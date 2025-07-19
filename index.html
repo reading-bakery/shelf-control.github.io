@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Buchformular</title>
+</head>
+<body>
+  <h1>Neues Buch hinzufügen</h1>
+  <form id="buchForm">
+    <label>Titel: <input type="text" name="titel" required></label><br>
+    <label>Autor: <input type="text" name="autor" required></label><br>
+    <label>Seitenzahl: <input type="number" name="seitenzahl" required></label><br>
+    <label>Genre: <input type="text" name="genre" required></label><br>
+    <button type="submit">Absenden</button>
+  </form>
+
+  <p id="antwort"></p>
+
+  <script>
+    document.getElementById('buchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const data = {
+        titel: formData.get('titel'),
+        autor: formData.get('autor'),
+        seitenzahl: formData.get('seitenzahl'),
+        genre: formData.get('genre')
+      };
+
+      fetch('https://script.google.com/macros/s/AKfycbxTKcBKQiN7YV-Oi1H4cfVD4ujUALHX5zQfNEzdMrH7v5jIYgtQkuNDhWre5WENm_m7/exec', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(res => res.text())
+      .then(text => {
+        document.getElementById('antwort').textContent = text;
+        document.getElementById('buchForm').reset();
+      })
+      .catch(err => {
+        document.getElementById('antwort').textContent = 'Fehler beim Senden: ' + err;
+      });
+    });
+  </script>
+</body>
+</html>
