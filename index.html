@@ -1,47 +1,229 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Buchformular</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelf Control</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis:wght@200..800&display=swap" rel="stylesheet">
+
+    
+
+  <style>
+    
+    .dosis {
+        font-family: "Dosis", sans-serif;
+        font-weight: 800;
+        font-style: normal;
+    }
+    
+    .bebas-neue-regular {
+        font-family: "Bebas Neue", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Dosis", sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #1f1f1f;
+      text-align: center;
+      cursor: none;
+    }
+
+    footer {
+      background-color: #1f1f1f;
+      padding: 1rem;
+      text-align: center;
+      cursor: text;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .card {
+      background-color: #1e1e1e;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+    }
+
+    a {
+        text-decoration: none;
+        color: whitesmoke;
+    }
+
+    h1 {
+        font-family:  "Bebas Neue", sans-serif;
+        font-size: 50pt;
+        color: khaki;
+    }
+
+    #addbook {
+        background-color: rgb(92, 92, 61);
+    }
+
+    .top-button {
+            display: flex;
+        }
+
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            padding: 10px;
+            background-color: rgb(224, 224, 87);
+            color: black;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            height: auto; 
+        }
+
+    
+    @media (max-width: 1024px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      main {
+        padding: 1rem;
+      }
+    }
+
+
+  </style>
+
 </head>
+
 <body>
-  <h1>Warum geht das nicht???</h1>
-  <form id="buchForm">
-    <label>Titel: <input type="text" name="titel" required></label><br>
-    <label>Autor: <input type="text" name="autor" required></label><br>
-    <label>Seitenzahl: <input type="number" name="seitenzahl" required></label><br>
-    <label>Genre: <input type="text" name="genre" required></label><br>
-    <button type="submit">Absenden</button>
-  </form>
 
-  <p id="antwort"></p>
+  <header>
+    <h1>Shelf Control</h1>
+  </header>
 
-  <script>
-    document.getElementById('buchForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+  <main>
 
-      const formData = new FormData(this);
-      const data = {
-        titel: formData.get('titel'),
-        autor: formData.get('autor'),
-        seitenzahl: formData.get('seitenzahl'),
-        genre: formData.get('genre')
-      };
+    <section class="grid">
 
-      fetch('https://script.google.com/macros/s/AKfycbxTKcBKQiN7YV-Oi1H4cfVD4ujUALHX5zQfNEzdMrH7v5jIYgtQkuNDhWre5WENm_m7/exec', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then(res => res.text())
-      .then(text => {
-        document.getElementById('antwort').textContent = text;
-        document.getElementById('buchForm').reset();
-      })
-      .catch(err => {
-        document.getElementById('antwort').textContent = 'Fehler beim Senden: ' + err;
-      });
-    });
-  </script>
+      <div class="card">
+        <a href="currently_index.html">
+            <h2><svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -1150 960 960" width="32px" fill="#FFFFFF"><path d="M560-564v-68q33-14 67.5-21t72.5-7q26 0 51 4t49 10v64q-24-9-48.5-13.5T700-600q-38 0-73 9.5T560-564Zm0 220v-68q33-14 67.5-21t72.5-7q26 0 51 4t49 10v64q-24-9-48.5-13.5T700-380q-38 0-73 9t-67 27Zm0-110v-68q33-14 67.5-21t72.5-7q26 0 51 4t49 10v64q-24-9-48.5-13.5T700-490q-38 0-73 9.5T560-454ZM260-320q47 0 91.5 10.5T440-278v-394q-41-24-87-36t-93-12q-36 0-71.5 7T120-692v396q35-12 69.5-18t70.5-6Zm260 42q44-21 88.5-31.5T700-320q36 0 70.5 6t69.5 18v-396q-33-14-68.5-21t-71.5-7q-47 0-93 12t-87 36v394Zm-40 118q-48-38-104-59t-116-21q-42 0-82.5 11T100-198q-21 11-40.5-1T40-234v-482q0-11 5.5-21T62-752q46-24 96-36t102-12q58 0 113.5 15T480-740q51-30 106.5-45T700-800q52 0 102 12t96 36q11 5 16.5 15t5.5 21v482q0 23-19.5 35t-40.5 1q-37-20-77.5-31T700-240q-60 0-116 21t-104 59ZM280-494Z"/></svg> Aktuelle Bücher</h2>
+            <p>Currently Reading & Listening </p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="lesemonate_index.html">
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -1060 960 960" width="28px" fill="#FFFFFF"><path d="M480-400 40-640l440-240 440 240-440 240Zm0 160L63-467l84-46 333 182 333-182 84 46-417 227Zm0 160L63-307l84-46 333 182 333-182 84 46L480-80Zm0-411 273-149-273-149-273 149 273 149Zm0-149Z"/></svg>
+                Lesemonate</h2>
+            <p>Welche Bücher habe ich wann gelesen?</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="recap_index.html">
+            <h2><svg width="32" height="32" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="14" width="4" height="11" rx="1" />
+                <rect x="10" y="10" width="4" height="15" rx="1" />
+                <rect x="17" y="6" width="4" height="19" rx="1" />
+            </svg>
+                Recap</h2>
+            <p>Verschiedene Lesestatistiken auf einem Blick</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="rachesub">
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M361-80q-14 0-24.5-7.5T322-108L220-440H80v-80h170q13 0 23.5 7.5T288-492l66 215 127-571q3-14 14-23t25-9q14 0 25 8.5t14 22.5l87 376 56-179q4-13 14.5-20.5T740-680q13 0 23 7t15 19l50 134h52v80h-80q-13 0-23-7t-15-19l-19-51-65 209q-4 13-15 21t-25 7q-14-1-24-9.5T601-311l-81-348-121 548q-3 14-13.5 22T361-80Z"/></svg>
+                Die Rache des SuB</h2>
+            <p>Zu viele Bücher schon wieder gekauft du hast</p>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="storage_index.html">
+            <h2> 
+                <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -1090 960 960" width="30px" fill="#FFFFFF"><path d="M480-120q-151 0-255.5-46.5T120-280v-400q0-66 105.5-113T480-840q149 0 254.5 47T840-680v400q0 67-104.5 113.5T480-120Zm0-479q89 0 179-25.5T760-679q-11-29-100.5-55T480-760q-91 0-178.5 25.5T200-679q14 30 101.5 55T480-599Zm0 199q42 0 81-4t74.5-11.5q35.5-7.5 67-18.5t57.5-25v-120q-26 14-57.5 25t-67 18.5Q600-528 561-524t-81 4q-42 0-82-4t-75.5-11.5Q287-543 256-554t-56-25v120q25 14 56 25t66.5 18.5Q358-408 398-404t82 4Zm0 200q46 0 93.5-7t87.5-18.5q40-11.5 67-26t32-29.5v-98q-26 14-57.5 25t-67 18.5Q600-328 561-324t-81 4q-42 0-82-4t-75.5-11.5Q287-343 256-354t-56-25v99q5 15 31.5 29t66.5 25.5q40 11.5 88 18.5t94 7Z"/></svg>                
+                Lager</h2>
+            <p>Alles und nichts</p>
+        </a>
+      </div>
+
+
+      <div class="card" id="addbook">
+        <a href="addnewbook_index.html">
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -1160 960 960" width="32px" fill="#FFFFFF"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>            
+                Neues Buch hinzufügen</h2>
+            <p>Metadaten für die Lesestatistik</p>
+        </a>
+      </div>
+
+      
+      <div class="top-button">
+        
+        <button id="backToTop">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
+            </svg>
+
+        </button>  
+
+        <script>
+            window.onscroll = function() {
+                var button = document.getElementById("backToTop");
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    button.style.display = "block";
+                } else {
+                    button.style.display = "none";
+                }
+            };
+        
+            document.getElementById("backToTop").onclick = function() {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            };
+        </script>
+        
+    </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Katharina | Impressum</p>
+  </footer>
+
 </body>
+
 </html>
