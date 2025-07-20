@@ -3,84 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>Neues Buch hinzufügen</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis:wght@200..800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css">  
-
 </head>
 <body>
-  <h1>Warum geht das nicht???</h1>
+  <h1>Formular testen</h1>
 
-<form action="https://docs.google.com/forms/u/0/d/19UQhYinmorqEvF8on4MrYIZe4QOLYGwKUV9QQDHb85c/previewResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
-  <label>Titel</label>
-  <input type="text" name="entry.554995646" required><br>
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+    <label>Titel:</label>
+    <input type="text" name="entry.554995646" required><br>
 
-  <label>Autor:in</label>
-  <input type="email" name="entry.890797774" required><br>
+    <label>Autor:in:</label>
+    <input type="text" name="entry.890797774" required><br>
 
-  <label>Geschlecht</label>
-  <textarea name="entry.108245160" required></textarea><br>
+    <label>Geschlecht:</label>
+    <input type="text" name="entry.108245160" required><br>
 
+    <label>Seitenzahl:</label>
+    <input type="text" name="entry.1433991187" required><br>
 
-  <label>Seitenzahl</label>
-  <textarea name="entry.1433991187" required></textarea><br>
+    <label>Erscheinungsjahr:</label>
+    <input type="text" name="entry.231863637" required><br>
 
-  <label>AAAA</label>
-  <textarea name="entry.231863637_year" required></textarea><br>
+    <button type="submit">Absenden</button>
+  </form>
 
-  <label>BBB</label>
-  <textarea name="entry.231863637_month" required></textarea><br>
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
 
-  <label>CCC</label>
-  <textarea name="entry.231863637_day" required></textarea><br>
-
-  <label>BBB</label>
-  <textarea name="entry.1685694101_sentinel" required></textarea><br>
-
-  <label>FFF</label>
-  <textarea name="entry.436245051_sentinel" required></textarea><br>
-
-  <label>GGG</label>
-  <textarea name="entry.1105252862_sentinel" required></textarea><br>
-
-  <label>uioui</label>
-  <textarea name="entry.1475530715_sentinel" required></textarea><br>
-
-  <label>ppp</label>
-  <textarea name="entry.1475530715_sentinel" required></textarea><br>
-  <label>rtzu</label>
-  <textarea name="entry.807495643_sentinel" required></textarea><br>
-  <label>kjhg</label>
-  <textarea name="entry.9727566_sentinel" required></textarea><br>
-  <label>pou</label>
-  <textarea name="entry.914730295_sentinel" required></textarea><br>
-
-  <label>kjhg</label>
-  <textarea name="entry.1685694101_sentinel" required></textarea><br>
-
-  <label>kjhg</label>
-  <textarea name="entry.436245051_sentinel" required></textarea><br>
-  <label>kjhg</label>
-  <textarea name="entry.1105252862_sentin" required></textarea><br>
-  <label>kjhg</label>
-  <textarea name="elentry.1674035100_sentinel" required></textarea><br>
-
-  <button type="submit">Hinzufügen</button>
-</form>
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
-<script>
-  let submitted = false;
-  function showDanke() {
-    if (submitted) {
-      alert("Danke für deine Nachricht! 🎉");
-      submitted = false;
+  <script>
+    let submitted = false;
+    function showDanke() {
+      if (submitted) {
+        alert("Danke für deine Nachricht! 🎉");
+        submitted = false;
+      }
     }
-  }
-  setTimeout(showDanke, 1000);
-</script>
+    setTimeout(showDanke, 1000);
+  </script>
 </body>
 </html>
