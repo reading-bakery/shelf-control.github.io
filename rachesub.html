@@ -1,56 +1,32 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <title>Stapel ungelesener Bücher</title>
-  <style>
-    .cover-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1rem;
-      padding: 2rem;
-    }
-    .cover-grid img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      transition: transform 0.2s;
-    }
-    .cover-grid img:hover {
-      transform: scale(1.05);
-    }
-  </style>
+<head><meta charset="UTF-8"><title>Mein SuB Cover</title>
+<style>
+  .cover-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap:1rem; padding:2rem; }
+  .cover-grid img { width:100%; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition:transform .2s; }
+  .cover-grid img:hover { transform:scale(1.05); }
+</style>
 </head>
 <body>
   <h1>📚 Mein SuB</h1>
-  <div class="cover-grid" id="coverGrid"></div>
+  <div id="coverGrid" class="cover-grid"></div>
 
   <script>
-    async function ladeSubCover() {
-      const url = "https://docs.google.com/spreadsheets/d/1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE/gviz/tq?tqx=out:csv";
-      const response = await fetch(url);
-      const text = await response.text();
-
-      const rows = text.split("\n").slice(1); 
-      const coverGrid = document.getElementById("coverGrid");
-
-      rows.forEach(row => {
-        const cols = row.split(",");
-
-        const coverURL = cols[0];   
-        const status = cols[4];      
-
-        if (status && status.trim().toLowerCase() === "sub" && coverURL.startsWith("http")) {
+    function googleSheetCallback(response) {
+      const rows = response.table.rows;
+      const grid = document.getElementById("coverGrid");
+      rows.forEach(r => {
+        const cover = r.c[0]?.v;
+        const status = (r.c[3]?.v || "").toLowerCase();
+        if (status === "sub" && cover?.startsWith("http")) {
           const img = document.createElement("img");
-          img.src = coverURL.trim();
-          img.alt = "Buchcover";
-          coverGrid.appendChild(img);
+          img.src = cover;
+          img.alt = r.c[1]?.v || "Buchcover";
+          grid.appendChild(img);
         }
       });
     }
-
-    ladeSubCover();
   </script>
+  <script src="https://docs.google.com/spreadsheets/d/1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE/gviz/tq?tqx=out:json&gid=0&callback=googleSheetCallback"></script>
 </body>
 </html>
