@@ -84,6 +84,11 @@
             height: auto; 
         }
 
+      #backToTop:hover {
+        background-color: #4b0606;
+        color: white;
+      }
+
     
     @media (max-width: 1024px) {
       .grid {
