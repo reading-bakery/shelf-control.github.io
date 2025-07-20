@@ -39,7 +39,7 @@
         const cols = row.split(",");
 
         const coverURL = cols[0];   
-        const status = cols[3];      
+        const status = cols[4];      
 
         if (status && status.trim().toLowerCase() === "sub" && coverURL.startsWith("http")) {
           const img = document.createElement("img");
