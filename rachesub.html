@@ -2,31 +2,38 @@
 <html lang="de">
 <head><meta charset="UTF-8"><title>Mein SuB Cover</title>
 <style>
-  .cover-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap:1rem; padding:2rem; }
-  .cover-grid img { width:100%; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.2); transition:transform .2s; }
+  .cover-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr)); gap:1rem; padding:2rem; }
+  .cover-grid img { width:100%; height:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,.2); transition:transform .2s;}
   .cover-grid img:hover { transform:scale(1.05); }
 </style>
 </head>
 <body>
   <h1>📚 Mein SuB</h1>
+  <p id="debug"></p>
   <div id="coverGrid" class="cover-grid"></div>
 
   <script>
     function googleSheetCallback(response) {
       const rows = response.table.rows;
-      const grid = document.getElementById("coverGrid");
+      const cols = response.table.cols;
+      document.getElementById("debug").textContent = 
+        'Gefundene Spalten: ' + cols.map(c => c.label).join(', ');
+
       rows.forEach(r => {
         const cover = r.c[0]?.v;
-        const status = (r.c[4]?.v || "").toLowerCase();
-        if (status === "sub" && cover?.startsWith("http")) {
-          const img = document.createElement("img");
+        const status = (r.c[4]?.v || '').toLowerCase();  // ggf. Index anpassen
+        console.log('Row:', cover, status);
+
+        if (status === 'sub' && typeof cover === 'string' && cover.startsWith('http')) {
+          const img = document.createElement('img');
           img.src = cover;
-          img.alt = r.c[1]?.v || "Buchcover";
-          grid.appendChild(img);
+          img.alt = r.c[1]?.v || 'Buchcover';
+          document.getElementById('coverGrid').appendChild(img);
         }
       });
     }
   </script>
+
   <script src="https://docs.google.com/spreadsheets/d/1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE/gviz/tq?tqx=out:json&gid=0&callback=googleSheetCallback"></script>
 </body>
 </html>
