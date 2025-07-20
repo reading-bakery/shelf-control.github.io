@@ -22,7 +22,24 @@
     
     
     <label>Cover</label>
-    <input type="text" name="entry.952453014"><br><br>
+    <input type="file" name="entry.952453014"><br><br>
+        <img id="preview" src="#" alt="Cover-Vorschau" style="max-width: 200px; display: none; border-radius: 5px;">
+
+        <script>
+          const coverInput = document.getElementById('cover');
+          const preview = document.getElementById('preview');
+    
+        coverInput.addEventListener('change', function () {
+          const file = this.files[0];
+          if (file) {
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = 'block';
+          }
+        });
+        </script>
+
+
+
     
     <label>Titel</label>
     <input type="text" name="entry.554995646"><br><br>
