@@ -17,7 +17,7 @@
       const grid = document.getElementById("coverGrid");
       rows.forEach(r => {
         const cover = r.c[0]?.v;
-        const status = (r.c[3]?.v || "").toLowerCase();
+        const status = (r.c[4]?.v || "").toLowerCase();
         if (status === "sub" && cover?.startsWith("http")) {
           const img = document.createElement("img");
           img.src = cover;
