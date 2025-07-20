@@ -6,42 +6,74 @@
 </head>
 <body>
   <h1>Warum geht das nicht???</h1>
-  <form id="buchForm">
-    <label>Titel: <input type="text" name="titel" required></label><br>
-    <label>Autor: <input type="text" name="autor" required></label><br>
-    <label>Seitenzahl: <input type="number" name="seitenzahl" required></label><br>
-    <label>Genre: <input type="text" name="genre" required></label><br>
-    <button type="submit">Absenden</button>
-  </form>
 
-  <p id="antwort"></p>
+<form action="https://docs.google.com/forms/u/0/d/19UQhYinmorqEvF8on4MrYIZe4QOLYGwKUV9QQDHb85c/previewResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+  <label>Titel</label>
+  <input type="text" name="entry.554995646" required><br>
 
-  <script>
-    document.getElementById('buchForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+  <label>Autor:in</label>
+  <input type="email" name="entry.890797774" required><br>
 
-      const formData = new FormData(this);
-      const data = {
-        titel: formData.get('titel'),
-        autor: formData.get('autor'),
-        seitenzahl: formData.get('seitenzahl'),
-        genre: formData.get('genre')
-      };
+  <label>Geschlecht</label>
+  <textarea name="entry.108245160" required></textarea><br>
 
-      fetch('https://script.google.com/macros/s/AKfycbxTKcBKQiN7YV-Oi1H4cfVD4ujUALHX5zQfNEzdMrH7v5jIYgtQkuNDhWre5WENm_m7/exec', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then(res => res.text())
-      .then(text => {
-        document.getElementById('antwort').textContent = text;
-        document.getElementById('buchForm').reset();
-      })
-      .catch(err => {
-        document.getElementById('antwort').textContent = 'Fehler beim Senden: ' + err;
-      });
-    });
-  </script>
+
+  <label>Seitenzahl</label>
+  <textarea name="entry.1433991187" required></textarea><br>
+
+  <label>AAAA</label>
+  <textarea name="entry.231863637_year" required></textarea><br>
+
+  <label>BBB</label>
+  <textarea name="entry.231863637_month" required></textarea><br>
+
+  <label>CCC</label>
+  <textarea name="entry.231863637_day" required></textarea><br>
+
+  <label>BBB</label>
+  <textarea name="entry.1685694101_sentinel" required></textarea><br>
+
+  <label>FFF</label>
+  <textarea name="entry.436245051_sentinel" required></textarea><br>
+
+  <label>GGG</label>
+  <textarea name="entry.1105252862_sentinel" required></textarea><br>
+
+  <label>uioui</label>
+  <textarea name="entry.1475530715_sentinel" required></textarea><br>
+
+  <label>ppp</label>
+  <textarea name="entry.1475530715_sentinel" required></textarea><br>
+  <label>rtzu</label>
+  <textarea name="entry.807495643_sentinel" required></textarea><br>
+  <label>kjhg</label>
+  <textarea name="entry.9727566_sentinel" required></textarea><br>
+  <label>pou</label>
+  <textarea name="entry.914730295_sentinel" required></textarea><br>
+
+  <label>kjhg</label>
+  <textarea name="entry.1685694101_sentinel" required></textarea><br>
+
+  <label>kjhg</label>
+  <textarea name="entry.436245051_sentinel" required></textarea><br>
+  <label>kjhg</label>
+  <textarea name="entry.1105252862_sentin" required></textarea><br>
+  <label>kjhg</label>
+  <textarea name="elentry.1674035100_sentinel" required></textarea><br>
+
+  <button type="submit">Hinzufügen</button>
+</form>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+<script>
+  let submitted = false;
+  function showDanke() {
+    if (submitted) {
+      alert("Danke für deine Nachricht! 🎉");
+      submitted = false;
+    }
+  }
+  setTimeout(showDanke, 1000);
+</script>
 </body>
 </html>
