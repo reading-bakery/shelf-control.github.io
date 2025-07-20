@@ -1,0 +1,53 @@
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+}
+
+.pie{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family:  "Bebas Neue", sans-serif;
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: rgb(90, 165, 142);
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    padding: 0.5rem;
+}
+
+.pie:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+
+
+@media (max-width: 1040px) {
+    .grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px;
+    }
+}
+
+@media (max-width: 840px) {
+
+    .grid{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); 
+    gap: 20px;
+    }
+
+    .pie{
+    font-family:  "Bebas Neue", sans-serif;
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: rgb(90, 165, 142);
+    }
+
+    
+}
