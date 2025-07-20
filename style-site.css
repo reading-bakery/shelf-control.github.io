@@ -1,0 +1,123 @@
+      body {
+        margin: 0;
+        font-family: "Dosis", sans-serif;
+        background: #121212;
+        color: #ffffff;
+        padding: 2rem;
+      }
+
+      h1 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        text-align: center;
+        margin-bottom: 2rem;
+        color: rgb(222, 201, 12);
+      }
+
+      h2 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 3rem;
+        letter-spacing: 2px;
+        text-align: center;
+        margin-bottom: 2rem;
+        color: khaki; 
+      }
+
+      form {
+        max-width: 700px;
+        margin: 0 auto;
+        background: #1e2b32;
+        padding: 1rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+
+      label {
+        font-weight: 600;
+        display: block;
+        margin: 0.5rem 0 0.5rem;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      input[type="date"],
+      select,
+      input[type="file"] {
+        width: 100%;
+        padding: 0.7rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        transition: border-color 0.3s ease;
+        background-color: #7786a1;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #0077cc;
+        outline: none;
+      }
+
+      button[type="submit"] {
+        margin-top: 2rem;
+        padding: 0.8rem 2rem;
+        background: #8fa15b;
+        color: white;
+        border: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        width: 100%;
+      }
+
+      button[type="submit"]:hover {
+        background: #005fa3;
+      }
+
+      img#preview {
+        margin-top: 0.5rem;
+        border: 2px solid #eee;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+
+      .top-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+      }
+
+      #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            padding: 10px;
+            background-color: rgb(224, 224, 87);
+            color: black;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            height: auto; 
+        }
+
+      #backToTop:hover {
+        background-color: #005fa3;
+      }
+
+      footer {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #888;
+        margin-top: 3rem;
+      }
+
+    header {
+      background-color: #1f1f1f;
+      text-align: center;
+      cursor: none;
+    }
+
