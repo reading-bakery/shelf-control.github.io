@@ -7,7 +7,7 @@
 <body>
   <h1>Formular testen</h1>
 
-  <form action="https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+  <form id="meinFormular" action="https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse" method="POST" target="hidden_iframe">
     <label>Titel:</label>
     <input type="text" name="entry.554995646" required><br>
 
@@ -26,17 +26,23 @@
     <button type="submit">Absenden</button>
   </form>
 
-  <iframe name="hidden_iframe" style="display:none;"></iframe>
+  <iframe name="hidden_iframe" style="display:none;" onload="formGesendet()"></iframe>
 
   <script>
     let submitted = false;
-    function showDanke() {
+
+    const form = document.getElementById('meinFormular');
+    form.addEventListener('submit', function () {
+      submitted = true;
+    });
+
+    function formGesendet() {
       if (submitted) {
-        alert("Danke für deine Nachricht! 🎉");
+        alert("✅ Danke! Das Formular wurde abgesendet.");
         submitted = false;
+        form.reset();
       }
     }
-    setTimeout(showDanke, 1000);
   </script>
 </body>
 </html>
