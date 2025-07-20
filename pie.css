@@ -26,7 +26,7 @@
 
 
 
-@media (max-width: 1040px) {
+@media (max-width: 940px) {
     .grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
@@ -34,7 +34,7 @@
     }
 }
 
-@media (max-width: 840px) {
+@media (max-width: 740px) {
 
     .grid{
     display: grid;
