@@ -5,23 +5,23 @@
   <title>Neues Buch hinzufügen</title>
 </head>
 <body>
-  <h1>Formular testen</h1>
+  <h1>Buch hinzufügen</h1>
 
   <form id="meinFormular" action="https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse" method="POST" target="hidden_iframe">
     <label>Titel:</label>
-    <input type="text" name="entry.554995646" required><br>
+    <input type="text" name="entry.554995646"><br>
 
     <label>Autor:in:</label>
-    <input type="text" name="entry.890797774" required><br>
+    <input type="text" name="entry.890797774"><br>
 
     <label>Geschlecht:</label>
-    <input type="text" name="entry.108245160" required><br>
+    <input type="text" name="entry.108245160"><br>
 
     <label>Seitenzahl:</label>
-    <input type="text" name="entry.1433991187" required><br>
+    <input type="text" name="entry.1433991187"><br>
 
     <label>Erscheinungsjahr:</label>
-    <input type="text" name="entry.231863637" required><br>
+    <input type="text" name="entry.231863637"><br>
 
     <button type="submit">Absenden</button>
   </form>
@@ -38,7 +38,7 @@
 
     function formGesendet() {
       if (submitted) {
-        alert("✅ Danke! Das Formular wurde abgesendet.");
+        alert("✅ Buch wurde hinzugefügt!");
         submitted = false;
         form.reset();
       }
