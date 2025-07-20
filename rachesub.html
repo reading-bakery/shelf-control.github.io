@@ -21,7 +21,7 @@
 
       rows.forEach(r => {
         const cover = r.c[0]?.v;
-        const status = (r.c[4]?.v || '').toLowerCase();  // ggf. Index anpassen
+        const status = (r.c[4]?.v || '').toLowerCase();  
         console.log('Row:', cover, status);
 
         if (status === 'sub' && typeof cover === 'string' && cover.startsWith('http')) {
