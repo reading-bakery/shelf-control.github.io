@@ -16,11 +16,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const ausgabenData = [];
       const subData = [];
 
+      let summeAusgaben = 0;
+
       for (let i = 1; i < rows.length; i++) {
         const row = rows[i];
         labels.push(row[monthIndex]);
-        ausgabenData.push(parseFloat(row[ausgabenIndex]) || 0);
+        const ausgabe = parseFloat(row[ausgabenIndex]) || 0;
+        ausgabenData.push(ausgabe);
+        summeAusgaben += ausgabe;
         subData.push(parseFloat(row[subIndex]) || 0);
+      }
+
+      // Summe formatieren und ins HTML einfügen
+      const summeContainer = document.getElementById('ausgaben-summe');
+      if (summeContainer) {
+        summeContainer.textContent = summeAusgaben.toFixed(2) + ' €';
       }
 
       renderChart('ausgabenChart', 'Ausgaben (€)', labels, ausgabenData, 'rgba(255, 206, 86, 0.7)');
@@ -46,40 +56,42 @@ function renderChart(canvasId, label, labels, data, color) {
       },
       x: {
         ticks: {
-          color: 'white'
+          color: 'white',
+          maxRotation: 0,   // verhindert schrägstellen der Labels
+          minRotation: 0
         }
       }
     },
     plugins: {
-        legend: {
+      legend: {
         position: 'bottom',
         labels: {
-            color: 'white'
+          color: 'white'
         }
-        },
-     annotation: canvasId === 'subChart' ? {
-  annotations: {
-    line1: {
-      type: 'line',
-      yMin: 100,
-      yMax: 100,
-      borderColor: 'red',
-      borderWidth: 2,
-      label: {
-        content: 'SuB-Ziel = 100',
-        enabled: true,
-        position: 'start',      
-        color: 'red',
-        font: {
-          size: 12,           
-          weight: 'normal'     
-        },
-        xAdjust: -10,          
-        yAdjust: 0
-      }
-    }
-  }
-} : {}
+      },
+      annotation: canvasId === 'subChart' ? {
+        annotations: {
+          line1: {
+            type: 'line',
+            yMin: 100,
+            yMax: 100,
+            borderColor: 'red',
+            borderWidth: 2,
+            label: {
+              content: 'SuB-Ziel = 100',
+              enabled: true,
+              position: 'start',
+              color: 'red',
+              font: {
+                size: 12,
+                weight: 'normal'
+              },
+              xAdjust: -10,
+              yAdjust: 0
+            }
+          }
+        }
+      } : {}
     }
   };
 
@@ -94,7 +106,7 @@ function renderChart(canvasId, label, labels, data, color) {
         borderColor: color.replace('0.7', '1'),
         borderWidth: 2,
         fill: false,
-        tension: 0.4 
+        tension: 0.4
       }]
     },
     options: options
