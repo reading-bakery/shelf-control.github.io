@@ -6,31 +6,48 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch(csvUrl)
     .then(response => response.text())
     .then(csvText => {
-      const rows = csvText.trim().split('\n').map(row => row.split(','));
+      const rows = csvText.trim().split('\n').map(row =>
+        row.split(',').map(cell => cell.trim().replace(/^"|"$/g, ''))
+      );
       const header = rows[0];
+
       const monthIndex = header.indexOf('Monat');
       const ausgabenIndex = header.indexOf('Ausgaben');
       const subIndex = header.indexOf('SuB');
+      const neuzugaengeIndex = header.indexOf('Anzahl Neuzugänge');
 
       const labels = [];
       const ausgabenData = [];
       const subData = [];
 
       let summeAusgaben = 0;
+      let summeNeuzugaenge = 0;
 
       for (let i = 1; i < rows.length; i++) {
         const row = rows[i];
         labels.push(row[monthIndex]);
+
         const ausgabe = parseFloat(row[ausgabenIndex]) || 0;
         ausgabenData.push(ausgabe);
         summeAusgaben += ausgabe;
-        subData.push(parseFloat(row[subIndex]) || 0);
+
+        const sub = parseFloat(row[subIndex]) || 0;
+        subData.push(sub);
+
+        const neuzugang = parseInt(row[neuzugaengeIndex], 10);
+        if (!isNaN(neuzugang)) {
+          summeNeuzugaenge += neuzugang;
+        }
       }
 
-      // Summe formatieren und ins HTML einfügen
       const summeContainer = document.getElementById('ausgaben-summe');
       if (summeContainer) {
         summeContainer.textContent = summeAusgaben.toFixed(2) + ' €';
+      }
+
+      const neuzugaengeContainer = document.getElementById('neuzugaenge-summe');
+      if (neuzugaengeContainer) {
+        neuzugaengeContainer.textContent = summeNeuzugaenge;
       }
 
       renderChart('ausgabenChart', 'Ausgaben (€)', labels, ausgabenData, 'rgba(255, 206, 86, 0.7)');
@@ -57,7 +74,7 @@ function renderChart(canvasId, label, labels, data, color) {
       x: {
         ticks: {
           color: 'white',
-          maxRotation: 0,   // verhindert schrägstellen der Labels
+          maxRotation: 0,
           minRotation: 0
         }
       }

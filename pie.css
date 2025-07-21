@@ -48,6 +48,22 @@ canvas {
     font-family: 'Bebas Neue', cursive; 
 }
 
+#neuzugaenge-summe {
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    border-radius: 50%;
+    background-color: #FFC72C; 
+    color: #222;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    user-select: none;
+    font-family: 'Bebas Neue', cursive;
+}
+
 @media (max-width: 940px) {
     .grid{
     display: grid;
