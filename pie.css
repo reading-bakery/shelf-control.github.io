@@ -19,8 +19,8 @@
     height: 100%;
     padding: 0.5rem;
     min-height: 260px;
+    box-sizing: border-box; 
 }
-
 
 .pie:hover {
     transform: scale(1.02);
@@ -66,8 +66,6 @@ canvas {
   font-family: "Dosis", sans-serif;
 }
 
-
-
 canvas#genderChart {
   filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
 }
@@ -90,35 +88,39 @@ canvas#genderChart {
 
 @media (max-width: 940px) {
     .grid{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 20px;
     }
 }
 
 @media (max-width: 740px) {
 
     .grid{
-    display: grid;
-    grid-template-columns: repeat(1, 1fr); 
-    gap: 20px;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr); 
+        gap: 20px;
     }
 
     .pie {
-    font-family:  "Bebas Neue", sans-serif;
-    font-size: 2.25rem;
-    font-weight: normal;
-    color: rgb(90, 165, 142);
+        font-family:  "Bebas Neue", sans-serif;
+        font-size: 2.25rem;
+        font-weight: normal;
+        color: rgb(90, 165, 142);
+        padding: 1rem;          
+        box-sizing: border-box; 
+        min-height: auto;       
     }
 
     .pie h3 {
-        min-height: 2.5rem;
+        min-height: auto;        
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
         font-size: 2.5rem;
-        }
-
-    
+        line-height: 1.2;        /* bessere Lesbarkeit und kein Abschneiden */
+        padding: 0 0.5rem;       /* horizontaler Abstand */
+        word-break: break-word;  /* bei langen Worten umbrechen */
+    }
 }
