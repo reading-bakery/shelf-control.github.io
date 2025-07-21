@@ -1,4 +1,3 @@
-// Registriert das Datalabels-Plugin.
 Chart.register(ChartDataLabels);
 
 let excludedCategories = [];
@@ -7,7 +6,6 @@ let myGenderChartInstance = null;
 async function drawGenderChart() {
   const sheetID = '1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE';
   const gid = '1702643479';
-  // Query filtert Zeilen mit NULL oder leerem String aus Spalte E
   const query = encodeURIComponent("SELECT E WHERE E IS NOT NULL AND E != ''");
   const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?gid=${gid}&tq=${query}`;
 
@@ -17,7 +15,6 @@ async function drawGenderChart() {
     const json = JSON.parse(text.substring(47).slice(0, -2));
     let rows = json.table.rows;
 
-    // Optional: zusätzliche Filterung im Code (wenn nötig)
     rows = rows.filter(row => {
       const val = row.c[0]?.v;
       return val !== null && val !== undefined && val.toString().trim() !== '';
@@ -39,7 +36,6 @@ async function drawGenderChart() {
 
     const filteredCounts = {};
     Object.keys(rawCounts).forEach(key => {
-      // Nur Kategorien mit mindestens 1 Treffer und nicht ausgeschlossen anzeigen
       if (!excludedCategories.includes(key) && rawCounts[key] > 0) {
         filteredCounts[key] = rawCounts[key];
       }
@@ -114,7 +110,6 @@ async function drawGenderChart() {
         },
         animation: {
           onComplete: function () {
-            // Eigene Linien/Prozentzahlen nicht mehr notwendig, da DataLabels genutzt wird
           }
         }
       }
