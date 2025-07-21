@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const monthIndex = header.indexOf('Monat');
       const ausgabenIndex = header.indexOf('Ausgaben');
       const subIndex = header.indexOf('SuB');
-      const neuzugaengeIndex = header.indexOf('Anzahl Neuzugänge');
+      const neuzugaengeIndex = header.indexOf('Neuzugänge');
 
       const labels = [];
       const ausgabenData = [];
