@@ -34,11 +34,11 @@ canvas {
 }
 
 .pie h3 {
-    margin-top: 1rem;
-    min-height: 40px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 #ausgaben-summe {
