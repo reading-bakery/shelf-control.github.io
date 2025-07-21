@@ -10,7 +10,7 @@
     justify-content: flex-start;
     align-items: center;     
     font-family:  "Bebas Neue", sans-serif;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: normal;
     color: rgb(90, 165, 142);
     background-color: #1f1f1f;
@@ -89,9 +89,9 @@ canvas {
     gap: 20px;
     }
 
-    .pie{
+    .pie {
     font-family:  "Bebas Neue", sans-serif;
-    font-size: 1.5rem;
+    font-size: 2.25rem;
     font-weight: normal;
     color: rgb(90, 165, 142);
     }
