@@ -58,24 +58,10 @@
         method="POST" target="hidden_iframe" onsubmit="submitted=true;">
     
     
-    <label>Cover</label>
-    <input type="file" name="entry.952453014"><br><br>
-        <img id="preview" src="#" alt="Cover-Vorschau" style="max-width: 200px; display: none; border-radius: 5px;">
-
-        <script>
-          const coverInput = document.getElementById('cover');
-          const preview = document.getElementById('preview');
-    
-        coverInput.addEventListener('change', function () {
-          const file = this.files[0];
-          if (file) {
-            preview.src = URL.createObjectURL(file);
-            preview.style.display = 'block';
-          }
-        });
-        </script>
 
 
+    <label>Start</label>
+    <input type="date" name="entry.231863637"><br><br>
 
     
     <label>Titel</label>
@@ -179,11 +165,9 @@
       <select name="entry.1674035100">
       <option value="" disabled selected>Bitte wählen…</option>
       <option value="Sonstiges">Sonstiges</option>
-      <option value="Arche">Arche</option>
       <option value="ATB/Aufbau/RL/Blumenbar">ATB/Aufbau/RL/Blumenbar</option>
       <option value="Atlantik">Atlantik</option>
-      <option value="Atrium">Atrium</option>
-      <option value="Berlin">Berlin</option>
+      <option value="Atrium">Atrium</option
       <option value="Blanvalet">Blanvalet</option>
       <option value="btb">btb</option>
       <option value="Carlsen">Carlsen</option>
@@ -214,23 +198,34 @@
       <option value="Luchterhand">Luchterhand</option>
       <option value="Lübbe">Lübbe</option>
       <option value="LYX">LYX</option>
-      <option value="Mare">Mare</option>
       <option value="Penguin">Penguin</option>
-      <option value="Piper">Piper</option>
+      <option value="Piper">Piper/Berlin</option>
       <option value="Reclam">Reclam</option>
       <option value="Rowohlt/rororo">Rowohlt/rororo</option>
-      <option value="Steidl">Steidl</option>
-      <option value="Surhkamp">Surhkamp</option>
+      <option value="Surhkamp">Suhrkamp</option>
       <option value="transcript">transcript</option>
-      <option value="Ueberreuter">Ueberreuter</option>
       <option value="Ullstein/List">Ullstein/List</option>
       <option value="Verbrecher">Verbrecher</option>
-      <option value="Wallstein">Wallstein</option>
-      <option value="Zsolnay">Zsolnay</option>
     </select><br><br>
 
-    <label>Start</label>
-    <input type="date" name="entry.231863637"><br><br>
+    <label>Cover</label>
+    <input type="file" name="entry.952453014"><br><br>
+        <img id="preview" src="#" alt="Cover-Vorschau" style="max-width: 200px; display: none; border-radius: 5px;">
+
+        <script>
+          const coverInput = document.getElementById('cover');
+          const preview = document.getElementById('preview');
+    
+        coverInput.addEventListener('change', function () {
+          const file = this.files[0];
+          if (file) {
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = 'block';
+          }
+        });
+        </script>
+
+
 
     <button type="submit">Buch hinzufügen</button>
   </form>
