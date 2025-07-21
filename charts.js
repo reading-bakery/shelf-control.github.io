@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       renderChart('ausgabenChart', 'Ausgaben (€)', labels, ausgabenData, 'rgba(255, 206, 86, 0.7)');
-      renderChart('subChart', 'SuB-Höhe', labels, subData, 'rgba(54, 162, 235, 0.7)');
+      renderChart('subChart', '2025', labels, subData, 'rgba(54, 162, 235, 0.7)');
     })
     .catch(err => console.error('Fehler beim Laden der CSV:', err));
 });
