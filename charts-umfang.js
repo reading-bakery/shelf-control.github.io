@@ -12,7 +12,6 @@ async function drawUmfangChart() {
     const json = JSON.parse(text.substring(47).slice(0, -2));
     const rows = json.table.rows;
 
-    // Zähle Werte aus Spalte F
     const counts = {};
     rows.forEach(row => {
       if (row.c[0] && row.c[0].v) {
@@ -21,27 +20,17 @@ async function drawUmfangChart() {
       }
     });
 
-    // Erwartete Labels fix vorgeben
     const expectedLabels = ['bis 300', '301-500', 'ab 501'];
-
-    // Alle erwarteten Labels sicherstellen (auch mit 0)
     expectedLabels.forEach(label => {
       if (!counts.hasOwnProperty(label)) {
         counts[label] = 0;
       }
     });
 
-    // Labels und Daten aus counts in der Reihenfolge von expectedLabels
     const labels = expectedLabels;
     const data = labels.map(label => counts[label]);
 
-    console.log('Labels:', labels);
-    console.log('Data:', data);
-
-    // Chart zeichnen
     const ctx = document.getElementById('umfangChart').getContext('2d');
-
-    // Falls Chart schon existiert, zerstören
     if (window.umfangChartInstance) {
       window.umfangChartInstance.destroy();
     }
@@ -52,10 +41,7 @@ async function drawUmfangChart() {
         labels: labels,
         datasets: [{
           data: data,
-          backgroundColor: [
-            '#F03274', '#4CC5D2', '#E67E22', '#2ECC71', '#9966FF', '#FF9F40', '#C9CBCF',
-            '#FF6384', '#36A2EB', '#FFCE56'
-          ],
+          backgroundColor: ['#F03274', '#4CC5D2', '#E67E22'],
           borderColor: '#1f1f1f',
           borderWidth: 5,
           borderRadius: 10
@@ -63,6 +49,7 @@ async function drawUmfangChart() {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: true,
         cutout: '60%',
         layout: {
           padding: {
@@ -77,7 +64,7 @@ async function drawUmfangChart() {
             font: {
               family: 'Dosis',
               size: 14,
-              weight: 'bold',
+              weight: 'bold'
             },
             formatter: (value, ctx) => {
               const label = ctx.chart.data.labels[ctx.dataIndex];
@@ -86,7 +73,7 @@ async function drawUmfangChart() {
               return `${percent}\n${label}`;
             },
             align: 'end',
-            anchor: 'end',
+            anchor: 'end'
           },
           legend: {
             display: false

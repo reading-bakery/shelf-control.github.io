@@ -15,10 +15,7 @@ async function drawGenderChart() {
     const json = JSON.parse(text.substring(47).slice(0, -2));
     let rows = json.table.rows;
 
-    rows = rows.filter(row => {
-      const val = row.c[0]?.v;
-      return val !== null && val !== undefined && val.toString().trim() !== '';
-    });
+    rows = rows.filter(row => row.c[0]?.v?.toString().trim() !== '');
 
     const rawCounts = {
       weiblich: 0,
@@ -63,25 +60,6 @@ async function drawGenderChart() {
       return;
     }
 
-    // Media Query: Schriftgröße, Padding & Höhe
-    let fontSize = 14;
-    let paddingTop = 45;
-    let paddingBottom = 100;
-
-    if (window.matchMedia("(max-width: 740px)").matches) {
-      fontSize = 10;
-      paddingTop = 35;
-      paddingBottom = 5;
-      canvas.height = 200;
-    } else if (window.matchMedia("(max-width: 940px)").matches) {
-      fontSize = 12;
-      paddingTop = 30;
-      paddingBottom = 70;
-      canvas.height = 280;
-    } else {
-      canvas.height = 360;
-    }
-
     myGenderChartInstance = new Chart(ctx, {
       type: 'pie',
       data: {
@@ -96,11 +74,12 @@ async function drawGenderChart() {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: true,
         cutout: '60%',
         layout: {
           padding: {
-            top: paddingTop,
-            bottom: paddingBottom
+            top: 45,
+            bottom: 100
           }
         },
         plugins: {
@@ -109,8 +88,8 @@ async function drawGenderChart() {
             color: '#ffffff',
             font: {
               family: 'Dosis',
-              size: fontSize,
-              weight: 'bold',
+              size: 14,
+              weight: 'bold'
             },
             formatter: function (value, context) {
               const label = context.chart.data.labels[context.dataIndex];
@@ -119,18 +98,13 @@ async function drawGenderChart() {
               return percentage + '\n' + label;
             },
             align: 'end',
-            anchor: 'end',
+            anchor: 'end'
           },
           tooltip: {
             enabled: false
           },
           legend: {
             display: false
-          }
-        },
-        animation: {
-          onComplete: function () {
-            // ggf. benutzerdefinierte Aktionen
           }
         }
       }
@@ -140,6 +114,8 @@ async function drawGenderChart() {
     console.error('Fehler beim Laden oder Zeichnen des Geschlechterdiagramms:', error);
   }
 }
+
+drawGenderChart();
 
 function toggleCategory(category) {
   const index = excludedCategories.indexOf(category);
@@ -153,5 +129,3 @@ function toggleCategory(category) {
     updateButtonStyles();
   }
 }
-
-drawGenderChart();

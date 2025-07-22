@@ -1,25 +1,25 @@
-.grid{
+.grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    align-items: stretch; /* sorgt dafür, dass alle Kacheln gleich hoch sind */
 }
 
 .pie {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;    
-    font-family:  "Bebas Neue", sans-serif;
+    align-items: center;
+    font-family: "Bebas Neue", sans-serif;
     font-size: 2rem;
     font-weight: normal;
     color: rgb(90, 165, 142);
     background-color: #1f1f1f;
     border-radius: 8px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 350px;
+    height: auto; /* automatisch, damit Grid die Höhe angleicht */
     padding: 0.5rem;
-    min-height: 260px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 .pie:hover {
@@ -27,159 +27,73 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
+.pie h3 {
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 2.25rem;
+}
 
 canvas {
   width: 100%;
-  height: auto; 
-  max-height: 300px; 
+  height: auto;
+  aspect-ratio: 1 / 1;
   margin-top: 1rem;
   cursor: pointer;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.15));
+  background-color: aqua;
 }
 
-
-
-.pie h3 {
-  min-height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 2.25rem;
-}
-
-#ausgaben-summe {
-    width: 120px;
-    height: 120px;
-    line-height: 120px;
-    border-radius: 50%;
-    background-color: #FFC72C; 
-    color: #222;
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-    margin: 20px auto; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    user-select: none; 
-    font-family: "Dosis", sans-serif;
-}
-
-#seiten-summe {
-    width: 120px;
-    height: 120px;
-    line-height: 120px;
-    border-radius: 50%;
-    background-color: #FFC72C; 
-    color: #222;
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-    margin: 20px auto; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    user-select: none; 
-    font-family: "Dosis", sans-serif;
-}
-
-#minuten-summe {
-    width: 120px;
-    height: 120px;
-    line-height: 120px;
-    border-radius: 50%;
-    background-color: #FFC72C; 
-    color: #222;
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-    margin: 20px auto; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    user-select: none; 
-    font-family: "Dosis", sans-serif;
-}
-
-#genderChart {
-  max-width: 100%;
-  max-height: 300px; 
-  margin-top: 0.2rem;
-  aspect-ratio: 1 / 1;
-  font-family: "Dosis", sans-serif;
-}
-
-
-
-canvas#genderChart {
-  filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
-}
-
+#genderChart,
 #umfangChart {
-  max-width: 100%;
-  max-height: 300px;
-  margin-top: 0.2rem;
-  font-family: "Dosis", sans-serif;
-  aspect-ratio: 1 / 1;
+    font-family: "Dosis", sans-serif;
 }
 
-canvas#umfangChart {
-  filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
-}
-
-
+#ausgaben-summe,
+#seiten-summe,
+#minuten-summe,
 #neuzugaenge-summe {
     width: 120px;
     height: 120px;
     line-height: 120px;
     border-radius: 50%;
-    background-color: #FFC72C; 
+    background-color: #FFC72C;
     color: #222;
-    font-size: 5rem;
+    font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
     margin: 20px auto;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     user-select: none;
     font-family: "Dosis", sans-serif;
 }
 
+#neuzugaenge-summe {
+    font-size: 5rem;
+}
+
 @media (max-width: 940px) {
-    .grid{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 20px;
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 740px) {
-
-    .grid{
-        display: grid;
-        grid-template-columns: repeat(1, 1fr); 
-        gap: 20px;
+    .grid {
+        grid-template-columns: 1fr;
     }
 
     .pie {
-        font-family:  "Bebas Neue", sans-serif;
         font-size: 2.25rem;
-        font-weight: normal;
-        color: rgb(90, 165, 142);
-        padding: 1rem;          
-        box-sizing: border-box; 
-        height: 400px;
+        padding: 1rem;
+        min-height: auto;
     }
-
-    
 
     .pie h3 {
-        min-height: auto;        
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
         font-size: 2.5rem;
-        line-height: 1.2;        
-        padding: 0 0.5rem;       
-        word-break: break-word; 
+        padding: 0 0.5rem;
+        word-break: break-word;
     }
-
-   
-
-
-
 }
