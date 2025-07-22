@@ -37,13 +37,16 @@ function renderChart(canvasId, label, labels, data, color) {
     responsive: true,
     scales: {
       y: {
+        display: false, // Y-Achse ausblenden
+        grid: {
+          display: false
+        },
+        ticks: {
+          display: false
+        },
         beginAtZero: false,
         min: 0,
-        max: 130,
-        ticks: {
-          stepSize: 50,
-          color: 'white'
-        }
+        max: 130
       },
       x: {
         ticks: {

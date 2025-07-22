@@ -36,13 +36,16 @@ function renderSubChart(canvasId, label, labels, data, color) {
     responsive: true,
     scales: {
       y: {
+        display: false, // Achse ausblenden
+        grid: {
+          display: false
+        },
+        ticks: {
+          display: false
+        },
         beginAtZero: false,
         min: 110,
-        max: 150,
-        ticks: {
-          stepSize: 10,
-          color: 'white'
-        }
+        max: 150
       },
       x: {
         ticks: {
