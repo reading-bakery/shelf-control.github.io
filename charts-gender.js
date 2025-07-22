@@ -78,7 +78,7 @@ async function drawGenderChart() {
         cutout: '60%',
         layout: {
           padding: {
-            top: 70,
+            top: 40,
             bottom: 70
           }
         },
