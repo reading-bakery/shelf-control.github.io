@@ -33,6 +33,7 @@ canvas {
   height: auto; 
   max-height: 300px; 
   margin-top: 1rem;
+  cursor: pointer;
 }
 
 
@@ -146,13 +147,12 @@ canvas#umfangChart {
 
     #genderChart {
     max-width: auto;   
-    max-height: 220px;  
-    background-color: red;
+    max-height: 240px;  
     }
 
     #umfangChart {
     max-width: auto;   
-    max-height: 220px;  
+    max-height: 240px;  
     margin: 0;     
     }
 
