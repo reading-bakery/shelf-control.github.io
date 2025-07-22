@@ -146,9 +146,15 @@ canvas#umfangChart {
 
     #genderChart {
     max-width: 100%;   
-    max-height: 300px;  
+    max-height: 260px;  
     margin: 0 auto;     
-  }
+    }
+
+    #umfangChart {
+    max-width: 100%;   
+    max-height: 260px;  
+    margin: 0 auto;     
+    }
 
 
 }
