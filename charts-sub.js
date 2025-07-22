@@ -11,53 +11,25 @@ document.addEventListener('DOMContentLoaded', () => {
         row.split(',').map(cell => cell.trim().replace(/^"|"$/g, ''))
       );
       const header = rows[0];
-
+      
       const monthIndex = header.indexOf('Monat');
-      const ausgabenIndex = header.indexOf('Ausgaben');
       const subIndex = header.indexOf('SuB');
-      const neuzugaengeIndex = header.indexOf('Neuzugänge');
 
       const labels = [];
-      const ausgabenData = [];
       const subData = [];
 
-      let summeAusgaben = 0;
-      let summeNeuzugaenge = 0;
-
       for (let i = 1; i < rows.length; i++) {
-        const row = rows[i];
-        labels.push(row[monthIndex]);
-
-        const ausgabe = parseFloat(row[ausgabenIndex]) || 0;
-        ausgabenData.push(ausgabe);
-        summeAusgaben += ausgabe;
-
-        const sub = parseFloat(row[subIndex]) || 0;
-        subData.push(sub);
-
-        const neuzugang = parseInt(row[neuzugaengeIndex], 10);
-        if (!isNaN(neuzugang)) {
-          summeNeuzugaenge += neuzugang;
-        }
+        labels.push(rows[i][monthIndex]);
+        const subValue = parseFloat(rows[i][subIndex]) || 0;
+        subData.push(subValue);
       }
 
-      const summeContainer = document.getElementById('ausgaben-summe');
-      if (summeContainer) {
-        summeContainer.textContent = Math.round(summeAusgaben) + ' €';
-      }
-
-      const neuzugaengeContainer = document.getElementById('neuzugaenge-summe');
-      if (neuzugaengeContainer) {
-        neuzugaengeContainer.textContent = summeNeuzugaenge;
-      }
-
-      renderChart('ausgabenChart', 'Ausgaben (€)', labels, ausgabenData, 'rgba(255, 206, 86, 0.7)');
-      renderChart('subChart', '2025', labels, subData, 'rgba(54, 162, 235, 0.7)');
+      renderSubChart('subChart', 'Sub-Abbau', labels, subData, 'rgba(54, 162, 235, 0.7)');
     })
     .catch(err => console.error('Fehler beim Laden der CSV:', err));
 });
 
-function renderChart(canvasId, label, labels, data, color) {
+function renderSubChart(canvasId, label, labels, data, color) {
   const ctx = document.getElementById(canvasId).getContext('2d');
 
   const options = {
@@ -65,10 +37,10 @@ function renderChart(canvasId, label, labels, data, color) {
     scales: {
       y: {
         beginAtZero: false,
-        min: canvasId === 'subChart' ? 110 : 0,
-        max: canvasId === 'subChart' ? 150 : 130,
+        min: 110,
+        max: 150,
         ticks: {
-          stepSize: 50,
+          stepSize: 10,
           color: 'white'
         }
       },
@@ -95,11 +67,9 @@ function renderChart(canvasId, label, labels, data, color) {
         },
         anchor: 'end',
         align: 'top',
-        formatter: function(value) {
-          return value;
-        }
+        formatter: value => value
       },
-      annotation: canvasId === 'subChart' ? {
+      annotation: {
         annotations: {
           line1: {
             type: 'line',
@@ -121,7 +91,7 @@ function renderChart(canvasId, label, labels, data, color) {
             }
           }
         }
-      } : {}
+      }
     }
   };
 

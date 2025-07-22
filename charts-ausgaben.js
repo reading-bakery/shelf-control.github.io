@@ -1,4 +1,3 @@
-Chart.register(window['chartjs-plugin-annotation']);
 Chart.register(ChartDataLabels);
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,15 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const monthIndex = header.indexOf('Monat');
       const ausgabenIndex = header.indexOf('Ausgaben');
-      const subIndex = header.indexOf('SuB');
-      const neuzugaengeIndex = header.indexOf('Neuzugänge');
 
       const labels = [];
       const ausgabenData = [];
-      const subData = [];
-
-      let summeAusgaben = 0;
-      let summeNeuzugaenge = 0;
 
       for (let i = 1; i < rows.length; i++) {
         const row = rows[i];
@@ -30,29 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const ausgabe = parseFloat(row[ausgabenIndex]) || 0;
         ausgabenData.push(ausgabe);
-        summeAusgaben += ausgabe;
-
-        const sub = parseFloat(row[subIndex]) || 0;
-        subData.push(sub);
-
-        const neuzugang = parseInt(row[neuzugaengeIndex], 10);
-        if (!isNaN(neuzugang)) {
-          summeNeuzugaenge += neuzugang;
-        }
-      }
-
-      const summeContainer = document.getElementById('ausgaben-summe');
-      if (summeContainer) {
-        summeContainer.textContent = Math.round(summeAusgaben) + ' €';
-      }
-
-      const neuzugaengeContainer = document.getElementById('neuzugaenge-summe');
-      if (neuzugaengeContainer) {
-        neuzugaengeContainer.textContent = summeNeuzugaenge;
       }
 
       renderChart('ausgabenChart', 'Ausgaben (€)', labels, ausgabenData, 'rgba(255, 206, 86, 0.7)');
-      renderChart('subChart', '2025', labels, subData, 'rgba(54, 162, 235, 0.7)');
     })
     .catch(err => console.error('Fehler beim Laden der CSV:', err));
 });
@@ -65,8 +38,8 @@ function renderChart(canvasId, label, labels, data, color) {
     scales: {
       y: {
         beginAtZero: false,
-        min: canvasId === 'subChart' ? 110 : 0,
-        max: canvasId === 'subChart' ? 150 : 130,
+        min: 0,
+        max: 130,
         ticks: {
           stepSize: 50,
           color: 'white'
@@ -98,30 +71,7 @@ function renderChart(canvasId, label, labels, data, color) {
         formatter: function(value) {
           return value;
         }
-      },
-      annotation: canvasId === 'subChart' ? {
-        annotations: {
-          line1: {
-            type: 'line',
-            yMin: 120,
-            yMax: 120,
-            borderColor: 'red',
-            borderWidth: 2,
-            label: {
-              content: 'SuB-Ziel = 120',
-              enabled: true,
-              position: 'start',
-              color: 'red',
-              font: {
-                size: 12,
-                weight: 'normal'
-              },
-              xAdjust: -10,
-              yAdjust: 0
-            }
-          }
-        }
-      } : {}
+      }
     }
   };
 
