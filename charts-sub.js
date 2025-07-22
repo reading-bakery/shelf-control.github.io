@@ -102,8 +102,8 @@ function renderSubChart(canvasId, label, labels, data, color) {
       datasets: [{
         label: label,
         data: data,
-        backgroundColor: color,
-        borderColor: color,
+        backgroundColor: 'blue',
+        borderColor: 'blue',
         borderWidth: 2,
         fill: false,
         tension: 0.4

@@ -82,8 +82,8 @@ function renderChart(canvasId, label, labels, data, color) {
       datasets: [{
         label: label,
         data: data,
-        backgroundColor: color,
-        borderColor: color,
+        backgroundColor: 'yellow',
+        borderColor: 'yellow',
         borderWidth: 2,
         fill: false,
         tension: 0.4
