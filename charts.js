@@ -1,4 +1,5 @@
 Chart.register(window['chartjs-plugin-annotation']);
+Chart.register(ChartDataLabels);
 
 document.addEventListener('DOMContentLoaded', () => {
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=501012815&single=true&output=csv';
@@ -64,10 +65,10 @@ function renderChart(canvasId, label, labels, data, color) {
     scales: {
       y: {
         beginAtZero: false,
-        min: canvasId === 'subChart' ? 90 : 0,
+        min: canvasId === 'subChart' ? 110 : 0,
         max: canvasId === 'subChart' ? 150 : undefined,
         ticks: {
-          stepSize: 10,
+          stepSize: 50,
           color: 'white'
         }
       },
@@ -86,16 +87,28 @@ function renderChart(canvasId, label, labels, data, color) {
           color: 'white'
         }
       },
+      datalabels: {
+        color: 'white',
+        font: {
+          weight: 'normal',
+          size: 8
+        },
+        anchor: 'end',
+        align: 'top',
+        formatter: function(value) {
+          return value;
+        }
+      },
       annotation: canvasId === 'subChart' ? {
         annotations: {
           line1: {
             type: 'line',
-            yMin: 100,
-            yMax: 100,
+            yMin: 120,
+            yMax: 120,
             borderColor: 'red',
             borderWidth: 2,
             label: {
-              content: 'SuB-Ziel = 100',
+              content: 'SuB-Ziel = 120',
               enabled: true,
               position: 'start',
               color: 'red',
@@ -126,6 +139,7 @@ function renderChart(canvasId, label, labels, data, color) {
         tension: 0.4
       }]
     },
-    options: options
+    options: options,
+    plugins: [ChartDataLabels]
   });
 }
