@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    align-items: stretch; /* sorgt dafür, dass alle Kacheln gleich hoch sind */
+    align-items: stretch; 
 }
 
 .pie {
@@ -17,7 +17,7 @@
     background-color: #1f1f1f;
     border-radius: 8px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: auto; /* automatisch, damit Grid die Höhe angleicht */
+    height: auto; 
     padding: 0.5rem;
     box-sizing: border-box;
 }
@@ -38,12 +38,11 @@
 
 canvas {
   width: 100%;
-  height: auto;
+  height: 100px;
   aspect-ratio: 1 / 1;
-  margin-top: 1rem;
+  margin-top: 0.2rem;
   cursor: pointer;
   filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.15));
-  background-color: aqua;
 }
 
 #genderChart,

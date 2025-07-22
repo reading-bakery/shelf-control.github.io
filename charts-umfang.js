@@ -53,8 +53,8 @@ async function drawUmfangChart() {
         cutout: '60%',
         layout: {
           padding: {
-            top: 45,
-            bottom: 100
+            top: 70,
+            bottom: 70
           }
         },
         plugins: {
