@@ -26,6 +26,8 @@
     <script src="charts-ausgaben.js" defer></script>
     <script src="charts-ausgaben-total.js" defer></script>
     <script src="charts-neuzugaenge.js" defer></script>
+    <script src="charts-seiten.js" defer></script>
+    <script src="charts-minuten.js" defer></script>
 
 </head>
 <body>
@@ -78,7 +80,7 @@
         </div>
 
         <div class="pie">
-            <h3>Ausgaben insgesamt</h3>
+            <h3>Ausgaben Gesamt</h3>
             <div id="ausgaben-summe"></div>
         </div>
 
@@ -88,15 +90,31 @@
         </div>
 
         <div class="pie">
-            <h3>Bücher ingesamt</h3>
+            <h3>Bücher Gesamt</h3>
         </div>
 
         <div class="pie">
-            <h3>Gelesene Seiten</h3>
+            <h3>Bücher pro Monat</h3>
         </div>
 
         <div class="pie">
-            <h3>Gehörte Minuten</h3>
+            <h3>Seiten Gesamt</h3>
+            <div id="seiten-summe"></div>
+            <canvas id="seitenChart"></canvas>
+        </div>
+
+        <div class="pie">
+            <h3>Seiten pro Monat</h3>
+            <div id="seiten-summe"></div>
+            <canvas id="seitenChart" width="600" height="400"></canvas>
+        </div>
+
+        <div class="pie">
+            <h3>Minuten Gesamt</h3>
+        </div>
+
+        <div class="pie">
+            <h3>Minuten pro Monat</h3>
         </div>
 
 
