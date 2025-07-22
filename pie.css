@@ -74,18 +74,6 @@ canvas#genderChart {
   filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
 }
 
-#umfangChart {
-  max-width: 100%;
-  max-height: 300px; 
-  margin-top: 0.2rem;
-  aspect-ratio: 1 / 1;
-  font-family: "Dosis", sans-serif;
-}
-
-canvas#umfangChart {
-  filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
-}
-
 #neuzugaenge-summe {
     width: 120px;
     height: 120px;
@@ -144,7 +132,7 @@ canvas#umfangChart {
 
     #genderChart {
     max-width: 100%;   
-    max-height: 200px;  
+    max-height: 300px;  
     margin: 0 auto;     
   }
 
