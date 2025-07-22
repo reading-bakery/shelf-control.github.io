@@ -146,14 +146,14 @@ canvas#umfangChart {
 
     #genderChart {
     max-width: auto;   
-    max-height: 260px;  
-    margin: 0 auto;     
+    max-height: 220px;  
+    background-color: red;
     }
 
     #umfangChart {
     max-width: auto;   
-    max-height: 260px;  
-    margin: 0 auto;     
+    max-height: 220px;  
+    margin: 0;     
     }
 
 
