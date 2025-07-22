@@ -65,11 +65,11 @@ async function drawUmfangChart() {
         datasets: [{
           data: data,
           backgroundColor: [
-            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C9CBCF'
+            '#F03274', '#4CC5D2', '#E67E22', '#2ECC71', '#9966FF', '#FF9F40', '#C9CBCF'
           ],
           borderColor: '#1f1f1f',
-          borderWidth: 4,
-          borderRadius: 8
+          borderWidth: 5,
+          borderRadius: 10
         }]
       },
       options: {
@@ -120,5 +120,6 @@ function toggleUmfangCategory(category) {
     updateButtonStyles();
   }
 }
+
 
 drawUmfangChart();

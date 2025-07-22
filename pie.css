@@ -68,18 +68,19 @@ canvas {
   font-family: "Dosis", sans-serif;
 }
 
+
+
 canvas#genderChart {
   filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
 }
 
 #umfangChart {
   max-width: 100%;
-  max-height: 300px;
+  max-height: 300px; 
   margin-top: 0.2rem;
   aspect-ratio: 1 / 1;
   font-family: "Dosis", sans-serif;
 }
-
 
 canvas#umfangChart {
   filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
@@ -125,9 +126,9 @@ canvas#umfangChart {
         padding: 1rem;          
         box-sizing: border-box; 
         min-height: auto;       
-        max-height: 350px; 
     }
 
+    
 
     .pie h3 {
         min-height: auto;        
@@ -141,8 +142,11 @@ canvas#umfangChart {
         word-break: break-word; 
     }
 
-    canvas {
-        max-height: 280px; 
-        height: auto;
-    }
+    #genderChart {
+    max-width: 100%;   
+    max-height: 200px;  
+    margin: 0 auto;     
+  }
+
+
 }
