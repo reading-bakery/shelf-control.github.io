@@ -35,6 +35,8 @@ canvas {
   margin-top: 1rem;
 }
 
+
+
 .pie h3 {
   min-height: 2.5rem;
   display: flex;
@@ -73,6 +75,18 @@ canvas {
 canvas#genderChart {
   filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
 }
+
+#umfangChart {
+  max-width: 100%;
+  max-height: 300px;
+  margin-top: 0.2rem;
+  font-family: "Dosis", sans-serif;
+}
+
+canvas#umfangChart {
+  filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
+}
+
 
 #neuzugaenge-summe {
     width: 120px;

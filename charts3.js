@@ -1,8 +1,5 @@
 Chart.register(ChartDataLabels);
 
-let excludedUmfangCategories = [];
-let myUmfangChartInstance = null;
-
 async function drawUmfangChart() {
   const sheetID = '1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE';
   const gid = '1702643479';
@@ -13,77 +10,51 @@ async function drawUmfangChart() {
     const response = await fetch(url);
     const text = await response.text();
     const json = JSON.parse(text.substring(47).slice(0, -2));
-    let rows = json.table.rows;
+    const rows = json.table.rows;
 
-    // Filtere leere Werte raus
-    rows = rows.filter(row => {
-      const val = row.c[0]?.v;
-      return val !== null && val !== undefined && val.toString().trim() !== '';
-    });
-
-    // Rohzählung aller Kategorien
-    const rawCounts = {};
+    // Zähle Werte aus Spalte F
+    const counts = {};
     rows.forEach(row => {
-      const value = row.c[0]?.v.toString().trim();
-      if (!rawCounts[value]) {
-        rawCounts[value] = 0;
-      }
-      rawCounts[value]++;
-    });
-
-    // Entferne ausgeschlossene Kategorien
-    Object.keys(rawCounts).forEach(key => {
-      if (excludedUmfangCategories.includes(key)) {
-        delete rawCounts[key];
+      if (row.c[0] && row.c[0].v) {
+        const val = row.c[0].v.toString().trim();
+        counts[val] = (counts[val] || 0) + 1;
       }
     });
 
-    // Nimm nur die drei häufigsten Kategorien
-    const sortedCategories = Object.entries(rawCounts)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 3);
+    // Erwartete Labels fix vorgeben
+    const expectedLabels = ['bis 300', '301-500', 'ab 501'];
 
-    // Baue gefilterte Counts mit genau 3 Labels (auch 0, falls Kategorie nicht da)
-    const filteredCounts = {};
-    sortedCategories.forEach(([cat, count]) => {
-      filteredCounts[cat] = count;
+    // Alle erwarteten Labels sicherstellen (auch mit 0)
+    expectedLabels.forEach(label => {
+      if (!counts.hasOwnProperty(label)) {
+        counts[label] = 0;
+      }
     });
 
-    // Falls weniger als 3 Kategorien, fülle mit 0 auf
-    while (Object.keys(filteredCounts).length < 3) {
-      const fillerKey = `Keine Daten ${Object.keys(filteredCounts).length + 1}`;
-      filteredCounts[fillerKey] = 0;
-    }
+    // Labels und Daten aus counts in der Reihenfolge von expectedLabels
+    const labels = expectedLabels;
+    const data = labels.map(label => counts[label]);
 
-    const total = Object.values(filteredCounts).reduce((a, b) => a + b, 0);
-    const labels = Object.keys(filteredCounts);
-    const data = Object.values(filteredCounts);
+    console.log('Labels:', labels);
+    console.log('Data:', data);
 
+    // Chart zeichnen
     const ctx = document.getElementById('umfangChart').getContext('2d');
 
-    if (myUmfangChartInstance) {
-      myUmfangChartInstance.destroy();
-      myUmfangChartInstance = null;
+    // Falls Chart schon existiert, zerstören
+    if (window.umfangChartInstance) {
+      window.umfangChartInstance.destroy();
     }
 
-    if (total === 0 || labels.length === 0) {
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      ctx.fillStyle = '#ffffff';
-      ctx.font = '20px Dosis';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('Keine Daten verfügbar', ctx.canvas.width / 2, ctx.canvas.height / 2);
-      return;
-    }
-
-    myUmfangChartInstance = new Chart(ctx, {
+    window.umfangChartInstance = new Chart(ctx, {
       type: 'pie',
       data: {
         labels: labels,
         datasets: [{
           data: data,
           backgroundColor: [
-            '#F03274', '#4CC5D2', '#E67E22'
+            '#F03274', '#4CC5D2', '#E67E22', '#2ECC71', '#9966FF', '#FF9F40', '#C9CBCF',
+            '#FF6384', '#36A2EB', '#FFCE56'
           ],
           borderColor: '#1f1f1f',
           borderWidth: 5,
@@ -93,6 +64,12 @@ async function drawUmfangChart() {
       options: {
         responsive: true,
         cutout: '60%',
+        layout: {
+          padding: {
+            top: 50,
+            bottom: 30
+          }
+        },
         plugins: {
           datalabels: {
             display: true,
@@ -102,20 +79,20 @@ async function drawUmfangChart() {
               size: 14,
               weight: 'bold',
             },
-            formatter: function(value, context) {
-              const label = context.chart.data.labels[context.dataIndex];
-              const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-              const percentage = total > 0 ? ((value / total) * 100).toFixed(1) + '%' : '0%';
-              return percentage + '\n' + label;
+            formatter: (value, ctx) => {
+              const label = ctx.chart.data.labels[ctx.dataIndex];
+              const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+              const percent = ((value / total) * 100).toFixed(1) + '%';
+              return `${percent}\n${label}`;
             },
             align: 'end',
             anchor: 'end',
           },
-          tooltip: {
-            enabled: false
-          },
           legend: {
             display: false
+          },
+          tooltip: {
+            enabled: false
           }
         }
       }
@@ -123,19 +100,6 @@ async function drawUmfangChart() {
 
   } catch (error) {
     console.error('Fehler beim Laden oder Zeichnen des Umfang-Diagramms:', error);
-  }
-}
-
-function toggleUmfangCategory(category) {
-  const index = excludedUmfangCategories.indexOf(category);
-  if (index > -1) {
-    excludedUmfangCategories.splice(index, 1);
-  } else {
-    excludedUmfangCategories.push(category);
-  }
-  drawUmfangChart();
-  if (typeof updateButtonStyles === 'function') {
-    updateButtonStyles();
   }
 }
 
