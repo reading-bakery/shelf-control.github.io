@@ -45,7 +45,8 @@ async function drawGenderChart() {
     const labels = Object.keys(filteredCounts).map(label => label.charAt(0).toUpperCase() + label.slice(1));
     const data = Object.values(filteredCounts);
 
-    const ctx = document.getElementById('genderChart').getContext('2d');
+    const canvas = document.getElementById('genderChart');
+    const ctx = canvas.getContext('2d');
 
     if (myGenderChartInstance) {
       myGenderChartInstance.destroy();
@@ -60,6 +61,25 @@ async function drawGenderChart() {
       ctx.textBaseline = 'middle';
       ctx.fillText('Keine Daten verfügbar', ctx.canvas.width / 2, ctx.canvas.height / 2);
       return;
+    }
+
+    // Media Query: Schriftgröße, Padding & Höhe
+    let fontSize = 14;
+    let paddingTop = 45;
+    let paddingBottom = 100;
+
+    if (window.matchMedia("(max-width: 740px)").matches) {
+      fontSize = 10;
+      paddingTop = 35;
+      paddingBottom = 5;
+      canvas.height = 200;
+    } else if (window.matchMedia("(max-width: 940px)").matches) {
+      fontSize = 12;
+      paddingTop = 30;
+      paddingBottom = 70;
+      canvas.height = 280;
+    } else {
+      canvas.height = 360;
     }
 
     myGenderChartInstance = new Chart(ctx, {
@@ -79,8 +99,8 @@ async function drawGenderChart() {
         cutout: '60%',
         layout: {
           padding: {
-            top: 45,
-            bottom: 100
+            top: paddingTop,
+            bottom: paddingBottom
           }
         },
         plugins: {
@@ -89,10 +109,10 @@ async function drawGenderChart() {
             color: '#ffffff',
             font: {
               family: 'Dosis',
-              size: 14,
+              size: fontSize,
               weight: 'bold',
             },
-            formatter: function(value, context) {
+            formatter: function (value, context) {
               const label = context.chart.data.labels[context.dataIndex];
               const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
               const percentage = ((value / total) * 100).toFixed(1) + '%';
@@ -110,6 +130,7 @@ async function drawGenderChart() {
         },
         animation: {
           onComplete: function () {
+            // ggf. benutzerdefinierte Aktionen
           }
         }
       }
