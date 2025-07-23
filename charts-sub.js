@@ -1,74 +1,151 @@
-const sheetID = '1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE';
-const gid = '1702643479';
-const sheetURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?gid=${gid}&tq=SELECT%20A,B`;
+const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=486311532&single=true&output=csv';
 
-fetch(sheetURL)
-  .then(res => res.text())
-  .then(rep => {
-    const data = JSON.parse(rep.substr(47).slice(0, -2));
-    const labels = [];
-    const values = [];
+async function loadAndDrawChart() {
+    try {
+        const response = await fetch(csvUrl);
+        const csvText = await response.text();
+        const rows = csvText.trim().split('\n').map(row => row.split(','));
 
-    data.table.rows.forEach(row => {
-      labels.push(row.c[0].v); // Monat
-      values.push(row.c[1].v); // Sub-Zahl
-    });
+        const months = rows.slice(1).map(row => row[0]);
+        const allYears = rows[0].slice(1);
 
-    const ctx = document.getElementById('subChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'SuB-Entwicklung',
-          data: values,
-          borderColor: '#3e95cd',
-          backgroundColor: 'rgba(62,149,205,0.2)',
-          fill: true,
-          tension: 0.3,
-          pointRadius: 4,
-          pointHoverRadius: 6
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: true
-          },
-          title: {
-            display: true,
-            text: 'SuB im Zeitverlauf'
-          },
-          annotation: {
-            annotations: {
-              zielLinie: {
-                type: 'line',
-                yMin: 120,
-                yMax: 120,
-                borderColor: 'red',
-                borderWidth: 2,
-                borderDash: [6, 6],
-                label: {
-                  content: 'Sub-Ziel = 120',
-                  enabled: true,
-                  position: 'end',
-                  backgroundColor: 'rgba(255, 99, 132, 0.8)',
-                  color: 'white',
-                  font: {
-                    weight: 'bold'
-                  }
+        const wantedYears = ['2025', '2026', '2027'];
+
+        const farben = {
+            '2025': '#ff7256',
+            '2026': '#FFB90F',
+            '2027': '#63b8ff'
+        };
+
+        const yearIndices = wantedYears.map(year => allYears.indexOf(year)).filter(idx => idx !== -1);
+
+        const datasets = yearIndices.map(colIndex => {
+            const year = allYears[colIndex];
+            const data = rows.slice(1).map(row => {
+                const val = parseInt(row[colIndex + 1]);
+                return isNaN(val) ? null : val;
+            });
+            const color = farben[year];
+            return {
+                label: year,
+                data,
+                borderColor: color,
+                backgroundColor: color,
+                fill: false,
+                tension: 0.3,
+                pointRadius: 4,
+                pointHoverRadius: 0,
+                hoverRadius: 0,
+                hoverBackgroundColor: color
+            };
+        });
+
+        const ctx = document.getElementById('subChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: datasets
+            },
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: null
+                },
+                hover: {
+                    mode: null
+                },
+                plugins: {
+                    datalabels: {
+                        display: true,
+                        color: 'white',
+                        font: {
+                            family: 'Dosis, sans-serif',
+                            size: 10
+                        },
+                        align: 'top',
+                        anchor: 'end'
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: 'white',
+                            font: {
+                                family: 'Dosis, sans-serif',
+                                size: 12,
+                                weight: 'normal'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        enabled: false
+                    },
+                    annotation: {
+                        annotations: {
+                            ziel: {
+                                type: 'line',
+                                yMin: 120,
+                                yMax: 120,
+                                borderColor: 'white',
+                                borderWidth: 1,
+                                borderDash: [5, 5],
+                                label: {
+                                    content: 'SuB-Ziel = 120',
+                                    enabled: true,
+                                    position: 'end',
+                                    yAdjust: -10,
+                                    color: 'white',
+                                    font: {
+                                        family: 'Dosis, sans-serif',
+                                        size: 10,
+                                        weight: 'normal'
+                                    },
+                                    padding: 0,
+                                    cornerRadius: 0,
+                                    backgroundColor: 'transparent'
+                                }
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#fff',
+                            font: {
+                                family: 'Dosis, sans-serif',
+                                size: 12
+                            },
+                            maxRotation: 0,
+                            minRotation: 0
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        display: false,
+                        min: 115,
+                        max: 145,
+                        ticks: {
+                            color: '#fff',
+                            font: {
+                                family: 'Dosis, sans-serif',
+                                size: 12
+                            }
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
                 }
-              }
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            suggestedMax: 150
-          }
-        }
-      }
-    });
-  });
+            },
+            plugins: [ChartDataLabels]
+        });
+    } catch (err) {
+        console.error('Fehler beim Laden des Sub-Charts:', err);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadAndDrawChart);

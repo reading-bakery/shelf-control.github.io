@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ausgabenData.push(ausgabe);
       }
 
-      renderChart('ausgabenChart', 'Ausgaben (€)', labels, ausgabenData, 'rgba(255, 206, 86, 0.7)');
+      renderChart('ausgabenChart', '', labels, ausgabenData, 'rgba(255, 206, 86, 0.7)');
     })
     .catch(err => console.error('Fehler beim Laden der CSV:', err));
 });
@@ -64,6 +64,7 @@ function renderChart(canvasId, label, labels, data, color) {
     plugins: {
       legend: {
         position: 'bottom',
+        display: false,
         labels: {
           color: 'white',
           font: {
@@ -78,7 +79,7 @@ function renderChart(canvasId, label, labels, data, color) {
         font: {
           family: "'Dosis', sans-serif",
           weight: 'normal',
-          size: 9
+          size: 10
         },
         anchor: 'end',
         align: 'top',
@@ -96,8 +97,8 @@ function renderChart(canvasId, label, labels, data, color) {
       datasets: [{
         label: label,
         data: data,
-        backgroundColor: color,
-        borderColor: color,
+        backgroundColor: '#FFB90F',
+        borderColor: '#FFB90F',
         borderWidth: 2,
         fill: false,
         tension: 0.4
