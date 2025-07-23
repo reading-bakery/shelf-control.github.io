@@ -45,12 +45,18 @@ canvas {
   filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.15));
 }
 
+#sprachenChart {
+  height: 200px;  
+}
+
+
 #genderChart,
 #umfangChart {
     font-family: "Dosis", sans-serif;
 }
 
-#ausgaben-summe,
+
+
 #seiten-summe,
 #minuten-summe,
 #neuzugaenge-summe,
