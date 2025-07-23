@@ -127,7 +127,7 @@ async function loadAndDrawChart() {
                     y: {
                         display: false,
                         min: 115,
-                        max: 145,
+                        max: 155,
                         ticks: {
                             color: '#fff',
                             font: {

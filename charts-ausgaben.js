@@ -35,12 +35,18 @@ function renderChart(canvasId, label, labels, data, color) {
 
   const options = {
     responsive: true,
+    interaction: {
+      mode: null  // deaktiviert Hover-Interaktionen komplett
+    },
+    hover: {
+      mode: null  // deaktiviert Hover-Tooltip
+    },
     scales: {
       y: {
         display: false,
-        grid: { display: false },
+        grid: { display: true },
         ticks: {
-          display: false,
+          display: true,
           font: {
             family: "'Dosis', sans-serif"
           }
@@ -58,6 +64,9 @@ function renderChart(canvasId, label, labels, data, color) {
             family: "'Dosis', sans-serif",
             size: 12
           }
+        },
+        grid: {
+          display: false
         }
       }
     },
@@ -97,8 +106,8 @@ function renderChart(canvasId, label, labels, data, color) {
       datasets: [{
         label: label,
         data: data,
-        backgroundColor: '#FFB90F',
-        borderColor: '#FFB90F',
+        backgroundColor: color,
+        borderColor: color,
         borderWidth: 2,
         fill: false,
         tension: 0.4

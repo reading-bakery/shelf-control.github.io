@@ -37,7 +37,7 @@ function ladeMinutenWert() {
         const formatted = wert.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         document.getElementById('minuten-summe').textContent = formatted;
       } else {
-        document.getElementById('minuten-summe').textContent = "Kein Wert gefunden";
+        document.getElementById('minuten-summe').textContent = "0";
       }
     })
     .catch(err => {
