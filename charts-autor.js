@@ -43,7 +43,8 @@ function renderAutorChart(labels, data) {
       responsive: true,
       scales: {
         x: {
-          display: false
+          display: false,
+          min: 0
         },
         y: {
           ticks: {
