@@ -37,12 +37,13 @@ function renderChart(canvasId, label, labels, data, color) {
     responsive: true,
     scales: {
       y: {
-        display: false, // Y-Achse ausblenden
-        grid: {
-          display: false
-        },
+        display: false,
+        grid: { display: false },
         ticks: {
-          display: false
+          display: false,
+          font: {
+            family: "'Dosis', sans-serif"
+          }
         },
         beginAtZero: false,
         min: 0,
@@ -52,7 +53,11 @@ function renderChart(canvasId, label, labels, data, color) {
         ticks: {
           color: 'white',
           maxRotation: 0,
-          minRotation: 0
+          minRotation: 0,
+          font: {
+            family: "'Dosis', sans-serif",
+            size: 12
+          }
         }
       }
     },
@@ -60,12 +65,18 @@ function renderChart(canvasId, label, labels, data, color) {
       legend: {
         position: 'bottom',
         labels: {
-          color: 'white'
+          color: 'white',
+          font: {
+            family: "'Dosis', sans-serif",
+            size: 14,
+            weight: 'normal'
+          }
         }
       },
       datalabels: {
         color: 'white',
         font: {
+          family: "'Dosis', sans-serif",
           weight: 'normal',
           size: 8
         },
@@ -85,8 +96,8 @@ function renderChart(canvasId, label, labels, data, color) {
       datasets: [{
         label: label,
         data: data,
-        backgroundColor: 'yellow',
-        borderColor: 'yellow',
+        backgroundColor: color,
+        borderColor: color,
         borderWidth: 2,
         fill: false,
         tension: 0.4

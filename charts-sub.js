@@ -36,12 +36,13 @@ function renderSubChart(canvasId, label, labels, data, color) {
     responsive: true,
     scales: {
       y: {
-        display: false, // Achse ausblenden
-        grid: {
-          display: false
-        },
+        display: false,
+        grid: { display: false },
         ticks: {
-          display: false
+          display: false,
+          font: {
+            family: "'Dosis', sans-serif"
+          }
         },
         beginAtZero: false,
         min: 110,
@@ -51,7 +52,11 @@ function renderSubChart(canvasId, label, labels, data, color) {
         ticks: {
           color: 'white',
           maxRotation: 0,
-          minRotation: 0
+          minRotation: 0,
+          font: {
+            family: "'Dosis', sans-serif",
+            size: 12
+          }
         }
       }
     },
@@ -59,12 +64,18 @@ function renderSubChart(canvasId, label, labels, data, color) {
       legend: {
         position: 'bottom',
         labels: {
-          color: 'white'
+          color: 'white',
+          font: {
+            family: "'Dosis', sans-serif",
+            size: 14,
+            weight: 'normal'
+          }
         }
       },
       datalabels: {
         color: 'white',
         font: {
+          family: "'Dosis', sans-serif",
           weight: 'normal',
           size: 8
         },
@@ -86,8 +97,9 @@ function renderSubChart(canvasId, label, labels, data, color) {
               position: 'start',
               color: 'red',
               font: {
+                family: "'Dosis', sans-serif",
                 size: 12,
-                weight: 'normal'
+                weight: 'bold'
               },
               xAdjust: -10,
               yAdjust: 0
@@ -105,8 +117,8 @@ function renderSubChart(canvasId, label, labels, data, color) {
       datasets: [{
         label: label,
         data: data,
-        backgroundColor: 'blue',
-        borderColor: 'blue',
+        backgroundColor: color,
+        borderColor: color,
         borderWidth: 2,
         fill: false,
         tension: 0.4

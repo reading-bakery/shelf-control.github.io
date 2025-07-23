@@ -2,20 +2,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1635103848&single=true&output=csv';
 
   const labelMap = {
-    'Deutsch': 'DEU',
-    'Spanisch': 'SPA',
+    'Deutsch': 'DE',
+    'Spanisch': 'SP',
     'Englisch Original': 'EN O',
-    'Französisch': 'FRA',
-    'Italienisch': 'ITA',
-    'Chinesisch': 'CHI',
-    'Russisch': 'RUS',
-    'Koreanisch': 'KOR',
-    'Japanisch': 'JAP',
-    'Portugiesisch': 'POR',
-    'Türkisch': 'TÜR',
-    'Spanisch Original': 'SPA O',
-    'Französisch Original': 'FRA O',
-    'Englisch': 'ENG'
+    'Französisch': 'FR',
+    'Italienisch': 'IT',
+    'Chinesisch': 'CH',
+    'Russisch': 'RU',
+    'Koreanisch': 'KO',
+    'Japanisch': 'JA',
+    'Portugiesisch': 'PO',
+    'Türkisch': 'TK',
+    'Spanisch Original': 'SP O',
+    'Französisch Original': 'FR O',
+    'Sonstiges': 'SONST',
+    'Englisch': 'EN'
   };
 
   fetch(csvUrl)
@@ -57,9 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
               '#1f1f1f', 
               '#1f1f1f'
             ],
-            borderWidth: 10,
-            borderRadius: 15,
-            barThickness: 50
+            borderWidth: 1,
+            borderRadius: 5,
+            barThickness: 25,
+            barPercentage: 0.6,
+            categoryPercentage: 0.6
           }]
         },
         options: {
@@ -73,23 +76,29 @@ document.addEventListener('DOMContentLoaded', () => {
               anchor: 'end',    
               align: 'end',      
               color: '#fff',
-              font: { weight: 'bold' },
+              font: { weight: 'normal',  },
               formatter: Math.round,
-              padding: { left: 10 }, 
+              padding: { left: 3 }, 
               clamp: true
             }
           },
-          scales: {
+            scales: {
             y: {
-              ticks: { color: '#fff' },
-              grid: { display: false }
+                ticks: {
+                color: '#fff',
+                font: {
+                    family: 'Dosis, sans-serif',
+                    size: 16,
+                    weight: 'bold'
+                }
+                },
+                grid: { display: false }
             },
             x: {
               display: false,
               beginAtZero: true,
               min: 0,
-              // Optional: etwas mehr Platz nach rechts, je nach max Wert
-              suggestedMax: Math.max(...anzahl) * 1.1 
+              suggestedMax: Math.max(...anzahl) * 1.1
             }
           },
           interaction: {
