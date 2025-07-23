@@ -78,7 +78,7 @@ function renderChart(canvasId, label, labels, data, color) {
         font: {
           family: "'Dosis', sans-serif",
           weight: 'normal',
-          size: 8
+          size: 9
         },
         anchor: 'end',
         align: 'top',

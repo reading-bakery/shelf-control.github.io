@@ -1,130 +1,114 @@
-Chart.register(window['chartjs-plugin-annotation']);
-Chart.register(ChartDataLabels);
+const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=486311532&single=true&output=csv';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=501012815&single=true&output=csv';
+async function loadAndDrawChart() {
+    try {
+        const response = await fetch(csvUrl);
+        const csvText = await response.text();
+        const rows = csvText.trim().split('\n').map(row => row.split(','));
 
-  fetch(csvUrl)
-    .then(response => response.text())
-    .then(csvText => {
-      const rows = csvText.trim().split('\n').map(row =>
-        row.split(',').map(cell => cell.trim().replace(/^"|"$/g, ''))
-      );
-      const header = rows[0];
-      
-      const monthIndex = header.indexOf('Monat');
-      const subIndex = header.indexOf('SuB');
+        const months = rows.slice(1).map(row => row[0]);
+        const allYears = rows[0].slice(1);
 
-      const labels = [];
-      const subData = [];
+        // 🎨 Nur diese drei Jahre anzeigen, in genau dieser Reihenfolge
+        const wantedYears = ['2025', '2026', '2027'];
 
-      for (let i = 1; i < rows.length; i++) {
-        labels.push(rows[i][monthIndex]);
-        const subValue = parseFloat(rows[i][subIndex]) || 0;
-        subData.push(subValue);
-      }
+        const farben = {
+            '2025': '	#ff7256', 
+            '2026': '#FFB90F', 
+            '2027': '	#63b8ff'  
+        };
 
-      renderSubChart('subChart', 'Sub-Abbau', labels, subData, 'rgba(54, 162, 235, 0.7)');
-    })
-    .catch(err => console.error('Fehler beim Laden der CSV:', err));
-});
+        // Filtere nur die Spalten der gewünschten Jahre raus
+        const yearIndices = wantedYears.map(year => allYears.indexOf(year)).filter(idx => idx !== -1);
 
-function renderSubChart(canvasId, label, labels, data, color) {
-  const ctx = document.getElementById(canvasId).getContext('2d');
+        const datasets = yearIndices.map(colIndex => {
+            const year = allYears[colIndex];
+            const data = rows.slice(1).map(row => {
+                const val = parseInt(row[colIndex + 1]);
+                return isNaN(val) ? null : val;
+            });
+            const color = farben[year]; // Kein fallback mehr
+            return {
+                label: year,
+                data,
+                borderColor: color,
+                backgroundColor: color,
+                fill: false,
+                tension: 0.3,
+                pointRadius: 4,
+                pointHoverRadius: 0,
+                hoverRadius: 0,
+                hoverBackgroundColor: color
+            };
+        });
 
-  const options = {
-    responsive: true,
-    scales: {
-      y: {
-        display: false,
-        grid: { display: false },
-        ticks: {
-          display: false,
-          font: {
-            family: "'Dosis', sans-serif"
-          }
-        },
-        beginAtZero: false,
-        min: 110,
-        max: 150
-      },
-      x: {
-        ticks: {
-          color: 'white',
-          maxRotation: 0,
-          minRotation: 0,
-          font: {
-            family: "'Dosis', sans-serif",
-            size: 12
-          }
-        }
-      }
-    },
-    plugins: {
-      legend: {
-        position: 'bottom',
-        labels: {
-          color: 'white',
-          font: {
-            family: "'Dosis', sans-serif",
-            size: 14,
-            weight: 'normal'
-          }
-        }
-      },
-      datalabels: {
-        color: 'white',
-        font: {
-          family: "'Dosis', sans-serif",
-          weight: 'normal',
-          size: 8
-        },
-        anchor: 'end',
-        align: 'top',
-        formatter: value => value
-      },
-      annotation: {
-        annotations: {
-          line1: {
+        const ctx = document.getElementById('subChart').getContext('2d');
+        new Chart(ctx, {
             type: 'line',
-            yMin: 120,
-            yMax: 120,
-            borderColor: 'red',
-            borderWidth: 2,
-            label: {
-              content: 'SuB-Ziel = 120',
-              enabled: true,
-              position: 'start',
-              color: 'red',
-              font: {
-                family: "'Dosis', sans-serif",
-                size: 12,
-                weight: 'bold'
-              },
-              xAdjust: -10,
-              yAdjust: 0
-            }
-          }
-        }
-      }
+            data: {
+                labels: months,
+                datasets: datasets
+            },
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: null
+                },
+                hover: {
+                    mode: null
+                },
+                plugins: {
+                    datalabels: {
+                        display: true,
+                        color: '#fff',
+                        font: {
+                            family: 'Dosis, sans-serif',
+                            size: 8
+                        },
+                        align: 'top',
+                        anchor: 'end'
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: 'white',
+                            font: {
+                                family: 'Dosis, sans-serif',
+                                size: 12,
+                                weight: 'normal'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        enabled: false
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#fff',
+                            font: {
+                                family: 'Dosis, sans-serif',
+                                size: 12
+                            },
+                            maxRotation: 0,
+                            minRotation: 0
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        display: false
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    } catch (err) {
+        console.error('Fehler beim Laden des Sub-Charts:', err);
     }
-  };
-
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: label,
-        data: data,
-        backgroundColor: color,
-        borderColor: color,
-        borderWidth: 2,
-        fill: false,
-        tension: 0.4
-      }]
-    },
-    options: options,
-    plugins: [ChartDataLabels]
-  });
 }
+
+document.addEventListener('DOMContentLoaded', loadAndDrawChart);

@@ -55,6 +55,11 @@ canvas {
     font-family: "Dosis", sans-serif;
 }
 
+body {
+  font-family: 'Dosis', sans-serif;
+  color: white;
+  background-color: #000; 
+}
 
 
 #seiten-summe,
