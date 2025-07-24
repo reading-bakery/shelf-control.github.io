@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ausgabenData.push(ausgabe);
       }
 
-      renderChart('ausgabenChart', '', labels, ausgabenData, 'rgba(255, 206, 86, 0.7)');
+      renderChart('ausgabenChart', '', labels, ausgabenData, '#FFB90F');
     })
     .catch(err => console.error('Fehler beim Laden der CSV:', err));
 });
@@ -36,10 +36,40 @@ function renderChart(canvasId, label, labels, data, color) {
   const options = {
     responsive: true,
     interaction: {
-      mode: null  // deaktiviert Hover-Interaktionen komplett
+      mode: 'nearest',
+      intersect: true
     },
     hover: {
-      mode: null  // deaktiviert Hover-Tooltip
+      mode: 'nearest',
+      intersect: true
+    },
+    plugins: {
+      tooltip: {
+        enabled: false
+      },
+      legend: {
+        position: 'bottom',
+        display: false,
+        labels: {
+          color: 'white',
+          font: {
+            family: "'Dosis', sans-serif",
+            size: 13,
+            weight: 'normal'
+          }
+        }
+      },
+      datalabels: {
+        color: 'white',
+        font: {
+          family: "'Dosis', sans-serif",
+          weight: 'normal',
+          size: 13
+        },
+        anchor: 'end',
+        align: 'top',
+        formatter: value => value
+      }
     },
     scales: {
       y: {
@@ -47,9 +77,7 @@ function renderChart(canvasId, label, labels, data, color) {
         grid: { display: true },
         ticks: {
           display: true,
-          font: {
-            family: "'Dosis', sans-serif"
-          }
+          font: { family: "'Dosis', sans-serif" }
         },
         beginAtZero: false,
         min: 0,
@@ -60,41 +88,9 @@ function renderChart(canvasId, label, labels, data, color) {
           color: 'white',
           maxRotation: 0,
           minRotation: 0,
-          font: {
-            family: "'Dosis', sans-serif",
-            size: 12
-          }
+          font: { family: "'Dosis', sans-serif", size: 16 }
         },
-        grid: {
-          display: false
-        }
-      }
-    },
-    plugins: {
-      legend: {
-        position: 'bottom',
-        display: false,
-        labels: {
-          color: 'white',
-          font: {
-            family: "'Dosis', sans-serif",
-            size: 14,
-            weight: 'normal'
-          }
-        }
-      },
-      datalabels: {
-        color: 'white',
-        font: {
-          family: "'Dosis', sans-serif",
-          weight: 'normal',
-          size: 10
-        },
-        anchor: 'end',
-        align: 'top',
-        formatter: function(value) {
-          return value;
-        }
+        grid: { display: false }
       }
     }
   };
@@ -108,9 +104,14 @@ function renderChart(canvasId, label, labels, data, color) {
         data: data,
         backgroundColor: color,
         borderColor: color,
-        borderWidth: 2,
+        borderWidth: 3,
         fill: false,
-        tension: 0.4
+        tension: 0.4,
+        pointRadius: 3,
+        pointHoverRadius: 9,       // Größer beim Hover
+        pointBackgroundColor: color,
+        pointHoverBackgroundColor: '#FFB90F',
+        pointBorderColor: color
       }]
     },
     options: options,

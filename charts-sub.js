@@ -32,10 +32,10 @@ async function loadAndDrawChart() {
                 borderColor: color,
                 backgroundColor: color,
                 fill: false,
-                tension: 0.3,
-                pointRadius: 4,
-                pointHoverRadius: 0,
-                hoverRadius: 0,
+                tension: 0.4,
+                pointRadius: 5,        // kleiner Punkt normal
+                pointHoverRadius: 10,  // größer beim Hover
+                hoverRadius: 9,        // bessere Erkennung beim Hover
                 hoverBackgroundColor: color
             };
         });
@@ -51,10 +51,12 @@ async function loadAndDrawChart() {
                 responsive: false,
                 maintainAspectRatio: false,
                 interaction: {
-                    mode: null
+                    mode: 'nearest',
+                    intersect: true
                 },
                 hover: {
-                    mode: null
+                    mode: 'nearest',
+                    intersect: true
                 },
                 plugins: {
                     datalabels: {
@@ -62,22 +64,27 @@ async function loadAndDrawChart() {
                         color: 'white',
                         font: {
                             family: 'Dosis, sans-serif',
-                            size: 10
+                            size: 13
                         },
                         align: 'top',
                         anchor: 'end'
                     },
                     legend: {
-                        position: 'bottom',
+                        position: 'top',
                         labels: {
                             color: 'white',
                             font: {
                                 family: 'Dosis, sans-serif',
                                 size: 12,
-                                weight: 'normal'
-                            }
+                                weight: 'bold'
+                            },
+                            boxWidth: 0,              // Kein Kästchen neben Text
+                            padding: 12,              // Platz um den Text (macht die Box sichtbar)
+                            usePointStyle: true,      // kleine Punkte als Marker (optional)
+                            // Text in einer farbigen Box mit runden Ecken - mit Plugin weiter unten
                         }
                     },
+
                     tooltip: {
                         enabled: false
                     },
@@ -98,7 +105,7 @@ async function loadAndDrawChart() {
                                     color: 'white',
                                     font: {
                                         family: 'Dosis, sans-serif',
-                                        size: 10,
+                                        size: 15,
                                         weight: 'normal'
                                     },
                                     padding: 0,
@@ -115,7 +122,7 @@ async function loadAndDrawChart() {
                             color: '#fff',
                             font: {
                                 family: 'Dosis, sans-serif',
-                                size: 12
+                                size: 16
                             },
                             maxRotation: 0,
                             minRotation: 0
@@ -132,7 +139,7 @@ async function loadAndDrawChart() {
                             color: '#fff',
                             font: {
                                 family: 'Dosis, sans-serif',
-                                size: 12
+                                size: 16
                             }
                         },
                         grid: {

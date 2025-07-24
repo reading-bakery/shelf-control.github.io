@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (name && count) {
           const parsedCount = parseInt(count.trim(), 10);
           if (!isNaN(parsedCount)) {
-            labels.push(name.trim()); // kein \n mehr nötig
+            labels.push(name.trim());
             data.push(parsedCount);
           }
         }
@@ -35,7 +35,9 @@ function renderAutorChart(labels, data) {
       datasets: [{
         label: 'Anzahl Bücher',
         data: data,
-        backgroundColor: generateColors(data.length)
+        backgroundColor: generateColors(data.length),
+        borderRadius: [0, 10, 10, 0], // Nur rechte Ecken abrunden
+        borderWidth: 10, // Border-Dicke 10px
       }]
     },
     options: {
@@ -44,36 +46,38 @@ function renderAutorChart(labels, data) {
       scales: {
         x: {
           display: false,
-          min: 0
+          min: 0,
+          max: 7,
+          grid: {
+            display: true // Grid für x-Achse einblenden
+          }
         },
         y: {
-          ticks: {
+        ticks: {
             color: 'white',
-            callback: function(value, index) {
-              // Zeilenumbruch bei Leerzeichen
-              const label = this.getLabelForValue(value);
-              return label.split(' ');
+            font: {
+                family: "'Dosis', sans-serif",
+                size: 16
+            },
+            callback: function(value) {
+                return this.getLabelForValue(value); // Name bleibt in einer Zeile
             }
-          },
+        },
           grid: {
-            display: false
+            display: true // Grid für y-Achse einblenden
           }
         }
       },
       plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          enabled: false
-        },
+        legend: { display: false },
+        tooltip: { enabled: false },
         datalabels: {
           color: 'white',
           anchor: 'end',
           align: 'right',
-          font: {
-            weight: 'bold'
-          }
+          font: { 
+            weight: 'normal',
+            size: 12 }
         }
       }
     },
