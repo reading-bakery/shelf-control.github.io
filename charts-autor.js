@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
           datalabels: {
             color: 'white',
             anchor: 'end',
-            align: 'right',
+            align: 'start',
             font: { weight: 'normal', size: 12 }
           }
         }
