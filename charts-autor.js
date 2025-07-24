@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return colors;
   }
 
-  function renderAutorChart(labels, data, barThickness) {
+  function renderAutorChart(labels, data, barThickness, maxValue) {
     const ctx = document.getElementById('autorChart').getContext('2d');
 
     if (autorChartInstance) {
@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
           x: {
             display: false,
             min: 0,
+            max: maxValue, // Dynamisch berechnet
             grid: { display: false }
           },
           y: {
@@ -58,8 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
           datalabels: {
             color: 'white',
             anchor: 'end',
-            align: 'start',
-            font: { weight: 'normal', size: 12 }
+            align: 'right',
+            offset: -10,
+            clamp: true,
+            font: { weight: 'normal', size: 13 }
           }
         }
       },
@@ -85,19 +88,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
+      const maxValue = Math.max(...data) + 1; // ➕ +1 für etwas Luft am rechten Rand
       const mediaQuery = window.matchMedia('(max-width: 740px)');
 
       function updateChart() {
-        if (mediaQuery.matches) {
-          renderAutorChart(labels, data, 30);  // dickere Balken auf kleinen Bildschirmen
-        } else {
-          renderAutorChart(labels, data, 35);  // dünnere Balken auf großen Bildschirmen
-        }
+        const barThickness = mediaQuery.matches ? 30 : 35;
+        renderAutorChart(labels, data, barThickness, maxValue);
       }
 
       mediaQuery.addEventListener('change', updateChart);
-
-      updateChart();  // Initiale Anzeige
+      updateChart();
     })
     .catch(error => {
       console.error('Fehler beim Laden der CSV:', error);
