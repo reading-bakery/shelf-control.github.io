@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             beginAtZero: true,
             ticks: {
               stepSize: 10,
-              display: true,
+              display: false,
               font: { family: "'Dosis', sans-serif" },
               color: 'white'
             },
