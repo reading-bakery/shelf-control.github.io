@@ -36,8 +36,11 @@ function renderAutorChart(labels, data) {
         label: 'Anzahl Bücher',
         data: data,
         backgroundColor: generateColors(data.length),
-        borderRadius: [0, 0, 0, 0], // Nur rechte Ecken abrunden
-        borderWidth: 7, // Border-Dicke 10px
+        borderRadius: {
+          topRight: 10,
+          bottomRight: 10
+        },
+        borderWidth: 10 // Border-Dicke 10px
       }]
     },
     options: {
@@ -53,16 +56,16 @@ function renderAutorChart(labels, data) {
           }
         },
         y: {
-        ticks: {
+          ticks: {
             color: 'white',
             font: {
-                family: "'Dosis', sans-serif",
-                size: 16
+              family: "'Dosis', sans-serif",
+              size: 16
             },
             callback: function(value) {
-                return this.getLabelForValue(value); // Name bleibt in einer Zeile
+              return this.getLabelForValue(value); // Name bleibt in einer Zeile
             }
-        },
+          },
           grid: {
             display: true // Grid für y-Achse einblenden
           }
@@ -75,9 +78,10 @@ function renderAutorChart(labels, data) {
           color: 'white',
           anchor: 'end',
           align: 'right',
-          font: { 
+          font: {
             weight: 'normal',
-            size: 12 }
+            size: 12
+          }
         }
       }
     },
