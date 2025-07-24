@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
           label: 'Anzahl Bücher',
           data: data,
           backgroundColor: generateColors(data.length),
-          borderRadius: [0, 10, 10, 0],
-          borderWidth: 10,
+          borderRadius: [15, 15, 15, 15],
+          borderWidth: 7,
           barThickness: barThickness
         }]
       },
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             color: 'white',
             anchor: 'end',
             align: 'right',
-            offset: -10,
+            offset: -7,
             clamp: true,
             font: { weight: 'normal', size: 13 }
           }
