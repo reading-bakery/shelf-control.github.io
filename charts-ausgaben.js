@@ -25,77 +25,72 @@ document.addEventListener('DOMContentLoaded', () => {
         ausgabenData.push(ausgabe);
       }
 
-      renderChart('ausgabenChart', '', labels, ausgabenData, '#FFB90F');
+      const optionsAusgaben = {
+        responsive: true,
+        interaction: {
+          mode: 'nearest',
+          intersect: true
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        plugins: {
+          tooltip: { enabled: false },
+          legend: { display: false },
+          datalabels: {
+            color: 'white',
+            font: {
+              family: "'Dosis', sans-serif",
+              weight: 'normal',
+              size: 13
+            },
+            anchor: 'center',
+            align: 'top',
+            padding: { top: 6 },
+            formatter: value => value
+          }
+        },
+        scales: {
+          y: {
+            min: 0,
+            max: 130,
+            beginAtZero: true,
+            ticks: {
+              stepSize: 10,
+              display: true,
+              font: { family: "'Dosis', sans-serif" },
+              color: 'white'
+            },
+            grid: { display: true }
+          },
+          x: {
+            ticks: {
+              color: 'white',
+              maxRotation: 0,
+              minRotation: 0,
+              font: { family: "'Dosis', sans-serif", size: 16 }
+            },
+            grid: { display: false }
+          }
+        }
+      };
+
+      renderAusgabenChart('ausgabenChart', '', labels, ausgabenData, '#63b8ff', optionsAusgaben);
     })
     .catch(err => console.error('Fehler beim Laden der CSV:', err));
 });
 
-function renderChart(canvasId, label, labels, data, color) {
+let chartAusgaben = null;
+
+function renderAusgabenChart(canvasId, label, labels, data, color, options) {
   const ctx = document.getElementById(canvasId).getContext('2d');
 
-  const options = {
-    responsive: true,
-    interaction: {
-      mode: 'nearest',
-      intersect: true
-    },
-    hover: {
-      mode: 'nearest',
-      intersect: true
-    },
-    plugins: {
-      tooltip: {
-        enabled: false
-      },
-      legend: {
-        position: 'bottom',
-        display: false,
-        labels: {
-          color: 'white',
-          font: {
-            family: "'Dosis', sans-serif",
-            size: 13,
-            weight: 'normal'
-          }
-        }
-      },
-      datalabels: {
-        color: 'white',
-        font: {
-          family: "'Dosis', sans-serif",
-          weight: 'normal',
-          size: 13
-        },
-        anchor: 'end',
-        align: 'top',
-        formatter: value => value
-      }
-    },
-    scales: {
-      y: {
-        display: false,
-        grid: { display: true },
-        ticks: {
-          display: true,
-          font: { family: "'Dosis', sans-serif" }
-        },
-        beginAtZero: false,
-        min: 0,
-        max: 130
-      },
-      x: {
-        ticks: {
-          color: 'white',
-          maxRotation: 0,
-          minRotation: 0,
-          font: { family: "'Dosis', sans-serif", size: 16 }
-        },
-        grid: { display: false }
-      }
-    }
-  };
+  if (chartAusgaben) {
+    chartAusgaben.destroy();
+  }
 
-  new Chart(ctx, {
+  chartAusgaben = new Chart(ctx, {
     type: 'line',
     data: {
       labels: labels,
@@ -107,11 +102,10 @@ function renderChart(canvasId, label, labels, data, color) {
         borderWidth: 3,
         fill: false,
         tension: 0.4,
-        pointRadius: 5,        // kleiner Punkt normal
-        pointHoverRadius: 10,  // größer beim Hover
-        hoverRadius: 9,        // bessere Erkennung beim Hover
+        pointRadius: 5,
+        pointHoverRadius: 10,
+        hoverRadius: 9,
         hoverBackgroundColor: color
-            
       }]
     },
     options: options,

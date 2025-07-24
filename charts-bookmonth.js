@@ -20,82 +20,67 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let i = 1; i < rows.length; i++) {
         const row = rows[i];
         labels.push(row[monthIndex]);
-
         const bookmonth = parseFloat(row[bookmonthIndex]) || 0;
         bookmonthData.push(bookmonth);
       }
 
-      renderChart('bookmonthChart', '', labels, bookmonthData, '#3CB371');
+      const optionsBook = {
+        responsive: true,
+        interaction: { mode: 'nearest', intersect: true },
+        hover: { mode: 'nearest', intersect: true },
+        plugins: {
+          tooltip: { enabled: false },
+          legend: { display: false },
+          datalabels: {
+            color: 'white',
+            font: {
+              family: "'Dosis', sans-serif",
+              weight: 'normal',
+              size: 13
+            },
+            anchor: 'end',
+            align: 'top',
+            formatter: value => value
+          }
+        },
+        scales: {
+          y: {
+            display: false,
+            min: 0,
+            max: 13,
+            grid: { display: true },
+            ticks: {
+              display: true,
+              font: { family: "'Dosis', sans-serif" }
+            }
+          },
+          x: {
+            ticks: {
+              color: 'white',
+              maxRotation: 0,
+              minRotation: 0,
+              font: { family: "'Dosis', sans-serif", size: 16 }
+            },
+            grid: { display: false }
+          }
+        }
+      };
+
+      renderBookmonthChart('bookmonthChart', '', labels, bookmonthData, '#3CB371', optionsBook);
     })
     .catch(err => console.error('Fehler beim Laden der CSV:', err));
 });
 
-function renderChart(canvasId, label, labels, data, color) {
+let chartBookmonth = null;
+
+function renderBookmonthChart(canvasId, label, labels, data, color, options) {
   const ctx = document.getElementById(canvasId).getContext('2d');
 
-  const options = {
-    responsive: true,
-    interaction: {
-      mode: 'nearest',
-      intersect: true
-    },
-    hover: {
-      mode: 'nearest',
-      intersect: true
-    },
-    plugins: {
-      tooltip: {
-        enabled: false
-      },
-      legend: {
-        position: 'bottom',
-        display: false,
-        labels: {
-          color: 'white',
-          font: {
-            family: "'Dosis', sans-serif",
-            size: 13,
-            weight: 'normal'
-          }
-        }
-      },
-      datalabels: {
-        color: 'white',
-        font: {
-          family: "'Dosis', sans-serif",
-          weight: 'normal',
-          size: 13
-        },
-        anchor: 'end',
-        align: 'top',
-        formatter: value => value
-      }
-    },
-    scales: {
-      y: {
-        display: false,
-        grid: { display: true },
-        ticks: {
-          display: true,
-          font: { family: "'Dosis', sans-serif" }
-        },
-        beginAtZero: false,
-        min: 0,
-        max: 13
-      },
-      x: {
-        ticks: {
-          color: 'white',
-          maxRotation: 0,
-          minRotation: 0,
-          font: { family: "'Dosis', sans-serif", size: 16 }
-        },
-        grid: { display: false }
-      }
-    }
-  };
+  if (chartBookmonth) {
+    chartBookmonth.destroy();
+  }
 
-  new Chart(ctx, {
+  chartBookmonth = new Chart(ctx, {
     type: 'line',
     data: {
       labels: labels,
@@ -107,9 +92,9 @@ function renderChart(canvasId, label, labels, data, color) {
         borderWidth: 3,
         fill: false,
         tension: 0.4,
-        pointRadius: 5,        // kleiner Punkt normal
-        pointHoverRadius: 10,  // größer beim Hover
-        hoverRadius: 9,        // bessere Erkennung beim Hover
+        pointRadius: 5,
+        pointHoverRadius: 10,
+        hoverRadius: 9,
         hoverBackgroundColor: color
       }]
     },
