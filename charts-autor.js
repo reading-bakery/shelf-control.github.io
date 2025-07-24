@@ -36,8 +36,8 @@ function renderAutorChart(labels, data) {
         label: 'Anzahl Bücher',
         data: data,
         backgroundColor: generateColors(data.length),
-        borderRadius: [0, 10, 10, 0], // Nur rechte Ecken abrunden
-        borderWidth: 10, // Border-Dicke 10px
+        borderRadius: [0, 0, 0, 0], // Nur rechte Ecken abrunden
+        borderWidth: 7, // Border-Dicke 10px
       }]
     },
     options: {
