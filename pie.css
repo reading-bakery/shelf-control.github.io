@@ -42,15 +42,19 @@ canvas {
   filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.15));
 }
 
-#sprachenChart {
-  height: 200px;  
-}
-
-
+#bookmonthChart,
+#ausgabenChart,
+#subChart,
 #genderChart,
-#umfangChart {
+#umfangChart
+#autorChart,
+#verlagChart,
+#sprachenChart {
+    height: 200px;  
     font-family: "Dosis", sans-serif;
 }
+
+
 
 body {
   font-family: 'Dosis', sans-serif;
@@ -70,7 +74,7 @@ body {
     height: 120px;
     line-height: 120px;
     border-radius: 50%;
-    background-color: #FFC72C;
+    background-color: #FFB90F;
     color: #222;
     font-size: 2.5rem;
     font-weight: bold;
@@ -84,6 +88,10 @@ body {
 #books-summe,
 #neuzugaenge-summe {
     font-size: 5rem;
+}
+
+#ausgaben-summe {
+    font-size: 3rem;
 }
 
 

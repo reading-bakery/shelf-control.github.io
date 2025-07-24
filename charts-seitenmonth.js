@@ -1,7 +1,7 @@
 Chart.register(ChartDataLabels);
 
 document.addEventListener('DOMContentLoaded', () => {
-  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=501012815&single=true&output=csv';
+  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1600444641&single=true&output=csv';
 
   fetch(csvUrl)
     .then(response => response.text())
@@ -12,20 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const header = rows[0];
 
       const monthIndex = header.indexOf('Monat');
-      const ausgabenIndex = header.indexOf('Ausgaben');
+      const seitenmonthIndex = header.indexOf('Anzahl');
 
       const labels = [];
-      const ausgabenData = [];
+      const seitenmonthData = [];
 
       for (let i = 1; i < rows.length; i++) {
         const row = rows[i];
         labels.push(row[monthIndex]);
 
-        const ausgabe = parseFloat(row[ausgabenIndex]) || 0;
-        ausgabenData.push(ausgabe);
+        const seitenmonth = parseFloat(row[seitenmonthIndex]) || 0;
+        seitenmonthData.push(seitenmonth);
       }
 
-      renderChart('ausgabenChart', '', labels, ausgabenData, '#FFB90F');
+      renderChart('seitenmonthChart', '', labels, seitenmonthData, '#9370DB');
     })
     .catch(err => console.error('Fehler beim Laden der CSV:', err));
 });
@@ -81,7 +81,7 @@ function renderChart(canvasId, label, labels, data, color) {
         },
         beginAtZero: false,
         min: 0,
-        max: 130
+        max: 3500
       },
       x: {
         ticks: {
@@ -111,7 +111,6 @@ function renderChart(canvasId, label, labels, data, color) {
         pointHoverRadius: 10,  // größer beim Hover
         hoverRadius: 9,        // bessere Erkennung beim Hover
         hoverBackgroundColor: color
-            
       }]
     },
     options: options,

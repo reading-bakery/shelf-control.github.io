@@ -32,6 +32,9 @@
     <script src="charts-seiten.js" defer></script>
     <script src="charts-books.js" defer></script>
     <script src="charts-verlag.js" defer></script>
+    <script src="charts-bookmonth.js" defer></script>
+    <script src="charts-seitenmonth.js" defer></script>
+
 
 
 </head>
@@ -87,9 +90,15 @@
 
         <div class="pie">
             <h3>Ausgaben Gesamt</h3>
-            <div id="ausgaben-summe"></div>
-         
+            <div id="ausgaben-summe"></div>       
         </div>
+
+        <div class="pie">
+            <h3>Top 5 Autor:innen</h3>
+            <canvas id="autorChart"></canvas>
+        </div>
+
+
 
         <div class="pie">
             <h3>Neuzugänge</h3>
@@ -102,7 +111,8 @@
         </div>
 
         <div class="pie">
-            <h3>Bücher pro Monat</h3>
+            <h3>Seiten pro Monat</h3>
+            <canvas id="seitenmonthChart"></canvas>
         </div>
 
         <div class="pie">
@@ -111,7 +121,8 @@
         </div>
 
         <div class="pie">
-            <h3>Seiten pro Monat</h3>
+            <h3>Bücher pro Monat</h3>
+            <canvas id="bookmonthChart"></canvas>
         </div>
 
         <div class="pie">
@@ -127,11 +138,6 @@
         <div class="pie">
             <h3>Top 5 Sprachen</h3>
             <canvas id="sprachenChart"></canvas>
-        </div>
-
-        <div class="pie">
-            <h3>Top 5 Autor:innen</h3>
-            <canvas id="autorChart"></canvas>
         </div>
 
         <div class="pie">
