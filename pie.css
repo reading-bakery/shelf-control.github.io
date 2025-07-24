@@ -58,7 +58,7 @@ body {
   background-color: #000; 
 }
 
-
+#books-summe,
 #seiten-summe,
 #minuten-summe,
 #neuzugaenge-summe,
@@ -81,6 +81,7 @@ body {
     font-family: "Dosis", sans-serif;
 }
 
+#books-summe,
 #neuzugaenge-summe {
     font-size: 5rem;
 }

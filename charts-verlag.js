@@ -1,7 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=57210249&single=true&output=csv';
+  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1931149788&single=true&output=csv';
 
-  let autorChartInstance = null;
+  let verlagChartInstance = null;
+
+  // Verlag-Mapping: lange Namen → kurze Namen
+  const languageMap = {
+    "ATB/Aufbau/RL/Blumenbar": "Aufbau/ATB",
+    "Sonstiges": "Sonst"
+    // hier kannst du weitere Einträge hinzufügen
+  };
 
   function generateColors(count) {
     const palette = ['#ff7256', '#FFB90F', '#63b8ff', '#3CB371', '#9370DB', '#20B2AA'];
@@ -12,14 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
     return colors;
   }
 
-  function renderAutorChart(labels, data, barThickness, maxValue) {
-    const ctx = document.getElementById('autorChart').getContext('2d');
+  function renderVerlagChart(labels, data, barThickness, maxValue) {
+    const ctx = document.getElementById('verlagChart').getContext('2d');
 
-    if (autorChartInstance) {
-      autorChartInstance.destroy();
+    if (verlagChartInstance) {
+      verlagChartInstance.destroy();
     }
 
-    autorChartInstance = new Chart(ctx, {
+    verlagChartInstance = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: labels,
@@ -39,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
           x: {
             display: false,
             min: 0,
-            max: maxValue, // Dynamisch berechnet
+            max: maxValue,
             grid: { display: false }
           },
           y: {
@@ -82,18 +89,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (name && count) {
           const parsedCount = parseInt(count.trim(), 10);
           if (!isNaN(parsedCount)) {
-            labels.push(name.trim());
+            // Hier das Mapping anwenden:
+            labels.push(languageMap[name.trim()] || name.trim());
             data.push(parsedCount);
           }
         }
       });
 
-      const maxValue = Math.max(...data) + 1; //  +2 für etwas Luft am rechten Rand
+      const maxValue = Math.max(...data) + 1; // +1 für Luft am rechten Rand
       const mediaQuery = window.matchMedia('(max-width: 740px)');
 
       function updateChart() {
         const barThickness = mediaQuery.matches ? 30 : 35;
-        renderAutorChart(labels, data, barThickness, maxValue);
+        renderVerlagChart(labels, data, barThickness, maxValue);
       }
 
       mediaQuery.addEventListener('change', updateChart);

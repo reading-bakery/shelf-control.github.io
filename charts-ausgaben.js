@@ -107,11 +107,10 @@ function renderChart(canvasId, label, labels, data, color) {
         borderWidth: 3,
         fill: false,
         tension: 0.4,
-        pointRadius: 3,
-        pointHoverRadius: 9,       // Größer beim Hover
-        pointBackgroundColor: color,
-        pointHoverBackgroundColor: '#FFB90F',
-        pointBorderColor: color
+        pointRadius: 5,        // kleiner Punkt normal
+        pointHoverRadius: 10,  // größer beim Hover
+        hoverRadius: 9,        // bessere Erkennung beim Hover
+        hoverBackgroundColor: color
       }]
     },
     options: options,

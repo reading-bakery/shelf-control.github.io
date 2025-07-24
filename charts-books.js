@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1606522008&single=true&output=csv';
+  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=583035260&single=true&output=csv';
 
   fetch(csvUrl)
     .then(response => response.text())
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      const container = document.getElementById('minuten-summe');
+      const container = document.getElementById('books-summe');
       container.textContent = `${summe.toLocaleString()}`;
     })
     .catch(error => {

@@ -29,7 +29,10 @@
     <script src="charts-minuten.js" defer></script>
     <script src="charts-sprachen.js" defer></script>
     <script src="charts-autor.js" defer></script>
-    
+    <script src="charts-seiten.js" defer></script>
+    <script src="charts-books.js" defer></script>
+    <script src="charts-verlag.js" defer></script>
+
 
 </head>
 <body>
@@ -95,6 +98,7 @@
 
         <div class="pie">
             <h3>Bücher Gesamt</h3>
+            <div id="books-summe"></div>
         </div>
 
         <div class="pie">
@@ -113,6 +117,16 @@
         <div class="pie">
             <h3>Minuten Gesamt</h3>
             <div id="minuten-summe"></div>
+        </div>
+
+        <div class="pie">
+            <h3>Verlag</h3>
+            <canvas id="verlagChart"></canvas>
+        </div>
+
+        <div class="pie">
+            <h3>Top 5 Sprachen</h3>
+            <canvas id="sprachenChart"></canvas>
         </div>
 
         <div class="pie">
@@ -170,15 +184,6 @@
         <div class="pie">
             <h3>Geschlecht</h3>
             <canvas id="genderChart"></canvas>
-        </div>
-
-        <div class="pie">
-            <h3>Top 5 Sprachen</h3>
-            <canvas id="sprachenChart"></canvas>
-        </div>
-
-        <div class="pie">
-            <h3>Verlag</h3>
         </div>
 
 
