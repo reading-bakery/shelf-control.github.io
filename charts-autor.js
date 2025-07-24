@@ -37,7 +37,7 @@ function renderAutorChart(labels, data) {
         data: data,
         backgroundColor: generateColors(data.length),
         borderRadius: [0, 10, 10, 0], // Nur rechte Ecken abrunden
-        borderWidth: 5, // Border-Dicke 10px
+        borderWidth: 10, // Border-Dicke 10px
       }]
     },
     options: {
