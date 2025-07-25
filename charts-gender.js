@@ -104,7 +104,7 @@ async function drawGenderChart() {
             enabled: false
           },
           legend: {
-            display: false
+            display: true
           }
         }
       }
