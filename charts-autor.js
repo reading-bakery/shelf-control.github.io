@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=57210249&single=true&output=csv';
 
   let autorChartInstance = null;
+  let activeIndex = null; // Index des gerade gehhoverten Balkens
 
   function generateColors(count) {
     const palette = ['#ff7256', '#FFB90F', '#63b8ff', '#3CB371', '#9370DB', '#20B2AA'];
@@ -35,17 +36,33 @@ document.addEventListener('DOMContentLoaded', () => {
       options: {
         indexAxis: 'y',
         responsive: true,
+        interaction: {
+          mode: 'nearest',
+          intersect: true
+        },
+        onHover: (event, elements) => {
+          if (elements.length) {
+            activeIndex = elements[0].index;
+          } else {
+            activeIndex = null;
+          }
+          autorChartInstance.update('none');
+        },
         scales: {
           x: {
             display: false,
             min: 0,
-            max: maxValue, // Dynamisch berechnet
+            max: maxValue,
             grid: { display: false }
           },
           y: {
             ticks: {
-              color: 'white',
-              font: { family: "'Dosis', sans-serif", size: 16 },
+              color: ctx => (ctx.index === activeIndex ? 'white' : 'white'),
+              font: ctx => ({
+                family: "'Dosis', sans-serif",
+                size: 16,
+                weight: ctx.index === activeIndex ? 'bold' : 'normal'
+              }),
               callback: function(value) {
                 return this.getLabelForValue(value);
               }
@@ -62,7 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
             align: 'right',
             offset: -2,
             clamp: true,
-            font: { family: "'Dosis', sans-serif", weight: 'normal', size: 15 }
+            font: ctx => ({
+              family: "'Dosis', sans-serif",
+              size: 15,
+              weight: ctx.dataIndex === activeIndex ? 'bold' : 'normal'
+            })
           }
         }
       },
@@ -88,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      const maxValue = Math.max(...data) + 1; //  +2 für etwas Luft am rechten Rand
+      const maxValue = Math.max(...data) + 1;
       const mediaQuery = window.matchMedia('(max-width: 740px)');
 
       function updateChart() {

@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1635103848&single=true&output=csv';
 
   let sprachenChartInstance = null;
+  let activeIndex = null; // aktuell gehovter Balken-Index
 
   // Sprachkürzel-Mapping
   const languageMap = {
@@ -48,6 +49,18 @@ document.addEventListener('DOMContentLoaded', () => {
       options: {
         indexAxis: 'y',
         responsive: true,
+        interaction: {
+          mode: 'nearest',
+          intersect: true
+        },
+        onHover: (event, elements) => {
+          if (elements.length) {
+            activeIndex = elements[0].index;
+          } else {
+            activeIndex = null;
+          }
+          sprachenChartInstance.update('none'); // sofort neu zeichnen ohne Animation
+        },
         scales: {
           x: {
             display: false,
@@ -58,7 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
           y: {
             ticks: {
               color: 'white',
-              font: { family: "'Dosis', sans-serif", size: 16 },
+              font: ctx => ({
+                family: "'Dosis', sans-serif",
+                size: 16,
+                weight: ctx.index === activeIndex ? 'bold' : 'normal'
+              }),
               callback: function(value) {
                 return this.getLabelForValue(value);
               }
@@ -81,7 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
             align: 'right',
             offset: -2,
             clamp: true,
-            font: { family: "'Dosis', sans-serif", weight: 'normal', size: 15 }
+            font: ctx => ({
+              family: "'Dosis', sans-serif",
+              weight: ctx.dataIndex === activeIndex ? 'bold' : 'normal',
+              size: 15
+            })
           }
         }
       },

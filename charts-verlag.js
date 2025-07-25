@@ -2,12 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1931149788&single=true&output=csv';
 
   let verlagChartInstance = null;
+  let activeIndex = null;  // aktuell gehoverter Balken-Index
 
   // Verlag-Mapping: lange Namen → kurze Namen
   const languageMap = {
     "ATB/Aufbau/RL/Blumenbar": "Aufbau/ATB",
     "Sonstiges": "Sonst"
-    // hier kannst du weitere Einträge hinzufügen
   };
 
   function generateColors(count) {
@@ -42,6 +42,18 @@ document.addEventListener('DOMContentLoaded', () => {
       options: {
         indexAxis: 'y',
         responsive: true,
+        interaction: {
+          mode: 'nearest',
+          intersect: true
+        },
+        onHover: (event, elements) => {
+          if (elements.length) {
+            activeIndex = elements[0].index;
+          } else {
+            activeIndex = null;
+          }
+          verlagChartInstance.update('none'); // ohne Animation neu rendern
+        },
         scales: {
           x: {
             display: false,
@@ -52,7 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
           y: {
             ticks: {
               color: 'white',
-              font: { family: "'Dosis', sans-serif", size: 16 },
+              font: ctx => ({
+                family: "'Dosis', sans-serif",
+                size: 16,
+                weight: ctx.index === activeIndex ? 'bold' : 'normal'
+              }),
               callback: function(value) {
                 return this.getLabelForValue(value);
               }
@@ -69,7 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
             align: 'right',
             offset: -2,
             clamp: true,
-            font: { family: "'Dosis', sans-serif", weight: 'normal', size: 15 }
+            font: ctx => ({
+              family: "'Dosis', sans-serif",
+              weight: ctx.dataIndex === activeIndex ? 'bold' : 'normal',
+              size: 15
+            })
           }
         }
       },
@@ -89,14 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (name && count) {
           const parsedCount = parseInt(count.trim(), 10);
           if (!isNaN(parsedCount)) {
-            // Hier das Mapping anwenden:
             labels.push(languageMap[name.trim()] || name.trim());
             data.push(parsedCount);
           }
         }
       });
 
-      const maxValue = Math.max(...data) + 1; // +1 für Luft am rechten Rand
+      const maxValue = Math.max(...data) + 1;
       const mediaQuery = window.matchMedia('(max-width: 740px)');
 
       function updateChart() {
