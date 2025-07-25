@@ -140,5 +140,14 @@
     }
 
 
-
-
+  #status {
+  min-height: 1.5em;      /* Platz für Text */
+  color: green;           /* Textfarbe */
+  font-weight: bold;
+  transition: opacity 0.5s ease;
+  opacity: 1;             /* sichtbar */
+  margin-top: 1em;
+}
+#status.error {
+  color: red;
+}

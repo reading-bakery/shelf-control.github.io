@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectBuch.appendChild(option);
       }
     }
-    zeigeStatus('Bücher geladen.', false);
+    zeigeStatus('Lesefortschritt erfolgreich getrackt 😊', false);
   }
 
   function validateForm() {
@@ -71,11 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxSeiten = buchDaten[titel]?.maxSeiten || Infinity;
     const bisSeite = parseInt(inputBisSeite.value, 10);
     if (isNaN(bisSeite) || bisSeite < 1) {
-      zeigeStatus('Bitte eine gültige Seitenzahl eingeben.', true);
+      zeigeStatus('Bitte eine gültige Seitenzahl eingeben. 😵', true);
       return false;
     }
     if (bisSeite > maxSeiten) {
-      zeigeStatus(`Die Seitenzahl darf nicht größer sein als die maximale Seitenzahl (${maxSeiten}).`, true);
+      zeigeStatus(`Die Seitenzahl darf nicht größer sein als die maximale Seitenzahl (${maxSeiten}). 😖`, true);
       return false;
     }
     return true;

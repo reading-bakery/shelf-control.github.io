@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Lesetracker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Tracker</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,16 +49,16 @@
     </div>
   </nav>
 
-<h2>Daily Tracker</h2>
+<h2>Lesetracker</h2>
 
 <form id="trackerForm">
-  <label for="buch">Buch auswählen:</label>
+  <label for="buch">Buch</label>
   <select id="buch" name="buch" required>
     <option value="">– Bitte wählen –</option>
-  </select>
+  </select><br><br>
 
-  <label for="bisSeite">Bis Seite:</label>
-  <input type="number" id="bisSeite" name="bisSeite" min="1" required />
+  <label for="bisSeite">Gelesen bis Seite</label>
+  <input type="number" id="bisSeite" name="bisSeite" min="1" required >
   <br><br>
   <div id="status"></div>
   <button type="submit">Speichern</button>
