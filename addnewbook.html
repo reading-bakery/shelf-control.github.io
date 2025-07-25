@@ -2,70 +2,64 @@
 <html lang="de">
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neues Buch hinzufügen</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neues Buch hinzufügen</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis:wght@200..800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis:wght@200..800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style-site.css">  
-    <link rel="stylesheet" href="navbar.css"> 
+  <link rel="stylesheet" href="style-site.css">  
+  <link rel="stylesheet" href="navbar.css"> 
+  <link rel="stylesheet" href="choices.css">
 
-    <script src="navbar.js" defer></script>
-    <script src="toggle.js" defer></script>
-    <script src="backtop.js" defer></script>
+  <script src="navbar.js" defer></script>
+  <script src="toggle.js" defer></script>
+  <script src="backtop.js" defer></script>
+  <script src="chpices.js" defer></script>
+
 
 </head>
 <body>
 
-            <nav class="navbar"> 
-                
-                <div class="box1">
-                    <a href="index.html" class="logohome">Shelf Control</a>
-                </div>
+  <nav class="navbar"> 
+    <div class="box1">
+      <a href="index.html" class="logohome">Shelf Control</a>
+    </div>
 
-                <ul class="nav-links" id="nav-links">
-                    
-                        <li><a href="currently.html">Currently</a></li> 
-                        <li><a href="daily.html">Tracker</a></li>
-                        <li><a href="wishlist.html">Wunschliste</a></li>
-                        <li><a href="rachesub.html">SuB</a></li>
-                        <li><a href="lesemonate.html">Lesemonate</a></li>
-                        <li><a href="challenges.html">Challenges</a></li>
-                        <li><a href="recap.html">Statistik</a></li>
-                        <li><a href="https://docs.google.com/spreadsheets/d/1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE/edit?gid=1702643479#gid=1702643479">Lager</a></li>
-                        <li><a href="addnewbook.html">Buch hinzufügen</a></li>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="currently.html">Currently</a></li> 
+      <li><a href="daily.html">Tracker</a></li>
+      <li><a href="wishlist.html">Wunschliste</a></li>
+      <li><a href="rachesub.html">SuB</a></li>
+      <li><a href="lesemonate.html">Lesemonate</a></li>
+      <li><a href="challenges.html">Challenges</a></li>
+      <li><a href="recap.html">Statistik</a></li>
+      <li><a href="https://docs.google.com/spreadsheets/d/1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE/edit?gid=1702643479#gid=1702643479">Lager</a></li>
+      <li><a href="addnewbook.html">Buch hinzufügen</a></li>
+    </ul>
 
-                </ul>
-
-                <div class="toggle-button" id="toggle-button">
-                    <span id="menu-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-                          </svg>
-                    </span>
-                    <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16" style="display: none;">
-                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                    </svg>
-                </div>
-
-            </nav>
-
+    <div class="toggle-button" id="toggle-button">
+      <span id="menu-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+        </svg>
+      </span>
+      <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16" style="display: none;">
+        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+      </svg>
+    </div>
+  </nav>
 
   <h2>Neues Buch hinzufügen</h2>
 
   <form action="https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse"
         method="POST" target="hidden_iframe" onsubmit="submitted=true;">
     
-    
-
-
     <label>Start</label>
     <input type="date" name="entry.231863637"><br><br>
 
-    
     <label>Titel</label>
     <input type="text" name="entry.554995646"><br><br>
 
@@ -74,7 +68,7 @@
 
     <label>Geschlecht</label>
     <select name="entry.1685694101" required>
-      <option value="" disabled selected>Bitte wählen…</option>
+      <option value="" disabled selected>– Bitte wählen –</option>
       <option value="Weiblich">Weiblich</option>
       <option value="Männlich">Männlich</option>
       <option value="Mix">Mix</option>
@@ -83,12 +77,11 @@
 
     <label>Umfang</label>
     <select name="entry.436245051" required>
-      <option value="" disabled selected>Bitte wählen…</option>
+      <option value="" disabled selected>– Bitte wählen –</option>
       <option value="bis 300">bis 300</option>
       <option value="301-500">301-500</option>
       <option value="ab 501">ab 501</option>
     </select><br><br>
-
 
     <label>Seiten total</label>
     <input type="number" name="entry.1082451600"><br><br>
@@ -98,7 +91,7 @@
 
     <label>Genre</label>
     <select name="entry.1105252862">
-      <option value="" disabled selected>Bitte wählen…</option>
+      <option value="" disabled selected>– Bitte wählen …</option>
       <option value="Roman">Roman</option>
       <option value="Non Fiction">Non Fiction</option>
       <option value="Thriller/Krimi">Krimi/Thriller</option>
@@ -109,7 +102,7 @@
 
     <label>Sub Genre</label>
     <select name="entry.1475530715">
-      <option value="" disabled selected>Bitte wählen…</option>
+      <option value="" disabled selected>– Bitte wählen –</option>
       <option value="Klassiker">Klassiker</option>
       <option value="(Auto-)Biografie">(Auto-)Biografie</option>
       <option value="Zeitgenössisch">Zeitgenössisch</option>
@@ -120,11 +113,9 @@
       <option value="Historisch">Historisch</option>
     </select><br><br>
 
-
-
     <label>Sprache</label>
     <select name="entry.807495643">
-      <option value="" disabled selected>Bitte wählen…</option>
+      <option value="" disabled selected>– Bitte wählen –</option>
       <option value="Deutsch">Deutsch</option>
       <option value="Englisch">Englisch</option>
       <option value="Französisch">Französisch</option>
@@ -145,18 +136,16 @@
 
     <label>Format</label>
     <select name="entry.9727566">
-      <option value="" disabled selected>Bitte wählen…</option>
+      <option value="" disabled selected>– Bitte wählen –</option>
       <option value="Softcover">Softcover</option>
       <option value="Hardcover">Hardcover</option>
       <option value="eBook">eBook</option>
       <option value="Hörbuch">Hörbuch</option>
     </select><br><br>
 
-
-
     <label>Status</label>
-      <select name="entry.914730295">
-      <option value="" disabled selected>Bitte wählen…</option>
+    <select name="entry.914730295">
+      <option value="" disabled selected>– Bitte wählen –</option>
       <option value="SuB">SuB</option>
       <option value="Neuzugang">Neuzugang</option>
       <option value="Ausgeliehen">Ausgeliehen</option>
@@ -164,8 +153,8 @@
     </select><br><br>
 
     <label>Verlag</label>
-      <select name="entry.1674035100">
-      <option value="" disabled selected>Bitte wählen…</option>
+    <select name="entry.1674035100">
+      <option value="" disabled selected>– Bitte wählen –</option>
       <option value="Sonstiges">Sonstiges</option>
       <option value="ATB/Aufbau/RL/Blumenbar">ATB/Aufbau/RL/Blumenbar</option>
       <option value="Atlantik">Atlantik</option>
@@ -211,23 +200,8 @@
     </select><br><br>
 
     <label>Cover</label>
-    <input type="file" name="entry.952453014"><br><br>
-        <img id="preview" src="#" alt="Cover-Vorschau" style="max-width: 200px; display: none; border-radius: 5px;">
-
-        <script>
-          const coverInput = document.getElementById('cover');
-          const preview = document.getElementById('preview');
-    
-        coverInput.addEventListener('change', function () {
-          const file = this.files[0];
-          if (file) {
-            preview.src = URL.createObjectURL(file);
-            preview.style.display = 'block';
-          }
-        });
-        </script>
-
-
+    <input type="file" id="cover" name="entry.952453014"><br><br>
+    <img id="preview" src="#" alt="Cover-Vorschau" style="max-width: 200px; display: none; border-radius: 5px;">
 
     <button type="submit">Buch hinzufügen</button>
   </form>
@@ -242,23 +216,34 @@
         alert("✅ Buch erfolgreich hinzugefügt!");
         submitted = false;
         document.querySelector("form").reset();
+        const preview = document.getElementById('preview');
+        preview.style.display = 'none';
+        preview.src = '#';
       }
     }
+
+    // Vorschau für Cover
+    document.addEventListener("DOMContentLoaded", function () {
+      const coverInput = document.getElementById('cover');
+      const preview = document.getElementById('preview');
+
+      coverInput.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+          preview.src = URL.createObjectURL(file);
+          preview.style.display = 'block';
+        }
+      });
+    });
   </script>
 
   <div class="top-button">
-        
-        <button id="backToTop">
-            
-            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
-            </svg>
-
-        </button>  
-
-        
-      </div>
-
+    <button id="backToTop">
+      <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
+      </svg>
+    </button>
+  </div>
 
   <footer>
     <p>&copy; 2025 Katharina | Impressum</p>

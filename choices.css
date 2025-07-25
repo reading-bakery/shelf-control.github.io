@@ -1,0 +1,42 @@
+.choices__inner {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-family: 'Dosis', sans-serif;
+  font-size: 16px;
+  color: #333;
+  min-height: auto;
+  box-shadow: none;
+}
+
+.choices__list--dropdown, .choices__list[aria-expanded] {
+  border-radius: 0 0 5px 5px;
+  border: 1px solid #ccc;
+  border-top: none;
+  background-color: white;
+  font-size: 16px;
+  font-family: 'Dosis', sans-serif;
+  z-index: 100;
+}
+
+.choices__list--dropdown .choices__item--selectable {
+  padding: 10px;
+}
+
+.choices__item--selectable.is-highlighted {
+  background-color: #f0f0f0;
+}
+
+/* Pfeil-Symbol kleiner und dezent */
+.choices[data-type*=select-one]::after {
+  border-color: #888 transparent transparent;
+  border-width: 6px;
+  margin-top: -4px;
+}
+
+/* Entferne unnötige graue Linie beim Öffnen */
+.choices.is-open .choices__inner {
+  border-radius: 5px 5px 0 0;
+  border-bottom: 1px solid #ccc;
+}

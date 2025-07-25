@@ -19,46 +19,57 @@
     <script src="backtop.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0/dist/chartjs-plugin-annotation.min.js"></script>
-    <script src="charts.js"></script>
+    <script src="daily.js" defer></script>
 
 </head>
 <body>
 
     <nav class="navbar"> 
                     
-                    <div class="box1">
-                        <a href="index.html" class="logohome">Shelf Control</a>
-                    </div>
+        <div class="box1">
+            <a href="index.html" class="logohome">Shelf Control</a>
+        </div>
 
-                    <ul class="nav-links" id="nav-links">
-                        
-                        <li><a href="currently.html">Currently</a></li> 
-                        <li><a href="daily.html">Tracker</a></li>
-                        <li><a href="wishlist.html">Wunschliste</a></li>
-                        <li><a href="rachesub.html">SuB</a></li>
-                        <li><a href="lesemonate.html">Lesemonate</a></li>
-                        <li><a href="challenges.html">Challenges</a></li>
-                        <li><a href="recap.html">Statistik</a></li>
-                        <li><a href="https://docs.google.com/spreadsheets/d/1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE/edit?gid=1702643479#gid=1702643479">Lager</a></li>
-                        <li><a href="addnewbook.html">Buch hinzufügen</a></li>
+        <ul class="nav-links" id="nav-links">
+            
+            <li><a href="currently.html">Currently</a></li> 
+            <li><a href="daily.html">Tracker</a></li>
+            <li><a href="wishlist.html">Wunschliste</a></li>
+            <li><a href="rachesub.html">SuB</a></li>
+            <li><a href="lesemonate.html">Lesemonate</a></li>
+            <li><a href="challenges.html">Challenges</a></li>
+            <li><a href="recap.html">Statistik</a></li>
+            <li><a href="https://docs.google.com/spreadsheets/d/1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE/edit?gid=1702643479#gid=1702643479">Lager</a></li>
+            <li><a href="addnewbook.html">Buch hinzufügen</a></li>
 
-                    </ul>
+        </ul>
 
-                    <div class="toggle-button" id="toggle-button">
-                        <span id="menu-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-                            </svg>
-                        </span>
-                        <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16" style="display: none;">
-                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                        </svg>
-                    </div>
+        <div class="toggle-button" id="toggle-button">
+            <span id="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </span>
+            <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16" style="display: none;">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+        </div>
 
     </nav>
 
 
     <h2>Daily Tracker</h2>
+
+    <form id="trackerForm">
+        <label for="buch">Buch auswählen</label>
+        <select id="buch" name="buch" required></select>
+
+        <label for="bisSeite">Bis Seite gelesen:</label>
+        <input type="number" id="bisSeite" name="bisSeite" required min="1">
+
+        <button type="submit">Eintrag speichern</button>
+        <div class="status" id="status"></div>
+    </form>
 
 
   
