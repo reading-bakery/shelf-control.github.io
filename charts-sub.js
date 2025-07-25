@@ -10,7 +10,6 @@ async function loadAndDrawChart() {
         const allYears = rows[0].slice(1);
 
         const wantedYears = ['2025', '2026', '2027'];
-
         const farben = {
             '2025': '#ff7256',
             '2026': '#FFB90F',
@@ -18,6 +17,9 @@ async function loadAndDrawChart() {
         };
 
         const yearIndices = wantedYears.map(year => allYears.indexOf(year)).filter(idx => idx !== -1);
+
+        let activeIndex = null;  // Hover (auch für Achsenhover)
+        let clickedIndex = null; // Klick auf Monatsname
 
         const datasets = yearIndices.map(colIndex => {
             const year = allYears[colIndex];
@@ -33,15 +35,19 @@ async function loadAndDrawChart() {
                 backgroundColor: color,
                 fill: false,
                 tension: 0.4,
-                pointRadius: 5,        // kleiner Punkt normal
-                pointHoverRadius: 10,  // größer beim Hover
-                hoverRadius: 9,        // bessere Erkennung beim Hover
+                pointRadius: ctx => {
+                    const i = ctx.dataIndex;
+                    return (i === activeIndex || i === clickedIndex) ? 7 : 5;
+                },
+                pointHoverRadius: 10,
+                hoverRadius: 9,
                 hoverBackgroundColor: color
             };
         });
 
         const ctx = document.getElementById('subChart').getContext('2d');
-        new Chart(ctx, {
+
+        const chart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: months,
@@ -54,18 +60,47 @@ async function loadAndDrawChart() {
                     mode: 'nearest',
                     intersect: true
                 },
-                hover: {
-                    mode: 'nearest',
-                    intersect: true
+                onClick: (event) => {
+                    const xAxis = chart.scales.x;
+                    const x = event.offsetX;
+                    const index = Math.round(xAxis.getValueForPixel(x));
+                    if (index >= 0 && index < months.length) {
+                        clickedIndex = (clickedIndex === index) ? null : index;
+                        chart.update('none');
+                    }
+                },
+                onHover: (event) => {
+                    const xAxis = chart.scales.x;
+                    const yAxis = chart.scales.y;
+                    const x = event.offsetX;
+                    const y = event.offsetY;
+
+                    const index = Math.round(xAxis.getValueForPixel(x));
+                    if (
+                        index >= 0 && index < months.length &&
+                        y > yAxis.bottom && y < yAxis.bottom + 30 // grob unter X-Achse
+                    ) {
+                        activeIndex = index;
+                    } else {
+                        // prüfe normalen Hover auf Punkte
+                        const elements = chart.getElementsAtEventForMode(event, 'nearest', {intersect: true}, false);
+                        if (elements.length > 0) {
+                            activeIndex = elements[0].index;
+                        } else {
+                            activeIndex = null;
+                        }
+                    }
+                    chart.update('none');
                 },
                 plugins: {
                     datalabels: {
-                        display: true,
+                        display: ctx => activeIndex === null || ctx.dataIndex === activeIndex,
                         color: 'white',
-                        font: {
+                        font: ctx => ({
                             family: 'Dosis, sans-serif',
-                            size: 13
-                        },
+                            size: 13,
+                            weight: ctx.dataIndex === activeIndex ? 'bold' : 'normal'
+                        }),
                         align: 'top',
                         anchor: 'end'
                     },
@@ -78,13 +113,11 @@ async function loadAndDrawChart() {
                                 size: 12,
                                 weight: 'normal'
                             },
-                            boxWidth: 50,              // Kein Kästchen neben Text
-                            padding: 10,              // Platz um den Text (macht die Box sichtbar)
-                            usePointStyle: true,      // kleine Punkte als Marker (optional)
-                            // Text in einer farbigen Box mit runden Ecken - mit Plugin weiter unten
+                            boxWidth: 50,
+                            padding: 10,
+                            usePointStyle: true
                         }
                     },
-
                     tooltip: {
                         enabled: false
                     },
@@ -105,8 +138,7 @@ async function loadAndDrawChart() {
                                     color: 'white',
                                     font: {
                                         family: 'Dosis, sans-serif',
-                                        size: 15,
-                                        weight: 'normal'
+                                        size: 15
                                     },
                                     padding: 0,
                                     cornerRadius: 0,
@@ -120,10 +152,11 @@ async function loadAndDrawChart() {
                     x: {
                         ticks: {
                             color: '#fff',
-                            font: {
+                            font: ctx => ({
                                 family: 'Dosis, sans-serif',
-                                size: 16
-                            },
+                                size: 16,
+                                weight: ctx.index === activeIndex ? 'bold' : 'normal'
+                            }),
                             maxRotation: 0,
                             minRotation: 0
                         },
@@ -136,7 +169,7 @@ async function loadAndDrawChart() {
                         min: 115,
                         max: 155,
                         ticks: {
-                            color: '#fff',
+                            color: 'white',
                             font: {
                                 family: 'Dosis, sans-serif',
                                 size: 16
@@ -150,6 +183,7 @@ async function loadAndDrawChart() {
             },
             plugins: [ChartDataLabels]
         });
+
     } catch (err) {
         console.error('Fehler beim Laden des Sub-Charts:', err);
     }
