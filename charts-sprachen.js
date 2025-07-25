@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
           label: 'Anzahl Bücher',
           data: data,
           backgroundColor: generateColors(data.length),
-          borderRadius: [20, 20, 20, 20],
+          borderRadius: [30, 30, 30, 30],
           borderWidth: 7,
           barThickness: barThickness
         }]
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             align: 'right',
             offset: -7,
             clamp: true,
-            font: { family: "'Dosis', sans-serif", weight: 'normal', size: 13 }
+            font: { family: "'Dosis', sans-serif", weight: 'normal', size: 15 }
           }
         }
       },
