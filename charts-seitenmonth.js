@@ -37,10 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
           const y = event.offsetY;
 
           const index = Math.round(xAxis.getValueForPixel(x));
-          if (
+            if (
             index >= 0 && index < labels.length &&
-            y > yAxis.bottom && y < yAxis.bottom + 30 // grob unter X-Achse
-          ) {
+            x > xAxis.left && x < xAxis.right &&
+            y > xAxis.top && y < xAxis.bottom + 40
+          ){
             activeIndexSeiten = index;
           } else {
             const elements = chartSeitenmonth.getElementsAtEventForMode(event, 'nearest', {intersect: true}, false);

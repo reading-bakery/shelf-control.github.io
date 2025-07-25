@@ -2,7 +2,6 @@ Chart.register(ChartDataLabels);
 
 let chartBookmonth = null;
 let activeIndexBook = null; // Hover-Index für Bookmonth-Chart
-const lineColor = '#3CB371'; // Linienfarbe
 
 document.addEventListener('DOMContentLoaded', () => {
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=583035260&single=true&output=csv';
@@ -32,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
         responsive: true,
         interaction: false, // eigenes Hover-Handling
         onHover: (event) => {
-          if (!chartBookmonth) return;
           const xAxis = chartBookmonth.scales.x;
           const yAxis = chartBookmonth.scales.y;
           const x = event.offsetX;
@@ -83,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
           },
           x: {
             ticks: {
-              color: ctx => (ctx.index === activeIndexBook ? lineColor : 'white'),
+              color: ctx => ctx.index === activeIndexBook ? '#3CB371' : 'white',
               maxRotation: 0,
               minRotation: 0,
               font: ctx => ({
@@ -97,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       };
 
-      renderBookmonthChart('bookmonthChart', '', labels, bookmonthData, lineColor, optionsBook);
+      renderBookmonthChart('bookmonthChart', '', labels, bookmonthData, '#3CB371', optionsBook);
     })
     .catch(err => console.error('Fehler beim Laden der CSV:', err));
 });
