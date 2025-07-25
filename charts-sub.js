@@ -76,10 +76,10 @@ async function loadAndDrawChart() {
                             font: {
                                 family: 'Dosis, sans-serif',
                                 size: 12,
-                                weight: 'bold'
+                                weight: 'normal'
                             },
-                            boxWidth: 0,              // Kein Kästchen neben Text
-                            padding: 12,              // Platz um den Text (macht die Box sichtbar)
+                            boxWidth: 50,              // Kein Kästchen neben Text
+                            padding: 10,              // Platz um den Text (macht die Box sichtbar)
                             usePointStyle: true,      // kleine Punkte als Marker (optional)
                             // Text in einer farbigen Box mit runden Ecken - mit Plugin weiter unten
                         }

@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             color: 'white',
             anchor: 'end',
             align: 'right',
-            offset: -7,
+            offset: -2,
             clamp: true,
             font: { family: "'Dosis', sans-serif", weight: 'normal', size: 15 }
           }
