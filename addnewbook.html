@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
 
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Neues Buch hinzufügen</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis:wght@200..800&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style-site.css">  
-  <link rel="stylesheet" href="navbar.css"> 
-  <link rel="stylesheet" href="choices.css">
+  <link rel="stylesheet" href="style-site.css">
+  <link rel="stylesheet" href="navbar.css">
 
   <script src="navbar.js" defer></script>
   <script src="toggle.js" defer></script>
   <script src="backtop.js" defer></script>
   <script src="chpices.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js" defer></script>
-
 
 </head>
+
 <body>
 
   <nav class="navbar"> 
@@ -57,7 +54,7 @@
 
   <form action="https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse"
         method="POST" target="hidden_iframe" onsubmit="submitted=true;">
-    
+
     <label>Start</label>
     <input type="date" name="entry.231863637"><br><br>
 
@@ -68,13 +65,13 @@
     <input type="text" name="entry.890797774"><br><br>
 
     <label>Geschlecht</label>
-    <select name="entry.1685694101" required>
-      <option value="" disabled selected>– Bitte wählen –</option>
-      <option value="Weiblich">Weiblich</option>
-      <option value="Männlich">Männlich</option>
-      <option value="Mix">Mix</option>
-      <option value="Divers">Divers</option>
-    </select><br><br>
+      <select name="entry.1685694101" required>
+        <option value="" disabled selected>– Bitte wählen –</option>
+        <option value="Weiblich">Weiblich</option>
+        <option value="Männlich">Männlich</option>
+        <option value="Mix">Mix</option>
+        <option value="Divers">Divers</option>
+      </select><br><br>
 
     <label>Umfang</label>
     <select name="entry.436245051" required>
@@ -85,7 +82,7 @@
     </select><br><br>
 
     <label>Seiten total</label>
-    <input type="number" name="entry.1082451600"><br><br>
+        <input type="number" name="entry.1082451600"><br><br>
 
     <label>Minuten total</label>
     <input type="number" name="entry.1433991187"><br><br>
@@ -144,8 +141,9 @@
       <option value="Hörbuch">Hörbuch</option>
     </select><br><br>
 
+
     <label>Status</label>
-    <select name="entry.914730295">
+      <select name="entry.914730295">
       <option value="" disabled selected>– Bitte wählen –</option>
       <option value="SuB">SuB</option>
       <option value="Neuzugang">Neuzugang</option>
@@ -201,10 +199,9 @@
     </select><br><br>
 
     <label>Cover</label>
-    <input type="file" id="cover" name="entry.952453014"><br><br>
-    <img id="preview" src="#" alt="Cover-Vorschau" style="max-width: 200px; display: none; border-radius: 5px;">
-
-    <button type="submit">Buch hinzufügen</button>
+      <input type="file" id="cover" name="entry.952453014"><br><br>
+      <img id="preview" src="#" alt="Cover-Vorschau" style="max-width: 200px; display: none; border-radius: 5px;">
+      <button type="submit">Buch hinzufügen</button>
   </form>
 
   <iframe name="hidden_iframe" style="display:none;" onload="formGesendet()"></iframe>
@@ -236,22 +233,11 @@
         }
       });
     });
-
-    // Choices.js initialisieren
-    document.addEventListener("DOMContentLoaded", function () {
-      const selects = document.querySelectorAll("select");
-      selects.forEach(select => {
-        new Choices(select, {
-          searchEnabled: true,
-          itemSelectText: '',
-          shouldSort: false
-        });
-      });
-    });
   </script>
 
   <div class="top-button">
-    <button id="backToTop">
+
+      <button id="backToTop">
       <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
       </svg>
