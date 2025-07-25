@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
               font: { family: "'Dosis', sans-serif" },
               color: 'white'
             },
-            grid: { display: true }
+            grid: { display: false }
           },
           x: {
             ticks: {

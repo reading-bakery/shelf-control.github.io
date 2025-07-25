@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    align-items: stretch;
+    width: 100%;
 }
 
 .pie {
@@ -46,7 +46,7 @@ canvas {
 #ausgabenChart,
 #subChart,
 #genderChart,
-#umfangChart
+#umfangChart,
 #autorChart,
 #verlagChart,
 #sprachenChart {
@@ -94,6 +94,52 @@ body {
     font-size: 3rem;
 }
 
+.carousel-text {
+    font-family: Dosis, sans-serif;
+    font-size: 2rem;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 200px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 100%;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: -0.2rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: rgb(90, 165, 142);
+}
 
 
 @media (max-width: 940px) {
