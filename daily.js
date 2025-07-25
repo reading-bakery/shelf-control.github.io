@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
         selectBuch.appendChild(option);
       }
     }
-    zeigeStatus('Lesefortschritt erfolgreich getrackt 😊', false);
   }
 
   function validateForm() {
@@ -75,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return false;
     }
     if (bisSeite > maxSeiten) {
-      zeigeStatus(`Die Seitenzahl darf nicht größer sein als die maximale Seitenzahl (${maxSeiten}). 😖`, true);
+      zeigeStatus(`Die Seitenzahl darf nicht größer sein als die maximale Seitenzahl (${maxSeiten}). 😭`, true);
       return false;
     }
     return true;
@@ -93,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formData.toString(),
       });
-      zeigeStatus('Eintrag erfolgreich gespeichert.', false);
+      zeigeStatus('Eintrag erfolgreich gespeichert. 😍', false);
       form.reset();
     } catch (error) {
       zeigeStatus('Fehler beim Senden: ' + error.message, true);
@@ -111,10 +110,17 @@ document.addEventListener('DOMContentLoaded', () => {
     await sendeDatenAnForm(titel, bisSeite);
   });
 
-  function zeigeStatus(text, isError) {
+function zeigeStatus(text, isError) {
+  if (!text) {
+    statusDiv.style.display = 'none';
+    statusDiv.textContent = '';
+    statusDiv.classList.remove('error');
+  } else {
     statusDiv.textContent = text;
     statusDiv.classList.toggle('error', isError);
+    statusDiv.style.display = 'block';
   }
+}
 
   ladeBuecher();
 });

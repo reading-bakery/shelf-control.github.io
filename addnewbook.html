@@ -2,7 +2,7 @@
 <html lang="de">
 
 <head>
-
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Neues Buch hinzufügen</title>
 
@@ -200,7 +200,8 @@
     <label>Cover</label>
       <input type="file" id="cover" name="entry.952453014"><br><br>
       <img id="preview" src="#" alt="Cover-Vorschau" style="max-width: 200px; display: none; border-radius: 5px;">
-    
+    <br><br>
+    <div id="statusMessage"></div>
       <button type="submit">Buch hinzufügen</button>
       
   </form>
@@ -211,15 +212,17 @@
     let submitted = false;
 
     function formGesendet() {
-      if (submitted) {
-        alert("✅ Buch erfolgreich hinzugefügt!");
-        submitted = false;
-        document.querySelector("form").reset();
-        const preview = document.getElementById('preview');
-        preview.style.display = 'none';
-        preview.src = '#';
-      }
-    }
+    if (submitted) {
+    const statusDiv = document.getElementById('statusMessage');
+    statusDiv.textContent = "Buch erfolgreich hinzugefügt!😍";
+    statusDiv.style.color = "white";
+    submitted = false;
+    document.querySelector("form").reset();
+    const preview = document.getElementById('preview');
+    preview.style.display = 'none';
+    preview.src = '#';
+  }
+}
 
     // Vorschau für Cover
     document.addEventListener("DOMContentLoaded", function () {

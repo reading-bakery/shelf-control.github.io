@@ -141,13 +141,28 @@
 
 
   #status {
-  min-height: 1.5em;      /* Platz für Text */
-  color: green;           /* Textfarbe */
-  font-weight: bold;
+  min-height: 1.5em;    
+  color: white;           
+  font-weight: normal;
   transition: opacity 0.5s ease;
-  opacity: 1;             /* sichtbar */
+  opacity: 1;             
   margin-top: 1em;
+  display: none;
 }
+
 #status.error {
-  color: red;
+  color: white;
+}
+
+#statusMessage {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#statusMessage.success {
+  color: white;
+}
+
+#statusMessage.error {
+  color: white;
 }
