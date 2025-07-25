@@ -21,6 +21,7 @@ async function loadAndDrawChart() {
         let activeIndex = null;  // Hover (auch für Achsenhover)
         let clickedIndex = null; // Klick auf Monatsname
 
+        // Datasets vorbereiten
         const datasets = yearIndices.map(colIndex => {
             const year = allYears[colIndex];
             const data = rows.slice(1).map(row => {
@@ -151,7 +152,22 @@ async function loadAndDrawChart() {
                 scales: {
                     x: {
                         ticks: {
-                            color: '#fff',
+                            // Hier: Farbe dynamisch setzen je nach Hover-Index und Linienfarbe
+                            color: ctx => {
+                                // Wenn Hover auf diesem Tick
+                                if (activeIndex === null) return '#fff'; // kein Hover, weiß
+
+                                if (ctx.index === activeIndex) {
+                                    // Suche im datasets-Array nach der ersten Linie, die für diesen Monat einen Wert hat
+                                    for (let ds of datasets) {
+                                        if (ds.data[ctx.index] !== null && ds.data[ctx.index] !== undefined) {
+                                            return ds.borderColor; // Linienfarbe als Tickfarbe
+                                        }
+                                    }
+                                    return '#fff'; // fallback weiß, falls keine Daten
+                                }
+                                return '#fff'; // andere Ticks bleiben weiß
+                            },
                             font: ctx => ({
                                 family: 'Dosis, sans-serif',
                                 size: 16,

@@ -1,5 +1,9 @@
 Chart.register(ChartDataLabels);
 
+const lineColor = '#63b8ff';
+let chartAusgaben = null;
+let activeIndexAusgabe = null;
+
 document.addEventListener('DOMContentLoaded', () => {
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=501012815&single=true&output=csv';
 
@@ -20,68 +24,83 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let i = 1; i < rows.length; i++) {
         const row = rows[i];
         labels.push(row[monthIndex]);
-
         const ausgabe = parseFloat(row[ausgabenIndex]) || 0;
         ausgabenData.push(ausgabe);
       }
 
       const optionsAusgaben = {
         responsive: true,
-        interaction: {
-          mode: 'nearest',
-          intersect: true
-        },
-        hover: {
-          mode: 'nearest',
-          intersect: true
+        interaction: false,
+        onHover: (event) => {
+          if (!chartAusgaben) return;
+          const xAxis = chartAusgaben.scales.x;
+          const yAxis = chartAusgaben.scales.y;
+          const x = event.offsetX;
+          const y = event.offsetY;
+
+          const index = Math.round(xAxis.getValueForPixel(x));
+          if (
+            index >= 0 && index < labels.length &&
+            y > yAxis.bottom && y < yAxis.bottom + 30
+          ) {
+            activeIndexAusgabe = index;
+          } else {
+            const elements = chartAusgaben.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
+            if (elements.length > 0) {
+              activeIndexAusgabe = elements[0].index;
+            } else {
+              activeIndexAusgabe = null;
+            }
+          }
+          chartAusgaben.update('none');
         },
         plugins: {
           tooltip: { enabled: false },
           legend: { display: false },
           datalabels: {
             color: 'white',
-            font: {
+            font: ctx => ({
               family: "'Dosis', sans-serif",
-              weight: 'normal',
+              weight: ctx.dataIndex === activeIndexAusgabe ? 'bold' : 'normal',
               size: 13
-            },
-            anchor: 'center',
+            }),
+            anchor: 'end',
             align: 'top',
-            padding: { top: 6 },
-            formatter: value => value
+            formatter: value => value,
+            display: ctx => activeIndexAusgabe === null || ctx.dataIndex === activeIndexAusgabe
           }
         },
         scales: {
           y: {
+            display: false,
             min: 0,
             max: 130,
-            beginAtZero: true,
+            grid: { display: true },
             ticks: {
-              stepSize: 10,
-              display: false,
-              font: { family: "'Dosis', sans-serif" },
-              color: 'white'
-            },
-            grid: { display: false }
+              display: true,
+              font: { family: "'Dosis', sans-serif" }
+            }
           },
           x: {
             ticks: {
-              color: 'white',
+              color: ctx => (ctx.index === activeIndexAusgabe ? lineColor : 'white'),
               maxRotation: 0,
               minRotation: 0,
-              font: { family: "'Dosis', sans-serif", size: 16 }
+              font: ctx => ({
+                family: "'Dosis', sans-serif",
+                size: 16,
+                weight: ctx.index === activeIndexAusgabe ? 'bold' : 'normal'
+              })
             },
             grid: { display: false }
           }
         }
       };
 
-      renderAusgabenChart('ausgabenChart', '', labels, ausgabenData, '#63b8ff', optionsAusgaben);
+      renderAusgabenChart('ausgabenChart', '', labels, ausgabenData, lineColor, optionsAusgaben);
     })
     .catch(err => console.error('Fehler beim Laden der CSV:', err));
 });
-
-let chartAusgaben = null;
 
 function renderAusgabenChart(canvasId, label, labels, data, color, options) {
   const ctx = document.getElementById(canvasId).getContext('2d');
@@ -102,10 +121,8 @@ function renderAusgabenChart(canvasId, label, labels, data, color, options) {
         borderWidth: 3,
         fill: false,
         tension: 0.4,
-        pointRadius: 5,
-        pointHoverRadius: 10,
-        hoverRadius: 9,
-        hoverBackgroundColor: color
+        pointRadius: ctx => (ctx.dataIndex === activeIndexAusgabe ? 8 : 5),
+        pointHoverRadius: 10
       }]
     },
     options: options,
