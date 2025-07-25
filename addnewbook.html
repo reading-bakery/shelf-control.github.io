@@ -17,7 +17,8 @@
   <script src="navbar.js" defer></script>
   <script src="toggle.js" defer></script>
   <script src="backtop.js" defer></script>
-  <script src="choices.js" defer></script>
+  <script src="chpices.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js" defer></script>
 
 
 </head>
@@ -233,6 +234,18 @@
           preview.src = URL.createObjectURL(file);
           preview.style.display = 'block';
         }
+      });
+    });
+
+    // Choices.js initialisieren
+    document.addEventListener("DOMContentLoaded", function () {
+      const selects = document.querySelectorAll("select");
+      selects.forEach(select => {
+        new Choices(select, {
+          searchEnabled: true,
+          itemSelectText: '',
+          shouldSort: false
+        });
       });
     });
   </script>
