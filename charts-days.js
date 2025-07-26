@@ -2,12 +2,12 @@
   const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv";
 
   const legendItems = [
-    { color: "#FFB90F", label: "< 30" },
+    { color: "#FFB90F", label: "≤ 30" },
     { color: "#FF4500", label: "31–50" },
     { color: "#3CB371", label: "51–70" },
     { color: "#A9A9A9", label: "71–100" },
     { color: "#800080", label: "101–150" },
-    { color: "#40E0D0", label: "> 150" }
+    { color: "#40E0D0", label: "≥ 150" }
   ];
 
   function getColor(pages) {
@@ -106,13 +106,14 @@
     if (!legend) return;
 
     legend.innerHTML = "";
-    legend.style.marginTop = "12px";
+    legend.style.marginTop = "auto";
+    legend.style.paddingTop = "10px";
     legend.style.display = "flex";
     legend.style.flexWrap = "wrap";
     legend.style.justifyContent = "center";
-    legend.style.gap = "10px";
-    legend.style.fontFamily = "Arial, sans-serif";
-    legend.style.fontSize = "14px";
+    legend.style.gap = "5px";
+    legend.style.fontFamily = "Dosis, sans-serif";
+    legend.style.fontSize = "13px";
     legend.style.alignItems = "center";
 
     legendItems.forEach(({ color, label }) => {
