@@ -6,15 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSe58QnLhT5Kujn2Wv-nF5uJqUM6JWQJ7NxDJT-iRNJiwXOEzg/formResponse';
   const formUrlLetzterStand = 'https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse';
 
+
   const feldIdBuch = 'entry.1952704878';
   const feldIdBisSeite = 'entry.1828547420';
-  const feldIdBuchLetzterStand = 'entry.1217511174';
-  const feldIdNeuerStand = 'entry.628547238';
+  const feldIdBuchLetzterStand = 'entry.1217511174';  // Titel für „Neues Buch hinzufügen“
+  const feldIdNeuerStand = 'entry.1273432895';        // Letzter Stand
 
   const selectBuch = document.getElementById('buch');
   const inputBisSeite = document.getElementById('bisSeite');
   const form = document.getElementById('trackerForm');
   const statusDiv = document.getElementById('status');
+
 
   const buchDaten = {};
 
@@ -61,6 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const idxTitel = headers.findIndex(h => h === 'Titel');
     const idxSeiten = headers.findIndex(h => h === 'Seitenzahl total');
     const idxEnde = headers.findIndex(h => h === 'Ende');
+    const idxLetzterStand = headers.findIndex(h => h === 'Letzter Stand');
+
 
     selectBuch.innerHTML = '<option value="">Bitte wählen</option>';
 
@@ -148,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       await sendeAnDaily(titel, differenz);
       await sendeLetzterStand(titel, neuerStand);
-      buchDaten[titel].letzterStand = neuerStand;
+      buchDaten[titel].letzterStand = neuerStand; // Lokaler Stand aktualisieren
       zeigeStatus('Eintrag erfolgreich gespeichert. 😍', false);
       form.reset();
     } catch (error) {
