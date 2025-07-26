@@ -2,19 +2,19 @@
   const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv";
 
   const legendItems = [
-    { color: "#FFB90F", label: "≤ 30" },
-    { color: "#FF4500", label: "31–50" },
+    { color: "#ff7256", label: "≤ 30" },
+    { color: "#FFB90F", label: "31–50" },
     { color: "#3CB371", label: "51–70" },
-    { color: "#A9A9A9", label: "71–100" },
+    { color: "#63b8ff ", label: "71–100" },
     { color: "#800080", label: "101–150" },
-    { color: "#40E0D0", label: "≥ 150" }
+    { color: "#40E0D0", label: "≥ 151" }
   ];
 
   function getColor(pages) {
-    if (pages < 30) return "#FFB90F";
-    if (pages <= 50) return "#FF4500";
+    if (pages < 30) return "#ff7256";
+    if (pages <= 50) return "#FFB90F";
     if (pages <= 70) return "#3CB371";
-    if (pages <= 100) return "#A9A9A9";
+    if (pages <= 100) return "#63b8ff";
     if (pages <= 150) return "#800080";
     return "#40E0D0";
   }
@@ -94,7 +94,7 @@
       roundRect(ctx, x, y, squareSize, squareSize, 5);
       ctx.fill();
 
-      ctx.strokeStyle = "#555";
+      ctx.strokeStyle = "#1f1f1f";
       ctx.lineWidth = 1;
       roundRect(ctx, x, y, squareSize, squareSize, 5);
       ctx.stroke();
@@ -128,6 +128,7 @@
       colorBox.style.borderRadius = "4px";
       colorBox.style.backgroundColor = color;
       colorBox.style.border = "1px solid #555";
+      colorBox.style.borderColor = "#1f1f1f";
 
       const text = document.createElement("span");
       text.textContent = label;
