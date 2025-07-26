@@ -19,11 +19,13 @@
     box-sizing: border-box;
 }
 
+
 .pie:hover {
     transform: scale(1.02);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
+.pie-pixel h3, 
 .pie h3 {
     min-height: 1rem;
     display: flex;
@@ -40,6 +42,11 @@ canvas {
   height: 250px;
   cursor: pointer;
   filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.15));
+}
+
+#hexwabeChart {
+    height: auto;
+    width: 100%;
 }
 
 #bookmonthChart,
@@ -140,6 +147,30 @@ body {
 .dot.active {
     background-color: rgb(90, 165, 142);
 }
+
+
+.grid-pixel {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+
+.pie-pixel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Bebas Neue", sans-serif;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%; 
+    padding: 0.3rem;
+    box-sizing: border-box;
+}
+
 
 
 @media (max-width: 940px) {
