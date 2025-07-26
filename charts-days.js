@@ -3,20 +3,20 @@
 
   const legendItems = [
     { color: "#FFB90F", label: "< 30" },
-    { color: "#FF4500", label: "31-50" },
-    { color: "#3CB371", label: "51-70" },
-    { color: "#A9A9A9", label: "71-100" },
-    { color: "#800080", label: "101-150" },
+    { color: "#FF4500", label: "31–50" },
+    { color: "#3CB371", label: "51–70" },
+    { color: "#A9A9A9", label: "71–100" },
+    { color: "#800080", label: "101–150" },
     { color: "#40E0D0", label: "> 150" }
   ];
 
   function getColor(pages) {
-    if (pages < 30) return "#FFB90F";    // gelb
-    if (pages <= 50) return "#FF4500";   // rot
-    if (pages <= 70) return "#3CB371";   // grün
-    if (pages <= 100) return "#A9A9A9";  // grau
-    if (pages <= 150) return "#800080";  // lila
-    return "#40E0D0";                    // türkis
+    if (pages < 30) return "#FFB90F";
+    if (pages <= 50) return "#FF4500";
+    if (pages <= 70) return "#3CB371";
+    if (pages <= 100) return "#A9A9A9";
+    if (pages <= 150) return "#800080";
+    return "#40E0D0";
   }
 
   function parseCSV(text) {
@@ -30,7 +30,7 @@
 
       const dateRaw = parts[0].trim();
       const date = dateRaw.split(' ')[0];
-      let pages = parseInt(parts[2].trim().replace(/\D/g, ''));
+      const pages = parseInt(parts[2].trim().replace(/\D/g, ''));
       if (isNaN(pages) || pages <= 0) continue;
 
       if (!pagesPerDate[date]) pagesPerDate[date] = 0;
@@ -39,7 +39,7 @@
 
     return Object.entries(pagesPerDate)
       .map(([date, pages]) => ({ date, pages }))
-      .sort((a,b) => new Date(a.date) - new Date(b.date));
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
   }
 
   function roundRect(ctx, x, y, width, height, radius = 5) {
@@ -58,12 +58,9 @@
 
   function drawSquares(data) {
     const canvas = document.getElementById("daysChart");
-    if (!canvas) {
-      console.error("Canvas mit ID 'daysChart' nicht gefunden!");
-      return;
-    }
-    const ctx = canvas.getContext("2d");
+    if (!canvas) return;
 
+    const ctx = canvas.getContext("2d");
     const dpr = window.devicePixelRatio || 1;
     const squareSize = 20;
     const gap = 4;
@@ -80,7 +77,6 @@
 
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(dpr, dpr);
-
     ctx.clearRect(0, 0, widthCSS, heightCSS);
 
     if (data.length === 0) {
@@ -106,21 +102,18 @@
   }
 
   function createLegend() {
-    let legend = document.getElementById("legend");
-    if (!legend) {
-      legend = document.createElement("div");
-      legend.id = "legend";
-      document.body.appendChild(legend);
-    }
+    const legend = document.getElementById("legenddays");
+    if (!legend) return;
+
+    legend.innerHTML = "";
     legend.style.marginTop = "12px";
     legend.style.display = "flex";
     legend.style.flexWrap = "wrap";
+    legend.style.justifyContent = "center";
     legend.style.gap = "10px";
     legend.style.fontFamily = "Arial, sans-serif";
     legend.style.fontSize = "14px";
     legend.style.alignItems = "center";
-
-    legend.innerHTML = ""; // leeren
 
     legendItems.forEach(({ color, label }) => {
       const item = document.createElement("div");
