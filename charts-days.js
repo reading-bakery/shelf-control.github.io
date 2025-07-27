@@ -3,10 +3,10 @@
 
   const legendItems = [
     { color: "#ff7256", label: "≤ 30" },
-    { color: "#FFB90F", label: "≤50" },
-    { color: "#3CB371", label: "≤70" },
-    { color: "#63b8ff ", label: "≤100" },
-    { color: "#800080", label: "≤150" },
+    { color: "#FFB90F", label: "≤ 50" },
+    { color: "#3CB371", label: "≤ 70" },
+    { color: "#63b8ff ", label: "≤ 100" },
+    { color: "#800080", label: "≤ 150" },
     { color: "#40E0D0", label: "≥ 151" }
   ];
 
