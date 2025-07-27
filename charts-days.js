@@ -3,10 +3,10 @@
 
   const legendItems = [
     { color: "#ff7256", label: "≤ 30" },
-    { color: "#FFB90F", label: "≤50" },
-    { color: "#3CB371", label: "≤70" },
-    { color: "#63b8ff ", label: "≤100" },
-    { color: "#800080", label: "≤150" },
+    { color: "#FFB90F", label: "≤ 50" },
+    { color: "#3CB371", label: "≤ 70" },
+    { color: "#63b8ff ", label: "≤ 100" },
+    { color: "#9370DB", label: "≤ 150" },
     { color: "#40E0D0", label: "≥ 151" }
   ];
 
@@ -15,7 +15,7 @@
     if (pages <= 50) return "#FFB90F";
     if (pages <= 70) return "#3CB371";
     if (pages <= 100) return "#63b8ff";
-    if (pages <= 150) return "#800080";
+    if (pages <= 150) return "#9370DB";
     return "#40E0D0";
   }
 

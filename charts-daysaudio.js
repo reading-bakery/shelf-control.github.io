@@ -6,7 +6,7 @@
     { color: "#FFB90F", label: "≤ 120" },
     { color: "#3CB371", label: "≤ 180" },
     { color: "#63b8ff", label: "≤ 240" },
-    { color: "#800080", label: "≥ 241" }
+    { color: "#9370DB", label: "≥ 241" }
   ];
 
   function getColor(value) {
@@ -14,7 +14,7 @@
     if (value <= 120) return "#FFB90F";
     if (value <= 180) return "#3CB371";
     if (value <= 240) return "#63b8ff";
-    return "#800080";
+    return "#9370DB";
   }
 
   function parseCSV(text) {
