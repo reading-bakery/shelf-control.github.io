@@ -107,15 +107,25 @@
             <div id="neuzugaenge-summe"></div>
         </div>
 
-        <div class="pie">
+
+        <div class="pie carousel-container">
             <h3>Ausgaben</h3>
-            <canvas id="ausgabenChart"></canvas>
+            <div class="carousel-dots">
+                <button class="dot active" aria-label="Slide 1"></button>
+                <button class="dot" aria-label="Slide 2"></button>
+            </div>
+            <div class="carousel-track-container">
+                <ul class="carousel-track">
+                <li class="carousel-slide current-slide">
+                    <div id="ausgaben-summe"></div>
+                </li>
+                <li class="carousel-slide">
+                    <canvas id="ausgabenChart"></canvas>
+                </li>
+                </ul>
+            </div>
         </div>
 
-        <div class="pie">
-            <h3>Ausgaben Gesamt</h3>
-            <div id="ausgaben-summe"></div>       
-        </div>
 
         <div class="pie carousel-container">
             <h3>Bücher</h3>
@@ -142,27 +152,43 @@
         </div>
 
 
-        <div class="pie">
-            <h3>Seiten pro Monat</h3>
-            <canvas id="seitenmonthChart"></canvas>
+        <div class="pie carousel-container">
+            <h3>Seiten</h3>
+            <div class="carousel-dots">
+                <button class="dot active" aria-label="Slide 1"></button>
+                <button class="dot" aria-label="Slide 2"></button>
+            </div>
+            <div class="carousel-track-container">
+                <ul class="carousel-track">
+                <li class="carousel-slide current-slide">
+                    <div id="seiten-summe"></div>
+                </li>
+                <li class="carousel-slide">
+                    <canvas id="seitenmonthChart"></canvas>
+                </li>
+                </ul>
+            </div>
         </div>
 
-        <div class="pie">
-            <h3>Gelesene Seiten</h3>
-            <div id="seiten-summe"></div>
+        <div class="pie carousel-container">
+            <h3>Minuten</h3>
+            <div class="carousel-dots">
+                <button class="dot active" aria-label="Slide 1"></button>
+                <button class="dot" aria-label="Slide 2"></button>
+            </div>
+            <div class="carousel-track-container">
+                <ul class="carousel-track">
+                <li class="carousel-slide current-slide">
+                    <div id="minuten-summe"></div>
+                </li>
+                <li class="carousel-slide">
+                    <canvas id="minutenmonthChart"></canvas>
+                </li>
+                </ul>
+            </div>
         </div>
 
 
-
-        <div class="pie">
-            <h3>Gehörte Minuten</h3>
-            <div id="minuten-summe"></div>
-        </div>
-
-        <div class="pie">
-            <h3>Minuten pro Monat</h3>
-            <canvas id="minutenmonthChart"></canvas>
-        </div>
 
         <div class="pie">
             <h3>Top 5 Verlage</h3>
@@ -175,24 +201,44 @@
             <canvas id="sprachenChart"></canvas>
         </div>
 
-        <div class="pie">
-            <h3>⌀ Tage pro Monat</h3>
-            <canvas id="averagemonthChart"></canvas>
-        </div>   
 
-        <div class="pie">
-            <h3>⌀ Tage</h3>
-            <div id="average"></div>
+        <div class="pie carousel-container">
+            <h3>Tage</h3>
+            <div class="carousel-dots">
+                <button class="dot active" aria-label="Slide 1"></button>
+                <button class="dot" aria-label="Slide 2"></button>
+            </div>
+            <div class="carousel-track-container">
+                <ul class="carousel-track">
+                <li class="carousel-slide current-slide">
+                    <div id="average"></div>
+                </li>
+                <li class="carousel-slide">
+                    <canvas id="averagemonthChart"></canvas>
+                </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pie carousel-container">
+            <h3>Sterne</h3>
+            <div class="carousel-dots">
+                <button class="dot active" aria-label="Slide 1"></button>
+                <button class="dot" aria-label="Slide 2"></button>
+            </div>
+            <div class="carousel-track-container">
+                <ul class="carousel-track">
+                <li class="carousel-slide current-slide">
+                    <div id="sterne-summe"></div>
+                </li>
+                <li class="carousel-slide">
+                    <canvas id="sternemonthChart"></canvas>
+                </li>
+                </ul>
+            </div>
         </div>
         
 
-        <div class="pie">
-            <h3>⌀ Bewertung</h3>
-        </div>
-        
-        <div class="pie">
-            <h3>⌀ Bewertung pro Buch</h3>
-        </div>
 
         <div class="pie">
             <h3>Umfang</h3>
