@@ -126,15 +126,12 @@ body {
   border-radius: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
-  padding: 0.3rem;
   box-sizing: border-box;
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
   overflow: hidden; /* Falls du das behalten willst, kannst du es lassen */
   /* ggf. border entfernen, da .pie keinen hat */
   border: none;
-  cursor: default;
+  cursor: pointer;
 }
 
 .carousel-container:hover {
@@ -152,6 +149,7 @@ body {
   width: 100%;
   max-width: 100%;
   flex-shrink: 0;
+  background-color: red;
 }
 
 
@@ -178,6 +176,29 @@ body {
   line-height: 36px;
   user-select: none;
 }
+
+.carousel-dots {
+  text-align: center;
+  margin-top: 0rem;
+  background-color: blue;
+}
+
+.carousel-dots .dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: #888;
+  border-radius: 50%;
+  margin: 0 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-dots .dot.active {
+  background-color: #FFB90F;
+}
+
 
 
 @media (max-width: 940px) {
