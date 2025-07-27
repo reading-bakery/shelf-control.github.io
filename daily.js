@@ -6,30 +6,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSe58QnLhT5Kujn2Wv-nF5uJqUM6JWQJ7NxDJT-iRNJiwXOEzg/formResponse';
   const formUrlLetzterStand = 'https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse';
 
-
   const feldIdBuch = 'entry.1952704878';
-  const feldIdBisSeite = 'entry.1828547420';
-  const feldIdBuchLetzterStand = 'entry.1217511174';  // Titel für „Neues Buch hinzufügen“
-  const feldIdNeuerStand = 'entry.1273432895';        // Letzter Stand
+  const feldIdSeiten = 'entry.1828547420';
+  const feldIdMinuten = 'entry.1811867671';
+  const feldIdBuchLetzterStand = 'entry.1217511174';
+  const feldIdNeuerStand = 'entry.1273432895';
 
   const selectBuch = document.getElementById('buch');
-  const inputBisSeite = document.getElementById('bisSeite');
+  const inputFortschritt = document.getElementById('bisSeite');
   const form = document.getElementById('trackerForm');
   const statusDiv = document.getElementById('status');
-
 
   const buchDaten = {};
 
   async function ladeBuecherUndStände() {
     try {
       const [buchCsv, dailyCsv] = await Promise.all([
-        fetch(`https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1702643479&single=true&output=csv`).then(res => res.text()),
-        fetch(`https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv`).then(res => res.text()),
+        fetch(`https://docs.google.com/spreadsheets/d/e/${spreadsheetId}/pub?gid=${gidBuecher}&single=true&output=csv`).then(res => res.text()),
+        fetch(`https://docs.google.com/spreadsheets/d/e/${spreadsheetId}/pub?gid=${gidDaily}&single=true&output=csv`).then(res => res.text()),
       ]);
 
       const letzteStände = berechneLetzterStand(dailyCsv);
       parseBuchCsv(buchCsv, letzteStände);
-
     } catch (error) {
       zeigeStatus('Fehler beim Laden: ' + error.message, true);
     }
@@ -38,8 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function berechneLetzterStand(csv) {
     const lines = csv.trim().split('\n');
     const headers = lines[0].split(',');
-    const idxBuch = headers.findIndex(h => h === 'Buch');
-    const idxSeite = headers.findIndex(h => h === 'Seiten');
+    const idxBuch = headers.indexOf('Buch');
+    const idxSeite = headers.indexOf('Seiten');
+    const idxMinuten = headers.indexOf('Minuten');
 
     const letzterStand = {};
 
@@ -47,10 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const row = lines[i].split(',');
       const buch = row[idxBuch]?.trim();
       const seite = parseInt(row[idxSeite]?.trim(), 10);
-      if (buch && !isNaN(seite)) {
-        if (!letzterStand[buch] || seite > letzterStand[buch]) {
-          letzterStand[buch] = seite;
-        }
+      const minuten = parseInt(row[idxMinuten]?.trim(), 10);
+
+      if (buch) {
+        if (!letzterStand[buch]) letzterStand[buch] = { seite: 0, minuten: 0 };
+        if (!isNaN(seite) && seite > letzterStand[buch].seite) letzterStand[buch].seite = seite;
+        if (!isNaN(minuten) && minuten > letzterStand[buch].minuten) letzterStand[buch].minuten = minuten;
       }
     }
     return letzterStand;
@@ -60,11 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const lines = csv.trim().split('\n');
     const headers = lines[0].split(',');
 
-    const idxTitel = headers.findIndex(h => h === 'Titel');
-    const idxSeiten = headers.findIndex(h => h === 'Seitenzahl total');
-    const idxEnde = headers.findIndex(h => h === 'Ende');
-    const idxLetzterStand = headers.findIndex(h => h === 'Letzter Stand');
-
+    const idxTitel = headers.indexOf('Titel');
+    const idxSeiten = headers.indexOf('Seitenzahl total');
+    const idxMinuten = headers.indexOf('Minuten total');
+    const idxFormat = headers.indexOf('Format');
+    const idxEnde = headers.indexOf('Ende');
 
     selectBuch.innerHTML = '<option value="">Bitte wählen</option>';
 
@@ -72,12 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const row = lines[i].split(',');
       const titel = row[idxTitel]?.trim();
       const maxSeiten = parseInt(row[idxSeiten]?.trim(), 10);
+      const maxMinuten = parseInt(row[idxMinuten]?.trim(), 10);
+      const format = row[idxFormat]?.trim();
       const beendet = row[idxEnde]?.trim();
 
       if (titel && beendet === '') {
         buchDaten[titel] = {
+          format: format,
           maxSeiten: isNaN(maxSeiten) ? Infinity : maxSeiten,
-          letzterStand: letzterStand[titel] || 0
+          maxMinuten: isNaN(maxMinuten) ? Infinity : maxMinuten,
+          letzterStand: letzterStand[titel] || { seite: 0, minuten: 0 }
         };
 
         const option = document.createElement('option');
@@ -90,32 +95,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function validateForm() {
     const titel = selectBuch.value;
-    if (!titel) {
-      zeigeStatus('Bitte ein Buch auswählen.', true);
-      return false;
-    }
     const daten = buchDaten[titel];
-    const neuerStand = parseInt(inputBisSeite.value, 10);
+    const neuerWert = parseInt(inputFortschritt.value, 10);
 
-    if (isNaN(neuerStand) || neuerStand < 1) {
-      zeigeStatus('Bitte gültige Seitenzahl eingeben. 😵', true);
+    if (!titel) {
+      zeigeStatus('Bitte ein Buch auswählen. 😊', true);
       return false;
     }
-    if (neuerStand > daten.maxSeiten) {
-      zeigeStatus(`Maximale Seitenzahl überschritten (${daten.maxSeiten}). 😭`, true);
+    if (isNaN(neuerWert) || neuerWert < 1) {
+      zeigeStatus('Bitte gültigen Wert eingeben. 🧐', true);
       return false;
     }
-    if (neuerStand <= daten.letzterStand) {
-      zeigeStatus(`Der neue Stand muss über dem bisherigen liegen (${daten.letzterStand}). 😬`, true);
+    if (['Softcover', 'Hardcover', 'eBook'].includes(daten.format)) {
+      if (neuerWert > daten.maxSeiten) {
+        zeigeStatus(`Maximale Seitenzahl überschritten (${daten.maxSeiten}). 😭`, true);
+        return false;
+      }
+      if (neuerWert <= daten.letzterStand.seite) {
+        zeigeStatus(`Der neue Stand muss über dem bisherigen liegen (${daten.letzterStand.seite}). 🥴`, true);
+        return false;
+      }
+    } else if (daten.format === 'Hörbuch') {
+      if (neuerWert > daten.maxMinuten) {
+        zeigeStatus(`Maximale Minutenzahl überschritten (${daten.maxMinuten}). 😭`, true);
+        return false;
+      }
+      if (neuerWert <= daten.letzterStand.minuten) {
+        zeigeStatus(`Der neue Stand muss über dem bisherigen liegen (${daten.letzterStand.minuten}). 🥴`, true);
+        return false;
+      }
+    } else {
+      zeigeStatus('Unbekanntes Format. 🤔', true);
       return false;
     }
     return true;
   }
 
-  async function sendeAnDaily(titel, seitenDifferenz) {
+  async function sendeEintrag(titel, differenz) {
+    const daten = buchDaten[titel];
     const formData = new URLSearchParams();
     formData.append(feldIdBuch, titel);
-    formData.append(feldIdBisSeite, seitenDifferenz);
+
+    if (['Softcover', 'Hardcover', 'eBook'].includes(daten.format)) {
+      formData.append(feldIdSeiten, differenz);
+    } else {
+      formData.append(feldIdMinuten, differenz);
+    }
 
     await fetch(formUrl, {
       method: 'POST',
@@ -125,10 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  async function sendeLetzterStand(titel, neuerStand) {
+  async function sendeLetzterStand(titel, neuerWert) {
     const formData = new URLSearchParams();
     formData.append(feldIdBuchLetzterStand, titel);
-    formData.append(feldIdNeuerStand, neuerStand);
+    formData.append(feldIdNeuerStand, neuerWert);
 
     await fetch(formUrlLetzterStand, {
       method: 'POST',
@@ -144,16 +169,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!validateForm()) return;
 
     const titel = selectBuch.value;
-    const neuerStand = parseInt(inputBisSeite.value, 10);
-    const letzterStand = buchDaten[titel].letzterStand;
-
-    const differenz = neuerStand - letzterStand;
+    const daten = buchDaten[titel];
+    const neuerWert = parseInt(inputFortschritt.value, 10);
+    const letzterWert = ['Softcover', 'Hardcover', 'eBook'].includes(daten.format)
+      ? daten.letzterStand.seite
+      : daten.letzterStand.minuten;
+    const differenz = neuerWert - letzterWert;
 
     try {
-      await sendeAnDaily(titel, differenz);
-      await sendeLetzterStand(titel, neuerStand);
-      buchDaten[titel].letzterStand = neuerStand; // Lokaler Stand aktualisieren
-      zeigeStatus('Eintrag erfolgreich gespeichert. 😍', false);
+      await sendeEintrag(titel, differenz);
+      await sendeLetzterStand(titel, neuerWert);
+
+      // Lokalen Fortschritt aktualisieren:
+      buchDaten[titel].letzterStand = {
+        seite: ['Softcover', 'Hardcover', 'eBook'].includes(daten.format) ? neuerWert : daten.letzterStand.seite,
+        minuten: daten.format === 'Hörbuch' ? neuerWert : daten.letzterStand.minuten
+      };
+
+      zeigeStatus('Eintrag erfolgreich gespeichert.😍', false);
       form.reset();
     } catch (error) {
       zeigeStatus('Fehler beim Senden: ' + error.message, true);
