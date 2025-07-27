@@ -38,8 +38,10 @@
     <script src="charts-days.js"></script>
     <script src="charts-daysaudio.js"></script>
     <script src="charts-minutenmonth.js" defer></script>
-    <script src="charts-minutenmonth.js" defer></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="charts-average.js" defer></script>
+    <script src="charts-averagemonth.js" defer></script>
+    <script src="carousel.js" defer></script>
 
 
 </head>
@@ -115,22 +117,31 @@
             <div id="ausgaben-summe"></div>       
         </div>
 
-        <div class="pie">
-            <h3>Gelesene Bücher</h3>
-            <div id="books-summe"></div>
-        </div>
+        <div class="pie carousel-container">
+  <h3>Bücher</h3>
 
-        <div class="pie">
-            <h3>Bücher pro Monat</h3>
-            <canvas id="bookmonthChart"></canvas>
-        </div>
+  <div class="carousel-track-container">
+    <ul class="carousel-track">
+      <li class="carousel-slide current-slide">
+        <div id="books-summe"></div>
+      </li>
+      <li class="carousel-slide">
+        <canvas id="bookmonthChart"></canvas>
+      </li>
+    </ul>
+  </div>
+
+  <div class="carousel-dots">
+    <button class="carousel-indicator current-slide"></button>
+    <button class="carousel-indicator"></button>
+  </div>
+</div>
+
 
         <div class="pie">
             <h3>Top 5 Autor:innen</h3>
             <canvas id="autorChart"></canvas>
         </div>
-
-
 
 
         <div class="pie">
@@ -161,13 +172,29 @@
         </div>
         
 
-
-
         <div class="pie">
             <h3>Top 5 Sprachen</h3>
             <canvas id="sprachenChart"></canvas>
         </div>
+
+        <div class="pie">
+            <h3>⌀ Tage pro Monat</h3>
+            <canvas id="averagemonthChart"></canvas>
+        </div>   
+
+        <div class="pie">
+            <h3>⌀ Tage</h3>
+            <div id="average"></div>
+        </div>
         
+
+        <div class="pie">
+            <h3>⌀ Bewertung</h3>
+        </div>
+        
+        <div class="pie">
+            <h3>⌀ Bewertung pro Buch</h3>
+        </div>
 
         <div class="pie">
             <h3>Umfang</h3>
@@ -180,22 +207,7 @@
         </div>
 
 
-        <div class="pie">
-            <h3>⌀ Tage</h3>
-        </div>
-        
 
-        <div class="pie">
-            <h3>⌀ Tage pro Monat</h3>
-        </div>
-
-        <div class="pie">
-            <h3>⌀ Bewertung</h3>
-        </div>
-        
-        <div class="pie">
-            <h3>⌀ Bewertung pro Buch</h3>
-        </div>
 
         <div class="pie">
             <h3>Highlights</h3>
