@@ -2,43 +2,41 @@
   const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv";
 
   const legendItems = [
-    { color: "#ff7256", label: "≤ 30" },
-    { color: "#FFB90F", label: "≤50" },
-    { color: "#3CB371", label: "≤70" },
-    { color: "#63b8ff ", label: "≤100" },
-    { color: "#800080", label: "≤150" },
-    { color: "#40E0D0", label: "≥ 151" }
+    { color: "#ff7256", label: "≤ 60" },
+    { color: "#FFB90F", label: "≤ 120" },
+    { color: "#3CB371", label: "≤ 180" },
+    { color: "#63b8ff", label: "≤ 240" },
+    { color: "#800080", label: "≥ 241" }
   ];
 
-  function getColor(pages) {
-    if (pages < 30) return "#ff7256";
-    if (pages <= 50) return "#FFB90F";
-    if (pages <= 70) return "#3CB371";
-    if (pages <= 100) return "#63b8ff";
-    if (pages <= 150) return "#800080";
-    return "#40E0D0";
+  function getColor(value) {
+    if (value <= 60) return "#ff7256";
+    if (value <= 120) return "#FFB90F";
+    if (value <= 180) return "#3CB371";
+    if (value <= 240) return "#63b8ff";
+    return "#800080";
   }
 
   function parseCSV(text) {
     const lines = text.trim().split('\n');
-    const pagesPerDate = {};
+    const minutesPerDate = {};
 
     for (let i = 1; i < lines.length; i++) {
       const line = lines[i];
       const parts = line.includes(';') ? line.split(';') : line.split(',');
-      if (parts.length < 3) continue;
+      if (parts.length < 4) continue;  // mindestens 4 Spalten benötigt
 
       const dateRaw = parts[0].trim();
       const date = dateRaw.split(' ')[0];
-      const pages = parseInt(parts[2].trim().replace(/\D/g, ''));
-      if (isNaN(pages) || pages <= 0) continue;
+      const minutes = parseInt(parts[3].trim().replace(/\D/g, ''));  // 4. Spalte: Minuten
+      if (isNaN(minutes) || minutes <= 0) continue;
 
-      if (!pagesPerDate[date]) pagesPerDate[date] = 0;
-      pagesPerDate[date] += pages;
+      if (!minutesPerDate[date]) minutesPerDate[date] = 0;
+      minutesPerDate[date] += minutes;
     }
 
-    return Object.entries(pagesPerDate)
-      .map(([date, pages]) => ({ date, pages }))
+    return Object.entries(minutesPerDate)
+      .map(([date, minutes]) => ({ date, pages: minutes }))  // 'pages' bleibt Attribut für getColor
       .sort((a, b) => new Date(a.date) - new Date(b.date));
   }
 
@@ -57,7 +55,7 @@
   }
 
   function drawSquares(data) {
-    const canvas = document.getElementById("daysChart");
+    const canvas = document.getElementById("daysaudioChart");
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
@@ -102,7 +100,7 @@
   }
 
   function createLegend() {
-    const legend = document.getElementById("legenddays");
+    const legend = document.getElementById("legendaudiodays");
     if (!legend) return;
 
     legend.innerHTML = "";
