@@ -54,7 +54,7 @@
         border: 1px solid #ccc;
         border-radius: 10px;
         transition: border-color 0.3s ease;
-        background-color: #7786a1;
+        background-color: rgb(140, 138, 153);
         font-family: "Dosis", sans-serif;
         font-weight: bold;
         cursor: pointer;
@@ -69,8 +69,8 @@
       button[type="submit"] {
         margin-top: 2rem;
         padding: 0.8rem 2rem;
-        background: rgb(92, 92, 61);
-        color: white;
+        background: rgb(140, 138, 153);
+        color: black;
         border: none;
         font-weight: 600;
         font-size: 1.1rem;
@@ -82,6 +82,7 @@
 
       button[type="submit"]:hover {
         background: #4b0606;
+        color: white;
       }
 
       img#preview {
