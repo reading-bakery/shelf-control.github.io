@@ -57,6 +57,7 @@
         background-color: #7786a1;
         font-family: "Dosis", sans-serif;
         font-weight: bold;
+        cursor: pointer;
       }
 
       input:focus,
