@@ -2,20 +2,19 @@
   const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv";
 
   const legendItems = [
-    { color: "#ff7256", label: "≤ 30" },
-    { color: "#FFB90F", label: "≤ 50" },
-    { color: "#3CB371", label: "≤ 70" },
-    { color: "#63b8ff ", label: "≤ 100" },
-    { color: "#9370DB", label: "≤ 150" },
-    { color: "#40E0D0", label: "≥ 151" }
+    { color: "#ff7256", label: "≤ 50" },
+    { color: "#FFB90F", label: "≤ 70" },
+    { color: "#3CB371", label: "≤ 100" },
+    { color: "#63b8ff ", label: "≤ 150" },
+    { color: "#9370DB", label: "≥ 151" }
   ];
 
   function getColor(pages) {
-    if (pages < 30) return "#ff7256";
-    if (pages <= 50) return "#FFB90F";
-    if (pages <= 70) return "#3CB371";
-    if (pages <= 100) return "#63b8ff";
-    if (pages <= 150) return "#9370DB";
+    if (pages < 50) return "#ff7256";
+    if (pages <= 70) return "#FFB90F";
+    if (pages <= 100) return "#3CB371";
+    if (pages <= 150) return "#63b8ff";
+    if (pages <= 300) return "#9370DB";
     return "#40E0D0";
   }
 
