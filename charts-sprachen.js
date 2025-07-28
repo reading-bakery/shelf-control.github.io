@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      const maxValue = Math.max(...data) + 3;
+      const maxValue = Math.max(...data) +4;
       const mediaQuery = window.matchMedia('(max-width: 740px)');
 
       function updateChart() {
