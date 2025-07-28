@@ -5,6 +5,23 @@
     width: 100%;
 }
 
+.pie-pixel {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: "Bebas Neue", sans-serif;
+  background-color: #1f1f1f;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%; 
+  padding: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 .pie, 
 .pie-container {
   display: flex;
@@ -218,7 +235,7 @@ body {
 
     .pie {
         font-size: 2.25rem;
-        padding: 1rem;
+        padding: 0rem;
         min-height: auto;
     }
 
