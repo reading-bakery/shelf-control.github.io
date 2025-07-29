@@ -1,23 +1,25 @@
 (() => {
   const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv";
 
+  // Farbgruppen für Lesepixel (kannst du anpassen)
   const legendItems = [
-    { color: "#ff7256", label: "≤ 50" },
-    { color: "#FFB90F", label: "≤ 70" },
-    { color: "#3CB371", label: "≤ 100" },
-    { color: "#63b8ff", label: "≤ 150" },
-    { color: "#9370DB", label: "≥ 151" }
+    { color: "#ff7256", label: "≤ 50 Seiten" },
+    { color: "#FFB90F", label: "≤ 70 Seiten" },
+    { color: "#3CB371", label: "≤ 100 Seiten" },
+    { color: "#63b8ff", label: "≤ 150 Seiten" },
+    { color: "#9370DB", label: "≥ 151 Seiten" }
   ];
 
-  function getColor(pages) {
-    if (pages < 50) return "#ff7256";
-    if (pages <= 70) return "#FFB90F";
-    if (pages <= 100) return "#3CB371";
-    if (pages <= 150) return "#63b8ff";
-    if (pages <= 300) return "#9370DB";
-    return "#40E0D0";
+  // Funktion zur Farbwahl anhand Seitenzahl
+  function getColor(value) {
+    if (value <= 50) return "#ff7256";
+    if (value <= 70) return "#FFB90F";
+    if (value <= 100) return "#3CB371";
+    if (value <= 150) return "#63b8ff";
+    return "#9370DB";
   }
 
+  // CSV parsen und Seiten pro Tag summieren
   function parseCSV(text) {
     const lines = text.trim().split('\n');
     const pagesPerDate = {};
@@ -25,11 +27,11 @@
     for (let i = 1; i < lines.length; i++) {
       const line = lines[i];
       const parts = line.includes(';') ? line.split(';') : line.split(',');
-      if (parts.length < 3) continue;
+      if (parts.length < 4) continue;
 
       const dateRaw = parts[0].trim();
       const date = dateRaw.split(' ')[0];
-      const pages = parseInt(parts[2].trim().replace(/\D/g, ''));
+      const pages = parseInt(parts[2].trim().replace(/\D/g, '')); // 3. Spalte: Seiten
       if (isNaN(pages) || pages <= 0) continue;
 
       if (!pagesPerDate[date]) pagesPerDate[date] = 0;
@@ -41,6 +43,7 @@
       .sort((a, b) => new Date(a.date) - new Date(b.date));
   }
 
+  // Abgerundete Rechtecke (für Quadrate)
   function roundRect(ctx, x, y, width, height, radius = 5) {
     ctx.beginPath();
     ctx.moveTo(x + radius, y);
@@ -55,6 +58,12 @@
     ctx.closePath();
   }
 
+  // Tooltip-Variablen
+  let hoverIndex = -1;
+  let hoverPos = { x: 0, y: 0 };
+  let hoverData = null;
+
+  // Zeichne das Raster mit farbigen Lesepixeln
   function drawSquares(data) {
     const canvas = document.getElementById("daysChart");
     if (!canvas) return;
@@ -63,7 +72,8 @@
     const dpr = window.devicePixelRatio || 1;
     const squareSize = 20;
     const gap = 4;
-    const squaresPerRow = 25;
+    const squaresPerRow = 15;
+
     const rows = Math.ceil(data.length / squaresPerRow);
 
     const widthCSS = squaresPerRow * (squareSize + gap) + gap;
@@ -76,84 +86,153 @@
 
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, widthCSS, heightCSS);
 
-    const squareData = [];
+    if (data.length === 0) {
+      ctx.fillStyle = "#000";
+      ctx.font = "16px Arial";
+      ctx.fillText("Keine Daten zum Anzeigen", 10, 50);
+      return;
+    }
 
-    function render(highlightIndex = -1) {
-      ctx.clearRect(0, 0, widthCSS, heightCSS);
+    data.forEach((item, index) => {
+      const x = gap + (index % squaresPerRow) * (squareSize + gap);
+      const y = gap + Math.floor(index / squaresPerRow) * (squareSize + gap);
 
-      data.forEach((item, index) => {
-        const x = gap + (index % squaresPerRow) * (squareSize + gap);
-        const y = gap + Math.floor(index / squaresPerRow) * (squareSize + gap);
+      ctx.fillStyle = getColor(item.pages);
+      roundRect(ctx, x, y, squareSize, squareSize, 5);
+      ctx.fill();
 
-        ctx.fillStyle = getColor(item.pages);
-        roundRect(ctx, x, y, squareSize, squareSize, 5);
-        ctx.fill();
-
+      if (index === hoverIndex) {
+        ctx.strokeStyle = "#fff";
+        ctx.lineWidth = 3;
+      } else {
         ctx.strokeStyle = "#1f1f1f";
         ctx.lineWidth = 1;
-        roundRect(ctx, x, y, squareSize, squareSize, 5);
-        ctx.stroke();
+      }
+      roundRect(ctx, x, y, squareSize, squareSize, 5);
+      ctx.stroke();
+    });
 
-        if (index === highlightIndex) {
-          ctx.strokeStyle = "#fff";
-          ctx.lineWidth = 3;
-          roundRect(ctx, x, y, squareSize, squareSize, 5);
-          ctx.stroke();
-        }
+    // Tooltip anzeigen
+    if (hoverIndex !== -1 && hoverData) {
+      const padding = 6;
+      const textLines = [
+        `<strong>${hoverData.date}</strong>`,
+        `${hoverData.pages} Seiten`
+      ];
 
-        squareData[index] = { x, y, width: squareSize, height: squareSize, ...item };
+      ctx.font = "13px Dosis, sans-serif";
+      ctx.textBaseline = "top";
+
+      let maxWidth = 0;
+      textLines.forEach(line => {
+        const w = ctx.measureText(line.replace(/<[^>]*>/g, '')).width;
+        if (w > maxWidth) maxWidth = w;
       });
-    }
+      const lineHeight = 20;
+      const tooltipWidth = maxWidth + padding * 2;
+      const tooltipHeight = lineHeight * textLines.length + padding * 2;
 
-    render();
+      let tooltipX = hoverPos.x;
+      let tooltipY = hoverPos.y - tooltipHeight - 10;
 
-    let tooltip = document.getElementById("tooltip");
-    if (!tooltip) {
-      tooltip = document.createElement("div");
-      tooltip.id = "tooltip";
-      tooltip.style.position = "absolute";
-      tooltip.style.background = "rgba(0, 0, 0, 0.8)";
-      tooltip.style.color = "#fff";
-      tooltip.style.padding = "6px 8px";
-      tooltip.style.borderRadius = "5px";
-      tooltip.style.pointerEvents = "none";
-      tooltip.style.fontSize = "13px";
-      tooltip.style.fontFamily = "Dosis, sans-serif";
-      tooltip.style.display = "none";
-      tooltip.style.zIndex = "10";
-      document.body.appendChild(tooltip);
-    }
+      if (tooltipY < 0) {
+        tooltipY = hoverPos.y + 10;
+      }
 
-    canvas.addEventListener("mousemove", (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
+      let tooltip = document.getElementById("tooltip");
+      if (!tooltip) {
+        tooltip = document.createElement("div");
+        tooltip.id = "tooltip";
+        tooltip.style.position = "absolute";
+        tooltip.style.background = "rgba(0, 0, 0, 0.8)";
+        tooltip.style.color = "#fff";
+        tooltip.style.padding = "6px 8px";
+        tooltip.style.borderRadius = "5px";
+        tooltip.style.pointerEvents = "none";
+        tooltip.style.fontSize = "13px";
+        tooltip.style.fontFamily = "Dosis, sans-serif";
+        tooltip.style.zIndex = "10";
+        document.body.appendChild(tooltip);
+      }
 
-      const hoveredIndex = squareData.findIndex(s =>
-        mouseX >= s.x && mouseX <= s.x + s.width &&
-        mouseY >= s.y && mouseY <= s.y + s.height
-      );
+      tooltip.innerHTML = textLines.join('<br>');
 
-      if (hoveredIndex !== -1) {
-        const hovered = squareData[hoveredIndex];
-        tooltip.innerHTML = `<strong>${hovered.date}</strong><br>${hovered.pages} Seiten`;
-        tooltip.style.left = `${e.pageX + 0}px`;
-        tooltip.style.top = `${e.pageY + 10}px`;
-        tooltip.style.display = "block";
-        render(hoveredIndex);
-      } else {
+      const canvasRect = canvas.getBoundingClientRect();
+      tooltip.style.left = (canvasRect.left + tooltipX) + "px";
+      tooltip.style.top = (canvasRect.top + tooltipY) + "px";
+      tooltip.style.display = "block";
+    } else {
+      const tooltip = document.getElementById("tooltip");
+      if (tooltip) {
         tooltip.style.display = "none";
-        render();
+      }
+    }
+  }
+
+  // Mausposition relativ zum Canvas
+  function getMousePos(canvas, evt) {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    return {
+      x: (evt.clientX - rect.left) * (canvas.width / rect.width) / dpr,
+      y: (evt.clientY - rect.top) * (canvas.height / rect.height) / dpr
+    };
+  }
+
+  // Hover-Setup für Tooltip
+  function setupHover(data) {
+    const canvas = document.getElementById("daysChart");
+    if (!canvas) return;
+
+    const squareSize = 20;
+    const gap = 4;
+    const squaresPerRow = 15;
+
+    canvas.addEventListener("mousemove", (evt) => {
+      const pos = getMousePos(canvas, evt);
+
+      const col = Math.floor((pos.x - gap) / (squareSize + gap));
+      const row = Math.floor((pos.y - gap) / (squareSize + gap));
+      const index = row * squaresPerRow + col;
+
+      if (
+        col < 0 || col >= squaresPerRow ||
+        row < 0 || index >= data.length ||
+        pos.x < gap || pos.y < gap ||
+        pos.x > gap + squaresPerRow * (squareSize + gap) ||
+        pos.y > gap + Math.ceil(data.length / squaresPerRow) * (squareSize + gap)
+      ) {
+        if (hoverIndex !== -1) {
+          hoverIndex = -1;
+          hoverData = null;
+          drawSquares(data);
+        }
+        return;
+      }
+
+      if (hoverIndex !== index) {
+        hoverIndex = index;
+        hoverData = data[index];
+        hoverPos = {
+          x: gap + (col) * (squareSize + gap),
+          y: gap + row * (squareSize + gap)
+        };
+        drawSquares(data);
       }
     });
 
     canvas.addEventListener("mouseleave", () => {
-      tooltip.style.display = "none";
-      render();
+      if (hoverIndex !== -1) {
+        hoverIndex = -1;
+        hoverData = null;
+        drawSquares(data);
+      }
     });
   }
 
+  // Legende erstellen
   function createLegend() {
     const legend = document.getElementById("legenddays");
     if (!legend) return;
@@ -168,7 +247,6 @@
     legend.style.fontFamily = "Dosis, sans-serif";
     legend.style.fontSize = "13px";
     legend.style.alignItems = "center";
-
     legendItems.forEach(({ color, label }) => {
       const item = document.createElement("div");
       item.style.display = "flex";
@@ -180,8 +258,7 @@
       colorBox.style.height = "18px";
       colorBox.style.borderRadius = "4px";
       colorBox.style.backgroundColor = color;
-      colorBox.style.border = "1px solid #555";
-      colorBox.style.borderColor = "#1f1f1f";
+      colorBox.style.border = "1px solid #1f1f1f";
 
       const text = document.createElement("span");
       text.textContent = label;
@@ -192,18 +269,22 @@
     });
   }
 
-  async function fetchAndDraw() {
+  async function main() {
+    createLegend();
+
     try {
       const response = await fetch(csvUrl);
-      if (!response.ok) throw new Error("CSV konnte nicht geladen werden");
-      const csvText = await response.text();
-      const data = parseCSV(csvText);
+      if (!response.ok) throw new Error("Netzwerkfehler beim Laden der CSV");
+
+      const text = await response.text();
+      const data = parseCSV(text);
+
       drawSquares(data);
-      createLegend();
-    } catch (e) {
-      console.error("Fehler beim Laden oder Zeichnen:", e);
+      setupHover(data);
+    } catch (error) {
+      console.error("Fehler beim Laden oder Verarbeiten der Daten:", error);
     }
   }
 
-  window.addEventListener("load", fetchAndDraw);
+  document.addEventListener("DOMContentLoaded", main);
 })();
