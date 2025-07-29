@@ -160,7 +160,7 @@
 
     legend.innerHTML = "";
     legend.style.marginTop = "auto";
-    legend.style.paddingTop = "10px";
+    legend.style.paddingTop = "5px";
     legend.style.display = "flex";
     legend.style.flexWrap = "wrap";
     legend.style.justifyContent = "center";

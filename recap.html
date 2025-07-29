@@ -13,35 +13,46 @@
     <link rel="stylesheet" href="style-site.css">  
     <link rel="stylesheet" href="navbar.css"> 
     <link rel="stylesheet" href="pie.css"> 
+<!-- Basisskripte -->
+<script src="navbar.js" defer></script>
+<script src="backtop.js" defer></script>
+<script src="toggle.js" defer></script>
+<script src="carousel.js" defer></script>
 
-    <script src="navbar.js" defer></script>
-    <script src="backtop.js" defer></script>
-    <script src="toggle.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0/dist/chartjs-plugin-annotation.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
-    <script src="charts-gender.js" defer></script>
-    <script src="charts-umfang.js" defer></script>
-    <script src="charts-sub.js" defer></script>
-    <script src="charts-ausgaben.js" defer></script>
-    <script src="charts-ausgaben-total.js" defer></script>
-    <script src="charts-neuzugaenge.js" defer></script>
-    <script src="charts-minuten.js" defer></script>
-    <script src="charts-sprachen.js" defer></script>
-    <script src="charts-autor.js" defer></script>
-    <script src="charts-seiten.js" defer></script>
-    <script src="charts-books.js" defer></script>
-    <script src="charts-verlag.js" defer></script>
-    <script src="charts-bookmonth.js" defer></script>
-    <script src="charts-seitenmonth.js" defer></script>
-    <script src="daily.js" defer></script>
-    <script src="charts-days.js"></script>
-    <script src="charts-daysaudio.js"></script>
-    <script src="charts-minutenmonth.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-    <script src="charts-average.js" defer></script>
-    <script src="charts-averagemonth.js" defer></script>
-    <script src="carousel.js" defer></script>
+<!-- Chart.js & Plugins (UNBEDINGT zuerst!) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0/dist/chartjs-plugin-annotation.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
+<!-- Parser (für CSV aus Google Sheets) -->
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<!-- Diagramm-Skripte: Datenvisualisierung -->
+<script src="charts-average.js" defer></script>
+<script src="charts-averagemonth.js" defer></script>
+<script src="charts-ausgaben.js" defer></script>
+<script src="charts-ausgaben-total.js" defer></script>
+<script src="charts-author.js" defer></script>
+<script src="charts-books.js" defer></script>
+<script src="charts-bookmonth.js" defer></script>
+<script src="charts-days.js" defer></script>
+<script src="charts-daysaudio.js" defer></script>
+<script src="charts-gender.js" defer></script>
+<script src="charts-minuten.js" defer></script>
+<script src="charts-minutenmonth.js" defer></script>
+<script src="charts-neuzugaenge.js" defer></script>
+<script src="charts-neumonth.js" defer></script>
+<script src="charts-seiten.js" defer></script>
+<script src="charts-seitenmonth.js" defer></script>
+<script src="charts-sprachen.js" defer></script>
+<script src="charts-sub.js" defer></script>
+<script src="charts-umfang.js" defer></script>
+<script src="charts-verlag.js" defer></script>
+
+<!-- Lesetracker (muss nach allen Diagrammen kommen) -->
+<script src="daily.js" defer></script>
+
+
 
 
 </head>
@@ -102,10 +113,27 @@
             <div id="legendaudiodays"></div>
         </div>
 
-        <div class="pie">
+
+
+        <div class="pie carousel-container">
             <h3>Neuzugänge</h3>
-            <div id="neuzugaenge-summe"></div>
+            <div class="carousel-dots">
+                <button class="dot active" aria-label="Slide 1"></button>
+                <button class="dot" aria-label="Slide 2"></button>
+            </div>
+            <div class="carousel-track-container">
+                <ul class="carousel-track">
+                <li class="carousel-slide current-slide">
+              		<canvas id="neumonthChart"></canvas>             
+                </li>
+                <li class="carousel-slide">
+                  <div id="neuzugaenge-summe"></div>
+                </li>
+                </ul>
+            </div>
         </div>
+
+
 
 
         <div class="pie carousel-container">
@@ -185,7 +213,7 @@
 
 
         <div class="pie carousel-container">
-            <h3>Tage</h3>
+            <h3>⌀ Tage pro Buch</h3>
             <div class="carousel-dots">
                 <button class="dot active" aria-label="Slide 1"></button>
                 <button class="dot" aria-label="Slide 2"></button>
@@ -203,7 +231,7 @@
         </div>
 
         <div class="pie carousel-container">
-            <h3>Sterne</h3>
+            <h3>⌀ Sterne pro Buch</h3>
             <div class="carousel-dots">
                 <button class="dot active" aria-label="Slide 1"></button>
                 <button class="dot" aria-label="Slide 2"></button>

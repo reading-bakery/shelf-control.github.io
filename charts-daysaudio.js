@@ -24,11 +24,11 @@
     for (let i = 1; i < lines.length; i++) {
       const line = lines[i];
       const parts = line.includes(';') ? line.split(';') : line.split(',');
-      if (parts.length < 4) continue;  // mindestens 4 Spalten benötigt
+      if (parts.length < 4) continue;
 
       const dateRaw = parts[0].trim();
       const date = dateRaw.split(' ')[0];
-      const minutes = parseInt(parts[3].trim().replace(/\D/g, ''));  // 4. Spalte: Minuten
+      const minutes = parseInt(parts[3].trim().replace(/\D/g, ''));
       if (isNaN(minutes) || minutes <= 0) continue;
 
       if (!minutesPerDate[date]) minutesPerDate[date] = 0;
@@ -36,7 +36,7 @@
     }
 
     return Object.entries(minutesPerDate)
-      .map(([date, minutes]) => ({ date, pages: minutes }))  // 'pages' bleibt Attribut für getColor
+      .map(([date, minutes]) => ({ date, pages: minutes }))
       .sort((a, b) => new Date(a.date) - new Date(b.date));
   }
 
@@ -54,10 +54,9 @@
     ctx.closePath();
   }
 
-  // Hover-Index und Position
   let hoverIndex = -1;
   let hoverPos = { x: 0, y: 0 };
-  let hoverData = null; // Das Objekt mit date + pages zum Hover
+  let hoverData = null;
 
   function drawSquares(data) {
     const canvas = document.getElementById("daysaudioChart");
@@ -68,6 +67,7 @@
     const squareSize = 20;
     const gap = 4;
     const squaresPerRow = 15;
+
     const rows = Math.ceil(data.length / squaresPerRow);
 
     const widthCSS = squaresPerRow * (squareSize + gap) + gap;
@@ -89,7 +89,6 @@
       return;
     }
 
-    // Quadrate zeichnen
     data.forEach((item, index) => {
       const x = gap + (index % squaresPerRow) * (squareSize + gap);
       const y = gap + Math.floor(index / squaresPerRow) * (squareSize + gap);
@@ -98,7 +97,6 @@
       roundRect(ctx, x, y, squareSize, squareSize, 5);
       ctx.fill();
 
-      // Umrandung weiß wenn Hover, sonst dunkel
       if (index === hoverIndex) {
         ctx.strokeStyle = "#fff";
         ctx.lineWidth = 3;
@@ -110,49 +108,67 @@
       ctx.stroke();
     });
 
-    // Tooltip zeichnen, wenn Hover
     if (hoverIndex !== -1 && hoverData) {
       const padding = 6;
       const textLines = [
-        `Datum: ${hoverData.date}`,
-        `Minuten: ${hoverData.pages}`
+        `${hoverData.date}`,
+        `${hoverData.pages} Minuten`
       ];
 
-      ctx.font = "12px Arial";
+      ctx.font = "13px Dosis";
       ctx.textBaseline = "top";
 
-      // Maße Tooltip berechnen
       let maxWidth = 0;
       textLines.forEach(line => {
         const w = ctx.measureText(line).width;
         if (w > maxWidth) maxWidth = w;
       });
-      const lineHeight = 16;
+      const lineHeight = 20;
       const tooltipWidth = maxWidth + padding * 2;
       const tooltipHeight = lineHeight * textLines.length + padding * 2;
 
       let tooltipX = hoverPos.x;
       let tooltipY = hoverPos.y - tooltipHeight - 10;
 
-      // Tooltip nicht aus Canvas oben rausragen lassen
       if (tooltipY < 0) {
         tooltipY = hoverPos.y + 10;
       }
 
-      // Hintergrund Tooltip
-      ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
-      roundRect(ctx, tooltipX, tooltipY, tooltipWidth, tooltipHeight, 6);
-      ctx.fill();
+      let tooltip = document.getElementById("tooltip");
+      if (!tooltip) {
+        tooltip = document.createElement("div");
+        tooltip.id = "tooltip";
+        tooltip.style.position = "absolute";
+        tooltip.style.background = "rgba(0, 0, 0, 0.8)";
+        tooltip.style.color = "#fff";
+        tooltip.style.padding = "6px 8px";
+        tooltip.style.borderRadius = "5px";
+        tooltip.style.pointerEvents = "none";
+        tooltip.style.fontSize = "13px";
+        tooltip.style.fontFamily = "Dosis, sans-serif";
+        tooltip.style.zIndex = "10";
+        document.body.appendChild(tooltip);
+      }
 
-      // Text
-      ctx.fillStyle = "#fff";
-      textLines.forEach((line, i) => {
-        ctx.fillText(line, tooltipX + padding, tooltipY + padding + i * lineHeight);
-      });
+      // Hier Datum fett machen:
+      tooltip.innerHTML = textLines.map((line, i) => 
+        i === 0 
+          ? `<div style="font-weight:bold;">${line}</div>` 
+          : `<div>${line}</div>`
+      ).join('');
+
+      const canvasRect = canvas.getBoundingClientRect();
+      tooltip.style.left = (canvasRect.left + tooltipX) + "px";
+      tooltip.style.top = (canvasRect.top + tooltipY) + "px";
+      tooltip.style.display = "block";
+    } else {
+      const tooltip = document.getElementById("tooltip");
+      if (tooltip) {
+        tooltip.style.display = "none";
+      }
     }
   }
 
-  // Hilfsfunktion, um Mausposition im Canvas zu ermitteln
   function getMousePos(canvas, evt) {
     const rect = canvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
@@ -162,19 +178,17 @@
     };
   }
 
-  // Event-Handler für Hover
   function setupHover(data) {
     const canvas = document.getElementById("daysaudioChart");
     if (!canvas) return;
 
     const squareSize = 20;
     const gap = 4;
-    const squaresPerRow = 30;
+    const squaresPerRow = 15;
 
     canvas.addEventListener("mousemove", (evt) => {
       const pos = getMousePos(canvas, evt);
 
-      // Welches Quadrat?
       const col = Math.floor((pos.x - gap) / (squareSize + gap));
       const row = Math.floor((pos.y - gap) / (squareSize + gap));
       const index = row * squaresPerRow + col;
@@ -186,7 +200,6 @@
         pos.x > gap + squaresPerRow * (squareSize + gap) ||
         pos.y > gap + Math.ceil(data.length / squaresPerRow) * (squareSize + gap)
       ) {
-        // Maus außerhalb der Quadrate
         if (hoverIndex !== -1) {
           hoverIndex = -1;
           hoverData = null;
@@ -221,7 +234,7 @@
 
     legend.innerHTML = "";
     legend.style.marginTop = "auto";
-    legend.style.paddingTop = "10px";
+    legend.style.paddingTop = "5px";
     legend.style.display = "flex";
     legend.style.flexWrap = "wrap";
     legend.style.justifyContent = "center";
@@ -229,7 +242,6 @@
     legend.style.fontFamily = "Dosis, sans-serif";
     legend.style.fontSize = "13px";
     legend.style.alignItems = "center";
-
     legendItems.forEach(({ color, label }) => {
       const item = document.createElement("div");
       item.style.display = "flex";
@@ -252,20 +264,22 @@
       legend.appendChild(item);
     });
   }
+  async function main() {
+    createLegend();
 
-  async function fetchAndDraw() {
     try {
       const response = await fetch(csvUrl);
-      if (!response.ok) throw new Error("CSV konnte nicht geladen werden");
-      const csvText = await response.text();
-      const data = parseCSV(csvText);
+      if (!response.ok) throw new Error("Netzwerkfehler beim Laden der CSV");
+
+      const text = await response.text();
+      const data = parseCSV(text);
+
       drawSquares(data);
-      createLegend();
       setupHover(data);
-    } catch (e) {
-      console.error("Fehler beim Laden oder Zeichnen:", e);
+    } catch (error) {
+      console.error("Fehler beim Laden oder Verarbeiten der Daten:", error);
     }
   }
 
-  window.addEventListener("load", fetchAndDraw);
+  document.addEventListener("DOMContentLoaded", main);
 })();
