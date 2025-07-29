@@ -54,6 +54,11 @@
     ctx.closePath();
   }
 
+  // Hover-Index und Position
+  let hoverIndex = -1;
+  let hoverPos = { x: 0, y: 0 };
+  let hoverData = null; // Das Objekt mit date + pages zum Hover
+
   function drawSquares(data) {
     const canvas = document.getElementById("daysaudioChart");
     if (!canvas) return;
@@ -62,7 +67,7 @@
     const dpr = window.devicePixelRatio || 1;
     const squareSize = 20;
     const gap = 4;
-    const squaresPerRow = 30;
+    const squaresPerRow = 15;
     const rows = Math.ceil(data.length / squaresPerRow);
 
     const widthCSS = squaresPerRow * (squareSize + gap) + gap;
@@ -84,6 +89,7 @@
       return;
     }
 
+    // Quadrate zeichnen
     data.forEach((item, index) => {
       const x = gap + (index % squaresPerRow) * (squareSize + gap);
       const y = gap + Math.floor(index / squaresPerRow) * (squareSize + gap);
@@ -92,10 +98,120 @@
       roundRect(ctx, x, y, squareSize, squareSize, 5);
       ctx.fill();
 
-      ctx.strokeStyle = "#1f1f1f";
-      ctx.lineWidth = 1;
+      // Umrandung weiß wenn Hover, sonst dunkel
+      if (index === hoverIndex) {
+        ctx.strokeStyle = "#fff";
+        ctx.lineWidth = 3;
+      } else {
+        ctx.strokeStyle = "#1f1f1f";
+        ctx.lineWidth = 1;
+      }
       roundRect(ctx, x, y, squareSize, squareSize, 5);
       ctx.stroke();
+    });
+
+    // Tooltip zeichnen, wenn Hover
+    if (hoverIndex !== -1 && hoverData) {
+      const padding = 6;
+      const textLines = [
+        `Datum: ${hoverData.date}`,
+        `Minuten: ${hoverData.pages}`
+      ];
+
+      ctx.font = "12px Arial";
+      ctx.textBaseline = "top";
+
+      // Maße Tooltip berechnen
+      let maxWidth = 0;
+      textLines.forEach(line => {
+        const w = ctx.measureText(line).width;
+        if (w > maxWidth) maxWidth = w;
+      });
+      const lineHeight = 16;
+      const tooltipWidth = maxWidth + padding * 2;
+      const tooltipHeight = lineHeight * textLines.length + padding * 2;
+
+      let tooltipX = hoverPos.x;
+      let tooltipY = hoverPos.y - tooltipHeight - 10;
+
+      // Tooltip nicht aus Canvas oben rausragen lassen
+      if (tooltipY < 0) {
+        tooltipY = hoverPos.y + 10;
+      }
+
+      // Hintergrund Tooltip
+      ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+      roundRect(ctx, tooltipX, tooltipY, tooltipWidth, tooltipHeight, 6);
+      ctx.fill();
+
+      // Text
+      ctx.fillStyle = "#fff";
+      textLines.forEach((line, i) => {
+        ctx.fillText(line, tooltipX + padding, tooltipY + padding + i * lineHeight);
+      });
+    }
+  }
+
+  // Hilfsfunktion, um Mausposition im Canvas zu ermitteln
+  function getMousePos(canvas, evt) {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    return {
+      x: (evt.clientX - rect.left) * (canvas.width / rect.width) / dpr,
+      y: (evt.clientY - rect.top) * (canvas.height / rect.height) / dpr
+    };
+  }
+
+  // Event-Handler für Hover
+  function setupHover(data) {
+    const canvas = document.getElementById("daysaudioChart");
+    if (!canvas) return;
+
+    const squareSize = 20;
+    const gap = 4;
+    const squaresPerRow = 30;
+
+    canvas.addEventListener("mousemove", (evt) => {
+      const pos = getMousePos(canvas, evt);
+
+      // Welches Quadrat?
+      const col = Math.floor((pos.x - gap) / (squareSize + gap));
+      const row = Math.floor((pos.y - gap) / (squareSize + gap));
+      const index = row * squaresPerRow + col;
+
+      if (
+        col < 0 || col >= squaresPerRow ||
+        row < 0 || index >= data.length ||
+        pos.x < gap || pos.y < gap ||
+        pos.x > gap + squaresPerRow * (squareSize + gap) ||
+        pos.y > gap + Math.ceil(data.length / squaresPerRow) * (squareSize + gap)
+      ) {
+        // Maus außerhalb der Quadrate
+        if (hoverIndex !== -1) {
+          hoverIndex = -1;
+          hoverData = null;
+          drawSquares(data);
+        }
+        return;
+      }
+
+      if (hoverIndex !== index) {
+        hoverIndex = index;
+        hoverData = data[index];
+        hoverPos = {
+          x: gap + (col) * (squareSize + gap),
+          y: gap + row * (squareSize + gap)
+        };
+        drawSquares(data);
+      }
+    });
+
+    canvas.addEventListener("mouseleave", () => {
+      if (hoverIndex !== -1) {
+        hoverIndex = -1;
+        hoverData = null;
+        drawSquares(data);
+      }
     });
   }
 
@@ -145,6 +261,7 @@
       const data = parseCSV(csvText);
       drawSquares(data);
       createLegend();
+      setupHover(data);
     } catch (e) {
       console.error("Fehler beim Laden oder Zeichnen:", e);
     }

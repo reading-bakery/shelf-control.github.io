@@ -5,7 +5,7 @@
     { color: "#ff7256", label: "≤ 50" },
     { color: "#FFB90F", label: "≤ 70" },
     { color: "#3CB371", label: "≤ 100" },
-    { color: "#63b8ff ", label: "≤ 150" },
+    { color: "#63b8ff", label: "≤ 150" },
     { color: "#9370DB", label: "≥ 151" }
   ];
 
@@ -63,7 +63,7 @@
     const dpr = window.devicePixelRatio || 1;
     const squareSize = 20;
     const gap = 4;
-    const squaresPerRow = 30;
+    const squaresPerRow = 25;
     const rows = Math.ceil(data.length / squaresPerRow);
 
     const widthCSS = squaresPerRow * (squareSize + gap) + gap;
@@ -76,27 +76,81 @@
 
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(dpr, dpr);
-    ctx.clearRect(0, 0, widthCSS, heightCSS);
 
-    if (data.length === 0) {
-      ctx.fillStyle = "#000";
-      ctx.font = "16px Arial";
-      ctx.fillText("Keine Daten zum Anzeigen", 10, 50);
-      return;
+    const squareData = [];
+
+    function render(highlightIndex = -1) {
+      ctx.clearRect(0, 0, widthCSS, heightCSS);
+
+      data.forEach((item, index) => {
+        const x = gap + (index % squaresPerRow) * (squareSize + gap);
+        const y = gap + Math.floor(index / squaresPerRow) * (squareSize + gap);
+
+        ctx.fillStyle = getColor(item.pages);
+        roundRect(ctx, x, y, squareSize, squareSize, 5);
+        ctx.fill();
+
+        ctx.strokeStyle = "#1f1f1f";
+        ctx.lineWidth = 1;
+        roundRect(ctx, x, y, squareSize, squareSize, 5);
+        ctx.stroke();
+
+        if (index === highlightIndex) {
+          ctx.strokeStyle = "#fff";
+          ctx.lineWidth = 3;
+          roundRect(ctx, x, y, squareSize, squareSize, 5);
+          ctx.stroke();
+        }
+
+        squareData[index] = { x, y, width: squareSize, height: squareSize, ...item };
+      });
     }
 
-    data.forEach((item, index) => {
-      const x = gap + (index % squaresPerRow) * (squareSize + gap);
-      const y = gap + Math.floor(index / squaresPerRow) * (squareSize + gap);
+    render();
 
-      ctx.fillStyle = getColor(item.pages);
-      roundRect(ctx, x, y, squareSize, squareSize, 5);
-      ctx.fill();
+    let tooltip = document.getElementById("tooltip");
+    if (!tooltip) {
+      tooltip = document.createElement("div");
+      tooltip.id = "tooltip";
+      tooltip.style.position = "absolute";
+      tooltip.style.background = "rgba(0, 0, 0, 0.8)";
+      tooltip.style.color = "#fff";
+      tooltip.style.padding = "6px 8px";
+      tooltip.style.borderRadius = "5px";
+      tooltip.style.pointerEvents = "none";
+      tooltip.style.fontSize = "13px";
+      tooltip.style.fontFamily = "Dosis, sans-serif";
+      tooltip.style.display = "none";
+      tooltip.style.zIndex = "10";
+      document.body.appendChild(tooltip);
+    }
 
-      ctx.strokeStyle = "#1f1f1f";
-      ctx.lineWidth = 1;
-      roundRect(ctx, x, y, squareSize, squareSize, 5);
-      ctx.stroke();
+    canvas.addEventListener("mousemove", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      const hoveredIndex = squareData.findIndex(s =>
+        mouseX >= s.x && mouseX <= s.x + s.width &&
+        mouseY >= s.y && mouseY <= s.y + s.height
+      );
+
+      if (hoveredIndex !== -1) {
+        const hovered = squareData[hoveredIndex];
+        tooltip.innerHTML = `<strong>${hovered.date}</strong><br>${hovered.pages} Seiten`;
+        tooltip.style.left = `${e.pageX + 0}px`;
+        tooltip.style.top = `${e.pageY + 10}px`;
+        tooltip.style.display = "block";
+        render(hoveredIndex);
+      } else {
+        tooltip.style.display = "none";
+        render();
+      }
+    });
+
+    canvas.addEventListener("mouseleave", () => {
+      tooltip.style.display = "none";
+      render();
     });
   }
 
