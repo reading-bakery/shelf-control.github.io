@@ -1,241 +1,230 @@
 (() => {
-  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv";
+  const canvas = document.getElementById('daysChart');
+  const ctx = canvas.getContext('2d');
+  const legendDiv = document.getElementById('legenddays');
 
-  const legendItems = [
-    { color: "#ff7256", label: "≤ 50" },
-    { color: "#FFB90F", label: "≤ 70" },
-    { color: "#3CB371", label: "≤ 100" },
-    { color: "#63b8ff", label: "≤ 150" },
-    { color: "#9370DB", label: "≥ 151" }
+  // Pixel/Zeile
+  const PIXELS_PER_ROW = 30;
+  const PIXEL_SIZE = 20; // px Quadrat
+  const PIXEL_GAP = 4;
+  const RADIUS = 5;
+
+  // Farben Cluster Seiten
+  const clusterColors = [
+    { max: 50, color: '#4CAF50' },    // grün
+    { max: 70, color: '#FFEB3B' },    // gelb
+    { max: 100, color: '#2196F3' },   // blau
+    { max: 150, color: '#F44336' },   // rot
+    { max: Infinity, color: '#9C27B0' } // lila
   ];
 
+  // Schrift für Legende und Tooltip
+  const FONT_FAMILY = "'Dosis', sans-serif";
+  const FONT_SIZE = 13;
+
+  // Tooltip Variablen
+  let tooltip = null;
+
+  // Hilfsfunktion Cluster-Farbe ermitteln
   function getColor(value) {
-    if (value <= 50) return "#ff7256";
-    if (value <= 70) return "#FFB90F";
-    if (value <= 100) return "#3CB371";
-    if (value <= 150) return "#63b8ff";
-    return "#9370DB";
+    for (const cluster of clusterColors) {
+      if (value <= cluster.max) return cluster.color;
+    }
+    return '#000';
   }
 
+  // CSV laden und Daten vorbereiten
+  async function loadData() {
+    const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv';
+    const res = await fetch(url);
+    const text = await res.text();
+    return parseCSV(text);
+  }
+
+  // Einfaches CSV Parsen in Array von Objekten
   function parseCSV(text) {
     const lines = text.trim().split('\n');
-    const pagesPerDate = {};
-
-    for (let i = 1; i < lines.length; i++) {
-      const parts = lines[i].includes(';') ? lines[i].split(';') : lines[i].split(',');
-      if (parts.length < 4) continue;
-      const date = parts[0].split(' ')[0].trim();
-      const pages = parseInt(parts[2].trim().replace(/\D/g, ''));
-      if (!isNaN(pages) && pages > 0) {
-        pagesPerDate[date] = (pagesPerDate[date] || 0) + pages;
-      }
-    }
-
-    return Object.entries(pagesPerDate)
-      .map(([date, pages]) => ({ date, pages }))
-      .sort((a, b) => new Date(a.date) - new Date(b.date));
+    const headers = lines[0].split(',').map(h => h.trim());
+    return lines.slice(1).map(line => {
+      const cols = line.split(',');
+      let obj = {};
+      headers.forEach((h, i) => obj[h] = cols[i]);
+      return obj;
+    });
   }
 
-  function roundRect(ctx, x, y, width, height, radius = 5) {
+  // Gruppieren nach Datum (Zeitstempel: YYYY-MM-DD HH:mm:ss)
+  // Summiere Seiten pro Tag
+  function groupByDay(data) {
+    const grouped = {};
+    data.forEach(row => {
+      if (!row['Zeitstempel'] || !row['Seiten']) return;
+      const day = row['Zeitstempel'].slice(0,10); // YYYY-MM-DD
+      const pages = Number(row['Seiten']);
+      if (isNaN(pages)) return;
+      grouped[day] = (grouped[day] || 0) + pages;
+    });
+    // Sortiert nach Datum aufsteigend
+    const sortedDays = Object.keys(grouped).sort();
+    return sortedDays.map(day => ({ day, value: grouped[day] }));
+  }
+
+  // Canvas-Größe setzen je nach Anzahl Pixel
+  function setCanvasSize(count) {
+    const rows = Math.ceil(count / PIXELS_PER_ROW);
+    canvas.width = PIXELS_PER_ROW * (PIXEL_SIZE + PIXEL_GAP) + PIXEL_GAP;
+    canvas.height = rows * (PIXEL_SIZE + PIXEL_GAP) + PIXEL_GAP + 40; // +40 für Legend
+  }
+
+  // Pixel zeichnen
+  function drawPixel(x, y, color, isHovered) {
+    ctx.fillStyle = color;
+    const px = x * (PIXEL_SIZE + PIXEL_GAP) + PIXEL_GAP;
+    const py = y * (PIXEL_SIZE + PIXEL_GAP) + PIXEL_GAP;
     ctx.beginPath();
-    ctx.moveTo(x + radius, y);
-    ctx.lineTo(x + width - radius, y);
-    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-    ctx.lineTo(x + width, y + height - radius);
-    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-    ctx.lineTo(x + radius, y + height);
-    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-    ctx.lineTo(x, y + radius);
-    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.moveTo(px + RADIUS, py);
+    ctx.lineTo(px + PIXEL_SIZE - RADIUS, py);
+    ctx.quadraticCurveTo(px + PIXEL_SIZE, py, px + PIXEL_SIZE, py + RADIUS);
+    ctx.lineTo(px + PIXEL_SIZE, py + PIXEL_SIZE - RADIUS);
+    ctx.quadraticCurveTo(px + PIXEL_SIZE, py + PIXEL_SIZE, px + PIXEL_SIZE - RADIUS, py + PIXEL_SIZE);
+    ctx.lineTo(px + RADIUS, py + PIXEL_SIZE);
+    ctx.quadraticCurveTo(px, py + PIXEL_SIZE, px, py + PIXEL_SIZE - RADIUS);
+    ctx.lineTo(px, py + RADIUS);
+    ctx.quadraticCurveTo(px, py, px + RADIUS, py);
     ctx.closePath();
+    ctx.fill();
+
+    if (isHovered) {
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
   }
 
-  let hoverIndex = -1;
-  let hoverPos = { x: 0, y: 0 };
-  let hoverData = null;
+  // Legend zeichnen unten (horizontal)
+  function drawLegend() {
+    legendDiv.innerHTML = ''; // Clear
+    const legendItems = [
+      { color: '#4CAF50', label: '0-50' },
+      { color: '#FFEB3B', label: '51-70' },
+      { color: '#2196F3', label: '71-100' },
+      { color: '#F44336', label: '101-150' },
+      { color: '#9C27B0', label: '151+' }
+    ];
+    legendDiv.style.fontFamily = FONT_FAMILY;
+    legendDiv.style.fontSize = FONT_SIZE + 'px';
+    legendDiv.style.display = 'flex';
+    legendDiv.style.justifyContent = 'center';
+    legendDiv.style.gap = '15px';
+    legendDiv.style.marginTop = '10px';
 
-  function drawSquares(data) {
-    const canvas = document.getElementById("daysChart");
-    if (!canvas) return;
+    legendItems.forEach(item => {
+      const span = document.createElement('span');
+      span.style.display = 'flex';
+      span.style.alignItems = 'center';
+      span.style.gap = '6px';
+      // farbige Box
+      const box = document.createElement('div');
+      box.style.width = '20px';
+      box.style.height = '20px';
+      box.style.backgroundColor = item.color;
+      box.style.borderRadius = '5px';
+      span.appendChild(box);
+      // Text
+      const label = document.createElement('span');
+      label.textContent = item.label;
+      span.appendChild(label);
+      legendDiv.appendChild(span);
+    });
+  }
 
-    const ctx = canvas.getContext("2d");
-    const dpr = window.devicePixelRatio || 1;
-    const squareSize = 20;
-    const gap = 4;
-    const squaresPerRow = 30;
+  // Tooltip zeichnen im Canvas
+  function drawTooltip(text, x, y) {
+    if (!text) return;
+    ctx.save();
+    ctx.font = `bold ${FONT_SIZE}px ${FONT_FAMILY}`;
+    ctx.textBaseline = 'top';
 
-    const rows = Math.ceil(data.length / squaresPerRow);
-    const widthCSS = squaresPerRow * (squareSize + gap) + gap;
-    const heightCSS = rows * (squareSize + gap) + gap;
+    const padding = 6;
+    const metrics = ctx.measureText(text);
+    const w = metrics.width + padding * 2;
+    const h = FONT_SIZE + padding * 2;
 
-    canvas.width = widthCSS * dpr;
-    canvas.height = heightCSS * dpr;
-    canvas.style.width = widthCSS + "px";
-    canvas.style.height = heightCSS + "px";
+    // Position anpassen (damit Tooltip nicht aus Canvas rausgeht)
+    let tx = x;
+    let ty = y - h - 10;
+    if (tx + w > canvas.width) tx = canvas.width - w - 5;
+    if (ty < 0) ty = y + 10;
 
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.scale(dpr, dpr);
-    ctx.clearRect(0, 0, widthCSS, heightCSS);
+    // Hintergrund
+    ctx.fillStyle = 'rgba(0,0,0,0.75)';
+    ctx.fillRect(tx, ty, w, h);
 
-    if (data.length === 0) {
-      ctx.fillStyle = "#000";
-      ctx.font = "16px Arial";
-      ctx.fillText("Keine Daten zum Anzeigen", 10, 50);
-      return;
-    }
+    // Text
+    ctx.fillStyle = 'white';
+    ctx.fillText(text, tx + padding, ty + padding);
 
-    data.forEach((item, index) => {
-      const x = gap + (index % squaresPerRow) * (squareSize + gap);
-      const y = gap + Math.floor(index / squaresPerRow) * (squareSize + gap);
+    ctx.restore();
+  }
 
-      ctx.fillStyle = getColor(item.pages);
-      roundRect(ctx, x, y, squareSize, squareSize, 5);
-      ctx.fill();
+  // Main zeichnen
+  function render(data, hoverIndex = -1) {
+    setCanvasSize(data.length);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      ctx.strokeStyle = index === hoverIndex ? "#fff" : "#1f1f1f";
-      ctx.lineWidth = index === hoverIndex ? 3 : 1;
-      roundRect(ctx, x, y, squareSize, squareSize, 5);
-      ctx.stroke();
+    data.forEach(({ value }, i) => {
+      const x = i % PIXELS_PER_ROW;
+      const y = Math.floor(i / PIXELS_PER_ROW);
+      const color = getColor(value);
+      drawPixel(x, y, color, i === hoverIndex);
     });
 
-    if (hoverIndex !== -1 && hoverData) {
-      const padding = 8;
-      const lineSpacing = 6;
+    drawLegend();
 
-      ctx.font = "bold 14px Dosis, sans-serif";
-      const dateWidth = ctx.measureText(hoverData.date).width;
-      const dateHeight = 22;
-
-      ctx.font = "14px Dosis, sans-serif";
-      const pagesText = `${hoverData.pages} Seiten`;
-      const pagesWidth = ctx.measureText(pagesText).width;
-      const pagesHeight = 22;
-
-      const tooltipWidth = Math.max(dateWidth, pagesWidth) + 2 * padding;
-      const tooltipHeight = dateHeight + pagesHeight + 3 * lineSpacing;
-
-      let x = hoverPos.x + 10;
-      let y = hoverPos.y - tooltipHeight - 10;
-
-      const canvasWidth = canvas.width / dpr;
-      const canvasHeight = canvas.height / dpr;
-
-      if (x + tooltipWidth > canvasWidth) x = canvasWidth - tooltipWidth - 10;
-      if (x < 0) x = 10;
-      if (y < 0) y = hoverPos.y + 10;
-
-      ctx.fillStyle = "rgba(0, 0, 0, 0.85)";
-      roundRect(ctx, x, y, tooltipWidth, tooltipHeight, 10);
-      ctx.fill();
-
-      // Datum fett und Größe 18
-      ctx.fillStyle = "#fff";
-      ctx.font = "bold 18px Dosis, sans-serif";
-      ctx.fillText(hoverData.date, x + padding, y + padding + dateHeight);
-
-      // Seiten normale Schriftgröße 17
-      ctx.font = "17px Dosis, sans-serif";
-      ctx.fillText(pagesText, x + padding, y + padding + dateHeight + pagesHeight + lineSpacing);
+    if (hoverIndex >= 0 && data[hoverIndex]) {
+      const x = (hoverIndex % PIXELS_PER_ROW) * (PIXEL_SIZE + PIXEL_GAP) + PIXEL_GAP;
+      const y = Math.floor(hoverIndex / PIXELS_PER_ROW) * (PIXEL_SIZE + PIXEL_GAP) + PIXEL_GAP;
+      const { day, value } = data[hoverIndex];
+      drawTooltip(`${day}\nSeiten: ${value}`, x, y);
     }
   }
 
-  function getMousePos(canvas, evt) {
+  // Event: Maus bewegen zum Pixel erkennen + re-rendern
+  function onMouseMove(e, data) {
     const rect = canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    return {
-      x: (evt.clientX - rect.left) * (canvas.width / rect.width) / dpr,
-      y: (evt.clientY - rect.top) * (canvas.height / rect.height) / dpr
-    };
-  }
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
 
-  function setupHover(data) {
-    const canvas = document.getElementById("daysChart");
-    if (!canvas) return;
-
-    const squareSize = 20;
-    const gap = 4;
-    const squaresPerRow = 30;
-
-    canvas.addEventListener("mousemove", (evt) => {
-      const pos = getMousePos(canvas, evt);
-      const col = Math.floor((pos.x - gap) / (squareSize + gap));
-      const row = Math.floor((pos.y - gap) / (squareSize + gap));
-      const index = row * squaresPerRow + col;
-
-      if (col < 0 || col >= squaresPerRow || row < 0 || index >= data.length) {
-        if (hoverIndex !== -1) {
-          hoverIndex = -1;
-          hoverData = null;
-          drawSquares(data);
+    // Pixel Position bestimmen
+    for (let i = 0; i < data.length; i++) {
+      const x = i % PIXELS_PER_ROW;
+      const y = Math.floor(i / PIXELS_PER_ROW);
+      const px = x * (PIXEL_SIZE + PIXEL_GAP) + PIXEL_GAP;
+      const py = y * (PIXEL_SIZE + PIXEL_GAP) + PIXEL_GAP;
+      if (mx >= px && mx <= px + PIXEL_SIZE && my >= py && my <= py + PIXEL_SIZE) {
+        if (hoverIndex !== i) {
+          hoverIndex = i;
+          render(data, hoverIndex);
         }
         return;
       }
-
-      if (hoverIndex !== index) {
-        hoverIndex = index;
-        hoverData = data[index];
-        hoverPos = {
-          x: gap + col * (squareSize + gap),
-          y: gap + row * (squareSize + gap)
-        };
-        drawSquares(data);
-      }
-    });
-
-    canvas.addEventListener("mouseleave", () => {
-      if (hoverIndex !== -1) {
-        hoverIndex = -1;
-        hoverData = null;
-        drawSquares(data);
-      }
-    });
-  }
-
-  function createLegend() {
-    const legend = document.getElementById("legenddays");
-    if (!legend) return;
-
-    legend.innerHTML = "";
-    legend.style.display = "flex";
-    legend.style.flexWrap = "wrap";
-    legend.style.justifyContent = "center";
-    legend.style.gap = "10px";
-    legend.style.fontFamily = "Dosis, sans-serif";
-
-    legendItems.forEach(({ color, label }) => {
-      const item = document.createElement("div");
-      item.style.display = "flex";
-      item.style.alignItems = "center";
-      item.style.gap = "6px";
-
-      const colorBox = document.createElement("div");
-      colorBox.style.width = "16px";
-      colorBox.style.height = "16px";
-      colorBox.style.backgroundColor = color;
-      colorBox.style.border = "1px solid #1f1f1f";
-      colorBox.style.borderRadius = "3px";
-
-      const text = document.createElement("span");
-      text.textContent = label;
-
-      item.appendChild(colorBox);
-      item.appendChild(text);
-      legend.appendChild(item);
-    });
-  }
-
-  async function main() {
-    createLegend();
-    try {
-      const response = await fetch(csvUrl);
-      const text = await response.text();
-      const data = parseCSV(text);
-      drawSquares(data);
-      setupHover(data);
-    } catch (e) {
-      console.error("Fehler beim Laden der CSV:", e);
+    }
+    if (hoverIndex !== -1) {
+      hoverIndex = -1;
+      render(data);
     }
   }
 
-  document.addEventListener("DOMContentLoaded", main);
+  // Initialisierung
+  let hoverIndex = -1;
+  loadData()
+    .then(rawData => {
+      const grouped = groupByDay(rawData);
+      render(grouped);
+      canvas.addEventListener('mousemove', e => onMouseMove(e, grouped));
+      canvas.addEventListener('mouseleave', () => {
+        hoverIndex = -1;
+        render(grouped);
+      });
+    });
 })();
