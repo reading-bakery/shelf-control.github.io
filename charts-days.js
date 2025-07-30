@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv';
-    const PIXELS_PER_ROW = 30;
+    const PIXELS_PER_ROW = 25;
     const PIXEL_SIZE = 20; // Example size, adjust as needed
-    const GAP = 2; // Gap between pixels
+    const GAP = 6; // Gap between pixels
 
     const canvas = document.getElementById('daysChart');
     const legendDiv = document.getElementById('legenddays');
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 drawChart();
                 // Draw new hover effect
                 ctx.strokeStyle = 'white';
-                ctx.lineWidth = 2;
+                ctx.lineWidth = 5;
                 ctx.beginPath();
                 ctx.roundRect(foundPixel.x, foundPixel.y, foundPixel.width, foundPixel.height, 5);
                 ctx.stroke();
