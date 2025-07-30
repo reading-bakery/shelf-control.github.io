@@ -66,7 +66,7 @@
     const dpr = window.devicePixelRatio || 1;
     const squareSize = 20;
     const gap = 4;
-    const squaresPerRow = 15;
+    const squaresPerRow = 20;
 
     const rows = Math.ceil(data.length / squaresPerRow);
 
@@ -109,13 +109,13 @@
     });
 
     if (hoverIndex !== -1 && hoverData) {
-      const padding = 6;
+      const padding = 40;
       const textLines = [
         `${hoverData.date}`,
         `${hoverData.pages} Minuten`
       ];
 
-      ctx.font = "13px Dosis";
+      ctx.font = "13px Dosis, sans-serif";  // Vergrößerte Schrift
       ctx.textBaseline = "top";
 
       let maxWidth = 0;
@@ -184,7 +184,7 @@
 
     const squareSize = 20;
     const gap = 4;
-    const squaresPerRow = 15;
+    const squaresPerRow = 20;
 
     canvas.addEventListener("mousemove", (evt) => {
       const pos = getMousePos(canvas, evt);
