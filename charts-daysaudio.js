@@ -51,11 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getColorForMinutes(minutes) {
-        if (minutes >= 0 && minutes <= 60) return '#4CAF50'; // Grün
-        if (minutes >= 61 && minutes <= 120) return '#FFEB3B'; // Gelb
-        if (minutes >= 121 && minutes <= 180) return '#2196F3'; // Blau
-        if (minutes >= 181 && minutes <= 240) return '#F44336'; // Rot
-        if (minutes >= 241) return '#9C27B0'; // Lila
+        if (minutes >= 0 && minutes <= 60) return '#ff7256'; // Grün
+        if (minutes >= 61 && minutes <= 120) return '#FFB90F '; // Gelb
+        if (minutes >= 121 && minutes <= 180) return '#63b8ff'; // Blau
+        if (minutes >= 181 && minutes <= 240) return '#3CB371'; // Rot
+        if (minutes >= 241) return '#9370DB '; // Lila
         return '#CCCCCC'; // Default or unknown
     }
 

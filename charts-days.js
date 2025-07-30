@@ -51,11 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getColorForPages(pages) {
-        if (pages >= 0 && pages <= 50) return '#4CAF50'; // Grün
-        if (pages >= 51 && pages <= 70) return '#FFEB3B'; // Gelb
-        if (pages >= 71 && pages <= 100) return '#2196F3'; // Blau
-        if (pages >= 101 && pages <= 150) return '#F44336'; // Rot
-        if (pages >= 151) return '#9C27B0'; // Lila
+        if (pages >= 0 && pages <= 50) return '#ff7256'; // Grün
+        if (pages >= 51 && pages <= 70) return '#FFB90F'; // Gelb
+        if (pages >= 71 && pages <= 100) return '#63b8ff'; // Blau
+        if (pages >= 101 && pages <= 150) return '#3CB371 '; // Rot
+        if (pages >= 151) return '#9370DB '; // Lila
         return '#CCCCCC'; // Default or unknown
     }
 
@@ -147,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tooltip functionality
     let tooltip = null;
 
+    
     function showTooltip(x, y, date, value) {
         if (!tooltip) {
             tooltip = document.createElement('div');
