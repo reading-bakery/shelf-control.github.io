@@ -99,17 +99,20 @@
     });
 
     if (hoverIndex !== -1 && hoverData) {
-      const padding = 10;  // 40px links und rechts = 80px gesamt
-      const lineHeight = 25;
+      const padding = 10;
+      const lineSpacing = 6;
 
-      ctx.font = "bold 13px Dosis, sans-serif";
+      ctx.font = "bold 16px Dosis, sans-serif";
       const dateWidth = ctx.measureText(hoverData.date).width;
+      const dateHeight = 16;
 
-      ctx.font = "10px Dosis, sans-serif";
-      const pagesWidth = ctx.measureText(`${hoverData.pages} Seiten`).width;
+      ctx.font = "14px Dosis, sans-serif";
+      const pagesText = `${hoverData.pages} Seiten`;
+      const pagesWidth = ctx.measureText(pagesText).width;
+      const pagesHeight = 14;
 
-      const tooltipWidth = Math.max(dateWidth, pagesWidth) + 8 * padding; // max Textbreite + 80px padding
-      const tooltipHeight = 70; // 2 Zeilen à 20px + 80px padding = 120px
+      const tooltipWidth = Math.max(dateWidth, pagesWidth) + 2 * padding;
+      const tooltipHeight = dateHeight + pagesHeight + 3 * lineSpacing;
 
       let x = hoverPos.x + 10;
       let y = hoverPos.y - tooltipHeight - 10;
@@ -126,11 +129,11 @@
       ctx.fill();
 
       ctx.fillStyle = "#fff";
-      ctx.font = "bold 22px Dosis, sans-serif";
-      ctx.fillText(hoverData.date, x + padding, y + padding);
+      ctx.font = "bold 16px Dosis, sans-serif";
+      ctx.fillText(hoverData.date, x + padding, y + padding + dateHeight);
 
-      ctx.font = "22px Dosis, sans-serif";
-      ctx.fillText(`${hoverData.pages} Seiten`, x + padding, y + padding + lineHeight);
+      ctx.font = "14px Dosis, sans-serif";
+      ctx.fillText(pagesText, x + padding, y + padding + dateHeight + pagesHeight + lineSpacing);
     }
   }
 
@@ -191,14 +194,11 @@
     if (!legend) return;
 
     legend.innerHTML = "";
-    legend.style.marginTop = "auto";
-    legend.style.paddingTop = "5px";
     legend.style.display = "flex";
     legend.style.flexWrap = "wrap";
     legend.style.justifyContent = "center";
-    legend.style.gap = "5px";
+    legend.style.gap = "10px";
     legend.style.fontFamily = "Dosis, sans-serif";
-    legend.style.fontSize = "13px";
 
     legendItems.forEach(({ color, label }) => {
       const item = document.createElement("div");
@@ -207,11 +207,11 @@
       item.style.gap = "6px";
 
       const colorBox = document.createElement("div");
-      colorBox.style.width = "18px";
-      colorBox.style.height = "18px";
-      colorBox.style.borderRadius = "4px";
+      colorBox.style.width = "16px";
+      colorBox.style.height = "16px";
       colorBox.style.backgroundColor = color;
       colorBox.style.border = "1px solid #1f1f1f";
+      colorBox.style.borderRadius = "3px";
 
       const text = document.createElement("span");
       text.textContent = label;
