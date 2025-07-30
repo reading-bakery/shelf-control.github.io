@@ -9,11 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis:wght@200..800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style-site.css"> 
+    <link rel="stylesheet" href="style-site.css">
     <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="pie.css"> 
+    <link rel="stylesheet" href="pie.css">
 
-        <script src="navbar.js" defer></script>
+    <script src="navbar.js" defer></script>
     <script src="backtop.js" defer></script>
     <script src="toggle.js" defer></script>
     <script src="carousel.js" defer></script>
@@ -25,103 +25,18 @@
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
     <script src="currently.js" defer></script>
-    
-<style>
-    /* Zusätzliches Styling speziell für diese Seite und die Bildergallerie */
-    body {
-        background-color: #000; /* Schwarzer Hintergrund, wie in deinem CSS */
-        color: white; /* Weiße Schriftfarbe */
-        font-family: 'Dosis', sans-serif; /* Standard-Schriftart */
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh; /* Mindesthöhe des Bodys für Footer am unteren Rand */
-    }
 
-    .main-content {
-        flex-grow: 1; /* Lässt den Hauptinhalt den verfügbaren Platz einnehmen */
-        padding: 20px;
-        max-width: 1200px; /* Max. Breite für den Inhalt */
-        margin: 20px auto; /* Zentriert den Inhalt */
-        background-color: #1f1f1f; /* Hintergrundfarbe für den Inhaltsbereich */
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    h1 {
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 3em;
-        color: rgb(90, 165, 142);
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    .image-gallery {
-        display: flex;
-        flex-wrap: wrap; /* Erlaubt den Bildern, in die nächste Zeile umzubrechen */
-        justify-content: center; /* Zentriert die Bilder horizontal */
-        gap: 20px; /* Abstand zwischen den Bildern */
-        padding: 20px;
-        background-color: #2a2a2a; /* Leichterer Hintergrund für die Galerie */
-        border-radius: 8px;
-    }
-
-    .image-gallery img {
-        /* *** HIER WIRD DIE GRÖSSE ANGEPASST *** */
-        max-width: 100px; /* Maximale Breite für jedes Bild (auf 100px reduziert) */
-        height: auto; /* Höhe automatisch anpassen, um Seitenverhältnis zu bewahren */
-        /* ************************************** */
-
-        border: 2px solid rgb(90, 165, 142); /* Rahmen passend zum Thema */
-        border-radius: 8px; /* Leicht abgerundete Ecken */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .image-gallery img:hover {
-        transform: scale(1.05); /* Bild vergrößern beim Hover */
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Responsive Anpassungen */
-    @media (max-width: 768px) {
-        .main-content {
-            padding: 10px;
-            margin: 10px auto;
-        }
-        h1 {
-            font-size: 2.5em;
-        }
-        .image-gallery {
-            gap: 10px;
-            padding: 10px;
-        }
-        .image-gallery img {
-            max-width: 80px; /* Noch kleiner auf kleineren Bildschirmen */
-        }
-    }
-
-    @media (max-width: 480px) {
-        h1 {
-            font-size: 2em;
-        }
-        .image-gallery img {
-            max-width: 60px; /* Sehr klein auf sehr kleinen Bildschirmen */
-        }
-    }
-</style>
 
 </head>
 <body>
 
-    <nav class="navbar"> 
+    <nav class="navbar">
         <div class="box1">
             <a href="index.html" class="logohome">Shelf Control</a>
         </div>
 
         <ul class="nav-links" id="nav-links">
-            <li><a href="currently.html">Currently</a></li> 
+            <li><a href="currently.html">Currently</a></li>
             <li><a href="daily.html">Tracker</a></li>
             <li><a href="wishlist.html">Wunschliste</a></li>
             <li><a href="rachesub.html">SuB</a></li>
@@ -144,15 +59,11 @@
         </div>
     </nav>
 
-    <div class="main-content">
-        <h1>Aktuell gelesene Bücher</h1>
-        
-        <div id="currentlyImages" class="image-gallery">
-            <p>Lade Bilder...</p>
-        </div>
-    </div>
+    <main>
+        <h1>Currently Reading</h1>
+        <div id="currently-reading-books">
+            </div>
+    </main>
 
-
-
-    </body>
+</body>
 </html>
