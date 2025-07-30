@@ -99,17 +99,17 @@
     });
 
     if (hoverIndex !== -1 && hoverData) {
-      const padding = 10;
+      const padding = 8;
       const lineSpacing = 6;
 
-      ctx.font = "bold 16px Dosis, sans-serif";
+      ctx.font = "bold 14px Dosis, sans-serif";
       const dateWidth = ctx.measureText(hoverData.date).width;
-      const dateHeight = 16;
+      const dateHeight = 22;
 
       ctx.font = "14px Dosis, sans-serif";
       const pagesText = `${hoverData.pages} Seiten`;
       const pagesWidth = ctx.measureText(pagesText).width;
-      const pagesHeight = 14;
+      const pagesHeight = 22;
 
       const tooltipWidth = Math.max(dateWidth, pagesWidth) + 2 * padding;
       const tooltipHeight = dateHeight + pagesHeight + 3 * lineSpacing;

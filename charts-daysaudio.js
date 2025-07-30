@@ -108,64 +108,56 @@
       ctx.stroke();
     });
 
+    // Tooltip im Canvas zeichnen
     if (hoverIndex !== -1 && hoverData) {
-      const padding = 40;
+      const padding = 8;
+      const lineHeight = 18;
       const textLines = [
         `${hoverData.date}`,
         `${hoverData.pages} Minuten`
       ];
 
-      ctx.font = "13px Dosis, sans-serif";  // Vergrößerte Schrift
+      ctx.font = "13px Dosis, sans-serif";
       ctx.textBaseline = "top";
 
+      // Max Textbreite ermitteln
       let maxWidth = 0;
       textLines.forEach(line => {
         const w = ctx.measureText(line).width;
         if (w > maxWidth) maxWidth = w;
       });
-      const lineHeight = 20;
+
       const tooltipWidth = maxWidth + padding * 2;
       const tooltipHeight = lineHeight * textLines.length + padding * 2;
 
-      let tooltipX = hoverPos.x;
-      let tooltipY = hoverPos.y - tooltipHeight - 10;
+      const squareCenterX = hoverPos.x + squareSize / 2;
+      const squareTopY = hoverPos.y;
 
-      if (tooltipY < 0) {
-        tooltipY = hoverPos.y + 10;
+      // Tooltip über Quadrat positionieren
+      let tooltipX = squareCenterX - tooltipWidth / 2;
+      let tooltipY = squareTopY - tooltipHeight - 6; // 6px Abstand
+
+      // Begrenzungen prüfen, damit Tooltip nicht aus Canvas raus geht
+      if (tooltipX < gap) tooltipX = gap;
+      if (tooltipX + tooltipWidth > canvas.width / dpr - gap) {
+        tooltipX = canvas.width / dpr - tooltipWidth - gap;
       }
 
-      let tooltip = document.getElementById("tooltip");
-      if (!tooltip) {
-        tooltip = document.createElement("div");
-        tooltip.id = "tooltip";
-        tooltip.style.position = "absolute";
-        tooltip.style.background = "rgba(0, 0, 0, 0.8)";
-        tooltip.style.color = "#fff";
-        tooltip.style.padding = "6px 8px";
-        tooltip.style.borderRadius = "5px";
-        tooltip.style.pointerEvents = "none";
-        tooltip.style.fontSize = "13px";
-        tooltip.style.fontFamily = "Dosis, sans-serif";
-        tooltip.style.zIndex = "10";
-        document.body.appendChild(tooltip);
+      // Wenn oben kein Platz, Tooltip unter das Quadrat setzen
+      if (tooltipY < gap) {
+        tooltipY = squareTopY + squareSize + 6;
       }
 
-      // Hier Datum fett machen:
-      tooltip.innerHTML = textLines.map((line, i) => 
-        i === 0 
-          ? `<div style="font-weight:bold;">${line}</div>` 
-          : `<div>${line}</div>`
-      ).join('');
+      // Hintergrund Tooltip
+      ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
+      roundRect(ctx, tooltipX, tooltipY, tooltipWidth, tooltipHeight, 5);
+      ctx.fill();
 
-      const canvasRect = canvas.getBoundingClientRect();
-      tooltip.style.left = (canvasRect.left + tooltipX) + "px";
-      tooltip.style.top = (canvasRect.top + tooltipY) + "px";
-      tooltip.style.display = "block";
-    } else {
-      const tooltip = document.getElementById("tooltip");
-      if (tooltip) {
-        tooltip.style.display = "none";
-      }
+      // Text Tooltip
+      ctx.fillStyle = "white";
+      textLines.forEach((line, i) => {
+        ctx.fillText(line, tooltipX + padding, tooltipY + padding + i * lineHeight);
+      });
     }
   }
 
@@ -211,75 +203,27 @@
       if (hoverIndex !== index) {
         hoverIndex = index;
         hoverData = data[index];
-        hoverPos = {
-          x: gap + (col) * (squareSize + gap),
-          y: gap + row * (squareSize + gap)
-        };
+        hoverPos.x = gap + col * (squareSize + gap);
+        hoverPos.y = gap + row * (squareSize + gap);
         drawSquares(data);
       }
     });
 
     canvas.addEventListener("mouseleave", () => {
-      if (hoverIndex !== -1) {
-        hoverIndex = -1;
-        hoverData = null;
-        drawSquares(data);
-      }
+      hoverIndex = -1;
+      hoverData = null;
+      drawSquares(data);
     });
   }
 
-  function createLegend() {
-    const legend = document.getElementById("legendaudiodays");
-    if (!legend) return;
-
-    legend.innerHTML = "";
-    legend.style.marginTop = "auto";
-    legend.style.paddingTop = "5px";
-    legend.style.display = "flex";
-    legend.style.flexWrap = "wrap";
-    legend.style.justifyContent = "center";
-    legend.style.gap = "5px";
-    legend.style.fontFamily = "Dosis, sans-serif";
-    legend.style.fontSize = "13px";
-    legend.style.alignItems = "center";
-    legendItems.forEach(({ color, label }) => {
-      const item = document.createElement("div");
-      item.style.display = "flex";
-      item.style.alignItems = "center";
-      item.style.gap = "6px";
-
-      const colorBox = document.createElement("div");
-      colorBox.style.width = "18px";
-      colorBox.style.height = "18px";
-      colorBox.style.borderRadius = "4px";
-      colorBox.style.backgroundColor = color;
-      colorBox.style.border = "1px solid #555";
-      colorBox.style.borderColor = "#1f1f1f";
-
-      const text = document.createElement("span");
-      text.textContent = label;
-
-      item.appendChild(colorBox);
-      item.appendChild(text);
-      legend.appendChild(item);
-    });
-  }
-  async function main() {
-    createLegend();
-
-    try {
-      const response = await fetch(csvUrl);
-      if (!response.ok) throw new Error("Netzwerkfehler beim Laden der CSV");
-
-      const text = await response.text();
+  fetch(csvUrl)
+    .then(res => res.text())
+    .then(text => {
       const data = parseCSV(text);
-
       drawSquares(data);
       setupHover(data);
-    } catch (error) {
-      console.error("Fehler beim Laden oder Verarbeiten der Daten:", error);
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", main);
+    })
+    .catch(err => {
+      console.error("Fehler beim Laden der CSV-Daten:", err);
+    });
 })();
