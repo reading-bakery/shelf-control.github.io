@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         minuten: daten.format === 'Hörbuch' ? neuerWert : daten.letzterStand.minuten
       };
 
-      zeigeStatus('Eintrag erfolgreich gespeichert.😍', false);
+      zeigeStatus('Eintrag erfolgreich gespeichert. 😍', false);
       form.reset();
     } catch (error) {
       zeigeStatus('Fehler beim Senden: ' + error.message, true);
