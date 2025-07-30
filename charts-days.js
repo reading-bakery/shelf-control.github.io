@@ -128,11 +128,13 @@
       roundRect(ctx, x, y, tooltipWidth, tooltipHeight, 10);
       ctx.fill();
 
+      // Datum fett und Größe 18
       ctx.fillStyle = "#fff";
-      ctx.font = "bold 16px Dosis, sans-serif";
+      ctx.font = "bold 18px Dosis, sans-serif";
       ctx.fillText(hoverData.date, x + padding, y + padding + dateHeight);
 
-      ctx.font = "14px Dosis, sans-serif";
+      // Seiten normale Schriftgröße 17
+      ctx.font = "17px Dosis, sans-serif";
       ctx.fillText(pagesText, x + padding, y + padding + dateHeight + pagesHeight + lineSpacing);
     }
   }

@@ -111,31 +111,35 @@
     // Tooltip im Canvas zeichnen
     if (hoverIndex !== -1 && hoverData) {
       const padding = 8;
-      const lineHeight = 18;
-      const textLines = [
-        `${hoverData.date}`,
-        `${hoverData.pages} Minuten`
-      ];
+      const dateFontSize = 18;
+      const minutesFontSize = 17;
+      const lineHeightDate = dateFontSize + 4;   // etwas Abstand
+      const lineHeightMinutes = minutesFontSize + 4;
 
-      ctx.font = "13px Dosis, sans-serif";
-      ctx.textBaseline = "top";
+      const textLines = [
+        { text: `${hoverData.date}`, fontSize: dateFontSize, fontWeight: "bold" },
+        { text: `${hoverData.pages} Minuten`, fontSize: minutesFontSize, fontWeight: "normal" }
+      ];
 
       // Max Textbreite ermitteln
       let maxWidth = 0;
+
+      // Erst Font setzen, dann messen
       textLines.forEach(line => {
-        const w = ctx.measureText(line).width;
+        ctx.font = `${line.fontWeight} ${line.fontSize}px Dosis, sans-serif`;
+        const w = ctx.measureText(line.text).width;
         if (w > maxWidth) maxWidth = w;
       });
 
       const tooltipWidth = maxWidth + padding * 2;
-      const tooltipHeight = lineHeight * textLines.length + padding * 2;
+      const tooltipHeight = lineHeightDate + lineHeightMinutes + padding * 2;
 
       const squareCenterX = hoverPos.x + squareSize / 2;
       const squareTopY = hoverPos.y;
 
       // Tooltip über Quadrat positionieren
       let tooltipX = squareCenterX - tooltipWidth / 2;
-      let tooltipY = squareTopY - tooltipHeight - 6; // 6px Abstand
+      let tooltipY = squareTopY - tooltipHeight - 8; // 6px Abstand
 
       // Begrenzungen prüfen, damit Tooltip nicht aus Canvas raus geht
       if (tooltipX < gap) tooltipX = gap;
@@ -154,9 +158,12 @@
       ctx.fill();
 
       // Text Tooltip
-      ctx.fillStyle = "white";
-      textLines.forEach((line, i) => {
-        ctx.fillText(line, tooltipX + padding, tooltipY + padding + i * lineHeight);
+      let textY = tooltipY + padding;
+      textLines.forEach(line => {
+        ctx.font = `${line.fontWeight} ${line.fontSize}px Dosis, sans-serif`;
+        ctx.fillStyle = "white";
+        ctx.fillText(line.text, tooltipX + padding, textY);
+        textY += line.fontSize + 4;
       });
     }
   }
