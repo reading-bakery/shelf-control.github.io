@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Challenges</title>
@@ -10,26 +9,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis:wght@200..800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="challenge.css">  
-    <link rel="stylesheet" href="navbar.css"> 
+    <link rel="stylesheet" href="challenge.css">
+    <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="pie.css"> 
 
-    <script src="toggle.js" defer></script>
-    <script src="navbar.js" defer></script>
-    <script src="backtop.js" defer></script>
-    <script src="challenge.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
+    <script src="utils.js" defer></script>
+    <script src="challenge-agatha.js" defer></script>
+    <script src="challenge-books.js" defer></script>
+    <script src="challenge-seiten.js" defer></script>
+    <script src="challenge-minuten.js" defer></script>
+
 
 </head>
 <body>
 
     <nav class="navbar"> 
-                    
         <div class="box1">
             <a href="index.html" class="logohome">Shelf Control</a>
         </div>
-
         <ul class="nav-links" id="nav-links">
-            
             <li><a href="currently.html">Currently</a></li> 
             <li><a href="daily.html">Tracker</a></li>
             <li><a href="wishlist.html">Wunschliste</a></li>
@@ -39,9 +38,7 @@
             <li><a href="recap.html">Statistik</a></li>
             <li><a href="https://docs.google.com/spreadsheets/d/1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE/edit?gid=1702643479#gid=1702643479">Lager</a></li>
             <li><a href="addnewbook.html">Buch hinzufügen</a></li>
-
         </ul>
-
         <div class="toggle-button" id="toggle-button">
             <span id="menu-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
@@ -52,188 +49,121 @@
                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
             </svg>
         </div>
-
     </nav>
 
+    <main>
+        <h1>Challenges</h1>
 
     <h1>Challenges</h1>
 
-    <div class="grid">
-
-      <div class="card">
-            <h2>Leseziele</h2>
-            <img src="images/die-erfindung-der-fluegel.png" alt="Erfing-Flügel" width="50%" height="auto">
-      </div>
-
-        <div class="card">
-            <h2>12 Books in 12 Months</h2>
-            <div class="grid-thumb">
-                <div class="covers">
-                    <img src="images/die-erfindung-der-fluegel.png" alt="thumb1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
+        <div class="ziele-container">
+        <h2>Leseziele</h2>
+        <div class="grid-ziel">
+            <div class="challenge-container">
+                <div id="books-circle"></div> 
+            </div>
+            <hr>
+            <div class="challenge-container">
+                <div id="pages-circle"></div>
+            </div>
+            <hr>
+            <div class="challenge-container">
+                <div id="minutes-circle"></div>
             </div>
         </div>
+        </div>
 
-      <div class="card">
-            <h2>ABC Challenge</h2>
-            <p>dfasdfdf</p>
-      </div>
 
-      <div class="card">
-            <h2>Bingo</h2>
-            <p>dfasdfdf</p>
-      </div>
+        <br>
 
-      <div class="card">
-            <h2>Agatha Christie Challenge</h2>
-            <div class="grid-thumb">
-                <div class="covers">
-                    <img src="images/agatha/das-unvollendete-bildnis.jpg" alt="thumb">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
+        <div class="grid">
+            <div class="card">
+                <h2>12 Books in 12 Months</h2>
+                <div class="grid-thumb">
+                    <div class="covers">
+                        <img src="images/die-erfindung-der-fluegel.jpg" alt="thumb1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                            <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                            <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
                 </div>
-            
-
-                <div class="covers">
-                    <img src="images/agatha/das-fahle-pferd.jpg" alt="thumb">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers">
-                    <img src="images/agatha/tragoedie-in-drei-akten.jpg" alt="thumb">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers">
-                    <img src="images/agatha/der-letzte-joker.jpg" alt="thumb">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers">
-                    <img src="images/agatha/mit-offenen-karten.jpg" alt="thumb">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers">
-                    <img src="images/agatha/das-krumme-haus.jpg" alt="thumb">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers">
-                    <img src="images/agatha/mord-in-mesopotamien.jpg" alt="thumb">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers">
-                    <img src="images/agatha/das-geheimnis-der-schnallenschuhe.jpg" alt="thumb">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers">
-                    <img src="images/agatha/bertrams-hotel.jpg" alt="thumb">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers">
-                    <img src="images/agatha/kurz-vor-mitternacht.jpg" alt="thumb">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers">
-                    <img src="images/agatha/die-katze-im-taubenschlag.jpg" alt="thumb">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers">
-                    <img src="images/agatha/n-oder-m.jpg" alt="thumb">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
             </div>
 
-      </div>
+            <div class="card">
+                <h2>Agatha Christie Challenge</h2>
+                <div class="grid-thumb">
+                    <div class="covers">
+                        <img src="images/die-erfindung-der-fluegel.jpg" alt="thumb1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                            <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                            <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
 
-      <div class="card">
-            <h2>Monatschallenge</h2>
-            <p>dfasdfdf</p>
-      </div>
+             <div class="card">
+                <h2>Bingo</h2>
+                <div class="grid-thumb">
+                    <div class="covers">
+                        <img src="images/die-erfindung-der-fluegel.jpg" alt="thumb1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                            <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                            <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>ABC Challenge</h2>
+                <div class="grid-thumb">
+                    <div class="covers">
+                        <img src="images/die-erfindung-der-fluegel.jpg" alt="thumb1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                            <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                            <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Monatchallenge</h2>
+                <div class="grid-thumb">
+                    <div class="covers">
+                        <img src="images/die-erfindung-der-fluegel.jpg" alt="thumb1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                            <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                            <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+
+    </main>
 
 
 
     <div class="top-button">
-        
         <button id="backToTop">
-            
             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
             </svg>
-
-        </button>  
-
-        <script>
-            window.onscroll = function() {
-                var button = document.getElementById("backToTop");
-                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                    button.style.display = "block";
-                } else {
-                    button.style.display = "none";
-                }
-            };
-        
-            document.getElementById("backToTop").onclick = function() {
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            };
-        </script>
-        
+        </button>
     </div>
-
-
-</div>
 
     <footer>
         <p>&copy; 2025 Katharina | Impressum</p>
     </footer>
-
-
 
 
 

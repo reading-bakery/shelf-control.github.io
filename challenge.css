@@ -1,160 +1,166 @@
-    .dosis {
-        font-family: "Dosis", sans-serif;
-        font-weight: 800;
-        font-style: normal;
-    }
-    
-    .bebas-neue-regular {
-        font-family: "Bebas Neue", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-    }
+/* Grundlegende Typografie und Layout */
+.dosis {
+    font-family: "Dosis", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+}
+.bebas-neue-regular {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
 
-    body {
-      margin: 0;
-      font-family: "Dosis", sans-serif;
-      background-color: #121212;
-      color: #ffffff;
-      line-height: 1.6;
-    }
+body {
+    margin: 0;
+    font-family: "Dosis", sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    line-height: 1.6;
+}
 
+main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px; /* Innenabstand für kleinere Bildschirme */
+}
 
-    footer {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #888;
-    margin-top: 3rem;
-    }
-
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .grid-thumb {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        gap: 1.3rem;
-        padding: 10px;
-        padding-bottom: 20px;
-    }
-
-    .card {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        font-family: "Bebas Neue", sans-serif;
-        background-color: #1f1f1f;
-        border-radius: 8px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        height: 100%; 
-        padding: 0rem;
-        box-sizing: border-box;
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    .card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    a {
-        text-decoration: none;
-        color: whitesmoke;
-    }
-
-    .covers {
-        position: relative;
-        display: inline-block;
-    }
-
-    .covers img {
-        display: block;
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-        cursor: pointer;
-    }
-
-    .covers svg {
-        position: absolute;
-        bottom: -10px;
-        right: -12px;
-        cursor: pointer;
-    }
-
-    h1 {
+h1 {
     font-family: "Bebas Neue", sans-serif;
     font-size: 3rem;
     letter-spacing: 2px;
     text-align: center;
     margin-bottom: 2rem;
     color: khaki; 
-    }
+}
 
-    h2 {
+h2 {
     font-family: "Bebas Neue", sans-serif;
     font-size: 2.25rem;
     letter-spacing: 2px;
     text-align: center;
     margin-bottom: 2rem;
     color: rgb(216, 215, 237); 
-    }
+}
 
-    p {
-        font-family: "Dosis", sans-serif;
-        font-size: 1rem;
-        letter-spacing: 2px;
-        text-align: center;
-        margin-bottom: 2rem;
-        color: whitesmoke; 
-    }
+p {
+    font-family: "Dosis", sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: whitesmoke; 
+}
+
+/* Container-Stile */
+.ziele-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    padding: 20px 0;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+.ziele-container:hover,
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.grid-ziel {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px; /* Zusätzlicher horizontaler Abstand, falls nötig */
+    box-sizing: border-box;
+}
+
+hr {
+    border: none;
+    background-color: rgb(92, 83, 83); /* Helle Trennlinie */
+    width: 2px;
+    height: 150px; /* Höhe der Linie anpassen */
+    margin: 0 1rem;
+}
+
+/* Fortschrittskreise-Stil */
+.challenge-container {
+    width: 25vw;
+    max-width: 200px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
 
 
-    .top-button {
-            display: flex;
-        }
+/* Andere Grid- und Karten-Stile */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin: 10px 0;
+}
+/* ... weitere Stile ... */
 
-    #backToTop {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: none;
-      padding: 10px;
-      background-color: rgb(224, 224, 87);
-      color: black;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      height: auto; 
-    }
+.top-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
 
-    #backToTop:hover {
-      background-color: #4b0606;
-      color: white;
-    }
+#backToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  padding: 10px;
+  background-color: rgb(224, 224, 87);
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  height: auto; 
+}
 
-    
-    @media (max-width: 1024px) {
-      .grid {
+#backToTop:hover {
+  background-color: #4b0606;
+  color: white;
+}
+
+.card {
+  background-color: #1f1f1f;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .grid {
         grid-template-columns: 1fr 1fr;
-      }
     }
-
-    @media (max-width: 600px) {
-      .grid {
+}
+@media (max-width: 600px) {
+    .grid-ziel {
+        flex-direction: column;
+    }
+    hr {
+        width: 80%; /* Horizontale Linie auf kleinen Bildschirmen */
+        height: 2px;
+        margin: 20px 0;
+    }
+    .challenge-container {
+        width: 60vw;
+    }
+    .grid {
         grid-template-columns: 1fr;
-      }
-
-      .grid-thumb {
-        grid-template-columns: 2fr;
-      }
-
     }
+}
 
-
+/* ... andere Media Queries ... */
