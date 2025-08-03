@@ -169,11 +169,6 @@ body {
     font-size: 8px;
 }
 
-.ziele-container:hover {
-    transform: scale(1.01);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-}
-
 .grid-ziel {
     display: flex;
     justify-content: space-around;
