@@ -1,55 +1,33 @@
-(async () => {
-  const url = "https://script.google.com/macros/s/AKfycbwqNu3uGrCzzhMshApOwukufr0eZjljl9rwSA0FOl-fzmeBCX8-J3Fw3mPrFPkrv61cFA/exec";
-  const response = await fetch(url);
-  const json = await response.json();
-  const data = json.data;
+document.addEventListener("DOMContentLoaded", () => {
+  const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=601378467&single=true&output=csv";
 
-  // Map: Buch → Status
-  const statusMap = {};
-  data.forEach(entry => {
-    const title = entry.Buch?.trim();
-    const status = entry.Gelesen?.trim();
-    if (title && status) {
-      statusMap[title] = status;
-    }
-  });
+  // Farbzuordnung
+  const STATUS_COLORS = {
+    "YES": "#e63946",  // Rot für gelesen
+    "NO": "#6c757d",   // Grau für ungelesen
+    "ABBR": "#2a9d8f"  // Grün für abgebrochen
+  };
 
-  const covers = document.querySelectorAll('#agatha-challenge .covers');
+  fetch(CSV_URL)
+    .then(response => response.text())
+    .then(csv => {
+      const lines = csv.trim().split("\n").slice(1); // Header überspringen
+      const statusMap = new Map();
 
-  covers.forEach(cover => {
-    const title = cover.getAttribute("data-title");
-    const status = statusMap[title];
+      for (const line of lines) {
+        const [title, status] = line.split(",").map(s => s.trim());
+        statusMap.set(title, status);
+      }
 
-    // Bild- und SVG-Elemente finden
-    const img = cover.querySelector("img");
-    const svg = cover.querySelector("svg");
+      document.querySelectorAll(".covers").forEach(cover => {
+        const title = cover.getAttribute("data-title");
+        const svg = cover.querySelector("svg");
+        const status = statusMap.get(title);
 
-    // Reset CSS
-    img.style.filter = "";
-    svg?.querySelectorAll("path").forEach(p => p.style.fill = "");
-
-    if (status === "YES") {
-      // Cover farbig, SVG rot
-      img.style.filter = "none";
-      svg?.querySelectorAll("path").forEach(p => p.style.fill = "red");
-    } else if (status === "NO") {
-      // Cover in Graustufen, SVG bleibt standard
-      img.style.filter = "grayscale(100%)";
-    } else if (status === "ABBR") {
-      // Cover farbig, SVG grün
-      img.style.filter = "none";
-      svg?.querySelectorAll("path").forEach(p => p.style.fill = "green");
-    }
-  });
-
-  // Legende unten einfügen
-  const legend = document.createElement("div");
-  legend.innerHTML = `
-    <div style="font-family: 'Dosis', sans-serif; font-size: 12px; text-align: center; margin-top: 10px;">
-      <span style="color: red;">●</span> Gelesen (YES) &nbsp;
-      <span style="color: green;">●</span> Abgebrochen (ABBR) &nbsp;
-      <span style="color: gray;">●</span> Noch nicht gelesen (NO)
-    </div>
-  `;
-  document.getElementById("agatha-challenge").appendChild(legend);
-})();
+        if (svg && status && STATUS_COLORS[status]) {
+          svg.style.color = STATUS_COLORS[status];
+        }
+      });
+    })
+    .catch(error => console.error("Fehler beim Laden der CSV-Daten:", error));
+});

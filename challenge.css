@@ -67,8 +67,9 @@ p {
     font-family: 'Dosis', sans-serif;
     font-size: 12px;
     text-align: center;
-    color: #aaa;
+    color: whitesmoke;
     margin-top: -5px;
-    margin-bottom: 10px;
+    margin-bottom:5px;
     letter-spacing: 0.5px;
+    background-color: blue;
 }
