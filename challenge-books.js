@@ -27,7 +27,7 @@ async function loadDataAndRender() {
 }
 
 function renderProgressCircle(current, goal) {
-  const percent = ((current / goal) * 100).toFixed(1); // kein cap bei 100%
+  const percent = ((current / goal) * 100).toFixed(1); // Prozent, z.B. 43.2
 
   const container = document.getElementById('books-circle');
   container.innerHTML = "";
@@ -36,7 +36,7 @@ function renderProgressCircle(current, goal) {
   const strokeWidth = 30;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
-  const offset = circumference * (1 - Math.min(percent, 100) / 100); // Fortschrittskreis max. 100%
+  const offset = circumference * (1 - Math.min(percent, 100) / 100);
 
   const svgns = "http://www.w3.org/2000/svg";
 
@@ -46,6 +46,7 @@ function renderProgressCircle(current, goal) {
   svg.style.transform = "rotate(-90deg)";
   svg.style.filter = "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2))";
 
+  // Hintergrundkreis
   const bgCircle = document.createElementNS(svgns, "circle");
   bgCircle.setAttribute("cx", size / 2);
   bgCircle.setAttribute("cy", size / 2);
@@ -54,11 +55,34 @@ function renderProgressCircle(current, goal) {
   bgCircle.setAttribute("stroke-width", strokeWidth);
   bgCircle.setAttribute("fill", "none");
 
+  // Farbverlauf definieren
+  const defs = document.createElementNS(svgns, "defs");
+  const linearGradient = document.createElementNS(svgns, "linearGradient");
+  linearGradient.setAttribute("id", "coralGradient");
+  linearGradient.setAttribute("x1", "0%");
+  linearGradient.setAttribute("y1", "0%");
+  linearGradient.setAttribute("x2", "100%");
+  linearGradient.setAttribute("y2", "0%");
+
+  const stop1 = document.createElementNS(svgns, "stop");
+  stop1.setAttribute("offset", "0%");
+  stop1.setAttribute("stop-color", "#ff7f50");  // helleres Koralle
+
+  const stop2 = document.createElementNS(svgns, "stop");
+  stop2.setAttribute("offset", "100%");
+  stop2.setAttribute("stop-color", "#ff4c26");  // dunkleres Koralle
+
+  linearGradient.appendChild(stop1);
+  linearGradient.appendChild(stop2);
+  defs.appendChild(linearGradient);
+  svg.appendChild(defs);
+
+  // Fortschrittskreis mit Farbverlauf
   const progressCircle = document.createElementNS(svgns, "circle");
   progressCircle.setAttribute("cx", size / 2);
   progressCircle.setAttribute("cy", size / 2);
   progressCircle.setAttribute("r", radius);
-  progressCircle.setAttribute("stroke", "#ff7256");
+  progressCircle.setAttribute("stroke", "url(#coralGradient)");
   progressCircle.setAttribute("stroke-width", strokeWidth);
   progressCircle.setAttribute("fill", "none");
   progressCircle.setAttribute("stroke-dasharray", circumference);
@@ -66,6 +90,7 @@ function renderProgressCircle(current, goal) {
   progressCircle.setAttribute("stroke-linecap", "round");
   progressCircle.style.transition = "stroke-dashoffset 1s ease";
 
+  // Textgruppe (zentriert und zurückrotiert)
   const textGroup = document.createElementNS(svgns, "g");
   textGroup.setAttribute("transform", `translate(${size / 2}, ${size / 2}) rotate(90)`);
 
@@ -83,7 +108,7 @@ function renderProgressCircle(current, goal) {
   textLine2.setAttribute("font-size", "12");
   textLine2.setAttribute("font-family", "Dosis, sans-serif");
   textLine2.setAttribute("fill", "white");
-  textLine2.textContent = `Büchern erreicht`;
+  textLine2.textContent = `Büchern erreicht.`;
 
   const textPercent = document.createElementNS(svgns, "text");
   textPercent.setAttribute("text-anchor", "middle");
