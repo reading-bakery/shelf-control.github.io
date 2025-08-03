@@ -1,41 +1,24 @@
-.dosis {
-    font-family: "Dosis", sans-serif;
-    font-weight: 800;
-    font-style: normal;
-}
-.bebas-neue-regular {
-    font-family: "Bebas Neue", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-body {
-  font-family: 'Dosis', sans-serif;
-  color: white;
-  background-color: #000; 
-}
-
-
-h1 {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: clamp(2rem, 5vw, 3rem);
-    letter-spacing: 2px;
-    text-align: center;
-    margin: 2rem 0;
-    color: var(--color-accent-khaki);
-    /* Verhindert, dass eine lange Überschrift über den Rand hinausgeht */
-    word-break: break-word;
-}
-
 h2 {
     font-family: "Bebas Neue", sans-serif;
-    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-size: 3rem;
     letter-spacing: 2px;
     text-align: center;
-    margin: 2rem 0;
-    color: rgb(165, 184, 201);
-    word-break: break-word;
+    margin-bottom: 2rem;
+    color: khaki; 
 }
+
+h3 {
+    min-height: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 2.25rem;
+    color: rgb(165, 184, 201);
+    margin: 10px;
+    font-family: "Bebas Neue", sans-serif;
+}
+
 
 p {
     font-family: "Dosis", sans-serif;
@@ -45,149 +28,5 @@ p {
     margin-bottom: 2rem;
     color: var(--color-text-secondary);
     word-break: break-word;
-}
-
-
-.ziele-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--color-surface);
-    border-radius: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 100%;
-    padding: 1.5rem 0;
-    margin-bottom: 1rem;
-    box-sizing: border-box;
-}
-
-.ziele-container:hover,
-.card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-}
-
-.grid-ziel {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    padding: 0 1rem;
-    box-sizing: border-box;
-    flex-wrap: wrap; 
-}
-
-hr {
-    border: none;
-    background-color: var(--color-divider);
-    width: 2px;
-    height: 150px;
-    margin: 0 1rem;
-}
-
-.challenge-container {
-    width: 100%;
-    max-width: 200px;
-    aspect-ratio: 1 / 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    margin: 1rem 0;
-    box-sizing: border-box;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin: 10px 0;
-    box-sizing: border-box;
-}
-
-.card {
-    background-color: var(--color-surface);
-    border-radius: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-sizing: border-box;
-}
-
-.grid-thumb .covers img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 5px;
-}
-
-.grid-thumb {
-    text-align: center;
-    padding: 1rem;
-}
-
-
-#backToTop {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none;
-    padding: 10px;
-    background-color: var(--color-button-primary);
-    color: black;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    height: auto;
-    font-size: 1.5rem;
-    z-index: 999;
-}
-
-#backToTop:hover {
-    background-color: var(--color-button-hover);
-    color: white;
-}
-
-footer {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #888;
-  margin-top: 3rem;
-}
-
-@media (max-width: 1024px) {
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-
-
-    .grid-ziel {
-        flex-direction: column;
-    }
-
-    hr {
-        width: 80%;
-        height: 2px;
-        margin: 20px 0;
-    }
-    
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-
-    h1 {
-        font-size: 2.5rem;
-    }
-    h2 {
-        font-size: 2rem;
-    }
-    p {
-        font-size: 0.9rem;
-    }
 }
 

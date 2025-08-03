@@ -23,6 +23,7 @@
   position: relative;
 }
 
+
 .pie, 
 .pie-container {
   display: flex;
@@ -41,12 +42,41 @@
   margin: 0 auto;
 }
 
+.ziele-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    padding: 1.5rem 0;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+.challenge-container {
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 1rem 0;
+    box-sizing: border-box;
+    background-color: #1f1f1f;
+    font-family: "Bebas Neue", sans-serif;
+}
+
 .pie-pixel:hover,
 .pie:hover,
 .pie-container:hover {
     transform: scale(1.02);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
+
 
 .pie-pixel h3, 
 .pie h3, 
@@ -59,6 +89,7 @@
     font-size: 2.25rem;
     color: rgb(165, 184, 201);
     margin: 10px;
+    font-family: "Neue Bebas" sans-serif;
 }
 
 canvas {
@@ -136,6 +167,52 @@ body {
 .legenddays {
     font-family: "Dosis", sans-serif;
     font-size: 8px;
+}
+
+.ziele-container:hover {
+    transform: scale(1.01);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.grid-ziel {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    flex-wrap: wrap; 
+    background-color: #1f1f1f;
+}
+
+hr {
+    border: none;
+    background-color: aliceblue;
+    width: 2px;
+    height: 150px;
+    margin: 0 1rem;
+}
+
+.card {
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.grid-thumb .covers img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+.grid-thumb {
+    text-align: center;
+    padding: 1rem;
 }
 
 .carousel-container {
@@ -228,10 +305,24 @@ body {
 @media (max-width: 940px) {
     .grid {
         grid-template-columns: repeat(2, 1fr);
+        }
     }
-}
 
 @media (max-width: 740px) {
+    .grid-ziel {
+        flex-direction: column;
+    }
+
+    hr {
+        width: 80%; /* Beispiel: 80% Breite des Containers */
+        height: 2px; /* Setzt die Höhe auf eine dünne Linie */
+        margin: 20px 0; /* Fügt vertikalen Abstand hinzu */
+        background-color: aliceblue; /* Behält die Farbe bei */
+        border: none;
+        }
+    
+
+
     .grid {
         grid-template-columns: 1fr;
     }
@@ -250,5 +341,5 @@ body {
         max-height: 100%;
     }
 
-}
+  }
 
