@@ -58,8 +58,7 @@
     if (!container) return;
     container.innerHTML = "";
 
-    // === WICHTIGE ÄNDERUNG: Größe wird dynamisch vom Container übernommen ===
-    const size = container.offsetWidth; 
+    const size = 200;
     const strokeWidth = 30;
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
