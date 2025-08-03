@@ -78,9 +78,6 @@ p {
     word-break: break-word;
 }
 
-/* ========================================================= */
-/* Container- und Karten-Stile */
-/* ========================================================= */
 
 .ziele-container {
     display: flex;
@@ -161,9 +158,6 @@ hr {
     padding: 1rem;
 }
 
-/* ========================================================= */
-/* Scroll-Button */
-/* ========================================================= */
 
 #backToTop {
     position: fixed;
@@ -201,8 +195,9 @@ footer {
 
 @media (max-width: 600px) {
     main {
-        padding: 0 0.5rem;
+      width: 100%;
     }
+
 
     .grid-ziel {
         flex-direction: column;
@@ -214,9 +209,6 @@ footer {
         margin: 20px 0;
     }
     
-    .challenge-container {
-        max-width: 150px; 
-    }
 
     .grid {
         grid-template-columns: 1fr;
