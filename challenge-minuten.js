@@ -83,7 +83,7 @@
 
     const stop1 = document.createElementNS(svgns, "stop");
     stop1.setAttribute("offset", "0%");
-    stop1.setAttribute("stop-color", "#022339ff"); // Dunklerer Blauton
+    stop1.setAttribute("stop-color", "#023557ff"); // Dunklerer Blauton
 
     const stop2 = document.createElementNS(svgns, "stop");
     stop2.setAttribute("offset", "100%");

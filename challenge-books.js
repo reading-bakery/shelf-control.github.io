@@ -66,7 +66,7 @@ function renderProgressCircle(current, goal) {
 
   const stop1 = document.createElementNS(svgns, "stop");
   stop1.setAttribute("offset", "0%");
-  stop1.setAttribute("stop-color", "#541608ff");  // dunkleres Koralle
+  stop1.setAttribute("stop-color", "#92230bff");  // dunkleres Koralle
 
   const stop2 = document.createElementNS(svgns, "stop");
   stop2.setAttribute("offset", "100%");

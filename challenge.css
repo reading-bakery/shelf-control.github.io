@@ -30,3 +30,45 @@ p {
     word-break: break-word;
 }
 
+.grid-thumb {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    padding: 1rem;
+    gap: 15px;
+}
+
+
+.grid-thumb .covers img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+
+.grid-thumb .covers {
+    position: relative; /* Referenz für das SVG */
+}
+
+.grid-thumb .covers svg {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 45px;
+    height: 45px;
+    color: grey; /* Farbe der Plakette */
+    background-color: rgba(0, 0, 0, 0.6); /* Optional: Hintergrund für Lesbarkeit */
+    border-radius: 50%; /* Optional: runde Hintergrundfläche */
+    padding: 4px; /* Optional: etwas Innenabstand */
+}
+
+.legend {
+    font-family: 'Dosis', sans-serif;
+    font-size: 12px;
+    text-align: center;
+    color: #aaa;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}

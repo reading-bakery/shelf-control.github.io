@@ -187,7 +187,7 @@ body {
 
 hr {
     border: none;
-    background-color: aliceblue;
+    background-color: rgb(253, 247, 192);
     width: 2px;
     height: 150px;
     margin: 0 1rem;
@@ -203,17 +203,7 @@ hr {
     box-sizing: border-box;
 }
 
-.grid-thumb .covers img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 5px;
-}
 
-.grid-thumb {
-    text-align: center;
-    padding: 1rem;
-}
 
 .carousel-container {
   display: flex;
@@ -317,7 +307,7 @@ hr {
         width: 80%; /* Beispiel: 80% Breite des Containers */
         height: 2px; /* Setzt die Höhe auf eine dünne Linie */
         margin: 20px 0; /* Fügt vertikalen Abstand hinzu */
-        background-color: aliceblue; /* Behält die Farbe bei */
+        background-color: rgb(253, 247, 192); /* Behält die Farbe bei */
         border: none;
         }
     

@@ -1,42 +1,55 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqNu3uGrCzzhMshApOwukufr0eZjljl9rwSA0FOl-fzmeBCX8-J3Fw3mPrFPkrv61cFA/exec"; // deine URL
+(async () => {
+  const url = "https://script.google.com/macros/s/AKfycbwqNu3uGrCzzhMshApOwukufr0eZjljl9rwSA0FOl-fzmeBCX8-J3Fw3mPrFPkrv61cFA/exec";
+  const response = await fetch(url);
+  const json = await response.json();
+  const data = json.data;
 
-document.addEventListener("DOMContentLoaded", () => {
-  const covers = document.querySelectorAll(".covers");
+  // Map: Buch → Status
+  const statusMap = {};
+  data.forEach(entry => {
+    const title = entry.Buch?.trim();
+    const status = entry.Gelesen?.trim();
+    if (title && status) {
+      statusMap[title] = status;
+    }
+  });
 
-  // 1. Initial-Ladezustände aus dem Sheet
-  fetch(SCRIPT_URL)
-    .then(res => res.json())
-    .then(statusData => {
-      covers.forEach((cover, index) => {
-        const svg = cover.querySelector("svg");
-        const match = statusData.find(entry => entry.index == index);
+  const covers = document.querySelectorAll('#agatha-challenge .covers');
 
-        if (match && match.gelesen) {
-          svg.classList.add("active");
-          svg.style.fill = "#ff7256";
-        }
-      });
-    });
+  covers.forEach(cover => {
+    const title = cover.getAttribute("data-title");
+    const status = statusMap[title];
 
-  // 2. Klick-Handling & POST an das Script
-  covers.forEach((cover, index) => {
+    // Bild- und SVG-Elemente finden
     const img = cover.querySelector("img");
     const svg = cover.querySelector("svg");
 
-    img.addEventListener("click", () => {
-      const isActive = svg.classList.toggle("active");
-      svg.style.fill = isActive ? "#ff7256" : "currentColor";
+    // Reset CSS
+    img.style.filter = "";
+    svg?.querySelectorAll("path").forEach(p => p.style.fill = "");
 
-      fetch(SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify({
-          index: index,
-          gelesen: isActive
-        }),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
-    });
+    if (status === "YES") {
+      // Cover farbig, SVG rot
+      img.style.filter = "none";
+      svg?.querySelectorAll("path").forEach(p => p.style.fill = "red");
+    } else if (status === "NO") {
+      // Cover in Graustufen, SVG bleibt standard
+      img.style.filter = "grayscale(100%)";
+    } else if (status === "ABBR") {
+      // Cover farbig, SVG grün
+      img.style.filter = "none";
+      svg?.querySelectorAll("path").forEach(p => p.style.fill = "green");
+    }
   });
-});
+
+  // Legende unten einfügen
+  const legend = document.createElement("div");
+  legend.innerHTML = `
+    <div style="font-family: 'Dosis', sans-serif; font-size: 12px; text-align: center; margin-top: 10px;">
+      <span style="color: red;">●</span> Gelesen (YES) &nbsp;
+      <span style="color: green;">●</span> Abgebrochen (ABBR) &nbsp;
+      <span style="color: gray;">●</span> Noch nicht gelesen (NO)
+    </div>
+  `;
+  document.getElementById("agatha-challenge").appendChild(legend);
+})();
