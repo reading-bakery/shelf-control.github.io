@@ -7,7 +7,7 @@
   'use strict';
 
   const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=62129941&single=true&output=csv";
-  const GOAL = 20000;
+  const GOAL = 15000;
   const TARGET_DIV_ID = 'minutes-circle';
 
   async function loadDataAndRender() {
@@ -83,7 +83,7 @@
 
     const stop1 = document.createElementNS(svgns, "stop");
     stop1.setAttribute("offset", "0%");
-    stop1.setAttribute("stop-color", "#4d9acd"); // Dunklerer Blauton
+    stop1.setAttribute("stop-color", "#022339ff"); // Dunklerer Blauton
 
     const stop2 = document.createElementNS(svgns, "stop");
     stop2.setAttribute("offset", "100%");

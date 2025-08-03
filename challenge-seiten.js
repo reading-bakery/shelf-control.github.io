@@ -91,7 +91,7 @@
 
     const stop1 = document.createElementNS(svgns, "stop");
     stop1.setAttribute("offset", "0%");
-    stop1.setAttribute("stop-color", "#32925d"); // Dunklerer Grünton
+    stop1.setAttribute("stop-color", "#022a14ff"); // Dunklerer Grünton
 
     const stop2 = document.createElementNS(svgns, "stop");
     stop2.setAttribute("offset", "100%");

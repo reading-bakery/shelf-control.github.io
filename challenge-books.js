@@ -66,11 +66,11 @@ function renderProgressCircle(current, goal) {
 
   const stop1 = document.createElementNS(svgns, "stop");
   stop1.setAttribute("offset", "0%");
-  stop1.setAttribute("stop-color", "#ff7f50");  // helleres Koralle
+  stop1.setAttribute("stop-color", "#541608ff");  // dunkleres Koralle
 
   const stop2 = document.createElementNS(svgns, "stop");
   stop2.setAttribute("offset", "100%");
-  stop2.setAttribute("stop-color", "#ff4c26");  // dunkleres Koralle
+  stop2.setAttribute("stop-color", "#ff7f50");  // helleres Koralle 
 
   linearGradient.appendChild(stop1);
   linearGradient.appendChild(stop2);
