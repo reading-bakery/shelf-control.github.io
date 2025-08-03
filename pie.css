@@ -41,7 +41,7 @@
   margin: 0 auto;
 }
 
-
+.pie-pixel:hover,
 .pie:hover,
 .pie-container:hover {
     transform: scale(1.02);
@@ -57,7 +57,7 @@
     justify-content: center;
     text-align: center;
     font-size: 2.25rem;
-    color: rgb(90, 165, 142);
+    color: rgb(165, 184, 201);
     margin: 10px;
 }
 
