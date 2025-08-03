@@ -50,7 +50,7 @@ function renderProgressCircle(current, goal) {
   bgCircle.setAttribute("cx", size / 2);
   bgCircle.setAttribute("cy", size / 2);
   bgCircle.setAttribute("r", radius);
-  bgCircle.setAttribute("stroke", "#eee");
+  bgCircle.setAttribute("stroke", "#353434ff");
   bgCircle.setAttribute("stroke-width", strokeWidth);
   bgCircle.setAttribute("fill", "none");
 
