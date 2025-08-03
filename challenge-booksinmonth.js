@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=601378467&single=true&output=csv";
+  const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=2088005895&single=true&output=csv";
 
   const STATUS_COLORS = {
     "YES": "#3CB371",  // gelesen
