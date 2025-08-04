@@ -119,18 +119,22 @@ p {
   align-items: center;
   justify-content: center;
   padding: 10px;
-  border: 1px solid whitesmoke;
+  border: 1px solid #353434ff;
   border-radius: 8px;
-  background: whitesmoke;
-  color: black;
-  font-weight: bold;
+  background: #353434ff;
+  color: whitesmoke;
+  font-size: 0.85rem;
+  font-weight: normal;
   text-align: center;
+  hyphens: auto;
+  word-wrap: break-word; 
+  overflow-wrap: break-word;
 }
 
 .flip-back {
   transform: rotateY(180deg);
-  background: #fae8be;
-  color: black;
+  background: #9370DB;
+  color: white;
 }
 
 .no-flip {
@@ -138,7 +142,7 @@ p {
   align-items: center;
   justify-content: center;
   padding: 10px;
-  border: 5px dashed #aaa;
+  border: 5px dashed #353434ff;
   border-radius: 8px;
   background: #f0f0f0;
 }

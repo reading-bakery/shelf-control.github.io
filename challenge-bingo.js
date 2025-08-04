@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const back = document.createElement("div");
         back.className = "flip-back";
-        back.textContent = buch.trim() || "Noch kein Buch";
+        back.textContent = buch.trim() || "???";
 
         inner.appendChild(front);
         inner.appendChild(back);
