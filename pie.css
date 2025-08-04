@@ -182,7 +182,7 @@ body {
 
 hr {
     border: none;
-    background-color: rgb(253, 247, 192);
+    background-color: #353434ff;
     width: 2px;
     height: 150px;
     margin: 0 1rem;
@@ -302,7 +302,6 @@ hr {
         width: 80%; /* Beispiel: 80% Breite des Containers */
         height: 2px; /* Setzt die Höhe auf eine dünne Linie */
         margin: 20px 0; /* Fügt vertikalen Abstand hinzu */
-        background-color: rgb(253, 247, 192); /* Behält die Farbe bei */
         border: none;
         }
     
