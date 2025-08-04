@@ -1,148 +1,152 @@
-      * {
-        box-sizing: border-box;
-        }
-      
-        body {
-        margin: 0;
-        font-family: "Dosis", sans-serif;
-        background: #121212;
-        color: #ffffff;
-        padding: 1rem;
-        }
+* {
+  box-sizing: border-box;
+}
 
-      h1 {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 1.5rem;
-        letter-spacing: 2px;
-        text-align: center;
-        margin-bottom: 2rem;
-        color: rgb(222, 201, 12);
-      }
+body {
+  margin: 0;
+  font-family: "Dosis", sans-serif;
+  background: #121212;
+  color: #ffffff;
+  padding: 1rem;
+}
 
-      h2 {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 3rem;
-        letter-spacing: 2px;
-        text-align: center;
-        margin-bottom: 2rem;
-        color: khaki; 
-      }
+h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: rgb(222, 201, 12);
+}
 
-      form {
-        max-width: 700px;
-        margin: 0 auto;
-        background: #1e2b32;
-        padding: 1rem;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      }
+h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: khaki; 
+}
 
-      label {
-        font-weight: 600;
-        display: block;
-        margin: 0.5rem 0 0.5rem;
-      }
+form {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #1e2b32;
+  padding: 1rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
 
-      input[type="text"],
-      input[type="number"],
-      input[type="date"],
-      select,
-      input[type="file"] {
-        width: 100%;
-        padding: 0.7rem;
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        transition: border-color 0.3s ease;
-        background-color: rgb(140, 138, 153);
-        font-family: "Dosis", sans-serif;
-        font-weight: bold;
-        cursor: pointer;
-      }
+label {
+  font-weight: 600;
+  display: block;
+  margin: 0.5rem 0 0.5rem;
+}
 
-      input:focus,
-      select:focus {
-        border-color: #0077cc;
-        outline: none;
-      }
+#subGenreSelect {
+   font-size: 3rem;
+}
 
-      button[type="submit"] {
-        margin-top: 2rem;
-        padding: 0.8rem 2rem;
-        background: rgb(140, 138, 153);
-        color: black;
-        border: none;
-        font-weight: 600;
-        font-size: 1.1rem;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: 0.3s ease;
-        width: 100%;
-      }
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+input[type="file"] {
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: border-color 0.3s ease;
+  background-color: #fff;
+  font-family: "Dosis", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-      button[type="submit"]:hover {
-        background: #4b0606;
-        color: white;
-      }
+input:focus,
+select:focus {
+  border-color: #0077cc;
+  outline: none;
+}
 
-      img#preview {
-        margin-top: 0.5rem;
-        border: 2px solid #eee;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-      
-      select {
-        font-family: "Dosis", sans-serif;
-        font-size: 1rem;
-        font-weight: bold;
-      }
-
-      option {
-        font-family: "Dosis", sans-serif;
-        font-size: 1rem;
-      }
+select {
+  font-family: "Dosis", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+}
 
 
-      .top-button {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-      }
 
-      #backToTop {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: none;
-            padding: 10px;
-            background-color: rgb(224, 224, 87);
-            color: black;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            height: auto; 
-        }
+option {
+  font-family: "Dosis", sans-serif;
+  font-size: 1rem;
+}
 
-      #backToTop:hover {
-        background-color: #4b0606;
-        color: white;
-      }
+button[type="submit"] {
+  margin-top: 2rem;
+  padding: 0.8rem 2rem;
+  background: rgb(140, 138, 153);
+  color: black;
+  border: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  width: 100%;
+}
 
-      footer {
-        text-align: center;
-        font-size: 0.9rem;
-        color: #888;
-        margin-top: 3rem;
-      }
+button[type="submit"]:hover {
+  background: #4b0606;
+  color: white;
+}
 
-    header {
-      background-color: #1f1f1f;
-      text-align: center;
-      cursor: none;
-    }
+img#preview {
+  margin-top: 0.5rem;
+  border: 2px solid #eee;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
+.top-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
 
-  #status {
+#backToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  padding: 10px;
+  background-color: rgb(224, 224, 87);
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  height: auto; 
+}
+
+#backToTop:hover {
+  background-color: #4b0606;
+  color: white;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 3rem;
+}
+
+header {
+  background-color: #1f1f1f;
+  text-align: center;
+  cursor: none;
+}
+
+#status {
   min-height: 1.5em;    
   color: white;           
   font-weight: normal;
@@ -167,6 +171,41 @@
 
 #statusMessage.error {
   color: white;
+}
+
+
+
+  .choices {
+    background-color: rgb(82, 65, 188) !important;
+    border-radius: 10px !important;
+    font-family: "Dosis", sans-serif !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+  }
+
+  .choices__item {
+    background-color: whitesmoke !important;
+    color:black !important;
+    border-radius: 15px !important;
+    padding: 0.3rem 0.8rem !important;
+    margin-right: 0.3rem !important;
+  }
+
+
+  .choices__button {
+  background-color: #1e2b32;  /* schwarzes X */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0 6px;
+  font-size: 0.9rem;
+  margin-left: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.choices__button:hover {
+  background-color: #ff7256;     /* Dunkleres Rot beim Hover */
 }
 
 
