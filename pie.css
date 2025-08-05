@@ -124,6 +124,8 @@ body {
   background-color: #000; 
 }
 
+#besthoeren-summe,
+#bestlesen-summe,
 #sterne,
 #average,
 #bestday-summe,
@@ -164,6 +166,14 @@ body {
 
 #ausgaben-summe {
     font-size: 3rem;
+}
+
+#besthoeren-summe,
+#bestlesen-summe {
+  font-size: 1.5rem;
+  line-height: 1.7rem;
+  width: 120px;
+  height: 120px;
 }
 
 .legendaudiodays,
@@ -221,6 +231,8 @@ hr {
   cursor: pointer;
 }
 
+
+
 .carousel-container:hover {
   transform: scale(1.02);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
@@ -232,6 +244,11 @@ hr {
   padding-left: 0px;
   padding-right: 0px;
   list-style: none;
+  width: auto;
+}
+
+.carousel-track-container {
+  width: 100%;
 }
 
 .carousel-slide {
@@ -241,7 +258,6 @@ hr {
   flex-shrink: 0;
   margin-bottom: -1rem;
 }
-
 
 .carousel-controls {
   position: absolute;
@@ -326,6 +342,18 @@ hr {
 
     canvas {
         max-height: 100%;
+    }
+
+    .carousel-slide {
+      width: 100% !important;
+      height: 250px !important;
+      max-width: 100%;
+      flex-shrink: 0;
+      margin-bottom: -2rem;
+    }
+
+    .carousel-track-container {
+      width: 100%;
     }
 
   }
