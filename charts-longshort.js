@@ -1,54 +1,67 @@
-const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=282362445&single=true&output=csv";
+(() => {
+  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1702643479&single=true&output=csv';
 
-function parseCSV(text) {
-    const [headerLine, ...lines] = text.trim().split("\n");
-    const headers = headerLine.split("\t");
-    return lines.map(line => {
-        const values = line.split("\t");
-        return Object.fromEntries(headers.map((h, i) => [h.trim(), values[i]?.trim()]));
-    });
-}
+  async function fetchAndRenderLongShort() {
+    try {
+      const response = await fetch(csvUrl);
+      if (!response.ok) throw new Error('Netzwerkfehler beim Laden der CSV');
+      const csvText = await response.text();
 
-function getValidNumber(value) {
-    return parseInt(value.replace(/\D/g, ""), 10);
-}
+      const rows = csvText.trim().split('\n').map(line => line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/));
+      const header = rows[0];
+      const dataRows = rows.slice(1);
 
-function createBookCard(book, label) {
-    const container = document.createElement("div");
-    const img = document.createElement("img");
-    img.src = book["Cover"];
-    img.alt = book["Titel"];
-    img.style.maxHeight = "200px";
-    img.style.borderRadius = "8px";
-    img.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
+      const coverIdx = header.indexOf('Cover');
+      const titelIdx = header.indexOf('Titel');
+      const seitenIdx = header.indexOf('Seitenzahl total');
 
-    const title = document.createElement("p");
-    title.textContent = `${label}: ${book["Titel"]} (${book["Seitenzahl total"]} Seiten)`;
-    title.style.marginTop = "10px";
-    title.style.fontWeight = "bold";
-
-    container.appendChild(img);
-    container.appendChild(title);
-    return container;
-}
-
-fetch(sheetURL)
-    .then(response => response.text())
-    .then(csvText => {
-        const data = parseCSV(csvText).filter(row =>
-            row["Seitenzahl total"] && !isNaN(getValidNumber(row["Seitenzahl total"]))
+      const validBooks = dataRows
+        .map(row => ({
+          cover: row[coverIdx]?.trim(),
+          titel: row[titelIdx]?.trim(),
+          seiten: Number(row[seitenIdx]?.replace(',', '.'))
+        }))
+        .filter(book =>
+          book.cover && book.cover !== '' &&
+          book.titel && book.titel !== '' &&
+          !isNaN(book.seiten) && book.seiten > 0
         );
 
-        const sorted = [...data].sort((a, b) =>
-            getValidNumber(a["Seitenzahl total"]) - getValidNumber(b["Seitenzahl total"])
-        );
+      const container = document.querySelector('#longshort-container-unique');
+      if (!container) {
+        console.error('Container #longshort-container-unique nicht gefunden');
+        return;
+      }
 
-        const shortest = sorted[0];
-        const longest = sorted[sorted.length - 1];
+      if (validBooks.length < 2) {
+        container.innerHTML = `<p class="longshort-error-unique">Nicht genügend Bücher mit gültigem Cover und Seitenzahl.</p>`;
+        return;
+      }
 
-        document.getElementById("shortestBook").appendChild(createBookCard(shortest, "Kürzestes Buch"));
-        document.getElementById("longestBook").appendChild(createBookCard(longest, "Längstes Buch"));
-    })
-    .catch(err => {
-        console.error("Fehler beim Laden der Daten:", err);
-    });
+      const shortest = validBooks.reduce((min, b) => b.seiten < min.seiten ? b : min, validBooks[0]);
+      const longest = validBooks.reduce((max, b) => b.seiten > max.seiten ? b : max, validBooks[0]);
+
+      container.innerHTML = `
+        <h3 style="font-family: Dosis, sans-serif; color: white;">Kürzestes vs. Längstes Buch</h3>
+        <div class="longshort-wrapper-unique">
+          <div class="longshort-book-unique">
+            <img class="longshort-cover-unique" src="${shortest.cover}" alt="Cover ${shortest.titel}" />
+            <p class="longshort-title-unique" style="font-family: Dosis, sans-serif; color: white; font-size: 1rem;">
+              ${shortest.titel}<br>${shortest.seiten} Seiten
+            </p>
+          </div>
+          <div class="longshort-book-unique">
+            <img class="longshort-cover-unique" src="${longest.cover}" alt="Cover ${longest.titel}" />
+            <p class="longshort-title-unique" style="font-family: Dosis, sans-serif; color: white; font-size: 1rem;">
+              ${longest.titel}<br>${longest.seiten} Seiten
+            </p>
+          </div>
+        </div>
+      `;
+    } catch (error) {
+      console.error('Fehler beim Laden oder Verarbeiten:', error);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', fetchAndRenderLongShort);
+})();
