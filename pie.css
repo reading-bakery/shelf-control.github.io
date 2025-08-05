@@ -312,7 +312,7 @@ hr {
         }
     }
 
-@media (max-width: 740px) {
+@media (max-width: 600px) {
     .grid-ziel {
         flex-direction: column;
     }
@@ -349,7 +349,7 @@ hr {
       height: 250px !important;
       max-width: 100%;
       flex-shrink: 0;
-      margin-bottom: -3rem;
+      margin-bottom: -3.5rem;
     }
 
 
