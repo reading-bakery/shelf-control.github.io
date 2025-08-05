@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data: data,
             backgroundColor: gradients.slice(0, labels.length),
             borderColor: '#1f1f1f',
-            borderWidth: 10,
+            borderWidth: 5,
             hoverOffset: 15,
             borderRadius: 15,
           }]

@@ -106,8 +106,7 @@ canvas#tempoChart,
 canvas#subgenreChart,
 canvas#genreChart,
 canvas#statusChart,
-canvas#formatChart,
-canvas#genderChart {
+canvas#formatChart {
 height: auto;
 }
 
@@ -121,7 +120,6 @@ height: auto;
 #bookmonthChart,
 #ausgabenChart,
 #subChart,
-#genderChart,
 #autorChart,
 #verlagChart,
 #sprachenChart {
@@ -192,6 +190,18 @@ body {
 .legenddays {
     font-family: "Dosis", sans-serif;
     font-size: 8px;
+}
+
+#umfangChart,
+#geschlechtChart,
+#formatChart,
+#statusChart,
+#genreChart,
+#subgenreChart,
+#tempoChart,
+#stimmungChart,
+#themenChart {
+  max-width: 300px;
 }
 
 .grid-ziel {
