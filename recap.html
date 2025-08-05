@@ -43,6 +43,7 @@
 <script src="charts-fazit.js" defer></script>
 <script src="charts-format.js" defer></script>
 <script src="charts-gender.js" defer></script>
+<script src="charts-longshort.js" defer></script>
 <script src="charts-genre.js" defer></script>
 <script src="charts-minuten.js" defer></script>
 <script src="charts-minutenmonth.js" defer></script>
@@ -344,7 +345,7 @@
         
 
         <div class="pie">
-            <h3>Stimmung</h3>
+            <h3>Top 10 Stimmungen</h3>
             <canvas id="stimmungChart"></canvas>
         </div>
         
@@ -357,10 +358,13 @@
         
 
 
-        <div class="pie">
-            <h3>Short vs. Long Buch</h3>
-            <img src="https://github.com/reading-bakery/shelf-control.github.io/blob/main/images/gelesen/die-garnett-girls.jpg?raw=true" alt="Testbild" style="max-width:200px;">
+    <div class="pie">
+        <h3>Short vs. Long Buch</h3>
+        <div id="longshortContainer" style="display: flex; justify-content: space-between; gap: 40px; align-items: center;">
+            <div id="shortestBook" style="text-align: center;"></div>
+            <div id="longestBook" style="text-align: center;"></div>
         </div>
+    </div>
 
         <div class="pie">
             <h3>Short vs. Long Audio</h3>
