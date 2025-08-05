@@ -41,7 +41,9 @@
 <script src="charts-days.js" defer></script>
 <script src="charts-daysaudio.js" defer></script>
 <script src="charts-fazit.js" defer></script>
+<script src="charts-format.js" defer></script>
 <script src="charts-gender.js" defer></script>
+<script src="charts-genre.js" defer></script>
 <script src="charts-minuten.js" defer></script>
 <script src="charts-minutenmonth.js" defer></script>
 <script src="charts-neuzugaenge.js" defer></script>
@@ -49,9 +51,14 @@
 <script src="charts-seiten.js" defer></script>
 <script src="charts-seitenmonth.js" defer></script>
 <script src="charts-sprachen.js" defer></script>
+<script src="charts-status.js" defer></script>
 <script src="charts-sterne.js" defer></script>
 <script src="charts-sternemonth.js" defer></script>
+<script src="charts-stimmung.js" defer></script>
 <script src="charts-sub.js" defer></script>
+<script src="charts-subgenre.js" defer></script>
+<script src="charts-tempo.js" defer></script>
+<script src="charts-themen.js" defer></script>
 <script src="charts-umfang.js" defer></script>
 <script src="charts-verlag.js" defer></script>
 
@@ -307,60 +314,48 @@
 
 
 
-
-
         <div class="pie">
             <h3>Format</h3>
+            <canvas id="formatChart" width="300" height="300" style="max-width:300px; max-height:300px;"></canvas>
         </div>
         
             
 
         <div class="pie">
             <h3>Status</h3>
+            <canvas id="statusChart" width="300" height="300" style="max-width:300px; max-height:300px;"></canvas>
         </div>
     
         
         <div class="pie">
             <h3>Genre</h3>
+            <canvas id="genreChart" width="300" height="300" style="max-width:300px; max-height:300px;"></canvas>
         </div>
         
-        <div class="pie">
-            <h3>Genre pro Monat</h3>
-        </div>
-
         <div class="pie">
             <h3>Sub Genre</h3>
+            <canvas id="subgenreChart" width="300" height="300" style="max-width:300px; max-height:300px;"></canvas>
         </div>
         
-        <div class="pie">
-            <h3>Sub Genre pro Monat</h3>
-        </div>
-
-
-
         <div class="pie">
             <h3>Tempo</h3>
+            <canvas id="tempoChart" width="300" height="300" style="max-width:300px; max-height:300px;"></canvas>
         </div>
         
-        <div class="pie">
-            <h3>Tempo pro Monat</h3>
-        </div>
 
         <div class="pie">
             <h3>Stimmung</h3>
+            <canvas id="stimmungChart" width="300" height="300" style="max-width:300px; max-height:300px;"></canvas>
         </div>
         
-        <div class="pie">
-            <h3>Stimmung pro Monat</h3>
-        </div>
+
 
         <div class="pie">
-            <h3>Themen</h3>
+            <h3>Top 10 Themen</h3>
+            <canvas id="themenChart" width="300" height="300" style="max-width:300px; max-height:300px;"></canvas>
         </div>
         
-        <div class="pie">
-            <h3>Themen pro Monat</h3>
-        </div>
+
 
         <div class="pie">
             <h3>Short vs. Long Buch</h3>
