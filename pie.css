@@ -100,6 +100,7 @@ canvas {
   cursor: pointer;
 }
 
+#sternemonthChart,
 #neumonthChart,
 #averagemonthChart,
 #daysaudioChart,
@@ -123,6 +124,7 @@ body {
   background-color: #000; 
 }
 
+#sterne,
 #average,
 #bestday-summe,
 #books-summe,
@@ -151,6 +153,7 @@ body {
     font-family: "Dosis", sans-serif;
 }
 
+#sterne,
 #average,
 #books-summe,
 #neuzugaenge-summe {
