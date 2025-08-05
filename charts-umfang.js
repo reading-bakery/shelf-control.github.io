@@ -1,93 +1,109 @@
-Chart.register(ChartDataLabels);
+ document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('umfangChart');
+      const ctx = canvas.getContext('2d');
 
-async function drawUmfangChart() {
-  const sheetID = '1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE';
-  const gid = '1702643479';
-  const query = encodeURIComponent("SELECT F WHERE F IS NOT NULL AND F != ''");
-  const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?gid=${gid}&tq=${query}`;
+      // Farbverläufe für jedes Segment erzeugen (horizontaler Verlauf)
+      const gradient1 = ctx.createLinearGradient(0, 0, canvas.width, 0);
+      gradient1.addColorStop(0, '#ff7256');
+      gradient1.addColorStop(1, '#f8693aff');
 
-  try {
-    const response = await fetch(url);
-    const text = await response.text();
-    const json = JSON.parse(text.substring(47).slice(0, -2));
-    const rows = json.table.rows;
+      const gradient2 = ctx.createLinearGradient(0, 0, canvas.width, 0);
+      gradient2.addColorStop(0, '#3CB371');
+      gradient2.addColorStop(1, '#294e29ff');
 
-    const counts = {};
-    rows.forEach(row => {
-      if (row.c[0] && row.c[0].v) {
-        const val = row.c[0].v.toString().trim();
-        counts[val] = (counts[val] || 0) + 1;
-      }
-    });
+      const gradient3 = ctx.createLinearGradient(0, 0, canvas.width, 0);
+      gradient3.addColorStop(0, '#9370DB');
+      gradient3.addColorStop(1, '#5e30f5ff');
 
-    const expectedLabels = ['bis 300', '301-500', 'ab 501'];
-    expectedLabels.forEach(label => {
-      if (!counts.hasOwnProperty(label)) {
-        counts[label] = 0;
-      }
-    });
+      // CSV-Daten laden und verarbeiten
+      fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=944857737&single=true&output=csv')
+        .then(response => response.text())
+        .then(csvText => {
+          const parsedData = Papa.parse(csvText, { header: true }).data;
 
-    const labels = expectedLabels;
-    const data = labels.map(label => counts[label]);
+          // Labels und Daten extrahieren
+          const labels = parsedData.map(row => row['Umfang']);
+          const data = parsedData.map(row => parseFloat(row['Anzahl']));
 
-    const ctx = document.getElementById('umfangChart').getContext('2d');
-    if (window.umfangChartInstance) {
-      window.umfangChartInstance.destroy();
-    }
-
-    window.umfangChartInstance = new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: labels,
-        datasets: [{
-          data: data,
-          backgroundColor: ['#F03274', '#4CC5D2', '#E67E22'],
-          borderColor: '#1f1f1f',
-          borderWidth: 5,
-          borderRadius: 10
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: true,
-        cutout: '60%',
-        layout: {
-          padding: {
-            top: 40,
-            bottom: 70
-          }
-        },
-        plugins: {
-          datalabels: {
-            display: true,
-            color: '#ffffff',
-            font: {
-              family: 'Dosis',
-              size: 14,
-              weight: 'bold'
+          // Donut-Diagramm konfigurieren
+          const config = {
+            type: 'doughnut',
+            data: {
+              labels: labels,
+              datasets: [{
+                label: 'Seitenumfang',
+                data: data,
+                backgroundColor: [gradient1, gradient2, gradient3],
+                borderColor: '#1f1f1f',
+                borderWidth: 10,
+                hoverOffset: 15,
+                borderRadius: 15,
+              }]
             },
-            formatter: (value, ctx) => {
-              const label = ctx.chart.data.labels[ctx.dataIndex];
-              const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-              const percent = ((value / total) * 100).toFixed(1) + '%';
-              return `${percent}\n${label}`;
+            options: {
+              cutout: '60%',
+              responsive: true,
+              plugins: {
+                legend: {
+                  display: false // Legende ausblenden
+                },
+                tooltip: {
+                  enabled: false // Tooltip komplett aus
+                },
+                datalabels: {
+                  display: false // keine Standard-Datalabels auf Segmenten
+                }
+              },
+              hover: {
+                onHover: (event, elements, chart) => {
+                  if (elements.length) {
+                    const idx = elements[0].index;
+                    chart.options.plugins.datalabels.display = ctx => ctx.dataIndex === idx;
+                    chart.data.datasets[0].datalabels = chart.data.datasets[0].datalabels || {};
+                    chart.update();
+                  } else {
+                    chart.options.plugins.datalabels.display = false;
+                    chart.update();
+                  }
+                }
+              }
             },
-            align: 'end',
-            anchor: 'end'
-          },
-          legend: {
-            display: false
-          },
-          tooltip: {
-            enabled: false
-          }
-        }
-      }
+            plugins: [{
+              id: 'centerLabel',
+              afterDraw(chart) {
+                const ctx = chart.ctx;
+                const centerX = chart.width / 2;
+                const centerY = chart.height / 2;
+                const active = chart.tooltip._active;
+
+                if (active && active.length) {
+                  const idx = active[0].index;
+                  const value = chart.data.datasets[0].data[idx];
+                  const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                  const percentage = ((value / total) * 100).toFixed(1) + '%';
+                  const label = chart.data.labels[idx];
+
+                  ctx.save();
+                  ctx.font = '16px Dosis, sans-serif';
+                  ctx.fillStyle = 'white';
+                  ctx.textAlign = 'center';
+                  ctx.textBaseline = 'middle';
+
+                  // Kategorie (Label) oben, leicht nach oben verschoben
+                  ctx.fillText(label, centerX, centerY - 12);
+
+                  // Prozentwert darunter, größer und etwas nach unten verschoben
+                  ctx.font = '22px Dosis, sans-serif';
+                  ctx.fillText(percentage, centerX, centerY + 14);
+
+                  ctx.restore();
+                }
+              }
+            }]
+          };
+
+          // Diagramm erstellen
+          new Chart(ctx, config);
+        })
+        .catch(error => console.error('Fehler beim Laden der CSV-Daten:', error));
     });
-
-  } catch (error) {
-    console.error('Fehler beim Laden oder Zeichnen des Umfang-Diagramms:', error);
-  }
-}
-
-drawUmfangChart();

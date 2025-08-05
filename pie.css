@@ -100,6 +100,19 @@ canvas {
   cursor: pointer;
 }
 
+canvas#themenChart,
+canvas#stimmungChart,
+canvas#tempoChart,
+canvas#subgenreChart,
+canvas#genreChart,
+canvas#statusChart,
+canvas#formatChart,
+canvas#genderChart {
+height: auto;
+}
+
+
+
 #sternemonthChart,
 #neumonthChart,
 #averagemonthChart,
@@ -109,7 +122,6 @@ canvas {
 #ausgabenChart,
 #subChart,
 #genderChart,
-#umfangChart,
 #autorChart,
 #verlagChart,
 #sprachenChart {
@@ -312,7 +324,7 @@ hr {
         }
     }
 
-@media (max-width: 600px) {
+@media (max-width: 740px) {
     .grid-ziel {
         flex-direction: column;
     }
@@ -346,9 +358,8 @@ hr {
 
     .carousel-slide {
       width: 100% !important;
-      height: 200px !important;
+      height: auto !important;
       max-width: 100%;
-      margin-bottom: -2rem;
     }
 
 
