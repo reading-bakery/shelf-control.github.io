@@ -5,14 +5,14 @@
       // Farbverläufe für jedes Segment erzeugen (horizontaler Verlauf)
       const gradient1 = ctx.createLinearGradient(0, 0, canvas.width, 0);
       gradient1.addColorStop(0, '#ff7256');
-      gradient1.addColorStop(1, '#f8693aff');
+      gradient1.addColorStop(1, '#ff4500');
 
       const gradient2 = ctx.createLinearGradient(0, 0, canvas.width, 0);
       gradient2.addColorStop(0, '#3CB371');
       gradient2.addColorStop(1, '#294e29ff');
 
       const gradient3 = ctx.createLinearGradient(0, 0, canvas.width, 0);
-      gradient3.addColorStop(0, '#9370DB');
+      gradient3.addColorStop(0, '#63b8ff');
       gradient3.addColorStop(1, '#5e30f5ff');
 
       // CSV-Daten laden und verarbeiten
@@ -41,7 +41,7 @@
               }]
             },
             options: {
-              cutout: '60%',
+              cutout: '55%',
               responsive: true,
               plugins: {
                 legend: {
