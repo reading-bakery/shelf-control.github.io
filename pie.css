@@ -98,7 +98,7 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
-#longshort-container-unique,
+
 .pie-pixel h3, 
 .pie h3, 
 .pie-container h3 {
@@ -223,6 +223,7 @@ body {
 #stimmungChart,
 #themenChart {
   max-width: 300px;
+  height: auto;
 }
 
 .grid-ziel {
@@ -347,41 +348,73 @@ hr {
   background-color: #FFB90F;
 }
 
-
+#longshort-container-audio,
 #longshort-container-unique {
       max-width: 700px;
       margin: 20px auto;
       font-family: Arial, sans-serif;
+      background-color: #1f1f1f;
+      border-radius: 8px;
     }
+
+    #longshort-container-audio h3,
     #longshort-container-unique h3 {
       text-align: center;
       margin-bottom: 1rem;
+      font-size: 1.3rem;
+      font-family: "Dosis", sans-serif; 
+      color: rgb(179, 220, 202);
+      font-weight: bold;
     }
+
+    .longshort-wrapper-audio, 
     .longshort-wrapper-unique {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
     }
+
+    .longshort-book-audio,
     .longshort-book-unique {
       text-align: center;
       max-width: 45%;
     }
+
+    .longshort-cover-audio,
     .longshort-cover-unique {
-      max-width: 100%;
+      max-width: 50%;
       height: auto;
       border-radius: 8px;
       box-shadow: 0 0 8px rgba(0,0,0,0.2);
     }
-    .longshort-title-unique {
-      margin-top: 0.5rem;
-      font-weight: bold;
-    }
+
+
+    .longshort-error-audio,
     .longshort-error-unique {
       text-align: center;
       color: red;
       font-weight: bold;
     }
+
+
+    .longshort-heading-audio,
+    .longshort-heading-unique {
+  font-family: 'Bebas Neue', sans-serif;
+  margin-bottom: 1rem;
+  font-size: 2.25rem;
+  color: rgb(165, 184, 201);
+}
+
+
+.longshort-title-unique,
+.longshort-title-unique {
+  font-family: 'Dosis', sans-serif;
+  color: whitesmoke;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: normal;
+}
 
 
 @media (max-width: 940px) {

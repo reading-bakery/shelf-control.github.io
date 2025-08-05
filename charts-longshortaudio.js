@@ -1,60 +1,67 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1702643479&single=true&output=csv";
+(() => {
+  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1702643479&single=true&output=csv';
 
-  async function fetchAndRenderMinutes() {
+  async function fetchAndRenderLongShortAudio() {
     try {
       const response = await fetch(csvUrl);
-      if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+      if (!response.ok) throw new Error('Netzwerkfehler beim Laden der CSV');
       const csvText = await response.text();
 
-      const rows = csvText.trim().split("\n").map(line => line.split(/\t|,/));
-
-      // Header aus der ersten Zeile holen
+      const rows = csvText.trim().split('\n').map(line => line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/));
       const header = rows[0];
       const dataRows = rows.slice(1);
 
-      // Index-Spalten ermitteln
-      const idxCover = header.indexOf("Cover");
-      const idxTitel = header.indexOf("Titel");
-      const idxMinutenTotal = header.indexOf("Minuten total");
+      const coverIdx = header.indexOf('Cover');
+      const titelIdx = header.indexOf('Titel');
+      const minutenIdx = header.indexOf('Minuten total');
 
-      // Filtere alle gültigen Einträge mit Cover und Minuten als Zahl größer 0
       const validBooks = dataRows
-        .map(r => ({
-          cover: r[idxCover],
-          titel: r[idxTitel],
-          minutenTotal: Number(r[idxMinutenTotal])
+        .map(row => ({
+          cover: row[coverIdx]?.trim(),
+          titel: row[titelIdx]?.trim(),
+          minuten: Number(row[minutenIdx]?.replace(',', '.'))
         }))
-        .filter(b => b.cover && !isNaN(b.minutenTotal) && b.minutenTotal > 0);
+        .filter(book =>
+          book.cover && book.cover !== '' &&
+          book.titel && book.titel !== '' &&
+          !isNaN(book.minuten) && book.minuten > 0
+        );
 
-      if (validBooks.length < 2) {
-        document.querySelector(".pie").textContent = "Nicht genügend Bücher mit gültigem Cover und Minutenangabe.";
+      const container = document.querySelector('#longshort-container-audio');
+      if (!container) {
+        console.error('Container #longshort-container-audio nicht gefunden');
         return;
       }
 
-      // Kürzestes und längstes Hörbuch finden
-      const shortestBook = validBooks.reduce((a, b) => (a.minutenTotal < b.minutenTotal ? a : b));
-      const longestBook = validBooks.reduce((a, b) => (a.minutenTotal > b.minutenTotal ? a : b));
+      if (validBooks.length < 2) {
+        container.innerHTML = `<p class="longshort-error-unique">Nicht genügend Hörbücher mit gültigem Cover und Minutenanzahl.</p>`;
+        return;
+      }
 
-      // Container ansprechen und Ausgabe erzeugen
-      const container = document.querySelector(".pie");
+      const shortest = validBooks.reduce((min, b) => b.minuten < min.minuten ? b : min, validBooks[0]);
+      const longest = validBooks.reduce((max, b) => b.minuten > max.minuten ? b : max, validBooks[0]);
+
       container.innerHTML = `
-        <h3>Shortest vs. Longest Hörbuch (Minuten total)</h3>
-        <div style="display:flex; justify-content:space-between; max-width:600px;">
-          <div style="text-align:center; width:48%;">
-            <img src="${shortestBook.cover}" alt="Cover ${shortestBook.titel}" style="max-width:100%; height:auto; border-radius:5px;">
-            <p><strong>${shortestBook.titel}</strong><br>${shortestBook.minutenTotal} Minuten</p>
+        <h3 class="longshort-heading-unique">Gehörte Bücher</h3>
+        <div class="longshort-wrapper-unique">
+          <div class="longshort-book-unique">
+            <img class="longshort-cover-unique" src="${shortest.cover}" alt="Cover ${shortest.titel}" />
+            <p class="longshort-title-unique">
+              ${shortest.titel}<br>${shortest.minuten} Minuten
+            </p>
           </div>
-          <div style="text-align:center; width:48%;">
-            <img src="${longestBook.cover}" alt="Cover ${longestBook.titel}" style="max-width:100%; height:auto; border-radius:5px;">
-            <p><strong>${longestBook.titel}</strong><br>${longestBook.minutenTotal} Minuten</p>
+          <div class="longshort-book-unique">
+            <img class="longshort-cover-unique" src="${longest.cover}" alt="Cover ${longest.titel}" />
+            <p class="longshort-title-unique">
+              ${longest.titel}<br>${longest.minuten} Minuten
+            </p>
           </div>
         </div>
       `;
     } catch (error) {
-      document.querySelector(".pie").textContent = `Fehler beim Laden oder Verarbeiten: ${error.message}`;
+      console.error('Fehler beim Laden oder Verarbeiten:', error);
     }
   }
 
-  fetchAndRenderMinutes();
-});
+  document.addEventListener('DOMContentLoaded', fetchAndRenderLongShortAudio);
+})();

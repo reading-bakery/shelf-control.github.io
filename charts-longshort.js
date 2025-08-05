@@ -42,17 +42,17 @@
       const longest = validBooks.reduce((max, b) => b.seiten > max.seiten ? b : max, validBooks[0]);
 
       container.innerHTML = `
-        <h3 style="font-family: Dosis, sans-serif; color: white;">Kürzestes vs. Längstes Buch</h3>
+        <h3 class="longshort-heading-unique">Gelesene Bücher</h3>
         <div class="longshort-wrapper-unique">
           <div class="longshort-book-unique">
             <img class="longshort-cover-unique" src="${shortest.cover}" alt="Cover ${shortest.titel}" />
-            <p class="longshort-title-unique" style="font-family: Dosis, sans-serif; color: white; font-size: 1rem;">
+            <p class="longshort-title-unique">
               ${shortest.titel}<br>${shortest.seiten} Seiten
             </p>
           </div>
           <div class="longshort-book-unique">
             <img class="longshort-cover-unique" src="${longest.cover}" alt="Cover ${longest.titel}" />
-            <p class="longshort-title-unique" style="font-family: Dosis, sans-serif; color: white; font-size: 1rem;">
+            <p class="longshort-title-unique">
               ${longest.titel}<br>${longest.seiten} Seiten
             </p>
           </div>
