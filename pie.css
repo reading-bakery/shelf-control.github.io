@@ -383,7 +383,7 @@ hr {
 
     .longshort-cover-audio,
     .longshort-cover-unique {
-      max-width: 50%;
+      max-width: 70%;
       height: auto;
       border-radius: 8px;
       box-shadow: 0 0 8px rgba(0,0,0,0.2);
