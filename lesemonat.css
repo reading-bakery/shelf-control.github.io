@@ -30,32 +30,30 @@
 
 /* Aktiver Button */
 .monat-btn.active {
-    background-color: rgb(65, 14, 141);
+  background-color: #63b8ff;   /* Beispiel Farbe */
+  color: white;
 }
+
 
 /* Hover */
 .monat-btn:hover {
     background-color: rgb(65, 14, 141);
 }
 
-/* Collapse: Vollbreite + Abstand */
 .collapse {
-    display: none;
-    padding: 10px;
-    background: #f8f8f8;
-    border-radius: 5px;
-    margin-top: 15px;
-    color: black;
-    
-    /* WICHTIG: volle Breite des Elterncontainers (lässt sich von lesejahr-2025 steuern) */
-    width: 100%;
-    box-sizing: border-box;
-    clear: both;  /* damit es unter allen Inline-Blocks steht */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 10px;
+  background-color: aliceblue;
+  border-radius: 6px;
 }
+
 
 /* Sichtbar */
 .collapse.show {
     display: block;
+    border-radius: 6px;
 }
 
 /* Handy-Ansicht: Buttons untereinander */

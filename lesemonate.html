@@ -14,9 +14,11 @@
     <link rel="stylesheet" href="navbar.css"> 
     <link rel="stylesheet" href="lesemonat.css"> 
 
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <script src="navbar.js" defer></script>
     <script src="backtop.js" defer></script>
     <script src="toggle.js" defer></script>
+    <script src="collapse.js" defer></script>
     <script src="lesemonat.js" defer></script>
 
 
@@ -61,103 +63,61 @@
 
 <div class="lesejahr-2025">
     <h3>2025</h3>
-    
-    <!-- Januar -->
-    <div class="monat-block">
-        <button class="monat-btn">Januar</button>
-        <div class="collapse">
-            <p>Inhalt für Januar...</p>
-        </div>
+    <div class="lesemonat">
+      <div class="monat-block">
+        <button class="monat-btn" type="button">Januar</button>
+        <div class="collapse" id="Januar"></div>
+      </div>
+      <div class="monat-block">
+        <button class="monat-btn" type="button">Februar</button>
+        <div class="collapse" id="Februar"></div>
+      </div>
+      <div class="monat-block">
+        <button class="monat-btn" type="button">März</button>
+        <div class="collapse" id="März"></div>
+      </div>
+      <div class="monat-block">
+        <button class="monat-btn" type="button">April</button>
+        <div class="collapse" id="April"></div>
+      </div>
+      <div class="monat-block">
+        <button class="monat-btn" type="button">Mai</button>
+        <div class="collapse" id="Mai"></div>
+      </div>
+      <div class="monat-block">
+        <button class="monat-btn" type="button">Juni</button>
+        <div class="collapse" id="Juni"></div>
+      </div>
+      <div class="monat-block">
+        <button class="monat-btn" type="button">Juli</button>
+        <div class="collapse" id="Juli"></div>
+      </div>
+      <div class="monat-block">
+        <button class="monat-btn" type="button">August</button>
+        <div class="collapse" id="August"></div>
+      </div>
+      <div class="monat-block">
+        <button class="monat-btn" type="button">September</button>
+        <div class="collapse" id="September"></div>
+      </div>
+      <div class="monat-block">
+        <button class="monat-btn" type="button">Oktober</button>
+        <div class="collapse" id="Oktober"></div>
+      </div>
+      <div class="monat-block">
+        <button class="monat-btn" type="button">November</button>
+        <div class="collapse" id="November"></div>
+      </div>
+      <div class="monat-block">
+        <button class="monat-btn" type="button">Dezember</button>
+        <div class="collapse" id="Dezember"></div>
+      </div>
+            <div class="monat-block">
+        <button class="monat-btn" type="button">Abgebrochen</button>
+        <div class="collapse" id="Abgebrochen"></div>
+      </div>
     </div>
-
-    <!-- Februar -->
-    <div class="monat-block">
-        <button class="monat-btn">Februar</button>
-        <div class="collapse">
-            <p>Inhalt für Februar...</p>
-        </div>
-    </div>
-
-    <!-- März -->
-    <div class="monat-block">
-        <button class="monat-btn">März</button>
-        <div class="collapse">
-            <p>Inhalt für März...</p>
-        </div>
-    </div>
-
-    <!-- April -->
-    <div class="monat-block">
-        <button class="monat-btn">April</button>
-        <div class="collapse">
-            <p>Inhalt für April...</p>
-        </div>
-    </div>
-
-    <!-- Mai -->
-    <div class="monat-block">
-        <button class="monat-btn">Mai</button>
-        <div class="collapse">
-            <p>Inhalt für Mai...</p>
-        </div>
-    </div>
-
-    <!-- Juni -->
-    <div class="monat-block">
-        <button class="monat-btn">Juni</button>
-        <div class="collapse">
-            <p>Inhalt für Juni...</p>
-        </div>
-    </div>
-
-    <!-- Juli -->
-    <div class="monat-block">
-        <button class="monat-btn">Juli</button>
-        <div class="collapse">
-            <p>Inhalt für Juli...</p>
-        </div>
-    </div>
-
-    <!-- August -->
-    <div class="monat-block">
-        <button class="monat-btn">August</button>
-        <div class="collapse">
-            <p>Inhalt für August...</p>
-        </div>
-    </div>
-
-    <!-- September -->
-    <div class="monat-block">
-        <button class="monat-btn">September</button>
-        <div class="collapse">
-            <p>Inhalt für September...</p>
-        </div>
-    </div>
-
-    <!-- Oktober -->
-    <div class="monat-block">
-        <button class="monat-btn">Oktober</button>
-        <div class="collapse">
-            <p>Inhalt für Oktober...</p>
-        </div>
-    </div>
-
-    <!-- November -->
-    <div class="monat-block">
-        <button class="monat-btn">November</button>
-        <div class="collapse">
-            <p>Inhalt für November...</p>
-        </div>
-    </div>
-
-    <!-- Dezember -->
-    <div class="monat-block">
-        <button class="monat-btn">Dezember</button>
-        <div class="collapse">
-            <p>Inhalt für Dezember...</p>
-        </div>
-    </div>
-</div>
+  </div>
 
 
   
