@@ -69,7 +69,15 @@
     font-weight: bold;
 }
 
-
+.navbar-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-radius: 0; /* optional: abgerundet entfernen */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Schatteneffekt */
+}
 
 
 @media (max-width: 840px) {

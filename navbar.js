@@ -3,17 +3,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const cookItems = document.querySelectorAll('.cook-item');
     const navbar = document.querySelector('.navbar');
 
+    // Dropdown-Menü
     kochenLink.addEventListener('click', function (event) {
-        event.preventDefault(); 
+        event.preventDefault();
 
-        let isVisible = false; 
+        let isVisible = false;
 
         cookItems.forEach(item => {
             if (item.style.display === "block") {
                 item.style.display = "none";
             } else {
                 item.style.display = "block";
-                isVisible = true; 
+                isVisible = true;
             }
         });
 
@@ -23,6 +24,13 @@ document.addEventListener("DOMContentLoaded", function () {
             navbar.classList.remove('navbar-expanded');
         }
     });
-});
- 
 
+    // Sticky Navbar
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 0) {
+            navbar.classList.add('navbar-fixed');
+        } else {
+            navbar.classList.remove('navbar-fixed');
+        }
+    });
+});
