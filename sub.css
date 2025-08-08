@@ -16,3 +16,29 @@
 .sub-bild:hover {
     transform: scale(1.05);
 }
+
+
+
+#luckyZufall {
+    position: fixed;       /* bleibt beim Scrollen an der Stelle */
+    bottom: 100px;           /* Abstand vom unteren Bildschirmrand */
+    right: 20px;            /* Abstand vom rechten Rand */
+    background-color: rgb(141, 14, 56);
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    height: auto;
+    padding: 10px;
+    color: white;
+    z-index: 1000;          /* über allen anderen Elementen */
+}
+
+#luckyZufall:hover {
+    background-color: rgb(65, 14, 141);
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    height: auto;
+    padding: 10px;
+    color: whitesmoke;
+}
