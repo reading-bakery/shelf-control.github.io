@@ -21,9 +21,23 @@
 
 #luckyZufall {
     position: fixed;       /* bleibt beim Scrollen an der Stelle */
-    bottom: 100px;           /* Abstand vom unteren Bildschirmrand */
+    bottom: 20px;           /* Abstand vom unteren Bildschirmrand */
     right: 20px;            /* Abstand vom rechten Rand */
     background-color: rgb(141, 14, 56);
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    height: auto;
+    padding: 10px;
+    color: white;
+    z-index: 1000;          /* über allen anderen Elementen */
+}
+
+#backToTop {
+    position: fixed;       /* bleibt beim Scrollen an der Stelle */
+    bottom: 100px;           /* Abstand vom unteren Bildschirmrand */
+    right: 20px;            /* Abstand vom rechten Rand */
+    background-color: rgb(224, 224, 87);
     cursor: pointer;
     border-radius: 8px;
     border: none;
@@ -45,7 +59,7 @@
 
 @media (max-width: 740x) {
     .sub-bild {
-        flex: 1 1 calc(25% - 20px); /* 3 pro Zeile mit Abstand */
-        max-width: calc(25% - 20px);
+        max-width: 50px;
     }
+
 }
