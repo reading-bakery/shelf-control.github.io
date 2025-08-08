@@ -108,12 +108,21 @@
 
 /* Handy-Ansicht: Buttons untereinander */
 @media (max-width: 740px) {
-    .monat-block {
-        display: block;
-        width: 100%;
-    }
+  .monat-block {
+      display: block;
+      width: 100%;
+  }
 
-    .monat-btn {
-        width: 100%;
-    }
+  .monat-btn {
+      width: 100%;
+  }
+
+  .cover-container {
+    justify-content: start; /* optional, damit linksbündig */
+  }
+
+  .cover-img {
+    width: calc((100% - 48px) / 3); /* 3 Bilder pro Zeile mit je 16px Margin */
+    margin: 8px;
+  }
 }
