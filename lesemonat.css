@@ -1,0 +1,71 @@
+/* Hauptcontainer fürs Jahr */
+.lesejahr-2025 {
+    max-width: 700px;      /* Beispiel: max-Breite des Gesamtcontainers */
+    margin: auto;          /* zentriert */
+    background: #1f1f1f;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Jeder Monat ist ein eigener Block: Button + Inhalt */
+.monat-block {
+    display: inline-block;
+    margin: 5px;
+    vertical-align: top;
+}
+
+/* Monats-Button */
+.monat-btn {
+    background-color: rgb(141, 14, 56);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    width: 100px;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+/* Aktiver Button */
+.monat-btn.active {
+    background-color: rgb(65, 14, 141);
+}
+
+/* Hover */
+.monat-btn:hover {
+    background-color: rgb(65, 14, 141);
+}
+
+/* Collapse: Vollbreite + Abstand */
+.collapse {
+    display: none;
+    padding: 10px;
+    background: #f8f8f8;
+    border-radius: 5px;
+    margin-top: 15px;
+    color: black;
+    
+    /* WICHTIG: volle Breite des Elterncontainers (lässt sich von lesejahr-2025 steuern) */
+    width: 100%;
+    box-sizing: border-box;
+    clear: both;  /* damit es unter allen Inline-Blocks steht */
+}
+
+/* Sichtbar */
+.collapse.show {
+    display: block;
+}
+
+/* Handy-Ansicht: Buttons untereinander */
+@media (max-width: 740px) {
+    .monat-block {
+        display: block;
+        width: 100%;
+    }
+
+    .monat-btn {
+        width: 100%;
+    }
+}

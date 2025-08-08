@@ -4,6 +4,7 @@
     justify-content: center;
     gap: 20px;
     padding: 20px;
+    background-color: #1f1f1f;
 }
 
 .sub-bild {
@@ -60,7 +61,7 @@
 @media (max-width: 740px) {
     .sub-bild {
         flex: 1 1 calc(33.333% - 20px); /* 3 pro Zeile, Platz für gap lassen */
-        max-width: calc(33.333% - 20px);
+        max-width: calc(33.333% - 10px);
     }
 
     /* Optional: Container so anpassen, dass es gut aussieht */
