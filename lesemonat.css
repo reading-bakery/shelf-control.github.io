@@ -63,12 +63,15 @@
 }
 
 .cover-container {
-  display: flex;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 10px;
-  height: 200px;
+  display: flex;
 }
+
 
 .cover-img {
   width: 80px;
@@ -95,6 +98,11 @@
 /* Container für abgebrochene Bücher optisch trennen */
 .abgebrochen-container {
   margin-top: 10px;
+}
+
+.collapse.show .cover-container {
+  max-height: 400px;
+  overflow: visible;
 }
 
 

@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const buttons = document.querySelectorAll('.monat-btn');
 
-  // monthNames für die CSV-Zuordnung
   const monthNames = {
     '1': 'Januar',
     '2': 'Februar',
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1702643479&single=true&output=csv';
 
-  // 1) CSV Daten laden und in ein Objekt speichern (monat -> Array von Cover URLs)
+  // Objekt für alle Monate plus Abgebrochen
   let monate = {
     Januar: [],
     Februar: [],
@@ -47,16 +46,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
       for (let i = 1; i < data.length; i++) {
         const row = data[i];
-        if (!row || row.length < 17) continue;
+        if (!row || row.length < 20) continue;
 
-        const monatNum = row[16]?.trim();
-        let monatName = monthNames[monatNum];
+        const fazitRaw = row[19]?.trim();
+        const fazit = fazitRaw ? fazitRaw.toLowerCase() : '';
+        const monatRaw = row[16]?.trim();
 
-        if (!monatName) {
-          if (monatNum && monatNum.toLowerCase() === 'abgebrochen') {
-            monatName = 'Abgebrochen';
+        let monatName = null;
+
+        if (fazit === 'abgebrochen') {
+          monatName = 'Abgebrochen'; // Nur hier speichern
+        } else {
+          const monatNum = parseInt(monatRaw, 10);
+          if (!isNaN(monatNum) && monatNum >= 1 && monatNum <= 12) {
+            monatName = monthNames[monatNum.toString()];
           } else {
-            continue;
+            continue; // Kein gültiger Monat → überspringen
           }
         }
 
@@ -70,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Fehler beim Laden der CSV:', error);
     });
 
-  // 2) Eventlistener für Buttons
   buttons.forEach(button => {
     button.addEventListener('click', () => {
       const monat = button.textContent.trim();
@@ -93,10 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!isOpen) {
         // Collapse öffnen und Button aktivieren
-        collapseDiv.style.maxHeight = collapseDiv.scrollHeight + "px";
-        collapseDiv.style.padding = "10px";
-        button.classList.add('active');
-
         // Bilder für den Monat laden und anzeigen
         const coverUrls = monate[monat] || [];
         coverUrls.forEach(url => {
@@ -108,9 +108,15 @@ document.addEventListener('DOMContentLoaded', () => {
           collapseDiv.appendChild(img);
         });
 
-        // Damit maxHeight korrekt gesetzt wird, nochmal anpassen
-        // (weil Inhalte jetzt hinzugekommen sind)
-        collapseDiv.style.maxHeight = collapseDiv.scrollHeight + "px";
+        // Padding setzen
+        collapseDiv.style.padding = "10px";
+
+        // maxHeight nach Rendering anpassen
+        requestAnimationFrame(() => {
+          collapseDiv.style.maxHeight = collapseDiv.scrollHeight + "px";
+        });
+
+        button.classList.add('active');
       }
     });
   });
