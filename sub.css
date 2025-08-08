@@ -42,3 +42,10 @@
     padding: 10px;
     color: whitesmoke;
 }
+
+@media (max-width: 768px) {
+    .sub-bild {
+        flex: 1 1 calc(33.333% - 20px); /* 3 pro Zeile mit Abstand */
+        max-width: calc(33.333% - 20px);
+    }
+}
