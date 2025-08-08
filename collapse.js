@@ -70,6 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         monate[monatName].push(coverUrl);
       }
+
+      // Bilder vorladen für schnellere Anzeige
+      Object.values(monate).flat().forEach(url => {
+        const img = new Image();
+        img.src = url;
+      });
     })
     .catch(error => {
       console.error('Fehler beim Laden der CSV:', error);
@@ -97,24 +103,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!isOpen) {
         // Collapse öffnen und Button aktivieren
-        // Bilder für den Monat laden und anzeigen
         const coverUrls = monate[monat] || [];
+
         coverUrls.forEach(url => {
           const img = document.createElement('img');
           img.className = 'cover-img';
           img.src = url;
           img.alt = 'Buchcover';
-          img.loading = 'lazy';
+          img.loading = 'eager'; // Direkt laden ohne lazy
           collapseDiv.appendChild(img);
         });
 
-        // Padding setzen
         collapseDiv.style.padding = "10px";
-
-        // maxHeight nach Rendering anpassen
-        requestAnimationFrame(() => {
-          collapseDiv.style.maxHeight = collapseDiv.scrollHeight + "px";
-        });
+        collapseDiv.style.maxHeight = "1000px"; // Große maxHeight = sofort komplett sichtbar
 
         button.classList.add('active');
       }

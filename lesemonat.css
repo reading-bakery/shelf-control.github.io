@@ -32,12 +32,14 @@
 .monat-btn.active {
   background-color: #63b8ff;   /* Beispiel Farbe */
   color: white;
+  font-weight: bold;
 }
 
 
 /* Hover */
 .monat-btn:hover {
     background-color: #63b8ff;
+    font-weight: bold;
 }
 
 .collapse {
@@ -122,7 +124,10 @@
   }
 
   .cover-img {
-    width: calc((100% - 48px) / 3); /* 3 Bilder pro Zeile mit je 16px Margin */
+    width: calc((100% - 20px) / 3); /* 3 Bilder pro Zeile mit je 16px Margin */
     margin: 8px;
+    max-width: calc(33.333% - 10px);
   }
+
+
 }
