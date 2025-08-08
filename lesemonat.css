@@ -45,21 +45,21 @@
   overflow: hidden;
   transition: max-height 0.3s ease, padding 0.3s ease;
   padding: 0 10px;
-  background-color: aliceblue;
+  background-color: #1f1f1f;
   border-radius: 6px;
-
-  /* Max-Höhe beschränken, z.B. 300px */
-  max-height: 0;
-  max-height: 300px; /* Das ist nur initial, überschrieben durch JS */
-  overflow-y: auto;  /* Scrollbar bei zu viel Inhalt */
 }
 
 
 
 /* Sichtbar */
 .collapse.show {
-    display: block;
-    border-radius: 6px;
+.collapse.show {
+  display: block;
+  max-height: none;       /* Höhe an den Inhalt anpassen */
+  overflow: visible;     /* kein Scrollen */
+  padding: 10px;         /* Optional: etwas Innenabstand */
+  border-radius: 6px;
+}
 }
 
 .cover-container {
@@ -67,6 +67,7 @@
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 10px;
+  height: 200px;
 }
 
 .cover-img {
@@ -77,7 +78,10 @@
   box-shadow: 0 0 4px rgba(0,0,0,0.3);
   transition: transform 0.3s;
   cursor: pointer;
+  margin: 8px; /* Abstand rundherum */
 }
+
+
 .cover-img:hover {
   transform: scale(1.05);
 }
