@@ -37,7 +37,7 @@
 
 /* Hover */
 .monat-btn:hover {
-    background-color: rgb(65, 14, 141);
+    background-color: #63b8ff;
 }
 
 .collapse {
@@ -47,7 +47,13 @@
   padding: 0 10px;
   background-color: aliceblue;
   border-radius: 6px;
+
+  /* Max-Höhe beschränken, z.B. 300px */
+  max-height: 0;
+  max-height: 300px; /* Das ist nur initial, überschrieben durch JS */
+  overflow-y: auto;  /* Scrollbar bei zu viel Inhalt */
 }
+
 
 
 /* Sichtbar */
@@ -55,6 +61,38 @@
     display: block;
     border-radius: 6px;
 }
+
+.cover-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.cover-img {
+  width: 80px;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+.cover-img:hover {
+  transform: scale(1.05);
+}
+
+/* Abgebrochene Bücher z.B. mit rotem Rahmen */
+.cover-img.abgebrochen {
+  border: 2px solid red;
+  opacity: 0.7;
+}
+
+/* Container für abgebrochene Bücher optisch trennen */
+.abgebrochen-container {
+  margin-top: 10px;
+}
+
 
 /* Handy-Ansicht: Buttons untereinander */
 @media (max-width: 740px) {
