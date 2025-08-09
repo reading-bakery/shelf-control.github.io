@@ -22,10 +22,9 @@
     cursor: pointer;
     border-radius: 8px;
     border: none;
-    height: auto;
     padding: 10px;
     color: white;
-    z-index: 1000; /* Hoch genug, damit Button über allem liegt */
+    z-index: 1000; /* hoch genug */
 }
 
 /* Monats-Button */
@@ -139,12 +138,12 @@
   }
 
   .cover-container {
-    justify-content: start; /* optional, damit linksbündig */
+    justify-content: center; /* optional, damit linksbündig *
   }
 
 .cover-img {
-    width: calc((100% - 12px) / 4); /* 4 Bilder pro Reihe */
-    margin: 4px;                    /* kleinerer Abstand */
-    max-width: calc(25% - 6px);
+    width: calc(100% - 12px) / 5; /* 4 Bilder pro Reihe */
+    margin: 3px;                    /* kleinerer Abstand */
+    max-width: calc(25% - 4px);
   }
 }
