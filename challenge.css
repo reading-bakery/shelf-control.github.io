@@ -40,11 +40,13 @@ p {
 
 
 .grid-thumb .covers img {
-    max-width: 100%;
-    height: auto;
-    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3; /* z.B. typisches Buchformat */
+    object-fit: cover;   /* füllt das Verhältnis ohne Verzerrung */
     border-radius: 5px;
+    display: block;
 }
+
 
 .ziele-container:hover {
     transform: scale(1.01);
