@@ -123,11 +123,9 @@
     justify-content: start; /* optional, damit linksbündig */
   }
 
-  .cover-img {
-    width: calc((100% - 20px) / 3); /* 3 Bilder pro Zeile mit je 16px Margin */
-    margin: 8px;
-    max-width: calc(33.333% - 10px);
+.cover-img {
+    width: calc((100% - 12px) / 4); /* 4 Bilder pro Reihe */
+    margin: 4px;                    /* kleinerer Abstand */
+    max-width: calc(25% - 6px);
   }
-
-
 }
