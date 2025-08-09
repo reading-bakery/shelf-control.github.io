@@ -12,6 +12,7 @@
     display: inline-block;
     margin: 5px;
     vertical-align: top;
+    z-index: 1;
 }
 
 #backToTop {
@@ -39,6 +40,7 @@
     width: 150px;
     transition: background-color 0.3s;
     text-align: center;
+    z-index: 1;
 }
 
 /* Aktiver Button */
@@ -46,6 +48,7 @@
   background-color: #63b8ff;   /* Beispiel Farbe */
   color: white;
   font-weight: bold;
+  z-index: 1;
 }
 
 
@@ -63,19 +66,19 @@
   background-color: #1f1f1f;
   border-radius: 6px;
   margin-top: 5px;
+  z-index: 1;
 }
 
 
 
 /* Sichtbar */
 .collapse.show {
-.collapse.show {
   display: block;
   max-height: none;       /* Höhe an den Inhalt anpassen */
   overflow: visible;     /* kein Scrollen */
   padding: 10px;         /* Optional: etwas Innenabstand */
   border-radius: 6px;
-}
+  z-index: 1;
 }
 
 .cover-container {
@@ -87,7 +90,7 @@
   margin-top: 10px;
   display: flex;
   position: relative; /* falls noch nicht gesetzt */
-  z-index: auto; /* deutlich niedriger als 1000 */
+  z-index: 1; /* deutlich niedriger als 1000 */
 }
 
 
@@ -112,10 +115,7 @@
 }
 
 
-/* Container für abgebrochene Bücher optisch trennen */
-.abgebrochen-container {
-  margin-top: 10px;
-}
+
 
 .collapse.show .cover-container {
   max-height: 400px;
