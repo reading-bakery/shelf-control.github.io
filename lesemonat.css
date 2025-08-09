@@ -14,6 +14,20 @@
     vertical-align: top;
 }
 
+#backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgb(224, 224, 87);
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    height: auto;
+    padding: 10px;
+    color: white;
+    z-index: 1000; /* Hoch genug, damit Button über allem liegt */
+}
+
 /* Monats-Button */
 .monat-btn {
     background-color: rgb(141, 14, 56);
@@ -23,7 +37,7 @@
     border-radius: 6px;
     cursor: pointer;
     text-align: left;
-    width: 100px;
+    width: 150px;
     transition: background-color 0.3s;
     text-align: center;
 }
@@ -72,7 +86,10 @@
   gap: 10px;
   margin-top: 10px;
   display: flex;
+  position: relative; /* falls noch nicht gesetzt */
+  z-index: 1; /* deutlich niedriger als 1000 */
 }
+
 
 
 .cover-img {
@@ -84,6 +101,8 @@
   transition: transform 0.3s;
   cursor: pointer;
   margin: 8px; /* Abstand rundherum */
+  position: relative; /* falls nötig */
+  z-index: 1;
 }
 
 
