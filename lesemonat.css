@@ -3,8 +3,14 @@
     max-width: 700px;      /* Beispiel: max-Breite des Gesamtcontainers */
     margin: auto;          /* zentriert */
     background: #1f1f1f;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
+}
+
+h3 {
+    font-size: 3rem;
+    color: rgb(223, 223, 199);
+    padding: 10px;
 }
 
 /* Jeder Monat ist ein eigener Block: Button + Inhalt */
@@ -30,7 +36,7 @@
 
 /* Monats-Button */
 .monat-btn {
-    background-color: rgb(141, 14, 56);
+    background-color: #ff7256 ;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -81,19 +87,6 @@
   z-index: 1;
 }
 
-.cover-container {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-  display: flex;
-  position: relative; /* falls noch nicht gesetzt */
-  z-index: 1; /* deutlich niedriger als 1000 */
-}
-
-
 
 .cover-img {
   width: 80px;
@@ -113,8 +106,6 @@
 .cover-img:hover {
   transform: scale(1.05);
 }
-
-
 
 
 .collapse.show .cover-container {
