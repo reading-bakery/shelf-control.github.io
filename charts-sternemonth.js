@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
           },
           x: {
             ticks: {
-              color: ctx => ctx.index === activeIndexSterne ? '#3CB371' : 'white',
+              color: ctx => ctx.index === activeIndexSterne ? '#9370DB' : 'white',
               maxRotation: 0,
               minRotation: 0,
               font: ctx => ({
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       };
 
-      renderSternemonthChart('sternemonthChart', '', labels, sternemonthData, '#3CB371', optionsSterne);
+      renderSternemonthChart('sternemonthChart', '', labels, sternemonthData, '#9370DB', optionsSterne);
     })
     .catch(err => console.error('Fehler beim Laden der CSV:', err));
 });

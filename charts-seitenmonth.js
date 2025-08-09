@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
               color: ctx => {
                 if (activeIndexSeiten === null) return 'white';
                 if (ctx.index === activeIndexSeiten) {
-                  return '#9370DB'; // Linienfarbe
+                  return '#63b8ff'; // Linienfarbe
                 }
                 return 'white';
               },
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       };
 
-      renderSeitenmonthChart('seitenmonthChart', '', labels, seitenmonthData, '#9370DB', optionsSeiten);
+      renderSeitenmonthChart('seitenmonthChart', '', labels, seitenmonthData, '#63b8ff', optionsSeiten);
     })
     .catch(err => console.error('Fehler beim Laden der CSV:', err));
 });

@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
           },
           x: {
             ticks: {
-              color: ctx => ctx.index === activeIndexMinuten ? '#FFB90F' : 'white',
+              color: ctx => ctx.index === activeIndexMinuten ? '#ff7256' : 'white',
               maxRotation: 0,
               minRotation: 0,
               font: ctx => ({
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       };
 
-      renderMinutenmonthChart('minutenmonthChart', '', labels, minutenmonthData, '#3CB371', optionsMinuten);
+      renderMinutenmonthChart('minutenmonthChart', '', labels, minutenmonthData, '#ff7256', optionsMinuten);
     })
     .catch(err => console.error('Fehler beim Laden der CSV:', err));
 });
@@ -114,8 +114,8 @@ function renderMinutenmonthChart(canvasId, label, labels, data, color, options) 
       datasets: [{
         label: label,
         data: data,
-        backgroundColor: '#FFB90F',
-        borderColor: '#FFB90F',
+        backgroundColor: '#ff7256',
+        borderColor: '#ff7256',
         borderWidth: 3,
         fill: false,
         tension: 0.4,

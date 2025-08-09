@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const ctx = chart.ctx;
             const centerX = chart.width / 2;
             const centerY = chart.height / 2;
-            const active = chart.tooltip._active;
+            const active = chart.tooltip?._active || [];
 
             if (active && active.length) {
               const idx = active[0].index;

@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="navbar.css">
 
   <script src="toggle.js" defer></script>
-  <script src="navbar.js" defer></script>
   <script src="backtop.js" defer></script>
 
 </head>
@@ -201,25 +200,10 @@
     statusDiv.style.color = "white";
     submitted = false;
     document.querySelector("form").reset();
-    const preview = document.getElementById('preview');
-    preview.style.display = 'none';
-    preview.src = '#';
   }
 }
 
-    // Vorschau für Cover
-    document.addEventListener("DOMContentLoaded", function () {
-      const coverInput = document.getElementById('cover');
-      const preview = document.getElementById('preview');
-
-      coverInput.addEventListener('change', function () {
-        const file = this.files[0];
-        if (file) {
-          preview.src = URL.createObjectURL(file);
-          preview.style.display = 'block';
-        }
-      });
-    });
+   
 
     
   

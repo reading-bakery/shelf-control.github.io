@@ -1,6 +1,6 @@
 Chart.register(ChartDataLabels);
 
-const lineColor = '#63b8ff';
+const lineColor = '#FFB90F';
 let chartAusgaben = null;
 let activeIndexAusgabe = null;
 
