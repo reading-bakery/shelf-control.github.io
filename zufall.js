@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         img.src = baseURL + dateiname;
         img.alt = "Zufälliges Buchcover: " + dateiname;
         img.loading = "lazy";
-        img.classList.add("sub-bild");
+        img.classList.add("sub-bild", "sub-bild-large");  // große Klasse nur für Zufallsbild
 
         container.appendChild(img);
     });

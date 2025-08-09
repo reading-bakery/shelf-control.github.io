@@ -18,6 +18,12 @@
     transform: scale(1.05);
 }
 
+.sub-bild-large {
+    width: 200px;
+    max-width: none;       /* Wichtig, um das Limit von .sub-bild aufzuheben */
+    height: auto;          /* proportional */
+    box-shadow: 0 0 8px rgba(0,0,0,0.6);
+}
 
 
 #luckyZufall {
@@ -67,5 +73,12 @@
     /* Optional: Container so anpassen, dass es gut aussieht */
     .sub {
         gap: 10px; /* Weniger Abstand bei kleinen Displays */
+    }
+
+    .sub-bild-large {
+        width: 15px;
+        max-width: none;       /* Wichtig, um das Limit von .sub-bild aufzuheben */
+        height: auto;          /* proportional */
+        box-shadow: 0 0 8px rgba(0,0,0,0.6);
     }
 }
