@@ -15,6 +15,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     transition: transform 0.3s;
+    cursor: pointer;
 }
 
 .wishlist-bild:hover {
@@ -26,6 +27,7 @@
     max-width: none;       /* Wichtig, um das Limit von .sub-bild aufzuheben */
     height: auto;          /* proportional */
     box-shadow: 0 0 8px rgba(0,0,0,0.6);
+    cursor: pointer;
 }
 
 
