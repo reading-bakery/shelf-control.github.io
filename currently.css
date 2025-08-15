@@ -1,0 +1,39 @@
+#currently {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.currently-book {
+    width: 180px;
+    text-align: center;
+    font-family: 'Dosis', sans-serif;
+}
+
+.currently-cover {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.currently-info {
+    margin-top: 10px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 5px 0;
+}
+
+.progress-bar .progress {
+    height: 100%;
+    background: #63b8ff;
+    width: 0%;
+    transition: width 0.5s ease;
+}
