@@ -17,11 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const start = book["Start"];
             const end = book["Ende"];
             if (start && !end) {
-                const title = book["Titel"] || book["Buch"] || "";
                 const cover = book["Cover"];
                 const totalPages = parseInt(book["Seitenzahl total"]) || 0;
                 const totalMinutes = parseInt(book["Minuten total"]) || 0;
                 const format = book["Format"];
+                const title = book["Titel"] || book["Buch"] || "";
 
                 // Fortschritt berechnen
                 let progress = 0;
@@ -42,13 +42,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 const bookDiv = document.createElement("div");
                 bookDiv.classList.add("currently-book");
                 bookDiv.innerHTML = `
-                    <img src="${cover}" alt="${title}" class="currently-cover">
+                    <img src="${cover}" alt="" class="currently-cover">
                     <div class="currently-info">
-                        <h3>${title}</h3>
                         <div class="progress-bar">
                             <div class="progress" style="width: ${percentage}%;"></div>
                         </div>
-                        <p>${progress} / ${total} ${format === "Hörbuch" ? "Minuten" : "Seiten"}</p>
+                        <p>${progress} / ${total} ${format === "Hörbuch" ? "Minuten" : "Seiten"} (${percentage.toFixed(0)}%)</p>
                     </div>
                 `;
                 container.appendChild(bookDiv);

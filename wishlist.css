@@ -1,0 +1,84 @@
+.wishlist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #1f1f1f;
+}
+
+.wishlist-bild {
+    max-width: 90px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+
+.wishlist-bild:hover {
+    transform: scale(1.05);
+}
+
+.wishlist-bild-large {
+    width: 200px;
+    max-width: none;       /* Wichtig, um das Limit von .sub-bild aufzuheben */
+    height: auto;          /* proportional */
+    box-shadow: 0 0 8px rgba(0,0,0,0.6);
+}
+
+
+#luckyZufall {
+    position: fixed;       /* bleibt beim Scrollen an der Stelle */
+    bottom: 20px;           /* Abstand vom unteren Bildschirmrand */
+    right: 20px;            /* Abstand vom rechten Rand */
+    background-color: rgb(141, 14, 56);
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    height: auto;
+    padding: 10px;
+    color: white;
+    z-index: 1000;          /* über allen anderen Elementen */
+}
+
+#backToTop {
+    position: fixed;       /* bleibt beim Scrollen an der Stelle */
+    bottom: 100px;           /* Abstand vom unteren Bildschirmrand */
+    right: 20px;            /* Abstand vom rechten Rand */
+    background-color: rgb(224, 224, 87);
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    height: auto;
+    padding: 10px;
+    color: white;
+    z-index: 1000;          /* über allen anderen Elementen */
+}
+
+#luckyZufall:hover {
+    background-color: rgb(65, 14, 141);
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    height: auto;
+    padding: 10px;
+    color: whitesmoke;
+}
+
+@media (max-width: 740px) {
+    .wishlist-bild {
+        flex: 1 1 calc(33.333% - 20px); /* 3 pro Zeile, Platz für gap lassen */
+        max-width: calc(33.333% - 10px);
+    }
+
+    /* Optional: Container so anpassen, dass es gut aussieht */
+    .wishlist {
+        gap: 10px; /* Weniger Abstand bei kleinen Displays */
+    }
+
+    .wishlist-bild-large {
+        width: 15px;
+        max-width: none;       /* Wichtig, um das Limit von .sub-bild aufzuheben */
+        height: auto;          /* proportional */
+        box-shadow: 0 0 8px rgba(0,0,0,0.6);
+    }
+}
