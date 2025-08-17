@@ -1,0 +1,127 @@
+/* Container für Monatschallenge */
+.card .monatschallenge {
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Carousel */
+.carousel-2 {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.carousel-track-2 {
+    display: flex;
+    flex-direction: column; /* Monate untereinander */
+    transition: all 0.5s ease;
+    scroll-behavior: smooth;
+    overflow-y: auto;
+    max-height: 600px;
+    scrollbar-width: none;
+
+    justify-content: flex-start; /* <--- oberer Rand */
+    align-items: center; /* optional, falls du die Slides horizontal zentrieren willst */
+}
+
+.carousel-track-2::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+/* Slide – einzelne Monate */
+.carousel-slide-2 {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start; /* links oben ausrichten */
+    align-items: flex-start;     /* vertikal oben */
+}
+
+/* Einzelner Monat */
+.month-block-2 {
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    flex: 1;              /* jeder Monat nimmt gleich viel Platz */
+    max-width: 100%;       /* 2 Monate pro Slide */
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+    height: auto;
+}
+
+.month-block-2 h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.month-theme-2 {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.8rem;
+}
+
+/* Bücher-Wrapper */
+.books-wrapper-2 {
+    display: flex; /* Bücher nebeneinander */
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap; /* bei vielen Büchern umbrechen */
+    margin-bottom: 10px;
+}
+
+.book {
+    position: relative;
+    width: 80px;
+    height: 120px; /* Feste Höhe hinzugefügt, um ein 2:3-Verhältnis zu erhalten */
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+
+
+.book img {
+    width: 100%;
+    height: 100%; /* Ändern Sie dies, damit das Bild die feste Höhe des Containers füllt */
+    object-fit: cover;
+}
+
+.book-status-icon {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 40px;
+    height: 40px;
+    color: grey;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+}
+
+/* Dots */
+.carousel-dots {
+    text-align: center;
+    margin-top: 0.8rem;
+}
+
+.carousel-dots button {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border-radius: 50%;
+    border: none;
+    background-color: #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+
+.carousel-dots button.active {
+    background-color: #ff7256;
+    transform: scale(1.2);
+}
