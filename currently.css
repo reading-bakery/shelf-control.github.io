@@ -62,6 +62,12 @@ transform: scale(1.03);
         height: auto; /* Stellt sicher, dass das Seitenverhältnis beibehalten wird */
     }
 
+    .currently-info {
+        display: flex; /* Flexbox aktivieren */
+        flex-direction: column; /* Elemente untereinander anordnen */
+        /* ... weitere Stilangaben ... */
+    }
+
     .progress-bar {
         width: calc(50% - 15px);
         height: 10px;
