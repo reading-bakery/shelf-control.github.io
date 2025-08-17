@@ -61,8 +61,8 @@ transform: scale(1.03);
     }
     
     .currently-cover {
-        width: 100px; /* Feste Breite bleibt erhalten */
-        height: 170px;
+        width: 120px; /* Feste Breite bleibt erhalten */
+        height: 190px;
     }
 
     .currently-info {
@@ -72,7 +72,7 @@ transform: scale(1.03);
     }
 
     .progress-bar {
-        width: 100%; /* Passt sich der vollen Breite des currently-info-Containers an */
+        width: 120px; /* Passt sich der vollen Breite des currently-info-Containers an */
         height: 10px;
     }
 }
