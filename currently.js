@@ -1,3 +1,4 @@
+// currently.js
 document.addEventListener("DOMContentLoaded", () => {
     const booksCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1702643479&single=true&output=csv";
     const dailyCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv";
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="progress-bar">
                             <div class="progress" style="width: ${percentage}%;"></div>
                         </div>
-                        <p>${progress} / ${total} ${format === "Hörbuch" ? "Minuten" : "Seiten"} (${percentage.toFixed(0)}%)</p>
+                        <p>${progress} / ${total} ${format === "Hörbuch" ? "Minuten" : "Seiten"} <br> (${percentage.toFixed(0)}%)</p>
                     </div>
                 `;
                 container.appendChild(bookDiv);

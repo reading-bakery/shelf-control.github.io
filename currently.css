@@ -54,22 +54,17 @@ transform: scale(1.03);
 
 @media (max-width: 740px) {
     .curr {
-        gap: 10px; /* Weniger Abstand bei kleinen Displays */
+        gap: 8px; /* Weniger Abstand bei kleinen Displays */
     }
 
     .currently-cover {
-        width: calc(50% - 15px); /* Passt zwei Bilder pro Zeile an */
+        width: calc(50% - 30px); /* Passt zwei Bilder pro Zeile an */
         height: auto; /* Stellt sicher, dass das Seitenverhältnis beibehalten wird */
     }
 
-    .currently-info {
-        display: flex; /* Flexbox aktivieren */
-        flex-direction: column; /* Elemente untereinander anordnen */
-        /* ... weitere Stilangaben ... */
-    }
 
     .progress-bar {
-        width: calc(50% - 15px);
+        width: calc(50% - 30px);
         height: 10px;
         background: #353434ff;
         border-radius: 5px;
