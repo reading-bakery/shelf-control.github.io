@@ -3,8 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=476127889&single=true&output=csv";
     const container = document.querySelector(".abc-challenge");
 
-    const PLACEHOLDER = "https://via.placeholder.com/150x220?text=?";
-
     Papa.parse(csvUrl, {
         download: true,
         header: true,
@@ -36,11 +34,25 @@ document.addEventListener("DOMContentLoaded", () => {
         const div = document.createElement("div");
         div.classList.add("abc-card");
 
-        const imgSrc = item.Cover || PLACEHOLDER;
-        div.innerHTML = `
-            <img src="${imgSrc}" alt="${item.Buch || ''}">
-            <span class="abc-letter">${item.Buchstabe}</span>
-        `;
+        let content;
+        if (item.Cover) {
+            content = `<img src="${item.Cover}" alt="${item.Buch || ''}">`;
+        } else {
+            content = `<div class="abc-placeholder"></div>`;
+        }
+
+        // Buchstaben in einzelne <span> aufsplitten
+        const letterContainer = document.createElement("div");
+        letterContainer.classList.add("abc-letter-container");
+        [...item.Buchstabe].forEach(letter => {
+            const span = document.createElement("span");
+            span.classList.add("abc-letter");
+            span.textContent = letter;
+            letterContainer.appendChild(span);
+        });
+
+        div.innerHTML = content;
+        div.appendChild(letterContainer);
 
         return div;
     }
