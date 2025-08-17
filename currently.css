@@ -58,18 +58,13 @@ transform: scale(1.03);
     }
 
     .currently-cover {
-        width: calc(50% - 30px); /* Passt zwei Bilder pro Zeile an */
+        width: calc(50% - 4px); /* Passt zwei Bilder pro Zeile an */
         height: auto; /* Stellt sicher, dass das Seitenverhältnis beibehalten wird */
     }
 
 
     .progress-bar {
-        width: calc(50% - 30px);
+        width: calc(50% - 4px);
         height: 10px;
-        background: #353434ff;
-        border-radius: 5px;
-        overflow: hidden;
-        margin: 5px 0;
-        cursor: pointer;
     }
 }
