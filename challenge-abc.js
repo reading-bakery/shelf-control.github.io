@@ -103,6 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
         container.appendChild(carousel);
 
         let currentSlide = 0;
+        let startX = 0;
+        let isDragging = false;
 
         function goToSlide(index) {
             currentSlide = index;
@@ -110,5 +112,33 @@ document.addEventListener("DOMContentLoaded", () => {
             track.style.transform = `translateX(${offset}%)`;
             nav.querySelectorAll(".abc-dot").forEach((d, i) => d.classList.toggle("active", i === index));
         }
+
+        // Touch-Events für Swipe
+        track.addEventListener("touchstart", e => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        });
+
+        track.addEventListener("touchmove", e => {
+            if (!isDragging) return;
+            const moveX = e.touches[0].clientX;
+            const diff = moveX - startX;
+            track.style.transform = `translateX(${-100 * currentSlide + (diff / carousel.offsetWidth) * 100}%)`;
+        });
+
+        track.addEventListener("touchend", e => {
+            if (!isDragging) return;
+            isDragging = false;
+            const endX = e.changedTouches[0].clientX;
+            const diff = endX - startX;
+
+            if (diff < -50 && currentSlide < totalSlides - 1) {
+                goToSlide(currentSlide + 1);
+            } else if (diff > 50 && currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            } else {
+                goToSlide(currentSlide); // zurück zur aktuellen Slide
+            }
+        });
     }
 });
