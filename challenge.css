@@ -1,3 +1,4 @@
+/* Überschriften */
 h2 {
     font-family: "Bebas Neue", sans-serif;
     font-size: 3rem;
@@ -19,7 +20,7 @@ h3 {
     font-family: "Bebas Neue", sans-serif;
 }
 
-
+/* Textabsätze */
 p {
     font-family: "Dosis", sans-serif;
     font-size: clamp(0.9rem, 2vw, 1rem);
@@ -29,38 +30,62 @@ p {
     word-break: break-word;
 }
 
+/* Grid für Thumbnails */
 .grid-thumb {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    text-align: center;
-    padding: 1rem;
-    gap: 15px;
-    cursor: pointer;
+    gap: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-
-.grid-thumb .covers img {
+/* Carousel innerhalb des Grids über alle Spalten */
+.grid-thumb .abc-carousel {
+    grid-column: 1 / -1; /* nimmt alle Grid-Spalten ein */
     width: 100%;
-    aspect-ratio: 2 / 3; /* z.B. typisches Buchformat */
-    object-fit: cover;   /* füllt das Verhältnis ohne Verzerrung */
+    height: auto;
+    overflow: hidden;
+}
+
+.grid-thumb .abc-carousel-track {
+    display: flex;
+    width: 100%;
+}
+
+.grid-thumb .abc-carousel-slide {
+    flex: 0 0 100%; /* jede Slide nimmt volle Breite ein */
+    height: auto;
+}
+
+.abc-carousel img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Covers & Cards */
+.grid-thumb .covers,
+.grid-thumb .abc-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-thumb .covers img,
+.abc-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 5px;
     display: block;
 }
 
-
-.ziele-container:hover {
-    transform: scale(1.01);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-}
-
-.card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-}
-
-
 .grid-thumb .covers {
-    position: relative; /* Referenz für das SVG */
+    position: relative; /* Referenz für SVG */
 }
 
 .grid-thumb .covers svg {
@@ -69,93 +94,130 @@ p {
     right: 0px;
     width: 40px;
     height: 40px;
-    color: grey; /* Farbe der Plakette */
-    background-color: rgba(0, 0, 0, 0.6); /* Optional: Hintergrund für Lesbarkeit */
-    border-radius: 50%; /* Optional: runde Hintergrundfläche */
-    padding: 4px; /* Optional: etwas Innenabstand */
+    color: grey;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    padding: 4px;
 }
 
+/* Legend */
 .legend {
     font-family: 'Dosis', sans-serif;
     font-size: 12px;
     text-align: center;
     color: whitesmoke;
     margin-top: -5px;
-    margin-bottom:5px;
+    margin-bottom: 5px;
     letter-spacing: 0.5px;
 }
 
-.bingo-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin: 15px;
+/* Hover Effekte */
+.ziele-container:hover,
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
+/* Bingo Grid */
+.bingo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 15px;
+}
+
+/* Flip Cards */
 .flip-container {
-  perspective: 1000px;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  cursor: pointer;
+    perspective: 1000px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
 }
 
 .flip-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.6s;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
 }
 
 .flipped .flip-inner {
-  transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }
 
 .flip-front, .flip-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  border: 1px solid #353434ff;
-  border-radius: 8px;
-  background: #353434ff;
-  color: whitesmoke;
-  font-size: 0.85rem;
-  font-weight: normal;
-  text-align: center;
-  hyphens: auto;
-  word-wrap: break-word; 
-  overflow-wrap: break-word;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #353434ff;
+    border-radius: 8px;
+    background: #353434ff;
+    color: whitesmoke;
+    font-size: 0.85rem;
+    font-weight: normal;
+    text-align: center;
+    hyphens: auto;
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
 }
 
 .flip-back {
-  transform: rotateY(180deg);
-  background: #9370DB;
-  color: white;
+    transform: rotateY(180deg);
+    background: #9370DB;
+    color: white;
 }
 
 .no-flip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  border: 5px dashed #353434ff;
-  border-radius: 8px;
-  background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 5px dashed #353434ff;
+    border-radius: 8px;
+    background: #f0f0f0;
 }
 
- 
-@media (max-width: 600px) {
-  .bingo-grid {
+/* ABC Challenge & Grid */
+.abc-challenge {
+    width: 100%;
+    grid-column: 1/-1;
+}
+
+.abc-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 15px;
-  }
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
 }
 
+/* Carousel Navigation */
+.abc-carousel-nav {
+    text-align: center;
+    margin-top: 10px;
+}
 
+.abc-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.abc-dot.active {
+    background: #ff7256;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .bingo-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
