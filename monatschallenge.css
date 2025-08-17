@@ -140,7 +140,6 @@
     border: none;
     background-color: #ccc;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
