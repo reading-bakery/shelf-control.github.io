@@ -61,8 +61,8 @@ transform: scale(1.03);
     }
     
     .currently-cover {
-        width: 170px; /* Feste Breite bleibt erhalten */
-        height: 250px;
+        width: 150px; /* Feste Breite bleibt erhalten */
+        height: 240px;
     }
 
     .currently-info {
