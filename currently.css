@@ -42,8 +42,6 @@ transform: scale(1.03);
 }
 
 
-
-
 .progress-bar .progress {
     height: 100%;
     width: 0%;
@@ -53,8 +51,24 @@ transform: scale(1.03);
 }
 
 
+
 @media (max-width: 740px) {
-    .corr {
+    .curr {
         gap: 10px; /* Weniger Abstand bei kleinen Displays */
+    }
+
+    .currently-cover {
+        width: calc(50% - 15px); /* Passt zwei Bilder pro Zeile an */
+        height: auto; /* Stellt sicher, dass das Seitenverhältnis beibehalten wird */
+    }
+
+    .progress-bar {
+        width: calc(50% - 15px);
+        height: 10px;
+        background: #353434ff;
+        border-radius: 5px;
+        overflow: hidden;
+        margin: 5px 0;
+        cursor: pointer;
     }
 }
