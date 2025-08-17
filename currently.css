@@ -53,18 +53,26 @@ transform: scale(1.03);
 
 
 @media (max-width: 740px) {
-    .curr {
-        gap: 8px; /* Weniger Abstand bei kleinen Displays */
+.curr {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px; /* Abstand zwischen Bild und Text */
     }
-
+    
     .currently-cover {
-        width: calc(50% - 4px); /* Passt zwei Bilder pro Zeile an */
-        height: auto; /* Stellt sicher, dass das Seitenverhältnis beibehalten wird */
+        width: 170px; /* Feste Breite bleibt erhalten */
+        height: 250px;
     }
 
+    .currently-info {
+        display: flex;
+        flex-direction: column; /* Elemente untereinander anordnen */
+        flex-grow: 1; /* Füllt den verbleibenden Platz */
+    }
 
     .progress-bar {
-        width: calc(50% - 4px);
+        width: 100%; /* Passt sich der vollen Breite des currently-info-Containers an */
         height: 10px;
     }
 }
