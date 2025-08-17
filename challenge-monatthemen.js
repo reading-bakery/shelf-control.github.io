@@ -7,19 +7,16 @@ async function loadMonateCarousel() {
 
     if (rows.length < 2) return;
 
-    const header = rows[0];
     const dataRows = rows.slice(1);
 
-    let currentSlide;
-
-    // Carousel-Dots-Container
     const numSlides = Math.ceil(dataRows.length / 3);
     const dotsContainer = document.createElement('div');
     dotsContainer.classList.add('carousel-dots');
-    container.insertBefore(dotsContainer, container.firstChild); // Dots an den Anfang des Containers verschieben
+    container.insertBefore(dotsContainer, container.firstChild);
 
+    let currentSlide;
     dataRows.forEach((row, index) => {
-        if (index % 3 === 0) { // 3 Monate pro Slide
+        if (index % 3 === 0) {
             currentSlide = document.createElement('div');
             currentSlide.classList.add('carousel-slide-2');
             container.appendChild(currentSlide);
@@ -37,28 +34,22 @@ async function loadMonateCarousel() {
         currentSlide.appendChild(monthDiv);
 
         const booksWrapper = monthDiv.querySelector('.books-wrapper-2');
-
-        // Cover-Spalten: D, G, J -> Index 3,6,9
-        // Status-Spalten: E, H, K -> Index 4,7,10
         const coverIndexes = [3, 6, 9];
         const statusIndexes = [4, 7, 10];
 
         coverIndexes.forEach((coverIndex, i) => {
             const coverUrl = row[coverIndex];
+            const bookDiv = document.createElement('div');
+            
             if (coverUrl && coverUrl.trim() !== '') {
-                // Status aus Sheet auslesen, Großschreibung erzwingen
                 const statusRaw = (row[statusIndexes[i]] || 'NO').trim().toUpperCase();
-
-                // Farben dynamisch zuweisen
                 const statusColors = {
                     'YES': '#3CB371',
                     'ABBR': '#9370DB',
                     'NO': 'gray'
                 };
-
                 const color = statusColors[statusRaw] || 'gray';
-
-                const bookDiv = document.createElement('div');
+                
                 bookDiv.classList.add('book');
                 bookDiv.innerHTML = `
                     <img src="${coverUrl}" alt="Buchcover">
@@ -69,16 +60,20 @@ async function loadMonateCarousel() {
                         </svg>
                     </div>
                 `;
-                booksWrapper.appendChild(bookDiv);
+            } else {
+                bookDiv.classList.add('placeholder-book');
+                bookDiv.innerHTML = `
+                    <span>?</span>
+                `;
             }
+
+            booksWrapper.appendChild(bookDiv);
         });
     });
 
-    // Initiale Slide anzeigen
     const slides = container.querySelectorAll('.carousel-slide-2');
     slides.forEach((s, i) => s.style.display = i === 0 ? 'block' : 'none');
 
-    // Dots erstellen
     for (let i = 0; i < numSlides; i++) {
         const dot = document.createElement('button');
         if (i === 0) dot.classList.add('active');

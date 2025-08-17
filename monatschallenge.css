@@ -53,7 +53,8 @@
 
 .month-block-2 h4 {
     margin: 0 0 0.5rem 0;
-    font-size: 1.1rem;
+    font-size: 0.99rem;
+    font-weight: bold;
 }
 
 .month-theme-2 {
@@ -98,6 +99,22 @@
     color: grey;
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 50%;
+}
+
+.placeholder-book {
+    display: inline-block;
+    font-size: 1.8rem;            /* größere Schrift */
+    color: #ff7256;               /* auffällige Farbe */
+    font-weight: bold;
+    text-align: center;
+    width: 25%;
+    height: 100px;
+    border: 2px dashed #ff7256;   /* optionaler Rahmen */
+    border-radius: 8px;
+    background-color: rgba(255, 114, 86, 0.1); /* leichtes Highlight */
+    box-shadow: 0 4px 10px rgba(255, 114, 86, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 /* Dots */
