@@ -8,8 +8,8 @@ async function loadMonateCarousel() {
     if (rows.length < 2) return;
 
     const dataRows = rows.slice(1);
-
     const numSlides = Math.ceil(dataRows.length / 3);
+
     const dotsContainer = document.createElement('div');
     dotsContainer.classList.add('carousel-dots');
     container.insertBefore(dotsContainer, container.firstChild);
@@ -40,16 +40,12 @@ async function loadMonateCarousel() {
         coverIndexes.forEach((coverIndex, i) => {
             const coverUrl = row[coverIndex];
             const bookDiv = document.createElement('div');
-            
+
             if (coverUrl && coverUrl.trim() !== '') {
                 const statusRaw = (row[statusIndexes[i]] || 'NO').trim().toUpperCase();
-                const statusColors = {
-                    'YES': '#3CB371',
-                    'ABBR': '#9370DB',
-                    'NO': 'gray'
-                };
+                const statusColors = { 'YES': '#3CB371', 'ABBR': '#9370DB', 'NO': 'gray' };
                 const color = statusColors[statusRaw] || 'gray';
-                
+
                 bookDiv.classList.add('book');
                 bookDiv.innerHTML = `
                     <img src="${coverUrl}" alt="Buchcover">
@@ -62,9 +58,7 @@ async function loadMonateCarousel() {
                 `;
             } else {
                 bookDiv.classList.add('placeholder-book');
-                bookDiv.innerHTML = `
-                    <span>?</span>
-                `;
+                bookDiv.innerHTML = `<span>?</span>`;
             }
 
             booksWrapper.appendChild(bookDiv);
@@ -74,17 +68,46 @@ async function loadMonateCarousel() {
     const slides = container.querySelectorAll('.carousel-slide-2');
     slides.forEach((s, i) => s.style.display = i === 0 ? 'block' : 'none');
 
+    const dots = [];
     for (let i = 0; i < numSlides; i++) {
         const dot = document.createElement('button');
         if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => {
-            slides.forEach(s => s.style.display = 'none');
-            slides[i].style.display = 'block';
-            dotsContainer.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            dot.classList.add('active');
-        });
+        dot.addEventListener('click', () => showSlide(i));
         dotsContainer.appendChild(dot);
+        dots.push(dot);
     }
+
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        slides.forEach(s => s.style.display = 'none');
+        slides[index].style.display = 'block';
+        dots.forEach(d => d.classList.remove('active'));
+        dots[index].classList.add('active');
+        currentIndex = index;
+    }
+
+    // --- Swipe-Funktion ---
+    let startX = 0;
+    let endX = 0;
+
+    container.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+    });
+
+    container.addEventListener('touchmove', e => {
+        endX = e.touches[0].clientX;
+    });
+
+    container.addEventListener('touchend', () => {
+        const diff = startX - endX;
+        if (Math.abs(diff) > 50) { // Mindestabstand zum Wischen
+            if (diff > 0 && currentIndex < slides.length - 1) showSlide(currentIndex + 1); // nach links wischen
+            if (diff < 0 && currentIndex > 0) showSlide(currentIndex - 1); // nach rechts wischen
+        }
+        startX = 0;
+        endX = 0;
+    });
 }
 
 loadMonateCarousel();
