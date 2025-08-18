@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function getColorForPages(pages) {
         if (pages >= 0 && pages <= 50) return '#ff7256'; // Grün
-        if (pages >= 51 && pages <= 70) return '#FFB90F'; // Gelb
+        if (pages >= 51 && pages <= 75) return '#FFB90F'; // Gelb
         if (pages >= 71 && pages <= 100) return '#63b8ff'; // Blau
         if (pages >= 101 && pages <= 150) return '#3CB371 '; // Rot
         if (pages >= 151) return '#9370DB '; // Lila
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             label: '≤ 50',
             color: '#ff7256'
         }, {
-            label: '≤ 70',
+            label: '≤ 75',
             color: '#FFB90F'
         }, {
             label: '≤ 100',
