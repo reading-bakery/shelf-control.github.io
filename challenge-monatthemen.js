@@ -87,27 +87,34 @@ async function loadMonateCarousel() {
         currentIndex = index;
     }
 
-    // --- Swipe-Funktion ---
-    let startX = 0;
-    let endX = 0;
+// Touch-Events für Swipe
+track.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+});
 
-    container.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-    });
+track.addEventListener("touchmove", e => {
+    if (!isDragging) return;
+    const moveX = e.touches[0].clientX;
+    const diff = moveX - startX;
+    track.style.transform = `translateX(${-100 * currentSlide + (diff / carousel.offsetWidth) * 100}%)`;
+});
 
-    container.addEventListener('touchmove', e => {
-        endX = e.touches[0].clientX;
-    });
+track.addEventListener("touchend", e => {
+    if (!isDragging) return;
+    isDragging = false;
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - startX;
 
-    container.addEventListener('touchend', () => {
-        const diff = startX - endX;
-        if (Math.abs(diff) > 50) { // Mindestabstand zum Wischen
-            if (diff > 0 && currentIndex < slides.length - 1) showSlide(currentIndex + 1); // nach links wischen
-            if (diff < 0 && currentIndex > 0) showSlide(currentIndex - 1); // nach rechts wischen
-        }
-        startX = 0;
-        endX = 0;
-    });
+    if (diff < -50 && currentSlide < totalSlides - 1) {
+        goToSlide(currentSlide + 1);
+    } else if (diff > 50 && currentSlide > 0) {
+        goToSlide(currentSlide - 1);
+    } else {
+        goToSlide(currentSlide); // zurück zur aktuellen Slide
+    }
+});
+
 }
 
 loadMonateCarousel();
