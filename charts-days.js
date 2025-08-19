@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv';
     const PIXELS_PER_ROW = 25;
-    const PIXEL_SIZE = 20; // Example size, adjust as needed
-    const GAP = 6; // Gap between pixels
+    const PIXEL_SIZE = 20;
+    const GAP = 6;
 
     const canvas = document.getElementById('daysChart');
     const legendDiv = document.getElementById('legenddays');
@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const ctx = canvas.getContext('2d');
 
-    let aggregatedData = {}; // To store aggregated pages per day
-    let pixelPositions = []; // To store position and data for hover
+    let aggregatedData = {};
+    let pixelPositions = [];
 
     function fetchData() {
         fetch(DATA_URL)
@@ -26,18 +26,18 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error('Error fetching data for daysChart:', error));
     }
 
+
+
     function parseCSV(csv) {
         const lines = csv.split('\n');
-        // Assuming first line is header
         for (let i = 1; i < lines.length; i++) {
             const line = lines[i].trim();
             if (!line) continue;
             const columns = line.split(',');
             if (columns.length >= 2) {
                 const timestampStr = columns[0].trim();
-                const pages = parseInt(columns[2].trim(), 10); // Column 'Seiten'
+                const pages = parseInt(columns[2].trim(), 10);
 
-                // Extract date part (YYYY-MM-DD)
                 const datePart = timestampStr.split(' ')[0];
 
                 if (!isNaN(pages)) {
@@ -51,12 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getColorForPages(pages) {
-        if (pages >= 0 && pages <= 50) return '#ff7256'; // Grün
-        if (pages >= 51 && pages <= 75) return '#FFB90F'; // Gelb
-        if (pages >= 71 && pages <= 100) return '#63b8ff'; // Blau
-        if (pages >= 101 && pages <= 150) return '#3CB371 '; // Rot
-        if (pages >= 151) return '#9370DB '; // Lila
-        return '#CCCCCC'; // Default or unknown
+        if (pages >= 0 && pages <= 50) return '#ff7256';
+        if (pages >= 51 && pages <= 75) return '#FFB90F';
+        if (pages >= 76 && pages <= 100) return '#63b8ff';
+        if (pages >= 101 && pages <= 150) return '#3CB371 ';
+        if (pages >= 151) return '#9370DB ';
+        return '#CCCCCC';
     }
 
     function drawChart() {
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             ctx.fillStyle = color;
             ctx.beginPath();
-            ctx.roundRect(x, y, PIXEL_SIZE, PIXEL_SIZE, 5); // Rounded corners
+            ctx.roundRect(x, y, PIXEL_SIZE, PIXEL_SIZE, 5);
             ctx.fill();
 
             pixelPositions.push({
@@ -121,14 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
         legendDiv.style.fontFamily = 'Dosis, sans-serif';
         legendDiv.style.fontSize = '13px';
 
-        legendDiv.innerHTML = ''; // Clear existing legend
+        legendDiv.innerHTML = '';
 
         legendItems.forEach(item => {
             const span = document.createElement('span');
             span.style.display = 'flex';
             span.style.alignItems = 'center';
             span.style.marginRight = '15px';
-            span.style.marginBottom = '5px'; // For wrapping
+            span.style.marginBottom = '5px';
 
             const colorBox = document.createElement('span');
             colorBox.style.display = 'inline-block';
@@ -147,8 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tooltip functionality
     let tooltip = null;
 
-    
-    function showTooltip(x, y, date, value) {
+    function showTooltip(x, y, date, value, event) {
         if (!tooltip) {
             tooltip = document.createElement('div');
             tooltip.style.position = 'absolute';
@@ -156,27 +155,30 @@ document.addEventListener('DOMContentLoaded', () => {
             tooltip.style.color = 'white';
             tooltip.style.padding = '8px 12px';
             tooltip.style.borderRadius = '5px';
-            tooltip.style.pointerEvents = 'none'; // So it doesn't block mouse events on canvas
+            tooltip.style.pointerEvents = 'none';
             tooltip.style.zIndex = '1000';
-            tooltip.style.fontFamily = 'Dosis, sans-serif'; // Default
+            tooltip.style.fontFamily = 'Dosis, sans-serif';
             tooltip.style.fontSize = '14px';
             document.body.appendChild(tooltip);
         }
 
         tooltip.innerHTML = `<b>${date}</b><br>${value} Seiten`;
 
-        // Position tooltip relative to the canvas
-        const canvasRect = canvas.getBoundingClientRect();
         const tooltipWidth = tooltip.offsetWidth;
         const tooltipHeight = tooltip.offsetHeight;
+        const margin = 10;
 
-        let tooltipX = canvasRect.left + x + PIXEL_SIZE / 2 - tooltipWidth / 2;
-        let tooltipY = canvasRect.top + y - tooltipHeight - 10; // Above the pixel
+        // Position tooltip relative to the mouse position
+        let tooltipX = event.clientX + margin;
+        let tooltipY = event.clientY - tooltipHeight - margin;
 
-        // Keep tooltip within canvas bounds
-        if (tooltipX < canvasRect.left) tooltipX = canvasRect.left;
-        if (tooltipX + tooltipWidth > canvasRect.right) tooltipX = canvasRect.right - tooltipWidth;
-        if (tooltipY < canvasRect.top) tooltipY = canvasRect.top + y + PIXEL_SIZE + 10; // Below if no space above
+        // Keep tooltip within viewport bounds
+        if (tooltipX + tooltipWidth > window.innerWidth) {
+            tooltipX = event.clientX - tooltipWidth - margin;
+        }
+        if (tooltipY < 0) {
+            tooltipY = event.clientY + margin;
+        }
 
         tooltip.style.left = `${tooltipX}px`;
         tooltip.style.top = `${tooltipY}px`;
@@ -189,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    let hoveredPixel = null; // Store the currently hovered pixel data
+    let hoveredPixel = null;
 
     canvas.addEventListener('mousemove', (event) => {
         const rect = canvas.getBoundingClientRect();
@@ -207,21 +209,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (foundPixel) {
             if (hoveredPixel !== foundPixel) {
-                // Redraw chart to clear previous hover effect
                 drawChart();
-                // Draw new hover effect
                 ctx.strokeStyle = 'white';
                 ctx.lineWidth = 5;
                 ctx.beginPath();
                 ctx.roundRect(foundPixel.x, foundPixel.y, foundPixel.width, foundPixel.height, 5);
                 ctx.stroke();
 
-                showTooltip(foundPixel.x, foundPixel.y, foundPixel.date, foundPixel.value);
+                showTooltip(foundPixel.x, foundPixel.y, foundPixel.date, foundPixel.value, event);
                 hoveredPixel = foundPixel;
             }
         } else {
             if (hoveredPixel) {
-                drawChart(); // Redraw to remove border
+                drawChart();
                 hideTooltip();
                 hoveredPixel = null;
             }
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     canvas.addEventListener('mouseleave', () => {
         if (hoveredPixel) {
-            drawChart(); // Redraw to remove border
+            drawChart();
             hideTooltip();
             hoveredPixel = null;
         }
