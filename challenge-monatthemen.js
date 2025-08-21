@@ -80,6 +80,11 @@ async function loadMonateCarousel() {
     let currentIndex = 0;
 
     function showSlide(index) {
+        if (index < 0) {
+            index = numSlides - 1;
+        } else if (index >= numSlides) {
+            index = 0;
+        }
         slides.forEach(s => s.style.display = 'none');
         slides[index].style.display = 'block';
         dots.forEach(d => d.classList.remove('active'));
@@ -87,42 +92,91 @@ async function loadMonateCarousel() {
         currentIndex = index;
     }
 
-    // New variables for swipe functionality
+    // --- Integrierte Swipe- und Maus-Funktionalität ---
     let startX = 0;
     let isDragging = false;
-
-    // Attach touch event listeners to the main container
+    
+    // Touch-Events für mobile Geräte
     container.addEventListener("touchstart", e => {
         isDragging = true;
         startX = e.touches[0].clientX;
+        // Optional: Deaktiviert CSS-Transition während des Ziehens
+        container.style.transition = 'none';
     });
 
     container.addEventListener("touchmove", e => {
         if (!isDragging) return;
-        const moveX = e.touches[0].clientX;
-        const diff = moveX - startX;
-        // This visual effect needs CSS support to work correctly.
-        // It's a bit more complex to implement without a track element.
-        // For a simpler solution, we can rely only on touchend.
-        // This line is commented out as it requires a different DOM structure.
-        // container.style.transform = `translateX(${-100 * currentIndex + (diff / container.offsetWidth) * 100}%)`;
+        const currentX = e.touches[0].clientX;
+        const diff = currentX - startX;
+        // Berechnet den aktuellen Offset basierend auf der Bewegung
+        const currentOffset = -currentIndex * container.offsetWidth;
+        container.style.transform = `translateX(${currentOffset + diff}px)`;
     });
 
     container.addEventListener("touchend", e => {
         if (!isDragging) return;
         isDragging = false;
+        
+        // CSS-Transition wieder aktivieren
+        container.style.transition = 'transform 0.3s ease-in-out';
+        
         const endX = e.changedTouches[0].clientX;
         const diff = endX - startX;
-
-        // Swipe threshold (e.g., 50 pixels)
         const swipeThreshold = 50;
 
         if (diff < -swipeThreshold && currentIndex < numSlides - 1) {
             showSlide(currentIndex + 1);
         } else if (diff > swipeThreshold && currentIndex > 0) {
             showSlide(currentIndex - 1);
+        } else {
+            // Wenn der Swipe nicht stark genug war, zur ursprünglichen Folie zurückkehren
+            showSlide(currentIndex);
         }
-        // If the swipe isn't significant, stay on the current slide
+        container.style.transform = 'none'; // Transform zurücksetzen
+    });
+
+    // Maus-Events für Desktop-Geräte
+    container.addEventListener("mousedown", e => {
+        isDragging = true;
+        startX = e.clientX;
+        container.style.transition = 'none';
+    });
+    
+    container.addEventListener("mousemove", e => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const currentX = e.clientX;
+        const diff = currentX - startX;
+        const currentOffset = -currentIndex * container.offsetWidth;
+        container.style.transform = `translateX(${currentOffset + diff}px)`;
+    });
+
+    container.addEventListener("mouseup", e => {
+        if (!isDragging) return;
+        isDragging = false;
+        container.style.transition = 'transform 0.3s ease-in-out';
+        
+        const endX = e.clientX;
+        const diff = endX - startX;
+        const swipeThreshold = 50;
+        
+        if (diff < -swipeThreshold && currentIndex < numSlides - 1) {
+            showSlide(currentIndex + 1);
+        } else if (diff > swipeThreshold && currentIndex > 0) {
+            showSlide(currentIndex - 1);
+        } else {
+            showSlide(currentIndex);
+        }
+        container.style.transform = 'none';
+    });
+
+    container.addEventListener("mouseleave", () => {
+        if (isDragging) {
+            isDragging = false;
+            container.style.transition = 'transform 0.3s ease-in-out';
+            container.style.transform = 'none';
+            showSlide(currentIndex);
+        }
     });
 }
 
