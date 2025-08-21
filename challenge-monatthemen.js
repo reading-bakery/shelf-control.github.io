@@ -14,12 +14,12 @@ async function loadMonateCarousel() {
     dotsContainer.classList.add('carousel-dots');
     container.insertBefore(dotsContainer, container.firstChild);
 
-    let currentSlide;
+    let currentSlideEl;
     dataRows.forEach((row, index) => {
         if (index % 3 === 0) {
-            currentSlide = document.createElement('div');
-            currentSlide.classList.add('carousel-slide-2');
-            container.appendChild(currentSlide);
+            currentSlideEl = document.createElement('div');
+            currentSlideEl.classList.add('carousel-slide-2');
+            container.appendChild(currentSlideEl);
         }
 
         const monthName = row[0] || `Monat ${index + 1}`;
@@ -31,7 +31,7 @@ async function loadMonateCarousel() {
             <h4>${monthName}: ${thema}</h4>
             <div class="books-wrapper-2"></div>
         `;
-        currentSlide.appendChild(monthDiv);
+        currentSlideEl.appendChild(monthDiv);
 
         const booksWrapper = monthDiv.querySelector('.books-wrapper-2');
         const coverIndexes = [3, 6, 9];
@@ -80,13 +80,6 @@ async function loadMonateCarousel() {
     let currentIndex = 0;
 
     function showSlide(index) {
-        // Ensure index is within bounds
-        if (index < 0) {
-            index = slides.length - 1;
-        } else if (index >= slides.length) {
-            index = 0;
-        }
-
         slides.forEach(s => s.style.display = 'none');
         slides[index].style.display = 'block';
         dots.forEach(d => d.classList.remove('active'));
@@ -94,93 +87,42 @@ async function loadMonateCarousel() {
         currentIndex = index;
     }
 
-    // --- Optimized Touch-Events for Swipe ---
+    // New variables for swipe functionality
     let startX = 0;
     let isDragging = false;
-    
-    // Attach event listeners to the main container
+
+    // Attach touch event listeners to the main container
     container.addEventListener("touchstart", e => {
         isDragging = true;
         startX = e.touches[0].clientX;
-        // Optionally, add a class for CSS transitions to be disabled during drag
-        container.style.transition = 'none';
     });
 
     container.addEventListener("touchmove", e => {
         if (!isDragging) return;
-        const currentX = e.touches[0].clientX;
-        const diff = currentX - startX;
-        
-        // This is a simple visual drag effect.
-        // It's not strictly necessary for functionality but improves UX.
-        const currentOffset = -currentIndex * container.offsetWidth;
-        container.style.transform = `translateX(${currentOffset + diff}px)`;
+        const moveX = e.touches[0].clientX;
+        const diff = moveX - startX;
+        // This visual effect needs CSS support to work correctly.
+        // It's a bit more complex to implement without a track element.
+        // For a simpler solution, we can rely only on touchend.
+        // This line is commented out as it requires a different DOM structure.
+        // container.style.transform = `translateX(${-100 * currentIndex + (diff / container.offsetWidth) * 100}%)`;
     });
 
     container.addEventListener("touchend", e => {
         if (!isDragging) return;
         isDragging = false;
-        
-        // Re-enable CSS transitions
-        container.style.transition = 'transform 0.3s ease-in-out';
-        container.style.transform = 'none'; // Reset the live transform
-
         const endX = e.changedTouches[0].clientX;
         const diff = endX - startX;
 
-        // Determine if a swipe occurred based on a threshold
-        const swipeThreshold = 50; // pixels
-        if (diff < -swipeThreshold) {
-            showSlide(currentIndex + 1);
-        } else if (diff > swipeThreshold) {
-            showSlide(currentIndex - 1);
-        } else {
-            // No significant swipe, stay on the current slide
-            showSlide(currentIndex);
-        }
-    });
-
-    // Add mouse events for testing on desktop
-    container.addEventListener("mousedown", e => {
-        isDragging = true;
-        startX = e.clientX;
-        container.style.transition = 'none';
-    });
-    
-    container.addEventListener("mousemove", e => {
-        if (!isDragging) return;
-        e.preventDefault(); // Prevent text selection
-        const currentX = e.clientX;
-        const diff = currentX - startX;
-        const currentOffset = -currentIndex * container.offsetWidth;
-        container.style.transform = `translateX(${currentOffset + diff}px)`;
-    });
-
-    container.addEventListener("mouseup", e => {
-        if (!isDragging) return;
-        isDragging = false;
-        container.style.transition = 'transform 0.3s ease-in-out';
-        container.style.transform = 'none';
-
-        const endX = e.clientX;
-        const diff = endX - startX;
+        // Swipe threshold (e.g., 50 pixels)
         const swipeThreshold = 50;
-        if (diff < -swipeThreshold) {
-            showSlide(currentIndex + 1);
-        } else if (diff > swipeThreshold) {
-            showSlide(currentIndex - 1);
-        } else {
-            showSlide(currentIndex);
-        }
-    });
 
-    container.addEventListener("mouseleave", () => {
-        if (isDragging) {
-            isDragging = false;
-            container.style.transition = 'transform 0.3s ease-in-out';
-            container.style.transform = 'none';
-            showSlide(currentIndex);
+        if (diff < -swipeThreshold && currentIndex < numSlides - 1) {
+            showSlide(currentIndex + 1);
+        } else if (diff > swipeThreshold && currentIndex > 0) {
+            showSlide(currentIndex - 1);
         }
+        // If the swipe isn't significant, stay on the current slide
     });
 }
 
