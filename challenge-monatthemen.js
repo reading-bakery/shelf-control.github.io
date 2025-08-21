@@ -10,23 +10,16 @@ async function loadMonateCarousel() {
     const dataRows = rows.slice(1);
     const numSlides = Math.ceil(dataRows.length / 3);
 
-    // Track einfügen (kommt nach .legend)
-    const track = document.createElement('div');
-    track.classList.add('carousel-track-2');
-    container.appendChild(track);
-
-    // Dots-Container einfügen (vor Track)
     const dotsContainer = document.createElement('div');
     dotsContainer.classList.add('carousel-dots');
-    container.insertBefore(dotsContainer, track);
+    container.insertBefore(dotsContainer, container.firstChild);
 
-    // Slides erzeugen
     let currentSlide;
     dataRows.forEach((row, index) => {
         if (index % 3 === 0) {
             currentSlide = document.createElement('div');
             currentSlide.classList.add('carousel-slide-2');
-            track.appendChild(currentSlide);
+            container.appendChild(currentSlide);
         }
 
         const monthName = row[0] || `Monat ${index + 1}`;
@@ -72,18 +65,10 @@ async function loadMonateCarousel() {
         });
     });
 
-    // Slides + Dots
-    const slides = track.querySelectorAll('.carousel-slide-2');
+    const slides = container.querySelectorAll('.carousel-slide-2');
+    slides.forEach((s, i) => s.style.display = i === 0 ? 'block' : 'none');
+
     const dots = [];
-    let currentIndex = 0;
-
-    function showSlide(index) {
-        track.style.transform = `translateX(${-index * 100}%)`;
-        dots.forEach(d => d.classList.remove('active'));
-        dots[index].classList.add('active');
-        currentIndex = index;
-    }
-
     for (let i = 0; i < numSlides; i++) {
         const dot = document.createElement('button');
         if (i === 0) dot.classList.add('active');
@@ -92,32 +77,111 @@ async function loadMonateCarousel() {
         dots.push(dot);
     }
 
-    // Touch-Events für Swipe
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        // Ensure index is within bounds
+        if (index < 0) {
+            index = slides.length - 1;
+        } else if (index >= slides.length) {
+            index = 0;
+        }
+
+        slides.forEach(s => s.style.display = 'none');
+        slides[index].style.display = 'block';
+        dots.forEach(d => d.classList.remove('active'));
+        dots[index].classList.add('active');
+        currentIndex = index;
+    }
+
+    // --- Optimized Touch-Events for Swipe ---
     let startX = 0;
     let isDragging = false;
-
-    track.addEventListener("touchstart", e => {
-        startX = e.touches[0].clientX;
+    
+    // Attach event listeners to the main container
+    container.addEventListener("touchstart", e => {
         isDragging = true;
+        startX = e.touches[0].clientX;
+        // Optionally, add a class for CSS transitions to be disabled during drag
+        container.style.transition = 'none';
     });
 
-    track.addEventListener("touchend", e => {
+    container.addEventListener("touchmove", e => {
+        if (!isDragging) return;
+        const currentX = e.touches[0].clientX;
+        const diff = currentX - startX;
+        
+        // This is a simple visual drag effect.
+        // It's not strictly necessary for functionality but improves UX.
+        const currentOffset = -currentIndex * container.offsetWidth;
+        container.style.transform = `translateX(${currentOffset + diff}px)`;
+    });
+
+    container.addEventListener("touchend", e => {
         if (!isDragging) return;
         isDragging = false;
+        
+        // Re-enable CSS transitions
+        container.style.transition = 'transform 0.3s ease-in-out';
+        container.style.transform = 'none'; // Reset the live transform
+
         const endX = e.changedTouches[0].clientX;
         const diff = endX - startX;
 
-        if (diff < -50 && currentIndex < numSlides - 1) {
+        // Determine if a swipe occurred based on a threshold
+        const swipeThreshold = 50; // pixels
+        if (diff < -swipeThreshold) {
             showSlide(currentIndex + 1);
-        } else if (diff > 50 && currentIndex > 0) {
+        } else if (diff > swipeThreshold) {
             showSlide(currentIndex - 1);
         } else {
-            showSlide(currentIndex); // zurück zur aktuellen Slide
+            // No significant swipe, stay on the current slide
+            showSlide(currentIndex);
         }
     });
 
-    // Erste Slide anzeigen
-    showSlide(0);
+    // Add mouse events for testing on desktop
+    container.addEventListener("mousedown", e => {
+        isDragging = true;
+        startX = e.clientX;
+        container.style.transition = 'none';
+    });
+    
+    container.addEventListener("mousemove", e => {
+        if (!isDragging) return;
+        e.preventDefault(); // Prevent text selection
+        const currentX = e.clientX;
+        const diff = currentX - startX;
+        const currentOffset = -currentIndex * container.offsetWidth;
+        container.style.transform = `translateX(${currentOffset + diff}px)`;
+    });
+
+    container.addEventListener("mouseup", e => {
+        if (!isDragging) return;
+        isDragging = false;
+        container.style.transition = 'transform 0.3s ease-in-out';
+        container.style.transform = 'none';
+
+        const endX = e.clientX;
+        const diff = endX - startX;
+        const swipeThreshold = 50;
+        if (diff < -swipeThreshold) {
+            showSlide(currentIndex + 1);
+        } else if (diff > swipeThreshold) {
+            showSlide(currentIndex - 1);
+        } else {
+            showSlide(currentIndex);
+        }
+    });
+
+    container.addEventListener("mouseleave", () => {
+        if (isDragging) {
+            isDragging = false;
+            container.style.transition = 'transform 0.3s ease-in-out';
+            container.style.transform = 'none';
+            showSlide(currentIndex);
+        }
+    });
 }
 
 loadMonateCarousel();

@@ -16,7 +16,7 @@
 .carousel-track-2 {
     display: flex;
     flex-direction: row;       /* ← jetzt horizontal */
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease;
     width: 100%;
     overflow: hidden;          /* keine Scrollbar */
 }
@@ -39,8 +39,8 @@
     flex: 1;
     max-width: 100%;
     box-sizing: border-box;
-    margin-top: 0.5rem;
     height: auto;
+    background-color: #353434ff;
 }
 
 .month-block-2 h4 {
@@ -52,19 +52,16 @@
 .month-theme-2 {
     font-size: 0.9rem;
     color: #666;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.2rem;
 }
 
 /* Bücher-Wrapper */
 .books-wrapper-2 {
     display: flex;
-    justify-content: center;     /* Bücher bleiben mittig */
+    justify-content: center;
     gap: 1.5rem;
     flex-wrap: wrap;
     margin-bottom: 10px;
-
-    width: 100%;                 /* nimmt volle Breite ein */
-    box-sizing: border-box;
 }
 
 .book {
@@ -75,6 +72,7 @@
     overflow: hidden;
     transition: transform 0.3s;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .book img {
@@ -135,7 +133,7 @@
     background-color: #ccc;
     cursor: pointer;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .carousel-dots button.active {
