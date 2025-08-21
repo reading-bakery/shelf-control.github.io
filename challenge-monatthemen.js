@@ -10,16 +10,23 @@ async function loadMonateCarousel() {
     const dataRows = rows.slice(1);
     const numSlides = Math.ceil(dataRows.length / 3);
 
+    // Track einfügen (kommt nach .legend)
+    const track = document.createElement('div');
+    track.classList.add('carousel-track-2');
+    container.appendChild(track);
+
+    // Dots-Container einfügen (vor Track)
     const dotsContainer = document.createElement('div');
     dotsContainer.classList.add('carousel-dots');
-    container.insertBefore(dotsContainer, container.firstChild);
+    container.insertBefore(dotsContainer, track);
 
+    // Slides erzeugen
     let currentSlide;
     dataRows.forEach((row, index) => {
         if (index % 3 === 0) {
             currentSlide = document.createElement('div');
             currentSlide.classList.add('carousel-slide-2');
-            container.appendChild(currentSlide);
+            track.appendChild(currentSlide);
         }
 
         const monthName = row[0] || `Monat ${index + 1}`;
@@ -65,10 +72,18 @@ async function loadMonateCarousel() {
         });
     });
 
-    const slides = container.querySelectorAll('.carousel-slide-2');
-    slides.forEach((s, i) => s.style.display = i === 0 ? 'block' : 'none');
-
+    // Slides + Dots
+    const slides = track.querySelectorAll('.carousel-slide-2');
     const dots = [];
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        track.style.transform = `translateX(${-index * 100}%)`;
+        dots.forEach(d => d.classList.remove('active'));
+        dots[index].classList.add('active');
+        currentIndex = index;
+    }
+
     for (let i = 0; i < numSlides; i++) {
         const dot = document.createElement('button');
         if (i === 0) dot.classList.add('active');
@@ -77,44 +92,32 @@ async function loadMonateCarousel() {
         dots.push(dot);
     }
 
-    let currentIndex = 0;
+    // Touch-Events für Swipe
+    let startX = 0;
+    let isDragging = false;
 
-    function showSlide(index) {
-        slides.forEach(s => s.style.display = 'none');
-        slides[index].style.display = 'block';
-        dots.forEach(d => d.classList.remove('active'));
-        dots[index].classList.add('active');
-        currentIndex = index;
-    }
+    track.addEventListener("touchstart", e => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+    });
 
-// Touch-Events für Swipe
-track.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-    isDragging = true;
-});
+    track.addEventListener("touchend", e => {
+        if (!isDragging) return;
+        isDragging = false;
+        const endX = e.changedTouches[0].clientX;
+        const diff = endX - startX;
 
-track.addEventListener("touchmove", e => {
-    if (!isDragging) return;
-    const moveX = e.touches[0].clientX;
-    const diff = moveX - startX;
-    track.style.transform = `translateX(${-100 * currentSlide + (diff / carousel.offsetWidth) * 100}%)`;
-});
+        if (diff < -50 && currentIndex < numSlides - 1) {
+            showSlide(currentIndex + 1);
+        } else if (diff > 50 && currentIndex > 0) {
+            showSlide(currentIndex - 1);
+        } else {
+            showSlide(currentIndex); // zurück zur aktuellen Slide
+        }
+    });
 
-track.addEventListener("touchend", e => {
-    if (!isDragging) return;
-    isDragging = false;
-    const endX = e.changedTouches[0].clientX;
-    const diff = endX - startX;
-
-    if (diff < -50 && currentSlide < totalSlides - 1) {
-        goToSlide(currentSlide + 1);
-    } else if (diff > 50 && currentSlide > 0) {
-        goToSlide(currentSlide - 1);
-    } else {
-        goToSlide(currentSlide); // zurück zur aktuellen Slide
-    }
-});
-
+    // Erste Slide anzeigen
+    showSlide(0);
 }
 
 loadMonateCarousel();

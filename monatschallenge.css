@@ -58,10 +58,13 @@
 /* Bücher-Wrapper */
 .books-wrapper-2 {
     display: flex;
-    justify-content: center;
+    justify-content: center;     /* Bücher bleiben mittig */
     gap: 1.5rem;
     flex-wrap: wrap;
     margin-bottom: 10px;
+
+    width: 100%;                 /* nimmt volle Breite ein */
+    box-sizing: border-box;
 }
 
 .book {
