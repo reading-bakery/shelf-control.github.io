@@ -12,30 +12,23 @@
     overflow: hidden;
 }
 
-
+/* Track mit horizontalem Layout */
 .carousel-track-2 {
     display: flex;
-    flex-direction: column; /* Monate untereinander */
-    transition: all 0.5s ease;
-    scroll-behavior: smooth;
-    overflow-y: auto;
-    max-height: 600px;
-    scrollbar-width: none;
-
-    justify-content: flex-start; /* <--- oberer Rand */
-    align-items: center; /* optional, falls du die Slides horizontal zentrieren willst */
+    flex-direction: row;       /* ← jetzt horizontal */
+    transition: transform 0.5s ease;
+    width: 100%;
+    overflow: hidden;          /* keine Scrollbar */
 }
 
-.carousel-track-2::-webkit-scrollbar {
-    display: none; /* Chrome, Safari */
-}
-
-/* Slide – einzelne Monate */
+/* Slide – enthält mehrere Monate */
 .carousel-slide-2 {
+    min-width: 100%;           /* jede Slide nimmt volle Breite ein */
     display: flex;
+    flex-direction: column;    /* Monate innerhalb der Slide untereinander */
     gap: 1rem;
-    justify-content: flex-start; /* links oben ausrichten */
-    align-items: flex-start;     /* vertikal oben */
+    box-sizing: border-box;
+    padding: 0.5rem;
 }
 
 /* Einzelner Monat */
@@ -43,8 +36,8 @@
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    flex: 1;              /* jeder Monat nimmt gleich viel Platz */
-    max-width: 100%;       /* 2 Monate pro Slide */
+    flex: 1;
+    max-width: 100%;
     box-sizing: border-box;
     margin-top: 0.5rem;
     height: auto;
@@ -64,35 +57,33 @@
 
 /* Bücher-Wrapper */
 .books-wrapper-2 {
-    display: flex; /* Bücher nebeneinander */
+    display: flex;
     justify-content: center;
     gap: 1.5rem;
-    flex-wrap: wrap; /* bei vielen Büchern umbrechen */
+    flex-wrap: wrap;
     margin-bottom: 10px;
 }
 
 .book {
     position: relative;
     width: 80px;
-    height: 120px; /* Feste Höhe hinzugefügt, um ein 2:3-Verhältnis zu erhalten */
+    height: 120px;
     border-radius: 6px;
     overflow: hidden;
     transition: transform 0.3s;
     cursor: pointer;
 }
 
-
-
 .book img {
     width: 100%;
-    height: 100%; /* Ändern Sie dies, damit das Bild die feste Höhe des Containers füllt */
+    height: 100%;
     object-fit: cover;
 }
 
 .book-status-icon {
     position: absolute;
-    bottom: 1px;   /* Abstand vom Rand */
-    right: 1px;    /* Abstand vom Rand */
+    bottom: 1px;
+    right: 1px;
     width: 40px;
     height: 40px;
     background-color: rgba(0, 0, 0, 0.6);
@@ -100,7 +91,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px;   /* Abstand zwischen SVG und Rand */
+    padding: 4px;
     box-sizing: border-box;
 }
 
@@ -109,18 +100,18 @@
     height: 100%;
 }
 
-
+/* Platzhalter */
 .placeholder-book {
     display: inline-block;
-    font-size: 1.8rem;            /* größere Schrift */
-    color: #ff7256;               /* auffällige Farbe */
+    font-size: 1.8rem;
+    color: #ff7256;
     font-weight: bold;
     text-align: center;
     width: 25%;
     height: 100px;
-    border: 2px dashed #ff7256;   /* optionaler Rahmen */
+    border: 2px dashed #ff7256;
     border-radius: 8px;
-    background-color: rgba(255, 114, 86, 0.1); /* leichtes Highlight */
+    background-color: rgba(255, 114, 86, 0.1);
     box-shadow: 0 4px 10px rgba(255, 114, 86, 0.3);
     transition: all 0.3s ease;
     cursor: pointer;
@@ -140,11 +131,9 @@
     border: none;
     background-color: #ccc;
     cursor: pointer;
-    text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
 }
-
 
 .carousel-dots button.active {
     background-color: #ff7256;
