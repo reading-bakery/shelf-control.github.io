@@ -262,8 +262,7 @@ hr {
   height: 100%;
   box-sizing: border-box;
   width: 100%;
-  overflow: hidden; /* Falls du das behalten willst, kannst du es lassen */
-  /* ggf. border entfernen, da .pie keinen hat */
+  overflow: hidden; 
   border: none;
   cursor: pointer;
 }
@@ -284,8 +283,10 @@ hr {
   transition: transform 0.4s ease-in-out;
   padding-left: 0px;
   padding-right: 0px;
+  margin-bottom: 12px;
   list-style: none;
   width: auto;
+      background-color: red;
 }
 
 .carousel-track-container {
@@ -456,24 +457,6 @@ hr {
       height: auto !important;
       max-width: 100%;
     }
-
-.carousel-slide {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100%;
-  flex-shrink: 0;
-}
-
-canvas {
-  width: 100% !important;
-  height: 100%; 
-  max-width: 100%;
-  display: block;
-  cursor: pointer;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-  display: block;
-}
 
   }
 
