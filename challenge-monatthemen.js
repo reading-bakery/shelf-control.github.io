@@ -98,84 +98,20 @@ async function loadMonateCarousel() {
     
     // Touch-Events für mobile Geräte
     container.addEventListener("touchstart", e => {
-        isDragging = true;
         startX = e.touches[0].clientX;
-        // Optional: Deaktiviert CSS-Transition während des Ziehens
-        container.style.transition = 'none';
-    });
-
-    container.addEventListener("touchmove", e => {
-        if (!isDragging) return;
-        const currentX = e.touches[0].clientX;
-        const diff = currentX - startX;
-        // Berechnet den aktuellen Offset basierend auf der Bewegung
-        const currentOffset = -currentIndex * container.offsetWidth;
-        container.style.transform = `translateX(${currentOffset + diff}px)`;
+        isDragging = true;
     });
 
     container.addEventListener("touchend", e => {
         if (!isDragging) return;
         isDragging = false;
-        
-        // CSS-Transition wieder aktivieren
-        container.style.transition = 'transform 0.3s ease-in-out';
-        
         const endX = e.changedTouches[0].clientX;
         const diff = endX - startX;
-        const swipeThreshold = 50;
 
-        if (diff < -swipeThreshold && currentIndex < numSlides - 1) {
+        if (diff < -50 && currentIndex < numSlides - 1) {
             showSlide(currentIndex + 1);
-        } else if (diff > swipeThreshold && currentIndex > 0) {
+        } else if (diff > 50 && currentIndex > 0) {
             showSlide(currentIndex - 1);
-        } else {
-            // Wenn der Swipe nicht stark genug war, zur ursprünglichen Folie zurückkehren
-            showSlide(currentIndex);
-        }
-        container.style.transform = 'none'; // Transform zurücksetzen
-    });
-
-    // Maus-Events für Desktop-Geräte
-    container.addEventListener("mousedown", e => {
-        isDragging = true;
-        startX = e.clientX;
-        container.style.transition = 'none';
-    });
-    
-    container.addEventListener("mousemove", e => {
-        if (!isDragging) return;
-        e.preventDefault();
-        const currentX = e.clientX;
-        const diff = currentX - startX;
-        const currentOffset = -currentIndex * container.offsetWidth;
-        container.style.transform = `translateX(${currentOffset + diff}px)`;
-    });
-
-    container.addEventListener("mouseup", e => {
-        if (!isDragging) return;
-        isDragging = false;
-        container.style.transition = 'transform 0.3s ease-in-out';
-        
-        const endX = e.clientX;
-        const diff = endX - startX;
-        const swipeThreshold = 50;
-        
-        if (diff < -swipeThreshold && currentIndex < numSlides - 1) {
-            showSlide(currentIndex + 1);
-        } else if (diff > swipeThreshold && currentIndex > 0) {
-            showSlide(currentIndex - 1);
-        } else {
-            showSlide(currentIndex);
-        }
-        container.style.transform = 'none';
-    });
-
-    container.addEventListener("mouseleave", () => {
-        if (isDragging) {
-            isDragging = false;
-            container.style.transition = 'transform 0.3s ease-in-out';
-            container.style.transform = 'none';
-            showSlide(currentIndex);
         }
     });
 }
