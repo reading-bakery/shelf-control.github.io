@@ -458,5 +458,10 @@ hr {
       max-width: 100%;
     }
 
+    .carousel-track {
+      margin-bottom: -12px;
+      background-color: plum;
+    }
+
   }
 
