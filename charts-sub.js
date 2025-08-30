@@ -182,7 +182,7 @@ async function loadAndDrawChart() {
                     },
                     y: {
                         display: false,
-                        min: 115,
+                        min: 118,
                         max: 155,
                         ticks: {
                             color: 'white',
