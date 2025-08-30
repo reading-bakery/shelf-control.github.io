@@ -247,7 +247,6 @@ hr {
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    background-color: antiquewhite;
 }
 
 
@@ -466,6 +465,18 @@ hr {
   max-width: 100%;
   flex-shrink: 0;
   background-color: red;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  display: block;
+  cursor: pointer;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  display: block;
+  background-color: rgb(78, 144, 144);
 }
 
   }
