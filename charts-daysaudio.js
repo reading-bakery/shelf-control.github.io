@@ -155,27 +155,52 @@ document.addEventListener('DOMContentLoaded', () => {
             tooltip.style.color = 'white';
             tooltip.style.padding = '8px 12px';
             tooltip.style.borderRadius = '5px';
-            tooltip.style.pointerEvents = 'none'; // So it doesn't block mouse events on canvas
+            tooltip.style.pointerEvents = 'none';
             tooltip.style.zIndex = '1000';
-            tooltip.style.fontFamily = 'Dosis, sans-serif'; // Default
+            tooltip.style.fontFamily = 'Dosis, sans-serif';
             tooltip.style.fontSize = '14px';
             document.body.appendChild(tooltip);
         }
 
         tooltip.innerHTML = `<b>${date}</b><br>${value} Minuten`;
 
-        // Position tooltip relative to the canvas
-        const canvasRect = canvas.getBoundingClientRect();
+        // Tooltip-Größe ermitteln
         const tooltipWidth = tooltip.offsetWidth;
         const tooltipHeight = tooltip.offsetHeight;
+        const margin = 10;
 
-        let tooltipX = canvasRect.left + x + PIXEL_SIZE / 2 - tooltipWidth / 2;
-        let tooltipY = canvasRect.top + y - tooltipHeight - 10; // Above the pixel
+        // Canvas-Position im Viewport
+        const canvasRect = canvas.getBoundingClientRect();
 
-        // Keep tooltip within canvas bounds
-        if (tooltipX < canvasRect.left) tooltipX = canvasRect.left;
-        if (tooltipX + tooltipWidth > canvasRect.right) tooltipX = canvasRect.right - tooltipWidth;
-        if (tooltipY < canvasRect.top) tooltipY = canvasRect.top + y + PIXEL_SIZE + 10; // Below if no space above
+        // Standard: Tooltip rechts neben dem Pixel
+        let tooltipX = canvasRect.left + x + PIXEL_SIZE + margin;
+        let tooltipY = canvasRect.top + y;
+
+        // Wenn rechts kein Platz, versuche links
+        if (tooltipX + tooltipWidth > canvasRect.right) {
+            tooltipX = canvasRect.left + x - tooltipWidth - margin;
+        }
+        // Wenn links auch kein Platz, versuche unterhalb
+        if (tooltipX < canvasRect.left) {
+            tooltipX = canvasRect.left + x;
+            tooltipY = canvasRect.top + y + PIXEL_SIZE + margin;
+        }
+        // Wenn unten kein Platz, versuche oberhalb
+        if (tooltipY + tooltipHeight > canvasRect.bottom) {
+            tooltipY = canvasRect.top + y - tooltipHeight - margin;
+        }
+        // Wenn oben kein Platz, setze ganz oben
+        if (tooltipY < canvasRect.top) {
+            tooltipY = canvasRect.top;
+        }
+        // Wenn immer noch rechts raus, setze ganz rechts
+        if (tooltipX + tooltipWidth > canvasRect.right) {
+            tooltipX = canvasRect.right - tooltipWidth;
+        }
+        // Wenn immer noch links raus, setze ganz links
+        if (tooltipX < canvasRect.left) {
+            tooltipX = canvasRect.left;
+        }
 
         tooltip.style.left = `${tooltipX}px`;
         tooltip.style.top = `${tooltipY}px`;

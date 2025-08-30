@@ -14,7 +14,7 @@ async function loadBesthoeren() {
 
     for (let i = 1; i < data.length; i++) {
       const row = data[i];
-      const datum = row[0];
+      const datum = row[5];
       const minuten = parseInt(row[3]) || 0; // Spalte D = Minuten (Index 3)
 
       if (!minutenProTag[datum]) {
@@ -36,7 +36,13 @@ async function loadBesthoeren() {
 
     const target = document.getElementById('besthoeren-summe');
     if (target) {
-      target.textContent = `${besterTag} ${maxMinuten} Min.`;
+      // Datum von YYYY-MM-TT zu TT.MM.JJJJ umwandeln
+      let displayDatum = besterTag;
+      if (/^\d{4}-\d{2}-\d{2}$/.test(besterTag)) {
+        const [jahr, monat, tag] = besterTag.split('-');
+        displayDatum = `${tag}.${monat}.${jahr}`;
+      }
+      target.textContent = `${displayDatum} ${maxMinuten} Min.`;
     } else {
       console.warn('Element mit ID "besthoeren-summe" nicht gefunden.');
     }

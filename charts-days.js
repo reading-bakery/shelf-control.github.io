@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tooltip functionality
     let tooltip = null;
 
-    function showTooltip(x, y, date, value, event) {
+    function showTooltip(x, y, date, value, event, pixel) {
         if (!tooltip) {
             tooltip = document.createElement('div');
             tooltip.style.position = 'absolute';
@@ -168,16 +168,37 @@ document.addEventListener('DOMContentLoaded', () => {
         const tooltipHeight = tooltip.offsetHeight;
         const margin = 10;
 
-        // Position tooltip relative to the mouse position
-        let tooltipX = event.clientX + margin;
-        let tooltipY = event.clientY - tooltipHeight - margin;
+        // Canvas-Position im Viewport
+        const canvasRect = canvas.getBoundingClientRect();
 
-        // Keep tooltip within viewport bounds
-        if (tooltipX + tooltipWidth > window.innerWidth) {
-            tooltipX = event.clientX - tooltipWidth - margin;
+        // Standard: Tooltip rechts neben dem Pixel
+        let tooltipX = canvasRect.left + pixel.x + pixel.width + margin;
+        let tooltipY = canvasRect.top + pixel.y;
+
+        // Wenn rechts kein Platz, versuche links
+        if (tooltipX + tooltipWidth > canvasRect.right) {
+            tooltipX = canvasRect.left + pixel.x - tooltipWidth - margin;
         }
-        if (tooltipY < 0) {
-            tooltipY = event.clientY + margin;
+        // Wenn links auch kein Platz, versuche unterhalb
+        if (tooltipX < canvasRect.left) {
+            tooltipX = canvasRect.left + pixel.x;
+            tooltipY = canvasRect.top + pixel.y + pixel.height + margin;
+            // Wenn unten kein Platz, versuche oberhalb
+            if (tooltipY + tooltipHeight > canvasRect.bottom) {
+                tooltipY = canvasRect.top + pixel.y - tooltipHeight - margin;
+            }
+        }
+        // Wenn oben kein Platz, setze ganz oben
+        if (tooltipY < canvasRect.top) {
+            tooltipY = canvasRect.top;
+        }
+        // Wenn immer noch rechts raus, setze ganz rechts
+        if (tooltipX + tooltipWidth > canvasRect.right) {
+            tooltipX = canvasRect.right - tooltipWidth;
+        }
+        // Wenn immer noch links raus, setze ganz links
+        if (tooltipX < canvasRect.left) {
+            tooltipX = canvasRect.left;
         }
 
         tooltip.style.left = `${tooltipX}px`;
@@ -216,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.roundRect(foundPixel.x, foundPixel.y, foundPixel.width, foundPixel.height, 5);
                 ctx.stroke();
 
-                showTooltip(foundPixel.x, foundPixel.y, foundPixel.date, foundPixel.value, event);
+                showTooltip(foundPixel.x, foundPixel.y, foundPixel.date, foundPixel.value, event, foundPixel);
                 hoveredPixel = foundPixel;
             }
         } else {

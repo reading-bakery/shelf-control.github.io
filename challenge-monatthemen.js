@@ -47,8 +47,10 @@ async function loadMonateCarousel() {
                 const color = statusColors[statusRaw] || 'gray';
 
                 bookDiv.classList.add('book');
+                // Grayscale-Filter für ungelesene Bücher (NO)
+                const grayscale = statusRaw === 'NO' ? 'filter: grayscale(100%);' : '';
                 bookDiv.innerHTML = `
-                    <img src="${coverUrl}" alt="Buchcover">
+                    <img src="${coverUrl}" alt="Buchcover" style="${grayscale}">
                     <div class="book-status-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="${color}" class="bi bi-award-fill" viewBox="0 0 16 16">
                             <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>

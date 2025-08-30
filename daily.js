@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const feldIdMinuten = 'entry.1811867671';
   const feldIdBuchLetzterStand = 'entry.1217511174';
   const feldIdNeuerStand = 'entry.1273432895';
+  const feldIdDate = 'entry.1557582300';
 
   const selectBuch = document.getElementById('buch');
   const inputFortschritt = document.getElementById('bisSeite');
@@ -131,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return true;
   }
 
-  async function sendeEintrag(titel, differenz) {
+  async function sendeEintrag(titel, differenz, datumString) {
     const daten = buchDaten[titel];
     const formData = new URLSearchParams();
     formData.append(feldIdBuch, titel);
@@ -141,6 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       formData.append(feldIdMinuten, differenz);
     }
+
+    // Datum hinzufügen
+    formData.append(feldIdDate, datumString);
 
     await fetch(formUrl, {
       method: 'POST',
@@ -176,8 +180,13 @@ document.addEventListener('DOMContentLoaded', () => {
       : daten.letzterStand.minuten;
     const differenz = neuerWert - letzterWert;
 
+    // Heutiges Datum im Format YYYY-MM-DD
+    const heute = new Date();
+    const datumString = heute.toISOString().split('T')[0];
+
     try {
-      await sendeEintrag(titel, differenz);
+      // Sende Eintrag inkl. Datum
+      await sendeEintrag(titel, differenz, datumString);
       await sendeLetzterStand(titel, neuerWert);
 
       // Lokalen Fortschritt aktualisieren:
