@@ -286,7 +286,6 @@ hr {
   margin-bottom: 12px;
   list-style: none;
   width: auto;
-      background-color: red;
 }
 
 .carousel-track-container {
@@ -460,8 +459,32 @@ hr {
 
     .carousel-track {
       margin-bottom: -12px;
-      background-color: plum;
+    }
+
+    #besthoeren-summe,
+    #bestlesen-summe,
+    #sterne,
+    #average,
+    #bestday-summe,
+    #books-summe,
+    #seiten-summe,
+    #minuten-summe,
+    #neuzugaenge-summe,
+    #highlight-summe,
+    #flop-summe,
+    #ausgaben-summe,
+    #abgebrochen-summe,
+    #sterne,
+    #average,
+    #books-summe,
+    #neuzugaenge-summe,
+    #ausgaben-summe,
+    #besthoeren-summe,
+    #bestlesen-summe {
+      padding-bottom: 72px;
+      color: whitesmoke;
     }
 
   }
+  
 
