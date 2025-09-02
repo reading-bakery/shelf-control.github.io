@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Jetzt: letzter Wert pro Buch, nicht max
   function berechneLetzterStand(csv) {
     const lines = csv.trim().split('\n');
     const headers = lines[0].split(',');
@@ -51,8 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (buch) {
         if (!letzterStand[buch]) letzterStand[buch] = { seite: 0, minuten: 0 };
-        if (!isNaN(seite) && seite > letzterStand[buch].seite) letzterStand[buch].seite = seite;
-        if (!isNaN(minuten) && minuten > letzterStand[buch].minuten) letzterStand[buch].minuten = minuten;
+        if (!isNaN(seite)) letzterStand[buch].seite = seite;
+        if (!isNaN(minuten)) letzterStand[buch].minuten = minuten;
       }
     }
     return letzterStand;
@@ -175,51 +176,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const titel = selectBuch.value;
     const daten = buchDaten[titel];
     const neuerWert = parseInt(inputFortschritt.value, 10);
-
-    // Summe aller bisherigen Einträge berechnen
-    const dailyCsv = await fetch(`https://docs.google.com/spreadsheets/d/e/${spreadsheetId}/pub?gid=${gidDaily}&single=true&output=csv`).then(res => res.text());
-    const lines = dailyCsv.trim().split('\n');
-    const headers = lines[0].split(',');
-    const idxBuch = headers.indexOf('Buch');
-    const idxSeiten = headers.indexOf('Seiten');
-    const idxMinuten = headers.indexOf('Minuten');
-
-    let sumSeiten = 0;
-    let sumMinuten = 0;
-    for (let i = 1; i < lines.length; i++) {
-        const row = lines[i].split(',');
-        if (row[idxBuch]?.trim() === titel) {
-            const s = parseInt(row[idxSeiten]?.trim(), 10);
-            const m = parseInt(row[idxMinuten]?.trim(), 10);
-            if (!isNaN(s)) sumSeiten += s;
-            if (!isNaN(m)) sumMinuten += m;
-        }
-    }
-
-    let differenz;
-    if (['Softcover', 'Hardcover', 'eBook'].includes(daten.format)) {
-        differenz = neuerWert - sumSeiten;
-    } else {
-        differenz = neuerWert - sumMinuten;
-    }
+    const letzterWert = ['Softcover', 'Hardcover', 'eBook'].includes(daten.format)
+      ? daten.letzterStand.seite
+      : daten.letzterStand.minuten;
+    const differenz = neuerWert - letzterWert;
 
     // Heutiges Datum im Format YYYY-MM-DD
     const heute = new Date();
     const datumString = heute.toISOString().split('T')[0];
 
     try {
-        await sendeEintrag(titel, differenz, datumString);
-        await sendeLetzterStand(titel, neuerWert);
+      // Sende Eintrag inkl. Datum
+      await sendeEintrag(titel, differenz, datumString);
+      await sendeLetzterStand(titel, neuerWert);
 
-        buchDaten[titel].letzterStand = {
-            seite: ['Softcover', 'Hardcover', 'eBook'].includes(daten.format) ? neuerWert : daten.letzterStand.seite,
-            minuten: daten.format === 'Hörbuch' ? neuerWert : daten.letzterStand.minuten
-        };
+      // Lokalen Fortschritt aktualisieren:
+      buchDaten[titel].letzterStand = {
+        seite: ['Softcover', 'Hardcover', 'eBook'].includes(daten.format) ? neuerWert : daten.letzterStand.seite,
+        minuten: daten.format === 'Hörbuch' ? neuerWert : daten.letzterStand.minuten
+      };
 
-        zeigeStatus('Eintrag erfolgreich gespeichert. 😍', false);
-        form.reset();
+      zeigeStatus('Eintrag erfolgreich gespeichert. 😍', false);
+      form.reset();
     } catch (error) {
-        zeigeStatus('Fehler beim Senden: ' + error.message, true);
+      zeigeStatus('Fehler beim Senden: ' + error.message, true);
     }
   });
 
