@@ -48,7 +48,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const gradient9 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Divers
   gradient9.addColorStop(0, '#63b8ff');
   gradient9.addColorStop(1, '#7c9c7fff');
-  gradients.push(gradient9),
+  gradients.push(gradient9);
+
+  const gradient10 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Divers
+  gradient10.addColorStop(0, '#5ea237ff');
+  gradient10.addColorStop(1, '#d8ebdaff');
+  gradients.push(gradient10);
+
+  const gradient11 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Divers
+  gradient11.addColorStop(0, '#d43e91ff');
+  gradient11.addColorStop(1, '#dba9cdff');
+  gradients.push(gradient11);
+
+  const gradient12 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Divers
+  gradient12.addColorStop(0, '#071eccff');
+  gradient12.addColorStop(1, '#bdb9dbff');
+  gradients.push(gradient12),
 
   // CSV-Daten laden
   fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=999478679&single=true&output=csv')
