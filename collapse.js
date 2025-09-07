@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
               const display = Number.isFinite(rounded)
                 ? rounded.toString().replace('.', ',')
                 : '–';
-              sterneHtml += `<span style="margin-left:1px;font-size:0.8rem;color:#ee;">${display}</span>`;
+              sterneHtml += `<span style="margin-left:1px;font-size:0.0rem;color:#ee;">${display}</span>`;
 
               sterneDiv.innerHTML = sterneHtml;
 
