@@ -99,6 +99,44 @@ h3 {
     overflow: visible;
 }
 
+/* Neue Styles für Sterne-Bewertung und Cover-Container */
+.cover-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.sterne-bewertung {
+  margin-top: 6px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.sterne-bewertung span {
+  font-size: 10px; 
+}
+
+/* Cover-Container: Covers nebeneinander, Bewertung darunter */
+.collapse .cover-container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 8px 6px 16px 6px;
+  vertical-align: top;
+}
+
+/* Zeile für alle Cover nebeneinander */
+.collapse {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0; /* Abstand über margin der cover-container */
+}
+
 /* Handy-Ansicht */
 @media (max-width: 740px) {
     .monat-block {
@@ -110,10 +148,17 @@ h3 {
         width: 100%;
     }
 
-
     .cover-img {
-        width: 60px;   /* kleinere Breite */
-        height: 90px;  /* passende Höhe */
-        margin: 2px;   /* weniger Abstand */
+        width: 60px;
+        height: 90px;
+        margin: 2px;
+    }
+
+    /* Covers auch mobil nebeneinander */
+    .collapse {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
     }
 }
