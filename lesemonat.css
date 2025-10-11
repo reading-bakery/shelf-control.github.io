@@ -162,3 +162,12 @@ h3 {
         align-items: flex-start;
     }
 }
+
+    /* Ergänzung für große Bildschirme */
+@media (min-width: 1400px) {
+    h2 {
+      font-size: 7rem;
+    }
+}
+
+

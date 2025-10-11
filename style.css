@@ -122,4 +122,12 @@
       }
     }
 
+    /* Ergänzung für große Bildschirme */
+@media (min-width: 1400px) {
+    h1 {
+      font-size: 7rem;
+    }
+}
+
+
 

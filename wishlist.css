@@ -87,3 +87,10 @@
         box-shadow: 0 0 8px rgba(0,0,0,0.6);
     }
 }
+
+/* Ergänzung für große Bildschirme */
+@media (min-width: 1400px) {
+    h2 {
+      font-size: 7rem;
+    }
+}

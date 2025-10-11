@@ -258,3 +258,19 @@ p {
         cursor: pointer;
     }
 }
+
+/* Ergänzung für große Bildschirme */
+@media (min-width: 1400px) {
+    h3 {
+        font-size: 3.5rem;
+    }
+
+    h2 {
+        font-size: 7rem;
+    }
+
+    .flip-front, .flip-back {
+        font-size: 1.2rem;
+    }
+}
+  
