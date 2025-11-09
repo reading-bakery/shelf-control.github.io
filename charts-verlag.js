@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             color: 'white',
             anchor: 'end',
             align: 'right',
-            offset: -2,
+            offset: -5,
             clamp: true,
             font: ctx => ({
               family: "'Dosis', sans-serif",

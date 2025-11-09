@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
             color: 'white',
             anchor: 'end',
             align: 'right',
-            offset: -2,
+            offset: -5,
             clamp: true,
             font: ctx => ({
               family: "'Dosis', sans-serif",
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      const maxValue = Math.max(...data) +4;
+      const maxValue = Math.max(...data) +6;
       const mediaQuery = window.matchMedia('(max-width: 740px)');
 
       function updateChart() {
