@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv';
     const PIXELS_PER_ROW = 25;
-    const PIXEL_SIZE = 20; // Example size, adjust as needed
-    const GAP = 6; // Gap between pixels
+    const PIXEL_SIZE = 20;
+    const GAP = 6;
 
     const canvas = document.getElementById('daysaudioChart');
     const legendDiv = document.getElementById('legendaudiodays');
@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const ctx = canvas.getContext('2d');
 
-    let aggregatedData = {}; // To store aggregated minutes per day
-    let pixelPositions = []; // To store position and data for hover
+    let aggregatedData = {};
+    let pixelPositions = [];
 
     function fetchData() {
         fetch(DATA_URL)
@@ -28,22 +28,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function parseCSV(csv) {
         const lines = csv.split('\n');
-        // Assuming first line is header
         for (let i = 1; i < lines.length; i++) {
             const line = lines[i].trim();
             if (!line) continue;
             const columns = line.split(',');
             if (columns.length >= 4) {
                 const timestampStr = columns[0].trim();
-                const minutes = parseInt(columns[3].trim(), 10); // Column 'Minuten'
-
-                // Extract date part (YYYY-MM-DD)
+                const minutes = parseInt(columns[3].trim(), 10);
                 const datePart = timestampStr.split(' ')[0];
 
                 if (!isNaN(minutes)) {
-                    if (!aggregatedData[datePart]) {
-                        aggregatedData[datePart] = 0;
-                    }
+                    if (!aggregatedData[datePart]) aggregatedData[datePart] = 0;
                     aggregatedData[datePart] += minutes;
                 }
             }
@@ -51,16 +46,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getColorForMinutes(minutes) {
-        if (minutes >= 0 && minutes <= 60) return '#ff7256'; // Grün
-        if (minutes >= 61 && minutes <= 120) return '#FFB90F '; // Gelb
-        if (minutes >= 121 && minutes <= 180) return '#63b8ff'; // Blau
-        if (minutes >= 181 && minutes <= 240) return '#3CB371'; // Rot
-        if (minutes >= 241) return '#9370DB '; // Lila
-        return '#CCCCCC'; // Default or unknown
+        if (minutes >= 0 && minutes <= 60) return '#ff7256'; // ≤ 60
+        if (minutes >= 61 && minutes <= 120) return '#FFB90F'; // ≤ 120
+        if (minutes >= 121 && minutes <= 180) return '#63b8ff'; // ≤ 180
+        if (minutes >= 181 && minutes <= 240) return '#3CB371'; // ≤ 240
+        if (minutes >= 241) return '#9370DB'; // ≥ 241
+        return '#CCCCCC';
     }
 
     function drawChart() {
-        const dates = Object.keys(aggregatedData).sort();
+        // 🔹 Nur vorhandene Daten, aber chronologisch korrekt sortiert
+        const dates = Object.keys(aggregatedData).sort((a, b) => {
+            const [dayA, monthA, yearA] = a.split(/[.\-\/]/).map(Number);
+            const [dayB, monthB, yearB] = b.split(/[.\-\/]/).map(Number);
+            return new Date(yearA, monthA - 1, dayA) - new Date(yearB, monthB - 1, dayB);
+        });
+
         const totalPixels = dates.length;
         const totalRows = Math.ceil(totalPixels / PIXELS_PER_ROW);
 
@@ -82,37 +83,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
             ctx.fillStyle = color;
             ctx.beginPath();
-            ctx.roundRect(x, y, PIXEL_SIZE, PIXEL_SIZE, 5); // Rounded corners
+            ctx.roundRect(x, y, PIXEL_SIZE, PIXEL_SIZE, 5);
             ctx.fill();
 
             pixelPositions.push({
-                x: x,
-                y: y,
+                x,
+                y,
                 width: PIXEL_SIZE,
                 height: PIXEL_SIZE,
-                date: date,
+                date,
                 value: minutes
             });
         });
     }
 
     function drawLegend() {
-        const legendItems = [{
-            label: '≤ 60',
-            color: '#ff7256'
-        }, {
-            label: '≤ 120',
-            color: '#FFB90F'
-        }, {
-            label: '≤ 180',
-            color: '#63b8ff'
-        }, {
-            label: '≤ 240',
-            color: '#3CB371'
-        }, {
-            label: '≥ 241',
-            color: '#9370DB'
-        }, ];
+        const legendItems = [
+            { label: '≤ 60', color: '#ff7256' },
+            { label: '≤ 120', color: '#FFB90F' },
+            { label: '≤ 180', color: '#63b8ff' },
+            { label: '≤ 240', color: '#3CB371' },
+            { label: '≥ 241', color: '#9370DB' },
+        ];
 
         legendDiv.style.display = 'flex';
         legendDiv.style.flexWrap = 'wrap';
@@ -120,15 +112,14 @@ document.addEventListener('DOMContentLoaded', () => {
         legendDiv.style.marginTop = '10px';
         legendDiv.style.fontFamily = 'Dosis, sans-serif';
         legendDiv.style.fontSize = '13px';
-
-        legendDiv.innerHTML = ''; // Clear existing legend
+        legendDiv.innerHTML = '';
 
         legendItems.forEach(item => {
             const span = document.createElement('span');
             span.style.display = 'flex';
             span.style.alignItems = 'center';
             span.style.marginRight = '15px';
-            span.style.marginBottom = '5px'; // For wrapping
+            span.style.marginBottom = '5px';
 
             const colorBox = document.createElement('span');
             colorBox.style.display = 'inline-block';
@@ -144,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Tooltip functionality
     let tooltip = null;
 
     function showTooltip(x, y, date, value) {
@@ -164,42 +154,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         tooltip.innerHTML = `<b>${date}</b><br>${value} Minuten`;
 
-        // Tooltip-Größe ermitteln
         const tooltipWidth = tooltip.offsetWidth;
         const tooltipHeight = tooltip.offsetHeight;
         const margin = 10;
-
-        // Canvas-Position im Viewport
         const canvasRect = canvas.getBoundingClientRect();
 
-        // Standard: Tooltip rechts neben dem Pixel
         let tooltipX = canvasRect.left + x + PIXEL_SIZE + margin;
         let tooltipY = canvasRect.top + y;
 
-        // Wenn rechts kein Platz, versuche links
         if (tooltipX + tooltipWidth > canvasRect.right) {
             tooltipX = canvasRect.left + x - tooltipWidth - margin;
         }
-        // Wenn links auch kein Platz, versuche unterhalb
         if (tooltipX < canvasRect.left) {
             tooltipX = canvasRect.left + x;
             tooltipY = canvasRect.top + y + PIXEL_SIZE + margin;
         }
-        // Wenn unten kein Platz, versuche oberhalb
         if (tooltipY + tooltipHeight > canvasRect.bottom) {
             tooltipY = canvasRect.top + y - tooltipHeight - margin;
         }
-        // Wenn oben kein Platz, setze ganz oben
         if (tooltipY < canvasRect.top) {
             tooltipY = canvasRect.top;
-        }
-        // Wenn immer noch rechts raus, setze ganz rechts
-        if (tooltipX + tooltipWidth > canvasRect.right) {
-            tooltipX = canvasRect.right - tooltipWidth;
-        }
-        // Wenn immer noch links raus, setze ganz links
-        if (tooltipX < canvasRect.left) {
-            tooltipX = canvasRect.left;
         }
 
         tooltip.style.left = `${tooltipX}px`;
@@ -208,12 +182,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function hideTooltip() {
-        if (tooltip) {
-            tooltip.style.display = 'none';
-        }
+        if (tooltip) tooltip.style.display = 'none';
     }
 
-    let hoveredPixel = null; // Store the currently hovered pixel data
+    let hoveredPixel = null;
 
     canvas.addEventListener('mousemove', (event) => {
         const rect = canvas.getBoundingClientRect();
@@ -222,8 +194,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let foundPixel = null;
         for (const pixel of pixelPositions) {
-            if (mouseX >= pixel.x && mouseX <= pixel.x + pixel.width &&
-                mouseY >= pixel.y && mouseY <= pixel.y + pixel.height) {
+            if (
+                mouseX >= pixel.x && mouseX <= pixel.x + pixel.width &&
+                mouseY >= pixel.y && mouseY <= pixel.y + pixel.height
+            ) {
                 foundPixel = pixel;
                 break;
             }
@@ -231,9 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (foundPixel) {
             if (hoveredPixel !== foundPixel) {
-                // Redraw chart to clear previous hover effect
                 drawChart();
-                // Draw new hover effect
                 ctx.strokeStyle = 'white';
                 ctx.lineWidth = 5;
                 ctx.beginPath();
@@ -245,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             if (hoveredPixel) {
-                drawChart(); // Redraw to remove border
+                drawChart();
                 hideTooltip();
                 hoveredPixel = null;
             }
@@ -254,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     canvas.addEventListener('mouseleave', () => {
         if (hoveredPixel) {
-            drawChart(); // Redraw to remove border
+            drawChart();
             hideTooltip();
             hoveredPixel = null;
         }

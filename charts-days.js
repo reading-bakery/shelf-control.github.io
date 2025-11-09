@@ -26,8 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error('Error fetching data for daysChart:', error));
     }
 
-
-
     function parseCSV(csv) {
         const lines = csv.split('\n');
         for (let i = 1; i < lines.length; i++) {
@@ -37,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (columns.length >= 2) {
                 const timestampStr = columns[0].trim();
                 const pages = parseInt(columns[2].trim(), 10);
-
                 const datePart = timestampStr.split(' ')[0];
 
                 if (!isNaN(pages)) {
@@ -50,17 +47,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // 🧩 Chronologische Sortierung für deutsches Datumsformat (TT.MM.JJJJ)
+    function sortDates(dates) {
+        return dates.sort((a, b) => {
+            const [dayA, monthA, yearA] = a.split(/[.\-/]/).map(Number);
+            const [dayB, monthB, yearB] = b.split(/[.\-/]/).map(Number);
+            return new Date(yearA, monthA - 1, dayA) - new Date(yearB, monthB - 1, dayB);
+        });
+    }
+
     function getColorForPages(pages) {
         if (pages >= 0 && pages <= 50) return '#ff7256';
         if (pages >= 51 && pages <= 75) return '#FFB90F';
         if (pages >= 76 && pages <= 100) return '#63b8ff';
-        if (pages >= 101 && pages <= 150) return '#3CB371 ';
-        if (pages >= 151) return '#9370DB ';
+        if (pages >= 101 && pages <= 150) return '#3CB371';
+        if (pages >= 151) return '#9370DB';
         return '#CCCCCC';
     }
 
     function drawChart() {
-        const dates = Object.keys(aggregatedData).sort();
+        const dates = sortDates(Object.keys(aggregatedData)); // ✅ hier wird korrekt sortiert
         const totalPixels = dates.length;
         const totalRows = Math.ceil(totalPixels / PIXELS_PER_ROW);
 
@@ -76,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const row = Math.floor(index / PIXELS_PER_ROW);
             const col = index % PIXELS_PER_ROW;
-
             const x = col * (PIXEL_SIZE + GAP);
             const y = row * (PIXEL_SIZE + GAP);
 
@@ -86,33 +91,24 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fill();
 
             pixelPositions.push({
-                x: x,
-                y: y,
+                x,
+                y,
                 width: PIXEL_SIZE,
                 height: PIXEL_SIZE,
-                date: date,
+                date,
                 value: pages
             });
         });
     }
 
     function drawLegend() {
-        const legendItems = [{
-            label: '≤ 50',
-            color: '#ff7256'
-        }, {
-            label: '≤ 75',
-            color: '#FFB90F'
-        }, {
-            label: '≤ 100',
-            color: '#63b8ff'
-        }, {
-            label: '≤ 150',
-            color: '#3CB371 '
-        }, {
-            label: '≥ 151',
-            color: '#9370DB'
-        }, ];
+        const legendItems = [
+            { label: '≤ 50', color: '#ff7256' },
+            { label: '≤ 75', color: '#FFB90F' },
+            { label: '≤ 100', color: '#63b8ff' },
+            { label: '≤ 150', color: '#3CB371' },
+            { label: '≥ 151', color: '#9370DB' },
+        ];
 
         legendDiv.style.display = 'flex';
         legendDiv.style.flexWrap = 'wrap';
@@ -120,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
         legendDiv.style.marginTop = '10px';
         legendDiv.style.fontFamily = 'Dosis, sans-serif';
         legendDiv.style.fontSize = '13px';
-
         legendDiv.innerHTML = '';
 
         legendItems.forEach(item => {
@@ -144,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Tooltip functionality
     let tooltip = null;
 
     function showTooltip(x, y, date, value, event, pixel) {
@@ -167,38 +161,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const tooltipWidth = tooltip.offsetWidth;
         const tooltipHeight = tooltip.offsetHeight;
         const margin = 10;
-
-        // Canvas-Position im Viewport
         const canvasRect = canvas.getBoundingClientRect();
 
-        // Standard: Tooltip rechts neben dem Pixel
         let tooltipX = canvasRect.left + pixel.x + pixel.width + margin;
         let tooltipY = canvasRect.top + pixel.y;
 
-        // Wenn rechts kein Platz, versuche links
-        if (tooltipX + tooltipWidth > canvasRect.right) {
+        if (tooltipX + tooltipWidth > canvasRect.right)
             tooltipX = canvasRect.left + pixel.x - tooltipWidth - margin;
-        }
-        // Wenn links auch kein Platz, versuche unterhalb
+
         if (tooltipX < canvasRect.left) {
             tooltipX = canvasRect.left + pixel.x;
             tooltipY = canvasRect.top + pixel.y + pixel.height + margin;
-            // Wenn unten kein Platz, versuche oberhalb
-            if (tooltipY + tooltipHeight > canvasRect.bottom) {
+            if (tooltipY + tooltipHeight > canvasRect.bottom)
                 tooltipY = canvasRect.top + pixel.y - tooltipHeight - margin;
-            }
-        }
-        // Wenn oben kein Platz, setze ganz oben
-        if (tooltipY < canvasRect.top) {
-            tooltipY = canvasRect.top;
-        }
-        // Wenn immer noch rechts raus, setze ganz rechts
-        if (tooltipX + tooltipWidth > canvasRect.right) {
-            tooltipX = canvasRect.right - tooltipWidth;
-        }
-        // Wenn immer noch links raus, setze ganz links
-        if (tooltipX < canvasRect.left) {
-            tooltipX = canvasRect.left;
         }
 
         tooltip.style.left = `${tooltipX}px`;
@@ -207,9 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function hideTooltip() {
-        if (tooltip) {
-            tooltip.style.display = 'none';
-        }
+        if (tooltip) tooltip.style.display = 'none';
     }
 
     let hoveredPixel = null;
