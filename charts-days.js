@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (columns.length >= 2) {
                 const timestampStr = columns[0].trim();
                 const pages = parseInt(columns[2].trim(), 10);
-                const datePart = timestampStr.split(' ')[0];
+
+                const datePart = timestampStr.split(' ')[0]; // "TT.MM.YYYY"
 
                 if (!isNaN(pages)) {
                     if (!aggregatedData[datePart]) {
@@ -45,15 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-    }
-
-    // 🧩 Chronologische Sortierung für deutsches Datumsformat (TT.MM.JJJJ)
-    function sortDates(dates) {
-        return dates.sort((a, b) => {
-            const [dayA, monthA, yearA] = a.split(/[.\-/]/).map(Number);
-            const [dayB, monthB, yearB] = b.split(/[.\-/]/).map(Number);
-            return new Date(yearA, monthA - 1, dayA) - new Date(yearB, monthB - 1, dayB);
-        });
     }
 
     function getColorForPages(pages) {
@@ -66,7 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function drawChart() {
-        const dates = sortDates(Object.keys(aggregatedData)); // ✅ hier wird korrekt sortiert
+        // 🔹 Chronologische Sortierung
+        const dates = Object.keys(aggregatedData).sort((a, b) => {
+            const [dayA, monthA, yearA] = a.split(/[.\-\/]/).map(Number);
+            const [dayB, monthB, yearB] = b.split(/[.\-\/]/).map(Number);
+            return new Date(yearA, monthA - 1, dayA) - new Date(yearB, monthB - 1, dayB);
+        });
+
         const totalPixels = dates.length;
         const totalRows = Math.ceil(totalPixels / PIXELS_PER_ROW);
 
@@ -82,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const row = Math.floor(index / PIXELS_PER_ROW);
             const col = index % PIXELS_PER_ROW;
+
             const x = col * (PIXEL_SIZE + GAP);
             const y = row * (PIXEL_SIZE + GAP);
 
@@ -91,11 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fill();
 
             pixelPositions.push({
-                x,
-                y,
+                x: x,
+                y: y,
                 width: PIXEL_SIZE,
                 height: PIXEL_SIZE,
-                date,
+                date: date,
                 value: pages
             });
         });
@@ -116,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         legendDiv.style.marginTop = '10px';
         legendDiv.style.fontFamily = 'Dosis, sans-serif';
         legendDiv.style.fontSize = '13px';
+
         legendDiv.innerHTML = '';
 
         legendItems.forEach(item => {
@@ -139,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 🔹 Tooltip
     let tooltip = null;
 
     function showTooltip(x, y, date, value, event, pixel) {
@@ -158,22 +159,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         tooltip.innerHTML = `<b>${date}</b><br>${value} Seiten`;
 
+        const canvasRect = canvas.getBoundingClientRect();
+        const margin = 10;
         const tooltipWidth = tooltip.offsetWidth;
         const tooltipHeight = tooltip.offsetHeight;
-        const margin = 10;
-        const canvasRect = canvas.getBoundingClientRect();
 
         let tooltipX = canvasRect.left + pixel.x + pixel.width + margin;
         let tooltipY = canvasRect.top + pixel.y;
 
-        if (tooltipX + tooltipWidth > canvasRect.right)
+        if (tooltipX + tooltipWidth > canvasRect.right) {
             tooltipX = canvasRect.left + pixel.x - tooltipWidth - margin;
-
-        if (tooltipX < canvasRect.left) {
-            tooltipX = canvasRect.left + pixel.x;
-            tooltipY = canvasRect.top + pixel.y + pixel.height + margin;
-            if (tooltipY + tooltipHeight > canvasRect.bottom)
-                tooltipY = canvasRect.top + pixel.y - tooltipHeight - margin;
+        }
+        if (tooltipY + tooltipHeight > canvasRect.bottom) {
+            tooltipY = canvasRect.top + pixel.y - tooltipHeight - margin;
         }
 
         tooltip.style.left = `${tooltipX}px`;
@@ -187,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let hoveredPixel = null;
 
+    // 🔹 Hover-Logik (kein Neuzeichnen des Charts)
     canvas.addEventListener('mousemove', (event) => {
         const rect = canvas.getBoundingClientRect();
         const mouseX = event.clientX - rect.left;
@@ -194,8 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let foundPixel = null;
         for (const pixel of pixelPositions) {
-            if (mouseX >= pixel.x && mouseX <= pixel.x + pixel.width &&
-                mouseY >= pixel.y && mouseY <= pixel.y + pixel.height) {
+            if (
+                mouseX >= pixel.x && mouseX <= pixel.x + pixel.width &&
+                mouseY >= pixel.y && mouseY <= pixel.y + pixel.height
+            ) {
                 foundPixel = pixel;
                 break;
             }
@@ -203,7 +204,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (foundPixel) {
             if (hoveredPixel !== foundPixel) {
-                drawChart();
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                pixelPositions.forEach(p => {
+                    ctx.fillStyle = getColorForPages(p.value);
+                    ctx.beginPath();
+                    ctx.roundRect(p.x, p.y, p.width, p.height, 5);
+                    ctx.fill();
+                });
+
                 ctx.strokeStyle = 'white';
                 ctx.lineWidth = 5;
                 ctx.beginPath();
@@ -213,18 +221,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 showTooltip(foundPixel.x, foundPixel.y, foundPixel.date, foundPixel.value, event, foundPixel);
                 hoveredPixel = foundPixel;
             }
-        } else {
-            if (hoveredPixel) {
-                drawChart();
-                hideTooltip();
-                hoveredPixel = null;
-            }
+        } else if (hoveredPixel) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pixelPositions.forEach(p => {
+                ctx.fillStyle = getColorForPages(p.value);
+                ctx.beginPath();
+                ctx.roundRect(p.x, p.y, p.width, p.height, 5);
+                ctx.fill();
+            });
+            hideTooltip();
+            hoveredPixel = null;
         }
     });
 
     canvas.addEventListener('mouseleave', () => {
         if (hoveredPixel) {
-            drawChart();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pixelPositions.forEach(p => {
+                ctx.fillStyle = getColorForPages(p.value);
+                ctx.beginPath();
+                ctx.roundRect(p.x, p.y, p.width, p.height, 5);
+                ctx.fill();
+            });
             hideTooltip();
             hoveredPixel = null;
         }
