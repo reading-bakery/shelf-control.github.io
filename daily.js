@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('trackerForm');
   const statusDiv = document.getElementById('status');
 
-  const buchDaten = {};
+  const buchDaten = {}; // enthält maxSeiten, maxMinuten, letzte Tageswerte, kumulierte Summe
 
   async function ladeBuecherUndStände() {
     try {
@@ -27,39 +27,43 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(`https://docs.google.com/spreadsheets/d/e/${spreadsheetId}/pub?gid=${gidDaily}&single=true&output=csv`).then(res => res.text()),
       ]);
 
-      const letzteStände = berechneLetzterStand(dailyCsv);
-      parseBuchCsv(buchCsv, letzteStände);
+      const tageBuch = parseDailyCsv(dailyCsv);
+      parseBuchCsv(buchCsv, tageBuch);
     } catch (error) {
       zeigeStatus('Fehler beim Laden: ' + error.message, true);
     }
   }
 
-  // Jetzt: letzter Wert pro Buch, nicht max
-  function berechneLetzterStand(csv) {
+  // Lese alle Einträge aus Daily CSV und bilde pro Buch die Historie nach Datum
+  function parseDailyCsv(csv) {
     const lines = csv.trim().split('\n');
     const headers = lines[0].split(',');
     const idxBuch = headers.indexOf('Buch');
     const idxSeite = headers.indexOf('Seiten');
     const idxMinuten = headers.indexOf('Minuten');
+    const idxDate = headers.indexOf('Datum');
 
-    const letzterStand = {};
-
+    const tageBuch = {}; // tageBuch[Buch][Datum] = Wert
     for (let i = 1; i < lines.length; i++) {
       const row = lines[i].split(',');
       const buch = row[idxBuch]?.trim();
       const seite = parseInt(row[idxSeite]?.trim(), 10);
       const minuten = parseInt(row[idxMinuten]?.trim(), 10);
+      const datum = row[idxDate]?.trim();
 
-      if (buch) {
-        if (!letzterStand[buch]) letzterStand[buch] = { seite: 0, minuten: 0 };
-        if (!isNaN(seite)) letzterStand[buch].seite = seite;
-        if (!isNaN(minuten)) letzterStand[buch].minuten = minuten;
-      }
+      if (!buch || !datum) continue;
+
+      if (!tageBuch[buch]) tageBuch[buch] = {};
+      if (!tageBuch[buch][datum]) tageBuch[buch][datum] = { seite: 0, minuten: 0 };
+
+      if (!isNaN(seite)) tageBuch[buch][datum].seite += seite;
+      if (!isNaN(minuten)) tageBuch[buch][datum].minuten += minuten;
     }
-    return letzterStand;
+
+    return tageBuch;
   }
 
-  function parseBuchCsv(csv, letzterStand) {
+  function parseBuchCsv(csv, tageBuch) {
     const lines = csv.trim().split('\n');
     const headers = lines[0].split(',');
 
@@ -80,11 +84,32 @@ document.addEventListener('DOMContentLoaded', () => {
       const beendet = row[idxEnde]?.trim();
 
       if (titel && beendet === '') {
+        // Berechne kumulierte Summe über alle Tage
+        let sumSeiten = 0;
+        let sumMinuten = 0;
+        if (tageBuch[titel]) {
+          for (const datum in tageBuch[titel]) {
+            sumSeiten += tageBuch[titel][datum].seite;
+            sumMinuten += tageBuch[titel][datum].minuten;
+          }
+        }
+
+        // Letzter Stand für Validierung (letzter Tag)
+        let letzterSeitenStand = 0;
+        let letzterMinutenStand = 0;
+        if (tageBuch[titel]) {
+          const daten = Object.keys(tageBuch[titel]).sort();
+          const letzterTag = daten[daten.length - 1];
+          letzterSeitenStand = tageBuch[titel][letzterTag].seite;
+          letzterMinutenStand = tageBuch[titel][letzterTag].minuten;
+        }
+
         buchDaten[titel] = {
-          format: format,
+          format,
           maxSeiten: isNaN(maxSeiten) ? Infinity : maxSeiten,
           maxMinuten: isNaN(maxMinuten) ? Infinity : maxMinuten,
-          letzterStand: letzterStand[titel] || { seite: 0, minuten: 0 }
+          summe: { seite: sumSeiten, minuten: sumMinuten },
+          letzterStand: { seite: letzterSeitenStand, minuten: letzterMinutenStand }
         };
 
         const option = document.createElement('option');
@@ -108,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
       zeigeStatus('Bitte gültigen Wert eingeben. 🧐', true);
       return false;
     }
+
     if (['Softcover', 'Hardcover', 'eBook'].includes(daten.format)) {
       if (neuerWert > daten.maxSeiten) {
         zeigeStatus(`Maximale Seitenzahl überschritten (${daten.maxSeiten}). 😭`, true);
@@ -130,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
       zeigeStatus('Unbekanntes Format. 🤔', true);
       return false;
     }
+
     return true;
   }
 
@@ -144,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
       formData.append(feldIdMinuten, differenz);
     }
 
-    // Datum hinzufügen
     formData.append(feldIdDate, datumString);
 
     await fetch(formUrl, {
@@ -176,27 +202,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const titel = selectBuch.value;
     const daten = buchDaten[titel];
     const neuerWert = parseInt(inputFortschritt.value, 10);
+
+    // Differenz berechnen für neuen Tageswert
     const letzterWert = ['Softcover', 'Hardcover', 'eBook'].includes(daten.format)
       ? daten.letzterStand.seite
       : daten.letzterStand.minuten;
+
     const differenz = neuerWert - letzterWert;
 
-    // Heutiges Datum im Format YYYY-MM-DD
     const heute = new Date();
     const datumString = heute.toISOString().split('T')[0];
 
     try {
-      // Sende Eintrag inkl. Datum
       await sendeEintrag(titel, differenz, datumString);
       await sendeLetzterStand(titel, neuerWert);
 
-      // Lokalen Fortschritt aktualisieren:
-      buchDaten[titel].letzterStand = {
-        seite: ['Softcover', 'Hardcover', 'eBook'].includes(daten.format) ? neuerWert : daten.letzterStand.seite,
-        minuten: daten.format === 'Hörbuch' ? neuerWert : daten.letzterStand.minuten
-      };
+      // Lokale Daten aktualisieren
+      if (['Softcover', 'Hardcover', 'eBook'].includes(daten.format)) {
+        daten.summe.seite += differenz;
+        daten.letzterStand.seite = neuerWert;
+      } else {
+        daten.summe.minuten += differenz;
+        daten.letzterStand.minuten = neuerWert;
+      }
 
-      zeigeStatus('Eintrag erfolgreich gespeichert. 😍', false);
+      zeigeStatus(`Eintrag erfolgreich gespeichert. 🥳 Gesamt: ${daten.summe.seite || daten.summe.minuten}`, false);
       form.reset();
     } catch (error) {
       zeigeStatus('Fehler beim Senden: ' + error.message, true);
