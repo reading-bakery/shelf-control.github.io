@@ -129,11 +129,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      const maxValue = Math.max(...data) +6;
       const mediaQuery = window.matchMedia('(max-width: 740px)');
 
       function updateChart() {
         const barThickness = mediaQuery.matches ? 30 : 35;
+        const baseMax = Math.max(...data) + 6;
+
+        // Mobile-spezifische Anpassung: Skala auf kleinen Bildschirmen etwas reduzieren
+        // Passe Multiplizierer oder Mindestwert nach Wunsch an
+        const mobileMax = Math.max(Math.ceil(baseMax * 0.7), 8);
+
+        const maxValue = mediaQuery.matches ? mobileMax : baseMax;
+
         renderSprachenChart(labels, data, barThickness, maxValue);
       }
 
