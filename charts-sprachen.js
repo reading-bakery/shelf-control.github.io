@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Mobile-spezifische Anpassung: Skala auf kleinen Bildschirmen etwas reduzieren
         // Passe Multiplizierer oder Mindestwert nach Wunsch an
-        const mobileMax = Math.max(Math.ceil(baseMax * 0.7), 8);
+        const mobileMax = Math.max(Math.ceil(baseMax * 1), 8);
 
         const maxValue = mediaQuery.matches ? mobileMax : baseMax;
 
