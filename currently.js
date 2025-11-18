@@ -1,9 +1,15 @@
 // currently.js
 document.addEventListener("DOMContentLoaded", () => {
-    const booksCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1702643479&single=true&output=csv";
-    const dailyCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv";
+    const booksCsvUrl =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1702643479&single=true&output=csv";
+    const dailyCsvUrl =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1783910348&single=true&output=csv";
 
-    // CSVs laden
+    // Neues Formular für "Beendet"
+    const NEW_GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeFSSyKXQxicXnnc3c3ItkxgU_4HsD5jxqhieg9xumRT7bGCg/formResponse"; 
+    const FIELD_NEW_TITLE = "entry.1669812265"; // Titel im neuen Formular
+    const FIELD_NEW_DATE = "entry.40812439";   // Datum im neuen Formular
+
     Promise.all([
         fetch(booksCsvUrl).then(res => res.text()),
         fetch(dailyCsvUrl).then(res => res.text())
@@ -18,13 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const start = book["Start"];
             const end = book["Ende"];
             if (start && !end) {
+
                 const cover = book["Cover"];
                 const totalPages = parseInt(book["Seitenzahl total"]) || 0;
                 const totalMinutes = parseInt(book["Minuten total"]) || 0;
                 const format = book["Format"];
                 const title = book["Titel"] || book["Buch"] || "";
 
-                // Fortschritt berechnen
                 let progress = 0;
                 daily.forEach(entry => {
                     if (entry["Buch"] === title) {
@@ -39,18 +45,48 @@ document.addEventListener("DOMContentLoaded", () => {
                 const total = format === "Hörbuch" ? totalMinutes : totalPages;
                 const percentage = total ? Math.min((progress / total) * 100, 100) : 0;
 
-                // HTML erstellen
                 const bookDiv = document.createElement("div");
                 bookDiv.classList.add("currently-book");
                 bookDiv.innerHTML = `
-                    <img src="${cover}" alt="" class="currently-cover">
+                    <div class="cover-wrapper">
+                        <img src="${cover}" alt="" class="currently-cover">
+                        <div class="finish-overlay">
+                            <button class="finish-btn">
+                                <span>Buch beenden</span>
+                            </button>
+                        </div>
+                    </div>
                     <div class="currently-info">
                         <div class="progress-bar">
                             <div class="progress" style="width: ${percentage}%;"></div>
                         </div>
-                        <p>${progress} / ${total} ${format === "Hörbuch" ? "Minuten" : "Seiten"} <br> (${percentage.toFixed(0)}%)</p>
+                        <p>${progress} / ${total} ${format === "Hörbuch" ? "Minuten" : "Seiten"}
+                        <br> (${percentage.toFixed(0)}%)</p>
                     </div>
                 `;
+
+                const finishBtn = bookDiv.querySelector(".finish-btn");
+                finishBtn.addEventListener("click", () => {
+                    const today = new Date().toISOString().split("T")[0];
+
+                    const formData = new FormData();
+                    formData.append(FIELD_NEW_TITLE, title); // Buchtitel
+                    formData.append(FIELD_NEW_DATE, today);  // aktuelles Datum
+
+                    fetch(NEW_GOOGLE_FORM_URL, {
+                        method: "POST",
+                        mode: "no-cors",
+                        body: formData
+                    })
+                    .then(() => {
+                        alert("Buch als beendet eingetragen!");
+                        location.reload();
+                    })
+                    .catch(err => {
+                        alert("Fehler: " + err);
+                    });
+                });
+
                 container.appendChild(bookDiv);
             }
         });

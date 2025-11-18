@@ -50,6 +50,44 @@ transform: scale(1.03);
     border-radius: 5px;
 }
 
+.cover-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.finish-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(20, 20, 20, 0.65);
+    border-radius: 10px;
+    opacity: 0;
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+.cover-wrapper:hover .finish-overlay {
+    opacity: 90;
+    pointer-events: all;
+}
+
+.finish-btn {
+    font-size: 16px;
+    color: white;
+    background: transparent;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Dosis', sans-serif;
+    background: rgba(20, 20, 20, 0.65);
+}
+
+.finish-btn:hover {
+    background: rgba(20, 186, 158, 0.2);
+}
+
+
 
 
 @media (max-width: 740px) {
