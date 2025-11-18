@@ -57,34 +57,40 @@ transform: scale(1.03);
 
 .finish-overlay {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;       /* Vollbreite des Covers */
+    height: 100%;      /* Volle Höhe des Covers */
+    display: flex;     /* Damit Button zentriert wird */
+    justify-content: center;
+    align-items: center;
     background: rgba(20, 20, 20, 0.65);
     border-radius: 10px;
     opacity: 0;
-    transition: 0.3s ease;
+    transition: opacity 0.9s ease;
     pointer-events: none;
 }
 
 .cover-wrapper:hover .finish-overlay {
-    opacity: 90;
+    opacity: 1;
     pointer-events: all;
 }
 
 .finish-btn {
     font-size: 16px;
     color: white;
-    background: transparent;
+    background: rgba(20, 20, 20, 0.65); /* normale Hintergrundfarbe */
     padding: 8px 14px;
     border-radius: 8px;
     cursor: pointer;
     font-family: 'Dosis', sans-serif;
-    background: rgba(20, 20, 20, 0.65);
+    border: none;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .finish-btn:hover {
-    background: rgba(20, 186, 158, 0.2);
+    background: #a2bba3; /* kräftiger/leuchtender beim Hover */
+    transform: scale(1.05); /* optional leichter Zoom */
 }
 
 
