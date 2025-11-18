@@ -18,9 +18,14 @@
     height: 270px;         /* feste Höhe, optional je nach Design */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    transition: transform 0.3s;
+    transition: transform 0.9s, opacity 0.9s; /* opacity für Hover-Transparenz */
     object-fit: cover;     /* Bild wird zugeschnitten, aber füllt die Box */
     cursor: pointer;
+}
+
+.cover-wrapper:hover .currently-cover {
+    opacity: 0.6;       /* Transparenz beim Hover */
+    transform: scale(1.03);
 }
 
 .currently-cover:hover {
@@ -55,44 +60,37 @@ transform: scale(1.03);
     display: inline-block;
 }
 
-.finish-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;       /* Vollbreite des Covers */
-    height: 100%;      /* Volle Höhe des Covers */
-    display: flex;     /* Damit Button zentriert wird */
-    justify-content: center;
-    align-items: center;
-    background: rgba(20, 20, 20, 0.65);
-    border-radius: 10px;
-    opacity: 0;
-    transition: opacity 0.9s ease;
-    pointer-events: none;
-}
 
-.cover-wrapper:hover .finish-overlay {
-    opacity: 1;
-    pointer-events: all;
-}
 
 .finish-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-size: 16px;
     color: white;
-    background: rgba(20, 20, 20, 0.65); /* normale Hintergrundfarbe */
+    background: rgba(20, 20, 20, 0.65);
     padding: 8px 14px;
     border-radius: 8px;
     cursor: pointer;
     font-family: 'Dosis', sans-serif;
     border: none;
-    transition: background 0.3s ease, transform 0.2s ease;
+
+    opacity: 0;           /* unsichtbar standardmäßig */
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    pointer-events: none; /* verhindert Klicks, wenn unsichtbar */
+}
+
+.cover-wrapper:hover .finish-btn {
+    opacity: 1;
+    pointer-events: all;   /* Button anklickbar beim Hover */
+    transform: translate(-50%, -50%) scale(1.05);
 }
 
 .finish-btn:hover {
-    background: #a2bba3; /* kräftiger/leuchtender beim Hover */
-    transform: scale(1.05); /* optional leichter Zoom */
+    background: #a2bba3;
+    transform: translate(-50%, -50%) scale(1.1);
 }
-
 
 
 
