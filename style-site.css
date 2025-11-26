@@ -171,6 +171,10 @@
   color: white;
 }
 
+.hidden-iframe {
+    display: none;
+}
+
     /* Ergänzung für große Bildschirme */
 @media (min-width: 1400px) {
     h2 {

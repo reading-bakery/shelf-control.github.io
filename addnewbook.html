@@ -42,7 +42,7 @@
           <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
         </svg>
       </span>
-      <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16" style="display: none;">
+      <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16" >
         <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
       </svg>
     </div>
@@ -53,17 +53,17 @@
   <form action="https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse"
         method="POST" target="hidden_iframe" onsubmit="submitted=true;">
 
-    <label>Start</label>
-    <input type="date" name="entry.231863637"><br><br>
+    <label for="start">Start</label>
+    <input type="date" id="start"  name="entry.231863637"><br><br>
 
-    <label>Titel</label>
-    <input type="text" name="entry.554995646"><br><br>
+    <label for="title">Titel</label>
+    <input type="text" id="title" name="entry.554995646"><br><br>
 
-    <label>Autor:in</label>
-    <input type="text" name="entry.890797774"><br><br>
+    <label for="autor">Autor:in</label>
+    <input type="text" id="autor" name="entry.890797774"><br><br>
 
-    <label>Geschlecht</label>
-      <select name="entry.1685694101" required>
+    <label for="geschlecht">Geschlecht</label>
+      <select id="geschlecht" name="entry.1685694101" required>
         <option value="" disabled selected>– Bitte wählen –</option>
         <option value="Weiblich">Weiblich</option>
         <option value="Männlich">Männlich</option>
@@ -71,22 +71,22 @@
         <option value="Divers">Divers</option>
       </select><br><br>
 
-    <label>Umfang</label>
-    <select name="entry.436245051" required>
+    <label for="umfang">Umfang</label>
+    <select id="umfang" name="entry.436245051" required>
       <option value="" disabled selected>– Bitte wählen –</option>
       <option value="bis 300">bis 300</option>
       <option value="301-500">301-500</option>
       <option value="ab 501">ab 501</option>
     </select><br><br>
 
-    <label>Seiten total</label>
-        <input type="number" name="entry.1082451600"><br><br>
+    <label for="seitentotal">Seiten total</label>
+        <input type="number" id="seitentotal" name="entry.1082451600"><br><br>
 
-    <label>Minuten total</label>
-    <input type="number" name="entry.1433991187"><br><br>
+    <label for="minutentotal">Minuten total</label>
+    <input type="number" id="minutentotal" name="entry.1433991187"><br><br>
 
-    <label>Genre</label>
-    <select name="entry.1105252862">
+    <label for="genre">Genre</label>
+    <select id="genre" name="entry.1105252862">
       <option value="" disabled selected>– Bitte wählen …</option>
       <option value="Roman">Roman</option>
       <option value="Non Fiction">Non Fiction</option>
@@ -96,8 +96,8 @@
       <option value="Graphic Novel/Comic">Graphic Novel/Comic</option>
     </select><br><br>
 
-    <label>Sprache</label>
-    <select name="entry.807495643">
+    <label for="sprache">Sprache</label>
+    <select id="sprache" name="entry.807495643">
       <option value="" disabled selected>– Bitte wählen –</option>
       <option value="Deutsch">Deutsch</option>
       <option value="Englisch">Englisch</option>
@@ -120,8 +120,8 @@
       <option value="Sonstiges">Sonstiges</option>
     </select><br><br>
 
-    <label>Format</label>
-    <select name="entry.9727566">
+    <label for="format">Format</label>
+    <select id="format" name="entry.9727566">
       <option value="" disabled selected>– Bitte wählen –</option>
       <option value="Softcover">Softcover</option>
       <option value="Hardcover">Hardcover</option>
@@ -130,8 +130,8 @@
     </select><br><br>
 
 
-    <label>Status</label>
-      <select name="entry.914730295">
+    <label for="status">Status</label>
+      <select id="status" name="entry.914730295">
       <option value="" disabled selected>– Bitte wählen –</option>
       <option value="SuB">SuB</option>
       <option value="Neuzugang">Neuzugang</option>
@@ -139,8 +139,8 @@
       <option value="Rezensionsexemplar">Rezensionsexemplar</option>
     </select><br><br>
 
-    <label>Verlag</label>
-    <select name="entry.1674035100">
+    <label for="verlag">Verlag</label>
+    <select id="verlag" name="entry.1674035100">
       <option value="" disabled selected>– Bitte wählen –</option>
       <option value="Sonstiges">Sonstiges</option>
       <option value="ATB/Aufbau/RL/Blumenbar">ATB/Aufbau/RL/Blumenbar</option>
@@ -192,7 +192,9 @@
       
   </form>
 
-  <iframe name="hidden_iframe" style="display:none;" onload="formGesendet()"></iframe>
+  <iframe name="hidden_iframe" class="hidden-iframe" onload="formGesendet()" title="Versteckter Iframe zum Formular-Submit"></iframe>
+
+
 
   <script>
     let submitted = false;
@@ -215,11 +217,14 @@
 
   <div class="top-button">
 
-      <button id="backToTop">
-      <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
-      </svg>
+<div class="top-button">
+    <button id="backToTop" aria-label="Nach oben">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
+        </svg>
     </button>
+</div>
+
   </div>
 
   <footer>

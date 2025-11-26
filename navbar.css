@@ -12,6 +12,9 @@
     font-family: "Bebas Neue", sans-serif;
 }
 
+.hidden-iframe {
+    display: none;
+}
 
 
 .nav-links {
