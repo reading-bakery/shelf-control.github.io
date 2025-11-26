@@ -103,7 +103,9 @@
       color: white;
     }
 
-    
+    #close-icon {
+    display: none; /* Startzustand ausgeblendet */
+    }
 
     
     @media (max-width: 1024px) {

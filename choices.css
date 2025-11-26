@@ -10,6 +10,10 @@
   box-shadow: none;
 }
 
+#close-icon {
+    display: none; /* Startzustand ausgeblendet */
+}
+
 .choices__list--dropdown, .choices__list[aria-expanded] {
   border-radius: 0 0 5px 5px;
   border: 1px solid #ccc;

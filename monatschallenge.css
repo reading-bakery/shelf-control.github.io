@@ -137,6 +137,10 @@
     margin-bottom: 5px;
 }
 
+#close-icon {
+    display: none; /* Startzustand ausgeblendet */
+}
+
 .carousel-dots button.active {
     background-color: #ff7256;
 }

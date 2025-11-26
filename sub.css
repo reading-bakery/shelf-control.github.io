@@ -54,6 +54,10 @@
     z-index: 1000;          /* über allen anderen Elementen */
 }
 
+#close-icon {
+    display: none; /* Startzustand ausgeblendet */
+}
+
 #luckyZufall:hover {
     background-color: rgb(65, 14, 141);
     cursor: pointer;

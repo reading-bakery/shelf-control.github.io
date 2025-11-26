@@ -16,6 +16,10 @@
     display: none;
 }
 
+#close-icon {
+    display: none; /* Startzustand ausgeblendet */
+}
+
 
 .nav-links {
     display: flex;

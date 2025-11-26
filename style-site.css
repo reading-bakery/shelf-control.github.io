@@ -98,6 +98,10 @@
         font-weight: bold;
       }
 
+      #close-icon {
+          display: none; /* Startzustand ausgeblendet */
+      }
+
       option {
         font-family: "Dosis", sans-serif;
         font-size: 1rem;

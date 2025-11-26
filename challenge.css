@@ -231,6 +231,10 @@ p {
     cursor: pointer;
 }
 
+#close-icon {
+    display: none; /* Startzustand ausgeblendet */
+}
+
 .abc-dot.active {
     background: #ff7256;
 }
