@@ -137,6 +137,10 @@ h3 {
   gap: 0; /* Abstand über margin der cover-container */
 }
 
+#close-icon {
+    display: none; /* Startzustand ausgeblendet */
+}
+
 /* Handy-Ansicht */
 @media (max-width: 740px) {
     .monat-block {

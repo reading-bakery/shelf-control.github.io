@@ -110,7 +110,6 @@
     font-size: 2.25rem;
     color: rgb(165, 184, 201);
     margin: 10px;
-    font-family: "Neue Bebas" sans-serif;
 }
 
 canvas {
@@ -175,9 +174,16 @@ body {
     justify-content: center; /* horizontal */
     align-items: center;     /* vertikal */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    user-select: none;
+
+    /* Benutzer kann Text nicht auswählen - Cross-Browser */
+    -webkit-user-select: none; /* Safari 3+, iOS 3+ */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* Standard */
+
     font-family: "Dosis", sans-serif;
-  }
+}
+
 
 #sterne,
 #average,
@@ -204,6 +210,9 @@ body {
 .legenddays {
     font-family: "Dosis", sans-serif;
     font-size: 8px;
+}
+#close-icon {
+    display: none; /* Startzustand ausgeblendet */
 }
 
 #umfangChart,
@@ -321,8 +330,14 @@ hr {
   width: 36px;
   height: 36px;
   line-height: 36px;
-  user-select: none;
+
+  /* Benutzer kann Text nicht auswählen */
+  -webkit-user-select: none; /* Safari 3+, iOS 3+ */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* Internet Explorer/Edge */
+  user-select: none;         /* Standard */
 }
+
 
 .carousel-dots {
   text-align: center;
