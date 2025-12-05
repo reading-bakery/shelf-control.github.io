@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
           y: {
             display: false,
             min: 0,
-            max: 3300,
+            max: 3500,
             grid: { display: true },
             ticks: {
               display: true,
