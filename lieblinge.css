@@ -5,13 +5,13 @@
     gap: 25px;
     justify-items: center;
     padding: 20px 10px;
-    max-width: 600px;   /* 3 × 170 + 2 × 25 Abstand = 560 → leicht erweitert */
+    max-width: 600px;
     margin: 0 auto;
 }
 
-/* GRAUER CONTAINER --- */
+/* GRAUER CONTAINER */
 .lieblinge {    
-display: flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     max-width: 700px;
@@ -21,7 +21,6 @@ display: flex;
     border-radius: 8px;
     gap: 20px;
 }
-
 
 /* --- COVER-CONTAINER --- */
 .lieblinge-cover {
@@ -88,24 +87,16 @@ display: flex;
     color: #000;
 }
 
-
-
-/* --- RESPONSIVE --- */
+/* --- RESPONSIVE: HANDY --- */
 @media (max-width: 740px) {
     .grid-thumb {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        grid-template-columns: repeat(2, 1fr);  /* <<< Fix: Immer 2 Cover pro Reihe */
+        gap: 18px;
     }
+
     .lieblinge-cover,
     .lieblinge-cover img {
         width: 140px;
         height: 220px;
     }
-
-    .lieblinge {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px; /* Abstand zwischen Bild und Text */
-    }
 }
-
