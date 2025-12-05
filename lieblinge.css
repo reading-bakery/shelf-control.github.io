@@ -50,7 +50,7 @@ display: flex;
 }
 
 /* --- RESPONSIVE --- */
-@media (max-width: 600px) {
+@media (max-width: 740px) {
     .grid-thumb {
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     }
@@ -59,4 +59,12 @@ display: flex;
         width: 140px;
         height: 220px;
     }
+
+    .lieblinge {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px; /* Abstand zwischen Bild und Text */
+    }
 }
+
