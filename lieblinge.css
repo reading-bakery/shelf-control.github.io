@@ -1,0 +1,62 @@
+/* --- GRID FÜR DIE COVER --- */
+.grid-thumb {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);   /* Immer 3 Cover pro Reihe */
+    gap: 25px;
+    justify-items: center;
+    padding: 20px 10px;
+    max-width: 600px;   /* 3 × 170 + 2 × 25 Abstand = 560 → leicht erweitert */
+    margin: 0 auto;
+}
+
+/* GRAUER CONTAINER --- */
+.lieblinge {    
+display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 700px;
+    margin: auto;
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 8px;
+    gap: 20px;
+}
+
+
+/* --- COVER-CONTAINER --- */
+.lieblinge-cover {
+    position: relative;
+    width: 170px;
+    height: 270px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* --- COVER-BILDER --- */
+.lieblinge-cover img {
+    width: 170px;
+    height: 270px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.9s ease, opacity 0.9s ease;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* --- HOVER-EFFEKT --- */
+.lieblinge-cover img:hover {
+    transform: scale(1.07);
+    opacity: 0.85;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 600px) {
+    .grid-thumb {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+    .lieblinge-cover,
+    .lieblinge-cover img {
+        width: 140px;
+        height: 220px;
+    }
+}
