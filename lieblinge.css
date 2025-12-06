@@ -110,6 +110,15 @@
     line-height: 1.4;
 }
 
+h3 {
+    text-align: center;
+    color: whitesmoke;
+    font-family: "Dosis", sans-serif;
+    font-size: 20pt;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
 /* --- RESPONSIVE: HANDY --- */
 @media (max-width: 740px) {
     .grid-thumb {
