@@ -1,7 +1,7 @@
 /* --- GRID FÜR DIE COVER --- */
 .grid-thumb {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);   /* Immer 6 Cover pro Reihe */
+    grid-template-columns: repeat(5, 1fr);   /* Immer 6 Cover pro Reihe */
     gap: 25px;
     justify-items: center;
     padding: 20px 10px;
@@ -125,5 +125,16 @@
     .lieblinge-cover {
         max-width: 140px;
         aspect-ratio: 14 / 22;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .lieblinge {
+        grid-template-columns: repeat(6, 1fr); /* maximal 6 Cover */
+        gap: 20px;
+    }
+
+    .lieblinge-cover {
+        max-width: 120px;  /* optional: passt besser in 6 Spalten */
     }
 }

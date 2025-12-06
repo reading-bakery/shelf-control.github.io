@@ -35,7 +35,6 @@
     padding: 0 20px;
     font-size: 13pt;
     text-align: left;
-    font-family: "Roboto", serif;
     white-space: nowrap;
     font-family: "Dosis", sans-serif;
 }
@@ -101,7 +100,7 @@
     .navbar.expanded {
         height: auto; 
         transition: height 0.1s ease-in-out;
-        background-color: #1f1f1f;;
+        background-color: #1f1f1f;
     }
 
    
@@ -163,7 +162,7 @@
     font-weight: bold;
     }
 
-    logohome:hover {
+    .logohome:hover {
     text-decoration: none;
     color: khaki;
     font-weight: 400;
@@ -171,3 +170,11 @@
 
 
 }
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .logohome {
+        font-size: 14pt; 
+    }
+}
+
+
