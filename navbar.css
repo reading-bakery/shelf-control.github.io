@@ -87,6 +87,12 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Schatteneffekt */
 }
 
+@media (max-width: 1366px) {
+ .logohome {
+        font-size: 24pt; 
+    }
+}
+
 
 @media (max-width: 840px) {
 
@@ -171,10 +177,5 @@
 
 }
 
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    .logohome {
-        font-size: 14pt; 
-    }
-}
 
 
