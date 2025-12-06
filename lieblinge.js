@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const text = cover.getAttribute("data-text") || "Kein Beschreibungstext vorhanden.";
 
             popupTitle.textContent = title;
-            popupText.textContent = text;
+            popupText.innerHTML = text;
 
             popup.style.display = "flex";
         });

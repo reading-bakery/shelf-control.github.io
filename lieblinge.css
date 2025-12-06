@@ -1,7 +1,7 @@
 /* --- GRID FÜR DIE COVER --- */
 .grid-thumb {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);   /* Immer 3 Cover pro Reihe */
+    grid-template-columns: repeat(4, 1fr);   /* Immer 6 Cover pro Reihe */
     gap: 25px;
     justify-items: center;
     padding: 20px 10px;
@@ -9,44 +9,45 @@
     margin: 0 auto;
 }
 
-/* GRAUER CONTAINER */
+/* --- GRAUER CONTAINER --- */
 .lieblinge {    
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* max. 4 pro Reihe */
+    gap: 20px;
     max-width: 700px;
     margin: auto;
     background-color: #1f1f1f;
     padding: 20px;
     border-radius: 8px;
-    gap: 20px;
+    justify-items: center;
 }
 
 /* --- COVER-CONTAINER --- */
 .lieblinge-cover {
-    position: relative;
-    width: 170px;
-    height: 270px;
+    width: 100%;
+    max-width: 170px;
+    aspect-ratio: 17 / 27;
     overflow: hidden;
     border-radius: 10px;
+    position: relative;
+    transition: transform 0.3s;  /* Animation für Hover */
+    cursor: pointer;
 }
 
-/* --- COVER-BILDER --- */
 .lieblinge-cover img {
-    width: 170px;
-    height: 270px;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    transition: transform 0.9s ease, opacity 0.9s ease;
     object-fit: cover;
     cursor: pointer;
 }
 
-/* --- HOVER-EFFEKT --- */
-.lieblinge-cover img:hover {
-    transform: scale(1.07);
-    opacity: 0.85;
+
+.lieblinge-cover:hover {
+    transform: scale(1.05);  /* der Container wird leicht größer */
 }
+
 
 /* --- POPUP OVERLAY --- */
 .popup-overlay {
@@ -70,7 +71,7 @@
     border-radius: 10px;
     max-width: 400px;
     width: 90%;
-    text-align: center;
+    text-align: left;
     position: relative;
     font-family: "Dosis", sans-serif;
 }
@@ -87,16 +88,42 @@
     color: #000;
 }
 
+/* --- LABELS UND WERTE --- */
+.popup-content .label {
+    font-weight: bold;                  
+    font-family: "Dosis", sans-serif; 
+    color: #1b6433;                        
+    display: inline-block;                       
+    font-size: 17px;
+    text-transform: none;                  
+    margin-top: 12px;       /* Abstand zwischen den Zeilen */
+}
+
+.popup-content .value {
+    font-weight: normal;
+    font-variant: normal;
+    font-family: "Dosis", sans-serif;
+    color: #000;
+}
+
+.popup-content br {
+    line-height: 1.4;
+}
+
 /* --- RESPONSIVE: HANDY --- */
 @media (max-width: 740px) {
     .grid-thumb {
-        grid-template-columns: repeat(2, 1fr);  /* <<< Fix: Immer 2 Cover pro Reihe */
+        grid-template-columns: repeat(3, 1fr);
         gap: 18px;
     }
 
-    .lieblinge-cover,
-    .lieblinge-cover img {
-        width: 140px;
-        height: 220px;
+    .lieblinge {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+    }
+
+    .lieblinge-cover {
+        max-width: 140px;
+        aspect-ratio: 14 / 22;
     }
 }
