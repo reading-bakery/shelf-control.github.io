@@ -42,6 +42,7 @@ p {
 }
 
 .originalsprache-placeholder, 
+.queer-placeholder, 
 .abc-placeholder {
     display: inline-block;
     font-size: 1.8rem;            /* größere Schrift */
@@ -63,6 +64,7 @@ p {
 /* Carousel innerhalb des Grids über alle Spalten */
 
 .grid-thumb .originalsprache-carousel,
+.grid-thumb .queer-carousel,
 .grid-thumb .abc-carousel {
     grid-column: 1 / -1; /* nimmt alle Grid-Spalten ein */
     width: 100%;
@@ -71,18 +73,21 @@ p {
 }
 
 .grid-thumb .originalsprache-carousel-track,
+.grid-thumb .queer-carousel-track,
 .grid-thumb .abc-carousel-track {
     display: flex;
     width: 100%;
 }
 
 .grid-thumb .originalsprache-carousel-slide, 
+.grid-thumb .queer-carousel-slide,
 .grid-thumb .abc-carousel-slide {
     flex: 0 0 100%; /* jede Slide nimmt volle Breite ein */
     height: auto;
 }
 
 .originalsprache img,
+.queer img, 
 .abc-carousel img {
     width: 100%;
     height: auto;
@@ -94,6 +99,7 @@ p {
 /* Covers & Cards */
 .grid-thumb .covers,
 .grid-thumb .abc-card,
+.grid-thumb .queer-card,
 .grid-thumb .originalsprache-card {
     width: 100%;
     height: 100%;
@@ -104,6 +110,7 @@ p {
 }
 
 .grid-thumb .covers img,
+.queer-card img,
 .originalsprache-card img,
 .abc-card img {
     width: 100%;
@@ -145,6 +152,7 @@ p {
 /* Hover Effekte */
 .ziele-container:hover,
 .card:hover,
+.queer-card:hover,
 .originalsprache-card:hover,
 .abc-card:hover {
     transform: scale(1.02);
@@ -217,12 +225,14 @@ p {
 }
 
 /* ABC Challenge & Grid */
+.queer-challenge,
 .originalsprache-challenge,
 .abc-challenge {
     width: 100%;
     grid-column: 1/-1;
 }
 
+.queer-grid,
 .originalsprache-grid,
 .abc-grid {
     display: grid;
@@ -231,6 +241,7 @@ p {
 }
 
 /* Carousel Navigation */
+.queer-carousel-nav,
 .originalsprache-carousel-nav, 
 .abc-carousel-nav {
     text-align: center;
@@ -238,6 +249,8 @@ p {
     margin-bottom: 10px;
 }
 
+
+.queer-dot,
 .originalsprache-dot, 
 .abc-dot {
     display: inline-block;
@@ -253,6 +266,8 @@ p {
     display: none; /* Startzustand ausgeblendet */
 }
 
+
+.queer-dot.active,
 .originalsprache-dot.active, 
 .abc-dot.active {
     background: #ff7256;
@@ -268,6 +283,7 @@ p {
     }
 
 
+    .queer-placeholder,
     .originalsprache-placeholder,
     .abc-placeholder {
         display: inline-block;
