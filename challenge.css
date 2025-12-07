@@ -20,6 +20,8 @@ h3 {
     font-family: "Bebas Neue", sans-serif;
 }
 
+
+
 /* Textabsätze */
 p {
     font-family: "Dosis", sans-serif;
@@ -39,6 +41,7 @@ p {
     padding-right: 10px;
 }
 
+.originalsprache-placeholder, 
 .abc-placeholder {
     display: inline-block;
     font-size: 1.8rem;            /* größere Schrift */
@@ -58,6 +61,8 @@ p {
 
 
 /* Carousel innerhalb des Grids über alle Spalten */
+
+.grid-thumb .originalsprache-carousel,
 .grid-thumb .abc-carousel {
     grid-column: 1 / -1; /* nimmt alle Grid-Spalten ein */
     width: 100%;
@@ -65,16 +70,19 @@ p {
     overflow: hidden;
 }
 
+.grid-thumb .originalsprache-carousel-track,
 .grid-thumb .abc-carousel-track {
     display: flex;
     width: 100%;
 }
 
+.grid-thumb .originalsprache-carousel-slide, 
 .grid-thumb .abc-carousel-slide {
     flex: 0 0 100%; /* jede Slide nimmt volle Breite ein */
     height: auto;
 }
 
+.originalsprache img,
 .abc-carousel img {
     width: 100%;
     height: auto;
@@ -85,7 +93,8 @@ p {
 
 /* Covers & Cards */
 .grid-thumb .covers,
-.grid-thumb .abc-card {
+.grid-thumb .abc-card,
+.grid-thumb .originalsprache-card {
     width: 100%;
     height: 100%;
     display: flex;
@@ -95,6 +104,7 @@ p {
 }
 
 .grid-thumb .covers img,
+.originalsprache-card img,
 .abc-card img {
     width: 100%;
     height: 100%;
@@ -102,6 +112,8 @@ p {
     border-radius: 5px;
     display: block;
 }
+
+
 
 .grid-thumb .covers {
     position: relative; /* Referenz für SVG */
@@ -132,7 +144,9 @@ p {
 
 /* Hover Effekte */
 .ziele-container:hover,
-.card:hover {
+.card:hover,
+.originalsprache-card:hover,
+.abc-card:hover {
     transform: scale(1.02);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
@@ -203,11 +217,13 @@ p {
 }
 
 /* ABC Challenge & Grid */
+.originalsprache-challenge,
 .abc-challenge {
     width: 100%;
     grid-column: 1/-1;
 }
 
+.originalsprache-grid,
 .abc-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -215,12 +231,14 @@ p {
 }
 
 /* Carousel Navigation */
+.originalsprache-carousel-nav, 
 .abc-carousel-nav {
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
+.originalsprache-dot, 
 .abc-dot {
     display: inline-block;
     width: 12px;
@@ -235,9 +253,12 @@ p {
     display: none; /* Startzustand ausgeblendet */
 }
 
+.originalsprache-dot.active, 
 .abc-dot.active {
     background: #ff7256;
 }
+
+
 
 
 /* Responsive */
@@ -246,6 +267,8 @@ p {
         grid-template-columns: repeat(3, 1fr);
     }
 
+
+    .originalsprache-placeholder,
     .abc-placeholder {
         display: inline-block;
         font-size: 1.8rem;            /* größere Schrift */
