@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         back.innerHTML = `
             <div class="originalsprache-language">
-                ${item.Originalsprache || "–"}
+                <br>${item.Originalsprache || "–"}
             </div>
         `;
 

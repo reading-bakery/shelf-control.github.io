@@ -57,10 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         back.innerHTML = `
             <div class="schinken-language">
-                ${item.Seiten || "–"}
+                ${item.Seiten
+                    ? item.Seiten.replace(/\s*Seiten/i, "<br>Seiten")
+                    : "–"}
             </div>
         `;
-
         /* ---------- Nummer ---------- */
         const letterContainer = document.createElement("div");
         letterContainer.classList.add("schinken-letter-container");

@@ -279,11 +279,13 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
+
     font-weight: 600;
     font-size: 1.1rem;
-    background-color: rgba(255, 114, 86, 0.1);
-    border-color: yellowgreen;
-    border: 1px solid;
+    line-height: 1.2;
+
+    background-color: #353434;
     box-sizing: border-box;
 }
 
@@ -375,6 +377,13 @@ p {
         transition: all 0.3s ease;
         cursor: pointer;
     }
+
+    .schinken-card-back,
+    .originalsprache-card-back {
+    font-size: 0.85rem;
+    line-height: 1.2;
+}
+
 }
 
 /* Ergänzung für große Bildschirme */
