@@ -41,8 +41,10 @@ p {
     padding-right: 10px;
 }
 
+.buechergilde-placeholder,
 .originalsprache-placeholder, 
 .queer-placeholder, 
+.schinken-placeholder, 
 .abc-placeholder {
     display: inline-block;
     font-size: 1.8rem;            /* größere Schrift */
@@ -63,8 +65,11 @@ p {
 
 /* Carousel innerhalb des Grids über alle Spalten */
 
+
+.grid-thumb .buechergilde-carousel,
 .grid-thumb .originalsprache-carousel,
 .grid-thumb .queer-carousel,
+.grid-thumb .schinken-carousel,
 .grid-thumb .abc-carousel {
     grid-column: 1 / -1; /* nimmt alle Grid-Spalten ein */
     width: 100%;
@@ -72,22 +77,29 @@ p {
     overflow: hidden;
 }
 
+.grid-thumb .buechergilde-carousel-track,
 .grid-thumb .originalsprache-carousel-track,
 .grid-thumb .queer-carousel-track,
+.grid-thumb .schinken-carousel-track,
 .grid-thumb .abc-carousel-track {
     display: flex;
     width: 100%;
 }
 
+
+.grid-thumb .buechergilde-carousel-slide,   
 .grid-thumb .originalsprache-carousel-slide, 
 .grid-thumb .queer-carousel-slide,
+.grid-thumb .schinken-carousel-slide,
 .grid-thumb .abc-carousel-slide {
     flex: 0 0 100%; /* jede Slide nimmt volle Breite ein */
     height: auto;
 }
 
+.buechergilde img,
 .originalsprache img,
 .queer img, 
+.schinken img, 
 .abc-carousel img {
     width: 100%;
     height: auto;
@@ -97,9 +109,11 @@ p {
 }
 
 /* Covers & Cards */
+.grid-thumb .buechergilde-card,
 .grid-thumb .covers,
 .grid-thumb .abc-card,
 .grid-thumb .queer-card,
+.grid-thumb .schinken-card,
 .grid-thumb .originalsprache-card {
     width: 100%;
     height: 100%;
@@ -109,8 +123,10 @@ p {
     align-items: center;
 }
 
+.buechergilde-card img,
 .grid-thumb .covers img,
 .queer-card img,
+.schinken-card img,
 .originalsprache-card img,
 .abc-card img {
     width: 100%;
@@ -150,9 +166,11 @@ p {
 }
 
 /* Hover Effekte */
+.buechergilde-card:hover,
 .ziele-container:hover,
 .card:hover,
 .queer-card:hover,
+.schinken-card:hover,
 .originalsprache-card:hover,
 .abc-card:hover {
     transform: scale(1.02);
@@ -224,15 +242,59 @@ p {
     background: #f0f0f0;
 }
 
+.originalsprache-card {
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.originalsprache-card-inner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.originalsprache-card.is-flipped .originalsprache-card-inner {
+    transform: rotateY(180deg);
+}
+
+.originalsprache-card-front,
+.originalsprache-card-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.originalsprache-card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: 1px solid var(--accent, #c9a24d);
+    box-sizing: border-box;
+}
+
+
+
+
 /* ABC Challenge & Grid */
+.buechergilde-challenge,
 .queer-challenge,
+.schinken-challenge,
 .originalsprache-challenge,
 .abc-challenge {
     width: 100%;
     grid-column: 1/-1;
 }
 
+.buechergilde-grid,
 .queer-grid,
+.schinken-grid,
 .originalsprache-grid,
 .abc-grid {
     display: grid;
@@ -241,7 +303,9 @@ p {
 }
 
 /* Carousel Navigation */
+.buechergilde-carousel-nav,
 .queer-carousel-nav,
+.schinken-carousel-nav,
 .originalsprache-carousel-nav, 
 .abc-carousel-nav {
     text-align: center;
@@ -249,8 +313,9 @@ p {
     margin-bottom: 10px;
 }
 
-
+.buechergilde-dot,  
 .queer-dot,
+.schinken-dot,
 .originalsprache-dot, 
 .abc-dot {
     display: inline-block;
@@ -266,8 +331,9 @@ p {
     display: none; /* Startzustand ausgeblendet */
 }
 
-
+.buechergilde-dot.active,   
 .queer-dot.active,
+.schinken-dot.active,
 .originalsprache-dot.active, 
 .abc-dot.active {
     background: #ff7256;
@@ -282,8 +348,9 @@ p {
         grid-template-columns: repeat(3, 1fr);
     }
 
-
+    .buechergilde-placeholder,
     .queer-placeholder,
+    .schinken-placeholder,
     .originalsprache-placeholder,
     .abc-placeholder {
         display: inline-block;
