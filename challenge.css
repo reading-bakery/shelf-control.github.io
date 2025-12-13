@@ -242,11 +242,13 @@ p {
     background: #f0f0f0;
 }
 
+.schinken-card,
 .originalsprache-card {
     perspective: 1000px;
     cursor: pointer;
 }
 
+.schinken-card-inner,
 .originalsprache-card-inner {
     position: relative;
     width: 100%;
@@ -254,11 +256,14 @@ p {
     transition: transform 0.6s;
     transform-style: preserve-3d;
 }
-
+.schinken-card.is-flipped .schinken-card-inner, 
 .originalsprache-card.is-flipped .originalsprache-card-inner {
     transform: rotateY(180deg);
 }
 
+
+.schinken-card-front,
+.schinken-card-back,
 .originalsprache-card-front,
 .originalsprache-card-back {
     position: absolute;
@@ -268,6 +273,7 @@ p {
     overflow: hidden;
 }
 
+.schinken-card-back,
 .originalsprache-card-back {
     transform: rotateY(180deg);
     display: flex;
