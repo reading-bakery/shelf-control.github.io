@@ -287,6 +287,10 @@ p {
 
     background-color: #353434;
     box-sizing: border-box;
+
+    hyphens: auto;          /* automatische Silbentrennung */
+    word-wrap: break-word;  /* ältere Browserunterstützung */
+    overflow-wrap: break-word; /* moderne Syntax */
 }
 
 
