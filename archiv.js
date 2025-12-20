@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector(".lesejahr-archiv");
-  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=158437862&single=true&output=csv";
+  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=158437862&single=true&output=csv";
 
   async function loadCSV(url) {
     const response = await fetch(url);
     const text = await response.text();
     return parseCSV(text);
   }
-202
+
   function parseCSV(text) {
     const lines = text.trim().split("\n");
     const headers = lines.shift().split(",");
@@ -33,27 +33,24 @@ document.addEventListener("DOMContentLoaded", () => {
     return grouped;
   }
 
-  // Sterne erzeugen – nur dein einzelner Stern
+  // Funktion für volle/halbe Sterne
   function createStars(sterne) {
     const container = document.createElement("div");
     container.classList.add("sterne-bewertung");
 
-    const fullStars = Math.floor(sterne);
-    const halfStar = sterne % 1 >= 0.5;
-
-    for (let i = 0; i < 5; i++) {
-      let display = "";
-      if (i < fullStars) display = "★";
-      else if (i === fullStars && halfStar) display = "★"; // halber Stern als gleicher Stern
-      else display = "☆";
-
-      const span = document.createElement("span");
-      span.style.marginLeft = "1px";
-      span.style.fontSize = "0.0rem";
-      span.style.color = "#ee"; // dein Stern
-      span.innerHTML = display;
-
-      container.appendChild(span);
+    for (let i = 1; i <= 5; i++) {
+      const starSpan = document.createElement("span");
+      if (sterne >= i) {
+        starSpan.textContent = "★"; // volle Sterne
+      } else if (sterne + 0.5 >= i) {
+        starSpan.textContent = "★"; 
+        starSpan.style.background = "linear-gradient(90deg, gold 50%, #555 50%)";
+        starSpan.style.webkitBackgroundClip = "text";
+        starSpan.style.webkitTextFillColor = "transparent";
+      } else {
+        starSpan.textContent = "☆"; // leerer Stern
+      }
+      container.appendChild(starSpan);
     }
 
     return container;
@@ -81,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const collapseDiv = document.createElement("div");
         collapseDiv.classList.add("collapse");
-        collapseDiv.style.display = "none"; // standardmäßig zugeklappt
+        collapseDiv.style.display = "none"; // <<< Standard: zugeklappt
 
         months[month].forEach(book => {
           const coverDiv = document.createElement("div");
