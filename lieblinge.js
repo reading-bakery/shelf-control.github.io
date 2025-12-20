@@ -15,6 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
             popupTitle.textContent = title;
             popupText.innerHTML = text;
 
+            // JS: max. Höhe für Text setzen + Scrollen aktivieren
+            const maxHeight = window.innerHeight * 0.6; // 60% der Viewport-Höhe
+            popupText.style.maxHeight = maxHeight + "px";
+            popupText.style.overflowY = "auto";
+
             popup.style.display = "flex";
         });
     });
