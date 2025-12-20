@@ -14,16 +14,22 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* max. 4 Monate pro Reihe */
   gap: 0.8rem;
-  margin-top: 0.5rem;
+  margin-top: .5rem;
 }
 
-.year-section,  
+.lesejahr-archiv h2,
 h3 {
     font-size: 3rem;
     color: rgb(223, 223, 199);
     padding: 5px 10px 5px 10px; /* oben und unten nur 5px */
     margin-bottom: 5px;          /* kleiner Abstand nach unten */
     margin-top: 0px;
+    font-family: "Dosis", sans-serif;
+    text-align: left;
+}
+
+.lesejahr-archiv h2 {
+    padding: 0px 0px 0px 0px; 
 }
 
 /* Jeder Monat ist ein eigener Block */
