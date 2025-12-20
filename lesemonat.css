@@ -1,4 +1,5 @@
 /* Hauptcontainer fürs Jahr */
+.lesejahr,
 .lesejahr-archiv,
 .lesejahr-2025 {
     max-width: 700px;
@@ -8,6 +9,15 @@
     border-radius: 8px;
 }
 
+
+.year-grid-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* max. 4 Monate pro Reihe */
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.year-section,  
 h3 {
     font-size: 3rem;
     color: rgb(223, 223, 199);
@@ -61,23 +71,6 @@ h3 {
     font-weight: bold;
 }
 
-/* Collapse-Bereich */
-.collapse {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-    padding: 0 10px;
-    background-color: #1f1f1f;
-    border-radius: 6px;
-}
-
-.collapse.show {
-    display: block;
-    max-height: none;
-    overflow: visible;
-    padding: 10px;
-    border-radius: 6px;
-}
 
 /* Cover-Bilder – feste Größe */
 .cover-img {
@@ -114,10 +107,12 @@ h3 {
   display: flex;
   align-items: center;
   gap: 1px;
+  color: yellow
 }
 
 .sterne-bewertung span {
   font-size: 10px; 
+  color: #fff; 
 }
 
 /* Cover-Container: Covers nebeneinander, Bewertung darunter */
@@ -142,6 +137,31 @@ h3 {
     display: none; /* Startzustand ausgeblendet */
 }
 
+
+.lesejahr-archiv .year-grid-buttons {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+
+.month-button {
+  background-color: #ff6b5c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.month-button:hover {
+  background-color: #ff8677;
+  transform: translateY(-2px);
+}
+
+
+
+
+
 /* Handy-Ansicht */
 @media (max-width: 740px) {
     .monat-block {
@@ -158,6 +178,8 @@ h3 {
         height: 120px;
         margin: 2px;
     }
+
+
 
     /* Covers auch mobil nebeneinander */
     .collapse {
