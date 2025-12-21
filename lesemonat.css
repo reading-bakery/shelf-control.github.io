@@ -24,7 +24,7 @@ h3 {
 }
 
 .lesejahr-archiv h2 {
-    padding: 0px 0px 0px 0px; 
+    padding: 0px 0px 5px 0px; 
 }
 
 /* Jeder Monat ist ein eigener Block */
@@ -141,7 +141,7 @@ h3 {
 
 
 .month-button {
-  background-color: #ff6b5c;
+  background-color: #9CAF88;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -151,8 +151,8 @@ h3 {
 }
 
 .month-button:hover {
-  background-color: #ff8677;
-  transform: translateY(-2px);
+    background-color: #63b8ff;
+    font-weight: bold;
 }
 
 
