@@ -10,12 +10,7 @@
 }
 
 
-.year-grid-buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* max. 4 Monate pro Reihe */
-  gap: 0.8rem;
-  margin-top: .5rem;
-}
+
 
 .lesejahr-archiv h2,
 h3 {
@@ -143,10 +138,6 @@ h3 {
     display: none; /* Startzustand ausgeblendet */
 }
 
-
-.lesejahr-archiv .year-grid-buttons {
-  grid-template-columns: repeat(4, 1fr);
-}
 
 
 .month-button {
