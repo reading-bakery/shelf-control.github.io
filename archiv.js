@@ -34,53 +34,52 @@ document.addEventListener("DOMContentLoaded", () => {
     return grouped;
   }
 
-// ⭐ Sterne: größer, aber NIE breiter als das Cover
-function createStarsDOM(sterne, coverWidthPx) {
-  const container = document.createElement("div");
-  container.style.display = "flex";
-  container.style.justifyContent = "center";
-  container.style.alignItems = "center";
-  container.style.width = coverWidthPx + "px";
-  container.style.gap = "2px";
-  container.style.boxSizing = "border-box";
+  // ⭐ Sterne erstellen (SVG, halbe Sterne unterstützt)
+  function createStarsDOM(sterne, coverWidthPx) {
+    const container = document.createElement("div");
+    container.style.display = "flex";
+    container.style.justifyContent = "center";
+    container.style.alignItems = "center";
+    container.style.width = coverWidthPx + "px";
+    container.style.gap = "2px";
+    container.style.boxSizing = "border-box";
 
-  const fullStars = Math.floor(sterne);
-  const halfStar = sterne % 1 >= 0.5;
+    const fullStars = Math.floor(sterne);
+    const halfStar = sterne % 1 >= 0.5;
+    const maxStars = 5;
+    const starSizePx = Math.min((coverWidthPx - (maxStars - 1) * 2) / maxStars * 1.25, 20);
 
-  const maxStars = 5;
-  const gapPx = 2 * (maxStars - 1); // 4 gaps á 2px
+    // volle Sterne
+    for (let i = 0; i < fullStars; i++) {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("width", starSizePx);
+      svg.setAttribute("height", starSizePx);
+      svg.setAttribute("viewBox", "0 0 24 24");
+      svg.innerHTML = `<polygon points="12,2 15,8.5 22,9.3 17,14.1 18.5,21 12,17.8 5.5,21 7,14.1 2,9.3 9,8.5" fill="gold"/>`;
+      container.appendChild(svg);
+    }
 
-  // 🔧 Basisgröße
-  const baseSize = (coverWidthPx - gapPx) / maxStars;
+    // halber Stern
+    if (halfStar) {
+      const gradId = `half-grad-${Math.random().toString(36).substr(2, 9)}`;
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("width", starSizePx);
+      svg.setAttribute("height", starSizePx);
+      svg.setAttribute("viewBox", "0 0 24 24");
+      svg.innerHTML = `
+        <defs>
+          <linearGradient id="${gradId}" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="50%" stop-color="gold"/>
+            <stop offset="50%" stop-color="#555"/>
+          </linearGradient>
+        </defs>
+        <polygon points="12,2 15,8.5 22,9.3 17,14.1 18.5,21 12,17.8 5.5,21 7,14.1 2,9.3 9,8.5" fill="url(#${gradId})"/>
+      `;
+      container.appendChild(svg);
+    }
 
-  // ⭐ bewusste Vergrößerung, aber gedeckelt
-  const starSizePx = Math.min(baseSize * 1.25, baseSize + 4);
-
-  for (let i = 0; i < fullStars; i++) {
-    const star = document.createElement("span");
-    star.textContent = "★";
-    star.style.color = "gold";
-    star.style.fontSize = `${starSizePx}px`;
-    star.style.lineHeight = "1";
-    star.style.display = "block";
-    container.appendChild(star);
+    return container;
   }
-
-  if (halfStar) {
-    const star = document.createElement("span");
-    star.textContent = "★";
-    star.style.fontSize = `${starSizePx}px`;
-    star.style.lineHeight = "1";
-    star.style.display = "block";
-    star.style.background = "linear-gradient(90deg, gold 50%, #555 50%)";
-    star.style.webkitBackgroundClip = "text";
-    star.style.webkitTextFillColor = "transparent";
-    container.appendChild(star);
-  }
-
-  return container;
-}
-
 
   function renderYears(groupedData) {
     container.innerHTML = "";
@@ -124,10 +123,9 @@ function createStarsDOM(sterne, coverWidthPx) {
           img.style.height = "125px";
           img.style.objectFit = "cover";
           img.style.borderRadius = "6px";
-
           coverDiv.appendChild(img);
 
-          const sterne = parseFloat(book.Sterne.replace(",", "."));
+          const sterne = parseFloat(book.Sterne.replace(",", ".")) || 0;
           const starsContainer = createStarsDOM(sterne, 70);
           coverDiv.appendChild(starsContainer);
 

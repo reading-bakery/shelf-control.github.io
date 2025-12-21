@@ -118,6 +118,16 @@ h3 {
   color: #fff; 
 }
 
+.sterne-bewertung svg {
+    display: block;          /* wichtig, sonst kann er verschwinden */
+    width: 14px;             /* Standardgröße */
+    height: 14px;
+}
+
+.sterne-bewertung svg polygon {
+    stroke: none;
+}
+
 /* Cover-Container: Covers nebeneinander, Bewertung darunter */
 .collapse .cover-container {
   display: inline-flex;
