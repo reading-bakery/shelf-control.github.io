@@ -96,14 +96,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
           collapseDiv.appendChild(coverDiv);
         });
-
+        
         monthBtn.addEventListener("click", () => {
           monthCollapses.forEach(div => {
-            if (div !== collapseDiv) div.style.display = "none";
+            if (div !== collapseDiv) {
+              div.style.display = "none";
+              // Entsprechend die active-Klasse entfernen
+              const btn = div.previousElementSibling; // Button direkt vor Collapse
+              if (btn && btn.classList.contains("month-button")) {
+                btn.classList.remove("active");
+              }
+            }
           });
-          collapseDiv.style.display = collapseDiv.style.display === "flex" ? "none" : "flex";
-        });
 
+          if (collapseDiv.style.display === "flex") {
+            collapseDiv.style.display = "none";
+            monthBtn.classList.remove("active"); // schließen → active entfernen
+          } else {
+            collapseDiv.style.display = "flex";
+            monthBtn.classList.add("active"); // öffnen → active setzen
+          }
+        })
         monthCollapses.push(collapseDiv);
         yearDiv.appendChild(monthBtn);
         yearDiv.appendChild(collapseDiv);

@@ -147,15 +147,31 @@ h3 {
   border-radius: 6px;
   padding: 0.5rem 0.8rem;
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.2s;
+  width: 150px;
+  transition: background-color 0.3s;
+  text-align: center;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
-.month-button:hover {
+
+.month-button.active {
     background-color: #63b8ff;
+    color: white;
     font-weight: bold;
 }
 
 
+.month-button:hover {
+    background-color: #9370DB;
+    font-weight: bold;
+}
+
+.month-button.active {
+    background-color: #9370DB;
+    color: white;
+    font-weight: bold;
+}
 
 
 
@@ -166,6 +182,7 @@ h3 {
         width: 100%;
     }
 
+    .month-button, 
     .monat-btn {
         width: 100%;
     }
