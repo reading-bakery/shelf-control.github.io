@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector(".lesejahr-archiv");
-  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=158437862&single=true&output=csv";
+  const csvUrl =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=158437862&single=true&output=csv";
 
   async function loadCSV(url) {
     const response = await fetch(url);
@@ -33,32 +34,57 @@ document.addEventListener("DOMContentLoaded", () => {
     return grouped;
   }
 
-  // Funktion für volle/halbe Sterne
-  function createStars(sterne) {
-    const container = document.createElement("div");
-    container.classList.add("sterne-bewertung");
+// ⭐ Sterne: größer, aber NIE breiter als das Cover
+function createStarsDOM(sterne, coverWidthPx) {
+  const container = document.createElement("div");
+  container.style.display = "flex";
+  container.style.justifyContent = "center";
+  container.style.alignItems = "center";
+  container.style.width = coverWidthPx + "px";
+  container.style.gap = "2px";
+  container.style.boxSizing = "border-box";
 
-    for (let i = 1; i <= 5; i++) {
-      const starSpan = document.createElement("span");
-      if (sterne >= i) {
-        starSpan.textContent = "★"; // volle Sterne
-      } else if (sterne + 0.5 >= i) {
-        starSpan.textContent = "★"; 
-        starSpan.style.background = "linear-gradient(90deg, gold 50%, #555 50%)";
-        starSpan.style.webkitBackgroundClip = "text";
-        starSpan.style.webkitTextFillColor = "transparent";
-      } else {
-        starSpan.textContent = "☆"; // leerer Stern
-      }
-      container.appendChild(starSpan);
-    }
+  const fullStars = Math.floor(sterne);
+  const halfStar = sterne % 1 >= 0.5;
 
-    return container;
+  const maxStars = 5;
+  const gapPx = 2 * (maxStars - 1); // 4 gaps á 2px
+
+  // 🔧 Basisgröße
+  const baseSize = (coverWidthPx - gapPx) / maxStars;
+
+  // ⭐ bewusste Vergrößerung, aber gedeckelt
+  const starSizePx = Math.min(baseSize * 1.25, baseSize + 4);
+
+  for (let i = 0; i < fullStars; i++) {
+    const star = document.createElement("span");
+    star.textContent = "★";
+    star.style.color = "gold";
+    star.style.fontSize = `${starSizePx}px`;
+    star.style.lineHeight = "1";
+    star.style.display = "block";
+    container.appendChild(star);
   }
+
+  if (halfStar) {
+    const star = document.createElement("span");
+    star.textContent = "★";
+    star.style.fontSize = `${starSizePx}px`;
+    star.style.lineHeight = "1";
+    star.style.display = "block";
+    star.style.background = "linear-gradient(90deg, gold 50%, #555 50%)";
+    star.style.webkitBackgroundClip = "text";
+    star.style.webkitTextFillColor = "transparent";
+    container.appendChild(star);
+  }
+
+  return container;
+}
+
 
   function renderYears(groupedData) {
     container.innerHTML = "";
-    const years = Object.keys(groupedData).sort((a,b) => b - a);
+    const years = Object.keys(groupedData).sort((a, b) => b - a);
 
     years.forEach(year => {
       const yearDiv = document.createElement("div");
@@ -78,45 +104,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const collapseDiv = document.createElement("div");
         collapseDiv.classList.add("collapse");
-        collapseDiv.style.display = "none"; // <<< Standard: zugeklappt
+        collapseDiv.style.display = "none";
+        collapseDiv.style.flexWrap = "wrap";
+        collapseDiv.style.gap = "10px";
+        collapseDiv.style.marginTop = "5px";
 
         months[month].forEach(book => {
           const coverDiv = document.createElement("div");
           coverDiv.classList.add("cover-container");
+          coverDiv.style.display = "flex";
+          coverDiv.style.flexDirection = "column";
+          coverDiv.style.alignItems = "center";
+          coverDiv.style.gap = "2px";
 
           const img = document.createElement("img");
-          img.classList.add("cover-img");
           img.src = book.Cover;
           img.alt = book.Buch;
+          img.style.width = "77px";
+          img.style.height = "125px";
+          img.style.objectFit = "cover";
+          img.style.borderRadius = "6px";
 
           coverDiv.appendChild(img);
 
           const sterne = parseFloat(book.Sterne.replace(",", "."));
-          coverDiv.appendChild(createStars(sterne));
+          const starsContainer = createStarsDOM(sterne, 70);
+          coverDiv.appendChild(starsContainer);
 
           collapseDiv.appendChild(coverDiv);
         });
-        
+
         monthBtn.addEventListener("click", () => {
           monthCollapses.forEach(div => {
             if (div !== collapseDiv) {
               div.style.display = "none";
-              // Entsprechend die active-Klasse entfernen
-              const btn = div.previousElementSibling; // Button direkt vor Collapse
-              if (btn && btn.classList.contains("month-button")) {
-                btn.classList.remove("active");
-              }
+              const btn = div.previousElementSibling;
+              if (btn) btn.classList.remove("active");
             }
           });
 
           if (collapseDiv.style.display === "flex") {
             collapseDiv.style.display = "none";
-            monthBtn.classList.remove("active"); // schließen → active entfernen
+            monthBtn.classList.remove("active");
           } else {
             collapseDiv.style.display = "flex";
-            monthBtn.classList.add("active"); // öffnen → active setzen
+            monthBtn.classList.add("active");
           }
-        })
+        });
+
         monthCollapses.push(collapseDiv);
         yearDiv.appendChild(monthBtn);
         yearDiv.appendChild(collapseDiv);
