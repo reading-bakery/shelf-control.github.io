@@ -136,9 +136,13 @@ canvas {
 #autorChart,
 #verlagChart,
 #sprachenChart {
-    height: 200px;  
+    height: 100% !important;  
     font-family: "Dosis", sans-serif;
   }
+
+#subChart {
+  height: 100% !important;
+}
 
 
 body {
@@ -447,6 +451,9 @@ hr {
         }
     
 
+    #subChart {
+      height: 300% !important;
+    }
 
     .grid {
         grid-template-columns: 1fr;

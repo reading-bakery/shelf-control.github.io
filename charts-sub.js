@@ -170,7 +170,7 @@ async function loadAndDrawChart() {
                             },
                             font: ctx => ({
                                 family: 'Dosis, sans-serif',
-                                size: 16,
+                                size: 14,
                                 weight: ctx.index === activeIndex ? 'bold' : 'normal'
                             }),
                             maxRotation: 0,
@@ -182,7 +182,7 @@ async function loadAndDrawChart() {
                     },
                     y: {
                         display: false,
-                        min: 118,
+                        min: 119,
                         max: 155,
                         ticks: {
                             color: 'white',
