@@ -55,7 +55,7 @@ async function loadAndDrawChart() {
                 datasets: datasets
             },
             options: {
-                responsive: false,
+                responsive: true,
                 maintainAspectRatio: false,
                 interaction: {
                     mode: 'nearest',
