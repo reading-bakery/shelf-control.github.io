@@ -85,7 +85,7 @@ async function loadAndDrawChart() {
                     datalabels: {
                         display: ctx => activeIndex === null || ctx.dataIndex === activeIndex,
                         color: 'white',
-                        font: ctx => ({ family: 'Dosis, sans-serif', size: 13, weight: ctx.dataIndex === activeIndex ? 'bold' : 'normal' }),
+                        font: ctx => ({ family: 'Dosis, sans-serif', size: 12, weight: ctx.dataIndex === activeIndex ? 'bold' : 'normal' }),
                         align: 'top',
                         anchor: 'end'
                     },
@@ -109,7 +109,7 @@ async function loadAndDrawChart() {
                                     position: 'end',
                                     yAdjust: -10,
                                     color: 'white',
-                                    font: { family: 'Dosis, sans-serif', size: 15 },
+                                    font: { family: 'Dosis, sans-serif', size: 12 },
                                     padding: 0,
                                     cornerRadius: 0,
                                     backgroundColor: 'transparent'
@@ -131,7 +131,7 @@ async function loadAndDrawChart() {
                                 }
                                 return '#fff';
                             },
-                            font: ctx => ({ family: 'Dosis, sans-serif', size: 14, weight: ctx.index === activeIndex ? 'bold' : 'normal' }),
+                            font: ctx => ({ family: 'Dosis, sans-serif', size: 13, weight: ctx.index === activeIndex ? 'bold' : 'normal' }),
                             maxRotation: 0,
                             minRotation: 0
                         },
@@ -139,9 +139,9 @@ async function loadAndDrawChart() {
                     },
                     y: {
                         display: false,
-                        min: 115,
+                        min: 120,
                         max: 145,
-                        ticks: { color: 'white', font: { family: 'Dosis, sans-serif', size: 16 } },
+                        ticks: { color: 'white', font: { family: 'Dosis, sans-serif', size: 12 } },
                         grid: { display: false }
                     }
                 }
