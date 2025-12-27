@@ -139,8 +139,8 @@ async function loadAndDrawChart() {
                     },
                     y: {
                         display: false,
-                        min: 119,
-                        max: 155,
+                        min: 115,
+                        max: 145,
                         ticks: { color: 'white', font: { family: 'Dosis, sans-serif', size: 16 } },
                         grid: { display: false }
                     }
