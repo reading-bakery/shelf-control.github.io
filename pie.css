@@ -24,6 +24,7 @@
 }
 
 #longshort-container-unique,
+.piesub,
 .pie, 
 .pie-container {
   display: flex;
@@ -101,6 +102,7 @@
 
 .pie-pixel h3, 
 .pie h3, 
+.piesub h3, 
 .pie-container h3 {
     min-height: 1rem;
     display: flex;
@@ -460,9 +462,13 @@ hr {
         max-height: 100%;
     }
 
+    .piesub {
+      height: 450px;
+    }
+
     
     #subChart {
-      height: 250px !important;
+      height: 450px;
     }
 
     .pie h3 {
