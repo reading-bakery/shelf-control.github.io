@@ -18,10 +18,10 @@ async function loadAndDrawChart() {
 
         const yearIndices = wantedYears.map(year => allYears.indexOf(year)).filter(idx => idx !== -1);
 
-        let activeIndex = null;  // Hover (auch für Achsenhover)
-        let clickedIndex = null; // Klick auf Monatsname
+        let activeIndex = null;
+        let clickedIndex = null;
 
-        // Datasets vorbereiten
+        // Datasets vorbereiten – nur 2026 standardmäßig sichtbar
         const datasets = yearIndices.map(colIndex => {
             const year = allYears[colIndex];
             const data = rows.slice(1).map(row => {
@@ -36,6 +36,7 @@ async function loadAndDrawChart() {
                 backgroundColor: color,
                 fill: false,
                 tension: 0.4,
+                hidden: year !== '2026', // 2025 und 2027 sind versteckt
                 pointRadius: ctx => {
                     const i = ctx.dataIndex;
                     return (i === activeIndex || i === clickedIndex) ? 7 : 5;
@@ -50,17 +51,11 @@ async function loadAndDrawChart() {
 
         const chart = new Chart(ctx, {
             type: 'line',
-            data: {
-                labels: months,
-                datasets: datasets
-            },
+            data: { labels: months, datasets },
             options: {
                 responsive: false,
                 maintainAspectRatio: false,
-                interaction: {
-                    mode: 'nearest',
-                    intersect: true
-                },
+                interaction: { mode: 'nearest', intersect: true },
                 onClick: (event) => {
                     const xAxis = chart.scales.x;
                     const x = event.offsetX;
@@ -77,19 +72,12 @@ async function loadAndDrawChart() {
                     const y = event.offsetY;
 
                     const index = Math.round(xAxis.getValueForPixel(x));
-                    if (
-                        index >= 0 && index < months.length &&
-                        y > yAxis.bottom && y < yAxis.bottom + 30 // grob unter X-Achse
-                    ) {
+                    if (index >= 0 && index < months.length &&
+                        y > yAxis.bottom && y < yAxis.bottom + 30) {
                         activeIndex = index;
                     } else {
-                        // prüfe normalen Hover auf Punkte
                         const elements = chart.getElementsAtEventForMode(event, 'nearest', {intersect: true}, false);
-                        if (elements.length > 0) {
-                            activeIndex = elements[0].index;
-                        } else {
-                            activeIndex = null;
-                        }
+                        activeIndex = elements.length > 0 ? elements[0].index : null;
                     }
                     chart.update('none');
                 },
@@ -97,31 +85,15 @@ async function loadAndDrawChart() {
                     datalabels: {
                         display: ctx => activeIndex === null || ctx.dataIndex === activeIndex,
                         color: 'white',
-                        font: ctx => ({
-                            family: 'Dosis, sans-serif',
-                            size: 13,
-                            weight: ctx.dataIndex === activeIndex ? 'bold' : 'normal'
-                        }),
+                        font: ctx => ({ family: 'Dosis, sans-serif', size: 13, weight: ctx.dataIndex === activeIndex ? 'bold' : 'normal' }),
                         align: 'top',
                         anchor: 'end'
                     },
                     legend: {
                         position: 'top',
-                        labels: {
-                            color: 'white',
-                            font: {
-                                family: 'Dosis, sans-serif',
-                                size: 12,
-                                weight: 'normal'
-                            },
-                            boxWidth: 50,
-                            padding: 10,
-                            usePointStyle: true
-                        }
+                        labels: { color: 'white', font: { family: 'Dosis, sans-serif', size: 12, weight: 'normal' }, boxWidth: 50, padding: 10, usePointStyle: true }
                     },
-                    tooltip: {
-                        enabled: false
-                    },
+                    tooltip: { enabled: false },
                     annotation: {
                         annotations: {
                             ziel: {
@@ -137,10 +109,7 @@ async function loadAndDrawChart() {
                                     position: 'end',
                                     yAdjust: -10,
                                     color: 'white',
-                                    font: {
-                                        family: 'Dosis, sans-serif',
-                                        size: 15
-                                    },
+                                    font: { family: 'Dosis, sans-serif', size: 15 },
                                     padding: 0,
                                     cornerRadius: 0,
                                     backgroundColor: 'transparent'
@@ -152,48 +121,28 @@ async function loadAndDrawChart() {
                 scales: {
                     x: {
                         ticks: {
-                            // Hier: Farbe dynamisch setzen je nach Hover-Index und Linienfarbe
                             color: ctx => {
-                                // Wenn Hover auf diesem Tick
-                                if (activeIndex === null) return '#fff'; // kein Hover, weiß
-
+                                if (activeIndex === null) return '#fff';
                                 if (ctx.index === activeIndex) {
-                                    // Suche im datasets-Array nach der ersten Linie, die für diesen Monat einen Wert hat
                                     for (let ds of datasets) {
-                                        if (ds.data[ctx.index] !== null && ds.data[ctx.index] !== undefined) {
-                                            return ds.borderColor; // Linienfarbe als Tickfarbe
-                                        }
+                                        if (ds.data[ctx.index] != null) return ds.borderColor;
                                     }
-                                    return '#fff'; // fallback weiß, falls keine Daten
+                                    return '#fff';
                                 }
-                                return '#fff'; // andere Ticks bleiben weiß
+                                return '#fff';
                             },
-                            font: ctx => ({
-                                family: 'Dosis, sans-serif',
-                                size: 14,
-                                weight: ctx.index === activeIndex ? 'bold' : 'normal'
-                            }),
+                            font: ctx => ({ family: 'Dosis, sans-serif', size: 14, weight: ctx.index === activeIndex ? 'bold' : 'normal' }),
                             maxRotation: 0,
                             minRotation: 0
                         },
-                        grid: {
-                            display: false
-                        }
+                        grid: { display: false }
                     },
                     y: {
                         display: false,
                         min: 119,
                         max: 155,
-                        ticks: {
-                            color: 'white',
-                            font: {
-                                family: 'Dosis, sans-serif',
-                                size: 16
-                            }
-                        },
-                        grid: {
-                            display: false
-                        }
+                        ticks: { color: 'white', font: { family: 'Dosis, sans-serif', size: 16 } },
+                        grid: { display: false }
                     }
                 }
             },
