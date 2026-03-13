@@ -43,6 +43,10 @@ p {
 
 .weltreise-card {
     text-align: center;
+    margin-top: 15px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 0px;
 }
 
 .weltreise-flagge {
@@ -50,6 +54,23 @@ p {
     margin-bottom: 5px;
     font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
 }
+
+/* Flaggen auf der Karte */
+.weltreise-flagge-img {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover-Effekt: Zoom + Glow */
+.weltreise-flagge-img:hover {
+    transform: scale(1.05) rotate(-4deg);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25), 0 0 12px rgba(255,255,255,0.5);
+    filter: brightness(1.1) saturate(1.3);
+}
+
+
 
 
 
@@ -83,6 +104,7 @@ p {
 .grid-thumb .buechergilde-carousel,
 .grid-thumb .originalsprache-carousel,
 .grid-thumb .queer-carousel,
+.grid-thumb .weltreise-carousel,
 .grid-thumb .poc-carousel,
 .grid-thumb .schinken-carousel,
 .grid-thumb .indie-carousel,
@@ -96,6 +118,7 @@ p {
 .grid-thumb .buechergilde-carousel-track,
 .grid-thumb .originalsprache-carousel-track,
 .grid-thumb .queer-carousel-track,
+.grid-thumb .weltreise-carousel-track,
 .grid-thumb .poc-carousel-track,
 .grid-thumb .schinken-carousel-track,
 .grid-thumb .indie-carousel-track,
@@ -108,6 +131,7 @@ p {
 .grid-thumb .buechergilde-carousel-slide,   
 .grid-thumb .originalsprache-carousel-slide, 
 .grid-thumb .queer-carousel-slide,
+.grid-thumb .weltreise-carousel-slide,
 .grid-thumb .poc-carousel-slide,
 .grid-thumb .schinken-carousel-slide,
 .grid-thumb .indie-carousel-slide,
@@ -344,6 +368,7 @@ p {
 /* ABC Challenge & Grid */
 .buechergilde-challenge,
 .queer-challenge,
+.weltreise-challenge,
 .poc-challenge,
 .schinken-challenge,
 .indie-challenge,
@@ -355,6 +380,7 @@ p {
 
 .buechergilde-grid,
 .queer-grid,
+.weltreise-grid,
 .poc-grid,
 .schinken-grid,
 .indie-grid,
@@ -378,8 +404,17 @@ p {
     margin-bottom: 10px;
 }
 
+/* Carousel Navigation – größerer Abstand zu den Flaggen */
+.weltreise-carousel-nav {
+    text-align: center;
+    margin-top: 10px;   /* Abstand vergrößert von 10px auf 30px */
+    margin-bottom: 20px;
+}
+
+
 .buechergilde-dot,  
 .queer-dot,
+.weltreise-dot,
 .poc-dot,
 .schinken-dot,
 .indie-dot,
@@ -399,6 +434,7 @@ p {
 }
 
 .buechergilde-dot.active,   
+.weltreise-dot.active,   
 .queer-dot.active,
 .poc-dot.active,
 .schinken-dot.active,
