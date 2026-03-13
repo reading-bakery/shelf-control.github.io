@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
         },
-        plugins: [{
+ plugins: [{
           id: 'centerLabel',
           afterDraw(chart) {
             const ctx = chart.ctx;
@@ -100,9 +100,16 @@ document.addEventListener('DOMContentLoaded', () => {
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
 
-              ctx.fillText(label, centerX, centerY - 12);
+              // Kategorie (Label) oben, leicht nach oben verschoben
+              ctx.fillText(label, centerX, centerY - 16);
+
+              // Prozentwert darunter, größer und etwas nach unten verschoben
               ctx.font = '22px Dosis, sans-serif';
-              ctx.fillText(percentage, centerX, centerY + 14);
+              ctx.fillText(percentage, centerX, centerY + 4);
+
+              // Totalangabe darunter
+              ctx.font = '16px Dosis, sans-serif';
+              ctx.fillText('Total: ' + value, centerX, centerY + 24);
 
               ctx.restore();
             }

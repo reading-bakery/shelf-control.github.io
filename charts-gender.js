@@ -80,35 +80,42 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         },
         plugins: [{
-          id: 'centerLabel',
-          afterDraw(chart) {
-            const ctx = chart.ctx;
-            const centerX = chart.width / 2;
-            const centerY = chart.height / 2;
-            const active = chart.tooltip?._active || [];
+                  id: 'centerLabel',
+                  afterDraw(chart) {
+                    const ctx = chart.ctx;
+                    const centerX = chart.width / 2;
+                    const centerY = chart.height / 2;
+                    const active = chart.tooltip?._active || [];
 
-            if (active && active.length) {
-              const idx = active[0].index;
-              const value = chart.data.datasets[0].data[idx];
-              const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-              const percentage = ((value / total) * 100).toFixed(1) + '%';
-              const label = chart.data.labels[idx];
+                    if (active && active.length) {
+                      const idx = active[0].index;
+                      const value = chart.data.datasets[0].data[idx];
+                      const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                      const percentage = ((value / total) * 100).toFixed(1) + '%';
+                      const label = chart.data.labels[idx];
 
-              ctx.save();
-              ctx.font = '16px Dosis, sans-serif';
-              ctx.fillStyle = 'white';
-              ctx.textAlign = 'center';
-              ctx.textBaseline = 'middle';
+                      ctx.save();
+                      ctx.font = '16px Dosis, sans-serif';
+                      ctx.fillStyle = 'white';
+                      ctx.textAlign = 'center';
+                      ctx.textBaseline = 'middle';
 
-              ctx.fillText(label, centerX, centerY - 12);
-              ctx.font = '22px Dosis, sans-serif';
-              ctx.fillText(percentage, centerX, centerY + 14);
+                      // Kategorie (Label) oben, leicht nach oben verschoben
+                      ctx.fillText(label, centerX, centerY - 16);
 
-              ctx.restore();
-            }
-          }
-        }]
-      };
+                      // Prozentwert darunter, größer und etwas nach unten verschoben
+                      ctx.font = '22px Dosis, sans-serif';
+                      ctx.fillText(percentage, centerX, centerY + 4);
+
+                      // Totalangabe darunter
+                      ctx.font = '16px Dosis, sans-serif';
+                      ctx.fillText('Total: ' + value, centerX, centerY + 24);
+
+                      ctx.restore();
+                    }
+                  }
+                }]
+              };            
 
       new Chart(ctx, config);
     })
