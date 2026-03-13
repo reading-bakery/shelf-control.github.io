@@ -41,6 +41,18 @@ p {
     padding-right: 10px;
 }
 
+.weltreise-card {
+    text-align: center;
+}
+
+.weltreise-flagge {
+    font-size: 36px;
+    margin-bottom: 5px;
+    font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+}
+
+
+
 .buechergilde-placeholder,
 .originalsprache-placeholder, 
 .queer-placeholder, 
