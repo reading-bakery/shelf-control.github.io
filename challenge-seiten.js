@@ -1,58 +1,67 @@
 /**
  * @name challenge-seiten.js
  * @description Lädt CSV-Daten, summiert die Seiten und zeigt den Fortschritt in einem SVG-Kreisdiagramm an.
- * Der gesamte Code ist in einem IIFE gekapselt, um globale Konflikte zu vermeiden.
+ * Zusätzlich wird angezeigt, ob man im Plan liegt oder Vorsprung/Rückstand hat.
  */
 (function() {
   'use strict';
 
-  // Konstanten für die Datenquelle und das Ziel
   const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=62129941&single=true&output=csv";
-  const GOAL = 20000; // Das Ziel sind 20.000 Seiten
-  const TARGET_DIV_ID = 'pages-circle'; // Das DIV, in das gezeichnet wird
+  const GOAL = 20000; // Zielseiten
+  const TARGET_DIV_ID = 'pages-circle';
 
-  /**
-   * Lädt die CSV-Daten, berechnet die Summe der "Seiten" und startet das Rendering.
-   */
   async function loadDataAndRender() {
     try {
-      // Stellt sicher, dass PapaParse verfügbar ist, falls es nicht global geladen wurde.
+      // PapaParse laden, falls nicht global
       if (typeof Papa === 'undefined') {
         const script = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js';
         document.head.appendChild(script);
         await new Promise(resolve => script.onload = resolve);
       }
-      
+
       const response = await fetch(CSV_URL);
+      if (!response.ok) throw new Error("CSV konnte nicht geladen werden");
+
       const csvText = await response.text();
 
       const results = Papa.parse(csvText, {
         header: true,
         skipEmptyLines: true,
-        dynamicTyping: true,
+        dynamicTyping: true
       });
 
-      const totalPagesRead = results.data.reduce((sum, row) => {
-        return sum + (row.Seiten || 0);
-      }, 0);
-      
+      if (!results.data || results.data.length === 0) throw new Error("Keine Daten in CSV");
+
+      // Spalte "Seiten" flexibel finden
+      const seitenSpalte = Object.keys(results.data[0]).find(key => key.trim().toLowerCase() === "seiten");
+      if (!seitenSpalte) throw new Error("Spalte 'Seiten' nicht gefunden");
+
+      const totalPagesRead = results.data.reduce((sum, row) => sum + (row[seitenSpalte] || 0), 0);
+
       renderProgressCircle(totalPagesRead, GOAL);
 
     } catch (error) {
       console.error("Fehler beim Laden oder Verarbeiten der Daten:", error);
       const container = document.getElementById(TARGET_DIV_ID);
-      if (container) {
-          container.textContent = "Fehler beim Laden der Daten";
-      }
+      if (container) container.textContent = "Fehler beim Laden der Daten";
     }
   }
 
-  /**
-   * Erstellt das SVG-Kreisdiagramm.
-   */
   function renderProgressCircle(current, goal) {
+    const today = new Date();
+    const startOfYear = new Date(today.getFullYear(), 0, 1);
+    const dayOfYear = Math.floor((today - startOfYear) / (1000*60*60*24)) + 1;
+    const daysInYear = 365;
+
+    const targetAtThisTime = Math.round(goal * (dayOfYear / daysInYear));
+    const delta = current - targetAtThisTime;
+
     const percent = ((current / goal) * 100).toFixed(1);
+    const deltaText = delta === 0 ? "Genau im Plan!"
+                     : delta > 0 ? `+${delta} Vorsprung`
+                     : `-${Math.abs(delta)} Rückstand`;
+    const deltaColor = delta === 0 ? "white" : delta > 0 ? "#00FF00" : "#FF4500";
 
     const container = document.getElementById(TARGET_DIV_ID);
     if (!container) return;
@@ -69,12 +78,12 @@
     svg.setAttribute("width", size);
     svg.setAttribute("height", size);
     svg.style.transform = "rotate(-90deg)";
-    svg.style.filter = "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2))";
+    svg.style.filter = "drop-shadow(2px 2px 4px rgba(0,0,0,0.2))";
 
     // Hintergrundkreis
     const bgCircle = document.createElementNS(svgns, "circle");
-    bgCircle.setAttribute("cx", size / 2);
-    bgCircle.setAttribute("cy", size / 2);
+    bgCircle.setAttribute("cx", size/2);
+    bgCircle.setAttribute("cy", size/2);
     bgCircle.setAttribute("r", radius);
     bgCircle.setAttribute("stroke", "#353434ff");
     bgCircle.setAttribute("stroke-width", strokeWidth);
@@ -83,7 +92,7 @@
     // Farbverlauf definieren
     const defs = document.createElementNS(svgns, "defs");
     const linearGradient = document.createElementNS(svgns, "linearGradient");
-    linearGradient.setAttribute("id", "greenGradient"); // Eindeutiger Name für den neuen Farbverlauf
+    linearGradient.setAttribute("id", "greenGradient");
     linearGradient.setAttribute("x1", "0%");
     linearGradient.setAttribute("y1", "0%");
     linearGradient.setAttribute("x2", "100%");
@@ -91,23 +100,23 @@
 
     const stop1 = document.createElementNS(svgns, "stop");
     stop1.setAttribute("offset", "0%");
-    stop1.setAttribute("stop-color", "#025a2aff"); // Dunklerer Grünton
+    stop1.setAttribute("stop-color", "#025a2aff");
 
     const stop2 = document.createElementNS(svgns, "stop");
     stop2.setAttribute("offset", "100%");
-    stop2.setAttribute("stop-color", "#4bd886"); // Hellerer Grünton
+    stop2.setAttribute("stop-color", "#4bd886");
 
     linearGradient.appendChild(stop1);
     linearGradient.appendChild(stop2);
     defs.appendChild(linearGradient);
     svg.appendChild(defs);
 
-    // Fortschrittskreis mit Farbverlauf
+    // Fortschrittskreis
     const progressCircle = document.createElementNS(svgns, "circle");
-    progressCircle.setAttribute("cx", size / 2);
-    progressCircle.setAttribute("cy", size / 2);
+    progressCircle.setAttribute("cx", size/2);
+    progressCircle.setAttribute("cy", size/2);
     progressCircle.setAttribute("r", radius);
-    progressCircle.setAttribute("stroke", "url(#greenGradient)"); // Verweis auf den neuen Farbverlauf
+    progressCircle.setAttribute("stroke", "url(#greenGradient)");
     progressCircle.setAttribute("stroke-width", strokeWidth);
     progressCircle.setAttribute("fill", "none");
     progressCircle.setAttribute("stroke-dasharray", circumference);
@@ -115,9 +124,9 @@
     progressCircle.setAttribute("stroke-linecap", "round");
     progressCircle.style.transition = "stroke-dashoffset 1s ease";
 
-    // Textgruppe (zentriert und zurückrotiert)
+    // Textgruppe
     const textGroup = document.createElementNS(svgns, "g");
-    textGroup.setAttribute("transform", `translate(${size / 2}, ${size / 2}) rotate(90)`);
+    textGroup.setAttribute("transform", `translate(${size/2}, ${size/2}) rotate(90)`);
 
     const textLine1 = document.createElementNS(svgns, "text");
     textLine1.setAttribute("text-anchor", "middle");
@@ -143,9 +152,18 @@
     textPercent.setAttribute("fill", "white");
     textPercent.textContent = `${percent}%`;
 
+    const textDelta = document.createElementNS(svgns, "text");
+    textDelta.setAttribute("text-anchor", "middle");
+    textDelta.setAttribute("y", "50");
+    textDelta.setAttribute("font-size", "14");
+    textDelta.setAttribute("font-family", "Dosis, sans-serif");
+    textDelta.setAttribute("fill", deltaColor);
+    textDelta.textContent = deltaText;
+
     textGroup.appendChild(textLine1);
     textGroup.appendChild(textLine2);
     textGroup.appendChild(textPercent);
+    textGroup.appendChild(textDelta);
 
     svg.appendChild(bgCircle);
     svg.appendChild(progressCircle);
@@ -154,7 +172,6 @@
     container.appendChild(svg);
   }
 
-  // Startet den gesamten Prozess, wenn die Seite geladen ist.
   document.addEventListener('DOMContentLoaded', loadDataAndRender);
 
-})(); // Ende des IIFE
+})();

@@ -4,19 +4,23 @@ const goal = 90;
 async function loadDataAndRender() {
   try {
     const response = await fetch(CSV_URL);
+    if (!response.ok) throw new Error("CSV konnte nicht geladen werden");
+
     const csvText = await response.text();
 
-    // CSV parsen mit PapaParse
-    const results = Papa.parse(csvText, {
-      header: true,
-      skipEmptyLines: true,
-    });
+    // CSV parsen
+    const results = Papa.parse(csvText, { header: true, skipEmptyLines: true });
+    if (!results.data || results.data.length === 0) throw new Error("Keine Daten in CSV");
 
-    const currentStr = results.data[0]?.Bücher;
-    if (!currentStr) throw new Error("Spalte 'Bücher' nicht gefunden oder leer.");
+    // Spalte 'Bücher' flexibel finden (ignore whitespace & case)
+    const buchSpalte = Object.keys(results.data[0]).find(key => key.trim().toLowerCase() === "bücher");
+    if (!buchSpalte) throw new Error("Spalte 'Bücher' nicht gefunden");
+
+    const currentStr = results.data[0][buchSpalte];
+    if (!currentStr) throw new Error("Kein Wert in Spalte 'Bücher'");
 
     const current = parseInt(currentStr, 10);
-    if (isNaN(current)) throw new Error("Wert in 'Bücher' ist keine Zahl.");
+    if (isNaN(current)) throw new Error("Wert in 'Bücher' ist keine Zahl");
 
     renderProgressCircle(current, goal);
   } catch (error) {
@@ -27,7 +31,19 @@ async function loadDataAndRender() {
 }
 
 function renderProgressCircle(current, goal) {
-  const percent = ((current / goal) * 100).toFixed(1); // Prozent, z.B. 43.2
+  const today = new Date();
+  const startOfYear = new Date(today.getFullYear(), 0, 1);
+  const dayOfYear = Math.floor((today - startOfYear) / (1000 * 60 * 60 * 24)) + 1;
+  const daysInYear = 365;
+
+  const targetAtThisTime = Math.round(goal * (dayOfYear / daysInYear));
+  const delta = current - targetAtThisTime;
+  const percent = ((current / goal) * 100).toFixed(1);
+
+  let deltaText = delta === 0 ? "Genau im Plan!" 
+                 : delta > 0 ? `+${delta} Vorsprung` 
+                 : `-${Math.abs(delta)} Rückstand`;
+  let deltaColor = delta === 0 ? "white" : delta > 0 ? "#13c913" : "#FF4500";
 
   const container = document.getElementById('books-circle');
   container.innerHTML = "";
@@ -37,25 +53,14 @@ function renderProgressCircle(current, goal) {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference * (1 - Math.min(percent, 100) / 100);
-
   const svgns = "http://www.w3.org/2000/svg";
 
   const svg = document.createElementNS(svgns, "svg");
   svg.setAttribute("width", size);
   svg.setAttribute("height", size);
   svg.style.transform = "rotate(-90deg)";
-  svg.style.filter = "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2))";
+  svg.style.filter = "drop-shadow(2px 2px 4px rgba(0,0,0,0.2))";
 
-  // Hintergrundkreis
-  const bgCircle = document.createElementNS(svgns, "circle");
-  bgCircle.setAttribute("cx", size / 2);
-  bgCircle.setAttribute("cy", size / 2);
-  bgCircle.setAttribute("r", radius);
-  bgCircle.setAttribute("stroke", "#353434ff");
-  bgCircle.setAttribute("stroke-width", strokeWidth);
-  bgCircle.setAttribute("fill", "none");
-
-  // Farbverlauf definieren
   const defs = document.createElementNS(svgns, "defs");
   const linearGradient = document.createElementNS(svgns, "linearGradient");
   linearGradient.setAttribute("id", "coralGradient");
@@ -66,21 +71,28 @@ function renderProgressCircle(current, goal) {
 
   const stop1 = document.createElementNS(svgns, "stop");
   stop1.setAttribute("offset", "0%");
-  stop1.setAttribute("stop-color", "#92230bff");  // dunkleres Koralle
+  stop1.setAttribute("stop-color", "#92230bff");
 
   const stop2 = document.createElementNS(svgns, "stop");
   stop2.setAttribute("offset", "100%");
-  stop2.setAttribute("stop-color", "#ff7f50");  // helleres Koralle 
+  stop2.setAttribute("stop-color", "#ff7f50");
 
   linearGradient.appendChild(stop1);
   linearGradient.appendChild(stop2);
   defs.appendChild(linearGradient);
   svg.appendChild(defs);
 
-  // Fortschrittskreis mit Farbverlauf
+  const bgCircle = document.createElementNS(svgns, "circle");
+  bgCircle.setAttribute("cx", size/2);
+  bgCircle.setAttribute("cy", size/2);
+  bgCircle.setAttribute("r", radius);
+  bgCircle.setAttribute("stroke", "#353434ff");
+  bgCircle.setAttribute("stroke-width", strokeWidth);
+  bgCircle.setAttribute("fill", "none");
+
   const progressCircle = document.createElementNS(svgns, "circle");
-  progressCircle.setAttribute("cx", size / 2);
-  progressCircle.setAttribute("cy", size / 2);
+  progressCircle.setAttribute("cx", size/2);
+  progressCircle.setAttribute("cy", size/2);
   progressCircle.setAttribute("r", radius);
   progressCircle.setAttribute("stroke", "url(#coralGradient)");
   progressCircle.setAttribute("stroke-width", strokeWidth);
@@ -90,37 +102,45 @@ function renderProgressCircle(current, goal) {
   progressCircle.setAttribute("stroke-linecap", "round");
   progressCircle.style.transition = "stroke-dashoffset 1s ease";
 
-  // Textgruppe (zentriert und zurückrotiert)
   const textGroup = document.createElementNS(svgns, "g");
-  textGroup.setAttribute("transform", `translate(${size / 2}, ${size / 2}) rotate(90)`);
+  textGroup.setAttribute("transform", `translate(${size/2}, ${size/2}) rotate(90)`);
 
   const textLine1 = document.createElementNS(svgns, "text");
   textLine1.setAttribute("text-anchor", "middle");
   textLine1.setAttribute("y", "-15");
   textLine1.setAttribute("font-size", "18");
-  textLine1.setAttribute("font-family", "Dosis, sans-serif");
   textLine1.setAttribute("fill", "white");
+  textLine1.setAttribute("font-family", "Dosis, sans-serif");
   textLine1.textContent = `${current} von ${goal}`;
 
   const textLine2 = document.createElementNS(svgns, "text");
   textLine2.setAttribute("text-anchor", "middle");
   textLine2.setAttribute("y", "5");
   textLine2.setAttribute("font-size", "12");
-  textLine2.setAttribute("font-family", "Dosis, sans-serif");
   textLine2.setAttribute("fill", "white");
-  textLine2.textContent = `Büchern erreicht.`;
+  textLine2.setAttribute("font-family", "Dosis, sans-serif");
+  textLine2.textContent = "Büchern erreicht.";
 
   const textPercent = document.createElementNS(svgns, "text");
   textPercent.setAttribute("text-anchor", "middle");
   textPercent.setAttribute("y", "30");
   textPercent.setAttribute("font-size", "22");
-  textPercent.setAttribute("font-family", "Dosis, sans-serif");
   textPercent.setAttribute("fill", "white");
+  textPercent.setAttribute("font-family", "Dosis, sans-serif");
   textPercent.textContent = `${percent}%`;
+
+  const textDelta = document.createElementNS(svgns, "text");
+  textDelta.setAttribute("text-anchor", "middle");
+  textDelta.setAttribute("y", "50");
+  textDelta.setAttribute("font-size", "14");
+  textDelta.setAttribute("fill", deltaColor);
+  textDelta.setAttribute("font-family", "Dosis, sans-serif");
+  textDelta.textContent = deltaText;
 
   textGroup.appendChild(textLine1);
   textGroup.appendChild(textLine2);
   textGroup.appendChild(textPercent);
+  textGroup.appendChild(textDelta);
 
   svg.appendChild(bgCircle);
   svg.appendChild(progressCircle);
@@ -129,5 +149,4 @@ function renderProgressCircle(current, goal) {
   container.appendChild(svg);
 }
 
-// Start
 loadDataAndRender();

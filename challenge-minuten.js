@@ -1,13 +1,13 @@
 /**
  * @name challenge-minuten.js
  * @description Lädt CSV-Daten, summiert die Minuten und zeigt den Fortschritt in einem SVG-Kreisdiagramm an.
- * Der gesamte Code ist in einem IIFE gekapselt, um globale Konflikte zu vermeiden.
+ * Zusätzlich wird angezeigt, ob man im Plan liegt oder Vorsprung/Rückstand hat.
  */
 (function() {
   'use strict';
 
   const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=62129941&single=true&output=csv";
-  const GOAL = 15000;
+  const GOAL = 15000; // Ziel-Minuten
   const TARGET_DIV_ID = 'minutes-circle';
 
   async function loadDataAndRender() {
@@ -18,33 +18,49 @@
         document.head.appendChild(script);
         await new Promise(resolve => script.onload = resolve);
       }
-      
+
       const response = await fetch(CSV_URL);
+      if (!response.ok) throw new Error("CSV konnte nicht geladen werden");
+
       const csvText = await response.text();
 
       const results = Papa.parse(csvText, {
         header: true,
         skipEmptyLines: true,
-        dynamicTyping: true,
+        dynamicTyping: true
       });
 
-      const totalMinutesRead = results.data.reduce((sum, row) => {
-        return sum + (row.Minuten || 0);
-      }, 0);
-      
+      if (!results.data || results.data.length === 0) throw new Error("Keine Daten in CSV");
+
+      // Spalte "Minuten" flexibel finden
+      const minutenSpalte = Object.keys(results.data[0]).find(key => key.trim().toLowerCase() === "minuten");
+      if (!minutenSpalte) throw new Error("Spalte 'Minuten' nicht gefunden");
+
+      const totalMinutesRead = results.data.reduce((sum, row) => sum + (row[minutenSpalte] || 0), 0);
+
       renderProgressCircle(totalMinutesRead, GOAL);
 
     } catch (error) {
       console.error("Fehler beim Laden oder Verarbeiten der Daten:", error);
       const container = document.getElementById(TARGET_DIV_ID);
-      if (container) {
-          container.textContent = "Fehler beim Laden der Daten";
-      }
+      if (container) container.textContent = "Fehler beim Laden der Daten";
     }
   }
 
   function renderProgressCircle(current, goal) {
+    const today = new Date();
+    const startOfYear = new Date(today.getFullYear(), 0, 1);
+    const dayOfYear = Math.floor((today - startOfYear) / (1000*60*60*24)) + 1;
+    const daysInYear = 365;
+
+    const targetAtThisTime = Math.round(goal * (dayOfYear / daysInYear));
+    const delta = current - targetAtThisTime;
+
     const percent = ((current / goal) * 100).toFixed(1);
+    const deltaText = delta === 0 ? "Genau im Plan!"
+                     : delta > 0 ? `+${delta} Vorsprung`
+                     : `-${Math.abs(delta)} Rückstand`;
+    const deltaColor = delta === 0 ? "white" : delta > 0 ? "#00FF00" : "#FF4500";
 
     const container = document.getElementById(TARGET_DIV_ID);
     if (!container) return;
@@ -65,8 +81,8 @@
 
     // Hintergrundkreis
     const bgCircle = document.createElementNS(svgns, "circle");
-    bgCircle.setAttribute("cx", size / 2);
-    bgCircle.setAttribute("cy", size / 2);
+    bgCircle.setAttribute("cx", size/2);
+    bgCircle.setAttribute("cy", size/2);
     bgCircle.setAttribute("r", radius);
     bgCircle.setAttribute("stroke", "#353434ff");
     bgCircle.setAttribute("stroke-width", strokeWidth);
@@ -75,7 +91,7 @@
     // Farbverlauf definieren
     const defs = document.createElementNS(svgns, "defs");
     const linearGradient = document.createElementNS(svgns, "linearGradient");
-    linearGradient.setAttribute("id", "blueGradient"); // Eindeutiger Name für den Farbverlauf
+    linearGradient.setAttribute("id", "blueGradient");
     linearGradient.setAttribute("x1", "0%");
     linearGradient.setAttribute("y1", "0%");
     linearGradient.setAttribute("x2", "100%");
@@ -83,23 +99,23 @@
 
     const stop1 = document.createElementNS(svgns, "stop");
     stop1.setAttribute("offset", "0%");
-    stop1.setAttribute("stop-color", "#023557ff"); // Dunklerer Blauton
+    stop1.setAttribute("stop-color", "#023557ff");
 
     const stop2 = document.createElementNS(svgns, "stop");
     stop2.setAttribute("offset", "100%");
-    stop2.setAttribute("stop-color", "#8ad0ff"); // Hellerer Blauton
+    stop2.setAttribute("stop-color", "#8ad0ff");
 
     linearGradient.appendChild(stop1);
     linearGradient.appendChild(stop2);
     defs.appendChild(linearGradient);
     svg.appendChild(defs);
 
-    // Fortschrittskreis mit Farbverlauf
+    // Fortschrittskreis
     const progressCircle = document.createElementNS(svgns, "circle");
-    progressCircle.setAttribute("cx", size / 2);
-    progressCircle.setAttribute("cy", size / 2);
+    progressCircle.setAttribute("cx", size/2);
+    progressCircle.setAttribute("cy", size/2);
     progressCircle.setAttribute("r", radius);
-    progressCircle.setAttribute("stroke", "url(#blueGradient)"); // Verweis auf den Farbverlauf
+    progressCircle.setAttribute("stroke", "url(#blueGradient)");
     progressCircle.setAttribute("stroke-width", strokeWidth);
     progressCircle.setAttribute("fill", "none");
     progressCircle.setAttribute("stroke-dasharray", circumference);
@@ -107,9 +123,9 @@
     progressCircle.setAttribute("stroke-linecap", "round");
     progressCircle.style.transition = "stroke-dashoffset 1s ease";
 
-    // Textgruppe (zentriert und zurückrotiert)
+    // Textgruppe
     const textGroup = document.createElementNS(svgns, "g");
-    textGroup.setAttribute("transform", `translate(${size / 2}, ${size / 2}) rotate(90)`);
+    textGroup.setAttribute("transform", `translate(${size/2}, ${size/2}) rotate(90)`);
 
     const textLine1 = document.createElementNS(svgns, "text");
     textLine1.setAttribute("text-anchor", "middle");
@@ -135,9 +151,18 @@
     textPercent.setAttribute("fill", "white");
     textPercent.textContent = `${percent}%`;
 
+    const textDelta = document.createElementNS(svgns, "text");
+    textDelta.setAttribute("text-anchor", "middle");
+    textDelta.setAttribute("y", "50");
+    textDelta.setAttribute("font-size", "14");
+    textDelta.setAttribute("font-family", "Dosis, sans-serif");
+    textDelta.setAttribute("fill", deltaColor);
+    textDelta.textContent = deltaText;
+
     textGroup.appendChild(textLine1);
     textGroup.appendChild(textLine2);
     textGroup.appendChild(textPercent);
+    textGroup.appendChild(textDelta);
 
     svg.appendChild(bgCircle);
     svg.appendChild(progressCircle);
@@ -146,7 +171,6 @@
     container.appendChild(svg);
   }
 
-  // Startet den gesamten Prozess, wenn die Seite geladen ist.
   document.addEventListener('DOMContentLoaded', loadDataAndRender);
 
-})(); // Ende des IIFE
+})();
