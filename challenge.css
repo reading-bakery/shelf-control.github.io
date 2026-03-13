@@ -445,6 +445,25 @@ p {
     background: #ff7256;
 }
 
+.challenge-container {
+  display: flex;
+  flex-direction: column; /* übereinander statt nebeneinander */
+  align-items: center;    /* zentriert horizontal */
+  gap: 15px;              /* Abstand zwischen Kreis und Graph */
+  margin-bottom: 30px;
+}
+
+#books-graph svg,
+#pages-graph svg,
+#minutes-graph svg {
+  display: block;
+}
+#books-graph,
+#pages-graph,
+#minutes-graph {
+  width: 100%;
+  height: 180px; /* mindestens Höhe für den Graphen */
+}
 
 
 
