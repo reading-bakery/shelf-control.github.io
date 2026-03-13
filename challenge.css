@@ -46,13 +46,12 @@ p {
     margin-top: 15px;
     margin-left: 3px;
     margin-right: 3px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
 }
 
 .weltreise-flagge {
     font-size: 36px;
     margin-bottom: 5px;
-    font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
 }
 
 /* Flaggen auf der Karte */
