@@ -14,12 +14,19 @@ async function loadDataAndRender() {
     }
 
     const response = await fetch(CSV_URL);
+    if (!response.ok) throw new Error("CSV konnte nicht geladen werden");
+
     const csvText = await response.text();
     const results = Papa.parse(csvText, { header: true, skipEmptyLines: true });
+    if (!results.data || results.data.length === 0) throw new Error("Keine Daten in CSV");
 
     const buchSpalte = Object.keys(results.data[0]).find(k => k.trim().toLowerCase() === 'bücher');
-    const current = parseInt(results.data[0][buchSpalte], 10);
+    if (!buchSpalte) throw new Error("Spalte 'Bücher' nicht gefunden");
 
+    const current = parseInt(results.data[0][buchSpalte], 10);
+    if (isNaN(current)) throw new Error("Wert in 'Bücher' ist keine Zahl");
+
+    // Berechnungen für Graph & Kreis
     const today = new Date();
     const startOfYear = new Date(today.getFullYear(), 0, 1);
     const dayOfYear = Math.floor((today - startOfYear)/(1000*60*60*24)) + 1;
@@ -31,26 +38,35 @@ async function loadDataAndRender() {
 
   } catch (error) {
     console.error("Fehler beim Laden oder Verarbeiten der Daten:", error);
-    const container = document.getElementById("books-circle");
-    container.textContent = "Fehler beim Laden der Daten";
+    document.getElementById("books-circle").textContent = "Fehler beim Laden der Daten";
   }
 }
 
-// Kreisdiagramm mit Vorsprung/Rückstand
+// Kreisdiagramm
 function renderProgressCircle(current, goal, dayOfYear) {
-  const percent = ((current / goal) * 100).toFixed(1);
+  const percent = ((current/goal)*100).toFixed(1);
   const container = document.getElementById('books-circle');
   container.innerHTML = "";
 
+  const today = new Date();
+  const startOfYear = new Date(today.getFullYear(), 0, 1);
+  const daysInYear = 365;
+  const targetAtThisTime = Math.round(goal * (dayOfYear/daysInYear));
+  const delta = current - targetAtThisTime;
+
+  let deltaText = delta === 0 ? "Genau im Plan!" 
+                 : delta > 0 ? `+${delta} Vorsprung` 
+                 : `-${Math.abs(delta)} Rückstand`;
+  let deltaColor = delta === 0 ? "white" : delta > 0 ? "#13c913" : "#FF4500";
+
   const size = 220, strokeWidth = 30;
-  const radius = (size - strokeWidth)/2;
+  const radius = (size-strokeWidth)/2;
   const circumference = 2*Math.PI*radius;
   const offset = circumference * (1 - Math.min(percent,100)/100);
   const svgns = "http://www.w3.org/2000/svg";
 
   const svg = document.createElementNS(svgns,"svg");
-  svg.setAttribute("width", size);
-  svg.setAttribute("height", size);
+  svg.setAttribute("width", size); svg.setAttribute("height", size);
   svg.style.transform = "rotate(-90deg)";
 
   // Farbverlauf
@@ -65,27 +81,21 @@ function renderProgressCircle(current, goal, dayOfYear) {
   defs.appendChild(linearGradient);
   svg.appendChild(defs);
 
-  // Hintergrundkreis
   const bgCircle = document.createElementNS(svgns,"circle");
   bgCircle.setAttribute("cx", size/2); bgCircle.setAttribute("cy", size/2); bgCircle.setAttribute("r", radius);
-  bgCircle.setAttribute("stroke","#353434ff"); bgCircle.setAttribute("stroke-width", strokeWidth); bgCircle.setAttribute("fill","none");
+  bgCircle.setAttribute("stroke", "#353434ff"); bgCircle.setAttribute("stroke-width", strokeWidth); bgCircle.setAttribute("fill","none");
 
-  // Fortschrittskreis
   const progressCircle = document.createElementNS(svgns,"circle");
   progressCircle.setAttribute("cx", size/2); progressCircle.setAttribute("cy", size/2); progressCircle.setAttribute("r", radius);
-  progressCircle.setAttribute("stroke","url(#coralGradient)"); progressCircle.setAttribute("stroke-width", strokeWidth);
-  progressCircle.setAttribute("fill","none"); progressCircle.setAttribute("stroke-dasharray", circumference);
-  progressCircle.setAttribute("stroke-dashoffset", offset); progressCircle.setAttribute("stroke-linecap","round");
+  progressCircle.setAttribute("stroke", "url(#coralGradient)");
+  progressCircle.setAttribute("stroke-width", strokeWidth);
+  progressCircle.setAttribute("fill","none");
+  progressCircle.setAttribute("stroke-dasharray", circumference);
+  progressCircle.setAttribute("stroke-dashoffset", offset);
+  progressCircle.setAttribute("stroke-linecap","round");
 
-  svg.appendChild(bgCircle);
+  svg.appendChild(bgCircle); 
   svg.appendChild(progressCircle);
-
-  // Delta berechnen
-  const daysInYear = 365;
-  const targetAtThisTime = Math.round(goal * (dayOfYear / daysInYear));
-  const delta = current - targetAtThisTime;
-  const deltaText = delta === 0 ? "Genau im Plan!" : delta > 0 ? `+${delta} Vorsprung` : `-${Math.abs(delta)} Rückstand`;
-  const deltaColor = delta === 0 ? "white" : delta > 0 ? "#13c913" : "#FF4500";
 
   // Textgruppe
   const textGroup = document.createElementNS(svgns,"g");
@@ -126,52 +136,86 @@ function renderProgressCircle(current, goal, dayOfYear) {
 
 // Linearer Graph darunter
 function renderLinearGraph(dayOfYear, current, goal, avgPerDay, predictedDay) {
+
   const container = document.getElementById('books-graph');
   container.innerHTML = "";
-  const width = 400, height = 150, padding = 30;
+
+  const width = 300;
+  const height = 200;
+  const padding = 30;
+  const axisYOffset = 50;
+
   const svgns = "http://www.w3.org/2000/svg";
+
   const svg = document.createElementNS(svgns,"svg");
-  svg.setAttribute("width", width); svg.setAttribute("height", height);
+  svg.setAttribute("width", width);
+  svg.setAttribute("height", height);
 
-  // Skalen
-  const xScale = (width-2*padding)/365;
-  const yScale = (height-2*padding)/goal;
+  // Skalierung
+  const xScale = (width - padding * 2) / 365;
+  const yScale = (height - padding - axisYOffset) / goal;
 
-  // Achsen
+  // X-Achse
   const axisX = document.createElementNS(svgns,"line");
-  axisX.setAttribute("x1",padding); axisX.setAttribute("y1",height-padding);
-  axisX.setAttribute("x2",width-padding); axisX.setAttribute("y2",height-padding);
-  axisX.setAttribute("stroke","white"); svg.appendChild(axisX);
+  axisX.setAttribute("x1", padding);
+  axisX.setAttribute("y1", height - axisYOffset);
+  axisX.setAttribute("x2", width - padding);
+  axisX.setAttribute("y2", height - axisYOffset);
+  axisX.setAttribute("stroke","white");
+  svg.appendChild(axisX);
 
+  // Y-Achse
   const axisY = document.createElementNS(svgns,"line");
-  axisY.setAttribute("x1",padding); axisY.setAttribute("y1",padding);
-  axisY.setAttribute("x2",padding); axisY.setAttribute("y2",height-padding);
-  axisY.setAttribute("stroke","white"); svg.appendChild(axisY);
+  axisY.setAttribute("x1", padding);
+  axisY.setAttribute("y1", padding);
+  axisY.setAttribute("x2", padding);
+  axisY.setAttribute("y2", height - axisYOffset);
+  axisY.setAttribute("stroke","white");
+  svg.appendChild(axisY);
 
-  // Tatsächlicher Fortschritt
+  // Fortschrittslinie (grün)
   const line = document.createElementNS(svgns,"polyline");
   const points = [];
-  for(let i=0;i<=dayOfYear;i++){
-    const x = padding + i*xScale;
-    const y = height-padding - avgPerDay*i*yScale;
+
+  for(let i = 0; i <= dayOfYear; i++){
+
+    const x = padding + i * xScale;
+    const y = height - axisYOffset - avgPerDay * i * yScale;
+
     points.push(`${x},${y}`);
   }
+
   line.setAttribute("points", points.join(" "));
-  line.setAttribute("fill","none"); line.setAttribute("stroke","#00FF00"); line.setAttribute("stroke-width","2");
+  line.setAttribute("fill","none");
+  line.setAttribute("stroke","#00FF00");
+  line.setAttribute("stroke-width","2");
+
   svg.appendChild(line);
 
-  // Prognose
-  const lastX = padding + dayOfYear*xScale;
-  const lastY = height-padding - current*yScale;
-  const predX = padding + Math.min(predictedDay,365)*xScale;
-  const predY = height-padding - goal*yScale;
+  
+
+  // Prognose-Linie (gelb gestrichelt)
+  const lastX = padding + dayOfYear * xScale;
+  const lastY = height - axisYOffset - current * yScale;
+
+  const predX = padding + Math.min(predictedDay,365) * xScale;
+  const predY = height - axisYOffset - goal * yScale;
+
   const predLine = document.createElementNS(svgns,"line");
-  predLine.setAttribute("x1",lastX); predLine.setAttribute("y1",lastY);
-  predLine.setAttribute("x2",predX); predLine.setAttribute("y2",predY);
-  predLine.setAttribute("stroke","#FFD700"); predLine.setAttribute("stroke-width","2"); predLine.setAttribute("stroke-dasharray","5,5");
+
+  predLine.setAttribute("x1", lastX);
+  predLine.setAttribute("y1", lastY);
+  predLine.setAttribute("x2", predX);
+  predLine.setAttribute("y2", predY);
+
+  predLine.setAttribute("stroke","#FFD700");
+  predLine.setAttribute("stroke-width","2");
+  predLine.setAttribute("stroke-dasharray","5,5");
+
   svg.appendChild(predLine);
 
   container.appendChild(svg);
 }
+
 
 loadDataAndRender();
