@@ -44,6 +44,7 @@ p {
 .buechergilde-placeholder,
 .originalsprache-placeholder, 
 .queer-placeholder, 
+.poc-placeholder, 
 .schinken-placeholder, 
 .abc-placeholder,
 .indie-placeholder {
@@ -70,6 +71,7 @@ p {
 .grid-thumb .buechergilde-carousel,
 .grid-thumb .originalsprache-carousel,
 .grid-thumb .queer-carousel,
+.grid-thumb .poc-carousel,
 .grid-thumb .schinken-carousel,
 .grid-thumb .indie-carousel,
 .grid-thumb .abc-carousel {
@@ -82,6 +84,7 @@ p {
 .grid-thumb .buechergilde-carousel-track,
 .grid-thumb .originalsprache-carousel-track,
 .grid-thumb .queer-carousel-track,
+.grid-thumb .poc-carousel-track,
 .grid-thumb .schinken-carousel-track,
 .grid-thumb .indie-carousel-track,
 .grid-thumb .abc-carousel-track {
@@ -93,6 +96,7 @@ p {
 .grid-thumb .buechergilde-carousel-slide,   
 .grid-thumb .originalsprache-carousel-slide, 
 .grid-thumb .queer-carousel-slide,
+.grid-thumb .poc-carousel-slide,
 .grid-thumb .schinken-carousel-slide,
 .grid-thumb .indie-carousel-slide,
 .grid-thumb .abc-carousel-slide {
@@ -103,6 +107,7 @@ p {
 .buechergilde img,
 .originalsprache img,
 .queer img, 
+.poc img, 
 .schinken img, 
 .indie img, 
 .abc-carousel img {
@@ -117,6 +122,7 @@ p {
 .grid-thumb .buechergilde-card,
 .grid-thumb .covers,
 .grid-thumb .abc-card,
+.grid-thumb .poc-card,
 .grid-thumb .queer-card,
 .grid-thumb .schinken-card,
 .grid-thumb .indie-card,
@@ -132,6 +138,7 @@ p {
 .buechergilde-card img,
 .grid-thumb .covers img,
 .queer-card img,
+.poc-card img,
 .schinken-card img,
 .indie-card img,
 .originalsprache-card img,
@@ -177,6 +184,7 @@ p {
 .ziele-container:hover,
 .card:hover,
 .queer-card:hover,
+.poc-card:hover,
 .schinken-card:hover,
 .indie-card:hover,
 .originalsprache-card:hover,
@@ -324,6 +332,7 @@ p {
 /* ABC Challenge & Grid */
 .buechergilde-challenge,
 .queer-challenge,
+.poc-challenge,
 .schinken-challenge,
 .indie-challenge,
 .originalsprache-challenge,
@@ -334,6 +343,7 @@ p {
 
 .buechergilde-grid,
 .queer-grid,
+.poc-grid,
 .schinken-grid,
 .indie-grid,
 .originalsprache-grid,
@@ -346,6 +356,7 @@ p {
 /* Carousel Navigation */
 .buechergilde-carousel-nav,
 .queer-carousel-nav,
+.poc-carousel-nav,
 .schinken-carousel-nav,
 .indie-carousel-nav,
 .originalsprache-carousel-nav, 
@@ -357,6 +368,7 @@ p {
 
 .buechergilde-dot,  
 .queer-dot,
+.poc-dot,
 .schinken-dot,
 .indie-dot,
 .originalsprache-dot, 
@@ -376,6 +388,7 @@ p {
 
 .buechergilde-dot.active,   
 .queer-dot.active,
+.poc-dot.active,
 .schinken-dot.active,
 .indie-dot.active,
 .originalsprache-dot.active, 
@@ -394,6 +407,7 @@ p {
 
     .buechergilde-placeholder,
     .queer-placeholder,
+    .poc-placeholder,
     .schinken-placeholder,
     .indie-placeholder,
     .originalsprache-placeholder,
