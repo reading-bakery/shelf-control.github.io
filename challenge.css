@@ -470,18 +470,21 @@ p {
 
 /* Responsive */
 @media (max-width: 740px) {
-    #books-graph svg,
-    #pages-graph svg,
-    #minutes-graph svg {
-    display: block;
-    margin-left: -30px; /* verschiebt den Graphen nach links */
-    }
-
     #books-graph,
     #pages-graph,
     #minutes-graph {
-    width: 85%;
-    height: 180px; /* mindestens Höhe für den Graphen */
+        width: 90%;       /* kleiner als vorher 85% */
+        max-width: 320px; /* maximale Breite */
+        margin: 0 auto;   /* zentriert */
+        height: 180px;
+    }
+
+    #books-graph svg,
+    #pages-graph svg,
+    #minutes-graph svg {
+        display: block;
+        width: 100%;      /* SVG passt sich Containerbreite an */
+        margin-left: 0;   /* keine Verschiebung mehr */
     }
 
     
