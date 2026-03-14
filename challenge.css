@@ -453,20 +453,36 @@ p {
   margin-bottom: 30px;
 }
 
+#books-graph,
+#pages-graph,
+#minutes-graph {
+  display: flex;
+  justify-content: center; /* Schiebt das SVG in die Mitte */
+  align-items: flex-end;    /* Setzt die Graphen auf die Grundlinie */
+  min-height: 200px;       /* WICHTIG: Genug Platz für das 220px SVG + etwas Puffer */
+  margin-bottom: 5px;
+
+}
+
+
+#books-graph {
+    margin-left: 50px;
+}
+
+#minutes-graph {
+    margin-right: 50px;
+}
+
+
+
 #books-graph svg,
 #pages-graph svg,
 #minutes-graph svg {
   display: block;
-  margin-left: -30px; /* verschiebt den Graphen nach links */
+  /* Verhindert, dass das SVG kleiner skaliert als es im JS definiert ist */
+  min-width: 350px; 
+  min-height: 220px;
 }
-#books-graph,
-#pages-graph,
-#minutes-graph {
-  width: 100%;
-  height: 180px; /* mindestens Höhe für den Graphen */
-}
-
-
 
 /* Responsive */
 @media (max-width: 740px) {
