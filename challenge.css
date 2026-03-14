@@ -480,7 +480,7 @@ p {
     #books-graph,
     #pages-graph,
     #minutes-graph {
-    width: auto;
+    width: 85%;
     height: 180px; /* mindestens Höhe für den Graphen */
     }
 
