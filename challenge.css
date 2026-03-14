@@ -457,6 +457,7 @@ p {
 #pages-graph svg,
 #minutes-graph svg {
   display: block;
+  margin-left: -30px; /* verschiebt den Graphen nach links */
 }
 #books-graph,
 #pages-graph,

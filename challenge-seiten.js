@@ -60,7 +60,7 @@
     const percent = ((current / goal) * 100).toFixed(1);
     const deltaText = delta === 0 ? "Genau im Plan!"
                      : delta > 0 ? `+${delta} Vorsprung`
-                     : `-${Math.abs(delta)} Rückstand`;
+                     : `-${Math.abs(delta)}  Rückstand`;
     const deltaColor = delta === 0 ? "white" : delta > 0 ? "#00FF00" : "#FF4500";
 
     const container = document.getElementById(TARGET_DIV_ID);
