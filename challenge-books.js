@@ -175,72 +175,90 @@ function renderLinearGraph(dayOfYear, current, goal, avgPerDay, predictedDay) {
 
   // X-Achsenbeschriftung (unten)
   const xLabel = document.createElementNS(svgns, "text");
-  xLabel.setAttribute("x", width / 1.2); // horizontal positioniert
-  xLabel.setAttribute("y", height - axisYOffset + 20); // unterhalb der Achse
+  xLabel.setAttribute("x", width / 1.2);
+  xLabel.setAttribute("y", height - axisYOffset + 20);
   xLabel.setAttribute("fill", "white");
   xLabel.setAttribute("font-size", "13");
   xLabel.setAttribute("font-family", "Dosis, sans-serif");
-  xLabel.setAttribute("text-anchor", "middle"); // zentriert
+  xLabel.setAttribute("text-anchor", "middle");
   xLabel.textContent = "Monat";
   svg.appendChild(xLabel);
 
-  // Y-Achsen-Beschriftung (vertikal links, etwas nach unten verschoben)
+  // Y-Achsenbeschriftung (vertikal links, etwas nach unten verschoben)
   const yLabel = document.createElementNS(svgns, "text");
-  yLabel.setAttribute("x", padding - 20); // links von der Achse
-  yLabel.setAttribute("y", padding + 20); // leicht nach unten verschoben
+  yLabel.setAttribute("x", padding - 20);
+  yLabel.setAttribute("y", padding + 20);
   yLabel.setAttribute("fill", "white");
   yLabel.setAttribute("font-size", "13");
   yLabel.setAttribute("font-family", "Dosis, sans-serif");
-  yLabel.setAttribute("text-anchor", "start"); // Startpunkt ist links/oben
-  yLabel.setAttribute("transform", `rotate(-90 ${padding - 10} ${padding + 20})`); // hochkant
+  yLabel.setAttribute("text-anchor", "start");
+  yLabel.setAttribute("transform", `rotate(-90 ${padding - 10} ${padding + 20})`);
   yLabel.textContent = "Bücher";
   svg.appendChild(yLabel);
 
-
-
-  // Fortschrittslinie (grün)
-  const line = document.createElementNS(svgns,"polyline");
-  const points = [];
-
+  // -----------------------------
+  // Gefüllter Bereich unter der Linie (bisheriger Fortschritt)
+  // -----------------------------
+  const fillPoints = [`${padding},${height - axisYOffset}`]; // Start unten links
   for(let i = 0; i <= dayOfYear; i++){
-
     const x = padding + i * xScale;
     const y = height - axisYOffset - avgPerDay * i * yScale;
-
-    points.push(`${x},${y}`);
+    fillPoints.push(`${x},${y}`);
   }
+  fillPoints.push(`${padding + dayOfYear * xScale},${height - axisYOffset}`); // Boden unten am letzten Punkt
+  const fillPolygon = document.createElementNS(svgns, "polygon");
+  fillPolygon.setAttribute("points", fillPoints.join(" "));
+  fillPolygon.setAttribute("fill", "rgba(146,35,11,0.3)"); // halbtransparent passend zur Linie
+  svg.appendChild(fillPolygon);
 
-  line.setAttribute("points", points.join(" "));
-  line.setAttribute("fill","none");
-  line.setAttribute("stroke","#92230bff");
-  line.setAttribute("stroke-width","2");
-
-  svg.appendChild(line);
-
-  
-
-  // Prognose-Linie (gelb gestrichelt)
+  // -----------------------------
+  // Gefüllter Prognose-Bereich
+  // -----------------------------
   const lastX = padding + dayOfYear * xScale;
   const lastY = height - axisYOffset - current * yScale;
-
   const predX = padding + Math.min(predictedDay,365) * xScale;
   const predY = height - axisYOffset - goal * yScale;
 
-  const predLine = document.createElementNS(svgns,"line");
+  const predFillPoints = [
+    `${lastX},${height - axisYOffset}`, // Boden an Startpunkt
+    `${lastX},${lastY}`,                 // Start der Prognose-Linie
+    `${predX},${predY}`,                 // Ende der Prognose-Linie
+    `${predX},${height - axisYOffset}`   // Boden am Ende
+  ];
 
+  const predFill = document.createElementNS(svgns, "polygon");
+  predFill.setAttribute("points", predFillPoints.join(" "));
+  predFill.setAttribute("fill", "rgba(255,127,80,0.2)"); // halbtransparentes Orange
+  svg.appendChild(predFill);
+
+  // Fortschrittslinie (dunkelrot)
+  const linePoints = [];
+  for(let i = 0; i <= dayOfYear; i++){
+    const x = padding + i * xScale;
+    const y = height - axisYOffset - avgPerDay * i * yScale;
+    linePoints.push(`${x},${y}`);
+  }
+  const line = document.createElementNS(svgns,"polyline");
+  line.setAttribute("points", linePoints.join(" "));
+  line.setAttribute("fill","none");
+  line.setAttribute("stroke","#92230bff");
+  line.setAttribute("stroke-width","2");
+  svg.appendChild(line);
+
+  // Prognose-Linie (gelb gestrichelt)
+  const predLine = document.createElementNS(svgns,"line");
   predLine.setAttribute("x1", lastX);
   predLine.setAttribute("y1", lastY);
   predLine.setAttribute("x2", predX);
   predLine.setAttribute("y2", predY);
-
   predLine.setAttribute("stroke","#ff7f50");
   predLine.setAttribute("stroke-width","2");
   predLine.setAttribute("stroke-dasharray","5,5");
-
   svg.appendChild(predLine);
 
   container.appendChild(svg);
 }
+
 
 
 loadDataAndRender();
