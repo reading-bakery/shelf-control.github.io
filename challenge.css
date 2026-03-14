@@ -470,6 +470,21 @@ p {
 
 /* Responsive */
 @media (max-width: 740px) {
+    #books-graph svg,
+    #pages-graph svg,
+    #minutes-graph svg {
+    display: block;
+    margin-left: -30px; /* verschiebt den Graphen nach links */
+    }
+
+    #books-graph,
+    #pages-graph,
+    #minutes-graph {
+    width: auto;
+    height: 180px; /* mindestens Höhe für den Graphen */
+    }
+
+    
     .bingo-grid {
         grid-template-columns: repeat(3, 1fr);
     }
