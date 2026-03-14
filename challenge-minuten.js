@@ -1,14 +1,14 @@
 /**
  * @name challenge-minuten.js
- * @description Lädt CSV-Daten, summiert die Minuten und zeigt den Fortschritt in einem SVG-Kreisdiagramm an.
- * Zusätzlich wird angezeigt, ob man im Plan liegt oder Vorsprung/Rückstand hat.
+ * @description CSV-Daten aus Spalte C summieren, Kreisdiagramm und linearer Graph mit Fokus auf Minuten/Monat.
  */
 (function() {
   'use strict';
 
   const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=62129941&single=true&output=csv";
-  const GOAL = 15000; // Ziel-Minuten
-  const TARGET_DIV_ID = 'minutes-circle';
+  const GOAL = 15000;
+  const TARGET_CIRCLE_ID = 'minutes-circle';
+  const TARGET_GRAPH_ID = 'minutes-graph';
 
   async function loadDataAndRender() {
     try {
@@ -20,157 +20,141 @@
       }
 
       const response = await fetch(CSV_URL);
-      if (!response.ok) throw new Error("CSV konnte nicht geladen werden");
-
+      if (!response.ok) throw new Error("CSV Fehler");
       const csvText = await response.text();
 
-      const results = Papa.parse(csvText, {
-        header: true,
-        skipEmptyLines: true,
-        dynamicTyping: true
-      });
+      const results = Papa.parse(csvText, { header: true, skipEmptyLines: true, dynamicTyping: true });
+      const totalMinutes = results.data.reduce((sum, row) => {
+        const keys = Object.keys(row);
+        return sum + (parseInt(row[keys[2]], 10) || 0);
+      }, 0);
 
-      if (!results.data || results.data.length === 0) throw new Error("Keine Daten in CSV");
+      const today = new Date();
+      const startOfYear = new Date(today.getFullYear(), 0, 1);
+      const dayOfYear = Math.floor((today - startOfYear)/(1000*60*60*24)) + 1;
+      const avgPerDay = totalMinutes / dayOfYear;
+      const predictedDay = Math.ceil(GOAL / avgPerDay);
 
-      // Spalte "Minuten" flexibel finden
-      const minutenSpalte = Object.keys(results.data[0]).find(key => key.trim().toLowerCase() === "minuten");
-      if (!minutenSpalte) throw new Error("Spalte 'Minuten' nicht gefunden");
-
-      const totalMinutesRead = results.data.reduce((sum, row) => sum + (row[minutenSpalte] || 0), 0);
-
-      renderProgressCircle(totalMinutesRead, GOAL);
+      renderProgressCircle(totalMinutes, GOAL, dayOfYear);
+      renderLinearGraph(dayOfYear, totalMinutes, GOAL, avgPerDay, predictedDay);
 
     } catch (error) {
-      console.error("Fehler beim Laden oder Verarbeiten der Daten:", error);
-      const container = document.getElementById(TARGET_DIV_ID);
-      if (container) container.textContent = "Fehler beim Laden der Daten";
+      console.error(error);
     }
   }
 
-  function renderProgressCircle(current, goal) {
-    const today = new Date();
-    const startOfYear = new Date(today.getFullYear(), 0, 1);
-    const dayOfYear = Math.floor((today - startOfYear) / (1000*60*60*24)) + 1;
-    const daysInYear = 365;
-
-    const targetAtThisTime = Math.round(goal * (dayOfYear / daysInYear));
-    const delta = current - targetAtThisTime;
-
+  function renderProgressCircle(current, goal, dayOfYear) {
     const percent = ((current / goal) * 100).toFixed(1);
-    const deltaText = delta === 0 ? "Genau im Plan!"
-                     : delta > 0 ? `+${delta} Vorsprung`
-                     : `-${Math.abs(delta)} Rückstand`;
-    const deltaColor = delta === 0 ? "white" : delta > 0 ? "#00FF00" : "#FF4500";
-
-    const container = document.getElementById(TARGET_DIV_ID);
+    const container = document.getElementById(TARGET_CIRCLE_ID);
     if (!container) return;
     container.innerHTML = "";
 
-    const size = 200;
-    const strokeWidth = 30;
-    const radius = (size - strokeWidth) / 2;
-    const circumference = 2 * Math.PI * radius;
-    const offset = circumference * (1 - Math.min(percent, 100) / 100);
+    const targetNow = Math.round(goal * (dayOfYear / 365));
+    const delta = current - targetNow;
+    const deltaColor = delta >= 0 ? "#13c913" : "#FF4500";
+    const deltaText = delta >= 0 ? `+${delta} Min.` : `${delta} Min.`;
 
+    const size = 220, stroke = 30, radius = (size - stroke)/2, circ = 2 * Math.PI * radius;
     const svgns = "http://www.w3.org/2000/svg";
-    const svg = document.createElementNS(svgns, "svg");
-    svg.setAttribute("width", size);
-    svg.setAttribute("height", size);
+    const svg = document.createElementNS(svgns,"svg");
+    svg.setAttribute("width", size); svg.setAttribute("height", size);
     svg.style.transform = "rotate(-90deg)";
-    svg.style.filter = "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2))";
 
-    // Hintergrundkreis
-    const bgCircle = document.createElementNS(svgns, "circle");
-    bgCircle.setAttribute("cx", size/2);
-    bgCircle.setAttribute("cy", size/2);
-    bgCircle.setAttribute("r", radius);
-    bgCircle.setAttribute("stroke", "#353434ff");
-    bgCircle.setAttribute("stroke-width", strokeWidth);
-    bgCircle.setAttribute("fill", "none");
+    const bg = document.createElementNS(svgns,"circle");
+    bg.setAttribute("cx", size/2); bg.setAttribute("cy", size/2); bg.setAttribute("r", radius);
+    bg.setAttribute("stroke", "#353434"); bg.setAttribute("stroke-width", stroke); bg.setAttribute("fill","none");
+    svg.appendChild(bg);
 
-    // Farbverlauf definieren
-    const defs = document.createElementNS(svgns, "defs");
-    const linearGradient = document.createElementNS(svgns, "linearGradient");
-    linearGradient.setAttribute("id", "blueGradient");
-    linearGradient.setAttribute("x1", "0%");
-    linearGradient.setAttribute("y1", "0%");
-    linearGradient.setAttribute("x2", "100%");
-    linearGradient.setAttribute("y2", "0%");
+    const progress = document.createElementNS(svgns,"circle");
+    progress.setAttribute("cx", size/2); progress.setAttribute("cy", size/2); progress.setAttribute("r", radius);
+    progress.setAttribute("stroke", "#8ad0ff"); progress.setAttribute("stroke-width", stroke);
+    progress.setAttribute("fill","none"); progress.setAttribute("stroke-dasharray", circ);
+    progress.setAttribute("stroke-dashoffset", circ * (1 - Math.min(percent,100)/100));
+    progress.setAttribute("stroke-linecap","round");
+    svg.appendChild(progress);
 
-    const stop1 = document.createElementNS(svgns, "stop");
-    stop1.setAttribute("offset", "0%");
-    stop1.setAttribute("stop-color", "#023557ff");
+    const g = document.createElementNS(svgns,"g");
+    g.setAttribute("transform", `translate(${size/2}, ${size/2}) rotate(90)`);
+    const txt = (y, f, c, t) => {
+      const el = document.createElementNS(svgns,"text");
+      el.setAttribute("text-anchor","middle"); el.setAttribute("y", y);
+      el.setAttribute("font-size", f); el.setAttribute("fill", c);
+      el.setAttribute("font-family","Dosis, sans-serif"); el.textContent = t;
+      return el;
+    };
+    g.append(txt("-15","18","white",`${current} / ${goal}`), txt("5","12","white","Minuten gesamt"), txt("30","22","white",`${percent}%`), txt("50","14",deltaColor, deltaText));
+    svg.appendChild(g); container.appendChild(svg);
+  }
 
-    const stop2 = document.createElementNS(svgns, "stop");
-    stop2.setAttribute("offset", "100%");
-    stop2.setAttribute("stop-color", "#8ad0ff");
+  function renderLinearGraph(dayOfYear, current, goal, avgPerDay, predictedDay) {
+    const container = document.getElementById(TARGET_GRAPH_ID);
+    if (!container) return;
+    container.innerHTML = "";
 
-    linearGradient.appendChild(stop1);
-    linearGradient.appendChild(stop2);
-    defs.appendChild(linearGradient);
-    svg.appendChild(defs);
+    const width = 350, height = 220, pad = 30, off = 50, svgns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(svgns,"svg");
+    svg.setAttribute("width", width); svg.setAttribute("height", height);
 
-    // Fortschrittskreis
-    const progressCircle = document.createElementNS(svgns, "circle");
-    progressCircle.setAttribute("cx", size/2);
-    progressCircle.setAttribute("cy", size/2);
-    progressCircle.setAttribute("r", radius);
-    progressCircle.setAttribute("stroke", "url(#blueGradient)");
-    progressCircle.setAttribute("stroke-width", strokeWidth);
-    progressCircle.setAttribute("fill", "none");
-    progressCircle.setAttribute("stroke-dasharray", circumference);
-    progressCircle.setAttribute("stroke-dashoffset", offset);
-    progressCircle.setAttribute("stroke-linecap", "round");
-    progressCircle.style.transition = "stroke-dashoffset 1s ease";
+    const maxY = Math.max(current, goal);
+    const xS = (width - 2*pad) / 365;
+    const yS = (height - pad - off) / maxY;
 
-    // Textgruppe
-    const textGroup = document.createElementNS(svgns, "g");
-    textGroup.setAttribute("transform", `translate(${size/2}, ${size/2}) rotate(90)`);
+    // Achsen
+    const line = (x1,y1,x2,y2) => {
+      const l = document.createElementNS(svgns,"line");
+      l.setAttribute("x1",x1); l.setAttribute("y1",y1); l.setAttribute("x2",x2); l.setAttribute("y2",y2);
+      l.setAttribute("stroke","white"); return l;
+    };
+    svg.append(line(pad, height-off, width-pad, height-off), line(pad, pad, pad, height-off));
 
-    const textLine1 = document.createElementNS(svgns, "text");
-    textLine1.setAttribute("text-anchor", "middle");
-    textLine1.setAttribute("y", "-15");
-    textLine1.setAttribute("font-size", "18");
-    textLine1.setAttribute("font-family", "Dosis, sans-serif");
-    textLine1.setAttribute("fill", "white");
-    textLine1.textContent = `${current.toLocaleString('de-DE')} von ${goal.toLocaleString('de-DE')}`;
+    // LABELS (Minuten & Monat)
+    const lbl = (x, y, t, anchor, rot = 0) => {
+      const el = document.createElementNS(svgns,"text");
+      el.setAttribute("x",x); el.setAttribute("y",y); el.setAttribute("fill","white");
+      el.setAttribute("font-size","13"); el.setAttribute("font-family","Dosis");
+      el.setAttribute("text-anchor", anchor);
+      if(rot) el.setAttribute("transform", `rotate(${rot} ${x} ${y})`);
+      el.textContent = t; return el;
+    };
+    svg.append(lbl(width-pad, height-off+15, "Minuten", "end"));
+    svg.append(lbl(15, pad+20, "Monat", "middle", -90));
 
-    const textLine2 = document.createElementNS(svgns, "text");
-    textLine2.setAttribute("text-anchor", "middle");
-    textLine2.setAttribute("y", "5");
-    textLine2.setAttribute("font-size", "12");
-    textLine2.setAttribute("font-family", "Dosis, sans-serif");
-    textLine2.setAttribute("fill", "white");
-    textLine2.textContent = `Minuten gehört.`;
+    // Flächen & Linien (Logik bleibt für die Kurve erhalten)
+    const pts = [];
+    for(let i=0; i<=dayOfYear; i++) pts.push(`${pad + i*xS},${height - off - (avgPerDay*i)*yS}`);
+    
+    const poly = document.createElementNS(svgns,"polyline");
+    poly.setAttribute("points", pts.join(" "));
+    poly.setAttribute("fill","none"); poly.setAttribute("stroke","#023557ff"); poly.setAttribute("stroke-width","2");
+    svg.appendChild(poly);
 
-    const textPercent = document.createElementNS(svgns, "text");
-    textPercent.setAttribute("text-anchor", "middle");
-    textPercent.setAttribute("y", "30");
-    textPercent.setAttribute("font-size", "22");
-    textPercent.setAttribute("font-family", "Dosis, sans-serif");
-    textPercent.setAttribute("fill", "white");
-    textPercent.textContent = `${percent}%`;
+    // Tooltip
+    const tip = document.createElementNS(svgns, "text");
+    tip.setAttribute("fill", "white"); tip.setAttribute("font-size", "12"); tip.setAttribute("font-family", "Dosis");
+    tip.setAttribute("text-anchor", "middle"); tip.setAttribute("visibility", "hidden");
+    svg.appendChild(tip);
 
-    const textDelta = document.createElementNS(svgns, "text");
-    textDelta.setAttribute("text-anchor", "middle");
-    textDelta.setAttribute("y", "50");
-    textDelta.setAttribute("font-size", "14");
-    textDelta.setAttribute("font-family", "Dosis, sans-serif");
-    textDelta.setAttribute("fill", deltaColor);
-    textDelta.textContent = deltaText;
+    const overlay = document.createElementNS(svgns, "rect");
+    overlay.setAttribute("x", pad); overlay.setAttribute("y", pad);
+    overlay.setAttribute("width", width-2*pad); overlay.setAttribute("height", height-pad-off);
+    overlay.setAttribute("fill", "transparent");
+    svg.appendChild(overlay);
 
-    textGroup.appendChild(textLine1);
-    textGroup.appendChild(textLine2);
-    textGroup.appendChild(textPercent);
-    textGroup.appendChild(textDelta);
+    overlay.addEventListener("mousemove", (e) => {
+      const r = svg.getBoundingClientRect();
+      let d = Math.round((e.clientX - r.left - pad) / xS);
+      d = Math.max(0, Math.min(d, 365));
+      const val = d <= dayOfYear ? avgPerDay * d : current + ((goal-current)/(predictedDay-dayOfYear))*(d-dayOfYear);
+      const m = ["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"][Math.min(11, Math.floor(d/30.5))];
 
-    svg.appendChild(bgCircle);
-    svg.appendChild(progressCircle);
-    svg.appendChild(textGroup);
+      tip.innerHTML = `<tspan x="${pad + d*xS}" dy="0">${m}</tspan><tspan x="${pad + d*xS}" dy="1.2em">${Math.round(val)} Min.</tspan>`;
+      tip.setAttribute("x", pad + d*xS); tip.setAttribute("y", height - off - Math.min(maxY, val)*yS - 25);
+      tip.setAttribute("visibility", "visible");
+    });
+    overlay.addEventListener("mouseleave", () => tip.setAttribute("visibility", "hidden"));
 
     container.appendChild(svg);
   }
 
-  document.addEventListener('DOMContentLoaded', loadDataAndRender);
-
+  loadDataAndRender();
 })();
