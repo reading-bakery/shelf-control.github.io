@@ -1,3 +1,4 @@
+// challenge-indie.js
 document.addEventListener("DOMContentLoaded", () => {
     const csvUrl =
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=855937535&single=true&output=csv";
@@ -45,7 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const back = document.createElement("div");
         back.classList.add("indie-card-back");
 
-        const hasCover = Boolean(item.Cover);
+        // Prüfen, ob ein Cover-Link existiert und nicht leer ist
+        const hasCover = Boolean(item.Cover && item.Cover.trim() !== "");
 
         /* ---------- Vorder- / Rückseite ---------- */
         if (hasCover) {
@@ -54,31 +56,32 @@ document.addEventListener("DOMContentLoaded", () => {
             front.innerHTML = `<div class="indie-placeholder"></div>`;
         }
 
-
         back.innerHTML = `
             <div class="indie-verlag">
                 <br>${item.Verlag || "–"}
             </div>
         `;
 
-        /* ---------- Nummer ---------- */
-        const letterContainer = document.createElement("div");
-        letterContainer.classList.add("indie-letter-container");
-
-        [...item.Nummer].forEach(letter => {
-            const span = document.createElement("span");
-            span.classList.add("indie-letter");
-            span.textContent = letter;
-            letterContainer.appendChild(span);
-        });
-
         inner.appendChild(front);
         inner.appendChild(back);
         card.appendChild(inner);
-        card.appendChild(letterContainer);
 
-        /* ---------- Flip (nur wenn Cover existiert) ---------- */
+        /* ---------- Nummer (NUR WENN COVER EXISTIERT) ---------- */
         if (hasCover) {
+            const letterContainer = document.createElement("div");
+            letterContainer.classList.add("indie-letter-container");
+
+            const numText = String(item.Nummer || "");
+            [...numText].forEach(letter => {
+                const span = document.createElement("span");
+                span.classList.add("indie-letter");
+                span.textContent = letter;
+                letterContainer.appendChild(span);
+            });
+
+            card.appendChild(letterContainer);
+
+            /* ---------- Flip-Event (NUR WENN COVER EXISTIERT) ---------- */
             card.addEventListener("click", () => {
                 card.classList.toggle("is-flipped");
             });

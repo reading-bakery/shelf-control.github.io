@@ -1,4 +1,4 @@
-// challenge-abc.js
+// challenge-queer.js
 document.addEventListener("DOMContentLoaded", () => {
     const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1307721425&single=true&output=csv";
     const container = document.querySelector(".queer-challenge");
@@ -34,25 +34,30 @@ document.addEventListener("DOMContentLoaded", () => {
         const div = document.createElement("div");
         div.classList.add("queer-card");
 
-        let content;
-        if (item.Cover) {
-            content = `<img src="${item.Cover}" alt="${item.Buch || ''}">`;
+        const hasCover = Boolean(item.Cover && item.Cover.trim() !== "");
+
+        // Cover oder Placeholder setzen
+        if (hasCover) {
+            div.innerHTML = `<img src="${item.Cover}" alt="${item.Buch || ''}">`;
         } else {
-            content = `<div class="queer-placeholder"></div>`;
+            div.innerHTML = `<div class="queer-placeholder"></div>`;
         }
 
-        // Buchstaben in einzelne <span> aufsplitten
-        const letterContainer = document.createElement("div");
-        letterContainer.classList.add("queer-letter-container");
-        [...item.Nummer].forEach(letter => {
-            const span = document.createElement("span");
-            span.classList.add("queer-letter");
-            span.textContent = letter;
-            letterContainer.appendChild(span);
-        });
-
-        div.innerHTML = content;
-        div.appendChild(letterContainer);
+        // Buchstaben NUR hinzufügen, wenn ein Cover existiert
+        if (hasCover) {
+            const letterContainer = document.createElement("div");
+            letterContainer.classList.add("queer-letter-container");
+            
+            const numText = String(item.Nummer || "");
+            [...numText].forEach(letter => {
+                const span = document.createElement("span");
+                span.classList.add("queer-letter");
+                span.textContent = letter;
+                letterContainer.appendChild(span);
+            });
+            
+            div.appendChild(letterContainer);
+        }
 
         return div;
     }
@@ -64,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const carousel = document.createElement("div");
         carousel.classList.add("queer-carousel");
 
-        // Carousel Navigation direkt unter Überschrift
+        // Carousel Navigation
         const nav = document.createElement("div");
         nav.classList.add("queer-carousel-nav");
         for (let i = 0; i < totalSlides; i++) {
@@ -74,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dot.addEventListener("click", () => goToSlide(i));
             nav.appendChild(dot);
         }
-        container.appendChild(nav); // Dots vor Track hinzufügen
+        container.appendChild(nav);
 
         const track = document.createElement("div");
         track.classList.add("queer-carousel-track");
@@ -113,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
             nav.querySelectorAll(".queer-dot").forEach((d, i) => d.classList.toggle("active", i === index));
         }
 
-        // Touch-Events für Swipe
+        // Swipe-Events
         track.addEventListener("touchstart", e => {
             startX = e.touches[0].clientX;
             isDragging = true;
@@ -137,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (diff > 50 && currentSlide > 0) {
                 goToSlide(currentSlide - 1);
             } else {
-                goToSlide(currentSlide); // zurück zur aktuellen Slide
+                goToSlide(currentSlide);
             }
         });
     }

@@ -56,14 +56,15 @@ p {
 
 /* Flaggen auf der Karte */
 .weltreise-flagge-img {
-    width: auto;          /* feste Breite für alle Flaggen */
-    height: auto;          /* Höhe automatisch proportional */
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
-    cursor: pointer;
+    width: 100%;            /* Am Handy: Füllt die (schmalere) Spalte voll aus */
+    max-width: 140px;       /* Am Desktop: Wird nie breiter als 140px */
+    height: auto;           /* Höhe wächst proportional mit */
+    aspect-ratio: 3 / 2;    /* OPTIONAL: Erzwingt gleiches Format für alle */
+    object-fit: cover;      /* Verhindert Verzerrung bei ungleichen Originalen */
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
 }
-
 /* Hover-Effekt: Zoom + Glow */
 .weltreise-flagge-img:hover {
     transform: scale(1.05) rotate(-4deg);
@@ -75,7 +76,7 @@ p {
 
 
 
-.buechergilde-placeholder,
+/* .buechergilde-placeholder,
 .originalsprache-placeholder, 
 .queer-placeholder, 
 .poc-placeholder, 
@@ -83,23 +84,36 @@ p {
 .abc-placeholder,
 .indie-placeholder {
     display: inline-block;
-    font-size: 1.8rem;            /* größere Schrift */
-    color: #ff7256;               /* auffällige Farbe */
+    font-size: 1.8rem;
+    color: #ff7256;
     font-weight: bold;
     text-align: center;
     width: 100%;
     height: 100px;
-    border: 1px dotted #ff7256;   /* optionaler Rahmen */
+    border: 1px dotted #ff7256;
     border-radius: 10px;
-    background-color: rgba(255, 114, 86, 0.1); /* leichtes Highlight */
+    background-color: rgba(255, 114, 86, 0.1);
     box-shadow: 0 4px 10px rgba(255, 114, 86, 0.3);
     transition: all 0.3s ease;
     cursor: pointer;
 }
+*/
 
-
-
-/* Carousel innerhalb des Grids über alle Spalten */
+.abc-placeholder {
+    display: inline-block;
+    font-size: 1.8rem;
+    color: #ff7256;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    height: 100px;
+    border: 1px dotted #ff7256;
+    border-radius: 10px;
+    background-color: rgba(255, 114, 86, 0.1);
+    box-shadow: 0 4px 10px rgba(255, 114, 86, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
 
 
 .grid-thumb .buechergilde-carousel,
@@ -377,6 +391,10 @@ p {
 .abc-challenge {
     width: 100%;
     grid-column: 1/-1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important; /* Startet immer ganz oben */
+    align-items: center; /* Zentriert das Grid als Ganzes auf der Seite */
 }
 
 .buechergilde-grid,
@@ -390,6 +408,9 @@ p {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0.5rem;
+    width: 100%;
+    align-items: start; /* Richtet Karten innerhalb einer Zeile am oberen Rand aus */
+    justify-items: start; /* Richtet Karten innerhalb der Spalte links aus */
 }
 
 /* Carousel Navigation */
@@ -453,6 +474,16 @@ p {
   margin-bottom: 30px;
 }
 
+/* Spezifisch für die Queere-Bücher-Sektion */
+.queer-challenge {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important; /* Inhalt nach oben schieben */
+    align-items: center;
+    vertical-align: top;
+}
+
+
 #books-graph,
 #pages-graph,
 #minutes-graph {
@@ -508,7 +539,7 @@ p {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .buechergilde-placeholder,
+/* .buechergilde-placeholder,
     .queer-placeholder,
     .poc-placeholder,
     .schinken-placeholder,
@@ -516,20 +547,36 @@ p {
     .originalsprache-placeholder,
     .abc-placeholder {
         display: inline-block;
-        font-size: 1.8rem;            /* größere Schrift */
-        color: #ff7256;               /* auffällige Farbe */
+        font-size: 1.8rem;
+        color: #ff7256;
         font-weight: bold;
         text-align: center;
         width: 100%;
         height: 75px;
-        border: 2px dotted #ff7256;   /* optionaler Rahmen */
+        border: 2px dotted #ff7256;
         border-radius: 10px;
-        background-color: rgba(255, 114, 86, 0.1); /* leichtes Highlight */
+        background-color: rgba(255, 114, 86, 0.1);
         box-shadow: 0 4px 10px rgba(255, 114, 86, 0.3);
         transition: all 0.3s ease;
         cursor: pointer;
     }
+*/
 
+.abc-placeholder {
+        display: inline-block;
+        font-size: 1.8rem;
+        color: #ff7256;
+        font-weight: bold;
+        text-align: center;
+        width: 100%;
+        height: 75px;
+        border: 2px dotted #ff7256;
+        border-radius: 10px;
+        background-color: rgba(255, 114, 86, 0.1);
+        box-shadow: 0 4px 10px rgba(255, 114, 86, 0.3);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
     .schinken-card-back,
     .indie-card-back,
     .originalsprache-card-back {

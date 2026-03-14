@@ -46,12 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const back = document.createElement("div");
         back.classList.add("originalsprache-card-back");
 
-        const hasCover = Boolean(item.Cover);
+        const hasCover = Boolean(item.Cover && item.Cover.trim() !== "");
 
         /* ---------- Vorder- / Rückseite ---------- */
         if (hasCover) {
             front.innerHTML = `<img src="${item.Cover}" alt="${item.Buch || ""}">`;
         } else {
+            // Placeholder wird angezeigt, wenn kein Cover da ist
             front.innerHTML = `<div class="originalsprache-placeholder"></div>`;
         }
 
@@ -61,24 +62,27 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
-        /* ---------- Nummer ---------- */
-        const letterContainer = document.createElement("div");
-        letterContainer.classList.add("originalsprache-letter-container");
-
-        [...item.Nummer].forEach(letter => {
-            const span = document.createElement("span");
-            span.classList.add("originalsprache-letter");
-            span.textContent = letter;
-            letterContainer.appendChild(span);
-        });
-
         inner.appendChild(front);
         inner.appendChild(back);
         card.appendChild(inner);
-        card.appendChild(letterContainer);
 
-        /* ---------- Flip (nur wenn Cover existiert) ---------- */
+        /* ---------- Nummer NUR WENN COVER EXISTIERT ---------- */
         if (hasCover) {
+            const letterContainer = document.createElement("div");
+            letterContainer.classList.add("originalsprache-letter-container");
+
+            // Erstellt die einzelnen Nummer-Spans
+            const numText = String(item.Nummer || "");
+            [...numText].forEach(letter => {
+                const span = document.createElement("span");
+                span.classList.add("originalsprache-letter");
+                span.textContent = letter;
+                letterContainer.appendChild(span);
+            });
+
+            card.appendChild(letterContainer);
+            
+            /* ---------- Flip-Event (nur bei Cover) ---------- */
             card.addEventListener("click", () => {
                 card.classList.toggle("is-flipped");
             });
