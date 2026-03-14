@@ -173,6 +173,31 @@ function renderLinearGraph(dayOfYear, current, goal, avgPerDay, predictedDay) {
   axisY.setAttribute("stroke","white");
   svg.appendChild(axisY);
 
+  // X-Achsenbeschriftung (unten)
+  const xLabel = document.createElementNS(svgns, "text");
+  xLabel.setAttribute("x", width / 1.2); // horizontal positioniert
+  xLabel.setAttribute("y", height - axisYOffset + 20); // unterhalb der Achse
+  xLabel.setAttribute("fill", "white");
+  xLabel.setAttribute("font-size", "13");
+  xLabel.setAttribute("font-family", "Dosis, sans-serif");
+  xLabel.setAttribute("text-anchor", "middle"); // zentriert
+  xLabel.textContent = "Monat";
+  svg.appendChild(xLabel);
+
+  // Y-Achsen-Beschriftung (vertikal links, etwas nach unten verschoben)
+  const yLabel = document.createElementNS(svgns, "text");
+  yLabel.setAttribute("x", padding - 20); // links von der Achse
+  yLabel.setAttribute("y", padding + 20); // leicht nach unten verschoben
+  yLabel.setAttribute("fill", "white");
+  yLabel.setAttribute("font-size", "13");
+  yLabel.setAttribute("font-family", "Dosis, sans-serif");
+  yLabel.setAttribute("text-anchor", "start"); // Startpunkt ist links/oben
+  yLabel.setAttribute("transform", `rotate(-90 ${padding - 10} ${padding + 20})`); // hochkant
+  yLabel.textContent = "Bücher";
+  svg.appendChild(yLabel);
+
+
+
   // Fortschrittslinie (grün)
   const line = document.createElementNS(svgns,"polyline");
   const points = [];
@@ -187,7 +212,7 @@ function renderLinearGraph(dayOfYear, current, goal, avgPerDay, predictedDay) {
 
   line.setAttribute("points", points.join(" "));
   line.setAttribute("fill","none");
-  line.setAttribute("stroke","#00FF00");
+  line.setAttribute("stroke","#92230bff");
   line.setAttribute("stroke-width","2");
 
   svg.appendChild(line);
@@ -208,7 +233,7 @@ function renderLinearGraph(dayOfYear, current, goal, avgPerDay, predictedDay) {
   predLine.setAttribute("x2", predX);
   predLine.setAttribute("y2", predY);
 
-  predLine.setAttribute("stroke","#FFD700");
+  predLine.setAttribute("stroke","#ff7f50");
   predLine.setAttribute("stroke-width","2");
   predLine.setAttribute("stroke-dasharray","5,5");
 
