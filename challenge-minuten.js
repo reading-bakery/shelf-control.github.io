@@ -55,7 +55,7 @@
           <text y="-15" font-size="18">${current.toLocaleString()} / ${goal.toLocaleString()}</text>
           <text y="5" font-size="12">Minuten gesamt</text>
           <text y="30" font-size="22">${percent}%</text>
-          <text y="50" font-size="14" fill="${deltaColor}">${delta >= 0 ? '+'+delta : delta} Min.</text>
+          <text y="50" font-size="14" fill="${deltaColor}">${delta >= 0 ? '+'+delta : delta} Rückstand</text>
         </g>
       </svg>`;
   }
