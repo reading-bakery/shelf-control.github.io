@@ -140,12 +140,12 @@ function renderProgressCircle(current, goal, dayOfYear) {
   const container = document.getElementById('books-graph');
   container.innerHTML = "";
 
-  const width = 300;
-  const height = 200;
-  const padding = 0;
-  const axisYOffset = 50;
+    const width = 350;
+    const height = 220;
+    const padding = 30;
+    const axisYOffset = 50;
+    const svgns = "http://www.w3.org/2000/svg";
 
-  const svgns = "http://www.w3.org/2000/svg";
 
   const svg = document.createElementNS(svgns,"svg");
   svg.setAttribute("width", width);
