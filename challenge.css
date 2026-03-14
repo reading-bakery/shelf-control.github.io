@@ -209,7 +209,7 @@ p {
 
 .grid-thumb .covers svg {
     position: absolute;
-    bottom: 0px;
+    bottom: 15px;
     right: 0px;
     width: 40px;
     height: 40px;
@@ -382,6 +382,8 @@ p {
 
 /* ABC Challenge & Grid */
 .buechergilde-challenge,
+.books-challenge,
+.agatha-challenge,
 .queer-challenge,
 .weltreise-challenge,
 .poc-challenge,
@@ -524,6 +526,11 @@ p {
         max-width: 320px; /* maximale Breite */
         margin: 0 auto;   /* zentriert */
         height: 180px;
+    }
+
+    #agatha-challenge, 
+    #books-challenge {
+        margin-bottom: 15px;
     }
 
     #books-graph svg,
