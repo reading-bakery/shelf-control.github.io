@@ -43,7 +43,11 @@
     const percent = ((current / goal) * 100).toFixed(1);
     const targetNow = Math.round(goal * (dayOfYear / 365));
     const delta = current - targetNow;
-    const deltaColor = delta >= 0 ? "#13c913" : "#FF4500";
+    
+    // Deine Delta-Logik
+    const deltaText = delta === 0 ? "Genau im Plan!" : delta > 0 ? `+${delta} Vorsprung` : `-${Math.abs(delta)} Rückstand`;
+    const deltaColor = delta === 0 ? "white" : delta > 0 ? "#13c913" : "#FF4500";
+    
     const size = 220, stroke = 30, radius = 95, circ = 2 * Math.PI * radius;
 
     container.innerHTML = `
@@ -68,10 +72,10 @@
           <text y="-15" font-size="18">${current.toLocaleString()} / ${goal.toLocaleString()}</text>
           <text y="5" font-size="12">Minuten gehört.</text>
           <text y="30" font-size="22">${percent}%</text>
-          <text y="50" font-size="14" fill="${deltaColor}">${delta >= 0 ? '+' + delta : delta} Rückstand</text>
+          <text y="50" font-size="14" fill="${deltaColor}">${deltaText}</text>
         </g>
       </svg>`;
-      }
+  }
 
   function renderLinearGraph(dayOfYear, current, goal, avgPerDay, predictedDay) {
     const container = document.getElementById(TARGET_GRAPH_ID);
@@ -86,7 +90,6 @@
     const xS = (width - 2*pad) / 365;
     const yS = (height - pad - off) / maxY;
 
-    // 1. Flächen
     const fPts = [`${pad},${height-off}`];
     const lPts = [];
     for(let i=0; i<=dayOfYear; i++) {
@@ -108,7 +111,6 @@
     pFill.setAttribute("fill", "rgba(138, 208, 255, 0.1)");
     svg.appendChild(pFill);
 
-    // 2. Achsen & Labels
     const line = (x1,y1,x2,y2) => {
       const el = document.createElementNS(svgns,"line");
       el.setAttribute("x1",x1); el.setAttribute("y1",y1); el.setAttribute("x2",x2); el.setAttribute("y2",y2);
@@ -126,7 +128,6 @@
     };
     svg.append(lbl(width-pad, height-off+15, "Minuten", "end"), lbl(15, pad+20, "Monat", "middle", -90));
 
-    // 3. Linien
     const poly = document.createElementNS(svgns,"polyline");
     poly.setAttribute("points", lPts.join(" "));
     poly.setAttribute("fill","none"); poly.setAttribute("stroke","#023557ff"); poly.setAttribute("stroke-width","3");
@@ -138,7 +139,6 @@
     pLine.setAttribute("stroke","#8ad0ff"); pLine.setAttribute("stroke-width","3"); pLine.setAttribute("stroke-dasharray","8,4");
     svg.appendChild(pLine);
 
-    // 4. INTERAKTIVER TOOLTIP (Dein Code integriert)
     const tooltip = document.createElementNS(svgns, "text");
     tooltip.setAttribute("fill", "white"); tooltip.setAttribute("font-size", "12");
     tooltip.setAttribute("font-family", "Dosis, sans-serif"); tooltip.setAttribute("text-anchor", "middle");
@@ -156,7 +156,6 @@
       let d = Math.round((e.clientX - rect.left - pad) / xS);
       d = Math.max(0, Math.min(d, 365));
 
-      // Prognosewert berechnen
       let val;
       if(d <= dayOfYear) {
         val = avgPerDay * d;
@@ -169,7 +168,6 @@
       const yPos = height - off - Math.min(maxY, val) * yS;
       const monthName = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"][Math.min(11, Math.floor(d/30.5))];
 
-      // Tooltip Position & Inhalt
       tooltip.setAttribute("x", xPos);
       tooltip.setAttribute("y", yPos - 15);
       tooltip.innerHTML = "";
@@ -184,13 +182,12 @@
 
       tooltip.appendChild(line1); tooltip.appendChild(line2);
 
-      // Hintergrund-Box
       let bbox = tooltip.getBBox();
       let pR = 5;
       if(!tooltip.bg){
         tooltip.bg = document.createElementNS(svgns, "rect");
         tooltip.bg.setAttribute("rx", 8); tooltip.bg.setAttribute("ry", 8);
-        tooltip.bg.setAttribute("fill", "rgba(0,0,0,0.7)"); // Etwas dunkler für bessere Lesbarkeit
+        tooltip.bg.setAttribute("fill", "rgba(0,0,0,0.7)");
         svg.insertBefore(tooltip.bg, tooltip);
       }
       tooltip.bg.setAttribute("x", bbox.x - pR); tooltip.bg.setAttribute("y", bbox.y - pR);
