@@ -76,7 +76,7 @@
       const monthName = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"][monthIndex];
 
       tooltip.setAttribute("x", xPos);
-      tooltip.setAttribute("y", yPos - 15);
+      tooltip.setAttribute("y", yPos - 20);
       tooltip.innerHTML = "";
 
       const line1 = document.createElementNS(svgns, "tspan");
@@ -84,10 +84,13 @@
       line1.textContent = `${monthName}:`;
 
       const line2 = document.createElementNS(svgns, "tspan");
-      line2.setAttribute("x", xPos); line2.setAttribute("dy", "1.2em");
-      line2.textContent = `${Math.round(predictedValue)} Min.`;
+      line2.setAttribute("x", xPos); 
+      line2.setAttribute("dy", "1.2em");
+      // .toLocaleString('de-DE') fügt die Tausendertrennpunkte hinzu
+      line2.textContent = `${Math.round(predictedValue).toLocaleString('de-DE')} Min.`;
 
-      tooltip.appendChild(line1); tooltip.appendChild(line2);
+      tooltip.appendChild(line1); 
+      tooltip.appendChild(line2);
 
       if (!tooltip.bg) {
         const bg = document.createElementNS(svgns, "rect");
