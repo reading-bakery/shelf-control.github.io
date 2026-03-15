@@ -601,7 +601,7 @@ p {
     transition: opacity 0.3s ease, transform 0.3s ease;
     text-align: center;
     margin-top: 8px;
-    font-size: 7pt;
+    font-size: 9pt;
     font-family: 'Dosis', sans-serif; /* Passend zu deinen anderen Skripten */
     pointer-events: none; /* Verhindert Flackern, wenn man direkt auf den Text hovert */
 }
