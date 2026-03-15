@@ -72,6 +72,28 @@ p {
     filter: brightness(1.1) saturate(1.3);
 }
 
+/* Grundzustand: Name ist unsichtbar */
+.weltreise-country-name {
+    opacity: 0;
+    transform: translateY(5px); /* Optional: Kleiner Versatz für Effekt */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    text-align: center;
+    margin-top: 8px;
+    font-family: 'Dosis', sans-serif; /* Passend zu deinen anderen Skripten */
+    pointer-events: none; /* Verhindert Flackern, wenn man direkt auf den Text hovert */
+}
+
+/* Hover-Zustand: Wenn die Karte gehovert wird, zeige den Namen */
+.weltreise-card:hover .weltreise-country-name {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Optional: Flagge beim Hover leicht hervorheben oder abdunkeln */
+.weltreise-card:hover .weltreise-flagge {
+    filter: brightness(1.1);
+    transition: filter 0.3s ease;
+}
 
 
 
@@ -209,7 +231,7 @@ p {
 
 .grid-thumb .covers svg {
     position: absolute;
-    bottom: 15px;
+    bottom: 0px;
     right: 0px;
     width: 40px;
     height: 40px;
