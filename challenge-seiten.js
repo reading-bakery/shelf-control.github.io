@@ -1,6 +1,6 @@
 /**
  * @name challenge-seiten.js
- * @description CSV-Daten summieren, Kreisdiagramm und linearer Graph mit Prognose und modularer Tooltip-Funktion.
+ * @description CSV-Daten summieren, Kreisdiagramm und linearer Graph mit dynamischer Skalierung, Pokal-Marker und Ziel-Fläche.
  */
 (function() {
   'use strict';
@@ -37,72 +37,14 @@
 
       const avgPerDay = totalPagesRead / dayOfYear;
       const predictedDay = Math.ceil(GOAL / avgPerDay);
+      const finalProjection = Math.round(avgPerDay * 365);
 
       renderProgressCircle(totalPagesRead, GOAL, dayOfYear);
-      renderLinearGraph(dayOfYear, totalPagesRead, GOAL, avgPerDay, predictedDay);
+      renderLinearGraph(dayOfYear, totalPagesRead, GOAL, avgPerDay, predictedDay, finalProjection);
 
     } catch (error) {
       console.error("Fehler beim Laden oder Verarbeiten der Daten:", error);
-      const containerCircle = document.getElementById(TARGET_CIRCLE_ID);
-      const containerGraph = document.getElementById(TARGET_GRAPH_ID);
-      if(containerCircle) containerCircle.textContent = "Fehler beim Laden der Daten";
-      if(containerGraph) containerGraph.textContent = "Fehler beim Laden der Daten";
     }
-  }
-
-  // --- Hilfsfunktion: Tooltip ---
-  function updateTooltip(svg, xPos, yPos, title, value) {
-    const svgns = "http://www.w3.org/2000/svg";
-    const paddingRect = 5;
-
-    let tooltip = svg.querySelector('.graph-tooltip');
-    if (!tooltip) {
-      tooltip = document.createElementNS(svgns, "text");
-      tooltip.setAttribute("class", "graph-tooltip");
-      tooltip.setAttribute("fill", "white");
-      tooltip.setAttribute("font-size", "12");
-      tooltip.setAttribute("font-family", "Dosis, sans-serif");
-      tooltip.setAttribute("text-anchor", "middle");
-      tooltip.setAttribute("pointer-events", "none");
-      svg.appendChild(tooltip);
-    }
-
-    tooltip.innerHTML = "";
-    const tspanTitle = document.createElementNS(svgns, "tspan");
-    tspanTitle.setAttribute("x", xPos);
-    tspanTitle.setAttribute("dy", "0");
-    tspanTitle.textContent = title;
-
-    const tspanValue = document.createElementNS(svgns, "tspan");
-    tspanValue.setAttribute("x", xPos);
-    tspanValue.setAttribute("dy", "1.2em");
-    tspanValue.style.fontWeight = "normal";
-    tspanValue.textContent = value;
-
-    tooltip.appendChild(tspanTitle);
-    tooltip.appendChild(tspanValue);
-
-    tooltip.setAttribute("x", xPos);
-    tooltip.setAttribute("y", yPos - 10);
-    tooltip.setAttribute("visibility", "visible");
-
-    let bg = svg.querySelector('.graph-tooltip-bg');
-    if (!bg) {
-      bg = document.createElementNS(svgns, "rect");
-      bg.setAttribute("class", "graph-tooltip-bg");
-      bg.setAttribute("rx", 10);
-      bg.setAttribute("ry", 10);
-      bg.setAttribute("fill", "rgba(0,0,0,0.6)");
-      bg.setAttribute("pointer-events", "none");
-      svg.insertBefore(bg, tooltip);
-    }
-
-    const bbox = tooltip.getBBox();
-    bg.setAttribute("x", bbox.x - paddingRect);
-    bg.setAttribute("y", bbox.y - paddingRect);
-    bg.setAttribute("width", bbox.width + paddingRect * 2);
-    bg.setAttribute("height", bbox.height + paddingRect * 2);
-    bg.setAttribute("visibility", "visible");
   }
 
   // --- Kreisdiagramm ---
@@ -126,34 +68,27 @@
     const svgns = "http://www.w3.org/2000/svg";
 
     const svg = document.createElementNS(svgns,"svg");
-    svg.setAttribute("width", size);
-    svg.setAttribute("height", size);
+    svg.setAttribute("width", size); svg.setAttribute("height", size);
     svg.style.transform = "rotate(-90deg)";
 
     const bgCircle = document.createElementNS(svgns,"circle");
     bgCircle.setAttribute("cx", size/2); bgCircle.setAttribute("cy", size/2); bgCircle.setAttribute("r", radius);
-    bgCircle.setAttribute("stroke", "#353434ff"); bgCircle.setAttribute("stroke-width", strokeWidth); bgCircle.setAttribute("fill","none");
+    bgCircle.setAttribute("stroke", "#353434"); bgCircle.setAttribute("stroke-width", strokeWidth); bgCircle.setAttribute("fill","none");
     svg.appendChild(bgCircle);
 
     const defs = document.createElementNS(svgns,"defs");
     const linearGradient = document.createElementNS(svgns,"linearGradient");
     linearGradient.setAttribute("id","greenGradient");
-    linearGradient.setAttribute("x1","0%"); linearGradient.setAttribute("y1","0%");
-    linearGradient.setAttribute("x2","100%"); linearGradient.setAttribute("y2","0%");
     const stop1 = document.createElementNS(svgns,"stop"); stop1.setAttribute("offset","0%"); stop1.setAttribute("stop-color","#025a2aff");
     const stop2 = document.createElementNS(svgns,"stop"); stop2.setAttribute("offset","100%"); stop2.setAttribute("stop-color","#4bd886");
     linearGradient.appendChild(stop1); linearGradient.appendChild(stop2);
-    defs.appendChild(linearGradient);
-    svg.appendChild(defs);
+    defs.appendChild(linearGradient); svg.appendChild(defs);
 
     const progressCircle = document.createElementNS(svgns,"circle");
     progressCircle.setAttribute("cx", size/2); progressCircle.setAttribute("cy", size/2); progressCircle.setAttribute("r", radius);
-    progressCircle.setAttribute("stroke", "url(#greenGradient)");
-    progressCircle.setAttribute("stroke-width", strokeWidth);
-    progressCircle.setAttribute("fill","none");
-    progressCircle.setAttribute("stroke-dasharray", circumference);
-    progressCircle.setAttribute("stroke-dashoffset", offset);
-    progressCircle.setAttribute("stroke-linecap","round");
+    progressCircle.setAttribute("stroke", "url(#greenGradient)"); progressCircle.setAttribute("stroke-width", strokeWidth);
+    progressCircle.setAttribute("fill","none"); progressCircle.setAttribute("stroke-dasharray", circumference);
+    progressCircle.setAttribute("stroke-dashoffset", offset); progressCircle.setAttribute("stroke-linecap","round");
     svg.appendChild(progressCircle);
 
     const textGroup = document.createElementNS(svgns,"g");
@@ -183,104 +118,102 @@
     textDelta.setAttribute("font-family","Dosis, sans-serif");
     textDelta.textContent = deltaText;
 
-    textGroup.appendChild(text1); textGroup.appendChild(text2);
-    textGroup.appendChild(textPercent); textGroup.appendChild(textDelta);
+    textGroup.append(text1, text2, textPercent, textDelta);
     svg.appendChild(textGroup);
     container.appendChild(svg);
   }
 
   // --- Linearer Graph ---
-  function renderLinearGraph(dayOfYear, current, goal, avgPerDay, predictedDay) {
+  function renderLinearGraph(dayOfYear, current, goal, avgPerDay, predictedDay, finalProjection) {
     const container = document.getElementById(TARGET_GRAPH_ID);
     if (!container) return;
     container.innerHTML = "";
 
-    const width = 350, height = 220, padding = 30, axisYOffset = 50;
-    const svgns = "http://www.w3.org/2000/svg";
+    const width = 350, height = 220, padding = 30, axisYOffset = 50, svgns = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(svgns,"svg");
-    svg.setAttribute("width", width); svg.setAttribute("height", height);
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
 
-    const maxY = Math.max(current, goal);
+    const maxY = Math.max(goal, finalProjection);
     const xScale = (width - 2*padding) / 365;
     const yScale = (height - padding - axisYOffset) / maxY;
 
-    // Achsen & Beschriftung
-    const axisX = document.createElementNS(svgns,"line");
-    axisX.setAttribute("x1", padding); axisX.setAttribute("y1", height - axisYOffset);
-    axisX.setAttribute("x2", width - padding); axisX.setAttribute("y2", height - axisYOffset);
-    axisX.setAttribute("stroke","white"); svg.appendChild(axisX);
+    // Achsen
+    const lineGen = (x1,y1,x2,y2) => {
+      const l = document.createElementNS(svgns,"line");
+      l.setAttribute("x1",x1); l.setAttribute("y1",y1); l.setAttribute("x2",x2); l.setAttribute("y2",y2);
+      l.setAttribute("stroke","white"); return l;
+    };
+    svg.append(lineGen(padding, height-axisYOffset, width-padding, height-axisYOffset), lineGen(padding, padding, padding, height-axisYOffset));
 
-    const axisY = document.createElementNS(svgns,"line");
-    axisY.setAttribute("x1", padding); axisY.setAttribute("y1", padding);
-    axisY.setAttribute("x2", padding); axisY.setAttribute("y2", height - axisYOffset);
-    axisY.setAttribute("stroke","white"); svg.appendChild(axisY);
-
-    const xLabel = document.createElementNS(svgns, "text");
-    xLabel.setAttribute("x", width - padding); xLabel.setAttribute("y", height - axisYOffset + 15);
-    xLabel.setAttribute("fill", "white"); xLabel.setAttribute("font-size", "13"); xLabel.setAttribute("font-family", "Dosis, sans-serif");
-    xLabel.setAttribute("text-anchor", "end"); xLabel.textContent = "Seiten";
-    svg.appendChild(xLabel);
-
-    const yLabel = document.createElementNS(svgns, "text");
-    const labelX = 45, labelY = padding + 20;
-    yLabel.setAttribute("x", labelX); yLabel.setAttribute("y", labelY);
-    yLabel.setAttribute("fill", "white"); yLabel.setAttribute("font-size", "13"); yLabel.setAttribute("font-family", "Dosis, sans-serif");
-    yLabel.setAttribute("text-anchor", "middle"); yLabel.setAttribute("transform", `rotate(-90 ${labelX} ${labelY})`);
-    yLabel.textContent = "Monat"; svg.appendChild(yLabel);
-
-    // Flächen & Linien
+    // Flächen: IST
     const fillPoints = [`${padding},${height-axisYOffset}`];
-    for(let i=0;i<=dayOfYear;i++) fillPoints.push(`${padding + i*xScale},${height - axisYOffset - avgPerDay*i*yScale}`);
+    for(let i=0; i<=dayOfYear; i++) fillPoints.push(`${padding + i*xScale},${height - axisYOffset - avgPerDay*i*yScale}`);
     fillPoints.push(`${padding + dayOfYear*xScale},${height-axisYOffset}`);
-    const fillPolygon = document.createElementNS(svgns,"polygon");
-    fillPolygon.setAttribute("points", fillPoints.join(" ")); fillPolygon.setAttribute("fill","rgba(2,90,42,0.2)");
-    svg.appendChild(fillPolygon);
+    const fillPoly = document.createElementNS(svgns,"polygon");
+    fillPoly.setAttribute("points", fillPoints.join(" ")); fillPoly.setAttribute("fill","rgba(2,90,42,0.2)");
+    svg.appendChild(fillPoly);
 
+    // Flächen: PROGNOSE bis Ziel
     const lastX = padding + dayOfYear*xScale, lastY = height - axisYOffset - current*yScale;
-    const predX = padding + Math.min(predictedDay,365)*xScale, predY = height - axisYOffset - goal*yScale;
-    const predPolygon = document.createElementNS(svgns,"polygon");
-    predPolygon.setAttribute("points", [`${lastX},${height-axisYOffset}`, `${lastX},${lastY}`, `${predX},${predY}`, `${predX},${height-axisYOffset}`].join(" "));
-    predPolygon.setAttribute("fill","rgba(75,216,134,0.2)"); svg.appendChild(predPolygon);
+    const goalDayX = padding + Math.min(predictedDay,365)*xScale, goalY = height - axisYOffset - goal*yScale;
+    const predFill = document.createElementNS(svgns,"polygon");
+    predFill.setAttribute("points", [`${lastX},${height-axisYOffset}`, `${lastX},${lastY}`, `${goalDayX},${goalY}`, `${goalDayX},${height-axisYOffset}`].join(" "));
+    predFill.setAttribute("fill","rgba(75,216,134,0.2)");
+    svg.appendChild(predFill);
 
+    // Bereich: ÜBERSCHUSS (Gelb)
+    if (finalProjection > goal) {
+      const endYearX = padding + 365 * xScale;
+      const endYearY = height - axisYOffset - finalProjection * yScale;
+      const surplusFill = document.createElementNS(svgns, "polygon");
+      surplusFill.setAttribute("points", [`${goalDayX},${height-axisYOffset}`, `${goalDayX},${goalY}`, `${endYearX},${endYearY}`, `${endYearX},${height-axisYOffset}`].join(" "));
+      surplusFill.setAttribute("fill", "rgba(255, 215, 0, 0.25)");
+      svg.appendChild(surplusFill);
+
+      const pValueText = document.createElementNS(svgns, "text");
+      pValueText.setAttribute("x", endYearX); pValueText.setAttribute("y", endYearY - 10);
+      pValueText.setAttribute("fill", "#FFD700"); pValueText.setAttribute("font-size", "14");
+      pValueText.setAttribute("font-weight", "bold"); pValueText.setAttribute("font-family", "Dosis");
+      pValueText.setAttribute("text-anchor", "end"); pValueText.textContent = finalProjection.toLocaleString('de-DE');
+      svg.appendChild(pValueText);
+
+      const dotLine = document.createElementNS(svgns, "line");
+      dotLine.setAttribute("x1", goalDayX); dotLine.setAttribute("y1", goalY);
+      dotLine.setAttribute("x2", endYearX); dotLine.setAttribute("y2", endYearY);
+      dotLine.setAttribute("stroke", "#FFD700"); dotLine.setAttribute("stroke-width", "2");
+      dotLine.setAttribute("stroke-dasharray", "2,4"); svg.appendChild(dotLine);
+    }
+
+    // Linien: Ist & Prognose
     const linePoints = [];
-    for(let i=0;i<=dayOfYear;i++) linePoints.push(`${padding + i*xScale},${height - axisYOffset - avgPerDay*i*yScale}`);
-    const line = document.createElementNS(svgns,"polyline");
-    line.setAttribute("points", linePoints.join(" ")); line.setAttribute("fill","none");
-    line.setAttribute("stroke","#025a2aff"); line.setAttribute("stroke-width","2");
-    svg.appendChild(line);
+    for(let i=0; i<=dayOfYear; i++) linePoints.push(`${padding + i*xScale},${height - axisYOffset - avgPerDay*i*yScale}`);
+    const poly = document.createElementNS(svgns,"polyline");
+    poly.setAttribute("points", linePoints.join(" ")); poly.setAttribute("fill","none");
+    poly.setAttribute("stroke","#025a2aff"); poly.setAttribute("stroke-width","2");
+    svg.appendChild(poly);
 
-    const predLine = document.createElementNS(svgns,"line");
-    predLine.setAttribute("x1", lastX); predLine.setAttribute("y1", lastY);
-    predLine.setAttribute("x2", predX); predLine.setAttribute("y2", predY);
-    predLine.setAttribute("stroke","#4bd886"); predLine.setAttribute("stroke-width","2"); predLine.setAttribute("stroke-dasharray","5,5");
-    svg.appendChild(predLine);
+    const pLine = document.createElementNS(svgns,"line");
+    pLine.setAttribute("x1", lastX); pLine.setAttribute("y1", lastY);
+    pLine.setAttribute("x2", goalDayX); pLine.setAttribute("y2", goalY);
+    pLine.setAttribute("stroke","#4bd886"); pLine.setAttribute("stroke-width","2"); pLine.setAttribute("stroke-dasharray","5,5");
+    svg.appendChild(pLine);
 
-    // Tooltip Overlay
-    const overlay = document.createElementNS(svgns, "rect");
-    overlay.setAttribute("x", padding); overlay.setAttribute("y", padding);
-    overlay.setAttribute("width", width - 2*padding); overlay.setAttribute("height", height - padding - axisYOffset);
-    overlay.setAttribute("fill", "transparent");
-    svg.appendChild(overlay);
+    // Ziel-Markierung
+    if (predictedDay <= 365) {
+      const gX = padding + predictedDay * xScale, gY = height - axisYOffset - goal * yScale;
+      const trophy = document.createElementNS(svgns, "text");
+      trophy.setAttribute("x", gX); trophy.setAttribute("y", gY + 7);
+      trophy.setAttribute("font-size", "20"); trophy.setAttribute("text-anchor", "middle");
+      trophy.textContent = "🏆"; svg.appendChild(trophy);
 
-    overlay.addEventListener("mousemove", (e) => {
-      const rect = svg.getBoundingClientRect();
-      let day = Math.round((e.clientX - rect.left - padding) / xScale);
-      day = Math.max(0, Math.min(day, 365));
-
-      let predictedY = (day <= predictedDay) ? (current + ((goal - current) / (predictedDay - dayOfYear)) * (day - dayOfYear)) : goal;
-      const xPos = padding + day * xScale;
-      const yPos = height - axisYOffset - Math.min(current, avgPerDay * day) * yScale;
-      const monthName = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"][Math.min(11, Math.floor(day / 30.5))];
-
-      updateTooltip(svg, xPos, yPos, `${monthName}:`, `${Math.round(predictedY).toLocaleString('de-DE')} Seiten`);
-    });
-
-    overlay.addEventListener("mouseleave", () => {
-      const t = svg.querySelector('.graph-tooltip');
-      const b = svg.querySelector('.graph-tooltip-bg');
-      if (t) t.setAttribute("visibility", "hidden");
-      if (b) b.setAttribute("visibility", "hidden");
-    });
+      const monthNames = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+      const label = document.createElementNS(svgns, "text");
+      label.setAttribute("x", gX + 3); label.setAttribute("y", gY + 25);
+      label.setAttribute("fill", "orange"); label.setAttribute("font-size", "12");
+      label.setAttribute("font-weight", "bold"); label.setAttribute("font-family", "Dosis");
+      label.textContent = monthNames[Math.min(11, Math.floor(predictedDay / 30.5))];
+      svg.appendChild(label);
+    }
 
     container.appendChild(svg);
   }

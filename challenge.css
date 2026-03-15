@@ -595,6 +595,17 @@ p {
     }
 */
 
+.weltreise-country-name {
+    opacity: 0;
+    transform: translateY(5px); /* Optional: Kleiner Versatz für Effekt */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    text-align: center;
+    margin-top: 8px;
+    font-size: 7pt;
+    font-family: 'Dosis', sans-serif; /* Passend zu deinen anderen Skripten */
+    pointer-events: none; /* Verhindert Flackern, wenn man direkt auf den Text hovert */
+}
+
 .abc-placeholder {
         display: inline-block;
         font-size: 1.8rem;
