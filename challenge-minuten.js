@@ -48,17 +48,30 @@
 
     container.innerHTML = `
       <svg width="${size}" height="${size}" style="transform: rotate(-90deg)">
+        <defs>
+          <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#8ad0ff" />
+            <stop offset="100%" stop-color="#023557ff" />
+          </linearGradient>
+        </defs>
+
         <circle cx="110" cy="110" r="${radius}" stroke="#353434" stroke-width="${stroke}" fill="none" />
-        <circle cx="110" cy="110" r="${radius}" stroke="#8ad0ff" stroke-width="${stroke}" fill="none" 
-          stroke-dasharray="${circ}" stroke-dashoffset="${circ * (1 - Math.min(percent,100)/100)}" stroke-linecap="round" />
+        
+        <circle cx="110" cy="110" r="${radius}" 
+          stroke="url(#progressGradient)" 
+          stroke-width="${stroke}" fill="none" 
+          stroke-dasharray="${circ}" 
+          stroke-dashoffset="${circ * (1 - Math.min(percent,100)/100)}" 
+          stroke-linecap="round" />
+
         <g style="transform: rotate(90deg) translate(110px, -110px); font-family: Dosis, sans-serif; fill: white; text-anchor: middle;">
           <text y="-15" font-size="18">${current.toLocaleString()} / ${goal.toLocaleString()}</text>
-          <text y="5" font-size="12">Minuten gesamt</text>
+          <text y="5" font-size="12">Minuten gehört.</text>
           <text y="30" font-size="22">${percent}%</text>
-          <text y="50" font-size="14" fill="${deltaColor}">${delta >= 0 ? '+'+delta : delta} Rückstand</text>
+          <text y="50" font-size="14" fill="${deltaColor}">${delta >= 0 ? '+' + delta : delta} Rückstand</text>
         </g>
       </svg>`;
-  }
+      }
 
   function renderLinearGraph(dayOfYear, current, goal, avgPerDay, predictedDay) {
     const container = document.getElementById(TARGET_GRAPH_ID);

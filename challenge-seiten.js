@@ -130,7 +130,7 @@
     text2.setAttribute("font-size","12");
     text2.setAttribute("fill","white");
     text2.setAttribute("font-family","Dosis, sans-serif");
-    text2.textContent = "Seiten gelesen";
+    text2.textContent = "Seiten gelesen.";
 
     const textPercent = document.createElementNS(svgns,"text");
     textPercent.setAttribute("text-anchor","middle");
