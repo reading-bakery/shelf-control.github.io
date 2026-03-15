@@ -40,11 +40,12 @@
   function renderProgressCircle(current, goal, dayOfYear) {
     const container = document.getElementById(TARGET_CIRCLE_ID);
     if (!container) return;
+
     const percent = ((current / goal) * 100).toFixed(1);
     const targetNow = Math.round(goal * (dayOfYear / 365));
     const delta = current - targetNow;
     
-    // Deine Delta-Logik
+    // Deine gemerkte Logik für Text und Farbe
     const deltaText = delta === 0 ? "Genau im Plan!" : delta > 0 ? `+${delta} Vorsprung` : `-${Math.abs(delta)} Rückstand`;
     const deltaColor = delta === 0 ? "white" : delta > 0 ? "#13c913" : "#FF4500";
     
