@@ -25,8 +25,8 @@
 
 #longshort-container-unique,
 .piesub,
-.pie-streak,
 .pie, 
+.pie-streak,
 .pie-container {
   display: flex;
   flex-direction: column;
@@ -102,8 +102,8 @@
 
 
 .pie-pixel h3, 
-.pie-streak,
 .pie h3, 
+.pie-streak h3,
 .piesub h3, 
 .pie-container h3 {
     min-height: 1rem;
@@ -127,25 +127,6 @@ canvas {
   display: block;
 }
 
-/* Der große Zahlenwert */
-.streak-number {
-    display: block;
-    font-size: 4rem;
-    font-weight: 800;
-    line-height: 1;
-    margin: 15px 0 5px 0;
-    color: #462b2b;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-}
-
-.streak-unit {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 20px;
-    display: block;
-}
-
-
 
 #sternemonthChart,
 #neumonthChart,
@@ -166,6 +147,19 @@ canvas {
   height: 100% !important;
 }
 
+#streak-number {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #ff7256;
+    font-family: 'Dosis', sans-serif;
+}
+
+#streak-unit {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: #ff7256;
+    font-family: 'Dosis', sans-serif;
+}
 
 body {
   font-family: 'Dosis', sans-serif;
@@ -532,6 +526,17 @@ hr {
       color: rgb(180, 201, 201);
       background-color: #1f1f1f;
       box-shadow: 0 0 0  rgba(0, 0, 0, 0.2);
+    }
+
+
+    #streak-number {
+      font-size: 2.5rem;
+      margin-bottom: 0px;
+    }
+
+    #streak-unit {
+      font-size: 1.1rem;
+      padding-bottom: 10px; 
     }
 
   }
