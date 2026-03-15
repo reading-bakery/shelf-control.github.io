@@ -25,6 +25,7 @@
 
 #longshort-container-unique,
 .piesub,
+.pie-streak,
 .pie, 
 .pie-container {
   display: flex;
@@ -101,6 +102,7 @@
 
 
 .pie-pixel h3, 
+.pie-streak,
 .pie h3, 
 .piesub h3, 
 .pie-container h3 {
@@ -123,6 +125,24 @@ canvas {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
   display: block;
+}
+
+/* Der große Zahlenwert */
+.streak-number {
+    display: block;
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 15px 0 5px 0;
+    color: #462b2b;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.streak-unit {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+    display: block;
 }
 
 
@@ -417,11 +437,11 @@ hr {
 
     .longshort-heading-audio,
     .longshort-heading-unique {
-  font-family: 'Bebas Neue', sans-serif;
-  margin-bottom: 1rem;
-  font-size: 2.25rem;
-  color: rgb(165, 184, 201);
-}
+      font-family: 'Bebas Neue', sans-serif;
+      margin-bottom: 1rem;
+      font-size: 2.25rem;
+      color: rgb(165, 184, 201);
+    }
 
 
 .longshort-title-unique,
@@ -432,6 +452,8 @@ hr {
   text-align: center;
   font-weight: normal;
 }
+
+
 
 
 @media (max-width: 940px) {

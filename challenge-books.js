@@ -1,6 +1,6 @@
 /**
  * @name books-challenge.js
- * @description Lese-Challenge mit optimierter Tablet-Logik und dynamischer Breite.
+ * @description Lese-Challenge mit korrekter Tablet-Logik und Fehlerbehebung.
  */
 (function() {
   'use strict';
@@ -52,8 +52,6 @@
 
     const targetAtThisTime = Math.round(goal * (dayOfYear / 365));
     const delta = current - targetAtThisTime;
-    
-    // Verwendung deiner spezifischen Logik für Text und Farbe
     const deltaText = delta === 0 ? "Genau im Plan!" : delta > 0 ? `+${delta} Vorsprung` : `-${Math.abs(delta)} Rückstand`;
     const deltaColor = delta === 0 ? "white" : delta > 0 ? "#13c913" : "#FF4500";
 
@@ -112,24 +110,13 @@
     if (!container) return;
     container.innerHTML = "";
 
-    // 1. Adaptive Breite bestimmen
+    // 1. Breite bestimmen (Nur einmal!)
     const isTabletPortrait = window.matchMedia("(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)").matches;
-    let width = 350; // Standard Mobile
-    let fontSize = 16; // Standard Schriftgröße
-
-    if (isTabletPortrait) {
-      width = 280;   // Noch schmaler für iPad Portrait
-      fontSize = 14; // Schrift etwas kleiner, damit sie bei wenig Breite nicht überlappt
-    } else if (window.innerWidth > 1024) {
-      width = 550;   // Desktop
-      fontSize = 16;
-    }
+    const width = isTabletPortrait ? 500 : 350; 
     
     const height = 220, padding = 30, axisYOffset = 50, svgns = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(svgns,"svg");
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-    svg.style.width = "100%"; // Sorgt dafür, dass das SVG im Container skaliert
-    svg.style.height = "auto";
 
     const maxY = Math.max(goal, finalProjection);
     const xScale = (width - 2*padding) / 365;
