@@ -515,7 +515,7 @@ p {
   display: flex;
   justify-content: center; /* Schiebt das SVG in die Mitte */
   align-items: flex-end;    /* Setzt die Graphen auf die Grundlinie */
-  min-height: 200px;       /* WICHTIG: Genug Platz für das 220px SVG + etwas Puffer */
+  min-height: 220px;       /* WICHTIG: Genug Platz für das 220px SVG + etwas Puffer */
   margin-bottom: 5px;
 
 }

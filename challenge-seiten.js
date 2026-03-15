@@ -184,6 +184,15 @@
       dotLine.setAttribute("stroke-dasharray", "2,4"); svg.appendChild(dotLine);
     }
 
+    // --- NEU: IST-WERT ANZEIGE ---
+    const currentValText = document.createElementNS(svgns, "text");
+    currentValText.setAttribute("x", lastX); currentValText.setAttribute("y", lastY - 10);
+    currentValText.setAttribute("fill", "#025a2aff"); currentValText.setAttribute("font-size", "16");
+    currentValText.setAttribute("font-weight", "bold"); currentValText.setAttribute("font-family", "Dosis");
+    currentValText.setAttribute("text-anchor", "middle"); currentValText.textContent = current;
+    svg.appendChild(currentValText);
+
+
     // Linien: Ist & Prognose
     const linePoints = [];
     for(let i=0; i<=dayOfYear; i++) linePoints.push(`${padding + i*xScale},${height - axisYOffset - avgPerDay*i*yScale}`);

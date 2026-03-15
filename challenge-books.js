@@ -1,6 +1,6 @@
 /**
  * @name books-challenge.js
- * @description Lese-Challenge mit dynamischer Skalierung, Pokal-Marker und gelbem Überschuss-Bereich. Tooltip entfernt.
+ * @description Lese-Challenge mit optimierter Tablet-Logik und dynamischer Breite.
  */
 (function() {
   'use strict';
@@ -24,7 +24,6 @@
       const results = Papa.parse(csvText, { header: true, skipEmptyLines: true, dynamicTyping: true });
       if (!results.data || results.data.length === 0) throw new Error("Keine Daten in CSV");
 
-      // Spaltenidentifikation
       const keys = Object.keys(results.data[0]);
       const buchSpalte = keys.find(k => k.trim().toLowerCase() === 'bücher');
       const current = parseInt(results.data[0][buchSpalte], 10) || 0;
@@ -45,22 +44,20 @@
     }
   }
 
-  // --- Kreisdiagramm ---
   function renderProgressCircle(current, goal, dayOfYear) {
     const percent = ((current / goal) * 100).toFixed(1);
     const container = document.getElementById('books-circle');
     if (!container) return;
     container.innerHTML = "";
 
-    const daysInYear = 365;
-    const targetAtThisTime = Math.round(goal * (dayOfYear / daysInYear));
+    const targetAtThisTime = Math.round(goal * (dayOfYear / 365));
     const delta = current - targetAtThisTime;
-
+    
+    // Verwendung deiner spezifischen Logik für Text und Farbe
     const deltaText = delta === 0 ? "Genau im Plan!" : delta > 0 ? `+${delta} Vorsprung` : `-${Math.abs(delta)} Rückstand`;
     const deltaColor = delta === 0 ? "white" : delta > 0 ? "#13c913" : "#FF4500";
 
-    const size = 220, strokeWidth = 30;
-    const radius = (size - strokeWidth)/2;
+    const size = 220, strokeWidth = 30, radius = (size - strokeWidth)/2;
     const circumference = 2 * Math.PI * radius;
     const offset = circumference * (1 - Math.min(percent,100)/100);
     const svgns = "http://www.w3.org/2000/svg";
@@ -83,12 +80,9 @@
 
     const progressCircle = document.createElementNS(svgns,"circle");
     progressCircle.setAttribute("cx", size/2); progressCircle.setAttribute("cy", size/2); progressCircle.setAttribute("r", radius);
-    progressCircle.setAttribute("stroke", "url(#coralGradient)");
-    progressCircle.setAttribute("stroke-width", strokeWidth);
-    progressCircle.setAttribute("fill","none");
-    progressCircle.setAttribute("stroke-dasharray", circumference);
-    progressCircle.setAttribute("stroke-dashoffset", offset);
-    progressCircle.setAttribute("stroke-linecap","round");
+    progressCircle.setAttribute("stroke", "url(#coralGradient)"); progressCircle.setAttribute("stroke-width", strokeWidth);
+    progressCircle.setAttribute("fill","none"); progressCircle.setAttribute("stroke-dasharray", circumference);
+    progressCircle.setAttribute("stroke-dashoffset", offset); progressCircle.setAttribute("stroke-linecap","round");
     svg.appendChild(progressCircle);
 
     const textGroup = document.createElementNS(svgns,"g");
@@ -96,58 +90,71 @@
 
     const t1 = document.createElementNS(svgns,"text");
     t1.setAttribute("text-anchor","middle"); t1.setAttribute("y","-15");
-    t1.setAttribute("font-size","18"); t1.setAttribute("fill","white");
-    t1.setAttribute("font-family","Dosis, sans-serif");
+    t1.setAttribute("font-size","18"); t1.setAttribute("fill","white"); t1.setAttribute("font-family","Dosis, sans-serif");
     t1.textContent = `${current} von ${goal}`;
 
     const tPercent = document.createElementNS(svgns,"text");
     tPercent.setAttribute("text-anchor","middle"); tPercent.setAttribute("y","30");
-    tPercent.setAttribute("font-size","22"); tPercent.setAttribute("fill","white");
-    tPercent.setAttribute("font-family","Dosis, sans-serif");
+    tPercent.setAttribute("font-size","22"); tPercent.setAttribute("fill","white"); tPercent.setAttribute("font-family","Dosis, sans-serif");
     tPercent.textContent = `${percent}%`;
 
     const tDelta = document.createElementNS(svgns,"text");
     tDelta.setAttribute("text-anchor","middle"); tDelta.setAttribute("y","50");
-    tDelta.setAttribute("font-size","14"); tDelta.setAttribute("fill", deltaColor);
-    tDelta.setAttribute("font-family","Dosis, sans-serif");
+    tDelta.setAttribute("font-size","14"); tDelta.setAttribute("fill", deltaColor); tDelta.setAttribute("font-family","Dosis, sans-serif");
     tDelta.textContent = deltaText;
 
     textGroup.append(t1, tPercent, tDelta); svg.appendChild(textGroup);
     container.appendChild(svg);
   }
 
-  // --- Linearer Graph ---
   function renderLinearGraph(dayOfYear, current, goal, avgPerDay, predictedDay, finalProjection) {
     const container = document.getElementById('books-graph');
     if (!container) return;
     container.innerHTML = "";
 
-    const width = 350, height = 220, padding = 30, axisYOffset = 50, svgns = "http://www.w3.org/2000/svg";
+    // 1. Adaptive Breite bestimmen
+    const isTabletPortrait = window.matchMedia("(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)").matches;
+    let width = 350; // Standard Mobile
+    let fontSize = 16; // Standard Schriftgröße
+
+    if (isTabletPortrait) {
+      width = 280;   // Noch schmaler für iPad Portrait
+      fontSize = 14; // Schrift etwas kleiner, damit sie bei wenig Breite nicht überlappt
+    } else if (window.innerWidth > 1024) {
+      width = 550;   // Desktop
+      fontSize = 16;
+    }
+    
+    const height = 220, padding = 30, axisYOffset = 50, svgns = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(svgns,"svg");
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    svg.style.width = "100%"; // Sorgt dafür, dass das SVG im Container skaliert
+    svg.style.height = "auto";
 
     const maxY = Math.max(goal, finalProjection);
     const xScale = (width - 2*padding) / 365;
     const yScale = (height - padding - axisYOffset) / maxY;
 
-    // Achsen
-    const line = (x1,y1,x2,y2) => {
-      const l = document.createElementNS(svgns,"line");
-      l.setAttribute("x1",x1); l.setAttribute("y1",y1); l.setAttribute("x2",x2); l.setAttribute("y2",y2);
-      l.setAttribute("stroke","white"); return l;
+    const lastX = padding + dayOfYear * xScale;
+    const lastY = height - axisYOffset - current * yScale;
+
+    // Achsen-Generator
+    const lineGen = (x1,y1,x2,y2) => {
+      const el = document.createElementNS(svgns,"line");
+      el.setAttribute("x1",x1); el.setAttribute("y1",y1); el.setAttribute("x2",x2); el.setAttribute("y2",y2);
+      el.setAttribute("stroke","white"); return el;
     };
-    svg.append(line(padding, height-axisYOffset, width-padding, height-axisYOffset), line(padding, padding, padding, height-axisYOffset));
+    svg.append(lineGen(padding, height-axisYOffset, width-padding, height-axisYOffset), lineGen(padding, padding, padding, height-axisYOffset));
 
     // Flächen: IST
     const fillPoints = [`${padding},${height-axisYOffset}`];
     for(let i=0; i<=dayOfYear; i++) fillPoints.push(`${padding + i*xScale},${height - axisYOffset - avgPerDay*i*yScale}`);
-    fillPoints.push(`${padding + dayOfYear*xScale},${height-axisYOffset}`);
+    fillPoints.push(`${lastX},${height-axisYOffset}`);
     const fillPoly = document.createElementNS(svgns,"polygon");
     fillPoly.setAttribute("points", fillPoints.join(" ")); fillPoly.setAttribute("fill","rgba(146,35,11,0.3)");
     svg.appendChild(fillPoly);
 
-    // Flächen: PROGNOSE bis Ziel
-    const lastX = padding + dayOfYear*xScale, lastY = height - axisYOffset - current*yScale;
+    // Flächen: PROGNOSE
     const goalDayX = padding + Math.min(predictedDay,365)*xScale, goalY = height - axisYOffset - goal*yScale;
     const predFill = document.createElementNS(svgns,"polygon");
     predFill.setAttribute("points", [`${lastX},${height-axisYOffset}`, `${lastX},${lastY}`, `${goalDayX},${goalY}`, `${goalDayX},${height-axisYOffset}`].join(" "));
@@ -156,8 +163,7 @@
 
     // Bereich: ÜBERSCHUSS (Gelb)
     if (finalProjection > goal) {
-      const endYearX = padding + 365 * xScale;
-      const endYearY = height - axisYOffset - finalProjection * yScale;
+      const endYearX = padding + 365 * xScale, endYearY = height - axisYOffset - finalProjection * yScale;
       const surplusFill = document.createElementNS(svgns, "polygon");
       surplusFill.setAttribute("points", [`${goalDayX},${height-axisYOffset}`, `${goalDayX},${goalY}`, `${endYearX},${endYearY}`, `${endYearX},${height-axisYOffset}`].join(" "));
       surplusFill.setAttribute("fill", "rgba(255, 215, 0, 0.25)");
@@ -177,7 +183,15 @@
       dotLine.setAttribute("stroke-dasharray", "2,4"); svg.appendChild(dotLine);
     }
 
-    // Ist-Linie & Prognose-Linie
+    // IST-WERT ANZEIGE
+    const currentValText = document.createElementNS(svgns, "text");
+    currentValText.setAttribute("x", lastX); currentValText.setAttribute("y", lastY - 10);
+    currentValText.setAttribute("fill", "#025a2aff"); currentValText.setAttribute("font-size", "16");
+    currentValText.setAttribute("font-weight", "bold"); currentValText.setAttribute("font-family", "Dosis");
+    currentValText.setAttribute("text-anchor", "middle"); currentValText.textContent = current;
+    svg.appendChild(currentValText);
+
+    // Fortschrittslinie
     const linePoints = [];
     for(let i=0; i<=dayOfYear; i++) linePoints.push(`${padding + i*xScale},${height - axisYOffset - avgPerDay*i*yScale}`);
     const poly = document.createElementNS(svgns,"polyline");
@@ -191,17 +205,16 @@
     pLine.setAttribute("stroke","#ff7f50"); pLine.setAttribute("stroke-width","2"); pLine.setAttribute("stroke-dasharray","5,5");
     svg.appendChild(pLine);
 
-    // Ziel-Markierung
+    // Ziel-Markierung (🏆)
     if (predictedDay <= 365) {
-      const gX = padding + predictedDay * xScale, gY = height - axisYOffset - goal * yScale;
       const trophy = document.createElementNS(svgns, "text");
-      trophy.setAttribute("x", gX); trophy.setAttribute("y", gY + 7);
+      trophy.setAttribute("x", goalDayX); trophy.setAttribute("y", goalY + 7);
       trophy.setAttribute("font-size", "20"); trophy.setAttribute("text-anchor", "middle");
       trophy.textContent = "🏆"; svg.appendChild(trophy);
 
       const monthNames = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
       const label = document.createElementNS(svgns, "text");
-      label.setAttribute("x", gX + 3); label.setAttribute("y", gY + 25);
+      label.setAttribute("x", goalDayX + 3); label.setAttribute("y", goalY + 25);
       label.setAttribute("fill", "orange"); label.setAttribute("font-size", "12");
       label.setAttribute("font-weight", "bold"); label.setAttribute("font-family", "Dosis");
       label.textContent = monthNames[Math.min(11, Math.floor(predictedDay / 30.5))];
