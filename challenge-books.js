@@ -194,7 +194,7 @@ function renderProgressCircle(current, goal, dayOfYear) {
 const yLabel = document.createElementNS(svgns, "text");
 
 // weiter links vom Rand
-const labelX = 15;                       // links vom Rand, kann angepasst werden
+const labelX = 45;                       // links vom Rand, kann angepasst werden
 const labelY = padding + 20;             // oben, Abstand vom oberen Rand
 
 yLabel.setAttribute("x", labelX);

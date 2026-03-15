@@ -222,7 +222,7 @@
     svg.appendChild(xLabel);
 
     const yLabel = document.createElementNS(svgns, "text");
-    const labelX = 15, labelY = padding + 20;
+    const labelX = 45, labelY = padding + 20;
     yLabel.setAttribute("x", labelX); yLabel.setAttribute("y", labelY);
     yLabel.setAttribute("fill", "white"); yLabel.setAttribute("font-size", "13"); yLabel.setAttribute("font-family", "Dosis, sans-serif");
     yLabel.setAttribute("text-anchor", "middle"); yLabel.setAttribute("transform", `rotate(-90 ${labelX} ${labelY})`);

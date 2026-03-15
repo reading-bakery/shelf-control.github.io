@@ -205,7 +205,7 @@
       if(rot) el.setAttribute("transform", `rotate(${rot} ${x} ${y})`);
       el.textContent = t; return el;
     };
-    svg.append(lbl(width-padding, height-axisYOffset+15, "Minuten", "end"), lbl(15, padding+20, "Monat", "middle", -90));
+    svg.append(lbl(width-padding, height-axisYOffset+15, "Minuten", "end"), lbl(45, padding+20, "Monat", "middle", -90));
 
     // Linien
     const poly = document.createElementNS(svgns,"polyline");
