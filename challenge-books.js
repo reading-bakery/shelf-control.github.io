@@ -173,7 +173,7 @@
     // IST-WERT ANZEIGE
     const currentValText = document.createElementNS(svgns, "text");
     currentValText.setAttribute("x", lastX); currentValText.setAttribute("y", lastY - 10);
-    currentValText.setAttribute("fill", "#025a2aff"); currentValText.setAttribute("font-size", "16");
+    currentValText.setAttribute("fill", "#92230bff"); currentValText.setAttribute("font-size", "16");
     currentValText.setAttribute("font-weight", "bold"); currentValText.setAttribute("font-family", "Dosis");
     currentValText.setAttribute("text-anchor", "middle"); currentValText.textContent = current;
     svg.appendChild(currentValText);
