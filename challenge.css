@@ -79,6 +79,7 @@ p {
     transition: opacity 0.3s ease, transform 0.3s ease;
     text-align: center;
     margin-top: 8px;
+    font-size: 9pt;
     font-family: 'Dosis', sans-serif; /* Passend zu deinen anderen Skripten */
     pointer-events: none; /* Verhindert Flackern, wenn man direkt auf den Text hovert */
 }
@@ -541,6 +542,12 @@ p {
 
 /* Responsive */
 @media (max-width: 740px) {
+    #agatha-challenge, 
+    #books-challenge {
+        margin-bottom: 15px;
+    }
+    
+    
     #books-graph,
     #pages-graph,
     #minutes-graph {
@@ -550,10 +557,7 @@ p {
         height: 180px;
     }
 
-    #agatha-challenge, 
-    #books-challenge {
-        margin-bottom: 15px;
-    }
+
 
     #books-graph svg,
     #pages-graph svg,
@@ -628,5 +632,62 @@ p {
     .flip-front, .flip-back {
         font-size: 1.2rem;
     }
+
+    #books-graph,
+    #pages-graph,
+    #minutes-graph {
+        width: 100%;       /* kleiner als vorher 85% */
+        max-width: 500px; /* maximale Breite */
+        margin: 0 auto;   /* zentriert */
+        height: 100px;
+    }
+
+
+
+    #books-graph svg,
+    #pages-graph svg,
+    #minutes-graph svg {
+        display: block;
+        max-width: 900px; /* maximale Breite */   
+        overflow: visible; /* Damit der Tooltip am Rand nicht abgeschnitten wird */
+    }
+
 }
   
+/* Spezifisch für iPad Air 4 und ähnliche Tablets im Hochformat */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    
+    /* Der Container, der die Graphen umschließt */
+    .prognose-wrapper, 
+    .weltreise-challenge { 
+        display: flex;
+        flex-direction: column; /* Graphen untereinander stapeln */
+        align-items: center;    /* Horizontal zentrieren */
+        gap: 80px;              /* Großer vertikaler Zwischenraum zwischen den Graphen */
+        padding: 40px 0;
+    }
+
+    #books-graph,
+    #pages-graph,
+    #minutes-graph {
+        width: 90%;             /* Nutzt die Breite des iPads gut aus */
+        max-width: 550px;       /* Begrenzung, damit es nicht zu gestreckt wirkt */
+        height: 300px;          /* Großzügige Höhe für die Kurven */
+        margin: 0 auto;
+    }
+
+    #books-graph svg,
+    #pages-graph svg,
+    #minutes-graph svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;      /* Wichtig, damit Tooltips nicht am Rand abgeschnitten werden */
+    }
+
+    /* Achsenbeschriftungen auf dem Tablet etwas vergrößern */
+    #books-graph svg text,
+    #pages-graph svg text,
+    #minutes-graph svg text {
+        font-size: 15px;
+    }
+}
