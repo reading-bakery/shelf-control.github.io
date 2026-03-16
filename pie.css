@@ -147,18 +147,71 @@ canvas {
   height: 100% !important;
 }
 
-#streak-number {
-    font-size: 3.5rem;
-    font-weight: bold;
-    color: #ff7256;
+
+
+
+.streak-wrapper {
+    display: flex;
+    gap: 3rem; /* Abstand zwischen den beiden Flammen */
+    justify-content: center;
+    align-items: flex-start; /* Sorgt dafür, dass beide Boxen oben bündig starten */
+    background-color: #1f1f1f;
+    padding: 2rem;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+.streak-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 140px; /* Feste Breite für Symmetrie */
+}
+
+.flame-box {
+    position: relative;
+    width: 120px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Die SVG Flamme liegt im Hintergrund */
+.flame-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    filter: drop-shadow(0 0 8px rgba(255, 69, 0, 0.4));
+}
+
+/* Die Zahl liegt über der Flamme */
+#streak-number, #streak-total {
+    position: relative;
+    z-index: 2;
+    font-size: 3rem;
+    color: white;
+    margin-top: 20px; /* Zentriert die Zahl im breiteren Teil der Flamme */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     font-family: 'Dosis', sans-serif;
 }
 
-#streak-unit {
-    font-size: 1.5rem;
-    font-weight: normal;
-    color: #ff7256;
+/* Einheiten Text */
+#streak-unit, #streak-total-unit {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     font-family: 'Dosis', sans-serif;
+}
+
+/* Farbe für den Bestwert (Gold/Gelb) */
+.flame-box.best .flame-svg {
+    color: #FFD700;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
 }
 
 body {
@@ -529,12 +582,14 @@ hr {
     }
 
 
-    #streak-number {
+    #streak-number,
+    #streak-total {
       font-size: 2.5rem;
       margin-bottom: 0px;
     }
 
-    #streak-unit {
+    #streak-unit,
+    #streak-total-unit {
       font-size: 1.1rem;
       padding-bottom: 10px; 
     }
