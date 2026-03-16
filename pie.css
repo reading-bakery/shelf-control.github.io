@@ -532,7 +532,26 @@ hr {
         max-height: 100%;
     }
 
+  .streak-wrapper {
+    padding: 1rem;
+    gap: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
+  .streak-card {
+    width: 110px;
+  }
+
+  .flame-box {
+    width: 90px;
+    height: 110px;
+  }
+
+  #streak-number,
+  #streak-total {
+    font-size: 2.2rem;
+  }
 
     
 
