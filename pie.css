@@ -439,7 +439,7 @@ hr {
 #longshort-container-audio,
 #longshort-container-unique {
       max-width: 700px;
-      margin: 20px auto;
+      margin: 10px;
       font-family: Arial, sans-serif;  
       background-color: #1f1f1f;
       border-radius: 8px;
@@ -448,7 +448,7 @@ hr {
     #longshort-container-audio h3,
     #longshort-container-unique h3 {
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       font-size: 1.3rem;
       font-family: "Dosis", sans-serif; 
       color: #a2bba3;
@@ -459,7 +459,7 @@ hr {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      gap: 1rem; /* kleinerer Abstand zwischen den Büchern */
+      gap: 0.5rem; /* kleinerer Abstand zwischen den Büchern */
     }
 
     .longshort-book-audio,
@@ -474,6 +474,7 @@ hr {
       overflow: hidden;
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      margin-bottom: -10px;
     }
 
     .longshort-cover-unique {
@@ -492,18 +493,24 @@ hr {
     .longshort-heading-audio,
     .longshort-heading-unique {
       font-family: 'Bebas Neue', sans-serif;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       font-size: 2.25rem;
     }
 
 
-.longshort-title-unique,
 .longshort-title-unique {
   font-family: 'Dosis', sans-serif;
   color: whitesmoke;
   text-align: center;
   font-weight: normal;
+
+  /* WICHTIG für volle Breite */
+  display: block;        /* Block-Element nimmt die gesamte Breite */
+  width: 100%;           /* optional, sicherheitshalber */
+  padding: 0px 0;       /* vertikale Abstände, horizontal nicht nötig */
+  box-sizing: border-box; /* verhindert, dass Padding die Breite überschreitet */
 }
+
 
     .book-title {
       color: #a2bba3;   /* Titel Farbe */
@@ -624,10 +631,50 @@ hr {
       box-shadow: 0 0 0  rgba(0, 0, 0, 0.2);
     }
 
-
-
-
+@media (max-width: 740px) {
+  /* Wrapper: enger Abstand zwischen den Cover */
+  .longshort-wrapper-unique,
+  .longshort-wrapper-audio {
+    gap: 0.5rem; /* enger als Desktop */
+    justify-content: center;
+    align-items: flex-start;
   }
+
+  /* Buchbox: entferne unnötige Margin/Padding */
+  .longshort-book-unique,
+  .longshort-book-audio {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    line-height: 1.2; /* engerer Zeilenabstand */
+  }
+
+  /* Titel */
+  .longshort-title-unique,
+  .longshort-title-audio {
+    font-size: 11pt;   /* etwas kleiner */
+    line-height: 1.1;  /* kompakter */
+    margin-bottom: 0.9rem; /* Abstand zur Seitenzahl minimal */
+  }
+
+  /* Seitenzahl / Minuten */
+  .book-minutes {
+    font-size: 9pt;    /* kleiner für Handy */
+    line-height: 1.1;  /* enger */
+  }
+
+  /* Überschrift Longshort */
+  .longshort-heading-unique,
+  .longshort-heading-audio {
+    font-size: 1.8rem; /* etwas kleiner als Desktop */
+    line-height: 1.1;
+  }
+
+}
+
+
+}
+
   
 /* Ergänzung für große Bildschirme */
 @media (min-width: 1400px) {
