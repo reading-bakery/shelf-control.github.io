@@ -58,8 +58,8 @@
       <svg width="${size}" height="${size}" style="transform: rotate(-90deg)">
         <defs>
           <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#8ad0ff" />
-            <stop offset="100%" stop-color="#023557ff" />
+            <stop offset="0%" stop-color="#023557ff" />
+            <stop offset="100%" stop-color="#8ad0ff" />
           </linearGradient>
         </defs>
         <circle cx="110" cy="110" r="${radius}" stroke="#353434" stroke-width="${stroke}" fill="none" />
