@@ -654,7 +654,7 @@ hr {
   .longshort-title-audio {
     font-size: 11pt;   /* etwas kleiner */
     line-height: 1.1;  /* kompakter */
-    margin-bottom: 0.9rem; /* Abstand zur Seitenzahl minimal */
+    margin-bottom: 1.5rem; /* Abstand zur Seitenzahl minimal */
   }
 
   /* Seitenzahl / Minuten */
