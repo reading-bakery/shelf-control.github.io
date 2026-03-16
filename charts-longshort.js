@@ -47,13 +47,14 @@
           <div class="longshort-book-unique">
             <img class="longshort-cover-unique" src="${shortest.cover}" alt="Cover ${shortest.titel}" />
             <p class="longshort-title-unique">
-              ${shortest.titel}<br>${shortest.seiten} Seiten
-            </p>
+            <span class="book-title">${shortest.titel}</span><br>
+            <span class="book-minutes">${shortest.seiten} Seiten</span>
           </div>
           <div class="longshort-book-unique">
             <img class="longshort-cover-unique" src="${longest.cover}" alt="Cover ${longest.titel}" />
             <p class="longshort-title-unique">
-              ${longest.titel}<br>${longest.seiten} Seiten
+              <span class="book-title">${longest.titel}</span><br>
+              <span class="book-minutes">${longest.seiten} Seiten</span>
             </p>
           </div>
         </div>

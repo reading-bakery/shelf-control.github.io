@@ -10,7 +10,6 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  font-family: "Bebas Neue", sans-serif;
   background-color: #1f1f1f;
   border-radius: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -21,6 +20,8 @@
   max-width: 600px;
   margin: 0 auto;
   position: relative;
+  font-family: "Bebas Neue", sans-serif;
+  text-transform: uppercase;
 }
 
 #longshort-container-unique,
@@ -32,7 +33,6 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  font-family: "Bebas Neue", sans-serif;
   background-color: #1f1f1f;
   border-radius: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -42,6 +42,8 @@
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
+  font-family: "Bebas Neue", sans-serif;
+  text-transform: uppercase;
 }
 
 #longshort-container-unique {
@@ -114,6 +116,8 @@
     font-size: 2.25rem;
     color: #a2bba3;
     margin: 10px;
+    font-family: "Bebas Neue", sans-serif;
+    text-transform: uppercase;
 }
 
 canvas {
@@ -156,7 +160,6 @@ canvas {
     justify-content: center;
     align-items: flex-start; /* Sorgt dafür, dass beide Boxen oben bündig starten */
     background-color: #1f1f1f;
-    padding: 2rem;
     font-family: "Bebas Neue", sans-serif;
 }
 
@@ -437,7 +440,7 @@ hr {
 #longshort-container-unique {
       max-width: 700px;
       margin: 20px auto;
-      font-family: Arial, sans-serif;
+      font-family: Arial, sans-serif;  
       background-color: #1f1f1f;
       border-radius: 8px;
     }
@@ -448,7 +451,7 @@ hr {
       margin-bottom: 1rem;
       font-size: 1.3rem;
       font-family: "Dosis", sans-serif; 
-      color: rgb(179, 220, 202);
+      color: #a2bba3;
       font-weight: bold;
     }
 
@@ -487,7 +490,6 @@ hr {
       font-family: 'Bebas Neue', sans-serif;
       margin-bottom: 1rem;
       font-size: 2.25rem;
-      color: rgb(165, 184, 201);
     }
 
 
@@ -500,6 +502,15 @@ hr {
   font-weight: normal;
 }
 
+    .book-title {
+      color: #a2bba3;   /* Titel Farbe */
+      text-transform: none;
+    }
+
+    .book-minutes {
+      color: whitesmoke;     /* Minuten bleiben weiß */
+      text-transform: none;
+    }
 
 
 
@@ -553,7 +564,14 @@ hr {
     font-size: 2.2rem;
   }
 
-    
+#streak-unit, #streak-total-unit {
+    margin-top: 0.5rem;
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Dosis', sans-serif;
+    text-align: center;
+}
 
 
     .pie h3 {
