@@ -41,24 +41,36 @@
       const shortest = validBooks.reduce((min, b) => b.seiten < min.seiten ? b : min, validBooks[0]);
       const longest = validBooks.reduce((max, b) => b.seiten > max.seiten ? b : max, validBooks[0]);
 
-      container.innerHTML = `
-        <h3 class="longshort-heading-unique">Gelesene Bücher</h3>
-        <div class="longshort-wrapper-unique">
-          <div class="longshort-book-unique">
-            <img class="longshort-cover-unique" src="${shortest.cover}" alt="Cover ${shortest.titel}" />
-            <p class="longshort-title-unique">
-            <span class="book-title">${shortest.titel}</span><br>
-            <span class="book-minutes">${shortest.seiten} Seiten</span>
-          </div>
-          <div class="longshort-book-unique">
-            <img class="longshort-cover-unique" src="${longest.cover}" alt="Cover ${longest.titel}" />
-            <p class="longshort-title-unique">
-              <span class="book-title">${longest.titel}</span><br>
-              <span class="book-minutes">${longest.seiten} Seiten</span>
-            </p>
-          </div>
-        </div>
-      `;
+container.innerHTML = `
+  <h3 class="longshort-heading-unique">Gelesene Bücher</h3>
+
+  <div class="longshort-wrapper-unique">
+
+    <div class="longshort-book-unique">
+      <div class="longshort-cover-wrapper">
+        <img class="longshort-cover-unique" src="${shortest.cover}" alt="Cover ${shortest.titel}" />
+      </div>
+
+      <p class="longshort-title-unique">
+        <span class="book-title">${shortest.titel}</span><br>
+        <span class="book-minutes">${shortest.seiten} Seiten</span>
+      </p>
+    </div>
+
+    <div class="longshort-book-unique">
+      <div class="longshort-cover-wrapper">
+        <img class="longshort-cover-unique" src="${longest.cover}" alt="Cover ${longest.titel}" />
+      </div>
+
+      <p class="longshort-title-unique">
+        <span class="book-title">${longest.titel}</span><br>
+        <span class="book-minutes">${longest.seiten} Seiten</span>
+      </p>
+    </div>
+
+  </div>
+`;
+
     } catch (error) {
       console.error('Fehler beim Laden oder Verarbeiten:', error);
     }

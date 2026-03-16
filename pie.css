@@ -455,28 +455,32 @@ hr {
       font-weight: bold;
     }
 
-    .longshort-wrapper-audio, 
     .longshort-wrapper-unique {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 1rem; /* kleinerer Abstand zwischen den Büchern */
     }
 
     .longshort-book-audio,
     .longshort-book-unique {
-      text-align: center;
-      max-width: 45%;
+        max-width: 100px;   /* verhindert riesigen Abstand */
+        text-align: center;
     }
 
-    .longshort-cover-audio,
-    .longshort-cover-unique {
-      max-width: 70%;
-      height: auto;
+    .longshort-cover-wrapper {
+      width: 100px;
+      aspect-ratio: 2 / 3;   /* klassische Buchcover Ratio */
+      overflow: hidden;
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(0,0,0,0.2);
     }
 
+    .longshort-cover-unique {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
     .longshort-error-audio,
     .longshort-error-unique {
@@ -497,7 +501,6 @@ hr {
 .longshort-title-unique {
   font-family: 'Dosis', sans-serif;
   color: whitesmoke;
-  font-size: 1rem;
   text-align: center;
   font-weight: normal;
 }
@@ -505,11 +508,13 @@ hr {
     .book-title {
       color: #a2bba3;   /* Titel Farbe */
       text-transform: none;
+      font-size: 12pt;
     }
 
     .book-minutes {
       color: whitesmoke;     /* Minuten bleiben weiß */
       text-transform: none;
+      font-size: 10pt;
     }
 
 

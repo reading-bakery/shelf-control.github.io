@@ -42,25 +42,35 @@
       const longest = validBooks.reduce((max, b) => b.minuten > max.minuten ? b : max, validBooks[0]);
 
       container.innerHTML = `
-        <h3 class="longshort-heading-unique">Gehörte Bücher</h3>
-        <div class="longshort-wrapper-unique">
-          <div class="longshort-book-unique">
-            <img class="longshort-cover-unique" src="${shortest.cover}" alt="Cover ${shortest.titel}" />
-           <p class="longshort-title-unique">
-            <span class="book-title">${shortest.titel}</span><br>
-            <span class="book-minutes">${shortest.minuten} Minuten</span>
-          </p>
-          </div>
-          <div class="longshort-book-unique">
-            <img class="longshort-cover-unique" src="${longest.cover}" alt="Cover ${longest.titel}" />
-            <p class="longshort-title-unique">
-              <span class="book-title">${longest.titel}</span><br>
-              <span class="book-minutes">${longest.minuten} Minuten</span>
-            </p>
+  <h3 class="longshort-heading-unique">Gehörte Bücher</h3>
 
-          </div>
-        </div>
-      `;
+  <div class="longshort-wrapper-unique">
+
+    <div class="longshort-book-unique">
+      <div class="longshort-cover-wrapper">
+        <img class="longshort-cover-unique" src="${shortest.cover}" alt="Cover ${shortest.titel}" />
+      </div>
+
+      <p class="longshort-title-unique">
+        <span class="book-title">${shortest.titel}</span><br>
+        <span class="book-minutes">${shortest.minuten} Minuten</span>
+      </p>
+    </div>
+
+    <div class="longshort-book-unique">
+      <div class="longshort-cover-wrapper">
+        <img class="longshort-cover-unique" src="${longest.cover}" alt="Cover ${longest.titel}" />
+      </div>
+
+      <p class="longshort-title-unique">
+        <span class="book-title">${longest.titel}</span><br>
+        <span class="book-minutes">${longest.minuten} Minuten</span>
+      </p>
+    </div>
+
+  </div>
+`;
+
     } catch (error) {
       console.error('Fehler beim Laden oder Verarbeiten:', error);
     }
