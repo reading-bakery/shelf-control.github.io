@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const ausgewähltesTempo = tempoOptionen[parseInt(tempoWahl) - 1] || "Mittel";
 
                     // 3. Sterne & Bestätigung
-                    const sterne = prompt("Bewertung (1-5 Sterne):", "5");
+                    const sterne = prompt("Bewertung (1-5 Sterne):", "");
 
                     if (confirm(`"${title}" beenden?\nFazit: ${ausgewähltesFazit}\nTempo: ${ausgewähltesTempo}\nSterne: ${sterne}`)) {
                         const fd = new FormData();
