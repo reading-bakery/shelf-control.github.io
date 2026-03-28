@@ -552,10 +552,13 @@ p {
     #books-graph,
     #pages-graph,
     #minutes-graph {
-        width: 90%;       /* kleiner als vorher 85% */
-        max-width: 320px; /* maximale Breite */
-        margin: 0 auto;   /* zentriert */
-        height: 180px;
+        width: 100%;
+        max-width: 100%;       /* Nutzt die volle verfügbare Breite */
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        height: auto;
+        display: flex;
+        justify-content: center;
     }
 
 
@@ -563,9 +566,10 @@ p {
     #books-graph svg,
     #pages-graph svg,
     #minutes-graph svg {
-        display: block;
-        width: 100%;      /* SVG passt sich Containerbreite an */
-        margin-left: 0;   /* keine Verschiebung mehr */
+        width: 100%;           /* Füllt die Breite des Handys aus */
+        height: auto;          /* Behält das Seitenverhältnis bei */
+        min-width: 0 !important; 
+        overflow: visible;
     }
 
     
@@ -628,6 +632,16 @@ p {
     font-size: 0.85rem;
     line-height: 1.2;
 }
+
+.prognose-container {
+        display: flex;
+        flex-direction: column; 
+        align-items: center;    
+        width: 100%;           /* 150% wäre breiter als das Handy-Display */
+        margin: 0 auto;
+        height: auto;          /* 'auto' statt 170px, damit alle Graphen Platz haben */
+        gap: 50px;             /* Abstand zwischen den einzelnen Graphen */
+    }
 
 }
 
