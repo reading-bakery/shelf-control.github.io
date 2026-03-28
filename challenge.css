@@ -267,6 +267,8 @@ p {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
+
+
 /* Bingo Grid */
 .bingo-grid {
     display: grid;
@@ -659,46 +661,43 @@ p {
     #pages-graph svg,
     #minutes-graph svg {
         display: block;
-        max-width: 900px; /* maximale Breite */   
+        width: 400px; /* maximale Breite */   
         overflow: visible; /* Damit der Tooltip am Rand nicht abgeschnitten wird */
     }
 
 }
   
-/* Spezifisch für iPad Air 4 und ähnliche Tablets im Hochformat */
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-    
-    /* Der Container, der die Graphen umschließt */
-    .prognose-wrapper, 
-    .weltreise-challenge { 
+@media screen and (max-width: 900px) and (orientation: portrait) {
+    /* Container auf vertikal umstellen */
+    .prognose-container {
         display: flex;
-        flex-direction: column; /* Graphen untereinander stapeln */
-        align-items: center;    /* Horizontal zentrieren */
-        gap: 80px;              /* Großer vertikaler Zwischenraum zwischen den Graphen */
-        padding: 40px 0;
+        flex-direction: column; 
+        align-items: center;    
+        gap: 60px; /* Großzügiger Abstand, damit Pokale/Zahlen nicht in den nächsten Graph ragen */
+        width: 100%;
+        margin: 0 auto;
     }
 
+    /* Margins aus dem Desktop-Layout zurücksetzen */
     #books-graph,
     #pages-graph,
     #minutes-graph {
-        width: 90%;             /* Nutzt die Breite des iPads gut aus */
-        max-width: 550px;       /* Begrenzung, damit es nicht zu gestreckt wirkt */
-        height: 300px;          /* Großzügige Höhe für die Kurven */
-        margin: 0 auto;
+        width: 100%;
+        max-width: 480px; /* Begrenzt die Breite, damit es auf schmalen Porträts nicht klebt */
+        margin-left: 0 !important;  /* Überschreibt die 50px von oben */
+        margin-right: 0 !important; /* Überschreibt die 50px von oben */
+        margin-bottom: 20px;
+        height: auto;
+        display: flex;
+        justify-content: center;
     }
 
     #books-graph svg,
     #pages-graph svg,
     #minutes-graph svg {
         width: 100%;
-        height: 100%;
-        overflow: visible;      /* Wichtig, damit Tooltips nicht am Rand abgeschnitten werden */
-    }
-
-    /* Achsenbeschriftungen auf dem Tablet etwas vergrößern */
-    #books-graph svg text,
-    #pages-graph svg text,
-    #minutes-graph svg text {
-        font-size: 15px;
+        height: auto;
+        min-width: 0 !important; 
+        overflow: visible; /* WICHTIG: Erlaubt, dass Pokale über den SVG-Rand ragen ohne Clipping */
     }
 }

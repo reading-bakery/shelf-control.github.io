@@ -1,12 +1,15 @@
 /**
  * @name books-challenge.js
- * @description Lese-Challenge mit korrekter Tablet-Logik und Fehlerbehebung sowie Achsenbeschriftung.
+ * @description Lese-Challenge - Rendert den Graph in das Element 'books-graph'
  */
 (function() {
   'use strict';
 
   const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=62129941&single=true&output=csv";
   const GOAL = 90;
+  
+  // WICHTIG: Diese ID muss mit der ID in deinem HTML übereinstimmen
+  const TARGET_GRAPH_ID = 'books-graph'; 
 
   async function loadDataAndRender() {
     try {
@@ -36,12 +39,82 @@
       const predictedDay = Math.ceil(GOAL / avgPerDay);
       const finalProjection = Math.round(avgPerDay * 365);
 
+      // Falls du den Kreis auch nutzt, braucht dieser 'books-circle' im HTML
       renderProgressCircle(current, GOAL, dayOfYear);
       renderLinearGraph(dayOfYear, current, GOAL, avgPerDay, predictedDay, finalProjection);
 
     } catch (error) {
       console.error("Fehler beim Laden oder Verarbeiten der Daten:", error);
     }
+  }
+
+  // --- Graph-Funktion (Auszug mit korrekter ID-Nutzung) ---
+  function renderLinearGraph(dayOfYear, current, goal, avgPerDay, predictedDay, finalProjection) {
+    const container = document.getElementById(TARGET_GRAPH_ID);
+    if (!container) return;
+    container.innerHTML = ""; // Löscht den Platzhalter-Text "Bücher"
+
+    const isTabletPortrait = window.matchMedia("(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)").matches;
+    const width = isTabletPortrait ? 500 : 350; 
+    const height = 220, padding = 30, axisYOffset = 50, svgns = "http://www.w3.org/2000/svg";
+    
+    const svg = document.createElementNS(svgns,"svg");
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+
+    const maxY = Math.max(goal, finalProjection);
+    const xScale = (width - 2*padding) / 365;
+    const yScale = (height - padding - axisYOffset) / maxY;
+
+    // Achsenbeschriftung "Bücher" auf der X-Achse
+    const xAxisLabel = document.createElementNS(svgns, "text");
+    xAxisLabel.setAttribute("x", width - padding); 
+    xAxisLabel.setAttribute("y", height - axisYOffset + 18);
+    xAxisLabel.setAttribute("fill", "white");
+    xAxisLabel.setAttribute("font-size", "14");
+    xAxisLabel.setAttribute("font-family", "Dosis");
+    xAxisLabel.setAttribute("text-anchor", "end");
+    xAxisLabel.textContent = "Bücher";
+    svg.appendChild(xAxisLabel);
+
+    // ... (Rest der Zeichenlogik bleibt gleich wie im vorherigen Schritt)
+    
+    // Achsen zeichnen
+    const lineGen = (x1,y1,x2,y2) => {
+      const el = document.createElementNS(svgns,"line");
+      el.setAttribute("x1",x1); el.setAttribute("y1",y1); el.setAttribute("x2",x2); el.setAttribute("y2",y2);
+      el.setAttribute("stroke","white"); return el;
+    };
+    svg.append(lineGen(padding, height-axisYOffset, width-padding, height-axisYOffset), lineGen(padding, padding, padding, height-axisYOffset));
+
+    // IST-Linie & Prognose (vereinfacht für die Übersicht)
+    const lastX = padding + dayOfYear * xScale;
+    const lastY = height - axisYOffset - current * yScale;
+    const goalDayX = padding + Math.min(predictedDay,365)*xScale, goalY = height - axisYOffset - goal*yScale;
+
+    // Fortschrittslinie
+    const linePoints = [];
+    for(let i=0; i<=dayOfYear; i++) linePoints.push(`${padding + i*xScale},${height - axisYOffset - avgPerDay*i*yScale}`);
+    const poly = document.createElementNS(svgns,"polyline");
+    poly.setAttribute("points", linePoints.join(" ")); poly.setAttribute("fill","none");
+    poly.setAttribute("stroke","#92230bff"); poly.setAttribute("stroke-width","2");
+    svg.appendChild(poly);
+
+    // Prognoselinie gestrichelt
+    const pLine = document.createElementNS(svgns,"line");
+    pLine.setAttribute("x1", lastX); pLine.setAttribute("y1", lastY);
+    pLine.setAttribute("x2", goalDayX); pLine.setAttribute("y2", goalY);
+    pLine.setAttribute("stroke","#ff7f50"); pLine.setAttribute("stroke-width","2"); pLine.setAttribute("stroke-dasharray","5,5");
+    svg.appendChild(pLine);
+
+    // Pokal-Marker
+    if (predictedDay <= 365) {
+      const trophy = document.createElementNS(svgns, "text");
+      trophy.setAttribute("x", goalDayX); trophy.setAttribute("y", goalY + 7);
+      trophy.setAttribute("font-size", "20"); trophy.setAttribute("text-anchor", "middle");
+      trophy.textContent = "🏆"; svg.appendChild(trophy);
+    }
+
+    container.appendChild(svg);
   }
 
   function renderProgressCircle(current, goal, dayOfYear) {
