@@ -1,6 +1,6 @@
 /**
  * @name books-challenge.js
- * @description Lese-Challenge mit korrekter Tablet-Logik und Fehlerbehebung.
+ * @description Lese-Challenge mit korrekter Tablet-Logik und Fehlerbehebung sowie Achsenbeschriftung.
  */
 (function() {
   'use strict';
@@ -110,7 +110,6 @@
     if (!container) return;
     container.innerHTML = "";
 
-    // 1. Breite bestimmen (Nur einmal!)
     const isTabletPortrait = window.matchMedia("(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)").matches;
     const width = isTabletPortrait ? 500 : 350; 
     
@@ -124,6 +123,17 @@
 
     const lastX = padding + dayOfYear * xScale;
     const lastY = height - axisYOffset - current * yScale;
+
+    // --- NEU: ACHSENBESCHRIFTUNG "BÜCHER" ---
+    const xAxisLabel = document.createElementNS(svgns, "text");
+    xAxisLabel.setAttribute("x", width - padding); 
+    xAxisLabel.setAttribute("y", height - axisYOffset + 15);
+    xAxisLabel.setAttribute("fill", "white");
+    xAxisLabel.setAttribute("font-size", "14");
+    xAxisLabel.setAttribute("font-family", "Dosis");
+    xAxisLabel.setAttribute("text-anchor", "end");
+    xAxisLabel.textContent = "Bücher";
+    svg.appendChild(xAxisLabel);
 
     // Achsen-Generator
     const lineGen = (x1,y1,x2,y2) => {

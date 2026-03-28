@@ -99,6 +99,19 @@
     };
     svg.append(lineGen(padding, height-axisYOffset, width-padding, height-axisYOffset), lineGen(padding, padding, padding, height-axisYOffset));
 
+    // --- NEU: ACHSENBESCHRIFTUNG "BÜCHER" ---
+    const xAxisLabel = document.createElementNS(svgns, "text");
+    xAxisLabel.setAttribute("x", width - padding); 
+    xAxisLabel.setAttribute("y", height - axisYOffset + 15);
+    xAxisLabel.setAttribute("fill", "white");
+    xAxisLabel.setAttribute("font-size", "14");
+    xAxisLabel.setAttribute("font-family", "Dosis");
+    xAxisLabel.setAttribute("text-anchor", "end");
+    xAxisLabel.textContent = "Minuten";
+    svg.appendChild(xAxisLabel);
+
+
+
     // Flächen: IST
     const fPts = [`${padding},${height-axisYOffset}`];
     const lPts = [];

@@ -137,6 +137,17 @@
     const xScale = (width - 2*padding) / 365;
     const yScale = (height - padding - axisYOffset) / maxY;
 
+    // --- NEU: ACHSENBESCHRIFTUNG "SEITEN" AN DER X-ACHSE ---
+    const xAxisLabel = document.createElementNS(svgns, "text");
+    xAxisLabel.setAttribute("x", width - padding); 
+    xAxisLabel.setAttribute("y", height - axisYOffset + 15); // Leicht unter der X-Achse
+    xAxisLabel.setAttribute("fill", "white");
+    xAxisLabel.setAttribute("font-size", "14");
+    xAxisLabel.setAttribute("font-family", "Dosis");
+    xAxisLabel.setAttribute("text-anchor", "end");
+    xAxisLabel.textContent = "Seiten";
+    svg.appendChild(xAxisLabel);
+
     // Achsen
     const lineGen = (x1,y1,x2,y2) => {
       const l = document.createElementNS(svgns,"line");
@@ -184,7 +195,7 @@
       dotLine.setAttribute("stroke-dasharray", "2,4"); svg.appendChild(dotLine);
     }
 
-    // --- NEU: IST-WERT ANZEIGE ---
+    // --- IST-WERT ANZEIGE ---
     const currentValText = document.createElementNS(svgns, "text");
     currentValText.setAttribute("x", lastX); currentValText.setAttribute("y", lastY - 10);
     currentValText.setAttribute("fill", "#025a2aff"); currentValText.setAttribute("font-size", "16");
