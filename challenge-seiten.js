@@ -61,8 +61,7 @@
     const deltaText = delta === 0 ? "Genau im Plan!" : delta > 0 ? `+${delta} Vorsprung` : `-${Math.abs(delta)} Rückstand`;
     const deltaColor = delta === 0 ? "white" : delta > 0 ? "#13c913" : "#FF4500";
 
-    const size = 220, strokeWidth = 30;
-    const radius = (size - strokeWidth)/2;
+    const size = 220, strokeWidth = 30, radius = (size - strokeWidth)/2;
     const circumference = 2 * Math.PI * radius;
     const offset = circumference * (1 - Math.min(percent,100)/100);
     const svgns = "http://www.w3.org/2000/svg";
