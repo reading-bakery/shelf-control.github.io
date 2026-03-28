@@ -12,23 +12,23 @@ async function updateStreakDisplay() {
         const rows = csvData.split('\n').filter(row => row.trim() !== '');
         if (rows.length < 2) return; 
 
-        // 1. Höchste Streak (All-Time High) ermitteln
+        // 1. Historischen Bestwert ermitteln (Scannt alle Zeilen, Spalte G = Index 6)
         let maxStreak = 0;
-        // Wir starten bei Index 1, um einen eventuellen Tabellen-Header zu ignorieren
         for (let i = 1; i < rows.length; i++) {
-            const currentVal = parseInt(rows[i].split(',')[0]) || 0;
-            if (currentVal > maxStreak) {
-                maxStreak = currentVal;
+            const columns = rows[i].split(',');
+            const valInRow = parseInt(columns[6]) || 0; // Spalte G
+            if (valInRow > maxStreak) {
+                maxStreak = valInRow;
             }
         }
 
-        // 2. Aktuellen Status (letzte Zeile) auslesen
+        // 2. Aktueller Stand aus der letzten Zeile, Spalte G
         const lastRow = rows[rows.length - 1].split(',');
-        const streakValue = parseInt(lastRow[0]) || 0;
-        const delta = parseInt(lastRow[1]) || 0;
+        const streakValue = parseInt(lastRow[6]) || 0; // Spalte G aktuelles Datum
+        const delta = parseInt(lastRow[1]) || 0; // bleibt unverändert für Vorsprung/Rückstand
 
-        // Logik für Text und Farbe (basierend auf deinen Vorgaben)
-        const deltaText = delta === 0 ? "in Folge" : delta > 0 ? `+${delta} Vorsprung` : `-${Math.abs(delta)} Rückstand`;
+        // Logik für Text und Farbe
+        const deltaText = delta === 0 ? "In Folge" : delta > 0 ? `+${delta} Vorsprung` : `-${Math.abs(delta)} Rückstand`;
         const deltaColor = delta === 0 ? "white" : delta > 0 ? "#13c913" : "#FF4500";
 
         // DOM Elemente befüllen
@@ -37,14 +37,14 @@ async function updateStreakDisplay() {
         const totalElement = document.getElementById('streak-total');
         const totalUnitElement = document.getElementById('streak-total-unit');
 
-        // Aktuelle Daten
+        // Aktueller Streak
         if (numberElement) numberElement.textContent = streakValue;
         if (unitElement) {
             unitElement.textContent = deltaText;
             unitElement.style.color = deltaColor;
         }
 
-        // Höchstwert Daten
+        // Historischer Bestwert
         if (totalElement) totalElement.textContent = maxStreak;
         if (totalUnitElement) totalUnitElement.textContent = "Bester Streak";
 
