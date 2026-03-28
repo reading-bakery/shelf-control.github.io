@@ -96,6 +96,53 @@ transform: scale(1.03);
     display: none; /* Startzustand ausgeblendet */
 }
 
+/* Container für die Buttons im Overlay */
+.overlay-buttons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Abstand zwischen den Buttons */
+    width: 80%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Gemeinsamer Style für beide Buttons */
+.overlay-buttons button {
+    font-size: 14px;
+    color: white;
+    background: rgba(20, 20, 20, 0.85);
+    padding: 10px 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Dosis', sans-serif;
+    border: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover-Effekt für das Erscheinen der Buttons */
+.cover-wrapper:hover .overlay-buttons {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Individuelle Hover-Farben für die Buttons */
+.overlay-buttons .btn-progress:hover {
+    background: #c95961; /* Blau für Fortschritt */
+    transform: scale(1.05);
+}
+
+.overlay-buttons .btn-finish:hover {
+    background: #a2bba3; /* Dein Grün für Beenden */
+    transform: scale(1.05);
+}
+
+
 @media (max-width: 740px) {
 .curr {
         display: flex;
