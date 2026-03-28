@@ -89,7 +89,7 @@
 
 @media (max-width: 1366px) {
  .logohome {
-        font-size: 21pt; 
+        font-size: 18pt; 
     }
 }
 
@@ -155,7 +155,7 @@
     .logohome {
         color: whitesmoke;
         text-decoration: none;
-         font-family: "Bebas Neue", sans-serif;
+        font-family: "Bebas Neue", sans-serif;
         font-weight: normal;
         font-size: 16pt; 
         display: flex;
