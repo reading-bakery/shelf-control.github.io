@@ -56,7 +56,7 @@
 
     const isTabletPortrait = window.matchMedia("(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)").matches;
     const width = isTabletPortrait ? 500 : 350; 
-    const height = 220, padding = 30, axisYOffset = 50, svgns = "http://www.w3.org/2000/svg";
+    const height = 250, padding = 30, axisYOffset = 50, svgns = "http://www.w3.org/2000/svg";
     
     const svg = document.createElementNS(svgns,"svg");
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);

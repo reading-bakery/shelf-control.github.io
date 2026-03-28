@@ -61,7 +61,8 @@
     const deltaText = delta === 0 ? "Genau im Plan!" : delta > 0 ? `+${delta} Vorsprung` : `-${Math.abs(delta)} Rückstand`;
     const deltaColor = delta === 0 ? "white" : delta > 0 ? "#13c913" : "#FF4500";
 
-    const size = 220, strokeWidth = 30, radius = (size - strokeWidth)/2;
+    const size = 220, strokeWidth = 30;
+    const radius = (size - strokeWidth)/2;
     const circumference = 2 * Math.PI * radius;
     const offset = circumference * (1 - Math.min(percent,100)/100);
     const svgns = "http://www.w3.org/2000/svg";
@@ -228,7 +229,7 @@
       const monthNames = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
       const label = document.createElementNS(svgns, "text");
       label.setAttribute("x", gX + 3); label.setAttribute("y", gY + 25);
-      label.setAttribute("fill", "orange"); label.setAttribute("font-size", "12");
+      label.setAttribute("fill", "orange"); label.setAttribute("font-size", "14");
       label.setAttribute("font-weight", "bold"); label.setAttribute("font-family", "Dosis");
       label.textContent = monthNames[Math.min(11, Math.floor(predictedDay / 30.5))];
       svg.appendChild(label);

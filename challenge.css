@@ -498,7 +498,6 @@ p {
   flex-direction: column; /* übereinander statt nebeneinander */
   align-items: center;    /* zentriert horizontal */
   gap: 15px;              /* Abstand zwischen Kreis und Graph */
-  margin-bottom: 30px;
 }
 
 /* Spezifisch für die Queere-Bücher-Sektion */
@@ -655,14 +654,20 @@ p {
         height: 100px;
     }
 
-
-
     #books-graph svg,
     #pages-graph svg,
     #minutes-graph svg {
         display: block;
         width: 400px; /* maximale Breite */   
         overflow: visible; /* Damit der Tooltip am Rand nicht abgeschnitten wird */
+    }
+
+    #books-graph {
+        margin-left: 40px;
+    }
+
+    #minutes-graph {
+        margin-left: -40px;
     }
 
 }
@@ -703,29 +708,4 @@ p {
         min-width: 0 !important; 
         overflow: visible; /* WICHTIG: Erlaubt, dass Pokale über den SVG-Rand ragen ohne Clipping */
     }
-
-@media screen and (max-width: 760px) { /* Einheit 'px' ergänzt */
-    
-    /* Container auf volle Breite und vertikalen Fluss */
-    .prognose-container {
-        display: flex;
-        flex-direction: column; 
-        align-items: center;    
-    }
-
-    /* Die einzelnen Graph-Boxen */
-    #books-graph,
-    #pages-graph,
-    #minutes-graph {
-        display: flex;
-        justify-content: center;
-    }
-
-    /* Das SVG innerhalb der Boxen */
-    #books-graph svg,
-    #pages-graph svg,
-    #minutes-graph svg {
-        overflow: visible;     /* Damit Pokale und Zahlen oben nicht abgeschnitten werden */
-    }
-}
 }
