@@ -649,7 +649,7 @@ p {
     #pages-graph,
     #minutes-graph {
         width: 100%;       /* kleiner als vorher 85% */
-        max-width: 500px; /* maximale Breite */
+        max-width: 600px; /* maximale Breite */
         margin: 0 auto;   /* zentriert */
         height: 100px;
     }
