@@ -1,7 +1,7 @@
 /**
  * @name books-challenge.js
  * @description Lese-Challenge - Rendert Kreis und Graph in die entsprechenden Container.
- * Maße und Logik sind identisch zu challenge-minuten.js.
+ * Optimierte Abstände im Kreisdiagramm für eine kompakte Textdarstellung.
  */
 (function() {
   'use strict';
@@ -27,7 +27,6 @@
       const results = Papa.parse(csvText, { header: true, skipEmptyLines: true, dynamicTyping: true });
       if (!results.data || results.data.length === 0) throw new Error("Keine Daten in CSV");
 
-      // Spalte "Bücher" dynamisch finden
       const keys = Object.keys(results.data[0]);
       const buchSpalte = keys.find(k => k.trim().toLowerCase() === 'bücher');
       const current = parseInt(results.data[0][buchSpalte], 10) || 0;
@@ -57,7 +56,6 @@
     const targetAtThisTime = Math.round(goal * (dayOfYear / 365));
     const delta = current - targetAtThisTime;
     
-    // deltaText und deltaColor basierend auf Planvorgabe
     const deltaText = delta === 0 ? "Genau im Plan!" : delta > 0 ? `+${delta} Vorsprung` : `-${Math.abs(delta)} Rückstand`;
     const deltaColor = delta === 0 ? "white" : delta > 0 ? "#13c913" : "#FF4500";
 
@@ -92,22 +90,33 @@
     const textGroup = document.createElementNS(svgns, "g");
     textGroup.setAttribute("transform", `translate(${size / 2}, ${size / 2}) rotate(90)`);
 
+    // --- TEXT-BLOCK MIT KOMPAKTEN ABSTÄNDEN ---
+    
+    // Obere Zeile: Stand
     const t1 = document.createElementNS(svgns, "text");
-    t1.setAttribute("text-anchor", "middle"); t1.setAttribute("y", "-15");
+    t1.setAttribute("text-anchor", "middle"); t1.setAttribute("y", "-18");
     t1.setAttribute("font-size", "18"); t1.setAttribute("fill", "white"); t1.setAttribute("font-family", "Dosis, sans-serif");
     t1.textContent = `${current} von ${goal}`;
 
+    // Mittlere Zeile: Label
+    const tLabel = document.createElementNS(svgns, "text");
+    tLabel.setAttribute("text-anchor", "middle"); tLabel.setAttribute("y", "2");
+    tLabel.setAttribute("font-size", "12"); tLabel.setAttribute("fill", "white"); tLabel.setAttribute("font-family", "Dosis, sans-serif");
+    tLabel.textContent = "Bücher beendet.";
+
+    // Untere Zeile 1: Prozent
     const tPercent = document.createElementNS(svgns, "text");
-    tPercent.setAttribute("text-anchor", "middle"); tPercent.setAttribute("y", "30");
+    tPercent.setAttribute("text-anchor", "middle"); tPercent.setAttribute("y", "25");
     tPercent.setAttribute("font-size", "22"); tPercent.setAttribute("fill", "white"); tPercent.setAttribute("font-family", "Dosis, sans-serif");
     tPercent.textContent = `${percent}%`;
 
+    // Untere Zeile 2: Delta
     const tDelta = document.createElementNS(svgns, "text");
-    tDelta.setAttribute("text-anchor", "middle"); tDelta.setAttribute("y", "50");
+    tDelta.setAttribute("text-anchor", "middle"); tDelta.setAttribute("y", "42");
     tDelta.setAttribute("font-size", "14"); tDelta.setAttribute("fill", deltaColor); tDelta.setAttribute("font-family", "Dosis, sans-serif");
     tDelta.textContent = deltaText;
 
-    textGroup.append(t1, tPercent, tDelta); svg.appendChild(textGroup);
+    textGroup.append(t1, tLabel, tPercent, tDelta); svg.appendChild(textGroup);
     container.appendChild(svg);
   }
 
@@ -116,7 +125,6 @@
     if (!container) return;
     container.innerHTML = "";
 
-    // Maßvorgaben aus challenge-minuten.js
     const width = 350, height = 220, padding = 30, axisYOffset = 50, svgns = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(svgns, "svg");
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
@@ -128,7 +136,6 @@
     const lastX = padding + dayOfYear * xScale;
     const lastY = height - axisYOffset - current * yScale;
 
-    // Achsenbeschriftung
     const xAxisLabel = document.createElementNS(svgns, "text");
     xAxisLabel.setAttribute("x", width - padding); xAxisLabel.setAttribute("y", height - axisYOffset + 15);
     xAxisLabel.setAttribute("fill", "white"); xAxisLabel.setAttribute("font-size", "14"); xAxisLabel.setAttribute("font-family", "Dosis");
@@ -142,7 +149,6 @@
     };
     svg.append(lineGen(padding, height - axisYOffset, width - padding, height - axisYOffset), lineGen(padding, padding, padding, height - axisYOffset));
 
-    // Flächen: IST
     const fillPoints = [`${padding},${height - axisYOffset}`];
     for (let i = 0; i <= dayOfYear; i++) fillPoints.push(`${padding + i * xScale},${height - axisYOffset - avgPerDay * i * yScale}`);
     fillPoints.push(`${lastX},${height - axisYOffset}`);
@@ -150,14 +156,12 @@
     fillPoly.setAttribute("points", fillPoints.join(" ")); fillPoly.setAttribute("fill", "rgba(146,35,11,0.3)");
     svg.appendChild(fillPoly);
 
-    // Flächen: PROGNOSE
     const goalDayX = padding + Math.min(predictedDay, 365) * xScale, goalY = height - axisYOffset - goal * yScale;
     const predFill = document.createElementNS(svgns, "polygon");
     predFill.setAttribute("points", [`${lastX},${height - axisYOffset}`, `${lastX},${lastY}`, `${goalDayX},${goalY}`, `${goalDayX},${height - axisYOffset}`].join(" "));
     predFill.setAttribute("fill", "rgba(255,127,80,0.15)");
     svg.appendChild(predFill);
 
-    // Bereich: ÜBERSCHUSS (Gelb)
     if (finalProjection > goal) {
       const endYearX = padding + 365 * xScale, endYearY = height - axisYOffset - finalProjection * yScale;
       const surplusFill = document.createElementNS(svgns, "polygon");
@@ -179,7 +183,6 @@
       dotLine.setAttribute("stroke-dasharray", "2,4"); svg.appendChild(dotLine);
     }
 
-    // IST-WERT ANZEIGE
     const currentValText = document.createElementNS(svgns, "text");
     currentValText.setAttribute("x", lastX); currentValText.setAttribute("y", lastY - 10);
     currentValText.setAttribute("fill", "#ff7f50"); currentValText.setAttribute("font-size", "16");
@@ -187,7 +190,6 @@
     currentValText.setAttribute("text-anchor", "middle"); currentValText.textContent = current;
     svg.appendChild(currentValText);
 
-    // Linien zeichnen
     const linePoints = [];
     for (let i = 0; i <= dayOfYear; i++) linePoints.push(`${padding + i * xScale},${height - axisYOffset - avgPerDay * i * yScale}`);
     const poly = document.createElementNS(svgns, "polyline");
@@ -201,7 +203,6 @@
     pLine.setAttribute("stroke", "#ff7f50"); pLine.setAttribute("stroke-width", "2"); pLine.setAttribute("stroke-dasharray", "5,5");
     svg.appendChild(pLine);
 
-    // Pokal & Datum
     if (predictedDay <= 365) {
       const trophy = document.createElementNS(svgns, "text");
       trophy.setAttribute("x", goalDayX); trophy.setAttribute("y", goalY + 7);
