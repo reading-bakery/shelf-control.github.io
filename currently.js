@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     const getIsoDate = () => new Date().toISOString().split('T')[0];
 
-    // --- NEU: Modal für Zahleneingabe (Fortschritt) ---
-    function openProgressModal(bookTitle, unit) {
+    // --- Modal für Zahleneingabe (angepasst auf "Bis zu welcher Seite/Minute") ---
+    function openProgressModal(bookTitle, format, currentProgress) {
         return new Promise(resolve => {
             const modal = document.getElementById("progressInputModal");
             const modalContent = modal.querySelector(".modal-content");
@@ -38,9 +38,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const h3 = modal.querySelector("h3");
             const subtext = modal.querySelector("#progressModalSubtext");
 
-            h3.textContent = "Fortschritt eingeben";
-            subtext.textContent = `Wie viele ${unit} hast du heute bei "${bookTitle}" geschafft?`;
+            const verb = format === "Hörbuch" ? "gehört" : "gelesen";
+            const unit = format === "Hörbuch" ? "Minute" : "Seite";
+
+            h3.textContent = "Fortschritt aktualisieren";
+            subtext.textContent = `Bis zu welcher ${unit} hast du heute in "${bookTitle}" ${verb}? (Aktuell: ${currentProgress})`;
+            
             input.value = "";
+            input.placeholder = `${unit} eingeben...`;
             
             let errorMsg = modalContent.querySelector(".error-msg");
             if(!errorMsg) {
@@ -59,9 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const save = () => {
                 const val = parseInt(input.value);
-                if(isNaN(val) || val <= 0) {
+                if(isNaN(val) || val <= currentProgress) {
                     modalContent.style.border = "2px solid red";
-                    errorMsg.textContent = `Bitte eine gültige Anzahl an ${unit} eingeben.`;
+                    errorMsg.textContent = `Bitte eine Zahl höher als ${currentProgress} eingeben.`;
                     return;
                 }
                 modal.style.display = "none";
@@ -189,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 errorMsg.textContent = "";
                 modal.style.display = "none";
                 cleanup();
-                resolve(num.toString().replace(".", ",")); // mit Komma
+                resolve(num.toString().replace(".", ",")); 
             };
             const cancel = () => {
                 modal.style.display = "none";
@@ -229,14 +234,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const format = book["Format"];
             const title = book["Titel"] || book["Buch"] || "";
 
+            // Bisherigen Fortschritt berechnen (Summe aller Einträge für dieses Buch)
             let progress = 0;
             daily.forEach(entry => {
                 if (entry["Buch"] === title) {
-                    progress += (format==="Hörbuch") ? (parseInt(entry["Minuten"])||0) : (parseInt(entry["Seiten"])||0);
+                    progress += (format === "Hörbuch") ? (parseInt(entry["Minuten"]) || 0) : (parseInt(entry["Seiten"]) || 0);
                 }
             });
-            const total = format==="Hörbuch"? totalMinutes : totalPages;
-            const percentage = total ? Math.min((progress/total)*100,100) : 0;
+
+            const total = format === "Hörbuch" ? totalMinutes : totalPages;
+            const percentage = total ? Math.min((progress / total) * 100, 100) : 0;
 
             const bookDiv = document.createElement("div");
             bookDiv.classList.add("currently-book");
@@ -252,28 +259,36 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="progress-bar">
                         <div class="progress" style="width: ${percentage}%;"></div>
                     </div>
-                    <p>${progress} / ${total} ${format==="Hörbuch"?"Minuten":"Seiten"}<br>
+                    <p>${progress} / ${total} ${format === "Hörbuch" ? "Minuten" : "Seiten"}<br>
                     <strong>(${percentage.toFixed(0)}%)</strong></p>
                 </div>
             `;
             container.appendChild(bookDiv);
 
-            // --- Fortschritt (Neu mit Modal) ---
+            // --- Fortschritt (Neu berechnet) ---
             bookDiv.querySelector(".btn-progress").addEventListener("click", async () => {
-                const unit = format==="Hörbuch"?"Minuten":"Seiten";
+                // Modal öffnen und die neue "End-Zahl" abfragen
+                const newTotalReached = await openProgressModal(title, format, progress);
                 
-                const val = await openProgressModal(title, unit);
-                if (val === null) return;
+                if (newTotalReached === null) return;
+
+                // Berechnung der Differenz: Neu eingegebene Zahl - Bisheriger Fortschritt
+                const delta = newTotalReached - progress;
 
                 const fd = new FormData();
                 fd.append(FIELD_DAILY_TITLE, title);
                 fd.append(FIELD_DAILY_DATE, getGermanDate());
-                if(format==="Hörbuch") fd.append(FIELD_DAILY_MINS, val);
-                else fd.append(FIELD_DAILY_PAGES, val);
                 
-                fetch(FORM_DAILY,{method:"POST",mode:"no-cors",body:fd})
-                    .then(()=> { alert("Fortschritt gespeichert!"); location.reload(); })
-                    .catch(err=>alert("Fehler: "+err));
+                // Wir senden nur die heute gelesenen Seiten (delta)
+                if (format === "Hörbuch") fd.append(FIELD_DAILY_MINS, delta);
+                else fd.append(FIELD_DAILY_PAGES, delta);
+                
+                fetch(FORM_DAILY, { method: "POST", mode: "no-cors", body: fd })
+                    .then(() => { 
+                        alert(`Super! Du hast heute ${delta} ${format === "Hörbuch" ? "Minuten gehört" : "Seiten gelesen"}.`); 
+                        location.reload(); 
+                    })
+                    .catch(err => alert("Fehler: " + err));
             });
 
             // --- Buch beenden ---
@@ -312,16 +327,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }).catch(err => console.error("Fehler beim Laden der CSV-Daten:", err));
 });
 
-// Schließt Modals, wenn man außerhalb des Inhalts klickt
+// Schließt Modals bei Klick außerhalb
 window.addEventListener("click", (event) => {
-    // Wir prüfen, ob das geklickte Element die Klasse "modal" hat 
-    // (das ist der dunkle Hintergrund, der den ganzen Bildschirm füllt)
     if (event.target.classList.contains("modal")) {
         event.target.style.display = "none";
-        
-        // Optional: Falls du Promises nutzt (wie oben), 
-        // müssten diese hier eigentlich ein 'resolve' senden.
-        // Da die Modals aber beim nächsten Öffnen ohnehin neu initialisiert werden,
-        // reicht das einfache Ausblenden für die Optik meistens aus.
     }
 });
