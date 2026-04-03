@@ -29,6 +29,62 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     const getIsoDate = () => new Date().toISOString().split('T')[0];
 
+    // --- NEU: Modal für Zahleneingabe (Fortschritt) ---
+    function openProgressModal(bookTitle, unit) {
+        return new Promise(resolve => {
+            const modal = document.getElementById("progressInputModal");
+            const modalContent = modal.querySelector(".modal-content");
+            const input = modal.querySelector("input");
+            const h3 = modal.querySelector("h3");
+            const subtext = modal.querySelector("#progressModalSubtext");
+
+            h3.textContent = "Fortschritt eingeben";
+            subtext.textContent = `Wie viele ${unit} hast du heute bei "${bookTitle}" geschafft?`;
+            input.value = "";
+            
+            let errorMsg = modalContent.querySelector(".error-msg");
+            if(!errorMsg) {
+                errorMsg = document.createElement("div");
+                errorMsg.className = "error-msg";
+                errorMsg.style.color = "red";
+                errorMsg.style.fontSize = "0.9em";
+                errorMsg.style.marginTop = "4px";
+                subtext.after(errorMsg);
+            }
+            errorMsg.textContent = "";
+            modalContent.style.border = "";
+
+            modal.style.display = "flex";
+            input.focus();
+
+            const save = () => {
+                const val = parseInt(input.value);
+                if(isNaN(val) || val <= 0) {
+                    modalContent.style.border = "2px solid red";
+                    errorMsg.textContent = `Bitte eine gültige Anzahl an ${unit} eingeben.`;
+                    return;
+                }
+                modal.style.display = "none";
+                cleanup();
+                resolve(val);
+            };
+
+            const cancel = () => {
+                modal.style.display = "none";
+                cleanup();
+                resolve(null);
+            };
+
+            function cleanup() {
+                modal.querySelector(".modal-save").removeEventListener("click", save);
+                modal.querySelector(".modal-cancel").removeEventListener("click", cancel);
+            }
+
+            modal.querySelector(".modal-save").addEventListener("click", save);
+            modal.querySelector(".modal-cancel").addEventListener("click", cancel);
+        });
+    }
+
     // --- Checkbox/Radio Modal ---
     function openCheckboxModal(modalId, options, title="Auswahl", multiple=true) {
         return new Promise(resolve => {
@@ -202,16 +258,19 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             container.appendChild(bookDiv);
 
-            // --- Fortschritt ---
-            bookDiv.querySelector(".btn-progress").addEventListener("click", () => {
+            // --- Fortschritt (Neu mit Modal) ---
+            bookDiv.querySelector(".btn-progress").addEventListener("click", async () => {
                 const unit = format==="Hörbuch"?"Minuten":"Seiten";
-                const val = prompt(`Wie viele ${unit} hast du heute bei "${title}" geschafft?`);
-                if (!val || isNaN(val)) return;
+                
+                const val = await openProgressModal(title, unit);
+                if (val === null) return;
+
                 const fd = new FormData();
                 fd.append(FIELD_DAILY_TITLE, title);
                 fd.append(FIELD_DAILY_DATE, getGermanDate());
-                if(format==="Hörbuch") fd.append(FIELD_DAILY_MINS,val);
-                else fd.append(FIELD_DAILY_PAGES,val);
+                if(format==="Hörbuch") fd.append(FIELD_DAILY_MINS, val);
+                else fd.append(FIELD_DAILY_PAGES, val);
+                
                 fetch(FORM_DAILY,{method:"POST",mode:"no-cors",body:fd})
                     .then(()=> { alert("Fortschritt gespeichert!"); location.reload(); })
                     .catch(err=>alert("Fehler: "+err));
@@ -219,24 +278,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // --- Buch beenden ---
             bookDiv.querySelector(".btn-finish").addEventListener("click", async () => {
-                // Reihenfolge: Sterne, Fazit, Sub Genre, Themen, Stimmung, Tempo
-
                 const sterne = await openStarsModal();
-
                 const fazitArr = await openCheckboxModal("fazitModal", ["Abgebrochen","Flop","Solide","Lesenswert","Highlight"], "Fazit", false);
                 const fazit = fazitArr[0];
-
                 const subgenreArr = await openCheckboxModal("subgenreModal", ["Klassiker", "(Auto-)Biografie", "Zeitgenössisch", "Mystery", "Fantasy", "Science Fiction", "Dystopie", "Historisch", "Magischer Realismus", "Kinderbuch", "New Adult", "Young Adult", "Horror"], "Sub Genre", true);
                 const subgenreStr = subgenreArr.join(", ");
-
                 const themenArr = await openCheckboxModal("themenModal", [
                     "Abenteuer","Ableismus","Antisemitismus","Alkoholismus","Armut","Bücher","Coming of Age","DDR","Demenz/Alzheimer","Depression","Diktatur","Ehebruch/Betrug","Eifersucht","Eltern-Kind-Beziehung","Elternschaft","Emanzipation","Familie","Female Rage","Feminismus","Freundschaft","Geheimnisse","Generationen","Gerichtsverfahren","Geschwister","Gesellschaft","Gewalt","Holocaust","Homophobie","Identität/Herkunft","Klassismus","Krankheit","Krieg","Kunst","Liebe","Magie","Missbrauch","Mord","Musik","Nachkriegszeit","Natur","Philosophie","Politik","Psychologisch","Queer","Rassismus","Religion","Rolle der Frau","Sexismus","Spionage","Sprache","Soziologie","Tod","Trauer","Trauma","Toxische Beziehungen","Vergewaltigung","Verrat","Wissenschaft","Zeitreise"
                 ], "Themen", true);
                 const themenStr = themenArr.join(", ");
-
                 const stimmungArr = await openCheckboxModal("stimmungModal", ["Traurig","Langweilig","Lustig/Humorvoll","Aufwühlend","Spannend","Melancholisch","Informativ","Romantisch","Nachdenklich","Düster","Gruselig","Cozy/Gemütlich","Ruhig","Herausfordernd/Komplex","Verwirrend","Eklig","Überraschend","Dramatisch"], "Stimmung", true);
                 const stimmungStr = stimmungArr.join(", ");
-
                 const tempoArr = await openCheckboxModal("tempoModal", ["Langsam","Mittel","Schnell"], "Lesetempo", false);
                 const tempo = tempoArr[0];
 
