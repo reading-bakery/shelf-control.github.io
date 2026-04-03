@@ -311,3 +311,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }).catch(err => console.error("Fehler beim Laden der CSV-Daten:", err));
 });
+
+// Schließt Modals, wenn man außerhalb des Inhalts klickt
+window.addEventListener("click", (event) => {
+    // Wir prüfen, ob das geklickte Element die Klasse "modal" hat 
+    // (das ist der dunkle Hintergrund, der den ganzen Bildschirm füllt)
+    if (event.target.classList.contains("modal")) {
+        event.target.style.display = "none";
+        
+        // Optional: Falls du Promises nutzt (wie oben), 
+        // müssten diese hier eigentlich ein 'resolve' senden.
+        // Da die Modals aber beim nächsten Öffnen ohnehin neu initialisiert werden,
+        // reicht das einfache Ausblenden für die Optik meistens aus.
+    }
+});
