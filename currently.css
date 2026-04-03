@@ -142,6 +142,50 @@ transform: scale(1.03);
     transform: scale(1.05);
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-content {
+    background: whitesmoke;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+    color: black;
+}
+.checkbox-list label {
+    display: block;
+    margin-bottom: 5px;
+    color: black;
+    font-weight: normal;
+    cursor: pointer;
+}
+.modal-save, .modal-cancel {
+    margin-top: 10px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 15px;
+    border: none;
+    background-color: #a2bba3;
+    cursor: pointer;
+}
+
+.modal-content .error-msg {
+    color: red;
+    font-size: 0.9em;
+    margin: 2px 0 6px 0; /* oben 2px, unten 6px */
+    line-height: 1.2em;
+}
+
+
+
 
 @media (max-width: 740px) {
 .curr {
