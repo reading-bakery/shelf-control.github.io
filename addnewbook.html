@@ -11,8 +11,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis:wght@200..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style-site.css">
   <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="barcode.css">
 
   <script src="toggle.js" defer></script>
+  <script src="barcode.js" defer></script>
   <script src="backtop.js" defer></script>
 
 </head>
@@ -49,6 +51,23 @@
   </nav>
 
   <h2>Neues Buch hinzufügen</h2>
+
+  <div class="addcontainer" id="addContainer">
+
+    <div class="barcode" id="openScanner">
+      <p>Buch mit Barcode hinzufügen</p>
+      <svg xmlns="http://www.w3.org/2000/svg" height="150px" viewBox="0 -960 960 960" width="150px" fill="white" cursor="pointer">
+        <path d="M40-200v-560h80v560H40Zm120 0v-560h80v560h-80Zm120 0v-560h40v560h-40Zm120 0v-560h80v560h-80Zm120 0v-560h120v560H520Zm160 0v-560h40v560h-40Zm120 0v-560h120v560H800Z"/>
+      </svg>
+    </div>
+
+    <div class="addbook" id="addBook">
+      <p>Buch händisch hinzufügen</p>
+      <p>Klick!</p>
+    </div>
+
+  </div>
+  
 
   <form action="https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse"
         method="POST" target="hidden_iframe" onsubmit="submitted=true;">
@@ -230,6 +249,18 @@
   <footer>
      <p>&copy; 2026 Katharina | Impressum</p>
   </footer>
+
+  <div id="scannerOverlay" class="scanner-overlay hidden">
+    <video id="video"></video>
+    <button id="closeScanner">Schließen</button>
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+  <script src="https://unpkg.com/@zxing/library@latest"></script>
+
+
+
 
 </body>
 </html>
