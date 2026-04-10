@@ -33,3 +33,16 @@
   border-radius: 8px;
   cursor: pointer;
 }
+
+.preview-box {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  z-index: 9999;
+  cursor: pointer;
+}

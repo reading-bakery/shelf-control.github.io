@@ -213,6 +213,15 @@
 
   <iframe name="hidden_iframe" class="hidden-iframe" onload="formGesendet()" title="Versteckter Iframe zum Formular-Submit"></iframe>
 
+  <div id="previewBox" class="hidden preview-box">
+  <h3>Buchvorschau</h3>
+    <p><strong>Titel:</strong> <span id="pTitle"></span></p>
+    <p><strong>Autor:</strong> <span id="pAuthor"></span></p>
+
+    <button id="confirmSend">✔ Bestätigen & speichern</button>
+    <button id="cancelSend">✖ Abbrechen</button>
+  </div>
+
 
 
   <script>
@@ -254,6 +263,7 @@
     <video id="video"></video>
     <button id="closeScanner">Schließen</button>
   </div>
+
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
