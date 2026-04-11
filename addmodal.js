@@ -7,13 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
     start: "entry.231863637", title: "entry.554995646", author: "entry.890797774", 
     gender: "entry.1685694101", umfang: "entry.436245051", seiten: "entry.1082451600",
     minuten: "entry.1433991187", genre: "entry.1105252862", sprache: "entry.807495643",
-    Format: "entry.9727566", status: "entry.914730295", verlag: "entry.1674035100"
+    format: "entry.9727566", status: "entry.914730295", verlag: "entry.1674035100"
   };
 
   const bookData = {
     start: "", title: "", author: "", gender: "", 
     umfang: "", seiten: "", minuten: "", genre: "", 
-    sprache: "", Format: "", status: "", verlag: ""
+    sprache: "", format: "", status: "", verlag: ""
   };
 
   // --- Hilfsfunktionen für Validierung & Anzeige ---
