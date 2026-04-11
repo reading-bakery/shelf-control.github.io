@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div style="text-align: center; padding: 20px;">
             <h3 style="color: #13c913;">Erfolg!</h3>
             <p style="font-size: 1.1em; margin: 20px 0;">
-              <strong>${bookData.title}</strong> wurde erfolgreich hinzugefügt. <3
+              <strong>${bookData.title}</strong> wurde erfolgreich hinzugefügt. 🚀
             </p>
             <button class="modal-save" style="width: 100%;">Super!</button>
           </div>
