@@ -1,3 +1,24 @@
+.addcontainer {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #1f1f1f;
+  padding: 1rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.addbook,
+.barcode {
+  background-color: rgb(139, 139, 129);
+  cursor: pointer;
+}
+
+
 .scanner-overlay {
   position: fixed;
   inset: 0;
@@ -19,7 +40,6 @@
   margin-top: 20px;
   padding: 10px 20px;
   font-size: 16px;
-  
 }
 
 .hidden {
@@ -27,7 +47,7 @@
 }
 
 #closeScanner {
-  background-color: rgb(224, 224, 87);
+  background-color: #a2bba3;;
   color: black;
   border: none;
   border-radius: 8px;
@@ -45,4 +65,105 @@
   border-radius: 12px;
   z-index: 9999;
   cursor: pointer;
+}
+
+
+.checkbox-list label {
+    display: block;
+    color: black;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: whitesmoke;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  color: black;
+}
+
+.modal-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Erhöht den Abstand unter dem Eingabefeld */
+.modal-search, 
+#seitenModal input, 
+#minutenModal input {
+}
+
+/* Falls du die Container-Logik nutzt */
+.modal-content input {
+    display: block;
+}
+
+
+.modal-save,
+.modal-cancel {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: #a2bba3;
+  cursor: pointer;
+}
+
+.modal-content .error-msg {
+    color: red;
+    font-size: 0.9em;
+    margin: 2px 0 6px 0; /* oben 2px, unten 6px */
+    line-height: 1.2em;
+}
+
+.modalcontainer {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+  z-index: 9999;
+}
+
+.modalcontainer.active {
+  display: flex;
+}
+
+
+#isbn,
+#manualAddBtn {
+  cursor: pointer;
+  border-radius: 8px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ccc;
+  font-family: "Dosis", sans-serif;
+  font-size: 12pt;
+  height: 40px;
+  background-color: rgb(233, 233, 221);
+  color: black;
 }

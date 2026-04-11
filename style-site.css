@@ -28,7 +28,7 @@
         color: khaki; 
       }
 
-      .addcontainer,
+
       .sub,
       form {
         max-width: 700px;
@@ -39,17 +39,7 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
       }
 
-      .addcontainer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .addbook,
-      .barcode {
-        background-color: rgb(139, 139, 129);
-      }
-
+      
 
       label {
         font-weight: 600;
@@ -200,6 +190,8 @@
   'GRAD' 0,
   'opsz' 24
 }
+
+
 
 
     /* Ergänzung für große Bildschirme */
