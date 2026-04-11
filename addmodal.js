@@ -53,17 +53,23 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
+  function openModal(id) { document.getElementById(id).classList.add("active"); }
+  function closeModal(id) { document.getElementById(id).classList.remove("active"); }
+
+  // --- Optionen Rendern (Kompakt-Design) ---
   const renderOptions = (modalId, options, name) => {
     const modal = document.getElementById(modalId);
     const list = modal?.querySelector(".checkbox-list");
     if (!list) return;
 
+    // Styling für die Liste: Engeres gap
     list.style.maxHeight = "250px";
     list.style.overflowY = "auto";
     list.style.display = "flex";
     list.style.flexDirection = "column";
+    list.style.gap = "1px"; // Sehr kleiner Abstand zwischen den Zeilen
     list.style.paddingRight = "5px";
-    list.style.borderRadius = "8px";
+    list.style.marginBottom = "3px"; // Platz zu den Buttons unten
 
     if (!modal.querySelector(".modal-search")) {
       const searchInput = document.createElement("input");
@@ -87,9 +93,11 @@ document.addEventListener("DOMContentLoaded", () => {
       };
     }
 
+    // Kompakte Radio-Buttons (wenig Padding)
     list.innerHTML = options.map(opt => `
-      <label style="display: flex; align-items: center; cursor: pointer;">
-        <input type="radio" name="${name}" value="${opt}"> ${opt}
+      <label style="display: flex; align-items: center; cursor: pointer; gap: 2px;">
+        <input type="radio" name="${name}" value="${opt}" style="margin: 0;"> 
+        <span style="font-size: 0.95em; line-height: 1.2;">${opt}</span>
       </label>
     `).join("");
   };
@@ -103,31 +111,42 @@ document.addEventListener("DOMContentLoaded", () => {
   renderOptions("statusModal", ["Neuzugang", "SuB", "Ausgeliehen", "Rezensionsexemplar"], "status");
   renderOptions("verlagModal", ["Sonstiges", "ATB/Aufbau/RL/Blumenbar", "Atlantik", "Atrium", "Blanvalet", "btb", "Carlsen", "C.Bertelsmann", "CBJ", "C.H.Beck", "Diogenes", "dtv", "Dumont", "Ecco", "Eichborn", "Eisele", "Fischer", "Frankfurter Verlagsanstalt", "Goldmann", "Hanser", "Harper Collins", "Heyne", "Insel", "Kampa", "Kein&Aber", "Knaur/Droemer", "KiWi", "Klett-Cotta", "Knesebeck", "Königskinder", "Limes", "Luchterhand", "Lübbe", "LYX", "Penguin", "Piper", "Pola", "Reclam", "Rowohlt/rororo", "Suhrkamp", "transcript", "Ullstein/List", "Verbrecher"], "verlag");
 
-  function openModal(id) { document.getElementById(id).classList.add("active"); }
-  function closeModal(id) { document.getElementById(id).classList.remove("active"); }
-
-  // --- Event Listener Kette ---
-  document.getElementById("manualAddBtn")?.addEventListener("click", () => openModal("modal-start"));
+  // --- Event Listener Kette mit Abständen für Inputs ---
+  document.getElementById("manualAddBtn")?.addEventListener("click", () => {
+    document.getElementById("startdateInput").style.marginBottom = "25px";
+    openModal("modal-start");
+  });
 
   document.querySelector("#modal-start .modal-save").addEventListener("click", () => {
     const val = document.getElementById("startdateInput").value;
-    if (validateStep("modal-start", val, true, "Bitte Startdatum eintragen.", "titleModal")) bookData.start = val;
+    if (validateStep("modal-start", val, true, "Bitte Startdatum eintragen.", "titleModal")) {
+        bookData.start = val;
+        document.querySelector("#titleModal input").style.marginBottom = "25px";
+    }
   });
 
   document.querySelector("#titleModal .modal-save").addEventListener("click", () => {
     const val = document.querySelector("#titleModal input").value;
-    if (validateStep("titleModal", val, true, "Bitte Titel eintragen.", "authorModal")) bookData.title = val;
+    if (validateStep("titleModal", val, true, "Bitte Titel eintragen.", "authorModal")) {
+        bookData.title = val;
+        document.querySelector("#authorModal input").style.marginBottom = "25px";
+    }
   });
 
   document.querySelector("#authorModal .modal-save").addEventListener("click", () => {
     const val = document.querySelector("#authorModal input").value;
-    if (validateStep("authorModal", val, true, "Bitte Autor:in eintragen.", "genderModal")) bookData.author = val;
+    if (validateStep("authorModal", val, true, "Bitte Autor:in eintragen.", "genderModal")) {
+        bookData.author = val;
+    }
   });
 
   const setupRadioStep = (modalId, key, errorText, nextModalId) => {
     document.querySelector(`#${modalId} .modal-save`).addEventListener("click", () => {
       const val = document.querySelector(`#${modalId} input:checked`)?.value;
-      if (validateStep(modalId, val, true, errorText, nextModalId)) bookData[key] = val;
+      if (validateStep(modalId, val, true, errorText, nextModalId)) {
+          bookData[key] = val;
+          if(nextModalId === "seitenModal") document.querySelector("#seitenModal input").style.marginBottom = "25px";
+      }
     });
   };
 
@@ -135,8 +154,11 @@ document.addEventListener("DOMContentLoaded", () => {
   setupRadioStep("umfangModal", "umfang", "Bitte Umfang auswählen.", "seitenModal");
 
   document.querySelector("#seitenModal .modal-save").addEventListener("click", () => {
-    bookData.seiten = document.querySelector("#seitenModal input").value || "0";
-    validateStep("seitenModal", bookData.seiten, false, "", "minutenModal");
+    const val = document.querySelector("#seitenModal input").value;
+    bookData.seiten = val || "0";
+    if (validateStep("seitenModal", val, false, "", "minutenModal")) {
+        document.querySelector("#minutenModal input").style.marginBottom = "25px";
+    }
   });
 
   document.querySelector("#minutenModal .modal-save").addEventListener("click", () => {
@@ -149,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupRadioStep("formatModal", "Format", "Bitte Format auswählen.", "statusModal");
   setupRadioStep("statusModal", "status", "Bitte Status auswählen.", "verlagModal");
 
-  // --- Letzter Schritt mit In-Modal Erfolgsmeldung ---
+  // --- Letzter Schritt: Senden & In-Modal Erfolg ---
   document.querySelector("#verlagModal .modal-save").addEventListener("click", async () => {
     const val = document.querySelector("#verlagModal input:checked")?.value;
     const currentModal = document.getElementById("verlagModal");
@@ -161,23 +183,18 @@ document.addEventListener("DOMContentLoaded", () => {
       Object.keys(FORM_ENTRIES).forEach(key => fd.append(FORM_ENTRIES[key], bookData[key]));
       
       try {
-        // Senden an Google Forms
         await fetch(FORM_URL, { method: "POST", mode: "no-cors", body: fd });
         
-        // Modal-Inhalt leeren und Erfolgsmeldung anzeigen
         modalContent.innerHTML = `
           <div style="text-align: center; padding: 20px;">
             <h3 style="color: #13c913;">Erfolg!</h3>
             <p style="font-size: 1.1em; margin: 20px 0;">
-              <strong>${bookData.title}</strong> wurde erfolgreich hinzugefügt. ♥️
+              <strong>${bookData.title}</strong> wurde erfolgreich hinzugefügt. <3
             </p>
             <button class="modal-save" style="width: 100%;">Super!</button>
           </div>
         `;
-
-        // Bei Klick auf "Super!" Seite neu laden
         modalContent.querySelector("button").onclick = () => location.reload();
-
       } catch (err) { 
         showError(currentModal, "Fehler beim Senden: " + err); 
       }
