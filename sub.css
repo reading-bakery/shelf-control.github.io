@@ -7,6 +7,8 @@
     background-color: #1f1f1f;
 }
 
+
+
 .sub-bild {
     max-width: 90px;
     border-radius: 10px;
@@ -212,64 +214,6 @@
     font-size: 12pt;
 }
 
-@media (max-width: 740px) {
-    .sub {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 10px;
-        justify-content: flex-start; /* Linksbündig wie im Bild */
-    }
-
-   .sub .buch-wrapper {
-        width: calc(33.33% - 7px) !important; 
-        flex: 0 0 calc(33.33% - 7px) !important;
-        aspect-ratio: 2 / 3 !important; 
-        position: relative !important; 
-        overflow: hidden !important;
-        background-color: red; /* Das ist dein Kontroll-Feld */
-        border-radius: 8px !important;
-    }
-
-.sub-bild {
-        /* 1. Absolute Positionierung fest verankern */
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        
-        /* 2. Den Platz des Wrappers erzwingen */
-        width: 100% !important;
-        height: 100% !important;
-        
-        /* 3. Das Bild strecken/beschneiden, um das Feld zu füllen */
-        object-fit: cover !important; 
-        
-        /* 4. Browser-Defaults zurücksetzen */
-        display: block !important;
-        margin: 0 !important;
-    }
-
-    .plus-overlay {
-        position: absolute !important;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 10; /* Über dem Bild */
-        /* ... restliches Overlay Styling ... */
-    }
-
-    /* Hover-Effekt: Bild wird blasser, Plus wird sichtbar */
-    .buch-wrapper:hover .plus-overlay {
-        opacity: 1 !important;
-    }
-
-    .buch-wrapper:hover .sub-bild {
-        opacity: 0.4 !important;
-    }
-
-   
-}
 
 
 /* Ergänzung für große Bildschirme */

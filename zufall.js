@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const buch = alleBuecher[Math.floor(Math.random() * alleBuecher.length)];
 
         const wrapper = document.createElement("div");
-        wrapper.classList.add("buch-wrapper");
+        wrapper.classList.add("buch-wrapper", "zufall-ergebnis"); // "zufall-ergebnis" neu
 
         const img = document.createElement("img");
         img.src = baseURL + buch.cover;
