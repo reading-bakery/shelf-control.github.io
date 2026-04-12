@@ -44,14 +44,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
-    // 2. Google Sheets Übertragung
-    const addToGoogleSheets = async (buch, element) => {
-        const confirmMsg = `Möchtest du "${buch.title}" hinzufügen?`;
-        if (!confirm(confirmMsg)) return;
+   // Hilfsfunktion zum Steuern des Modals
+const modal = document.getElementById("book-modal");
+const closeBtn = document.getElementById("modal-cancel");
+const confirmBtn = document.getElementById("modal-confirm");
 
-        // Link-Format für die Tabelle
-        const githubLink = `https://github.com/reading-bakery/shelf-control.github.io/blob/main/images/sub/${buch.cover}?raw=true`;
+const addToGoogleSheets = (buch, element) => {
+    // Modal befüllen
+    document.getElementById("modal-cover").src = baseURL + buch.cover;
+    document.getElementById("modal-title").textContent = buch.title;
+    document.getElementById("modal-author").textContent = buch.author;
+
+    // Modal anzeigen
+    modal.style.display = "flex";
+
+    // Klick auf Abbrechen
+    closeBtn.onclick = () => { modal.style.display = "none"; };
+
+    // Klick auf Bestätigen
+    confirmBtn.onclick = async () => {
+        modal.style.display = "none"; // Modal sofort schließen
         
+        const githubLink = `https://github.com/reading-bakery/shelf-control.github.io/blob/main/images/sub/${buch.cover}?raw=true`;
         const formData = new FormData();
         const today = new Date().toISOString().split('T')[0];
 
@@ -70,25 +84,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         formData.append(FORM_ENTRIES.cover, githubLink);
 
         try {
-            // Senden an Google Forms
             fetch(FORM_URL, { method: "POST", mode: "no-cors", body: formData });
 
-            // Sofortiges Ausblenden in der UI
+            // UI-Animation
             element.style.transition = "opacity 0.5s ease, transform 0.5s ease";
             element.style.opacity = "0";
             element.style.transform = "scale(0.8)";
             
             setTimeout(() => {
                 element.remove();
-                // Aus lokalem Speicher entfernen für Suche
                 alleBuecher = alleBuecher.filter(b => b.cover !== buch.cover);
             }, 500);
-
-            alert(`"${buch.title}" wurde übertragen! Es kann 1-2 Min. dauern, bis es auf allen Geräten verschwindet.`);
         } catch (error) {
             console.error("Fehler beim Senden:", error);
         }
     };
+};
 
     // 3. Bilder rendern
     const renderBooks = (buecherListe) => {

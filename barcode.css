@@ -111,11 +111,15 @@
 #confirmSend {
     background-color: #a2bba3;
     color: black;
+    font-family: "Dosis", sans-serif;
+    font-size: 12pt;
 }
 
 #cancelSend {
     background-color: #e0d0d0;
     color: #333;
+    font-family: "Dosis", sans-serif;
+    font-size: 12pt;
 }
 
 /* Hilfsklasse zum Verstecken */
