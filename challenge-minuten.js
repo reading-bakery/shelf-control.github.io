@@ -70,7 +70,7 @@
           stroke-dashoffset="${circ * (1 - Math.min(percent,100)/100)}" 
           stroke-linecap="round" />
         <g style="transform: rotate(90deg) translate(110px, -110px); font-family: Dosis, sans-serif; fill: white; text-anchor: middle;">
-          <text y="-15" font-size="18">${current.toLocaleString('de-DE')} / ${goal.toLocaleString('de-DE')}</text>
+          <text y="-15" font-size="18">${current.toLocaleString('de-DE')} von  ${goal.toLocaleString('de-DE')}</text>
           <text y="5" font-size="12">Minuten gehört.</text>
           <text y="30" font-size="22">${percent}%</text>
           <text y="50" font-size="14" fill="${deltaColor}">${deltaText}</text>
