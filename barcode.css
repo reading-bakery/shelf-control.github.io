@@ -188,11 +188,7 @@
   gap: 10px;
 }
 
-/* Erhöht den Abstand unter dem Eingabefeld */
-.modal-search, 
-#seitenModal input, 
-#minutenModal input {
-}
+
 
 /* Falls du die Container-Logik nutzt */
 .modal-content input {

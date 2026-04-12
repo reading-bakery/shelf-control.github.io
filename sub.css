@@ -148,9 +148,8 @@
     transform: scale(1.2);
     }
     .sub-bild-large {
-        width: 180px !important;    /* Deine Wunschbreite */
-        height: auto !important;     /* Verhindert das "Langeziehen" */
-        min-height: 250px;           /* Gibt eine ungefähre Form vor */
+        width: 180px !important;    
+        height: 270px !important;    /* Festes Verhältnis 2:3 passend zur Desktop-Optik */
         object-fit: cover !important; 
         display: block !important;
         margin: 20px auto !important;
@@ -165,33 +164,49 @@
     }
 
     .buch-wrapper {
+        width: fit-content !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+
+@media (max-width: 740px) {
+    .sub {
+        gap: 8px !important;
+        padding: 10px !important;
+    }
+
+    /* Die kleinen Bilder in der Galerie */
+    .sub .buch-wrapper {
         width: calc(33.333% - 8px) !important;
     }
 
+    /* DAS ZUFALLSBILD AUF DEM HANDY - Fix für das Quetschen */
+    .sub-bild-large {
+        width: 180px !important;
+        height: 270px !important; /* Festes Maß verhindert Verformung */
+        object-fit: cover !important;
+        margin: 20px auto !important;
+    }
+
+    /* Der Wrapper im Zufall-Modus darf nicht breiter sein als das Bild */
+    #subContainer .buch-wrapper {
+        width: 180px !important; 
+        margin: 0 auto !important;
+        display: block !important;
+    }
+
     .plus-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #a2bba3;
-    font-size: 60px;
-    font-weight: bold;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 2;
-    pointer-events: auto;
+        font-size: 60px;
+    }
 }
 
 
-}
 
 /* Ergänzung für große Bildschirme */
 @media (min-width: 1400px) {
+    
     h2 {
       font-size: 7rem;
     }
+}
 }
