@@ -1,28 +1,32 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const container = document.querySelector(".sub");
 
-    // Basis-URL für Bilder + JSON
     const baseURL = "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/";
-    const jsonURL = baseURL + "sub.json"; 
+    const jsonURL = baseURL + "sub.json";
 
     try {
         const response = await fetch(jsonURL);
         if (!response.ok) throw new Error("sub.json konnte nicht geladen werden.");
 
-        const bücher = await response.json();
+        const daten = await response.json();
 
-        // Falls das JSON ein direktes Array von Objekten ist:
+        // Hier liegt die Änderung: Wir greifen auf daten.books zu!
+        const bücher = daten.books; 
+
+        if (!Array.isArray(bücher)) {
+            throw new Error("Das 'books'-Feld wurde im JSON nicht gefunden oder ist kein Array.");
+        }
+
         bücher.forEach(buch => {
-            // Wir prüfen, ob ein Cover-Dateiname existiert
             if (buch.cover) {
                 const img = document.createElement("img");
-                img.src = baseURL + buch.cover; // Greift auf "cover" im Objekt zu
-                img.alt = buch.title;           // Nutzt den Titel als Alt-Text
+                img.src = baseURL + buch.cover;
+                img.alt = buch.title;
                 img.loading = "lazy";
                 img.classList.add("sub-bild");
                 
-                // Optional: Titel als Tooltip beim Drüberfahren
-                img.title = `${buch.title} von ${buch.author}`;
+                // Optionaler Bonus: Zeige Titel/Autor beim Hovern an
+                img.title = `${buch.title} - ${buch.author}`;
                 
                 container.appendChild(img);
             }
