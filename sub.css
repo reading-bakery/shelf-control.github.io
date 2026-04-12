@@ -219,15 +219,13 @@
         gap: 20px;
     }
 
-    /* Auf größeren Screens feste Breite oder mehr Platz */
-        width: 150px; 
-    }
+
 
     .plus-overlay {
         font-size: 80px;
     }
 
-}
+
 
 
 /* Ergänzung für große Bildschirme */
@@ -236,4 +234,5 @@
     h2 {
       font-size: 7rem;
     }
+}
 }
