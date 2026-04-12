@@ -5,11 +5,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     // --- KONFIGURATION ---
     const baseURL = "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/";
     const jsonURL = baseURL + "sub.json";
-    const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse";
-    
-    // HIER den Link aus "Im Web veröffentlichen" (TSV Format) einfügen:
-    const SHEET_TSV_URL = "DEIN_GOOGLE_SHEET_TSV_LINK_HIER";
 
+    // DIESE ZEILE HAT GEFEHLT:
+    const SHEET_TSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1702643479&single=true&output=tsv"; 
+
+    const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse";
+
+    
     const FORM_ENTRIES = {
         start: "entry.231863637", 
         title: "entry.554995646", 
@@ -44,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 2. Google Sheets Übertragung
     const addToGoogleSheets = async (buch, element) => {
-        const confirmMsg = `Möchtest du "${buch.title}" in die Google Sheets aufnehmen?`;
+        const confirmMsg = `Möchtest du "${buch.title}" hinzufügen?`;
         if (!confirm(confirmMsg)) return;
 
         // Link-Format für die Tabelle

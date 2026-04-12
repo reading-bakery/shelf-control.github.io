@@ -19,11 +19,16 @@
 }
 
 .sub-bild-large {
-    width: 200px;
-    max-width: none;       /* Wichtig, um das Limit von .sub-bild aufzuheben */
-    height: auto;          /* proportional */
-    box-shadow: 0 0 8px rgba(0,0,0,0.6);
+    width: 200px !important;
+    height: 300px !important; /* Hier legst du die "Gleichheit" fest */
+    object-fit: cover;        /* Schneidet Ränder leicht ab, statt zu quetschen */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    display: block;
+    margin: 0 auto;
 }
+
+
 
 
 #luckyZufall {
@@ -73,20 +78,58 @@
     color: whitesmoke;
 }
 
-@media (max-width: 740px) {
-    /* Container: Platz optimieren für 3 Spalten */
-    .sub {
-        gap: 8px !important; 
-        padding: 10px !important;
-        justify-content: center !important;
-    }
+/* --- 3. SUB / BÜCHERGITTER --- */
+.sub {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
 
-    /* Der Wrapper ist jetzt das Element, das 33% einnimmt */
-    .buch-wrapper {
-        width: calc(33.333% - 8px) !important;
-        flex: 0 0 auto !important;
-        position: relative;
-    }
+.buch-wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.sub-bild {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.plus-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a2bba3;
+    font-size: 80px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 2;
+    pointer-events: auto;
+}
+
+.buch-wrapper:hover .sub-bild {
+    opacity: 0.3;
+    transform: scale(1.02);
+}
+
+.buch-wrapper:hover .plus-overlay {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+@media (max-width: 740px) {
+
 
     /* Das Bild füllt den Wrapper einfach aus */
     .sub-bild {
@@ -95,31 +138,55 @@
         height: auto !important;
     }
 
-    /* Plus-Symbol am Handy etwas kleiner (80px ist zu riesig für 3 Spalten) */
-    .plus-overlay {
-        font-size: 40px !important; 
-        /* Auf Touch-Geräten gibt es keinen Hover. 
-           Optional: Hier opacity auf 0.5 setzen, damit man sieht, dass man klicken kann */
+    .buch-wrapper:hover .sub-bild {
+    opacity: 0.3;
+    transform: scale(1.02);
     }
 
+    .buch-wrapper:hover .plus-overlay {
+    opacity: 1;
+    transform: scale(1.2);
+    }
+    .sub-bild-large {
+        width: 180px !important;    /* Deine Wunschbreite */
+        height: auto !important;     /* Verhindert das "Langeziehen" */
+        min-height: 250px;           /* Gibt eine ungefähre Form vor */
+        object-fit: cover !important; 
+        display: block !important;
+        margin: 20px auto !important;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
 
-    /* Optional: Container so anpassen, dass es gut aussieht */
+    /* Galerie-Ansicht (3 Spalten) */
     .sub {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        flex-direction: row !important;
-        justify-content: center !important;
-        gap: 10px !important;
+        gap: 8px !important;
         padding: 10px !important;
     }
 
-    .sub-bild-large {
-       width: 180px; /* Deutlich größer für das Handy-Ergebnis */
-        max-width: 80%; /* Falls das Handy sehr schmal ist */
-        height: auto;
-        margin: 0 auto;
-        display: block;
+    .buch-wrapper {
+        width: calc(33.333% - 8px) !important;
     }
+
+    .plus-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a2bba3;
+    font-size: 60px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 2;
+    pointer-events: auto;
+}
+
+
 }
 
 /* Ergänzung für große Bildschirme */

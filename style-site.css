@@ -71,54 +71,7 @@ form {
     align-items: flex-start;
 }
 
-/* --- 3. SUB / BÜCHERGITTER --- */
-.sub {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-}
 
-.buch-wrapper {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-}
-
-.sub-bild {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.plus-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #a2bba3;
-    font-size: 80px;
-    font-weight: bold;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.buch-wrapper:hover .sub-bild {
-    opacity: 0.3;
-    transform: scale(1.02);
-}
-
-.buch-wrapper:hover .plus-overlay {
-    opacity: 1;
-    transform: scale(1.2);
-}
 
 /* --- 4. FORMULAR & BUTTONS --- */
 input[type="text"],
@@ -165,6 +118,9 @@ button[type="submit"]:hover {
     color: white;
 }
 
+.visually-hidden {
+    display: none;
+}
 
 /* --- 5. MOBILE OPTIMIERUNG (HANDY) --- */
 @media (max-width: 740px) {
@@ -210,21 +166,7 @@ button[type="submit"]:hover {
         display: block;
     }
 
-    /* Galerie-Ansicht (3 Spalten) */
-    .sub {
-        gap: 8px !important;
-        padding: 10px !important;
-        justify-content: center !important;
-    }
-
-    .buch-wrapper {
-        width: calc(33.333% - 8px) !important;
-    }
-
-    .sub-bild {
-        aspect-ratio: 2 / 3 !important;
-        object-fit: cover !important;
-    }
+    
 }
 
 /* --- 6. SONSTIGES & HELPER --- */

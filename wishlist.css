@@ -23,11 +23,13 @@
 }
 
 .wishlist-bild-large {
-    width: 200px;
-    max-width: none;       /* Wichtig, um das Limit von .sub-bild aufzuheben */
-    height: auto;          /* proportional */
-    box-shadow: 0 0 8px rgba(0,0,0,0.6);
-    cursor: pointer;
+    width: 200px !important;
+    height: 300px !important; /* Hier legst du die "Gleichheit" fest */
+    object-fit: cover;        /* Schneidet Ränder leicht ab, statt zu quetschen */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    display: block;
+    margin: 0 auto;
 }
 
 
