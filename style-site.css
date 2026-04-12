@@ -110,6 +110,8 @@
     flex: 1;                       /* Nimmt gleichmäßig Platz ein */
     display: flex;
     justify-content: center;
+    background-color: beige;
+    border-radius: 12px;
 }
 
 /* ISBN und Manuell Bereich rechts */

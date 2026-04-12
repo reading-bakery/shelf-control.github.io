@@ -69,17 +69,43 @@
 }
 
 @media (max-width: 740px) {
-    .sub-bild {
-       /* 3 Bilder pro Zeile: 100% / 3 minus ein bisschen Puffer für die Abstände */
-        width: calc(33.333% - 10px); 
-        max-width: none; /* Ganz wichtig: Die 90px Begrenzung von oben aufheben! */
-        flex: 0 0 auto;
+    /* Container: Platz optimieren für 3 Spalten */
+    .sub {
+        gap: 8px !important; 
+        padding: 10px !important;
+        justify-content: center !important;
     }
+
+    /* Der Wrapper ist jetzt das Element, das 33% einnimmt */
+    .buch-wrapper {
+        width: calc(33.333% - 8px) !important;
+        flex: 0 0 auto !important;
+        position: relative;
+    }
+
+    /* Das Bild füllt den Wrapper einfach aus */
+    .sub-bild {
+        width: 100% !important;
+        max-width: none !important;
+        height: auto !important;
+    }
+
+    /* Plus-Symbol am Handy etwas kleiner (80px ist zu riesig für 3 Spalten) */
+    .plus-overlay {
+        font-size: 40px !important; 
+        /* Auf Touch-Geräten gibt es keinen Hover. 
+           Optional: Hier opacity auf 0.5 setzen, damit man sieht, dass man klicken kann */
+    }
+}
 
     /* Optional: Container so anpassen, dass es gut aussieht */
     .sub {
-        gap: 10px; 
-        padding: 10px; /* Weniger Padding am Rand für mehr Platz */
+        display: flex !important;
+        flex-wrap: wrap !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        padding: 10px !important;
     }
 
     .sub-bild-large {
