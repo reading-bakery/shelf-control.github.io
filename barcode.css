@@ -122,11 +122,17 @@
     font-size: 12pt;
 }
 
-#closeNotFound {
-    background-color: #a2bba3;
-    color: #333;
-    font-family: "Dosis", sans-serif;
-    font-size: 12pt;
+#notFoundModal {
+  display: none; /* Standardmäßig aus */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font-family: "Dosis", sans-serif;
+  font-size: 12pt
 }
 
 /* Hilfsklasse zum Verstecken */
@@ -169,6 +175,22 @@
   background: rgba(0,0,0,0.6);
 
   display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.modal1 {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+
+  display: none;
   justify-content: center;
   align-items: center;
 

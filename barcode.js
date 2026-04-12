@@ -22,12 +22,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- SCANNER START ---
     document.getElementById("openScanner")?.addEventListener("click", () => {
         const overlay = document.getElementById("scannerOverlay");
-        overlay?.classList.remove("hidden");
+        if (overlay) {
+            overlay.classList.remove("hidden");
+            overlay.style.display = "flex";
+        }
         
         codeReader.decodeFromVideoDevice(null, document.getElementById("video"), async (result) => {
             if (result) {
                 codeReader.reset();
-                overlay?.classList.add("hidden");
+                overlay.classList.add("hidden");
+                overlay.style.display = "none";
                 await fetchBookData(result.getText());
             }
         });
@@ -38,15 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const cleanScanIsbn = String(rawInput).replace(/[^0-9Xx]/g, "").trim();
         const JSON_URL = `https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/sub.json?t=${new Date().getTime()}`;
         
-        // Modal-Elemente für "Nicht gefunden"
         const notFoundModal = document.getElementById("notFoundModal");
-        const closeNotFoundBtn = document.getElementById("closeNotFound");
-
-        if (closeNotFoundBtn) {
-            closeNotFoundBtn.onclick = () => {
-                notFoundModal.style.display = "none";
-            };
-        }
+        const previewBox = document.getElementById("previewBox");
 
         try {
             const res = await fetch(JSON_URL);
@@ -56,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             if (treffer) {
-                // Bild-Pfad bauen
                 const coverURL = treffer.cover ? `https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/${treffer.cover}` : "";
 
                 bookData = {
@@ -75,27 +71,28 @@ document.addEventListener("DOMContentLoaded", () => {
                     cover: coverURL
                 };
 
-                // UI befüllen
                 document.getElementById("pTitle").textContent = bookData.title;
                 document.getElementById("pAuthor").textContent = bookData.author;
-                
                 const coverImg = document.getElementById("pCover");
                 if(coverImg) {
                     coverImg.src = coverURL;
                     coverImg.style.display = coverURL ? "block" : "none";
                 }
 
-                document.getElementById("previewBox")?.classList.remove("hidden");
+                previewBox?.classList.remove("hidden");
+                previewBox.style.display = "block";
             } else {
-                // Falls Buch nicht in der Liste: Eigenes Modal statt Alert
+                // FEHLERFALL: Modal anzeigen und CSS-Hürden erzwingen
                 if (notFoundModal) {
                     notFoundModal.style.display = "flex";
+                    notFoundModal.style.opacity = "1";
+                    notFoundModal.style.pointerEvents = "auto";
                 } else {
-                    alert("Barcode wurde nicht gefunden.");
+                    alert("Barcode nicht gefunden.");
                 }
             }
         } catch (err) { 
-            console.error("Fehler beim Laden der Buchdaten:", err); 
+            console.error("Fehler beim Laden:", err); 
         }
     }
 
@@ -103,25 +100,41 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("confirmSend")?.addEventListener("click", async () => {
         const fd = new FormData();
         Object.keys(FORM_ENTRIES).forEach(key => fd.append(FORM_ENTRIES[key], bookData[key] || ""));
-
         try {
-            // Senden an Google Forms
             await fetch(FORM_URL, { method: "POST", mode: "no-cors", body: fd });
             alert("Erfolgreich gespeichert!");
             location.reload();
-        } catch (err) { 
-            alert("Fehler beim Senden."); 
+        } catch (err) { alert("Fehler beim Senden."); }
+    });
+
+    // --- CLOSE EVENTS ---
+
+    // "Nicht gefunden" Modal schließen
+    document.getElementById("closeNotFound")?.addEventListener("click", () => {
+        const modal = document.getElementById("notFoundModal");
+        if (modal) {
+            modal.style.display = "none";
+            modal.style.opacity = "0";
+            modal.style.pointerEvents = "none";
         }
     });
 
-    // --- PREVIEW ABBRECHEN ---
+    // Vorschau abbrechen
     document.getElementById("cancelSend")?.addEventListener("click", () => {
-        document.getElementById("previewBox")?.classList.add("hidden");
+        const pb = document.getElementById("previewBox");
+        if (pb) {
+            pb.classList.add("hidden");
+            pb.style.display = "none";
+        }
     });
 
-    // --- SCANNER SCHLIESSEN ---
+    // Scanner manuell schließen
     document.getElementById("closeScanner")?.addEventListener("click", () => {
         codeReader.reset();
-        document.getElementById("scannerOverlay")?.classList.add("hidden");
+        const overlay = document.getElementById("scannerOverlay");
+        if (overlay) {
+            overlay.classList.add("hidden");
+            overlay.style.display = "none";
+        }
     });
 });
