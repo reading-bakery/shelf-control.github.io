@@ -107,9 +107,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Wrapper erstellen (für die Zentrierung und das Overlay)
        const wrapper = document.createElement("div");
             wrapper.classList.add("buch-wrapper");
-            wrapper.style.margin = "0 auto"; 
-            wrapper.style.width = "fit-content"; // ÄNDERUNG: Passt sich dem Bild an, statt fest 200px
-            wrapper.style.display = "block"; // Stellt sicher, dass margin: auto funktioniert
 
         // Das Bild (erhält die "Large"-Klasse für die festen Maße)
         const img = document.createElement("img");

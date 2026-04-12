@@ -118,89 +118,77 @@
     pointer-events: auto;
 }
 
-.buch-wrapper:hover .sub-bild {
-    opacity: 0.3;
-    transform: scale(1.02);
-}
-
 .buch-wrapper:hover .plus-overlay {
     opacity: 1;
     transform: scale(1.2);
 }
 
-@media (max-width: 740px) {
-
-
-    /* Das Bild füllt den Wrapper einfach aus */
-    .sub-bild {
-        width: 100% !important;
-        max-width: none !important;
-        height: auto !important;
+    .buch-wrapper:hover .sub-bild-large,
+    .buch-wrapper:hover .sub-bild {
+        opacity: 0.3 !important;
+        transform: scale(1.02);
     }
 
-    .buch-wrapper:hover .sub-bild {
-    opacity: 0.3;
-    transform: scale(1.02);
+@media (max-width: 740px) {
+    .sub {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        /* Abstände zwischen den Bildern auf 4px verringert */
+        gap: 4px !important; 
+        padding: 4px !important;
+        justify-content: center !important;
+    }
+
+    .sub .buch-wrapper {
+        /* Breite leicht angepasst für 3 Spalten inkl. kleiner Gaps */
+        width: calc(33.33% - 4px) !important;
+        max-width: calc(33.33% - 4px) !important;
+        flex: 0 0 calc(33.33% - 4px) !important;
+        margin: 0 !important;
+        position: relative !important;
+        /* Wichtig: Verhindert kleine Lücken unten im Wrapper */
+        line-height: 0 !important; 
+    }
+
+    .sub-bild {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 2 / 3 !important;
+        object-fit: cover !important;
+        display: block !important;
+        border-radius: 8px !important; /* Etwas kleinerer Radius passend zur Bildgröße */
+    }
+
+    /* DAS PLUS-OVERLAY: Exakt so groß wie das Bild */
+    .plus-overlay {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 60% !important;
+        height: 100% !important;
+        
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        
+        /* Das Pluszeichen selbst */
+        font-size: 4rem !important; /* Etwas kleiner, damit es nicht über den Rand ragt */
+        line-height: 0 !important;
+        color: #a2bba3 !important;
+        
+        /* Hintergrund des Overlays beim Hover */
+        background-color: rgba(0, 0, 0, 0.4) !important; 
+        border-radius: 5px !important;
+        
+        opacity: 0 !important;
+        transition: opacity 0.2s ease !important;
+        z-index: 5 !important;
     }
 
     .buch-wrapper:hover .plus-overlay {
-    opacity: 1;
-    transform: scale(1.2);
-    }
-    .sub-bild-large {
-        width: 180px !important;    
-        height: 270px !important;    /* Festes Verhältnis 2:3 passend zur Desktop-Optik */
-        object-fit: cover !important; 
-        display: block !important;
-        margin: 20px auto !important;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.6);
-    }
-
-    /* Galerie-Ansicht (3 Spalten) */
-    .sub {
-        gap: 8px !important;
-        padding: 10px !important;
-    }
-
-    .buch-wrapper {
-        width: fit-content !important;
-        margin: 0 auto !important;
-        display: block !important;
-    }
-
-@media (max-width: 740px) {
-    .sub {
-        gap: 8px !important;
-        padding: 10px !important;
-    }
-
-    /* Die kleinen Bilder in der Galerie */
-    .sub .buch-wrapper {
-        width: calc(33.333% - 8px) !important;
-    }
-
-    /* DAS ZUFALLSBILD AUF DEM HANDY - Fix für das Quetschen */
-    .sub-bild-large {
-        width: 180px !important;
-        height: 270px !important; /* Festes Maß verhindert Verformung */
-        object-fit: cover !important;
-        margin: 20px auto !important;
-    }
-
-    /* Der Wrapper im Zufall-Modus darf nicht breiter sein als das Bild */
-    #subContainer .buch-wrapper {
-        width: 180px !important; 
-        margin: 0 auto !important;
-        display: block !important;
-    }
-
-    .plus-overlay {
-        font-size: 60px;
+        opacity: 1 !important;
     }
 }
-
-
 
 /* Ergänzung für große Bildschirme */
 @media (min-width: 1400px) {
@@ -208,5 +196,4 @@
     h2 {
       font-size: 7rem;
     }
-}
 }
