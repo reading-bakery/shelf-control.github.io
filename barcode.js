@@ -1,10 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
     const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse";
     const FORM_ENTRIES = {
-        start: "entry.231863637", title: "entry.554995646", author: "entry.890797774", 
-        gender: "entry.1685694101", umfang: "entry.436245051", seiten: "entry.1082451600",
-        minuten: "entry.1433991187", genre: "entry.1105252862", sprache: "entry.807495643",
-        format: "entry.9727566", status: "entry.914730295", verlag: "entry.1674035100",  
+        start: "entry.231863637", 
+        title: "entry.554995646", 
+        author: "entry.890797774", 
+        gender: "entry.1685694101", 
+        umfang: "entry.436245051", 
+        seiten: "entry.1082451600",
+        minuten: "entry.1433991187", 
+        genre: "entry.1105252862", 
+        sprache: "entry.807495643",
+        format: "entry.9727566", 
+        status: "entry.914730295", 
+        verlag: "entry.1674035100",  
         cover: "entry.952453014"
     };
 
@@ -30,6 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const cleanScanIsbn = String(rawInput).replace(/[^0-9Xx]/g, "").trim();
         const JSON_URL = `https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/sub.json?t=${new Date().getTime()}`;
         
+        // Modal-Elemente für "Nicht gefunden"
+        const notFoundModal = document.getElementById("notFoundModal");
+        const closeNotFoundBtn = document.getElementById("closeNotFound");
+
+        if (closeNotFoundBtn) {
+            closeNotFoundBtn.onclick = () => {
+                notFoundModal.style.display = "none";
+            };
+        }
+
         try {
             const res = await fetch(JSON_URL);
             const data = await res.json();
@@ -69,9 +87,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 document.getElementById("previewBox")?.classList.remove("hidden");
             } else {
-                alert("Buch nicht in sub.json gefunden.");
+                // Falls Buch nicht in der Liste: Eigenes Modal statt Alert
+                if (notFoundModal) {
+                    notFoundModal.style.display = "flex";
+                } else {
+                    alert("Barcode wurde nicht gefunden.");
+                }
             }
-        } catch (err) { console.error(err); }
+        } catch (err) { 
+            console.error("Fehler beim Laden der Buchdaten:", err); 
+        }
     }
 
     // --- BESTÄTIGEN & SENDEN ---
@@ -80,16 +105,21 @@ document.addEventListener("DOMContentLoaded", () => {
         Object.keys(FORM_ENTRIES).forEach(key => fd.append(FORM_ENTRIES[key], bookData[key] || ""));
 
         try {
+            // Senden an Google Forms
             await fetch(FORM_URL, { method: "POST", mode: "no-cors", body: fd });
             alert("Erfolgreich gespeichert!");
             location.reload();
-        } catch (err) { alert("Fehler beim Senden."); }
+        } catch (err) { 
+            alert("Fehler beim Senden."); 
+        }
     });
 
+    // --- PREVIEW ABBRECHEN ---
     document.getElementById("cancelSend")?.addEventListener("click", () => {
         document.getElementById("previewBox")?.classList.add("hidden");
     });
 
+    // --- SCANNER SCHLIESSEN ---
     document.getElementById("closeScanner")?.addEventListener("click", () => {
         codeReader.reset();
         document.getElementById("scannerOverlay")?.classList.add("hidden");

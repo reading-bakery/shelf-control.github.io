@@ -122,6 +122,13 @@
     font-size: 12pt;
 }
 
+#closeNotFound {
+    background-color: #a2bba3;
+    color: #333;
+    font-family: "Dosis", sans-serif;
+    font-size: 12pt;
+}
+
 /* Hilfsklasse zum Verstecken */
 .hidden {
     display: none !important;
