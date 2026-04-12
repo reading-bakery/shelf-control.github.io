@@ -63,12 +63,11 @@
 
 /* HOVER: Bild wird schwächer */
 .buch-wrapper:hover .sub-bild {
-    opacity: 0.3; /* Das Bild wird stark transparent */
+    opacity: 0.3;
     transform: scale(1.02);
 }
 
 
-/* Das Plus-Overlay mit starker Farbe */
 .plus-overlay {
     position: absolute;
     top: 0;
@@ -78,21 +77,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    /* Hier die starke Farbe definieren */
     color: #a2bba3;
     font-size: 80px;
     font-weight: bold;
-    
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 2;
+    pointer-events: none; /* WICHTIG: Klicks gehen durch das Overlay auf das Bild/Wrapper */
 }
 
 /* Erscheint beim Hovern über den Wrapper */
 .buch-wrapper:hover .plus-overlay {
     opacity: 1;
-    ransform: scale(1.2);
+    transform: scale(1.2);
 }
 
 /* Container, der alles aufteilt */
@@ -158,6 +155,66 @@
     background-color: #e0e0d0;
 }
 
+@media (max-width: 740px) {
+    /* ... deine bisherigen Regeln für .sub und .buch-wrapper ... */
+
+    /* ISBN Feld und Manueller Button schmaler machen */
+    #isbn, 
+    #manualAddBtn {
+        width: 100% !important;   /* Regelt die Breite am Handy */
+        max-width: 300px !important; /* Verhindert, dass sie auf großen Handys zu breit werden */
+        margin-left: auto !important;  /* Zentriert die Elemente */
+        margin-right: auto !important; /* Zentriert die Elemente */
+        display: block !important;     /* Nötig für das Zentrieren mit margin auto */
+    }
+
+    /* Falls der Wrapper um das ISBN Feld noch stört */
+    .isbn-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    @media (max-width: 740px) {
+    /* 1. Galerie-Container */
+    .sub {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: flex-start !important; 
+        gap: 8px !important; 
+        padding: 10px !important;
+    }
+
+    /* 2. Der Wrapper (3 Spalten) */
+    .buch-wrapper {
+        width: calc(33.333% - 8px) !important; 
+        flex: 0 0 auto !important;
+        margin: 0 !important;
+    }
+
+    /* 3. Die Bilder (Vereinheitlichung) */
+    .sub-bild {
+        width: 100% !important;
+        /* Erzeugt ein einheitliches Hochformat (z.B. 2:3) */
+        aspect-ratio: 2 / 3 !important; 
+        /* WICHTIG: Schneidet das Bild sauber zu, statt es zu quetschen */
+        object-fit: cover !important; 
+        max-width: none !important;
+        height: auto !important; 
+        border-radius: 8px !important;
+        display: block !important;
+    }
+
+    /* 4. ISBN & Button schmaler */
+    #isbn, 
+    #manualAddBtn {
+        width: 80% !important;
+        max-width: 300px !important;
+        margin: 10px auto !important;
+        display: block !important;
+    }
+}
+}
 
 
 /* Mobile Optimierung: Untereinander stapeln, wenn der Bildschirm zu klein ist */
