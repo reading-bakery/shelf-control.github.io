@@ -1,230 +1,97 @@
-const openScanner = document.getElementById("openScanner");
-const overlay = document.getElementById("scannerOverlay");
-const closeScanner = document.getElementById("closeScanner");
-
-const codeReader = new ZXing.BrowserMultiFormatReader();
-
-const form = document.querySelector("form");
-const previewBox = document.getElementById("previewBox");
-
-const pTitle = document.getElementById("pTitle");
-const pAuthor = document.getElementById("pAuthor");
-
-const confirmSend = document.getElementById("confirmSend");
-const cancelSend = document.getElementById("cancelSend");
-
-
-
-// ISBN Input (wichtig: muss existieren!)
-const isbnInput = document.getElementById("isbn");
-
-let allowSubmit = false;
-
-/* ---------------------------
-   SCANNER START
-----------------------------*/
-openScanner.addEventListener("click", async () => {
-  overlay.classList.remove("hidden");
-
-  try {
-    const videoElement = document.getElementById("video");
-
-    codeReader.decodeFromVideoDevice(
-      null,
-      videoElement,
-      async (result) => {
-        if (result) {
-          const isbn = result.getText();
-          console.log("📌 ISBN erkannt:", isbn);
-
-          stopScanner();
-          await fetchBookData(isbn);
-        }
-      }
-    );
-  } catch (err) {
-    console.error(err);
-    alert("Scanner konnte nicht gestartet werden");
-  }
-});
-
-/* ---------------------------
-   SCANNER STOP
-----------------------------*/
-function stopScanner() {
-  codeReader.reset();
-  overlay.classList.add("hidden");
-}
-
-closeScanner.addEventListener("click", stopScanner);
-
-/* ---------------------------
-   MANUELLE ISBN
-----------------------------*/
-isbnInput?.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    fetchBookData(isbnInput.value);
-  }
-});
-
-/* ---------------------------
-   GOOGLE BOOKS API
-----------------------------*/
-async function fetchBookData(rawInput) {
-  try {
-    console.log("RAW INPUT:", rawInput);
-
-    if (!rawInput) {
-      alert("Keine ISBN eingegeben");
-      return;
-    }
-
-    // ISBN CLEANING (WICHTIG!)
-    const isbn = String(rawInput).replace(/[^0-9Xx]/g, "").trim();
-
-    console.log("CLEAN ISBN:", isbn);
-
-    if (isbn.length < 10) {
-      alert("Ungültige ISBN: " + isbn);
-      return;
-    }
-
-    const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`;
-    console.log("REQUEST:", url);
-
-    const res = await fetch(url);
-    const data = await res.json();
-
-    console.log("RESPONSE:", data);
-
-    if (!data.items || data.items.length === 0) {
-      alert("Buch nicht gefunden – bitte manuell eingeben");
-      return;
-    }
-
-    const book = data.items[0].volumeInfo;
-
-    const title = book.title || "Unbekannt";
-    const author = (book.authors || []).join(", ");
-
-    document.getElementById("title").value = title;
-    document.getElementById("autor").value = author;
-
-    showPreview(title, author);
-
-  } catch (err) {
-    console.error("❌ Fehler:", err);
-    alert("Fehler beim Laden des Buches");
-  }
-}
-
-/* ---------------------------
-   PREVIEW
-----------------------------*/
-function showPreview(title, author) {
-  pTitle.textContent = title;
-  pAuthor.textContent = author;
-  previewBox.classList.remove("hidden");
-}
-
-/* ---------------------------
-   FORM CONTROL
-----------------------------*/
-form.addEventListener("submit", (e) => {
-  if (!allowSubmit) {
-    e.preventDefault();
-  }
-});
-
-/* ---------------------------
-   CONFIRM / CANCEL
-----------------------------*/
-confirmSend.addEventListener("click", () => {
-  allowSubmit = true;
-  previewBox.classList.add("hidden");
-  form.submit();
-  allowSubmit = false;
-});
-
-cancelSend.addEventListener("click", () => {
-  previewBox.classList.add("hidden");
-});
-
-function openUniversalModal({ title, type = "text", options = [] }) {
-  return new Promise(resolve => {
-
-    const modal = document.getElementById("universalModal");
-    const h3 = document.getElementById("modalTitle");
-    const search = document.getElementById("modalSearch");
-    const list = document.getElementById("modalList");
-    const number = document.getElementById("modalNumber");
-    const date = document.getElementById("modalDate");
-
-    h3.textContent = title;
-
-    // Reset
-    search.style.display = "none";
-    list.innerHTML = "";
-    number.style.display = "none";
-    date.style.display = "none";
-
-    let value = null;
-
-    // TYPE LOGIC
-    if (type === "textlist") {
-      search.style.display = "block";
-
-      options.forEach(opt => {
-        const label = document.createElement("label");
-        label.innerHTML = `<input type="checkbox" value="${opt}"> ${opt}`;
-        list.appendChild(label);
-      });
-    }
-
-    if (type === "number") {
-      number.style.display = "block";
-    }
-
-    if (type === "date") {
-      date.style.display = "block";
-    }
-
-    modal.style.display = "flex";
-
-    // SAVE
-    const save = () => {
-
-      if (type === "textlist") {
-        value = Array.from(list.querySelectorAll("input:checked"))
-          .map(i => i.value);
-      }
-
-      if (type === "number") {
-        value = parseInt(number.value);
-      }
-
-      if (type === "date") {
-        value = date.value;
-      }
-
-      modal.style.display = "none";
-      cleanup();
-      resolve(value);
+document.addEventListener("DOMContentLoaded", () => {
+    const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse";
+    const FORM_ENTRIES = {
+        start: "entry.231863637", title: "entry.554995646", author: "entry.890797774", 
+        gender: "entry.1685694101", umfang: "entry.436245051", seiten: "entry.1082451600",
+        minuten: "entry.1433991187", genre: "entry.1105252862", sprache: "entry.807495643",
+        format: "entry.9727566", status: "entry.914730295", verlag: "entry.1674035100",  
+        cover: "entry.952453014"
     };
 
-    const cancel = () => {
-      modal.style.display = "none";
-      cleanup();
-      resolve(null);
-    };
+    let bookData = {}; 
+    const codeReader = new ZXing.BrowserMultiFormatReader();
 
-    function cleanup() {
-      modal.querySelector(".modal-save").removeEventListener("click", save);
-      modal.querySelector(".modal-cancel").removeEventListener("click", cancel);
+    // --- SCANNER START ---
+    document.getElementById("openScanner")?.addEventListener("click", () => {
+        const overlay = document.getElementById("scannerOverlay");
+        overlay?.classList.remove("hidden");
+        
+        codeReader.decodeFromVideoDevice(null, document.getElementById("video"), async (result) => {
+            if (result) {
+                codeReader.reset();
+                overlay?.classList.add("hidden");
+                await fetchBookData(result.getText());
+            }
+        });
+    });
+
+    // --- DATEN AUS JSON LADEN ---
+    async function fetchBookData(rawInput) {
+        const cleanScanIsbn = String(rawInput).replace(/[^0-9Xx]/g, "").trim();
+        const JSON_URL = `https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/sub.json?t=${new Date().getTime()}`;
+        
+        try {
+            const res = await fetch(JSON_URL);
+            const data = await res.json();
+            const treffer = (data.books || []).find(b => 
+                String(b.isbn || "").replace(/[^0-9Xx]/g, "").includes(cleanScanIsbn)
+            );
+
+            if (treffer) {
+                // Bild-Pfad bauen
+                const coverURL = treffer.cover ? `https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/${treffer.cover}` : "";
+
+                bookData = {
+                    start: new Date().toISOString().split('T')[0],
+                    title: treffer.title || "",
+                    author: treffer.author || "",
+                    gender: treffer.gender || "",
+                    umfang: treffer.umfang || "",
+                    seiten: treffer.seiten || "",
+                    minuten: "0",
+                    genre: treffer.genre || "",
+                    sprache: treffer.sprache || "",
+                    format: treffer.format || "",
+                    status: "Gelesen", 
+                    verlag: treffer.verlag || "",
+                    cover: coverURL
+                };
+
+                // UI befüllen
+                document.getElementById("pTitle").textContent = bookData.title;
+                document.getElementById("pAuthor").textContent = bookData.author;
+                
+                const coverImg = document.getElementById("pCover");
+                if(coverImg) {
+                    coverImg.src = coverURL;
+                    coverImg.style.display = coverURL ? "block" : "none";
+                }
+
+                document.getElementById("previewBox")?.classList.remove("hidden");
+            } else {
+                alert("Buch nicht in sub.json gefunden.");
+            }
+        } catch (err) { console.error(err); }
     }
 
-    modal.querySelector(".modal-save").addEventListener("click", save);
-    modal.querySelector(".modal-cancel").addEventListener("click", cancel);
-  });
-}
+    // --- BESTÄTIGEN & SENDEN ---
+    document.getElementById("confirmSend")?.addEventListener("click", async () => {
+        const fd = new FormData();
+        Object.keys(FORM_ENTRIES).forEach(key => fd.append(FORM_ENTRIES[key], bookData[key] || ""));
+
+        try {
+            await fetch(FORM_URL, { method: "POST", mode: "no-cors", body: fd });
+            alert("Erfolgreich gespeichert!");
+            location.reload();
+        } catch (err) { alert("Fehler beim Senden."); }
+    });
+
+    document.getElementById("cancelSend")?.addEventListener("click", () => {
+        document.getElementById("previewBox")?.classList.add("hidden");
+    });
+
+    document.getElementById("closeScanner")?.addEventListener("click", () => {
+        codeReader.reset();
+        document.getElementById("scannerOverlay")?.classList.add("hidden");
+    });
+});

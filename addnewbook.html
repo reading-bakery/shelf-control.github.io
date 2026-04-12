@@ -15,6 +15,7 @@
 
   <script src="toggle.js" defer></script>
   <script src="https://unpkg.com/@zxing/library@latest"></script>
+  <script src="barcode.js" defer></script>
   <script src="addmodal.js" defer></script>
   <script src="backtop.js" defer></script>
 
@@ -55,12 +56,26 @@
 
   <div class="addcontainer" id="addContainer">
 
-    <div class="barcode" id="openScanner">
-      <p>Buch mit Barcode hinzufügen</p>
-      <svg xmlns="http://www.w3.org/2000/svg" height="150px" viewBox="0 -960 960 960" width="150px" fill="white" >
-        <path d="M40-200v-560h80v560H40Zm120 0v-560h80v560h-80Zm120 0v-560h40v560h-40Zm120 0v-560h80v560h-80Zm120 0v-560h120v560H520Zm160 0v-560h40v560h-40Zm120 0v-560h120v560H800Z"/>
-      </svg>
+<div class="barcode" id="openScanner" style="cursor: pointer;">
+  <p>Buch mit Barcode hinzufügen</p>
+  <svg xmlns="http://www.w3.org/2000/svg" height="150px" viewBox="0 -960 960 960" width="150px" fill="white">
+    <path d="M40-200v-560h80v560H40Zm120 0v-560h80v560h-80Zm120 0v-560h40v560h-40Zm120 0v-560h80v560h-80Zm120 0v-560h120v560H520Zm160 0v-560h40v560h-40Zm120 0v-560h120v560H800Z"/>
+  </svg>
+</div>
+
+<div id="previewBox" class="hidden">
+    <h3 style="margin-top: 0;">Buch gefunden!</h3>
+    
+    <img id="pCover" src="" alt="Cover">
+    
+    <strong id="pTitle">-</strong>
+    <p id="pAuthor">-</p>
+    
+    <div class="preview-actions">
+        <button id="confirmSend" class="preview-btn">Bestätigen</button>
+        <button id="cancelSend" class="preview-btn">Abbrechen</button>
     </div>
+</div>
 
     <div class="isbn" id="addIsbn">
       <label for="isbn"></label>

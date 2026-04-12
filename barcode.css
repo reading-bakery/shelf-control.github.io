@@ -46,6 +46,84 @@
   display: none;
 }
 
+/* Container für die Buchvorschau */
+#previewBox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: whitesmoke;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+    text-align: center;
+    width: 280px;
+    color: #333;
+}
+
+/* Das Buchcover */
+#pCover {
+    width: 140px;
+    height: auto;
+    border-radius: 5px;
+    margin: 10px auto;
+    display: none; /* Wird per JS auf 'block' gesetzt */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Titel und Autor */
+#pTitle {
+    display: block;
+    margin: 10px 0 2px 0; /* Nur 2px Abstand nach unten */
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#pAuthor {
+    color: #464545;
+    font-size: 0.9em;
+    margin-top: 0;         /* Kein Abstand nach oben */
+    margin-bottom: 20px;   /* Abstand zu den Buttons beibehalten */
+}
+
+/* Button-Container */
+.preview-actions {
+    display: flex;
+    gap: 20px;
+}
+
+/* Gemeinsame Button-Styles */
+.preview-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+.preview-btn:active {
+    opacity: 0.8;
+}
+
+/* Spezifische Button-Farben */
+#confirmSend {
+    background-color: #a2bba3;
+    color: black;
+}
+
+#cancelSend {
+    background-color: #eee;
+    color: #333;
+}
+
+/* Hilfsklasse zum Verstecken */
+.hidden {
+    display: none !important;
+}
+
 #closeScanner {
   background-color: #a2bba3;
   color: black;

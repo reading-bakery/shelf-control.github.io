@@ -1,22 +1,35 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   console.log("ADDMODAL LÄUFT");
 
   const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse";
-
+  const JSON_URL = "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/sub.json";
+  
   const FORM_ENTRIES = {
     start: "entry.231863637", title: "entry.554995646", author: "entry.890797774", 
     gender: "entry.1685694101", umfang: "entry.436245051", seiten: "entry.1082451600",
     minuten: "entry.1433991187", genre: "entry.1105252862", sprache: "entry.807495643",
-    format: "entry.9727566", status: "entry.914730295", verlag: "entry.1674035100"
+    format: "entry.9727566", status: "entry.914730295", verlag: "entry.1674035100",  
+    cover: "entry.952453014"
   };
 
   const bookData = {
     start: "", title: "", author: "", gender: "", 
     umfang: "", seiten: "", minuten: "", genre: "", 
-    sprache: "", format: "", status: "", verlag: ""
+    sprache: "", format: "", status: "", verlag: "", cover: ""
   };
 
-  // --- Hilfsfunktionen für Validierung & Anzeige ---
+  let subDatenbank = [];
+
+  // --- 1. Sub-Datenbank laden für den Cover-Abgleich ---
+  try {
+    const response = await fetch(JSON_URL);
+    const daten = await response.json();
+    subDatenbank = daten.books || [];
+  } catch (error) {
+    console.warn("Konnte sub.json nicht für Cover-Match laden:", error);
+  }
+
+  // --- Hilfsfunktionen ---
   function showError(modal, message) {
     const modalContent = modal.querySelector(".modal-content");
     let errorMsg = modalContent.querySelector(".error-msg");
@@ -56,20 +69,16 @@ document.addEventListener("DOMContentLoaded", () => {
   function openModal(id) { document.getElementById(id).classList.add("active"); }
   function closeModal(id) { document.getElementById(id).classList.remove("active"); }
 
-  // --- Optionen Rendern (Kompakt-Design) ---
   const renderOptions = (modalId, options, name) => {
     const modal = document.getElementById(modalId);
     const list = modal?.querySelector(".checkbox-list");
     if (!list) return;
 
-    // Styling für die Liste: Engeres gap
     list.style.maxHeight = "250px";
     list.style.overflowY = "auto";
     list.style.display = "flex";
     list.style.flexDirection = "column";
-    list.style.gap = "1px"; // Sehr kleiner Abstand zwischen den Zeilen
-    list.style.paddingRight = "5px";
-    list.style.marginBottom = "3px"; // Platz zu den Buttons unten
+    list.style.gap = "1px";
 
     if (!modal.querySelector(".modal-search")) {
       const searchInput = document.createElement("input");
@@ -79,12 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
       searchInput.style.width = "100%";
       searchInput.style.padding = "10px";
       searchInput.style.marginBottom = "10px";
-      searchInput.style.boxSizing = "border-box";
       searchInput.style.borderRadius = "12px";
       searchInput.style.border = "1px solid #ccc";
-      
       list.before(searchInput);
-      
       searchInput.oninput = () => {
         const val = searchInput.value.toLowerCase();
         list.querySelectorAll("label").forEach(l => {
@@ -93,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
       };
     }
 
-    // Kompakte Radio-Buttons (wenig Padding)
     list.innerHTML = options.map(opt => `
       <label style="display: flex; align-items: center; cursor: pointer; gap: 2px;">
         <input type="radio" name="${name}" value="${opt}" style="margin: 0;"> 
@@ -109,11 +114,10 @@ document.addEventListener("DOMContentLoaded", () => {
   renderOptions("spracheModal", ["Deutsch", "Englisch", "Französisch", "Spanisch", "Italienisch", "Portugiesisch", "Koreanisch", "Japanisch", "Chinesisch", "Niederländisch", "Hebräisch", "Türkisch", "Russisch", "Schwedisch", "Norwegisch", "Dänisch", "Finnisch", "Polnisch", "Tschechisch", "Griechisch", "Arabisch", "Englisch Original", "Französisch Original", "Spanisch Original"], "sprache");
   renderOptions("formatModal", ["Softcover", "Hardcover", "eBook", "Hörbuch"], "format");
   renderOptions("statusModal", ["Neuzugang", "SuB", "Ausgeliehen", "Rezensionsexemplar"], "status");
-  renderOptions("verlagModal", ["Sonstiges", "ATB/Aufbau/RL/Blumenbar", "Atlantik", "Atrium", "Blanvalet", "btb", "Carlsen", "C.Bertelsmann", "CBJ", "C.H.Beck", "Diogenes", "dtv", "Dumont", "Ecco", "Eichborn", "Eisele", "Fischer", "Frankfurter Verlagsanstalt", "Goldmann", "Hanser", "Harper Collins", "Heyne", "Insel", "Kampa", "Kein&Aber", "Knaur/Droemer", "KiWi", "Klett-Cotta", "Knesebeck", "Königskinder", "Limes", "Luchterhand", "Lübbe", "LYX", "Penguin", "Piper", "Pola", "Reclam", "Rowohlt/rororo", "Suhrkamp", "transcript", "Ullstein/List", "Verbrecher"], "verlag");
+  renderOptions("verlagModal", ["Sonstiges", "ATB/Aufbau/RL/Blumenbar", "Atlantik", "Atrium", "Blanvalet", "btb", "Carlsen", "C.Bertelsmann", "CBJ", "C.H.Beck", "Diogenes", "dtv", "Dumont", "Ecco", "Eichborn", "Eisele", "Fischer", "Frankfurter Verlagsanstalt", "Goldmann", "Hanser", "Harper Collins", "Heyne", "Insel", "Kampa", "Kein&Aber", "Knaur/Droemer", "Kjona", "KiWi", "Klett-Cotta", "Knesebeck", "Königskinder", "Limes", "Luchterhand", "Lübbe", "LYX", "Penguin", "Piper", "Pola", "Reclam", "Rowohlt/rororo", "Suhrkamp", "transcript", "Ullstein/List", "Verbrecher"], "verlag");
 
-  // --- Event Listener Kette mit Abständen für Inputs ---
+  // --- Event Listener ---
   document.getElementById("manualAddBtn")?.addEventListener("click", () => {
-    document.getElementById("startdateInput").style.marginBottom = "25px";
     openModal("modal-start");
   });
 
@@ -121,7 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const val = document.getElementById("startdateInput").value;
     if (validateStep("modal-start", val, true, "Bitte Startdatum eintragen.", "titleModal")) {
         bookData.start = val;
-        document.querySelector("#titleModal input").style.marginBottom = "25px";
     }
   });
 
@@ -129,7 +132,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const val = document.querySelector("#titleModal input").value;
     if (validateStep("titleModal", val, true, "Bitte Titel eintragen.", "authorModal")) {
         bookData.title = val;
-        document.querySelector("#authorModal input").style.marginBottom = "25px";
+
+        // --- MATCHING LOGIK HIER ---
+        const treffer = subDatenbank.find(b => b.title.toLowerCase().trim() === val.toLowerCase().trim());
+        if (treffer && treffer.cover) {
+          bookData.cover = `https://github.com/reading-bakery/shelf-control.github.io/blob/main/images/sub/${treffer.cover}?raw=true`;
+          console.log("Cover Match gefunden:", bookData.cover);
+        } else {
+          bookData.cover = "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/default-cover.jpg";
+          console.log("Kein Match, nutze Standard-Cover.");
+        }
     }
   });
 
@@ -145,7 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const val = document.querySelector(`#${modalId} input:checked`)?.value;
       if (validateStep(modalId, val, true, errorText, nextModalId)) {
           bookData[key] = val;
-          if(nextModalId === "seitenModal") document.querySelector("#seitenModal input").style.marginBottom = "25px";
       }
     });
   };
@@ -156,9 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#seitenModal .modal-save").addEventListener("click", () => {
     const val = document.querySelector("#seitenModal input").value;
     bookData.seiten = val || "0";
-    if (validateStep("seitenModal", val, false, "", "minutenModal")) {
-        document.querySelector("#minutenModal input").style.marginBottom = "25px";
-    }
+    validateStep("seitenModal", val, false, "", "minutenModal");
   });
 
   document.querySelector("#minutenModal .modal-save").addEventListener("click", () => {
@@ -168,10 +177,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setupRadioStep("genreModal", "genre", "Bitte Genre auswählen.", "spracheModal");
   setupRadioStep("spracheModal", "sprache", "Bitte Sprache auswählen.", "formatModal");
-  setupRadioStep("formatModal", "Format", "Bitte Format auswählen.", "statusModal");
+  setupRadioStep("formatModal", "format", "Bitte Format auswählen.", "statusModal");
   setupRadioStep("statusModal", "status", "Bitte Status auswählen.", "verlagModal");
 
-  // --- Letzter Schritt: Senden & In-Modal Erfolg ---
+  // --- Senden ---
   document.querySelector("#verlagModal .modal-save").addEventListener("click", async () => {
     const val = document.querySelector("#verlagModal input:checked")?.value;
     const currentModal = document.getElementById("verlagModal");
@@ -179,24 +188,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (validateStep("verlagModal", val, true, "Bitte Verlag auswählen.", null)) {
       bookData.verlag = val;
+
       const fd = new FormData();
-      Object.keys(FORM_ENTRIES).forEach(key => fd.append(FORM_ENTRIES[key], bookData[key]));
+      Object.keys(FORM_ENTRIES).forEach(key => fd.append(FORM_ENTRIES[key], bookData[key] || ""));
       
       try {
         await fetch(FORM_URL, { method: "POST", mode: "no-cors", body: fd });
-        
         modalContent.innerHTML = `
           <div style="text-align: center; padding: 20px;">
             <h3 style="color: #13c913;">Erfolg!</h3>
-            <p style="font-size: 1.1em; margin: 20px 0;">
-              <strong>${bookData.title}</strong> wurde erfolgreich hinzugefügt. 🚀
-            </p>
+            <p style="font-size: 1.1em; margin: 20px 0;"><strong>${bookData.title}</strong> wurde hinzugefügt. 🚀</p>
             <button class="modal-save" style="width: 100%;">Super!</button>
           </div>
         `;
         modalContent.querySelector("button").onclick = () => location.reload();
       } catch (err) { 
-        showError(currentModal, "Fehler beim Senden: " + err); 
+        showError(currentModal, "Fehler: " + err); 
       }
     }
   });
