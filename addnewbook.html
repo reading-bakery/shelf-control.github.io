@@ -59,7 +59,6 @@
     <div class="main-layout">
       <div class="scanner-section">
         <div class="barcode" id="openScanner" style="cursor: pointer;">
-          <p>Buch mit Barcode hinzufügen</p>
           <svg xmlns="http://www.w3.org/2000/svg" height="150px" viewBox="0 -960 960 960" width="250px" fill="beige">
             <path d="M40-200v-560h80v560H40Zm120 0v-560h80v560h-80Zm120 0v-560h40v560h-40Zm120 0v-560h80v560h-80Zm120 0v-560h120v560H520Zm160 0v-560h40v560h-40Zm120 0v-560h120v560H800Z"/>
           </svg>
@@ -219,13 +218,9 @@
       </div>
     </div>
 
-  </div> ```
+  </div> 
 
-### Warum geht es jetzt wieder?
-* **Alle IDs vorhanden:** `renderOptions` findet nun alle Modals (gender, sprache, verlag etc.) und kann die Radio-Buttons einfügen, ohne dass das Script abbricht.
-* **Events können binden:** Da nun jedes Modal einen Button mit der Klasse `modal-cancel` hat, kann der Loop am Ende deiner `addmodal.js` diese Buttons auch wirklich finden und die Schließen-Funktion hinzufügen.
 
-Wenn du das so einfügst, sollte die Fehlermeldung in der Konsole verschwinden und die Buttons reagieren wieder. Gib Bescheid, ob alles klappt!
 
   <div class="top-button">
   <div class="top-button">

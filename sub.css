@@ -70,20 +70,24 @@
 
 @media (max-width: 740px) {
     .sub-bild {
-        flex: 1 1 calc(33.333% - 20px); /* 3 pro Zeile, Platz für gap lassen */
-        max-width: calc(33.333% - 10px);
+       /* 3 Bilder pro Zeile: 100% / 3 minus ein bisschen Puffer für die Abstände */
+        width: calc(33.333% - 10px); 
+        max-width: none; /* Ganz wichtig: Die 90px Begrenzung von oben aufheben! */
+        flex: 0 0 auto;
     }
 
     /* Optional: Container so anpassen, dass es gut aussieht */
     .sub {
-        gap: 10px; /* Weniger Abstand bei kleinen Displays */
+        gap: 10px; 
+        padding: 10px; /* Weniger Padding am Rand für mehr Platz */
     }
 
     .sub-bild-large {
-        width: 15px;
-        max-width: none;       /* Wichtig, um das Limit von .sub-bild aufzuheben */
-        height: auto;          /* proportional */
-        box-shadow: 0 0 8px rgba(0,0,0,0.6);
+       width: 180px; /* Deutlich größer für das Handy-Ergebnis */
+        max-width: 80%; /* Falls das Handy sehr schmal ist */
+        height: auto;
+        margin: 0 auto;
+        display: block;
     }
 }
 
