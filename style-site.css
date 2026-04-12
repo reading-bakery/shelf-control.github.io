@@ -95,7 +95,78 @@
     ransform: scale(1.2);
 }
 
+/* Container, der alles aufteilt */
+.main-layout {
+    display: flex;
+    justify-content: space-around; /* Verteilt Platz zwischen links und rechts */
+    align-items: center;           /* Zentriert sie vertikal zueinander */
+    gap: 40px;                     /* Abstand zwischen den beiden Blöcken */
+    padding: 20px;
+    width: 100%;
+}
 
+/* Scanner Bereich links */
+.scanner-section {
+    flex: 1;                       /* Nimmt gleichmäßig Platz ein */
+    display: flex;
+    justify-content: center;
+}
+
+/* ISBN und Manuell Bereich rechts */
+.controls-section {
+    flex: 1;                       /* Nimmt gleichmäßig Platz ein */
+    display: flex;
+    flex-direction: column;        /* Stapelt die Elemente untereinander */
+    gap: 25px;                     /* Abstand zwischen ISBN-Box und Manuell-Button */
+    align-items: flex-start;       /* Richtet alles linksbündig innerhalb der rechten Seite aus */
+}
+
+/* Styling für die ISBN-Zeile */
+.isbn {
+    display: flex;
+    flex-direction: column;        /* Suchen-Button unter das Inputfeld */
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+#isbn {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #f0f0e0;     /* Dein Beigeton */
+    font-family: 'Dosis', sans-serif;
+    width: 100%;
+}
+
+/* Manuelle Button Anpassung */
+.manual-btn {
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: none;
+    background-color: #f0f0e0;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Dosis', sans-serif;
+    transition: background 0.3s;
+}
+
+.manual-btn:hover {
+    background-color: #e0e0d0;
+}
+
+
+
+/* Mobile Optimierung: Untereinander stapeln, wenn der Bildschirm zu klein ist */
+@media (max-width: 600px) {
+    .main-layout {
+        flex-direction: column;
+        text-align: center;
+    }
+    .controls-section {
+        align-items: center;
+    }
+}
 
       
       .search-container {

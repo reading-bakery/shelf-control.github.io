@@ -14,7 +14,6 @@
 
 .addbook,
 .barcode {
-  background-color: rgb(139, 139, 129);
   cursor: pointer;
 }
 
@@ -232,16 +231,49 @@
 }
 
 
-#isbn,
-#manualAddBtn {
-  cursor: pointer;
-  border-radius: 8px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #ccc;
-  font-family: "Dosis", sans-serif;
-  font-size: 12pt;
-  height: 40px;
-  background-color: rgb(233, 233, 221);
-  color: black;
+/* Gemeinsame Basis für Input und Button */
+#isbn, .manual-btn {
+    width: 320px;            /* Feste Breite für beide */
+    padding: 15px 20px;      /* Gleiches Padding (Oben/Unten Links/Rechts) */
+    border-radius: 12px;     /* Abgerundete Ecken */
+    border: none;
+    font-family: 'Dosis', sans-serif;
+    font-size: 1rem;
+    background-color: #e8e8d5; /* Dein Beigeton aus dem Bild */
+    box-sizing: border-box;  /* WICHTIG: Padding wird in die Breite eingerechnet */
+}
+
+/* Spezifisch für das Eingabefeld */
+#isbn {
+    outline: none;
+}
+
+/* Spezifisch für den Button */
+.manual-btn {
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    transition: background 0.3s;
+    display: block; /* Sorgt für korrekte Breitenberechnung */
+}
+
+.manual-btn:hover {
+    background-color: #d8d8c5;
+}
+
+/* Container-Anpassung für die rechte Seite */
+.controls-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;         /* Abstand zwischen den Feldern */
+    align-items: flex-start; 
+}
+
+/* Falls das Suchen-Button unter dem ISBN Feld ist */
+#isbnSearch {
+    margin-top: 5px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
 }

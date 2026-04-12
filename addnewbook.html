@@ -52,169 +52,180 @@
     </div>
   </nav>
 
-  <h2>Neues Buch hinzufügen</h2>
+<h2>Neues Buch hinzufügen</h2>
 
   <div class="addcontainer" id="addContainer">
 
-<div class="barcode" id="openScanner" style="cursor: pointer;">
-  <p>Buch mit Barcode hinzufügen</p>
-  <svg xmlns="http://www.w3.org/2000/svg" height="150px" viewBox="0 -960 960 960" width="150px" fill="white">
-    <path d="M40-200v-560h80v560H40Zm120 0v-560h80v560h-80Zm120 0v-560h40v560h-40Zm120 0v-560h80v560h-80Zm120 0v-560h120v560H520Zm160 0v-560h40v560h-40Zm120 0v-560h120v560H800Z"/>
-  </svg>
-</div>
+    <div class="main-layout">
+      <div class="scanner-section">
+        <div class="barcode" id="openScanner" style="cursor: pointer;">
+          <p>Buch mit Barcode hinzufügen</p>
+          <svg xmlns="http://www.w3.org/2000/svg" height="150px" viewBox="0 -960 960 960" width="250px" fill="beige">
+            <path d="M40-200v-560h80v560H40Zm120 0v-560h80v560h-80Zm120 0v-560h40v560h-40Zm120 0v-560h80v560h-80Zm120 0v-560h120v560H520Zm160 0v-560h40v560h-40Zm120 0v-560h120v560H800Z"/>
+          </svg>
+        </div>
+      </div>
 
-<div id="previewBox" class="hidden">
-    <h3 style="margin-top: 0;">Buch gefunden!</h3>
-    
-    <img id="pCover" src="" alt="Cover">
-    
-    <strong id="pTitle">-</strong>
-    <p id="pAuthor">-</p>
-    
-    <div class="preview-actions">
-        <button id="confirmSend" class="preview-btn">Bestätigen</button>
-        <button id="cancelSend" class="preview-btn">Abbrechen</button>
-    </div>
-</div>
-
-    <div class="isbn" id="addIsbn">
-      <label for="isbn"></label>
-      <input type="text" id="isbn" placeholder="ISBN: 9783161484100">
-      <button type="button" id="isbnSearch">Suchen</button>
+      <div class="controls-section">
+        <div class="isbn-wrapper">
+          <input type="text" id="isbn" placeholder="ISBN: 9783161484100">
+        </div>
+        <button type="button" id="manualAddBtn" class="manual-btn">
+          Buch manuell hinzufügen
+        </button>
+      </div>
     </div>
 
-<button type="button" id="manualAddBtn">
-  Buch manuell hinzufügen
-</button>
-
-<div class="modal" id="modal-start">
-  <div class="modal-content">
-    <label for="startdateInput">Startdatum</label>
-    <input type="date" id="startdateInput">
-
-    <div class="modal-buttons">
-      <button type="button" class="modal-save">Weiter</button>
-      <button type="button" class="modal-cancel">Abbrechen</button>
+    <div id="previewBox" class="hidden">
+        <h3 style="margin-top: 0;">Buch gefunden!</h3>
+        <img id="pCover" src="" alt="Cover">
+        <strong id="pTitle">-</strong>
+        <p id="pAuthor">-</p>
+        <div class="preview-actions">
+            <button id="confirmSend" class="preview-btn">Bestätigen</button>
+            <button id="cancelSend" class="preview-btn">Abbrechen</button>
+        </div>
     </div>
-  </div>
-</div>
 
+    <div class="modal" id="modal-start">
+      <div class="modal-content">
+        <label for="startdateInput">Startdatum</label>
+        <input type="date" id="startdateInput">
+        <div class="modal-buttons">
+          <button type="button" class="modal-save">Weiter</button>
+          <button type="button" class="modal-cancel">Abbrechen</button>
+        </div>
+      </div>
+    </div>
 
-<div class="modal" id="titleModal">
-    <div class="modal-content">
+    <div class="modal" id="titleModal">
+      <div class="modal-content">
         <h3>Buchtitel</h3>
         <input type="text" placeholder="...">
-        <button class="modal-save">Weiter</button>
-        <button class="modal-cancel">Abbrechen</button>
+        <div class="modal-buttons">
+          <button type="button" class="modal-save">Weiter</button>
+          <button type="button" class="modal-cancel">Abbrechen</button>
+        </div>
+      </div>
     </div>
-</div>
 
-<div class="modal" id="titleModal">
-    <div class="modal-content">
-        <h3>Buchtitel</h3>
-        <input type="text" placeholder="...">
-        <div class="checkbox-list"></div> <!-- leer, wird nicht genutzt -->
-        <button class="modal-save">Weiter</button>
-        <button class="modal-cancel">Abbrechen</button>
-    </div>
-</div>
-
-<div class="modal" id="authorModal">
-    <div class="modal-content">
+    <div class="modal" id="authorModal">
+      <div class="modal-content">
         <h3>Autor:in</h3>
         <input type="text" placeholder="...">
-        <div class="checkbox-list"></div> <!-- leer, wird nicht genutzt -->
-        <button class="modal-save">Weiter</button>
-        <button class="modal-cancel">Abbrechen</button>
+        <div class="modal-buttons">
+          <button type="button" class="modal-save">Weiter</button>
+          <button type="button" class="modal-cancel">Abbrechen</button>
+        </div>
+      </div>
     </div>
-</div>
 
-<div class="modal" id="genderModal">
-    <div class="modal-content">
+    <div class="modal" id="genderModal">
+      <div class="modal-content">
         <h3>Geschlecht</h3>
-        <div class="checkbox-list"></div> <!-- leer, wird nicht genutzt -->
-        <button class="modal-save">Weiter</button>
-        <button class="modal-cancel">Abbrechen</button>
+        <div class="checkbox-list"></div>
+        <div class="modal-buttons">
+          <button type="button" class="modal-save">Weiter</button>
+          <button type="button" class="modal-cancel">Abbrechen</button>
+        </div>
+      </div>
     </div>
-</div>
 
-<div class="modal" id="umfangModal">
-    <div class="modal-content">
+    <div class="modal" id="umfangModal">
+      <div class="modal-content">
         <h3>Umfang</h3>
-        <div class="checkbox-list"></div> <!-- leer, wird nicht genutzt -->
-        <button class="modal-save">Weiter</button>
-        <button class="modal-cancel">Abbrechen</button>
+        <div class="checkbox-list"></div>
+        <div class="modal-buttons">
+          <button type="button" class="modal-save">Weiter</button>
+          <button type="button" class="modal-cancel">Abbrechen</button>
+        </div>
+      </div>
     </div>
-</div>
 
-<div class="modal" id="seitenModal">
-    <div class="modal-content">
+    <div class="modal" id="seitenModal">
+      <div class="modal-content">
         <h3>Seiten insgesamt</h3>
         <input type="text" placeholder="...">
-        <div class="checkbox-list"></div> <!-- leer, wird nicht genutzt -->
-        <button class="modal-save">Weiter</button>
-        <button class="modal-cancel">Abbrechen</button>
+        <div class="modal-buttons">
+          <button type="button" class="modal-save">Weiter</button>
+          <button type="button" class="modal-cancel">Abbrechen</button>
+        </div>
+      </div>
     </div>
-</div>
 
-<div class="modal" id="minutenModal">
-    <div class="modal-content">
+    <div class="modal" id="minutenModal">
+      <div class="modal-content">
         <h3>Minuten insgesamt</h3>
         <input type="text" placeholder="...">
-        <div class="checkbox-list"></div> <!-- leer, wird nicht genutzt -->
-        <button class="modal-save">Weiter</button>
-        <button class="modal-cancel">Abbrechen</button>
+        <div class="modal-buttons">
+          <button type="button" class="modal-save">Weiter</button>
+          <button type="button" class="modal-cancel">Abbrechen</button>
+        </div>
+      </div>
     </div>
-</div>
 
-<div class="modal" id="genreModal">
-    <div class="modal-content">
+    <div class="modal" id="genreModal">
+      <div class="modal-content">
         <h3>Genre</h3>
-        <div class="checkbox-list"></div> <!-- leer, wird nicht genutzt -->
-        <button class="modal-save">Weiter</button>
-        <button class="modal-cancel">Abbrechen</button>
+        <div class="checkbox-list"></div>
+        <div class="modal-buttons">
+          <button type="button" class="modal-save">Weiter</button>
+          <button type="button" class="modal-cancel">Abbrechen</button>
+        </div>
+      </div>
     </div>
-</div>
 
-<div class="modal" id="spracheModal">
-    <div class="modal-content">
+    <div class="modal" id="spracheModal">
+      <div class="modal-content">
         <h3>Sprache</h3>
-        <div class="checkbox-list"></div> <!-- leer, wird nicht genutzt -->
-        <button class="modal-save">Weiter</button>
-        <button class="modal-cancel">Abbrechen</button>
+        <div class="checkbox-list"></div>
+        <div class="modal-buttons">
+          <button type="button" class="modal-save">Weiter</button>
+          <button type="button" class="modal-cancel">Abbrechen</button>
+        </div>
+      </div>
     </div>
-</div>
 
-<div class="modal" id="formatModal">
-    <div class="modal-content">
+    <div class="modal" id="formatModal">
+      <div class="modal-content">
         <h3>Format</h3>
-        <div class="checkbox-list"></div> <!-- leer, wird nicht genutzt -->
-        <button class="modal-save">Weiter</button>
-        <button class="modal-cancel">Abbrechen</button>
+        <div class="checkbox-list"></div>
+        <div class="modal-buttons">
+          <button type="button" class="modal-save">Weiter</button>
+          <button type="button" class="modal-cancel">Abbrechen</button>
+        </div>
+      </div>
     </div>
-</div>
 
-<div class="modal" id="statusModal">
-    <div class="modal-content">
+    <div class="modal" id="statusModal">
+      <div class="modal-content">
         <h3>Status</h3>
-        <div class="checkbox-list"></div> <!-- leer, wird nicht genutzt -->
-        <button class="modal-save">Weiter</button>
-        <button class="modal-cancel">Abbrechen</button>
+        <div class="checkbox-list"></div>
+        <div class="modal-buttons">
+          <button type="button" class="modal-save">Weiter</button>
+          <button type="button" class="modal-cancel">Abbrechen</button>
+        </div>
+      </div>
     </div>
-</div>
 
-<div class="modal" id="verlagModal">
-    <div class="modal-content">
+    <div class="modal" id="verlagModal">
+      <div class="modal-content">
         <h3>Verlag</h3>
-        <div class="checkbox-list"></div> <!-- leer, wird nicht genutzt -->
-        <button class="modal-save">Speichern</button>
-        <button class="modal-cancel">Abbrechen</button>
+        <div class="checkbox-list"></div>
+        <div class="modal-buttons">
+          <button type="button" class="modal-save">Speichern</button>
+          <button type="button" class="modal-cancel">Abbrechen</button>
+        </div>
+      </div>
     </div>
-</div>
 
+  </div> ```
 
+### Warum geht es jetzt wieder?
+* **Alle IDs vorhanden:** `renderOptions` findet nun alle Modals (gender, sprache, verlag etc.) und kann die Radio-Buttons einfügen, ohne dass das Script abbricht.
+* **Events können binden:** Da nun jedes Modal einen Button mit der Klasse `modal-cancel` hat, kann der Loop am Ende deiner `addmodal.js` diese Buttons auch wirklich finden und die Schließen-Funktion hinzufügen.
 
-</div>
+Wenn du das so einfügst, sollte die Fehlermeldung in der Konsole verschwinden und die Buttons reagieren wieder. Gib Bescheid, ob alles klappt!
 
   <div class="top-button">
   <div class="top-button">
