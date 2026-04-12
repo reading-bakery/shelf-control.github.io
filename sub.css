@@ -18,6 +18,7 @@
 
 .sub-bild:hover {
     transform: scale(1.05);
+    
 }
 
 .sub-bild-large {
@@ -128,7 +129,8 @@
     .buch-wrapper:hover .sub-bild-large,
     .buch-wrapper:hover .sub-bild {
         opacity: 0.3 !important;
-        transform: scale(1.02);
+        transform: scale(1.0);
+            border-radius: 10px;
     }
 
 /* Das Modal-Hintergrund-Overlay */
@@ -216,8 +218,8 @@
 
 @media (min-width: 600px) {
     .sub {
-        gap: 20px;
-        padding: 20px;
+        gap: 5px;
+        padding: 5px;
     }
 
 
