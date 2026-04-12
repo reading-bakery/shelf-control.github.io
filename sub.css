@@ -214,9 +214,10 @@
     font-size: 12pt;
 }
 
-@media (min-width: 740px) {
+@media (min-width: 600px) {
     .sub {
         gap: 20px;
+        padding: 20px;
     }
 
 
@@ -224,6 +225,9 @@
     .plus-overlay {
         font-size: 80px;
     }
+}
+
+
 
 
 
@@ -234,5 +238,4 @@
     h2 {
       font-size: 7rem;
     }
-}
 }
