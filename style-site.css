@@ -39,6 +39,64 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
       }
 
+.sub {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Abstand zwischen den Büchern */
+    justify-content: center;
+}
+
+      /* Container für das Bild */
+.buch-wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.sub-bild {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1; /* Volle Sichtbarkeit */
+}
+
+/* HOVER: Bild wird schwächer */
+.buch-wrapper:hover .sub-bild {
+    opacity: 0.3; /* Das Bild wird stark transparent */
+    transform: scale(1.02);
+}
+
+
+/* Das Plus-Overlay mit starker Farbe */
+.plus-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Hier die starke Farbe definieren */
+    color: #a2bba3;
+    font-size: 80px;
+    font-weight: bold;
+    
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 2;
+}
+
+/* Erscheint beim Hovern über den Wrapper */
+.buch-wrapper:hover .plus-overlay {
+    opacity: 1;
+    ransform: scale(1.2);
+}
+
+
+
       
       .search-container {
         margin-bottom: 20px;
