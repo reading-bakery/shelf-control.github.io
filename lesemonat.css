@@ -44,9 +44,14 @@ h3 {
     border-radius: 8px;
     border: none;
     padding: 10px;
-    color: white;
+    color: black;
     z-index: 99999; /* immer über allem */
 }
+
+   #backToTop:hover {
+      background-color: #4b0606;
+      color: white;
+    }
 
 /* Monats-Button */
 .monat-btn {

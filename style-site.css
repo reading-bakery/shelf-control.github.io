@@ -238,7 +238,13 @@ button[type="submit"]:hover {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    color: black;
 }
+
+   #backToTop:hover {
+      background-color: #4b0606;
+      color: white;
+    }
 
 footer {
     text-align: center;

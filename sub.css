@@ -50,9 +50,14 @@
     border: none;
     height: auto;
     padding: 10px;
-    color: white;
+    color: black;
     z-index: 1000;          /* über allen anderen Elementen */
 }
+
+   #backToTop:hover {
+      background-color: #4b0606;
+      color: white;
+    }
 
 #close-icon {
     display: none; /* Startzustand ausgeblendet */
