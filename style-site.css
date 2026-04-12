@@ -1,52 +1,84 @@
-      * {
-        box-sizing: border-box;
-        }
-      
-        body {
-        margin: 0;
-        font-family: "Dosis", sans-serif;
-        background: #121212;
-        color: #ffffff;
-        padding: 1rem;
-        }
+/* --- 1. ALLGEMEINE SETTINGS --- */
+* {
+    box-sizing: border-box;
+}
 
-      h1 {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 1.5rem;
-        letter-spacing: 2px;
-        text-align: center;
-        margin-bottom: 2rem;
-        color: rgb(222, 201, 12);
-      }
+body {
+    margin: 0;
+    font-family: "Dosis", sans-serif;
+    background: #121212;
+    color: #ffffff;
+    padding: 1rem;
+}
 
-      h2 {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 3rem;
-        letter-spacing: 2px;
-        text-align: center;
-        margin-bottom: 2rem;
-        color: khaki; 
-      }
+h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: rgb(222, 201, 12);
+}
 
-      .search-container,
-      .sub,
-      form {
-        max-width: 700px;
-        margin: 0 auto;
-        background: #1f1f1f;
-        padding: 1rem;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      }
+h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: khaki;
+}
 
+/* --- 2. LAYOUT CONTAINER --- */
+.search-container,
+.sub,
+form {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #1f1f1f;
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.search-container {
+  margin-bottom: 20px;
+}
+
+.main-layout {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+    padding: 20px;
+    width: 100%;
+}
+
+.scanner-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    background-color: beige;
+    border-radius: 12px;
+    overflow: hidden; /* Damit das Bild/Canvas nicht übersteht */
+}
+
+.controls-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+/* --- 3. SUB / BÜCHERGITTER --- */
 .sub {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px; /* Abstand zwischen den Büchern */
+    gap: 15px;
     justify-content: center;
 }
 
-      /* Container für das Bild */
 .buch-wrapper {
     position: relative;
     display: inline-block;
@@ -58,15 +90,7 @@
     height: 100%;
     object-fit: cover;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    opacity: 1; /* Volle Sichtbarkeit */
 }
-
-/* HOVER: Bild wird schwächer */
-.buch-wrapper:hover .sub-bild {
-    opacity: 0.3;
-    transform: scale(1.02);
-}
-
 
 .plus-overlay {
     position: absolute;
@@ -83,314 +107,147 @@
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 2;
-    pointer-events: none; /* WICHTIG: Klicks gehen durch das Overlay auf das Bild/Wrapper */
+    pointer-events: none;
 }
 
-/* Erscheint beim Hovern über den Wrapper */
+.buch-wrapper:hover .sub-bild {
+    opacity: 0.3;
+    transform: scale(1.02);
+}
+
 .buch-wrapper:hover .plus-overlay {
     opacity: 1;
     transform: scale(1.2);
 }
 
-/* Container, der alles aufteilt */
-.main-layout {
-    display: flex;
-    justify-content: space-around; /* Verteilt Platz zwischen links und rechts */
-    align-items: center;           /* Zentriert sie vertikal zueinander */
-    gap: 40px;                     /* Abstand zwischen den beiden Blöcken */
-    padding: 20px;
+/* --- 4. FORMULAR & BUTTONS --- */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
     width: 100%;
-}
-
-/* Scanner Bereich links */
-.scanner-section {
-    flex: 1;                       /* Nimmt gleichmäßig Platz ein */
-    display: flex;
-    justify-content: center;
-    background-color: beige;
-    border-radius: 12px;
-}
-
-/* ISBN und Manuell Bereich rechts */
-.controls-section {
-    flex: 1;                       /* Nimmt gleichmäßig Platz ein */
-    display: flex;
-    flex-direction: column;        /* Stapelt die Elemente untereinander */
-    gap: 25px;                     /* Abstand zwischen ISBN-Box und Manuell-Button */
-    align-items: flex-start;       /* Richtet alles linksbündig innerhalb der rechten Seite aus */
-}
-
-/* Styling für die ISBN-Zeile */
-.isbn {
-    display: flex;
-    flex-direction: column;        /* Suchen-Button unter das Inputfeld */
-    gap: 10px;
-    width: 100%;
-    max-width: 300px;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border: 1px solid #ecdede;
+    border-radius: 10px;
+    background-color: rgb(194, 187, 187);
+    font-family: "Dosis", sans-serif;
+    font-weight: bold;
 }
 
 #isbn {
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    background-color: #f0f0e0;     /* Dein Beigeton */
-    font-family: 'Dosis', sans-serif;
-    width: 100%;
+    background-color: #f0f0e0;
     text-align: center;
+    border: none;
 }
 
-/* Manuelle Button Anpassung */
-.manual-btn {
+.manual-btn, button[type="submit"] {
     padding: 15px 25px;
     border-radius: 10px;
     border: none;
-    background-color: #f0f0e0;
     cursor: pointer;
     font-weight: bold;
     font-family: 'Dosis', sans-serif;
-    transition: background 0.3s;
+    transition: 0.3s ease;
 }
 
-.manual-btn:hover {
-    background-color: #e0e0d0;
+.manual-btn { background-color: #f0f0e0; }
+.manual-btn:hover { background-color: #e0e0d0; }
+
+button[type="submit"] {
+    margin-top: 2rem;
+    background: rgb(140, 138, 153);
+    width: 100%;
 }
 
+button[type="submit"]:hover {
+    background: #4b0606;
+    color: white;
+}
+
+
+/* --- 5. MOBILE OPTIMIERUNG (HANDY) --- */
 @media (max-width: 740px) {
-    /* ... deine bisherigen Regeln für .sub und .buch-wrapper ... */
-
-    /* ISBN Feld und Manueller Button schmaler machen */
-    #isbn, 
-    #manualAddBtn {
-        width: 100% !important;   /* Regelt die Breite am Handy */
-        max-width: 300px !important; /* Verhindert, dass sie auf großen Handys zu breit werden */
-        margin-left: auto !important;  /* Zentriert die Elemente */
-        margin-right: auto !important; /* Zentriert die Elemente */
-        display: block !important;     /* Nötig für das Zentrieren mit margin auto */
-    }
-
-    /* Falls der Wrapper um das ISBN Feld noch stört */
-    .isbn-wrapper {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
-    @media (max-width: 740px) {
-    /* 1. Galerie-Container */
-    .sub {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        justify-content: flex-start !important; 
-        gap: 8px !important; 
+    .main-layout {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 20px !important;
         padding: 10px !important;
     }
 
-    /* 2. Der Wrapper (3 Spalten) */
-    .buch-wrapper {
-        width: calc(33.333% - 8px) !important; 
-        flex: 0 0 auto !important;
-        margin: 0 !important;
-    }
-
-    /* 3. Die Bilder (Vereinheitlichung) */
-    .sub-bild {
-        width: 100% !important;
-        /* Erzeugt ein einheitliches Hochformat (z.B. 2:3) */
-        aspect-ratio: 2 / 3 !important; 
-        /* WICHTIG: Schneidet das Bild sauber zu, statt es zu quetschen */
-        object-fit: cover !important; 
-        max-width: none !important;
-        height: auto !important; 
-        border-radius: 8px !important;
-        display: block !important;
-    }
-
-    /* 4. ISBN & Button schmaler */
-    #isbn, 
-    #manualAddBtn {
-        width: 80% !important;
-        max-width: 300px !important;
-        margin: 10px auto !important;
-        display: block !important;
-    }
-}
-}
-
-
-/* Mobile Optimierung: Untereinander stapeln, wenn der Bildschirm zu klein ist */
-@media (max-width: 600px) {
-    .main-layout {
-        flex-direction: column;
-        text-align: center;
-    }
     .controls-section {
-        align-items: center;
+        align-items: center !important;
+        width: 100% !important;
+        gap: 15px !important;
     }
-}
 
-      
-      .search-container {
-        margin-bottom: 20px;
-      }
-      
+    /* Diese drei Container/Elemente werden nun auf die absolut gleiche Breite gezwungen */
+    .scanner-section,
+    #isbn, 
+    .manual-btn {
+        width: 85% !important; 
+        max-width: 350px !important;
+        margin: 0 auto !important;
+        display: block !important;
+        
+        /* WICHTIG: Padding anpassen, damit langer Text (ISBN) nicht abgeschnitten wird */
+        padding: 12px 5px !important; 
+        min-height: 50px !important;
+        box-sizing: border-box !important;
+    }
 
-      label {
-        font-weight: 600;
+    /* Verhindert, dass der Text im ISBN Feld zu groß ist oder abgeschnitten wird */
+    #isbn {
+        font-size: 1rem !important; 
+        line-height: normal !important;
+    }
+
+    .scanner-section img, 
+    .scanner-section canvas {
+        width: 100% !important;
+        height: auto !important;
         display: block;
-        margin: 0.5rem 0 0.5rem;
-      }
-
-      input[type="text"],
-      input[type="number"],
-      input[type="date"],
-      select,
-      input[type="file"] {
-        width: 100%;
-        padding: 0.7rem;
-        font-size: 1rem;
-        border: 1px solid #ecdede;
-        border-radius: 10px;
-        transition: border-color 0.3s ease;
-        background-color: rgb(194, 187, 187);
-        font-family: "Dosis", sans-serif;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      input:focus,
-      select:focus {
-        border-color: #0077cc;
-        outline: none;
-      }
-
-      button[type="submit"] {
-        margin-top: 2rem;
-        padding: 0.8rem 2rem;
-        background: rgb(140, 138, 153);
-        color: black;
-        border: none;
-        font-weight: 600;
-        font-size: 1.1rem;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: 0.3s ease;
-        width: 100%;
-      }
-
-      button[type="submit"]:hover {
-        background: #4b0606;
-        color: white;
-      }
-
-      img#preview {
-        margin-top: 0.5rem;
-        border: 2px solid ;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-      
-      select {
-        font-family: "Dosis", sans-serif;
-        font-size: 1rem;
-        font-weight: bold;
-      }
-
-      #close-icon {
-          display: none; /* Startzustand ausgeblendet */
-      }
-
-      option {
-        font-family: "Dosis", sans-serif;
-        font-size: 1rem;
-      }
-
-
-      .top-button {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-      }
-
-      #backToTop {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: none;
-            padding: 10px;
-            background-color: rgb(224, 224, 87);
-            color: black;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            height: auto; 
-        }
-
-
-      #backToTop:hover {
-        background-color: #4b0606;
-        color: white;
-      }
-
-      footer {
-        text-align: center;
-        font-size: 0.9rem;
-        color: #888;
-        margin-top: 3rem;
-      }
-
-    header {
-      background-color: #1f1f1f;
-      text-align: center;
-      cursor: none;
     }
 
+    /* Galerie-Ansicht (3 Spalten) */
+    .sub {
+        gap: 8px !important;
+        padding: 10px !important;
+        justify-content: center !important;
+    }
 
-  #status {
-  min-height: 1.5em;    
-  color: white;           
-  font-weight: normal;
-  transition: opacity 0.5s ease;
-  opacity: 1;             
-  margin-top: 1em;
-  display: none;
+    .buch-wrapper {
+        width: calc(33.333% - 8px) !important;
+    }
+
+    .sub-bild {
+        aspect-ratio: 2 / 3 !important;
+        object-fit: cover !important;
+    }
 }
 
-#status.error {
-  color: white;
-}
-
-#statusMessage {
-  padding: 10px;
-  border-radius: 5px;
-}
-
-#statusMessage.success {
-  color: white;
-}
-
-#statusMessage.error {
-  color: white;
-}
-
-.hidden-iframe {
+/* --- 6. SONSTIGES & HELPER --- */
+#backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
     display: none;
+    padding: 10px;
+    background-color: rgb(224, 224, 87);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' white,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
+footer {
+    text-align: center;
+    color: #888;
+    margin-top: 3rem;
 }
 
+.hidden-iframe { display: none; }
 
-
-
-    /* Ergänzung für große Bildschirme */
 @media (min-width: 1400px) {
-    h2 {
-      font-size: 7rem;
-    }
+    h2 { font-size: 7rem; }
 }
-
