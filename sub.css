@@ -129,66 +129,6 @@
         transform: scale(1.02);
     }
 
-@media (max-width: 740px) {
-    .sub {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        /* Abstände zwischen den Bildern auf 4px verringert */
-        gap: 4px !important; 
-        padding: 4px !important;
-        justify-content: center !important;
-    }
-
-    .sub .buch-wrapper {
-        /* Breite leicht angepasst für 3 Spalten inkl. kleiner Gaps */
-        width: calc(33.33% - 4px) !important;
-        max-width: calc(33.33% - 4px) !important;
-        flex: 0 0 calc(33.33% - 4px) !important;
-        margin: 0 !important;
-        position: relative !important;
-        /* Wichtig: Verhindert kleine Lücken unten im Wrapper */
-        line-height: 0 !important; 
-    }
-
-    .sub-bild {
-        width: 100% !important;
-        height: auto !important;
-        aspect-ratio: 2 / 3 !important;
-        object-fit: cover !important;
-        display: block !important;
-        border-radius: 8px !important; /* Etwas kleinerer Radius passend zur Bildgröße */
-    }
-
-    /* DAS PLUS-OVERLAY: Exakt so groß wie das Bild */
-    .plus-overlay {
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 60% !important;
-        height: 100% !important;
-        
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        
-        /* Das Pluszeichen selbst */
-        font-size: 4rem !important; /* Etwas kleiner, damit es nicht über den Rand ragt */
-        line-height: 0 !important;
-        color: #a2bba3 !important;
-        
-        /* Hintergrund des Overlays beim Hover */
-        background-color: rgba(0, 0, 0, 0.4) !important; 
-        border-radius: 5px !important;
-        
-        opacity: 0 !important;
-        transition: opacity 0.2s ease !important;
-        z-index: 5 !important;
-    }
-
-    .buch-wrapper:hover .plus-overlay {
-        opacity: 1 !important;
-    }
-}
 
 /* Ergänzung für große Bildschirme */
 @media (min-width: 1400px) {
