@@ -214,6 +214,20 @@
     font-size: 12pt;
 }
 
+@media (min-width: 740px) {
+    .sub {
+        gap: 20px;
+    }
+
+    /* Auf größeren Screens feste Breite oder mehr Platz */
+        width: 150px; 
+    }
+
+    .plus-overlay {
+        font-size: 80px;
+    }
+
+}
 
 
 /* Ergänzung für große Bildschirme */
