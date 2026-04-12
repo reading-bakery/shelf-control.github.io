@@ -507,7 +507,7 @@
     "format": "Softcover",
     "status": "SuB",
     "verlag": "Piper",
-    "cover": "das-volk-der-baeume.jpg"
+    "cover": "das-volk-der-baueme.jpg"
     },
 
     {
@@ -582,7 +582,7 @@
       "format": "Softcover",
       "status": "SuB",
       "verlag": "Diogenes Verlag AG",
-      "cover": "der-groß-fehler.jpg"
+      "cover": "der-grosse-fehler.jpg"
     },
 
     {
@@ -1227,7 +1227,7 @@
       "format": "eBook",
       "status": "SuB",
       "verlag": "Penguin",
-      "cover": "familiensache.jpg"
+      "cover": "familensache.jpg"
     },
 
     {
@@ -1362,7 +1362,7 @@
       "format": "Softcover",
       "status": "SuB",
       "verlag": "Rowohlt/rororo",
-      "cover": "gestaendnisse-einer-teilzeitfeministin.jpg"
+      "cover": "gestaaendnisse-einer-teilzeit-feministin.jpg"
     },
 
     {
@@ -1407,7 +1407,7 @@
       "format": "Softcover",
       "status": "SuB",
       "verlag": "dtv",
-      "cover": "große-erwartungen.jpg"
+      "cover": "grosse-erwartungen.jpg"
     },
 
     {
@@ -1622,7 +1622,7 @@
 
     {
       "isbn": "978-3-257-24644-5, 9783257246445",
-      "title": "Kalmann",
+      "title": "Kalman",
       "author": "Joachim B. Schmidt",
       "gender": "Männlich",
       "umfang": "301-500",
@@ -1632,7 +1632,7 @@
       "format": "Softcover",
       "status": "SuB",
       "verlag": "Diogenes",
-      "cover": "kalmann.jpg"
+      "cover": "kalman.jpg"
     },
 
     {
