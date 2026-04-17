@@ -160,6 +160,7 @@ transform: scale(1.03);
     overflow-y: auto;
     color: black;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    
 }
 .checkbox-list label {
     display: block;
