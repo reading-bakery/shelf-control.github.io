@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     const getIsoDate = () => new Date().toISOString().split('T')[0];
 
-    // --- Modal für Zahleneingabe (angepasst auf "Bis zu welcher Seite/Minute") ---
+    // --- Modal für Zahleneingabe ---
     function openProgressModal(bookTitle, format, currentProgress) {
         return new Promise(resolve => {
             const modal = document.getElementById("progressInputModal");
@@ -87,6 +87,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
             modal.querySelector(".modal-save").addEventListener("click", save);
             modal.querySelector(".modal-cancel").addEventListener("click", cancel);
+        });
+    }
+
+    // --- Erfolgs-Modal DAILY ---
+    function openConfirmDailyModal(delta, unit) {
+        return new Promise(resolve => {
+            const modal = document.getElementById("confirmDailyModal");
+            const text = document.getElementById("confirmDailyText");
+            const btnOk = document.getElementById("btnConfirmDailySend");
+
+            text.innerHTML = `Du hast heute <strong>${delta} ${unit}</strong> geschafft!`;
+            modal.style.display = "flex";
+
+            const onOk = () => {
+                modal.style.display = "none";
+                btnOk.removeEventListener("click", onOk);
+                resolve();
+            };
+
+            btnOk.addEventListener("click", onOk);
+        });
+    }
+
+    // --- Erfolgs-Modal FINISH (Deine Anpassung) ---
+    function openFinishSummaryModal(data) {
+        return new Promise(resolve => {
+            const modal = document.getElementById("finishSummaryModal");
+            const container = document.getElementById("finishSummaryContent");
+            const btnOk = document.getElementById("btnFinishSend");
+
+            container.innerHTML = `
+                <strong>Titel:</strong> ${data.title}<br>
+                <strong>Sterne:</strong> ${data.sterne}<br>
+                <strong>Fazit:</strong> ${data.fazit}<br>
+                <strong>Sub-Genre:</strong> ${data.subgenre}<br>
+                <strong>Themen:</strong> ${data.themen}<br>
+                <strong>Stimmung:</strong> ${data.stimmung}<br>
+                <strong>Tempo:</strong> ${data.tempo}
+            `;
+
+            modal.style.display = "flex";
+
+            const onOk = () => {
+                modal.style.display = "none";
+                btnOk.removeEventListener("click", onOk);
+                resolve();
+            };
+
+            btnOk.addEventListener("click", onOk);
         });
     }
 
@@ -234,7 +283,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const format = book["Format"];
             const title = book["Titel"] || book["Buch"] || "";
 
-            // Bisherigen Fortschritt berechnen (Summe aller Einträge für dieses Buch)
             let progress = 0;
             daily.forEach(entry => {
                 if (entry["Buch"] === title) {
@@ -265,27 +313,24 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             container.appendChild(bookDiv);
 
-            // --- Fortschritt (Neu berechnet) ---
+            // --- Fortschritt aktualisieren ---
             bookDiv.querySelector(".btn-progress").addEventListener("click", async () => {
-                // Modal öffnen und die neue "End-Zahl" abfragen
                 const newTotalReached = await openProgressModal(title, format, progress);
-                
                 if (newTotalReached === null) return;
 
-                // Berechnung der Differenz: Neu eingegebene Zahl - Bisheriger Fortschritt
                 const delta = newTotalReached - progress;
+                const unit = format === "Hörbuch" ? "Minuten" : "Seiten";
 
                 const fd = new FormData();
                 fd.append(FIELD_DAILY_TITLE, title);
                 fd.append(FIELD_DAILY_DATE, getGermanDate());
                 
-                // Wir senden nur die heute gelesenen Seiten (delta)
                 if (format === "Hörbuch") fd.append(FIELD_DAILY_MINS, delta);
                 else fd.append(FIELD_DAILY_PAGES, delta);
                 
                 fetch(FORM_DAILY, { method: "POST", mode: "no-cors", body: fd })
-                    .then(() => { 
-                        alert(`Super! Du hast heute ${delta} ${format === "Hörbuch" ? "Minuten gehört" : "Seiten gelesen"}.`); 
+                    .then(async () => { 
+                        await openConfirmDailyModal(delta, unit);
                         location.reload(); 
                     })
                     .catch(err => alert("Fehler: " + err));
@@ -294,34 +339,55 @@ document.addEventListener("DOMContentLoaded", () => {
             // --- Buch beenden ---
             bookDiv.querySelector(".btn-finish").addEventListener("click", async () => {
                 const sterne = await openStarsModal();
+                if (!sterne) return;
+
                 const fazitArr = await openCheckboxModal("fazitModal", ["Abgebrochen","Flop","Solide","Lesenswert","Highlight"], "Fazit", false);
                 const fazit = fazitArr[0];
+                if (!fazit) return;
+
                 const subgenreArr = await openCheckboxModal("subgenreModal", ["Klassiker", "(Auto-)Biografie", "Zeitgenössisch", "Mystery", "Fantasy", "Science Fiction", "Dystopie", "Historisch", "Magischer Realismus", "Kinderbuch", "New Adult", "Young Adult", "Horror"], "Sub Genre", true);
                 const subgenreStr = subgenreArr.join(", ");
+
                 const themenArr = await openCheckboxModal("themenModal", [
                     "Abenteuer","Ableismus","Antisemitismus","Alkoholismus","Armut","Bücher","Coming of Age","DDR","Demenz/Alzheimer","Depression","Diktatur","Ehebruch/Betrug","Eifersucht","Eltern-Kind-Beziehung","Elternschaft","Emanzipation","Familie","Female Rage","Feminismus","Freundschaft","Geheimnisse","Generationen","Gerichtsverfahren","Geschwister","Gesellschaft","Gewalt","Holocaust","Homophobie","Identität/Herkunft","Klassismus","Krankheit","Krieg","Kunst","Liebe","Magie","Missbrauch","Mord","Musik","Nachkriegszeit","Natur","Philosophie","Politik","Psychologisch","Queer","Rassismus","Religion","Rolle der Frau","Sexismus","Spionage","Sprache","Soziologie","Tod","Trauer","Trauma","Toxische Beziehung","Vergewaltigung","Verrat","Wissenschaft","Zeitreise"
                 ], "Themen", true);
                 const themenStr = themenArr.join(", ");
+
                 const stimmungArr = await openCheckboxModal("stimmungModal", ["Traurig","Langweilig","Lustig/Humorvoll","Aufwühlend","Spannend","Melancholisch","Informativ","Romantisch","Nachdenklich","Düster","Gruselig","Cozy/Gemütlich","Ruhig","Herausfordernd/Komplex","Verwirrend","Eklig","Überraschend","Dramatisch"], "Stimmung", true);
                 const stimmungStr = stimmungArr.join(", ");
+
                 const tempoArr = await openCheckboxModal("tempoModal", ["Langsam","Mittel","Schnell"], "Lesetempo", false);
                 const tempo = tempoArr[0];
+                if (!tempo) return;
 
-                if(confirm(`"${title}" beenden?\nSterne: ${sterne}\nFazit: ${fazit}\nSub Genre: ${subgenreStr}\nThemen: ${themenStr}\nStimmung: ${stimmungStr}\nTempo: ${tempo}`)){
-                    const fd = new FormData();
-                    fd.append(FIELD_FINISH_TITLE, title);
-                    fd.append(FIELD_FINISH_DATE, getIsoDate());
-                    fd.append(FIELD_FINISH_STAR, sterne);
-                    fd.append(FIELD_FINISH_FAZIT, fazit);
-                    fd.append(FIELD_FINISH_SUBGENRE, subgenreStr);
-                    fd.append(FIELD_FINISH_THEMEN, themenStr);
-                    fd.append(FIELD_FINISH_STIMMUNG, stimmungStr);
-                    fd.append(FIELD_FINISH_TEMPO, tempo);
+                // Daten für Google Forms vorbereiten
+                const fd = new FormData();
+                fd.append(FIELD_FINISH_TITLE, title);
+                fd.append(FIELD_FINISH_DATE, getIsoDate());
+                fd.append(FIELD_FINISH_STAR, sterne);
+                fd.append(FIELD_FINISH_FAZIT, fazit);
+                fd.append(FIELD_FINISH_SUBGENRE, subgenreStr);
+                fd.append(FIELD_FINISH_THEMEN, themenStr);
+                fd.append(FIELD_FINISH_STIMMUNG, stimmungStr);
+                fd.append(FIELD_FINISH_TEMPO, tempo);
 
-                    fetch(FORM_FINISH,{method:"POST",mode:"no-cors",body:fd})
-                        .then(()=> { alert("Buch erfolgreich archiviert!"); location.reload(); })
-                        .catch(err=>alert("Fehler beim Senden: "+err));
-                }
+                // Daten senden
+                fetch(FORM_FINISH, { method: "POST", mode: "no-cors", body: fd })
+                    .then(async () => { 
+                        // NACH dem Senden: Dein neues Zusammenfassungs-Modal anzeigen
+                        const summaryData = {
+                            title: title,
+                            sterne: sterne,
+                            fazit: fazit,
+                            subgenre: subgenreStr,
+                            themen: themenStr,
+                            stimmung: stimmungStr,
+                            tempo: tempo
+                        };
+                        await openFinishSummaryModal(summaryData);
+                        location.reload(); 
+                    })
+                    .catch(err => alert("Fehler beim Senden: " + err));
             });
         });
     }).catch(err => console.error("Fehler beim Laden der CSV-Daten:", err));

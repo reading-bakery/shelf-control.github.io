@@ -189,9 +189,9 @@ button[type="submit"]:hover {
     }
 
 footer {
-    text-align: center;
-    color: #888;
-    margin-top: 3rem;
+      padding: 1rem;
+      text-align: center;
+      cursor: text;
 }
 
 .hidden-iframe { display: none; }
