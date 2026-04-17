@@ -5,13 +5,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // --- KONFIGURATION ---
     const baseURL = "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/";
     const jsonURL = baseURL + "sub.json";
-
-    // DIESE ZEILE HAT GEFEHLT:
     const SHEET_TSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1702643479&single=true&output=tsv"; 
-
     const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse";
 
-    
     const FORM_ENTRIES = {
         start: "entry.231863637", 
         title: "entry.554995646", 
@@ -31,6 +27,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     let alleBuecher = [];
     let bereitsGeleseneCover = "";
 
+    // --- MODAL ELEMENTE ---
+    const modal = document.getElementById("book-modal");
+    const closeBtn = document.getElementById("modal-cancel");
+    const confirmBtn = document.getElementById("modal-confirm");
+
     // 1. Abgleich: Vorhandene Einträge aus Google Sheets laden
     const ladeGeleseneStatus = async () => {
         try {
@@ -44,69 +45,93 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
-   // Hilfsfunktion zum Steuern des Modals
-const modal = document.getElementById("book-modal");
-const closeBtn = document.getElementById("modal-cancel");
-const confirmBtn = document.getElementById("modal-confirm");
+    // Hilfsfunktion: Erfolgs-Modal anzeigen
+    function openSuccessAddModal() {
+        return new Promise(resolve => {
+            const successModal = document.getElementById("successAddModal");
+            const btnOk = document.getElementById("btnSuccessAddOk");
 
-const addToGoogleSheets = (buch, element) => {
-    // Modal befüllen
-    document.getElementById("modal-cover").src = baseURL + buch.cover;
-    document.getElementById("modal-title").textContent = buch.title;
-    document.getElementById("modal-author").textContent = buch.author;
+            successModal.style.display = "flex";
 
-    // Modal anzeigen
-    modal.style.display = "flex";
+            const onOk = () => {
+                successModal.style.display = "none";
+                btnOk.removeEventListener("click", onOk);
+                resolve();
+            };
 
-    // Klick auf Abbrechen
-    closeBtn.onclick = () => { modal.style.display = "none"; };
+            btnOk.addEventListener("click", onOk);
+        });
+    }
 
-    // Klick auf Bestätigen
-    confirmBtn.onclick = async () => {
-        modal.style.display = "none"; // Modal sofort schließen
-        
-        const githubLink = `https://github.com/reading-bakery/shelf-control.github.io/blob/main/images/sub/${buch.cover}?raw=true`;
-        const formData = new FormData();
-        const today = new Date().toISOString().split('T')[0];
+    // Hauptfunktion: Buch zu Google Sheets hinzufügen
+    const addToGoogleSheets = (buch, element) => {
+        // Buch-Modal befüllen
+        document.getElementById("modal-cover").src = baseURL + buch.cover;
+        document.getElementById("modal-title").textContent = buch.title;
+        document.getElementById("modal-author").textContent = buch.author;
 
-        formData.append(FORM_ENTRIES.start, today);
-        formData.append(FORM_ENTRIES.title, buch.title || "");
-        formData.append(FORM_ENTRIES.author, buch.author || "");
-        formData.append(FORM_ENTRIES.gender, buch.gender || "");
-        formData.append(FORM_ENTRIES.umfang, buch.umfang || "");
-        formData.append(FORM_ENTRIES.seiten, buch.seiten || "");
-        formData.append(FORM_ENTRIES.minuten, ""); 
-        formData.append(FORM_ENTRIES.genre, buch.genre || "");
-        formData.append(FORM_ENTRIES.sprache, buch.sprache || "");
-        formData.append(FORM_ENTRIES.format, buch.format || "");
-        formData.append(FORM_ENTRIES.status, "Gelesen"); 
-        formData.append(FORM_ENTRIES.verlag, buch.verlag || "");
-        formData.append(FORM_ENTRIES.cover, githubLink);
+        modal.style.display = "flex";
 
-        try {
-            fetch(FORM_URL, { method: "POST", mode: "no-cors", body: formData });
+        closeBtn.onclick = () => { modal.style.display = "none"; };
 
-            // UI-Animation
-            element.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-            element.style.opacity = "0";
-            element.style.transform = "scale(0.8)";
-            
-            setTimeout(() => {
-                element.remove();
-                alleBuecher = alleBuecher.filter(b => b.cover !== buch.cover);
-            }, 500);
-        } catch (error) {
-            console.error("Fehler beim Senden:", error);
-        }
+        confirmBtn.onclick = async () => {
+            confirmBtn.disabled = true;
+            confirmBtn.textContent = "Wird gesendet...";
+
+            const githubLink = `https://github.com/reading-bakery/shelf-control.github.io/blob/main/images/sub/${buch.cover}?raw=true`;
+            const formData = new FormData();
+            const today = new Date().toISOString().split('T')[0];
+
+            formData.append(FORM_ENTRIES.start, today);
+            formData.append(FORM_ENTRIES.title, buch.title || "");
+            formData.append(FORM_ENTRIES.author, buch.author || "");
+            formData.append(FORM_ENTRIES.gender, buch.gender || "");
+            formData.append(FORM_ENTRIES.umfang, buch.umfang || "");
+            formData.append(FORM_ENTRIES.seiten, buch.seiten || "");
+            formData.append(FORM_ENTRIES.minuten, ""); 
+            formData.append(FORM_ENTRIES.genre, buch.genre || "");
+            formData.append(FORM_ENTRIES.sprache, buch.sprache || "");
+            formData.append(FORM_ENTRIES.format, buch.format || "");
+            formData.append(FORM_ENTRIES.status, "Gelesen"); 
+            formData.append(FORM_ENTRIES.verlag, buch.verlag || "");
+            formData.append(FORM_ENTRIES.cover, githubLink);
+
+            try {
+                // 1. Daten an Google senden
+                await fetch(FORM_URL, { method: "POST", mode: "no-cors", body: formData });
+
+                // 2. Buch-Auswahl-Modal schließen
+                modal.style.display = "none";
+
+                // 3. Erfolgs-Bestätigung anzeigen und auf Klick warten
+                await openSuccessAddModal();
+
+                // 4. UI-Animation: Buch aus der Liste entfernen
+                element.style.transition = "all 0.5s ease";
+                element.style.opacity = "0";
+                element.style.transform = "translateY(-20px) scale(0.8)";
+                
+                setTimeout(() => {
+                    element.remove();
+                    alleBuecher = alleBuecher.filter(b => b.cover !== buch.cover);
+                    confirmBtn.disabled = false;
+                    confirmBtn.textContent = "Hinzufügen";
+                }, 500);
+
+            } catch (error) {
+                console.error("Fehler beim Senden:", error);
+                alert("Fehler beim Hinzufügen. Bitte erneut versuchen.");
+                confirmBtn.disabled = false;
+                confirmBtn.textContent = "Hinzufügen";
+            }
+        };
     };
-};
 
     // 3. Bilder rendern
     const renderBooks = (buecherListe) => {
         container.innerHTML = "";
 
         buecherListe.forEach(buch => {
-            // Nur anzeigen, wenn der Dateiname NICHT in der Google TSV steht
             if (buch.cover && !bereitsGeleseneCover.includes(buch.cover)) {
                 const wrapper = document.createElement("div");
                 wrapper.classList.add("buch-wrapper");
@@ -156,6 +181,13 @@ const addToGoogleSheets = (buch, element) => {
             (b.genre || "").toLowerCase().includes(term)
         );
         renderBooks(gefiltert);
+    });
+
+    // Schließen bei Klick außerhalb
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
     });
 
     init();

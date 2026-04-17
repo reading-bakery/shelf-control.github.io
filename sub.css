@@ -164,11 +164,7 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.modal-content h3 { 
-    font-family: 'Bebas Neue', sans-serif; 
-    font-size: 1.8rem; 
-    margin-bottom: 10px; 
-    color: #333; }
+
 
 #modal-cover {
     width: 150px;
@@ -215,11 +211,35 @@
     font-family: "Dosis", sans-serif;
     font-size: 12pt;
 }
+
 .btn-cancel { 
     background-color: #e2d1d1; 
     color: #222; 
     font-family: "Dosis", sans-serif;
     font-size: 12pt;
+}
+
+
+.modal-save {
+    margin-top: 10px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 15px;
+    border: none;
+    background-color: #a2bba3;
+    cursor: pointer;
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+}
+
+
+#btnSuccessAddOk.btn-confirm {
+    width: auto;           /* Hebt das width: 100% aus dem Inline-Style auf */
+    min-width: 10px;      /* Mindestbreite, damit er nicht zu mickrig aussieht */
+    max-width: 150px;      /* Hier stellst du ein, wie schmal er maximal sein soll */
+    margin: 10px auto;     /* Zentriert den Button horizontal */
+    padding: 8px 15px;     /* Macht den Button insgesamt etwas flacher/schmaler */
+    display: block;        /* Nötig für das Zentrieren mit margin: auto */
 }
 
 @media (min-width: 600px) {

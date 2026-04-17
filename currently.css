@@ -169,6 +169,7 @@ transform: scale(1.03);
     cursor: pointer;
     margin-top: 5px;
 }
+
 .modal-save, .modal-cancel {
     margin-top: 10px;
     padding: 5px 10px;
@@ -183,6 +184,16 @@ transform: scale(1.03);
 
 .modal-save {
     background-color: #a2bba3;
+}
+
+#btnConfirmDailySend.modal-save,
+#btnFinishSend.modal-save {
+    width: auto;           /* Hebt das width: 100% aus dem Inline-Style auf */
+    min-width: 10px;      /* Mindestbreite, damit er nicht zu mickrig aussieht */
+    max-width: 150px;      /* Hier stellst du ein, wie schmal er maximal sein soll */
+    margin: 10px auto;     /* Zentriert den Button horizontal */
+    padding: 8px 15px;     /* Macht den Button insgesamt etwas flacher/schmaler */
+    display: block;        /* Nötig für das Zentrieren mit margin: auto */
 }
 
 .modal-cancel {
