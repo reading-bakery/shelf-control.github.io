@@ -52,13 +52,18 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: whitesmoke;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 10px;
     z-index: 2000;
-    text-align: center;
     width: 280px;
     color: #333;
+    max-width: 400px;
+    width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+    color: black;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: center; 
 }
 
 /* Das Buchcover */
@@ -73,34 +78,40 @@
 
 /* Titel und Autor */
 #pTitle {
-    display: block;
-    margin: 10px 0 2px 0; /* Nur 2px Abstand nach unten */
-    font-size: 1.1em;
-    font-weight: bold;
+    font-size: 1.2rem; 
+    margin: 5px 0 2px; 
+    font-weight: bold; 
+    color: #222; 
+    line-height: 1.2;
 }
 
 #pAuthor {
-    color: #464545;
-    font-size: 0.9em;
-    margin-top: 0;         /* Kein Abstand nach oben */
-    margin-bottom: 20px;   /* Abstand zu den Buttons beibehalten */
+    font-size: 1rem; 
+    color: #666; 
+    margin-top: 0;      /* Explizit auf 0 gesetzt, um Lücke nach oben zu schließen */
+    margin-bottom: 25px;
 }
 
 /* Button-Container */
 .preview-actions {
-    display: flex;
-    gap: 20px;
+    display: flex; 
+    gap: 5px; 
+    justify-content: center; 
 }
 
 /* Gemeinsame Button-Styles */
 .preview-btn {
-    flex: 1;
-    padding: 12px;
+    font-size: 14px;
+    color: white;
+    background: rgba(20, 20, 20, 0.85);
+    font-family: 'Dosis', sans-serif;
     border: none;
-    border-radius: 8px;
+    transition: background 0.2s ease, transform 0.2s ease;
+    padding: 7px 2px;
+    border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
-    transition: opacity 0.2s;
+    flex: 1;
 }
 
 .preview-btn:active {
@@ -113,6 +124,7 @@
     color: black;
     font-family: "Dosis", sans-serif;
     font-size: 12pt;
+    font-weight: bold;
 }
 
 #cancelSend {
@@ -120,6 +132,7 @@
     color: #333;
     font-family: "Dosis", sans-serif;
     font-size: 12pt;
+    font-weight: bold;
 }
 
 #notFoundModal {
