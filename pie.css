@@ -90,6 +90,8 @@
     box-sizing: border-box;
     background-color: #1f1f1f;
     font-family: "Bebas Neue", sans-serif;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 
@@ -352,11 +354,7 @@ hr {
   cursor: pointer;
 }
 
-/* Falls der Abstand durch .challenge-container kommt: */
-.challenge-container {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-}
+
 
 .carousel-container:hover {
   transform: scale(1.02);

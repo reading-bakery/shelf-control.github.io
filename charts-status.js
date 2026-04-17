@@ -100,18 +100,22 @@ document.addEventListener('DOMContentLoaded', () => {
                       ctx.textAlign = 'center';
                       ctx.textBaseline = 'middle';
 
-                      // Kategorie (Label) oben, leicht nach oben verschoben
-                      ctx.fillText(label, centerX, centerY - 16);
+                      // 1. Label (z.B. "bis 300")
+              ctx.font = '18px "Dosis", sans-serif';
+              ctx.fillStyle = '#a2bba3';
+              ctx.fillText(label, centerX, centerY - 25);
 
-                      // Prozentwert darunter, größer und etwas nach unten verschoben
-                      ctx.font = '22px Dosis, sans-serif';
-                      ctx.fillText(percentage, centerX, centerY + 4);
+              // 2. Prozentwert (Groß in Bebas Neue)
+              ctx.font = 'bold 38px "Bebas Neue", sans-serif';
+              ctx.fillStyle = 'white';
+              ctx.fillText(percentage, centerX, centerY + 5);
 
-                      // Totalangabe darunter
-                      ctx.font = '16px Dosis, sans-serif';
-                      ctx.fillText('Total: ' + value, centerX, centerY + 24);
+              // 3. Total Wert (wieder eingebaut)
+              ctx.font = '16px "Dosis", sans-serif';
+              ctx.fillStyle = 'white';
+              ctx.fillText('Total: ' + value, centerX, centerY + 32);
 
-                      ctx.restore();
+              ctx.restore();
                     }
                   }
                 }]
