@@ -153,6 +153,15 @@
     display: none !important;
 }
 
+#closeNotFound.modal-save {
+    width: auto;           /* Hebt das width: 100% aus dem Inline-Style auf */
+    min-width: 100px;      /* Mindestbreite, damit er nicht zu mickrig aussieht */
+    max-width: 150px;      /* Hier stellst du ein, wie schmal er maximal sein soll */
+    margin: 10px auto;     /* Zentriert den Button horizontal */
+    padding: 8px 15px;     /* Macht den Button insgesamt etwas flacher/schmaler */
+    display: block;        /* Nötig für das Zentrieren mit margin: auto */
+}
+
 #closeScanner {
   background-color: #a2bba3;
   color: black;
@@ -292,7 +301,7 @@
 
 
 /* Gemeinsame Basis für Input und Button */
-#isbn, .manual-btn {
+#isbnInput, .manual-btn {
     width: 320px;            /* Feste Breite für beide */
     padding: 15px 20px;      /* Gleiches Padding (Oben/Unten Links/Rechts) */
     border-radius: 12px;     /* Abgerundete Ecken */
@@ -301,10 +310,11 @@
     font-size: 1rem;
     background-color: #e8e8d5; /* Dein Beigeton aus dem Bild */
     box-sizing: border-box;  /* WICHTIG: Padding wird in die Breite eingerechnet */
+    cursor: pointer;
 }
 
 /* Spezifisch für das Eingabefeld */
-#isbn {
+#isbnInput {
     outline: none;
 }
 

@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let bookData = {}; 
     const codeReader = new ZXing.BrowserMultiFormatReader();
 
-    // --- SCANNER START ---
+    // --- 1. SCANNER START ---
     document.getElementById("openScanner")?.addEventListener("click", () => {
         const overlay = document.getElementById("scannerOverlay");
         if (overlay) {
@@ -37,8 +37,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- DATEN AUS JSON LADEN ---
+    // --- 2. MANUELLE ISBN EINGABE (NEU) ---
+    const isbnInputField = document.getElementById("isbnInput");
+    isbnInputField?.addEventListener("keypress", async (e) => {
+        if (e.key === "Enter") {
+            const manualIsbn = isbnInputField.value.trim();
+            if (manualIsbn) {
+                await fetchBookData(manualIsbn);
+                isbnInputField.value = ""; // Feld leeren nach Suche
+            }
+        }
+    });
+
+    // --- 3. DATEN AUS JSON LADEN ---
     async function fetchBookData(rawInput) {
+        // Bereinigt Input von Bindestrichen & Leerzeichen
         const cleanScanIsbn = String(rawInput).replace(/[^0-9Xx]/g, "").trim();
         const JSON_URL = `https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/sub.json?t=${new Date().getTime()}`;
         
@@ -48,6 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const res = await fetch(JSON_URL);
             const data = await res.json();
+            
+            // Abgleich: Wir bereinigen auch die ISBNs in der JSON für den Vergleich
             const treffer = (data.books || []).find(b => 
                 String(b.isbn || "").replace(/[^0-9Xx]/g, "").includes(cleanScanIsbn)
             );
@@ -93,12 +108,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- BESTÄTIGEN & SENDEN ---
+    // --- 4. BESTÄTIGEN & SENDEN ---
     document.getElementById("confirmSend")?.addEventListener("click", async () => {
         const confirmBtn = document.getElementById("confirmSend");
         const previewBox = document.getElementById("previewBox");
         
-        // Feedback: Senden-Status
         confirmBtn.disabled = true;
         confirmBtn.textContent = "Wird gesendet...";
 
@@ -108,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             await fetch(FORM_URL, { method: "POST", mode: "no-cors", body: fd });
             
-            // Erfolg: PreviewBox Inhalt ersetzen (wie in sub.js)
             previewBox.innerHTML = `
                 <div style="text-align: center; padding: 20px;">
                     <h3 style="font-family: 'Dosis', sans-serif; text-transform: none; margin-bottom: 15px;">
@@ -118,7 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
 
-            // Reload bei Klick auf "Super!"
             document.getElementById("btnSuccessAddOk").onclick = () => {
                 location.reload();
             };
@@ -131,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- CLOSE EVENTS ---
+    // --- 5. CLOSE EVENTS ---
     document.getElementById("closeNotFound")?.addEventListener("click", () => {
         const modal = document.getElementById("notFoundModal");
         if (modal) {
