@@ -1,3 +1,4 @@
+/* --- LAYOUT & CONTAINER --- */
 .addcontainer {
   max-width: 700px;
   margin: 0 auto;
@@ -5,19 +6,60 @@
   padding: 1rem;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    display: flex;
+  display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
-
-
 
 .addbook,
 .barcode {
   cursor: pointer;
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
+/* Rechte Seite: Eingabe & Button Sektion */
+.controls-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch; /* WICHTIG: Zwingt Kinder-Elemente auf volle Breite */
+    width: 100%;          /* Sorgt dafür, dass der Bereich den Raum ausfüllt */
+}
 
+/* --- ISBN INPUT & MANUELLER BUTTON (BREITEN-FIX) --- */
+#isbnInput, 
+.manual-btn {
+    width: 100%;             /* Nutzt 100% der .controls-section */
+    padding: 15px 20px; 
+    border-radius: 12px; 
+    border: none;
+    font-family: 'Dosis', sans-serif;
+    font-size: 1rem;
+    background-color: #e8e8d5; 
+    box-sizing: border-box;  /* Verhindert, dass Padding die Breite sprengt */
+    text-align: center;
+    display: block;          /* Sorgt für Block-Verhalten */
+}
+
+#isbnInput {
+    outline: none;
+    cursor: pointer;
+}
+
+.manual-btn {
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.manual-btn:hover {
+  background-color: #d8d8c5;
+}
+
+/* --- SCANNER & OVERLAY --- */
 .scanner-overlay {
   position: fixed;
   inset: 0;
@@ -35,108 +77,96 @@
   border-radius: 10px;
 }
 
-.scanner-overlay button {
+.scanner-overlay button, 
+#closeScanner {
   margin-top: 20px;
   padding: 10px 20px;
   font-size: 16px;
+  background-color: #a2bba3;
+  color: black;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Dosis', sans-serif;
+  font-weight: bold;
 }
 
-.hidden {
-  display: none;
-}
-
-/* Container für die Buchvorschau */
+/* --- PREVIEW BOX (BUCHVORSCHAU) --- */
 #previewBox {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: whitesmoke;
-    padding: 20px;
-    border-radius: 10px;
-    z-index: 2000;
-    width: 280px;
-    color: #333;
-    max-width: 400px;
-    width: 90%;
-    max-height: 80%;
-    overflow-y: auto;
-    color: black;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    text-align: center; 
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 2000;
+  width: 90%;
+  max-width: 400px;
+  max-height: 80%;
+  overflow-y: auto;
+  color: black;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  text-align: center; 
 }
 
-/* Das Buchcover */
 #pCover {
-    width: 140px;
-    height: auto;
-    border-radius: 5px;
-    margin: 10px auto;
-    display: none; /* Wird per JS auf 'block' gesetzt */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 140px;
+  height: auto;
+  border-radius: 5px;
+  margin: 10px auto;
+  display: none; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Titel und Autor */
 #pTitle {
-    font-size: 1.2rem; 
-    margin: 5px 0 2px; 
-    font-weight: bold; 
-    color: #222; 
-    line-height: 1.2;
+  font-size: 1.2rem; 
+  margin: 5px 0 2px; 
+  font-weight: bold; 
+  color: #222; 
+  line-height: 1.2;
 }
 
 #pAuthor {
-    font-size: 1rem; 
-    color: #666; 
-    margin-top: 0;      /* Explizit auf 0 gesetzt, um Lücke nach oben zu schließen */
-    margin-bottom: 25px;
+  font-size: 1rem; 
+  color: #666; 
+  margin-top: 0;
+  margin-bottom: 25px;
 }
 
-/* Button-Container */
 .preview-actions {
-    display: flex; 
-    gap: 5px; 
-    justify-content: center; 
+  display: flex; 
+  gap: 5px; 
+  justify-content: center; 
 }
 
-/* Gemeinsame Button-Styles */
 .preview-btn {
-    font-size: 14px;
-    color: white;
-    background: rgba(20, 20, 20, 0.85);
-    font-family: 'Dosis', sans-serif;
-    border: none;
-    transition: background 0.2s ease, transform 0.2s ease;
-    padding: 7px 2px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    flex: 1;
+  font-size: 14px;
+  color: white;
+  background: rgba(20, 20, 20, 0.85);
+  font-family: 'Dosis', sans-serif;
+  border: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+  padding: 7px 2px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  flex: 1;
 }
 
-.preview-btn:active {
-    opacity: 0.8;
-}
-
-/* Spezifische Button-Farben */
 #confirmSend {
-    background-color: #a2bba3;
-    color: black;
-    font-family: "Dosis", sans-serif;
-    font-size: 12pt;
-    font-weight: bold;
+  background-color: #a2bba3;
+  color: black;
 }
 
 #cancelSend {
-    background-color: #e0d0d0;
-    color: #333;
-    font-family: "Dosis", sans-serif;
-    font-size: 12pt;
-    font-weight: bold;
+  background-color: #e0d0d0;
+  color: #333;
 }
 
+/* --- MODALE & NOT FOUND --- */
 #notFoundModal {
-  display: none; /* Standardmäßig aus */
+  display: none;
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
@@ -145,205 +175,80 @@
   align-items: center;
   z-index: 1000;
   font-family: "Dosis", sans-serif;
-  font-size: 12pt
-}
-
-/* Hilfsklasse zum Verstecken */
-.hidden {
-    display: none !important;
 }
 
 #closeNotFound.modal-save {
-    width: auto;           /* Hebt das width: 100% aus dem Inline-Style auf */
-    min-width: 100px;      /* Mindestbreite, damit er nicht zu mickrig aussieht */
-    max-width: 150px;      /* Hier stellst du ein, wie schmal er maximal sein soll */
-    margin: 10px auto;     /* Zentriert den Button horizontal */
-    padding: 8px 15px;     /* Macht den Button insgesamt etwas flacher/schmaler */
-    display: block;        /* Nötig für das Zentrieren mit margin: auto */
+  width: auto;
+  min-width: 100px;
+  max-width: 150px;
+  margin: 10px auto;
+  padding: 8px 15px;
+  display: block;
 }
 
-#closeScanner {
-  background-color: #a2bba3;
-  color: black;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-}
-
-.preview-box {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #222;
-  color: white;
-  padding: 20px;
-  border-radius: 12px;
-  z-index: 9999;
-  cursor: pointer;
-}
-
-
-.checkbox-list label {
-    display: block;
-    margin-bottom: 5px;
-    color: black;
-    font-weight: normal;
-    cursor: pointer;
-    margin-top: 5px;
-}
-
-.modal {
+.modal, .modal1, .modalcontainer {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.6);
+  display: none; /* Default hidden */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
 
+.modal.active, .modal1.active, .modalcontainer.active {
   display: flex;
-  justify-content: center;
-  align-items: center;
-
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.3s;
-  z-index: 9999;
-  cursor: pointer;
-}
-
-.modal1 {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-
-  display: none;
-  justify-content: center;
-  align-items: center;
-
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.3s;
-  z-index: 9999;
-  cursor: pointer;
-}
-
-.modal.active {
   opacity: 1;
   pointer-events: auto;
 }
 
 .modal-content {
-    background: whitesmoke;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 400px;
-    width: 90%;
-    max-height: 80%;
-    overflow-y: auto;
-    color: black;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  background: whitesmoke;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  color: black;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.modal-buttons {
+/* --- FORMULAR ELEMENTE IN MODALEN --- */
+.checkbox-list label {
+  display: block;
+  margin-bottom: 5px;
+  color: black;
+  font-weight: normal;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.modal-save, .modal-cancel {
   margin-top: 10px;
-  display: flex;
-  gap: 5px;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Dosis', sans-serif;
+  font-weight: bold;
 }
 
+.modal-save { background-color: #a2bba3; }
+.modal-cancel { background-color: #e0d0d0; }
 
-
-/* Falls du die Container-Logik nutzt */
-.modal-content input {
-    display: block;
+.error-msg {
+  color: red;
+  font-size: 0.9em;
+  margin: 2px 0 6px 0;
+  line-height: 1.2em;
 }
 
-
-.modal-save,
-.modal-cancel {
-    margin-top: 10px;
-    padding: 5px 10px;
-    margin-right: 5px;
-    border-radius: 15px;
-    border: none;
-    background-color: #a2bba3;
-    cursor: pointer;
-    font-family: 'Dosis', sans-serif;
-    font-weight: bold;
-}
-
-.modal-save {
-  background-color: #a2bba3;
-}
-
-.modal-cancel {
-  background-color: #e0d0d0;
-}
-
-
-.modal-content .error-msg {
-    color: red;
-    font-size: 0.9em;
-    margin: 2px 0 6px 0; /* oben 2px, unten 6px */
-    line-height: 1.2em;
-}
-
-.modalcontainer {
-  position: fixed;
-  inset: 0;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0,0,0,0.6);
-  z-index: 9999;
-}
-
-.modalcontainer.active {
-  display: flex;
-}
-
-
-/* Gemeinsame Basis für Input und Button */
-#isbnInput, .manual-btn {
-    width: 320px;            /* Feste Breite für beide */
-    padding: 15px 20px;      /* Gleiches Padding (Oben/Unten Links/Rechts) */
-    border-radius: 12px;     /* Abgerundete Ecken */
-    border: none;
-    font-family: 'Dosis', sans-serif;
-    font-size: 1rem;
-    background-color: #e8e8d5; /* Dein Beigeton aus dem Bild */
-    box-sizing: border-box;  /* WICHTIG: Padding wird in die Breite eingerechnet */
-    cursor: pointer;
-}
-
-/* Spezifisch für das Eingabefeld */
-#isbnInput {
-    outline: none;
-}
-
-/* Spezifisch für den Button */
-.manual-btn {
-    cursor: pointer;
-    font-weight: bold;
-    text-align: center;
-    transition: background 0.3s;
-    display: block; /* Sorgt für korrekte Breitenberechnung */
-}
-
-.manual-btn:hover {
-    background-color: #d8d8c5;
-}
-
-/* Container-Anpassung für die rechte Seite */
-.controls-section {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;         /* Abstand zwischen den Feldern */
-    align-items: flex-start; 
-}
-
-/* Falls das Suchen-Button unter dem ISBN Feld ist */
-#isbnSearch {
-    margin-top: 5px;
-    padding: 5px 15px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
+/* --- HILFSKLASSEN --- */
+.hidden {
+  display: none !important;
 }
