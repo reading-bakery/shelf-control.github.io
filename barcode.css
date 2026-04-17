@@ -144,7 +144,7 @@
   background-color: #a2bba3;
   color: black;
   border: none;
-  border-radius: 8px;
+  border-radius: 25px;
   cursor: pointer;
 }
 
@@ -164,9 +164,11 @@
 
 .checkbox-list label {
     display: block;
+    margin-bottom: 5px;
     color: black;
     font-weight: normal;
     cursor: pointer;
+    margin-top: 5px;
 }
 
 .modal {
@@ -207,18 +209,21 @@
 }
 
 .modal-content {
-  background: whitesmoke;
-  padding: 20px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 400px;
-  color: black;
+    background: whitesmoke;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+    color: black;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .modal-buttons {
   margin-top: 10px;
   display: flex;
-  gap: 10px;
+  gap: 5px;
 }
 
 
@@ -231,10 +236,15 @@
 
 .modal-save,
 .modal-cancel {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+    margin-top: 10px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 15px;
+    border: none;
+    background-color: #a2bba3;
+    cursor: pointer;
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
 }
 
 .modal-save {

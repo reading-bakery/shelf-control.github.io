@@ -152,11 +152,14 @@
 
 /* Die weiße Box */
 .modal-content {
-    background: whitesmoke; /* Creme-Weiß wie im Bild */
-    padding: 30px;
-    border-radius: 25px;
-    width: 90%;
+    background: whitesmoke;
+    padding: 20px;
+    border-radius: 10px;
     max-width: 400px;
+    width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+    color: black;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
@@ -193,14 +196,14 @@
 /* Buttons */
 .modal-footer { 
     display: flex; 
-    gap: 10px; 
+    gap: 5px; 
     justify-content: center; 
 }
 
 .btn-confirm, .btn-cancel {
     padding: 12px 2px;
     border: none;
-    border-radius: 12px;
+    border-radius: 25px;
     cursor: pointer;
     font-weight: bold;
     flex: 1;

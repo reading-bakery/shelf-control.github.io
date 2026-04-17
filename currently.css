@@ -159,6 +159,7 @@ transform: scale(1.03);
     max-height: 80%;
     overflow-y: auto;
     color: black;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 .checkbox-list label {
     display: block;
@@ -166,6 +167,7 @@ transform: scale(1.03);
     color: black;
     font-weight: normal;
     cursor: pointer;
+    margin-top: 5px;
 }
 .modal-save, .modal-cancel {
     margin-top: 10px;
@@ -175,9 +177,17 @@ transform: scale(1.03);
     border: none;
     background-color: #a2bba3;
     cursor: pointer;
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
 }
 
+.modal-save {
+    background-color: #a2bba3;
+}
 
+.modal-cancel {
+    background-color: #e2d1d1; ;
+}
 
 .modal-content .error-msg {
     color: red;
