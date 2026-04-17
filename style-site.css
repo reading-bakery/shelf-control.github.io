@@ -71,7 +71,23 @@ form {
     align-items: flex-start;
 }
 
-
+#btnSuccessAddOk.modal-save {
+    display: block;        /* Erlaubt die Zentrierung mit margin: auto */
+    width: fit-content;    /* Button wird nur so breit wie der Text */
+    min-width: 100px;       /* Mindestbreite, damit er nicht zu mickrig wirkt */
+    max-width: 150px;      /* Deine gewünschte maximale Breite */
+    margin: 20px auto 10px;/* Zentriert den Button (20px oben, auto links/rechts) */
+    padding: 8px 15px;     /* Macht den Button schmaler */
+    
+    /* Falls du das Design aus dem Screenshot (grün/rund) willst: */
+    background-color: #a2bba3; 
+    color: black;
+    border: none;
+    border-radius: 25px;   /* Rundes Design wie im Screenshot */
+    cursor: pointer;
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+}
 
 /* --- 4. FORMULAR & BUTTONS --- */
 input[type="text"],

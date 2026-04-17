@@ -194,13 +194,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       
       try {
         await fetch(FORM_URL, { method: "POST", mode: "no-cors", body: fd });
-        modalContent.innerHTML = `
-          <div style="text-align: center; padding: 20px;">
-            <h3 style="color: #a2bba3;">Erfolg!</h3>
-            <p style="font-size: 1.1em; margin: 20px 0;"><strong>${bookData.title}</strong> wurde hinzugefügt. 🚀</p>
-            <button class="modal-save" style="width: 100%;">Super!</button>
-          </div>
-        `;
+       modalContent.innerHTML = `
+        <div style="text-align: center; padding: 20px;">
+          <p style="font-size: 1.1em; margin: 20px 0;"><strong>${bookData.title}</strong> wurde hinzugefügt. 🚀</p>
+          <button class="modal-save" id="btnSuccessAddOk">Super!</button>
+        </div>
+      `;
         modalContent.querySelector("button").onclick = () => location.reload();
       } catch (err) { 
         showError(currentModal, "Fehler: " + err); 

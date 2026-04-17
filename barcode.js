@@ -82,13 +82,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 previewBox?.classList.remove("hidden");
                 previewBox.style.display = "block";
             } else {
-                // FEHLERFALL: Modal anzeigen und CSS-Hürden erzwingen
                 if (notFoundModal) {
                     notFoundModal.style.display = "flex";
                     notFoundModal.style.opacity = "1";
                     notFoundModal.style.pointerEvents = "auto";
-                } else {
-                    alert("Barcode nicht gefunden.");
                 }
             }
         } catch (err) { 
@@ -98,18 +95,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- BESTÄTIGEN & SENDEN ---
     document.getElementById("confirmSend")?.addEventListener("click", async () => {
+        const confirmBtn = document.getElementById("confirmSend");
+        const previewBox = document.getElementById("previewBox");
+        
+        // Feedback: Senden-Status
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = "Wird gesendet...";
+
         const fd = new FormData();
         Object.keys(FORM_ENTRIES).forEach(key => fd.append(FORM_ENTRIES[key], bookData[key] || ""));
+        
         try {
             await fetch(FORM_URL, { method: "POST", mode: "no-cors", body: fd });
-            alert("Erfolgreich gespeichert!");
-            location.reload();
-        } catch (err) { alert("Fehler beim Senden."); }
+            
+            // Erfolg: PreviewBox Inhalt ersetzen (wie in sub.js)
+            previewBox.innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <h3 style="font-family: 'Dosis', sans-serif; text-transform: none; margin-bottom: 15px;">
+                        Buch erfolgreich hinzugefügt! 🚀
+                    </h3>
+                    <button id="btnSuccessAddOk" class="modal-save">Super!</button>
+                </div>
+            `;
+
+            // Reload bei Klick auf "Super!"
+            document.getElementById("btnSuccessAddOk").onclick = () => {
+                location.reload();
+            };
+
+        } catch (err) { 
+            console.error("Fehler beim Senden:", err);
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = "Hinzufügen";
+            alert("Fehler beim Senden."); 
+        }
     });
 
     // --- CLOSE EVENTS ---
-
-    // "Nicht gefunden" Modal schließen
     document.getElementById("closeNotFound")?.addEventListener("click", () => {
         const modal = document.getElementById("notFoundModal");
         if (modal) {
@@ -119,7 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Vorschau abbrechen
     document.getElementById("cancelSend")?.addEventListener("click", () => {
         const pb = document.getElementById("previewBox");
         if (pb) {
@@ -128,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Scanner manuell schließen
     document.getElementById("closeScanner")?.addEventListener("click", () => {
         codeReader.reset();
         const overlay = document.getElementById("scannerOverlay");

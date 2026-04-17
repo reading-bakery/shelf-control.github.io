@@ -189,7 +189,7 @@ transform: scale(1.03);
 #btnConfirmDailySend.modal-save,
 #btnFinishSend.modal-save {
     width: auto;           /* Hebt das width: 100% aus dem Inline-Style auf */
-    min-width: 10px;      /* Mindestbreite, damit er nicht zu mickrig aussieht */
+    min-width: 100px;      /* Mindestbreite, damit er nicht zu mickrig aussieht */
     max-width: 150px;      /* Hier stellst du ein, wie schmal er maximal sein soll */
     margin: 10px auto;     /* Zentriert den Button horizontal */
     padding: 8px 15px;     /* Macht den Button insgesamt etwas flacher/schmaler */
