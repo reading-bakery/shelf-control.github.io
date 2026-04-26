@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = canvas.getContext('2d');
 
   const gradients = [];
+  const inactiveColor = '#333333';
 
   const createGradient = (start, end) => {
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
@@ -11,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gradients.push(gradient);
   };
 
-  // 13 Farbverläufe
+  // 13 Farbverläufe definieren
   createGradient('#ff7256', '#ff4500');
   createGradient('#3CB371', '#294e29ff');
   createGradient('#f663d6ff', '#560746ff');
@@ -44,6 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      // Farben für die Top 10 festlegen
+      const chartColors = gradients.slice(0, labels.length);
+
       const config = {
         type: 'doughnut',
         data: {
@@ -51,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
           datasets: [{
             label: 'Stimmung',
             data: data,
-            backgroundColor: gradients.slice(0, labels.length),
+            backgroundColor: [...chartColors],
             borderColor: '#1f1f1f',
             borderWidth: 6,
             hoverOffset: 12,
@@ -61,33 +65,35 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
           cutout: '55%',
           responsive: true,
+          onHover: (event, elements, chart) => {
+            const dataset = chart.data.datasets[0];
+            if (elements.length > 0) {
+              const activeIdx = elements[0].index;
+              // Alle inaktiven Segmente grau färben
+              dataset.backgroundColor = chartColors.map((color, i) =>
+                i === activeIdx ? color : inactiveColor
+              );
+            } else {
+              // Ursprüngliche Farben wiederherstellen
+              dataset.backgroundColor = [...chartColors];
+            }
+            chart.update('none');
+          },
           plugins: {
             legend: { display: false },
             tooltip: { enabled: false },
             datalabels: { display: false }
-          },
-          hover: {
-            onHover: (event, elements, chart) => {
-              if (elements.length) {
-                const idx = elements[0].index;
-                chart.options.plugins.datalabels.display = ctx => ctx.dataIndex === idx;
-                chart.update();
-              } else {
-                chart.options.plugins.datalabels.display = false;
-                chart.update();
-              }
-            }
           }
         },
-         plugins: [{
+        plugins: [{
           id: 'centerLabel',
           afterDraw(chart) {
             const ctx = chart.ctx;
             const centerX = chart.width / 2;
             const centerY = chart.height / 2;
-            const active = chart.tooltip?._active || [];
+            const active = chart.getActiveElements();
 
-            if (active && active.length) {
+            if (active && active.length > 0) {
               const idx = active[0].index;
               const value = chart.data.datasets[0].data[idx];
               const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
@@ -95,22 +101,20 @@ document.addEventListener('DOMContentLoaded', () => {
               const label = chart.data.labels[idx];
 
               ctx.save();
-              ctx.font = '16px Dosis, sans-serif';
-              ctx.fillStyle = 'white';
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
 
-               // 1. Label (z.B. "bis 300")
+              // 1. Label
               ctx.font = '18px "Dosis", sans-serif';
               ctx.fillStyle = '#a2bba3';
               ctx.fillText(label, centerX, centerY - 25);
 
-              // 2. Prozentwert (Groß in Bebas Neue)
+              // 2. Prozentwert
               ctx.font = 'bold 38px "Bebas Neue", sans-serif';
               ctx.fillStyle = 'white';
               ctx.fillText(percentage, centerX, centerY + 5);
 
-              // 3. Total Wert (wieder eingebaut)
+              // 3. Total Wert
               ctx.font = '16px "Dosis", sans-serif';
               ctx.fillStyle = 'white';
               ctx.fillText('Total: ' + value, centerX, centerY + 32);

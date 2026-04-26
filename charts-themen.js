@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const canvas = document.getElementById('themenChart');
+  const canvas = document.getElementById('stimmungChart');
   const ctx = canvas.getContext('2d');
 
   const gradients = [];
+  const inactiveColor = '#333333';
 
   const createGradient = (start, end) => {
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
@@ -11,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gradients.push(gradient);
   };
 
-  // 13 Farbverläufe
+  // Definition der 13 verfügbaren Farbverläufe
   createGradient('#ff7256', '#ff4500');
   createGradient('#3CB371', '#294e29ff');
   createGradient('#f663d6ff', '#560746ff');
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   createGradient('#ac7975ff', '#430b07ff');
   createGradient('#bbddff', '#005577');
 
-  fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=498241349&single=true&output=csv')
+  fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=282362445&single=true&output=csv')
     .then(response => response.text())
     .then(csvText => {
       const parsedData = Papa.parse(csvText, { header: true }).data;
@@ -34,9 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const filtered = parsedData
         .filter(row => parseFloat(row['Anzahl']) > 0)
         .sort((a, b) => parseFloat(b['Anzahl']) - parseFloat(a['Anzahl']))
-        .slice(0, 10); // Top 10
+        .slice(0, 10); // Nur Top 10 anzeigen
 
-      const labels = filtered.map(row => row['Thema']);
+      const labels = filtered.map(row => row['Stimmung']);
       const data = filtered.map(row => parseFloat(row['Anzahl']));
 
       if (data.length === 0) {
@@ -44,14 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      // Farben passend zu den gefilterten Labels extrahieren
+      const chartColors = gradients.slice(0, labels.length);
+
       const config = {
         type: 'doughnut',
         data: {
           labels: labels,
           datasets: [{
-            label: 'Thema',
+            label: 'Stimmung',
             data: data,
-            backgroundColor: gradients.slice(0, labels.length),
+            backgroundColor: [...chartColors],
             borderColor: '#1f1f1f',
             borderWidth: 6,
             hoverOffset: 12,
@@ -61,33 +65,34 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
           cutout: '55%',
           responsive: true,
+          // Hover-Effekt: Inaktive Segmente werden grau
+          onHover: (event, elements, chart) => {
+            const dataset = chart.data.datasets[0];
+            if (elements.length > 0) {
+              const activeIdx = elements[0].index;
+              dataset.backgroundColor = chartColors.map((color, i) =>
+                i === activeIdx ? color : inactiveColor
+              );
+            } else {
+              dataset.backgroundColor = [...chartColors];
+            }
+            chart.update('none');
+          },
           plugins: {
             legend: { display: false },
             tooltip: { enabled: false },
             datalabels: { display: false }
-          },
-          hover: {
-            onHover: (event, elements, chart) => {
-              if (elements.length) {
-                const idx = elements[0].index;
-                chart.options.plugins.datalabels.display = ctx => ctx.dataIndex === idx;
-                chart.update();
-              } else {
-                chart.options.plugins.datalabels.display = false;
-                chart.update();
-              }
-            }
           }
         },
-         plugins: [{
+        plugins: [{
           id: 'centerLabel',
           afterDraw(chart) {
             const ctx = chart.ctx;
             const centerX = chart.width / 2;
             const centerY = chart.height / 2;
-            const active = chart.tooltip?._active || [];
+            const active = chart.getActiveElements();
 
-            if (active && active.length) {
+            if (active && active.length > 0) {
               const idx = active[0].index;
               const value = chart.data.datasets[0].data[idx];
               const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
@@ -95,22 +100,20 @@ document.addEventListener('DOMContentLoaded', () => {
               const label = chart.data.labels[idx];
 
               ctx.save();
-              ctx.font = '16px Dosis, sans-serif';
-              ctx.fillStyle = 'white';
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
 
-               // 1. Label (z.B. "bis 300")
+              // 1. Kategorie Label
               ctx.font = '18px "Dosis", sans-serif';
               ctx.fillStyle = '#a2bba3';
               ctx.fillText(label, centerX, centerY - 25);
 
-              // 2. Prozentwert (Groß in Bebas Neue)
+              // 2. Großer Prozentwert
               ctx.font = 'bold 38px "Bebas Neue", sans-serif';
               ctx.fillStyle = 'white';
               ctx.fillText(percentage, centerX, centerY + 5);
 
-              // 3. Total Wert (wieder eingebaut)
+              // 3. Absolute Anzahl
               ctx.font = '16px "Dosis", sans-serif';
               ctx.fillStyle = 'white';
               ctx.fillText('Total: ' + value, centerX, centerY + 32);
