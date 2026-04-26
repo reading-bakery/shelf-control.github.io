@@ -2,19 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=57210249&single=true&output=csv';
 
   let autorChartInstance = null;
-  let activeIndex = null; // Index des gerade gehhoverten Balkens
+  const inactiveColor = '#333333';
+  let activeIndex = null;
 
   function generateColors(count) {
     const palette = ['#ff7256', '#FFB90F', '#63b8ff', '#3CB371', '#9370DB', '#20B2AA'];
-    const colors = [];
-    for (let i = 0; i < count; i++) {
-      colors.push(palette[i % palette.length]);
-    }
-    return colors;
+    return Array.from({ length: count }, (_, i) => palette[i % palette.length]);
   }
 
   function renderAutorChart(labels, data, barThickness, maxValue) {
-    const ctx = document.getElementById('autorChart').getContext('2d');
+    const canvas = document.getElementById('autorChart');
+    const ctx = canvas.getContext('2d');
+    const originalColors = generateColors(data.length);
 
     if (autorChartInstance) {
       autorChartInstance.destroy();
@@ -27,24 +26,27 @@ document.addEventListener('DOMContentLoaded', () => {
         datasets: [{
           label: 'Anzahl Bücher',
           data: data,
-          backgroundColor: generateColors(data.length),
-          borderRadius: [30, 30, 30, 30],
-          borderWidth: 7,
+          backgroundColor: [...originalColors],
+          borderRadius: 30,
+          borderWidth: 3,
           barThickness: barThickness
         }]
       },
       options: {
         indexAxis: 'y',
         responsive: true,
-        interaction: {
-          mode: 'nearest',
-          intersect: true
-        },
         onHover: (event, elements) => {
-          if (elements.length) {
+          const dataset = autorChartInstance.data.datasets[0];
+          if (elements.length > 0) {
             activeIndex = elements[0].index;
+            // Inaktive Balken ausgrauen
+            dataset.backgroundColor = originalColors.map((color, i) =>
+              i === activeIndex ? color : inactiveColor
+            );
           } else {
             activeIndex = null;
+            // Originalfarben wiederherstellen
+            dataset.backgroundColor = [...originalColors];
           }
           autorChartInstance.update('none');
         },
@@ -52,20 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
           x: {
             display: false,
             min: 0,
-            max: maxValue,
-            grid: { display: false }
+            max: maxValue
           },
           y: {
             ticks: {
-              color: ctx => (ctx.index === activeIndex ? 'white' : 'white'),
-              font: ctx => ({
+              color: 'white',
+              font: (context) => ({
                 family: "'Dosis', sans-serif",
                 size: 16,
-                weight: ctx.index === activeIndex ? 'bold' : 'normal'
-              }),
-              callback: function(value) {
-                return this.getLabelForValue(value);
-              }
+                // Nur den Namen des aktuell gehoverten Autors fetten
+                weight: context.index === activeIndex ? 'bold' : 'normal'
+              })
             },
             grid: { display: false }
           }
@@ -77,13 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
             color: 'white',
             anchor: 'end',
             align: 'right',
-            offset: -2,
-            clamp: true,
-            font: ctx => ({
+            offset: 10,
+            font: (context) => ({
               family: "'Dosis', sans-serif",
               size: 15,
-              weight: ctx.dataIndex === activeIndex ? 'bold' : 'normal'
-            })
+              // Nur die Zahl am Balkenende des gehoverten Elements fetten
+              weight: context.dataIndex === activeIndex ? 'bold' : 'normal'
+            }),
+            formatter: (value) => value
           }
         }
       },
@@ -109,18 +109,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      const maxValue = Math.max(...data) + 1;
       const mediaQuery = window.matchMedia('(max-width: 740px)');
 
       function updateChart() {
-        const barThickness = mediaQuery.matches ? 30 : 35;
+        const barThickness = mediaQuery.matches ? 25 : 30;
+        // Puffer für die Zahlen rechts
+        const maxValue = Math.max(...data) * 1.2;
         renderAutorChart(labels, data, barThickness, maxValue);
       }
 
       mediaQuery.addEventListener('change', updateChart);
       updateChart();
     })
-    .catch(error => {
-      console.error('Fehler beim Laden der CSV:', error);
-    });
+    .catch(error => console.error('Fehler:', error));
 });

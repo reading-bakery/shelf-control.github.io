@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1635103848&single=true&output=csv';
 
   let sprachenChartInstance = null;
-  let activeIndex = null; // aktuell gehovter Balken-Index
+  const inactiveColor = '#333333';
+  let activeIndex = null;
 
-  // Sprachkürzel-Mapping
   const languageMap = {
     "Englisch": "Englisch",
     "Deutsch": "Deutsch",
@@ -19,15 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function generateColors(count) {
     const palette = ['#ff7256', '#FFB90F', '#63b8ff', '#3CB371', '#9370DB', '#20B2AA'];
-    const colors = [];
-    for (let i = 0; i < count; i++) {
-      colors.push(palette[i % palette.length]);
-    }
-    return colors;
+    return Array.from({ length: count }, (_, i) => palette[i % palette.length]);
   }
 
   function renderSprachenChart(labels, data, barThickness, maxValue) {
-    const ctx = document.getElementById('sprachenChart').getContext('2d');
+    const canvas = document.getElementById('sprachenChart');
+    const ctx = canvas.getContext('2d');
+    const originalColors = generateColors(data.length);
 
     if (sprachenChartInstance) {
       sprachenChartInstance.destroy();
@@ -40,53 +38,45 @@ document.addEventListener('DOMContentLoaded', () => {
         datasets: [{
           label: 'Anzahl Bücher',
           data: data,
-          backgroundColor: generateColors(data.length),
-          borderRadius: [30, 30, 30, 30],
-          borderWidth: 7,
+          backgroundColor: [...originalColors],
+          borderRadius: 30,
+          borderWidth: 3,
           barThickness: barThickness
         }]
       },
       options: {
         indexAxis: 'y',
         responsive: true,
-        interaction: {
-          mode: 'nearest',
-          intersect: true
-        },
         onHover: (event, elements) => {
-          if (elements.length) {
+          const dataset = sprachenChartInstance.data.datasets[0];
+          if (elements.length > 0) {
             activeIndex = elements[0].index;
+            dataset.backgroundColor = originalColors.map((color, i) =>
+              i === activeIndex ? color : inactiveColor
+            );
           } else {
             activeIndex = null;
+            dataset.backgroundColor = [...originalColors];
           }
-          sprachenChartInstance.update('none'); // sofort neu zeichnen ohne Animation
+          sprachenChartInstance.update('none');
         },
         scales: {
           x: {
             display: false,
             min: 0,
-            max: maxValue,
-            grid: { display: false }
+            max: maxValue
           },
           y: {
             ticks: {
               color: 'white',
-              font: ctx => ({
+              font: (context) => ({
                 family: "'Dosis', sans-serif",
                 size: 16,
-                weight: ctx.index === activeIndex ? 'bold' : 'normal'
-              }),
-              callback: function(value) {
-                return this.getLabelForValue(value);
-              }
+                // Fettung nur für das gehoverte Element an der Achse
+                weight: context.index === activeIndex ? 'bold' : 'normal'
+              })
             },
-            grid: { display: false },
-            title: {
-              display: false,
-              text: 'Sprache',
-              color: 'white',
-              font: { family: "'Dosis', sans-serif", size: 18, weight: 'bold' }
-            }
+            grid: { display: false }
           }
         },
         plugins: {
@@ -96,13 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
             color: 'white',
             anchor: 'end',
             align: 'right',
-            offset: -5,
-            clamp: true,
-            font: ctx => ({
+            offset: 10,
+            font: (context) => ({
               family: "'Dosis', sans-serif",
-              weight: ctx.dataIndex === activeIndex ? 'bold' : 'normal',
-              size: 15
-            })
+              size: 15,
+              // Fettung nur für den gehoverten Datenwert am Balkenende
+              weight: context.dataIndex === activeIndex ? 'bold' : 'normal'
+            }),
+            formatter: (value) => value
           }
         }
       },
@@ -132,22 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const mediaQuery = window.matchMedia('(max-width: 740px)');
 
       function updateChart() {
-        const barThickness = mediaQuery.matches ? 30 : 35;
-        const baseMax = Math.max(...data) + 6;
-
-        // Mobile-spezifische Anpassung: Skala auf kleinen Bildschirmen etwas reduzieren
-        // Passe Multiplizierer oder Mindestwert nach Wunsch an
-        const mobileMax = Math.max(Math.ceil(baseMax * 1), 8);
-
-        const maxValue = mediaQuery.matches ? mobileMax : baseMax;
-
+        const barThickness = mediaQuery.matches ? 25 : 30;
+        // Puffer für Datalabels rechts (1.2 multiplier für Platz)
+        const maxValue = Math.max(...data) * 1.2;
         renderSprachenChart(labels, data, barThickness, maxValue);
       }
 
       mediaQuery.addEventListener('change', updateChart);
       updateChart();
     })
-    .catch(error => {
-      console.error('Fehler beim Laden der CSV:', error);
-    });
+    .catch(error => console.error('Fehler:', error));
 });

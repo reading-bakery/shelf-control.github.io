@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1931149788&single=true&output=csv';
 
   let verlagChartInstance = null;
-  let activeIndex = null;  // aktuell gehoverter Balken-Index
+  const inactiveColor = '#333333';
+  let activeIndex = null; // Speichert den Index des gehoverten Balkens
 
-  // Verlag-Mapping: lange Namen → kurze Namen
   const languageMap = {
     "ATB/Aufbau/RL/Blumenbar": "Aufbau/ATB",
     "Sonstiges": "Sonst"
@@ -12,15 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function generateColors(count) {
     const palette = ['#ff7256', '#FFB90F', '#63b8ff', '#3CB371', '#9370DB', '#20B2AA'];
-    const colors = [];
-    for (let i = 0; i < count; i++) {
-      colors.push(palette[i % palette.length]);
-    }
-    return colors;
+    return Array.from({ length: count }, (_, i) => palette[i % palette.length]);
   }
 
   function renderVerlagChart(labels, data, barThickness, maxValue) {
-    const ctx = document.getElementById('verlagChart').getContext('2d');
+    const canvas = document.getElementById('verlagChart');
+    const ctx = canvas.getContext('2d');
+    const originalColors = generateColors(data.length);
 
     if (verlagChartInstance) {
       verlagChartInstance.destroy();
@@ -33,45 +31,43 @@ document.addEventListener('DOMContentLoaded', () => {
         datasets: [{
           label: 'Anzahl Bücher',
           data: data,
-          backgroundColor: generateColors(data.length),
-          borderRadius: [30, 30, 30, 30],
-          borderWidth: 7,
+          backgroundColor: [...originalColors],
+          borderRadius: 30,
+          borderWidth: 3,
           barThickness: barThickness
         }]
       },
       options: {
         indexAxis: 'y',
         responsive: true,
-        interaction: {
-          mode: 'nearest',
-          intersect: true
-        },
         onHover: (event, elements) => {
-          if (elements.length) {
+          const dataset = verlagChartInstance.data.datasets[0];
+          if (elements.length > 0) {
             activeIndex = elements[0].index;
+            dataset.backgroundColor = originalColors.map((color, i) =>
+              i === activeIndex ? color : inactiveColor
+            );
           } else {
             activeIndex = null;
+            dataset.backgroundColor = [...originalColors];
           }
-          verlagChartInstance.update('none'); // ohne Animation neu rendern
+          verlagChartInstance.update('none'); // Wichtig: Rendert neu, um Font-Änderung anzuwenden
         },
         scales: {
           x: {
             display: false,
             min: 0,
-            max: maxValue,
-            grid: { display: false }
+            max: maxValue
           },
           y: {
             ticks: {
               color: 'white',
-              font: ctx => ({
+              font: (context) => ({
                 family: "'Dosis', sans-serif",
                 size: 16,
-                weight: ctx.index === activeIndex ? 'bold' : 'normal'
-              }),
-              callback: function(value) {
-                return this.getLabelForValue(value);
-              }
+                // Nur das Label an der Achse fetten, das zum aktiven Index gehört
+                weight: context.index === activeIndex ? 'bold' : 'normal'
+              })
             },
             grid: { display: false }
           }
@@ -83,13 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
             color: 'white',
             anchor: 'end',
             align: 'right',
-            offset: -5,
-            clamp: true,
-            font: ctx => ({
+            offset: 10,
+            font: (context) => ({
               family: "'Dosis', sans-serif",
-              weight: ctx.dataIndex === activeIndex ? 'bold' : 'normal',
-              size: 15
-            })
+              size: 15,
+              // Nur den Wert am Balkenende fetten, der zum aktiven Index gehört
+              weight: context.dataIndex === activeIndex ? 'bold' : 'normal'
+            }),
+            formatter: (value) => value
           }
         }
       },
@@ -115,18 +112,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      const maxValue = Math.max(...data) + 1;
+      const maxValue = Math.max(...data) * 1.2;
       const mediaQuery = window.matchMedia('(max-width: 740px)');
 
       function updateChart() {
-        const barThickness = mediaQuery.matches ? 30 : 35;
+        const barThickness = mediaQuery.matches ? 25 : 30;
         renderVerlagChart(labels, data, barThickness, maxValue);
       }
 
       mediaQuery.addEventListener('change', updateChart);
       updateChart();
     })
-    .catch(error => {
-      console.error('Fehler beim Laden der CSV:', error);
-    });
+    .catch(error => console.error('Fehler:', error));
 });
