@@ -722,6 +722,7 @@ hr {
     #longshort-container-audio {
         max-width: 900px !important; 
         padding: 2rem !important;
+        padding-bottom: 10px;
     }
 
     /* Macht die einzelnen Buch-Boxen breiter */

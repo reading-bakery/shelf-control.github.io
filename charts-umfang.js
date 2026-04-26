@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('umfangChart');
   const ctx = canvas.getContext('2d');
 
-  // Farbverläufe für jedes Segment erzeugen (horizontaler Verlauf)
+  // Farbverläufe erzeugen
   const gradient1 = ctx.createLinearGradient(0, 0, canvas.width, 0);
   gradient1.addColorStop(0, '#ff7256');
   gradient1.addColorStop(1, '#ff4500');
@@ -15,17 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
   gradient3.addColorStop(0, '#63b8ff');
   gradient3.addColorStop(1, '#5e30f5ff');
 
-  // CSV-Daten laden und verarbeiten
+  const originalGradients = [gradient1, gradient2, gradient3];
+  const inactiveColor = '#333333'; 
+
   fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=944857737&single=true&output=csv')
     .then(response => response.text())
     .then(csvText => {
       const parsedData = Papa.parse(csvText, { header: true }).data;
-
-      // Labels und Daten extrahieren
       const labels = parsedData.map(row => row['Umfang']);
       const data = parsedData.map(row => parseFloat(row['Anzahl']));
 
-      // Donut-Diagramm konfigurieren
       const config = {
         type: 'doughnut',
         data: {
@@ -33,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
           datasets: [{
             label: 'Seitenumfang',
             data: data,
-            backgroundColor: [gradient1, gradient2, gradient3],
+            backgroundColor: [...originalGradients],
             borderColor: '#1f1f1f',
             borderWidth: 5,
             hoverOffset: 15,
@@ -44,37 +43,33 @@ document.addEventListener('DOMContentLoaded', () => {
           cutout: '55%',
           responsive: true,
           plugins: {
-            legend: {
-              display: false // Legende ausblenden
-            },
-            tooltip: {
-              enabled: false // Tooltip komplett aus
-            },
-            datalabels: {
-              display: false // keine Standard-Datalabels auf Segmenten
-            }
+            legend: { display: false },
+            tooltip: { enabled: false },
+            datalabels: { display: false }
           },
-          hover: {
-            onHover: (event, elements, chart) => {
-              if (elements.length) {
-                const idx = elements[0].index;
-                chart.options.plugins.datalabels.display = ctx => ctx.dataIndex === idx;
-                chart.data.datasets[0].datalabels = chart.data.datasets[0].datalabels || {};
-                chart.update();
-              } else {
-                chart.options.plugins.datalabels.display = false;
-                chart.update();
-              }
+          onHover: (event, elements, chart) => {
+            const dataset = chart.data.datasets[0];
+            
+            if (elements.length > 0) {
+              const activeIdx = elements[0].index;
+              // Erzeuge neues Array für die Farben
+              dataset.backgroundColor = originalGradients.map((color, i) => 
+                i === activeIdx ? color : inactiveColor
+              );
+            } else {
+              // Zurücksetzen auf Original
+              dataset.backgroundColor = [...originalGradients];
             }
+            
+            // WICHTIG: Update triggern, damit die Farben neu gerendert werden
+            chart.update(); 
           }
         },
         plugins: [{
           id: 'centerLabel',
           afterDraw(chart) {
             const ctx = chart.ctx;
-            const centerX = chart.width / 2;
-            const centerY = chart.height / 2;
-            const active = chart.tooltip?._active || [];
+            const active = chart.getActiveElements();
 
             if (active && active.length) {
               const idx = active[0].index;
@@ -82,24 +77,21 @@ document.addEventListener('DOMContentLoaded', () => {
               const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
               const percentage = ((value / total) * 100).toFixed(1) + '%';
               const label = chart.data.labels[idx];
+              const centerX = chart.width / 2;
+              const centerY = chart.height / 2;
 
               ctx.save();
-              ctx.font = '16px Dosis, sans-serif';
-              ctx.fillStyle = 'white';
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
 
-              // 1. Label (z.B. "bis 300")
               ctx.font = '18px "Dosis", sans-serif';
               ctx.fillStyle = '#a2bba3';
               ctx.fillText(label, centerX, centerY - 25);
 
-              // 2. Prozentwert (Groß in Bebas Neue)
               ctx.font = 'bold 38px "Bebas Neue", sans-serif';
               ctx.fillStyle = 'white';
               ctx.fillText(percentage, centerX, centerY + 5);
 
-              // 3. Total Wert (wieder eingebaut)
               ctx.font = '16px "Dosis", sans-serif';
               ctx.fillStyle = 'white';
               ctx.fillText('Total: ' + value, centerX, centerY + 32);
@@ -110,10 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }]
       };
 
-      // Diagramm erstellen
       new Chart(ctx, config);
     })
-    .catch(error => console.error('Fehler beim Laden der CSV-Daten:', error));
+    .catch(error => console.error('Fehler:', error));
 });
-
-
