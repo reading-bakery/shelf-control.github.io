@@ -681,20 +681,21 @@ hr {
         flex: 0 1 45%;      /* Nutzt maximal 45% der Breite, damit 2 nebeneinander passen */
         max-width: 140px;   /* Verhindert, dass sie auf großen Handys zu klobig werden */
         min-width: 100px;
+        padding-bottom: 10px;
     }
 
     /* Das Cover-Bild auf dem Handy */
     .longshort-cover-wrapper {
         width: 100% !important;
         aspect-ratio: 2 / 3;
-        margin-bottom: 8px !important;
+        margin-bottom: 5px !important;
         box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     /* Titel und Infos unter dem Cover */
     .longshort-title-unique,
     .longshort-title-audio {
-        font-size: 10pt !important;
+        font-size: 13pt !important;
         line-height: 1.2 !important;
         display: block;
         min-height: 2.4em; /* Reserviert Platz für 2 Zeilen Text */
@@ -702,7 +703,7 @@ hr {
 
     .book-minutes,
     .book-pages {
-        font-size: 9pt !important;
+        font-size: 11pt !important;
         margin-top: 4px;
         opacity: 0.9;
     }
