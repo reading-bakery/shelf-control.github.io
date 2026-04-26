@@ -99,17 +99,16 @@
     };
     svg.append(lineGen(padding, height-axisYOffset, width-padding, height-axisYOffset), lineGen(padding, padding, padding, height-axisYOffset));
 
-    // --- NEU: ACHSENBESCHRIFTUNG "BÜCHER" ---
+ // --- NEU: ACHSENBESCHRIFTUNG "SEITEN" AN DER X-ACHSE ---
     const xAxisLabel = document.createElementNS(svgns, "text");
     xAxisLabel.setAttribute("x", width - padding); 
-    xAxisLabel.setAttribute("y", height - axisYOffset + 15);
+    xAxisLabel.setAttribute("y", height - axisYOffset + 20); // Leicht unter der X-Achse
     xAxisLabel.setAttribute("fill", "white");
-    xAxisLabel.setAttribute("font-size", "14");
+    xAxisLabel.setAttribute("font-size", "18");
     xAxisLabel.setAttribute("font-family", "Dosis");
     xAxisLabel.setAttribute("text-anchor", "end");
     xAxisLabel.textContent = "Minuten";
     svg.appendChild(xAxisLabel);
-
 
 
     // Flächen: IST
@@ -142,7 +141,7 @@
 
       const pVal = document.createElementNS(svgns, "text");
       pVal.setAttribute("x", endYearX); pVal.setAttribute("y", endYearY - 10);
-      pVal.setAttribute("fill", "#FFD700"); pVal.setAttribute("font-size", "14");
+      pVal.setAttribute("fill", "#FFD700"); pVal.setAttribute("font-size", "20");
       pVal.setAttribute("font-weight", "bold"); pVal.setAttribute("font-family", "Dosis");
       pVal.setAttribute("text-anchor", "end"); pVal.textContent = finalProjection.toLocaleString('de-DE');
       svg.appendChild(pVal);
@@ -157,7 +156,7 @@
     // --- NEU: IST-WERT ANZEIGE ---
     const currentValText = document.createElementNS(svgns, "text");
     currentValText.setAttribute("x", lastX); currentValText.setAttribute("y", lastY - 10);
-    currentValText.setAttribute("fill", "#8ad0ff"); currentValText.setAttribute("font-size", "16");
+    currentValText.setAttribute("fill", "#8ad0ff"); currentValText.setAttribute("font-size", "20");
     currentValText.setAttribute("font-weight", "bold"); currentValText.setAttribute("font-family", "Dosis");
     currentValText.setAttribute("text-anchor", "middle"); currentValText.textContent = current;
     svg.appendChild(currentValText);
@@ -186,7 +185,7 @@
       const monthNames = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
       const label = document.createElementNS(svgns, "text");
       label.setAttribute("x", gX + 3); label.setAttribute("y", gY + 25);
-      label.setAttribute("fill", "orange"); label.setAttribute("font-size", "12");
+      label.setAttribute("fill", "orange"); label.setAttribute("font-size", "15");
       label.setAttribute("font-weight", "bold"); label.setAttribute("font-family", "Dosis");
       label.textContent = monthNames[Math.min(11, Math.floor(predictedDay / 30.5))];
       svg.appendChild(label);

@@ -137,8 +137,8 @@
     const lastY = height - axisYOffset - current * yScale;
 
     const xAxisLabel = document.createElementNS(svgns, "text");
-    xAxisLabel.setAttribute("x", width - padding); xAxisLabel.setAttribute("y", height - axisYOffset + 15);
-    xAxisLabel.setAttribute("fill", "white"); xAxisLabel.setAttribute("font-size", "14"); xAxisLabel.setAttribute("font-family", "Dosis");
+    xAxisLabel.setAttribute("x", width - padding); xAxisLabel.setAttribute("y", height - axisYOffset + 20);
+    xAxisLabel.setAttribute("fill", "white"); xAxisLabel.setAttribute("font-size", "18"); xAxisLabel.setAttribute("font-family", "Dosis");
     xAxisLabel.setAttribute("text-anchor", "end"); xAxisLabel.textContent = "Bücher";
     svg.appendChild(xAxisLabel);
 
@@ -171,7 +171,7 @@
 
       const pValueText = document.createElementNS(svgns, "text");
       pValueText.setAttribute("x", endYearX); pValueText.setAttribute("y", endYearY - 10);
-      pValueText.setAttribute("fill", "#FFD700"); pValueText.setAttribute("font-size", "14");
+      pValueText.setAttribute("fill", "#FFD700"); pValueText.setAttribute("font-size", "20");
       pValueText.setAttribute("font-weight", "bold"); pValueText.setAttribute("font-family", "Dosis");
       pValueText.setAttribute("text-anchor", "end"); pValueText.textContent = finalProjection;
       svg.appendChild(pValueText);
@@ -185,7 +185,7 @@
 
     const currentValText = document.createElementNS(svgns, "text");
     currentValText.setAttribute("x", lastX); currentValText.setAttribute("y", lastY - 10);
-    currentValText.setAttribute("fill", "#ff7f50"); currentValText.setAttribute("font-size", "16");
+    currentValText.setAttribute("fill", "#ff7f50"); currentValText.setAttribute("font-size", "20");
     currentValText.setAttribute("font-weight", "bold"); currentValText.setAttribute("font-family", "Dosis");
     currentValText.setAttribute("text-anchor", "middle"); currentValText.textContent = current;
     svg.appendChild(currentValText);
@@ -212,7 +212,7 @@
       const monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
       const label = document.createElementNS(svgns, "text");
       label.setAttribute("x", goalDayX + 3); label.setAttribute("y", goalY + 25);
-      label.setAttribute("fill", "orange"); label.setAttribute("font-size", "12");
+      label.setAttribute("fill", "orange"); label.setAttribute("font-size", "15");
       label.setAttribute("font-weight", "bold"); label.setAttribute("font-family", "Dosis");
       label.textContent = monthNames[Math.min(11, Math.floor(predictedDay / 30.5))];
       svg.appendChild(label);
