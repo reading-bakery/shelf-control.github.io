@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const canvas = document.getElementById('stimmungChart');
+  const canvas = document.getElementById('themenChart');
   const ctx = canvas.getContext('2d');
 
   const gradients = [];
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gradients.push(gradient);
   };
 
-  // Definition der 13 verfügbaren Farbverläufe
+  // Definition der 13 Farbverläufe
   createGradient('#ff7256', '#ff4500');
   createGradient('#3CB371', '#294e29ff');
   createGradient('#f663d6ff', '#560746ff');
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   createGradient('#ac7975ff', '#430b07ff');
   createGradient('#bbddff', '#005577');
 
-  fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=282362445&single=true&output=csv')
+  fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=498241349&single=true&output=csv')
     .then(response => response.text())
     .then(csvText => {
       const parsedData = Papa.parse(csvText, { header: true }).data;
@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const filtered = parsedData
         .filter(row => parseFloat(row['Anzahl']) > 0)
         .sort((a, b) => parseFloat(b['Anzahl']) - parseFloat(a['Anzahl']))
-        .slice(0, 10); // Nur Top 10 anzeigen
+        .slice(0, 10); // Top 10
 
-      const labels = filtered.map(row => row['Stimmung']);
+      const labels = filtered.map(row => row['Thema']);
       const data = filtered.map(row => parseFloat(row['Anzahl']));
 
       if (data.length === 0) {
@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Farben passend zu den gefilterten Labels extrahieren
       const chartColors = gradients.slice(0, labels.length);
 
       const config = {
@@ -53,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data: {
           labels: labels,
           datasets: [{
-            label: 'Stimmung',
+            label: 'Thema',
             data: data,
             backgroundColor: [...chartColors],
             borderColor: '#1f1f1f',
@@ -65,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
           cutout: '55%',
           responsive: true,
-          // Hover-Effekt: Inaktive Segmente werden grau
+          // Graustufen-Effekt beim Hover
           onHover: (event, elements, chart) => {
             const dataset = chart.data.datasets[0];
             if (elements.length > 0) {
@@ -103,17 +102,17 @@ document.addEventListener('DOMContentLoaded', () => {
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
 
-              // 1. Kategorie Label
+              // 1. Thema (Label)
               ctx.font = '18px "Dosis", sans-serif';
               ctx.fillStyle = '#a2bba3';
               ctx.fillText(label, centerX, centerY - 25);
 
-              // 2. Großer Prozentwert
+              // 2. Prozentwert
               ctx.font = 'bold 38px "Bebas Neue", sans-serif';
               ctx.fillStyle = 'white';
               ctx.fillText(percentage, centerX, centerY + 5);
 
-              // 3. Absolute Anzahl
+              // 3. Absolute Anzahl (Total)
               ctx.font = '16px "Dosis", sans-serif';
               ctx.fillStyle = 'white';
               ctx.fillText('Total: ' + value, centerX, centerY + 32);
