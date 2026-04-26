@@ -2,87 +2,47 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('subgenreChart');
   const ctx = canvas.getContext('2d');
 
-  // Farbverläufe für die 4 Kategorien vorbereiten
+  // Farbverläufe vorbereiten
   const gradients = [];
+  const inactiveColor = '#333333';
 
-  const gradient1 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Weiblich
-  gradient1.addColorStop(0, '#ff7256');
-  gradient1.addColorStop(1, '#ff4500');
-  gradients.push(gradient1);
+  // Hilfsfunktion zum Hinzufügen der Gradients (erhöht die Übersichtlichkeit)
+  const addGradient = (c1, c2) => {
+    const g = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    g.addColorStop(0, c1);
+    g.addColorStop(1, c2);
+    gradients.push(g);
+  };
 
-  const gradient2 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Männlich
-  gradient2.addColorStop(0, '#3CB371');
-  gradient2.addColorStop(1, '#294e29ff');
-  gradients.push(gradient2);
+  addGradient('#ff7256', '#ff4500');
+  addGradient('#3CB371', '#294e29ff');
+  addGradient('#f663d6ff', '#560746ff');
+  addGradient('#FFB90F', '#a87806ff');
+  addGradient('#9370DB', '#d7cbefff');
+  addGradient('#20B2AA', '#8bacabff');
+  addGradient('#da0d1aff', '#c6757aff');
+  addGradient('#160537ff', '#b49be5ff');
+  addGradient('#63b8ff', '#7c9c7fff');
+  addGradient('#5ea237ff', '#d8ebdaff');
+  addGradient('#d43e91ff', '#dba9cdff');
+  addGradient('#071eccff', '#bdb9dbff');
 
-  const gradient3 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Mix
-  gradient3.addColorStop(0, '#f663d6ff');
-  gradient3.addColorStop(1, '#560746ff');
-  gradients.push(gradient3);
-
-  const gradient4 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Divers
-  gradient4.addColorStop(0, '#FFB90F');
-  gradient4.addColorStop(1, '#a87806ff');
-  gradients.push(gradient4);
-
-  const gradient5 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Divers
-  gradient5.addColorStop(0, '#9370DB');
-  gradient5.addColorStop(1, '#d7cbefff');
-  gradients.push(gradient5);
-
-  const gradient6 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Divers
-  gradient6.addColorStop(0, '#20B2AA');
-  gradient6.addColorStop(1, '#8bacabff');
-  gradients.push(gradient6);
-
-  const gradient7 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Divers
-  gradient7.addColorStop(0, '#da0d1aff');
-  gradient7.addColorStop(1, '#c6757aff');
-  gradients.push(gradient7);
-
-  const gradient8 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Divers
-  gradient8.addColorStop(0, '#160537ff');
-  gradient8.addColorStop(1, '#b49be5ff');
-  gradients.push(gradient8);
-
-  const gradient9 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Divers
-  gradient9.addColorStop(0, '#63b8ff');
-  gradient9.addColorStop(1, '#7c9c7fff');
-  gradients.push(gradient9);
-
-  const gradient10 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Divers
-  gradient10.addColorStop(0, '#5ea237ff');
-  gradient10.addColorStop(1, '#d8ebdaff');
-  gradients.push(gradient10);
-
-  const gradient11 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Divers
-  gradient11.addColorStop(0, '#d43e91ff');
-  gradient11.addColorStop(1, '#dba9cdff');
-  gradients.push(gradient11);
-
-  const gradient12 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Divers
-  gradient12.addColorStop(0, '#071eccff');
-  gradient12.addColorStop(1, '#bdb9dbff');
-  gradients.push(gradient12),
-
-  // CSV-Daten laden
   fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=999478679&single=true&output=csv')
     .then(response => response.text())
     .then(csvText => {
       const parsedData = Papa.parse(csvText, { header: true }).data;
-
-      // Nur Werte mit Anzahl > 0 berücksichtigen
       const filtered = parsedData.filter(row => parseFloat(row['Anzahl']) > 0);
 
       const labels = filtered.map(row => row['Sub-Genre']);
       const data = filtered.map(row => parseFloat(row['Anzahl']));
 
       if (data.length === 0) {
-        canvas.style.display = 'none'; // Diagramm ausblenden, wenn keine Daten vorhanden
+        canvas.style.display = 'none';
         return;
       }
 
-      // Donut-Diagramm erstellen
+      const chartColors = gradients.slice(0, labels.length);
+
       const config = {
         type: 'doughnut',
         data: {
@@ -90,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
           datasets: [{
             label: 'Sub-Genre',
             data: data,
-            backgroundColor: gradients.slice(0, labels.length),
+            backgroundColor: [...chartColors],
             borderColor: '#1f1f1f',
             borderWidth: 5,
             hoverOffset: 15,
@@ -100,66 +60,60 @@ document.addEventListener('DOMContentLoaded', () => {
         options: {
           cutout: '55%',
           responsive: true,
+          onHover: (event, elements, chart) => {
+            const dataset = chart.data.datasets[0];
+            if (elements.length > 0) {
+              const activeIdx = elements[0].index;
+              dataset.backgroundColor = chartColors.map((color, i) =>
+                i === activeIdx ? color : inactiveColor
+              );
+            } else {
+              dataset.backgroundColor = [...chartColors];
+            }
+            chart.update('none');
+          },
           plugins: {
             legend: { display: false },
             tooltip: { enabled: false },
             datalabels: { display: false }
-          },
-          hover: {
-            onHover: (event, elements, chart) => {
-              if (elements.length) {
-                const idx = elements[0].index;
-                chart.options.plugins.datalabels.display = ctx => ctx.dataIndex === idx;
-                chart.data.datasets[0].datalabels = chart.data.datasets[0].datalabels || {};
-                chart.update();
-              } else {
-                chart.options.plugins.datalabels.display = false;
-                chart.update();
-              }
-            }
           }
         },
         plugins: [{
-                  id: 'centerLabel',
-                  afterDraw(chart) {
-                    const ctx = chart.ctx;
-                    const centerX = chart.width / 2;
-                    const centerY = chart.height / 2;
-                    const active = chart.tooltip?._active || [];
+          id: 'centerLabel',
+          afterDraw(chart) {
+            const ctx = chart.ctx;
+            const active = chart.getActiveElements();
 
-                    if (active && active.length) {
-                      const idx = active[0].index;
-                      const value = chart.data.datasets[0].data[idx];
-                      const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                      const percentage = ((value / total) * 100).toFixed(1) + '%';
-                      const label = chart.data.labels[idx];
+            if (active && active.length) {
+              const idx = active[0].index;
+              const value = chart.data.datasets[0].data[idx];
+              const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+              const percentage = ((value / total) * 100).toFixed(1) + '%';
+              const label = chart.data.labels[idx];
+              const centerX = chart.width / 2;
+              const centerY = chart.height / 2;
 
-                      ctx.save();
-                      ctx.font = '16px Dosis, sans-serif';
-                      ctx.fillStyle = 'white';
-                      ctx.textAlign = 'center';
-                      ctx.textBaseline = 'middle';
+              ctx.save();
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
 
-                    // 1. Label (z.B. "bis 300")
               ctx.font = '18px "Dosis", sans-serif';
               ctx.fillStyle = '#a2bba3';
               ctx.fillText(label, centerX, centerY - 25);
 
-              // 2. Prozentwert (Groß in Bebas Neue)
               ctx.font = 'bold 38px "Bebas Neue", sans-serif';
               ctx.fillStyle = 'white';
               ctx.fillText(percentage, centerX, centerY + 5);
 
-              // 3. Total Wert (wieder eingebaut)
               ctx.font = '16px "Dosis", sans-serif';
               ctx.fillStyle = 'white';
               ctx.fillText('Total: ' + value, centerX, centerY + 32);
 
               ctx.restore();
-                    }
-                  }
-                }]
-              };  
+            }
+          }
+        }]
+      };
 
       new Chart(ctx, config);
     })
