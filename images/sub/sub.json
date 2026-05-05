@@ -299,6 +299,21 @@
     "verlag": "Penguin",
     "cover": "das-gefluester.jpg"
     },
+
+    {
+    "isbn": "978-3-910372-69-6, 9783910372696",
+    "title": "Das Gedächtnis der Tiere",
+    "author": "Claire Fuller",
+    "gender": "Weiblich",
+    "umfang": "301-500",
+    "seiten": "336",
+    "genre": "Roman",
+    "sprache": "Englisch",
+    "format": "Hardcover",
+    "status": "Neu",
+    "verlag": "Kjona",
+    "cover": "das-gedaechtnis-der-tiere.jpg"
+    },
     
     {
     "isbn": "978-3-492-31930-0, 9783492319300",
@@ -2339,6 +2354,21 @@
       "verlag": "Penguin",
       "cover": "such-a-fun-age.jpg"
     },
+
+    {
+      "isbn": "978-3-446-27101-2, 9783446271012",
+      "title": "Süß",
+      "author": "Ann-Kristin Tlusty",
+      "gender": "Weiblich",
+      "umfang": "bis 300",
+      "seiten": "208",
+      "genre": "Non Fiction",
+      "sprache": "Deutsch",
+      "format": "eBook",
+      "status": "Neu",
+      "verlag": "Hanser",
+      "cover": "suess.jpg"
+    },
    
     {
       "isbn": "978-0-241-37694-2, 9780241376942",
@@ -2398,6 +2428,21 @@
       "status": "SuB",
       "verlag": "Fischer",
       "cover": "traumsammler.jpg"
+    },
+
+    {
+      "isbn": "978-3-89667-778-5, 9783896677785",
+      "title": "Treppe aus Papier",
+      "author": "Henrik Szántó",
+      "gender": "Männlich",
+      "umfang": "bis 300",
+      "seiten": "224",
+      "genre": "Roman",
+      "sprache": "Deutsch",
+      "format": "eBook",
+      "status": "Neu",
+      "verlag": "Blessing",
+      "cover": "treppe-aus-papier.jpg"
     },
 
 
@@ -2567,6 +2612,21 @@
     },
 
     {
+      "isbn": "978-3-7632-7411-6, 9783763274116",
+      "title": "Von Mäusen und Menschen",
+      "author": "John Steinbeck",
+      "gender": "Männlich",
+      "umfang": "bis 300",
+      "seiten": "272",
+      "genre": "Roman",
+      "sprache": "Englisch",
+      "format": "Hardcover",
+      "status": "SuB",
+      "verlag": "Büchergilde",
+      "cover": "von-mauesen-und-menschen.jpg"
+    },
+
+    {
       "isbn": "978-3-423-14412-4, 9783423144124",
       "title": "Wassermusik",
       "author": "T. C. Boyle",
@@ -2586,7 +2646,7 @@
       "title": "Welches Königreich",
       "author": "Fine Gråbøl",
       "gender": "Weiblich",
-      "umfang": "bis 200",
+      "umfang": "bis 300",
       "seiten": "174",
       "genre": "Roman",
       "sprache": "Dänisch",
@@ -2616,7 +2676,7 @@
       "title": "Wie Inseln im Licht",
       "author": "Franziska Gänsler",
       "gender": "Weiblich",
-      "umfang": "bis 200",
+      "umfang": "bis 300",
       "seiten": "206",
       "genre": "Roman",
       "sprache": "Deutsch",
