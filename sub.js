@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             formData.append(FORM_ENTRIES.genre, buch.genre || "");
             formData.append(FORM_ENTRIES.sprache, buch.sprache || "");
             formData.append(FORM_ENTRIES.format, buch.format || "");
-            formData.append(FORM_ENTRIES.status, "Gelesen"); 
+            formData.append(FORM_ENTRIES.status, buch.status || "");
             formData.append(FORM_ENTRIES.verlag, buch.verlag || "");
             formData.append(FORM_ENTRIES.cover, githubLink);
 

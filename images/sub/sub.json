@@ -1861,21 +1861,6 @@
     },
 
     {
-      "isbn": "978-3-328-11357-7, 9783328113577",
-      "title": "Maifliegenzeit",
-      "author": "Matthias Jügler",
-      "gender": "Männlich",
-      "umfang": "bis 300",
-      "seiten": "160",
-      "genre": "Roman",
-      "sprache": "Deutsch",
-      "format": "Softcover",
-      "status": "SuB",
-      "verlag": "Penguin",
-      "cover": "maifliegenzeit.jpg"
-    },
-
-    {
       "isbn": "978-8-4165-1744-2, 9788416517442",
       "title": "Malibú Renace",
       "author": "Taylor Jenkins Reid",
@@ -2008,21 +1993,6 @@
       "status": "SuB",
       "verlag": "Sonstiges",
       "cover": "momo.jpg"
-    },
-
-    {
-      "isbn": "978-3-548-06897-8, 9783548068978",
-      "title": "Nach Mitternacht",
-      "author": "Irmgard Keun",
-      "gender": "Weiblich",
-      "umfang": "bis 300",
-      "seiten": "182",
-      "genre": "Roman",
-      "sprache": "Deutsch",
-      "format": "Softcover",
-      "status": "SuB",
-      "verlag": "Ullstein/List",
-      "cover": "nach-mitternacht.jpg"
     },
 
     {
