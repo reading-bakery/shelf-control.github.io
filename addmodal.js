@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // --- Modals initialisieren ---
   renderOptions("genderModal", ["Weiblich", "Männlich", "Mix", "Divers"], "gender");
   renderOptions("umfangModal", ["bis 300", "301-500", "ab 501"], "umfang");
-  renderOptions("genreModal", ["Roman", "Non Fiction", "Thriller/Krimi", "Kinder- und Jugendbuch", "Erzählung", "Graphic Novel/Comic"], "genre");
+  renderOptions("genreModal", ["Roman", "Non Fiction", "Thriller/Krimi", "Erzählung", "Graphic Novel/Comic"], "genre");
   renderOptions("spracheModal", ["Deutsch", "Englisch", "Französisch", "Spanisch", "Italienisch", "Portugiesisch", "Koreanisch", "Japanisch", "Chinesisch", "Niederländisch", "Hebräisch", "Türkisch", "Russisch", "Schwedisch", "Norwegisch", "Dänisch", "Finnisch", "Polnisch", "Tschechisch", "Griechisch", "Arabisch", "Englisch Original", "Französisch Original", "Spanisch Original"], "sprache");
   renderOptions("formatModal", ["Softcover", "Hardcover", "eBook", "Hörbuch"], "format");
   renderOptions("statusModal", ["Neuzugang", "SuB", "Ausgeliehen", "Rezensionsexemplar"], "status");

@@ -345,7 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const fazit = fazitArr[0];
                 if (!fazit) return;
 
-                const subgenreArr = await openCheckboxModal("subgenreModal", ["Klassiker", "(Auto-)Biografie", "Zeitgenössisch", "Mystery", "Fantasy", "Science Fiction", "Dystopie", "Historisch", "Magischer Realismus", "Kinderbuch", "New Adult", "Young Adult", "Horror"], "Sub Genre", true);
+                const subgenreArr = await openCheckboxModal("subgenreModal", ["Kinder- und Jugendbuch", "Klassiker", "(Auto-)Biografie", "Zeitgenössisch", "Mystery", "Fantasy", "Science Fiction", "Dystopie", "Historisch", "Magischer Realismus", "Kinderbuch", "New Adult", "Young Adult", "Horror"], "Sub Genre", true);
                 const subgenreStr = subgenreArr.join(", ");
 
                 const themenArr = await openCheckboxModal("themenModal", [

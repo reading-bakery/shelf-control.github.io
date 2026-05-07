@@ -126,52 +126,23 @@
     <div class="modal-content-2">
         <h3>Neues Buch auf den SuB legen</h3>
         <form id="addSubForm">
-            <input type="text" id="title" placeholder="Buchtitel" required>
-            <input type="text" id="author" placeholder="Autor:in">
-            <input type="number" id="pages" placeholder="Seiten insgesamt">
+            <input type="number" id="isbnnumber" placeholder="ISBN eingeben">
+            <input type="text" id="title" placeholder="Buchtitel eingeben" required>
+            <input type="text" id="author" placeholder="Autor:in eingeben">
+            <input type="number" id="pages" placeholder="Seiten insgesamt eingeben">
             
 
             <select id="gender" aria-label="Geschlecht auswählen">
                 <option value="" disabled selected>Geschlecht wählen</option>
-                <option value="weiblich">Weiblich</option>
-                <option value="männlich">Männlich</option>
-                <option value="divers">Divers</option>
-                <option value="unbekannt">Unbekannt</option>
             </select>
 
             <select id="genre" aria-label="Genre auswählen">
                 <option value="" disabled selected>Genre wählen</option>
-                <option value="fantasy">Fantasy</option>
-                <option value="thriller">Thriller</option>
-                <option value="romance">Romance</option>
-                <option value="scifi">Sci-Fi</option>
-                <option value="nonfiction">Sachbuch</option>
-            </select>
-
-            <select id="language" aria-label="Sprache auswählen">
-                <option value="" disabled selected>Originalsprache</option>
-                <option value="deutsch">Deutsch</option>
-                <option value="englisch">Englisch</option>
-                <option value="französisch">Französisch</option>
-                <option value="andere">Andere</option>
-            </select>
-
-            <select id="format" aria-label="Format auswählen">
-                <option value="" disabled selected>Format</option>
-                <option value="hardcover">Hardcover</option>
-                <option value="taschenbuch">Taschenbuch</option>
-                <option value="ebook">E-Book</option>
-                <option value="hörbuch">Hörbuch</option>
             </select>
 
             <select id="publisher" aria-label="Verlag auswählen">
                 <option value="" disabled selected>Verlag wählen</option>
-                <option value="verlag1">Verlag A</option>
-                <option value="verlag2">Verlag B</option>
-                <option value="self">Self-Publishing</option>
-            </select>
-
-            <input type="number" id="isbnnumber" placeholder="ISBN">
+            </select>>
 
             <div class="file-upload">
                 <label for="cover">Cover hochladen:</label>

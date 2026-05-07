@@ -73,6 +73,7 @@ h3 {
     border-radius: 8px;
     font-family: 'Dosis', sans-serif;
     box-sizing: border-box; /* Wichtig, damit die Breite bei 100% bleibt */
+    color: black;
 }
 
 #addSubForm input {
