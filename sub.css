@@ -182,18 +182,19 @@ h3 {
         transform: scale(1.0);
     }
 
-/* Das Modal-Hintergrund-Overlay */
-.modal-overlay {
+
+
+.modal, .modal-overlay {
+    display: none; /* WICHTIG: Damit sie am Anfang weg sind */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: none; /* Standardmäßig versteckt */
-    align-items: center;
-    justify-content: center;
+    background-color: rgba(0,0,0,0.7); /* Halbdurchsichtiges Schwarz */
     z-index: 1000;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Die weiße Box */
@@ -220,6 +221,7 @@ h3 {
     color: black;
     text-align: center;
 }
+
 
 
 #modal-cover {
