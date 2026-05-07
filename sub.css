@@ -1,3 +1,7 @@
+h3 {
+    text-align: left;
+}
+
 .sub {
     display: flex;
     flex-wrap: wrap;
@@ -56,24 +60,14 @@
     position: fixed;       /* bleibt beim Scrollen an der Stelle */
     bottom: 90px;           /* Abstand vom unteren Bildschirmrand */
     right: 20px;            /* Abstand vom rechten Rand */
-    background-color: rgb(83, 154, 180);
+    background-color: rgb(68, 142, 99);
     cursor: pointer;
     border-radius: 8px;
     border: none;
     height: auto;
     padding: 10px;
-    color: white;
+    color: black;
     z-index: 1000;          /* über allen anderen Elementen */
-}
-
-#addSub:hover {
-    background-color: rgb(66, 143, 95);
-    cursor: pointer;
-    border-radius: 8px;
-    border: none;
-    height: auto;
-    padding: 10px;
-    color: whitesmoke;
 }
 
 #backToTop {
@@ -92,6 +86,11 @@
 
 #backToTop:hover {
     background-color: #4b0606;
+    color: white;
+}
+
+#addSub:hover {
+    background-color: #bc4715;
     color: white;
 }
 
@@ -167,47 +166,27 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: whitesmoke;
+    background: rgba(0, 0, 0, 0.7);
     display: none; /* Standardmäßig versteckt */
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 2000;
 }
 
-#addSubForm {
-    background-color: whitesmoke;
-    
-}
-
+/* Die weiße Box */
 .modal-content {
     background: whitesmoke;
-    padding: 0;
+    padding: 20px;
     border-radius: 10px;
     max-width: 400px;
     width: 90%;
-    max-height: 80vh; /* Nutze vh für bessere Kontrolle */
+    max-height: 80%;
     overflow-y: auto;
     color: black;
-    /* Schatten entfernen oder dezenter machen: */
-    box-shadow: none; 
-    /* Verhindert den grauen Balken am Ende: */
-    display: flex;
-    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-/* Optional: Die Scrollbar selbst unsichtbar oder whitesmoke machen */
-.modal-content::-webkit-scrollbar {
-    width: 8px;
-}
-
-.modal-content::-webkit-scrollbar-track {
-    background: whitesmoke; 
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-    background: #ccc; /* Ein helles Grau für den Griff */
-    border-radius: 10px;
-}
 
 
 #modal-cover {
@@ -265,79 +244,40 @@
 
 .modal-cancel,
 .modal-save {
-  margin-top: 10px;
-  padding: 5px 10px;
-  margin-right: 5px;
-  border-radius: 15px;
-  border: none;
-  cursor: pointer;
-  font-family: 'Dosis', sans-serif;
-  font-weight: bold;
-  width: 170px;
-}
-
-.modal-save { background-color: #a2bba3; }
-.modal-cancel { background-color: #e0d0d0; }
-
-#btnSuccessAddOk.btn-confirm {
-    width: auto;           /* Hebt das width: 100% aus dem Inline-Style auf */
-    min-width: 10px;      /* Mindestbreite, damit er nicht zu mickrig aussieht */
-    max-width: 150px;      /* Hier stellst du ein, wie schmal er maximal sein soll */
-    margin: 10px auto;     /* Zentriert den Button horizontal */
-    padding: 8px 15px;     /* Macht den Button insgesamt etwas flacher/schmaler */
-    display: block;        /* Nötig für das Zentrieren mit margin: auto */
-}
-
-h3 {
- padding-left: 20px;
-}
-
-.modal {
-    display: none; /* Standardmäßig unsichtbar */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Dunkler Hintergrund */
-    align-items: center;
-    justify-content: center;
-}
-
-
-
-
-
-.close-modal {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #deff9a;
-}
-
-#addBookForm input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    background: #333;
-    border: 1px solid #555;
-    color: white;
-    border-radius: 5px;
-}
-
-#addBookForm button {
-    width: 100%;
-    padding: 10px;
-    background-color: #deff9a;
-    color: black;
+    margin-top: 10px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 15px;
     border: none;
-    border-radius: 5px;
-    font-weight: bold;
     cursor: pointer;
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+    width: 150px;
 }
+
+.modal-save {
+ background-color: #a2bba3;
+}
+
+.modal-cancel {
+    background-color: #e0d0d0;
+}
+
+#btnSuccessSubOk,
+#btnSuccessAddOk {
+    margin-top: 10px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 15px;
+    border: none;
+    background-color: #a2bba3;
+    cursor: pointer;
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+    width: 100px;
+
+}
+
 
 
 @media (min-width: 600px) {
@@ -352,6 +292,8 @@ h3 {
         font-size: 80px;
     }
 }
+
+
 
 
 
