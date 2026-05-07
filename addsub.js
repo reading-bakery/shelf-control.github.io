@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. KONFIGURATION ---
-    // Ersetze diese URL mit deiner Web-App-URL aus Google Apps Script (endet auf /exec)
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzYl3rNcBsgLlS_ZhAg30l0VXmYYb64QdlJKG0RmbahLGiOx8LaaA4Px8KjPEf3p2596Q/exec";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz9s1gQDb65Zqf2hJmgnDRC1IP2AGcYvOT1hWPF35TZ9zR2LpdCAFvjBtjX9ax2Q00X/exec";
 
     const setupData = {
         gender: ["Weiblich", "Männlich", "Divers", "Mix"],
@@ -109,12 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const file = fileInput.files[0];
             const reader = new FileReader();
 
-            // Bild einlesen und abschicken
             reader.onload = async function() {
                 const base64String = reader.result.split(',')[1];
                 const pages = parseInt(document.getElementById('pages').value) || 0;
                 
-                // Umfang-Logik
                 let umfangText = "";
                 if (pages > 0 && pages <= 300) umfangText = "bis 300";
                 else if (pages >= 301 && pages <= 500) umfangText = "301-500";
@@ -139,17 +136,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     const response = await fetch(APPS_SCRIPT_URL, {
                         method: 'POST',
-                        // mode: 'no-cors' MUSS WEG oder durch 'cors' ersetzt werden
                         body: JSON.stringify(payload)
                     });
 
-                    const result = await response.json();
+                    // WICHTIG: Wir lesen die Antwort als TEXT, nicht als JSON
+                    const resultText = await response.text();
 
-                    if (result.status === "success") {
+                    if (resultText.includes("SUCCESS")) {
                         closeAll();
-                        successModal.style.display = 'flex';
+                        successModal.style.display = 'flex'; // Hier startet deine Rakete 🚀
                     } else {
-                        throw new Error(result.message || "Fehler beim Speichern");
+                        throw new Error(resultText || "Fehler beim Speichern");
                     }
                 } catch (error) {
                     console.error("Fehler beim Upload:", error);

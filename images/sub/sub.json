@@ -856,6 +856,21 @@
     },
 
     {
+      "isbn": "978-3-7152-5065-6, 9783715250656",
+      "title": "Die hässlichste Frau der Welt",
+      "author": "Margrit Schrieber",
+      "gender": "Weiblich",
+      "umfang": "bis 300",
+      "seiten": "192",
+      "genre": "Roman",
+      "sprache": "Deutsch",
+      "format": "Hardcover",
+      "status": "SuB",
+      "verlag": "Sonstiges",
+      "cover": "die-haesslichste-frau-der-welt.jpg"
+    },
+
+    {
       "isbn": "978-3-453-32159-5, 9783453321595",
       "title": "Die Hexe und der Winterzauber",
       "author": "Katherine Arden",
