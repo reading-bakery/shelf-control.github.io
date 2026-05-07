@@ -1,5 +1,6 @@
 h3 {
     text-align: left;
+    padding: 15px 0 0 15px;
 }
 
 .sub {
@@ -54,6 +55,28 @@ h3 {
     padding: 10px;
     color: white;
     z-index: 1000;          /* über allen anderen Elementen */
+}
+
+#addSubForm {
+    background-color: whitesmoke;
+    padding-bottom: 20px;
+}
+
+/* Erhöht den Abstand für alle Eingabefelder und Dropdowns im Modal */
+#addSubForm input, 
+#addSubForm select {
+    width: 100%;
+    padding: 2px;       /* Innenabstand für mehr Höhe im Feld */
+    margin: 3px 0;      /* ERSTES WORT: 15px Abstand nach oben und unten */
+    background: #c5bdbd; /* Dein Grau-Ton */
+    border: none;
+    border-radius: 8px;
+    font-family: 'Dosis', sans-serif;
+    box-sizing: border-box; /* Wichtig, damit die Breite bei 100% bleibt */
+}
+
+#addSubForm input {
+    padding-left: 5px;
 }
 
 #addSub {
@@ -170,7 +193,7 @@ h3 {
     display: none; /* Standardmäßig versteckt */
     align-items: center;
     justify-content: center;
-    z-index: 2000;
+    z-index: 1000;
 }
 
 /* Die weiße Box */
@@ -187,6 +210,16 @@ h3 {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
+.modal-content-2 {
+    background-color: whitesmoke;
+    padding: 0;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 90%;
+    max-height: 80%;
+    color: black;
+    text-align: center;
+}
 
 
 #modal-cover {
