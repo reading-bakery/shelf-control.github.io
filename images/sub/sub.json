@@ -2161,6 +2161,21 @@
     },
 
     {
+      "isbn": "978-3-7558-0085-9, 9783755800859",
+      "title": "Richtig gutes Essen",
+      "author": "Junko Takase",
+      "gender": "Weiblich",
+      "umfang": "bis 300",
+      "seiten": "160",
+      "genre": "Roman",
+      "sprache": "Japanisch",
+      "format": "Hardcover",
+      "status": "Hardcover",
+      "verlag": "Dumont",
+      "cover": "richtig-gutes-essen.jpg"
+    },
+
+    {
       "isbn": "978-3-257-24720-6, 9783257247206",
       "title": "Ripley",
       "author": "Patricia Highsmith",
