@@ -318,8 +318,8 @@ h3 {
 
 @media (min-width: 740px) {
     .sub {
-        gap: 8px;
-        padding: 5px;
+        gap: 4px;
+        padding: 3px;
     }
 
 
