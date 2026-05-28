@@ -120,6 +120,23 @@
     "cover": "am-ende-einer-welt.jpg"
     },
 
+
+    {
+    "isbn": "978-3-649-6435-9, 9783649643599",
+    "title": "Anne auf Green Gables",
+    "author": "Lucy Maud Montgomery",
+    "gender": "Weiblich",
+    "umfang": "301-500",
+    "seiten": "384",
+    "genre": "Roman",
+    "sprache": "Englisch",
+    "format": "Hardcover",
+    "status": "Neuzugang",
+    "verlag": "Coppenrath",
+    "cover": "anne-of-green-gables.jpg"
+    },
+
+
     {
     "isbn": "978-3-492-26311-5, 9783492263115",
     "title": "Auf den zweiten Blick",
@@ -310,7 +327,7 @@
     "genre": "Roman",
     "sprache": "Englisch",
     "format": "Hardcover",
-    "status": "Neu",
+    "status": "Neuzugang",
     "verlag": "Kjona",
     "cover": "das-gedaechtnis-der-tiere.jpg"
     },
@@ -2365,7 +2382,7 @@
       "genre": "Non Fiction",
       "sprache": "Deutsch",
       "format": "eBook",
-      "status": "Neu",
+      "status": "Neuzugang",
       "verlag": "Hanser",
       "cover": "suess.jpg"
     },
@@ -2440,11 +2457,10 @@
       "genre": "Roman",
       "sprache": "Deutsch",
       "format": "eBook",
-      "status": "Neu",
+      "status": "Neuzugang",
       "verlag": "Blessing",
       "cover": "treppe-aus-papier.jpg"
     },
-
 
     {
       "isbn": "978-3-7530-0008-4, 9783753000084",
@@ -2745,14 +2761,100 @@
     "status": "Rezensionsexemplar",
     "verlag": "Rowohlt/rororo",
     "cover": "zeit-der-geister.jpg"
-  }     
+  },     
+
+  {
+  "isbn": "978-3-608-98687-7, 9783608986877",
+  "title": "Nightbitch",
+  "author": "Rachel Yoder",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "304",
+  "genre": "Roman",
+  "sprache": "Englisch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "Klett-Cotta",
+  "cover": "nightbitch.jpg"
+  },
+  
+  {
+  "isbn": "978-3-426-28435-3, 9783426284353",
+  "title": "Great Big Beautiful Life",
+  "author": "Emily Henry",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "464",
+  "genre": "Roman",
+  "sprache": "Englisch",
+  "format": "Softcover",
+  "status": "Neuzugang",
+  "verlag": "Knaur/Droemer",
+  "cover": "great-big-beautiful-life.jpg"
+  },
+
+  {
+  "isbn": "978-3-426-28435-3, 9783426284353", 
+  "title": "Das Wohlbefinden",
+  "author": "Emily Henry",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "336",
+  "genre": "Roman",
+  "sprache": "Deutsch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "Klett-Cotta",
+  "cover": "das_wohlbefinden.jpg"
+  },
+
+  {
+  "isbn": "978-3-89667-772-3, 9783896677723", 
+  "title": "Krummes Holz",
+  "author": "Julja Linhof",
+  "gender": "Weiblich",
+  "umfang": "bis 300",
+  "seiten": "272",
+  "genre": "Roman",
+  "sprache": "Deutsch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "Blessing",
+  "cover": "krummes-holz.jpg"
+  },
+
+  {
+  "isbn": "978-3-7160-0023-6, 9783716000236", 
+  "title": "Krawall und Kekse",
+  "author": "Shirley Jackson",
+  "gender": "Weiblich",
+  "umfang": "bis 300",
+  "seiten": "256",
+  "genre": "Roman",
+  "sprache": "Englisch",
+  "format": "Softcover",
+  "status": "Neuzugang",
+  "verlag": "Arche",
+  "cover": "krawall-und-kekse.jpg"
+  },
+
+  {
+  "isbn": "978-3-499-01340-9, 9783499013409", 
+  "title": "Fräulein Gold 7",
+  "author": "Anne Stern",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "448",
+  "genre": "Roman",
+  "sprache": "Deutsch",
+  "format": "Softcover",
+  "status": "Neuzugang",
+  "verlag": "Rowohlt/rororo",
+  "cover": "fraeulein-gold-7.jpg"
+  }
 
     ]
   }
 
       
-
-
-
-
 
