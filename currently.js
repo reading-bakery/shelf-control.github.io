@@ -353,7 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ], "Themen", true);
                 const themenStr = themenArr.join(", ");
 
-                const stimmungArr = await openCheckboxModal("stimmungModal", ["Traurig","Langweilig","Lustig/Humorvoll","Aufwühlend","Spannend","Melancholisch","Informativ","Romantisch","Nachdenklich","Düster","Gruselig","Cozy/Gemütlich","Ruhig","Herausfordernd/Komplex","Verwirrend","Eklig","Überraschend","Dramatisch"], "Stimmung", true);
+                const stimmungArr = await openCheckboxModal("stimmungModal", ["Traurig","Langweilig","Lustig/Humorvoll","Aufwühlend","Spannend","Melancholisch","Informativ","Spicy","Nachdenklich","Düster","Gruselig","Cozy/Gemütlich","Ruhig","Herausfordernd/Komplex","Verwirrend","Eklig","Überraschend","Dramatisch"], "Stimmung", true);
                 const stimmungStr = stimmungArr.join(", ");
 
                 const tempoArr = await openCheckboxModal("tempoModal", ["Langsam","Mittel","Schnell"], "Lesetempo", false);
