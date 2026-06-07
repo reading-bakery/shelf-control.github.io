@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "Südkorea": "<img src='flags/kr.svg' class='weltreise-flagge-img' alt='Südkorea'>",
         "Tansania": "<img src='flags/tz.svg' class='weltreise-flagge-img' alt='Tansania'>",
         "Tschechien": "<img src='flags/cz.svg' class='weltreise-flagge-img' alt='Tschechien'>",
+        "Thailand": "<img src='flags/tha.svg' class='weltreise-flagge-img' alt='Thailand'>",
         "Türkei": "<img src='flags/tr.svg' class='weltreise-flagge-img' alt='Türkei'>",
         "Ukraine": "<img src='flags/ua.svg' class='weltreise-flagge-img' alt='Ukraine'>",
         "USA": "<img src='flags/us.svg' class='weltreise-flagge-img' alt='USA'>",
