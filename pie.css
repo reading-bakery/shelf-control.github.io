@@ -640,7 +640,7 @@ hr {
       margin-top: -15px;
     }
 
-@media (max-width: 500px) {
+@media (max-width: 740px) {
     #longshort-container-unique,
     #longshort-container-audio {
         padding: 1rem 0.5rem !important; /* Weniger Innenabstand für mehr Platz */
