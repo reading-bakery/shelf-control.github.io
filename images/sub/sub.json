@@ -587,20 +587,7 @@
     "cover": "der-baer-und-die-nachtigall.jpg"
     },
 
-    {
-      "isbn": "978-3-458-68260-8, 9783458682608",
-      "title": "Der Gesang der Berge",
-      "author": "Nguyễn Phan Quế Mai",
-      "gender": "Weiblich",
-      "umfang": "301-500",
-      "seiten": "430",
-      "genre": "Roman",
-      "sprache": "Englisch",
-      "format": "Softcover",
-      "status": "SuB",
-      "verlag": "Insel",
-      "cover": "der-gesang-der-berge.jpg"
-    },
+
 
     {
       "isbn": "978-3-257-24705-3, 9783257247053",
@@ -1380,21 +1367,6 @@
       "status": "SuB",
       "verlag": "Ecco",
       "cover": "fuenf-leben.jpg"
-    },
-
-    {
-      "isbn": "978-3-426-28432-2, 9783426284322",
-      "title": "Funny Story",
-      "author": "Emily Henry",
-      "gender": "Weiblich",
-      "umfang": "301-500",
-      "seiten": "464",
-      "genre": "Roman",
-      "sprache": "Englisch",
-      "format": "Softcover",
-      "status": "SuB",
-      "verlag": "Knaur/Droemer",
-      "cover": "funny-story.jpg"
     },
 
     {
@@ -2567,20 +2539,7 @@
       "cover": "unerhoerte-stimmen.jpg"
     },
 
-    {
-      "isbn": "978-3-257-24538-7, 9783257245387",
-      "title": "Uns gehört die Nacht",
-      "author": "Jardine Libaire",
-      "gender": "Weiblich",
-      "umfang": "301-500",
-      "seiten": "464",
-      "genre": "Roman",
-      "sprache": "Französisch",
-      "format": "Softcover",
-      "status": "SuB",
-      "verlag": "Diogenes",
-      "cover": "uns-gehoert-die-nacht.jpg"
-    },
+
 
     {
       "isbn": "978-3-499-63186-3, 9783499631863",
@@ -2687,20 +2646,7 @@
       "cover": "wenn-ich-wiederkomme.jpg"
     },
 
-    {
-      "isbn": "978-3-0369-5034-1, 9783036950341",
-      "title": "Wie Inseln im Licht",
-      "author": "Franziska Gänsler",
-      "gender": "Weiblich",
-      "umfang": "bis 300",
-      "seiten": "206",
-      "genre": "Roman",
-      "sprache": "Deutsch",
-      "format": "Hardcover",
-      "status": "SuB",
-      "verlag": "Kein&Aber",
-      "cover": "wie-inseln-im-licht.jpg"
-    },
+
 
     {
       "isbn": "978-3-596-70332-6, 9783596703326",

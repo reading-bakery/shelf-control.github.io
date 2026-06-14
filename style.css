@@ -107,6 +107,8 @@
     display: none; /* Startzustand ausgeblendet */
     }
 
+
+
     
     @media (max-width: 1024px) {
       .grid {
