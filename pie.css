@@ -709,14 +709,12 @@ hr {
     }
 
 canvas {
-  width: 100% !important;
   max-width: 100%;
   display: block;
   cursor: pointer;
   display: block;
   margin-bottom: 25px !important;
 }
-
 
 #sternemonthChart,
 #neumonthChart,
@@ -725,14 +723,19 @@ canvas {
 #minutenmonthChart,
 #bookmonthChart,
 #ausgabenChart,
-#subChart,
 #autorChart,
 #verlagChart,
 #sprachenChart {
     height: 400px;
     font-family: "Dosis", sans-serif;
-    margin-top: -20px;      /* nach oben verschieben */
+    margin-top: 10px;      /* nach oben verschieben */
     margin-bottom: 20px;
+}
+
+#subChart {
+  height: 350px;
+  font-family: "Dosis", sans-serif;
+  margin-top: 10px;
 }
 }
 
