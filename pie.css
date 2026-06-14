@@ -714,7 +714,7 @@ canvas {
   display: block;
   cursor: pointer;
   display: block;
-  background-color: blue;
+  margin-bottom: 25px !important;
 }
 
 
@@ -729,12 +729,11 @@ canvas {
 #autorChart,
 #verlagChart,
 #sprachenChart {
-    height: 400px; /* Hier von 350px erhöht */
+    height: 400px;
     font-family: "Dosis", sans-serif;
-    margin-bottom: 20px; /* Optional: sorgt für mehr Abstand nach unten */
+    margin-top: -20px;      /* nach oben verschieben */
+    margin-bottom: 20px;
 }
-
-
 }
 
   
