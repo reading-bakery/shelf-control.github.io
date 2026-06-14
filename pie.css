@@ -640,8 +640,8 @@ hr {
       margin-top: -15px;
     }
 
-@media (max-width: 740px) {
- #longshort-container-unique,
+@media (max-width: 500px) {
+    #longshort-container-unique,
     #longshort-container-audio {
         padding: 1rem 0.5rem !important; /* Weniger Innenabstand für mehr Platz */
         width: 100% !important;
@@ -707,6 +707,32 @@ hr {
         margin-top: 4px;
         opacity: 0.9;
     }
+
+canvas {
+  width: 100% !important;
+  max-width: 100%;
+  display: block;
+  cursor: pointer;
+  display: block;
+  background-color: blue;
+}
+
+
+#sternemonthChart,
+#neumonthChart,
+#averagemonthChart,
+#daysaudioChart,
+#minutenmonthChart,
+#bookmonthChart,
+#ausgabenChart,
+#subChart,
+#autorChart,
+#verlagChart,
+#sprachenChart {
+    height: 400px; /* Hier von 350px erhöht */
+    font-family: "Dosis", sans-serif;
+    margin-bottom: 20px; /* Optional: sorgt für mehr Abstand nach unten */
+}
 
 
 }
