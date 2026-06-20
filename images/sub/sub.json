@@ -1445,6 +1445,21 @@
     },
 
     {
+      "isbn": "978-3-365-01220-8, 9783365012208",
+      "title": "Halbwach",
+      "author": "Sophia Como",
+      "gender": "Weiblich",
+      "umfang": "301-500",
+      "seiten": "400",
+      "genre": "Roman ",
+      "sprache": "Deutsch",
+      "format": "Softcover",
+      "status": "SuB",
+      "verlag": "Harper Collins",
+      "cover": "halbwach.jpg"
+    },
+
+    {
       "isbn": "978-3-442-77201-8, 9783442772018",
       "title": "Harlem Shuffle",
       "author": "Colson Whitehead",
