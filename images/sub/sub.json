@@ -1095,7 +1095,7 @@
       "sprache": "Finnisch",
       "format": "Hardcover",
       "status": "SuB",
-      "verlag": "Ecco Verlag",
+      "verlag": "Ecco",
       "cover": "die-unbezwingbare.jpg"
     },
 
@@ -1595,6 +1595,21 @@
     },
 
     {
+      "isbn": "978-3-7530-0002-2, 9783753000022",
+      "title": "Iss das jetzt, wenn du mich liebst",
+      "author": "Bianca Nawrath",
+      "gender": "Weiblich",
+      "umfang": "bis 300",
+      "seiten": "288",
+      "genre": "Roman",
+      "sprache": "Deutsch",
+      "format": "Hardcover",
+      "status": "Neuzugang",
+      "verlag": "Ecco",
+      "cover": "iss-das-jetzt-wenn-du-mich-liebst.jpg"
+    },
+
+    {
       "isbn": "978-3-910372-23-8, 9783910372238",
       "title": "Jeanie und Julius",
       "author": "Claire Fuller",
@@ -1955,6 +1970,21 @@
     },
 
     {
+      "isbn": "978-3-455-01804-2, 9783455018042",
+      "title": "Mein Mann",
+      "author": "Maud Ventura",
+      "gender": "Weiblich",
+      "umfang": "bis 300",
+      "seiten": "272",
+      "genre": "Roman",
+      "sprache": "Französisch",
+      "format": "Hardcover",
+      "status": "Neuzugang",
+      "verlag": "Sonstiges",
+      "cover": "mein-mann.jpg"
+    },
+
+    {
       "isbn": "978-3-7530-0080-0, 9783753000800",
       "title": "Memphis",
       "author": "Tara M. Stringfellow",
@@ -2042,6 +2072,22 @@
       "status": "SuB",
       "verlag": "ATB/Aufbau/RL/Blumenbar",
       "cover": "notizen-zu-einer-hinrichtung.jpg"
+    },
+
+
+    {
+      "isbn": "978-3-7530-0078-7, 9783753000787",
+      "title": "Nur eine weitere Geschichte",
+      "author": "Jacqueline Maley",
+      "gender": "Weiblich",
+      "umfang": "301-500",
+      "seiten": "496",
+      "genre": "Roman",
+      "sprache": "Englisch",
+      "format": "Hardcover",
+      "status": "Neuzugang",
+      "verlag": "Ecco",
+      "cover": "nur-eine-weitere-geschichte.jpg"
     },
 
     {
@@ -2315,6 +2361,21 @@
     },
 
     {
+      "isbn": "978-3-95614-600-8, 9783956146008",
+      "title": "So gehn wir denn hinab",
+      "author": "Jesmyn Ward",
+      "gender": "Weiblich",
+      "umfang": "301-500",
+      "seiten": "304",
+      "genre": "Roman",
+      "sprache": "Englisch",
+      "format": "Hardcover",
+      "status": "Neuzugang",
+      "verlag": "Sonstiges",
+      "cover": "so-gehn-wir-denn-hinab.jpg"
+    },
+
+    {
       "isbn": "978-3-442-77125-7, 9783442771257",
       "title": "Sprache und Sein",
       "author": "Kübra Gümüsay",
@@ -2460,7 +2521,7 @@
       "sprache": "Englisch",
       "format": "Hardcover",
       "status": "SuB",
-      "verlag": "Ecco Verlag",
+      "verlag": "Ecco",
       "cover": "true-story.jpg"
     },
 
