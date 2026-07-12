@@ -213,6 +213,21 @@
     },
 
     {
+    "isbn": "978-3-7558-0582-3, 9783755805823",
+    "title": "Botanik des Wahnsinns",
+    "author": "Leon Engler",
+    "gender": "Männlich",
+    "umfang": "bis 300",
+    "seiten": "208",
+    "genre": "Roman",
+    "sprache": "Deutsch",
+    "format": "Softcover",
+    "status": "Neuzugang",
+    "verlag": "Dumont",
+    "cover": "botanik-des-wahnsinns.jpg"
+    },
+
+    {
     "isbn": "978-1-5290-7441-3, 9781529074413",
     "title": "Breasts and Eggs",
     "author": "Mieko Kawakami",
@@ -1235,6 +1250,21 @@
     },
 
     {
+      "isbn": "978-3-910372-79-5, 9783910372795",
+      "title": "Eine einfache Wahrheit",
+      "author": "Corinna Krenzer",
+      "gender": "Weiblich",
+      "umfang": "bis 300",
+      "seiten": "240",
+      "genre": "Roman",
+      "sprache": "Deutsch",
+      "format": "Hardcover",
+      "status": "Neuzugang",
+      "verlag": "Kjona",
+      "cover": "eine-einfache-wahrheit.jpg"
+    },
+
+    {
     "isbn": "978-3-426-52445-9, 9783426524459",
     "title": "Eisige Wellen",
     "author": "Leigh Bardugo",
@@ -1592,6 +1622,22 @@
       "status": "SuB",
       "verlag": "Ullstein/List",
       "cover": "institut-fuer-gute-muetter.jpg"
+    },
+
+
+    {
+      "isbn": "978-3-910372-83-2, 9783910372832",
+      "title": "Inter alia",
+      "author": "Suzie Miller",
+      "gender": "Weiblich",
+      "umfang": "301-500",
+      "seiten": "304",
+      "genre": "Roman",
+      "sprache": "Englisch",
+      "format": "Hardcover",
+      "status": "Neuzugang",
+      "verlag": "Kjona",
+      "cover": "inter-alia.jpg"
     },
 
     {
