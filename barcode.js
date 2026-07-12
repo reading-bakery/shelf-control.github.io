@@ -77,11 +77,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     gender: treffer.gender || "",
                     umfang: treffer.umfang || "",
                     seiten: treffer.seiten || "",
-                    minuten: "0",
+                    minuten: " ",
                     genre: treffer.genre || "",
                     sprache: treffer.sprache || "",
                     format: treffer.format || "",
-                    status: "Gelesen", 
+                    status: treffer.status || "", 
                     verlag: treffer.verlag || "",
                     cover: coverURL
                 };
