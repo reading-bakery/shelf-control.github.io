@@ -49,9 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getColorForPages(pages) {
-        if (pages >= 0 && pages <= 50) return '#ff7256';
-        if (pages >= 51 && pages <= 75) return '#FFB90F';
-        if (pages >= 76 && pages <= 100) return '#63b8ff';
+        if (pages >= 0 && pages <= 25) return '#ff7256';
+        if (pages >= 26 && pages <= 50) return '#FFB90F';
+        if (pages >= 51 && pages <= 100) return '#63b8ff';
         if (pages >= 101 && pages <= 150) return '#3CB371';
         if (pages >= 151) return '#9370DB';
         return '#CCCCCC';
@@ -102,8 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function drawLegend() {
         const legendItems = [
-            { label: '≤ 50', color: '#ff7256' },
-            { label: '≤ 75', color: '#FFB90F' },
+            { label: '≤ 25', color: '#ff7256' },
+            { label: '≤ 50', color: '#FFB90F' },
             { label: '≤ 100', color: '#63b8ff' },
             { label: '≤ 150', color: '#3CB371' },
             { label: '≥ 151', color: '#9370DB' },
