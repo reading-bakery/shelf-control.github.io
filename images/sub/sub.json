@@ -2919,7 +2919,128 @@
   "status": "Neuzugang",
   "verlag": "Rowohlt/rororo",
   "cover": "frauelein-gold-7.jpg"
+  },
+
+  {
+  "isbn": "978-3-423-14843-6, 9783423148436", 
+  "title": "Vati",
+  "author": "Monika Helfer",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "176",
+  "genre": "Roman",
+  "sprache": "Deutsch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "dtv",
+  "cover": "vati.jpg"
+  },
+
+  {
+  "isbn": "978-3-423-14801-6, 9783423148016", 
+  "title": "Die Bagage",
+  "author": "Monika Helfer",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "160",
+  "genre": "Roman",
+  "sprache": "Deutsch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "dtv",
+  "cover": "die-bagage.jpg"
+  },
+
+  {
+  "isbn": "978-3-423-14879-5, 9783423148795", 
+  "title": "Löwenherz",
+  "author": "Monika Helfer",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "192",
+  "genre": "Roman",
+  "sprache": "Deutsch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "dtv",
+  "cover": "loewenherz.jpg"
+  },
+
+  {
+  "isbn": "978-3-328-60451-8, 9783328604518", 
+  "title": "Verlorene Schäfchen",
+  "author": "Madeline Cash",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "320",
+  "genre": "Roman",
+  "sprache": "Englisch",
+  "format": "eBook",
+  "status": "Neuzugang",
+  "verlag": "Penguin",
+  "cover": "verlorene-schaefchen.jpg"
+  },
+
+  {
+  "isbn": "978-3-89667-785-3, 9783896677853", 
+  "title": "Restsommer",
+  "author": "Kea von Garnier",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "400",
+  "genre": "Roman",
+  "sprache": "Deutsch",
+  "format": "eBook",
+  "status": "Neuzugang",
+  "verlag": "Blessing",
+  "cover": "restsommer.jpg"
+  },
+
+  {
+  "isbn": "978-3-442-71781-1, 9783442717811", 
+  "title": "Bad Feminist",
+  "author": "Roxane Gay",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "416",
+  "genre": "Roman",
+  "sprache": "Englisch",
+  "format": "eBook",
+  "status": "Neuzugang",
+  "verlag": "dtv",
+  "cover": "bad-feminist.jpg"
+  },
+
+  {
+  "isbn": "978-3-351-04268-4, 9783351042684", 
+  "title": "Der Sommer der schlafenden Hunde",
+  "author": "Laura Dürrschmidt",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "432",
+  "genre": "Roman",
+  "sprache": "Deutsch",
+  "format": "eBook",
+  "status": "Neuzugang",
+  "verlag": "ATB/Aufbau/RL/Blumenbar",
+  "cover": "der-sommer-der-schlafenden-hunde.jpg"
+  },
+
+  {
+  "isbn": "978-3-442-73887-8, 9783442738878", 
+  "title": "Die Bienenhüterin",
+  "author": "Sue Monk Kidd",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "480",
+  "genre": "Roman",
+  "sprache": "Englisch",
+  "format": "eBook",
+  "status": "Neuzugang",
+  "verlag": "btb",
+  "cover": "die-bienenhueterin.jpg"
   }
+
 
     ]
   }
