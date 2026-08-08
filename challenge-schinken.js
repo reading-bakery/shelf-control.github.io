@@ -48,20 +48,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const hasCover = Boolean(item.Cover);
 
-        /* ---------- Vorder- / Rückseite ---------- */
+        /* ---------- Vorderseite ---------- */
         if (hasCover) {
-            front.innerHTML = `<img src="${item.Cover}" alt="${item.Buch || ""}">`;
+            front.innerHTML = `<img src="${item.Cover}" alt="${item.Titel || item.Buch || ""}">`;
         } else {
             front.innerHTML = `<div class="schinken-placeholder"></div>`;
         }
 
+        /* ---------- Rückseite (Seitenzahl oder Minutenzahl) ---------- */
+        let lengthText = "–";
+        
+        const seiten = item["Seitenzahl total"] || item.Seiten;
+        const minuten = item["Minuten total"] || item.Minuten;
+
+        if (seiten) {
+            lengthText = `${seiten}<br>Seiten`;
+        } else if (minuten) {
+            lengthText = `${minuten}<br>Minuten`;
+        }
+
         back.innerHTML = `
             <div class="schinken-language">
-                ${item.Seiten
-                    ? item.Seiten.replace(/\s*Seiten/i, "<br>Seiten")
-                    : "–"}
+                ${lengthText}
             </div>
         `;
+
         /* ---------- Nummer ---------- */
         const letterContainer = document.createElement("div");
         letterContainer.classList.add("schinken-letter-container");
