@@ -3039,8 +3039,67 @@
   "status": "Neuzugang",
   "verlag": "btb",
   "cover": "die-bienenhueterin.jpg"
-  }
+  },
 
+  {
+  "isbn": "978-3-462-01327-6, 9783462013276", 
+  "title": "Weird Girls",
+  "author": "Gráinne O'Hare",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "320",
+  "genre": "Roman",
+  "sprache": "Englisch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "KiWi",
+  "cover": "weird-girls.jpg"
+  },
+
+  {
+  "isbn": "978-3-910372-67-2, 9783910372672", 
+  "title": "Das gute Benehmen",
+  "author": "Molly Keane",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "336",
+  "genre": "Roman",
+  "sprache": "Englisch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "Kjona",
+  "cover": "das-gute-benehmen.jpg"
+  },
+
+  {
+  "isbn": "978-3-95732-663-8, 9783957326638", 
+  "title": "Soziologie und Literatur",
+  "author": "Marc Ortmann",
+  "gender": "Männlich",
+  "umfang": "301-500",
+  "seiten": "320",
+  "genre": "Non Fiction",
+  "sprache": "Deutsch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "Verbrecher",
+  "cover": "soziologie-und-literatur.jpg"
+  },
+
+  {
+  "isbn": "978-3-608-96741-8, 9783608967418", 
+  "title": "Niklas Luhmann",
+  "author": "Clemens Luhmann",
+  "gender": "Männlich",
+  "umfang": "301-500",
+  "seiten": "384",
+  "genre": "Non Fiction",
+  "sprache": "Deutsch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "Klett-Cotta",
+  "cover": "niklas-luhmann.jpg"
+  }
 
     ]
   }
