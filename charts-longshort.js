@@ -14,17 +14,20 @@
       const coverIdx = header.indexOf('Cover');
       const titelIdx = header.indexOf('Titel');
       const seitenIdx = header.indexOf('Seitenzahl total');
+      const fazitIdx = header.indexOf('Fazit'); // Spalte Fazit ermitteln
 
       const validBooks = dataRows
         .map(row => ({
           cover: row[coverIdx]?.trim(),
           titel: row[titelIdx]?.trim(),
-          seiten: Number(row[seitenIdx]?.replace(',', '.'))
+          seiten: Number(row[seitenIdx]?.replace(',', '.')),
+          fazit: fazitIdx !== -1 ? row[fazitIdx]?.trim() : '' // Fazit-Wert auslesen
         }))
         .filter(book =>
           book.cover && book.cover !== '' &&
           book.titel && book.titel !== '' &&
-          !isNaN(book.seiten) && book.seiten > 0
+          !isNaN(book.seiten) && book.seiten > 0 &&
+          book.fazit?.toLowerCase() !== 'abgebrochen' // "Abgebrochen" ausschließen
         );
 
       const container = document.querySelector('#longshort-container-unique');
@@ -41,35 +44,35 @@
       const shortest = validBooks.reduce((min, b) => b.seiten < min.seiten ? b : min, validBooks[0]);
       const longest = validBooks.reduce((max, b) => b.seiten > max.seiten ? b : max, validBooks[0]);
 
-container.innerHTML = `
-  <h3 class="longshort-heading-unique">Gelesene Bücher</h3>
+      container.innerHTML = `
+        <h3 class="longshort-heading-unique">Gelesene Bücher</h3>
 
-  <div class="longshort-wrapper-unique">
+        <div class="longshort-wrapper-unique">
 
-    <div class="longshort-book-unique">
-      <div class="longshort-cover-wrapper">
-        <img class="longshort-cover-unique" src="${shortest.cover}" alt="Cover ${shortest.titel}" />
-      </div>
+          <div class="longshort-book-unique">
+            <div class="longshort-cover-wrapper">
+              <img class="longshort-cover-unique" src="${shortest.cover}" alt="Cover ${shortest.titel}" />
+            </div>
 
-      <p class="longshort-title-unique">
-        <span class="book-title">${shortest.titel}</span><br>
-        <span class="book-minutes">${shortest.seiten} Seiten</span>
-      </p>
-    </div>
+            <p class="longshort-title-unique">
+              <span class="book-title">${shortest.titel}</span><br>
+              <span class="book-minutes">${shortest.seiten} Seiten</span>
+            </p>
+          </div>
 
-    <div class="longshort-book-unique">
-      <div class="longshort-cover-wrapper">
-        <img class="longshort-cover-unique" src="${longest.cover}" alt="Cover ${longest.titel}" />
-      </div>
+          <div class="longshort-book-unique">
+            <div class="longshort-cover-wrapper">
+              <img class="longshort-cover-unique" src="${longest.cover}" alt="Cover ${longest.titel}" />
+            </div>
 
-      <p class="longshort-title-unique">
-        <span class="book-title">${longest.titel}</span><br>
-        <span class="book-minutes">${longest.seiten} Seiten</span>
-      </p>
-    </div>
+            <p class="longshort-title-unique">
+              <span class="book-title">${longest.titel}</span><br>
+              <span class="book-minutes">${longest.seiten} Seiten</span>
+            </p>
+          </div>
 
-  </div>
-`;
+        </div>
+      `;
 
     } catch (error) {
       console.error('Fehler beim Laden oder Verarbeiten:', error);

@@ -14,17 +14,20 @@
       const coverIdx = header.indexOf('Cover');
       const titelIdx = header.indexOf('Titel');
       const minutenIdx = header.indexOf('Minuten total');
+      const fazitIdx = header.indexOf('Fazit'); // Spalte Fazit ermitteln
 
       const validBooks = dataRows
         .map(row => ({
           cover: row[coverIdx]?.trim(),
           titel: row[titelIdx]?.trim(),
-          minuten: Number(row[minutenIdx]?.replace(',', '.'))
+          minuten: Number(row[minutenIdx]?.replace(',', '.')),
+          fazit: fazitIdx !== -1 ? row[fazitIdx]?.trim() : '' // Fazit-Wert auslesen
         }))
         .filter(book =>
           book.cover && book.cover !== '' &&
           book.titel && book.titel !== '' &&
-          !isNaN(book.minuten) && book.minuten > 0
+          !isNaN(book.minuten) && book.minuten > 0 &&
+          book.fazit?.toLowerCase() !== 'abgebrochen' // "Abgebrochen" ausschließen
         );
 
       const container = document.querySelector('#longshort-container-audio');
