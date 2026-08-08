@@ -48,17 +48,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const hasCover = Boolean(item.Cover && item.Cover.trim() !== "");
 
-        /* ---------- Vorder- / Rückseite ---------- */
+        /* ---------- Vorderseite ---------- */
         if (hasCover) {
-            front.innerHTML = `<img src="${item.Cover}" alt="${item.Buch || ""}">`;
+            front.innerHTML = `<img src="${item.Cover}" alt="${item.Titel || item.Buch || ""}">`;
         } else {
-            // Placeholder wird angezeigt, wenn kein Cover da ist
             front.innerHTML = `<div class="originalsprache-placeholder"></div>`;
         }
 
+        /* ---------- Rückseite (Sprache dynamisch auslesen) ---------- */
+        const spracheVal = item.Originalsprache || item.Sprache || "–";
+
         back.innerHTML = `
             <div class="originalsprache-language">
-                <br>${item.Originalsprache || "–"}
+                <span>${spracheVal}</span>
             </div>
         `;
 
@@ -66,27 +68,24 @@ document.addEventListener("DOMContentLoaded", () => {
         inner.appendChild(back);
         card.appendChild(inner);
 
-        /* ---------- Nummer NUR WENN COVER EXISTIERT ---------- */
-        if (hasCover) {
-            const letterContainer = document.createElement("div");
-            letterContainer.classList.add("originalsprache-letter-container");
+        /* ---------- Nummer & Flip (Egal ob Cover existiert oder nicht) ---------- */
+        const letterContainer = document.createElement("div");
+        letterContainer.classList.add("originalsprache-letter-container");
 
-            // Erstellt die einzelnen Nummer-Spans
-            const numText = String(item.Nummer || "");
-            [...numText].forEach(letter => {
-                const span = document.createElement("span");
-                span.classList.add("originalsprache-letter");
-                span.textContent = letter;
-                letterContainer.appendChild(span);
-            });
+        const numText = String(item.Nummer || "");
+        [...numText].forEach(letter => {
+            const span = document.createElement("span");
+            span.classList.add("originalsprache-letter");
+            span.textContent = letter;
+            letterContainer.appendChild(span);
+        });
 
-            card.appendChild(letterContainer);
-            
-            /* ---------- Flip-Event (nur bei Cover) ---------- */
-            card.addEventListener("click", () => {
-                card.classList.toggle("is-flipped");
-            });
-        }
+        card.appendChild(letterContainer);
+
+        /* ---------- Flip-Event immer aktivieren ---------- */
+        card.addEventListener("click", () => {
+            card.classList.toggle("is-flipped");
+        });
 
         return card;
     }
