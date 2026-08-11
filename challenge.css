@@ -102,6 +102,8 @@ p {
 /* .buechergilde-placeholder,
 .originalsprache-placeholder, 
 .queer-placeholder, 
+.sachbuch-placeholder,
+.klassiker-placeholder,
 .poc-placeholder, 
 .schinken-placeholder, 
 .abc-placeholder,
@@ -142,6 +144,8 @@ p {
 .grid-thumb .buechergilde-carousel,
 .grid-thumb .originalsprache-carousel,
 .grid-thumb .queer-carousel,
+.grid-thumb .sachbuch-carousel,
+.grid-thumb .klassiker-carousel,
 .grid-thumb .weltreise-carousel,
 .grid-thumb .poc-carousel,
 .grid-thumb .schinken-carousel,
@@ -156,6 +160,8 @@ p {
 .grid-thumb .buechergilde-carousel-track,
 .grid-thumb .originalsprache-carousel-track,
 .grid-thumb .queer-carousel-track,
+.grid-thumb .sachbuch-carousel-track,
+.grid-thumb .klassiker-carousel-track,
 .grid-thumb .weltreise-carousel-track,
 .grid-thumb .poc-carousel-track,
 .grid-thumb .schinken-carousel-track,
@@ -169,6 +175,8 @@ p {
 .grid-thumb .buechergilde-carousel-slide,   
 .grid-thumb .originalsprache-carousel-slide, 
 .grid-thumb .queer-carousel-slide,
+.grid-thumb .sachbuch-carousel-slide,
+.grid-thumb .klassiker-carousel-slide,
 .grid-thumb .weltreise-carousel-slide,
 .grid-thumb .poc-carousel-slide,
 .grid-thumb .schinken-carousel-slide,
@@ -181,6 +189,8 @@ p {
 .buechergilde img,
 .originalsprache img,
 .queer img, 
+.sachbuch img, 
+.klassiker img, 
 .poc img, 
 .schinken img, 
 .indie img, 
@@ -198,6 +208,8 @@ p {
 .grid-thumb .abc-card,
 .grid-thumb .poc-card,
 .grid-thumb .queer-card,
+.grid-thumb .sachbuch-card,
+.grid-thumb .klassiker-card,
 .grid-thumb .schinken-card,
 .grid-thumb .indie-card,
 .grid-thumb .originalsprache-card {
@@ -212,6 +224,8 @@ p {
 .buechergilde-card img,
 .grid-thumb .covers img,
 .queer-card img,
+.sachbuch-card img,
+.klassiker-card img,
 .poc-card img,
 .schinken-card img,
 .indie-card img,
@@ -258,6 +272,8 @@ p {
 .ziele-container:hover,
 .card:hover,
 .queer-card:hover,
+.sachbuch-card:hover,
+.klassiker-card:hover,
 .poc-card:hover,
 .schinken-card:hover,
 .indie-card:hover,
@@ -410,6 +426,8 @@ p {
 .books-challenge,
 .agatha-challenge,
 .queer-challenge,
+.sachbuch-challenge,
+.klassiker-challenge,
 .weltreise-challenge,
 .poc-challenge,
 .schinken-challenge,
@@ -426,6 +444,8 @@ p {
 
 .buechergilde-grid,
 .queer-grid,
+.sachbuch-grid,
+.klassiker-grid,
 .weltreise-grid,
 .poc-grid,
 .schinken-grid,
@@ -443,6 +463,8 @@ p {
 /* Carousel Navigation */
 .buechergilde-carousel-nav,
 .queer-carousel-nav,
+.sachbuch-carousel-nav,
+.klassiker-carousel-nav,
 .poc-carousel-nav,
 .schinken-carousel-nav,
 .indie-carousel-nav,
@@ -463,6 +485,8 @@ p {
 
 .buechergilde-dot,  
 .queer-dot,
+.sachbuch-dot,
+.klassiker-dot,
 .weltreise-dot,
 .poc-dot,
 .schinken-dot,
@@ -485,6 +509,8 @@ p {
 .buechergilde-dot.active,   
 .weltreise-dot.active,   
 .queer-dot.active,
+.sachbuch-dot.active,
+.klassiker-dot.active,
 .poc-dot.active,
 .schinken-dot.active,
 .indie-dot.active,
@@ -500,8 +526,9 @@ p {
   gap: 15px;              /* Abstand zwischen Kreis und Graph */
 }
 
-/* Spezifisch für die Queere-Bücher-Sektion */
-.queer-challenge {
+.queer-challenge,
+.sachbuch-challenge,
+.klassiker-challenge {
     display: flex;
     flex-direction: column;
     justify-content: flex-start !important; /* Inhalt nach oben schieben */
@@ -583,7 +610,9 @@ p {
     .schinken-placeholder,
     .indie-placeholder,
     .originalsprache-placeholder,
-    .abc-placeholder {
+    .abc-placeholder,
+    .sachbuch-placeholder,
+    .klassiker-placeholder {
         display: inline-block;
         font-size: 1.8rem;
         color: #ff7256;
