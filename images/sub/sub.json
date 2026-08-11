@@ -3099,6 +3099,51 @@
   "status": "Neuzugang",
   "verlag": "Klett-Cotta",
   "cover": "niklas-luhmann.jpg"
+  },
+
+  {
+  "isbn": "978-3-7596-0076-9, 9783759600769", 
+  "title": "Gewöhnungsbedürftig",
+  "author": "Daniela Wilmer",
+  "gender": "Weiblich",
+  "umfang": "bis 300",
+  "seiten": "272",
+  "genre": "Roman",
+  "sprache": "Deutsch",
+  "format": "eBook",
+  "status": "Rezensionsexemplar",
+  "verlag": "Pola",
+  "cover": "gewoehnungsbeduerftig.jpg"
+  },
+
+  {
+  "isbn": "978-3-462-05520-7, 9783462055207", 
+  "title": "Molka",
+  "author": "Monika Kim",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "304",
+  "genre": "Roman",
+  "sprache": "Englisch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "KiWi",
+  "cover": "molka.jpg"
+  },
+
+  {
+  "isbn": "978-3-498-00789-8, 9783498007898", 
+  "title": "Honey",
+  "author": "Imani Thompson",
+  "gender": "Weiblich",
+  "umfang": "301-500",
+  "seiten": "416",
+  "genre": "Roman",
+  "sprache": "Englisch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "Rowohlt/rororo",
+  "cover": "honey.jpg"
   }
 
     ]
