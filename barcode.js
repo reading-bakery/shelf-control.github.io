@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "entry.554995646", 
         author: "entry.890797774", 
         gender: "entry.1685694101", 
+        poc: "entry.1600060751",
         umfang: "entry.436245051", 
         seiten: "entry.1082451600",
         minuten: "entry.1433991187", 
@@ -37,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- 2. MANUELLE ISBN EINGABE (NEU) ---
+    // --- 2. MANUELLE ISBN EINGABE ---
     const isbnInputField = document.getElementById("isbnInput");
     isbnInputField?.addEventListener("keypress", async (e) => {
         if (e.key === "Enter") {
@@ -74,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     start: new Date().toISOString().split('T')[0],
                     title: treffer.title || "",
                     author: treffer.author || "",
+                    poc: treffer.poc || "",
                     gender: treffer.gender || "",
                     umfang: treffer.umfang || "",
                     seiten: treffer.seiten || "",
