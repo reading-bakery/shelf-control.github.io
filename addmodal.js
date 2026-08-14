@@ -9,13 +9,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     gender: "entry.1685694101", umfang: "entry.436245051", seiten: "entry.1082451600",
     minuten: "entry.1433991187", genre: "entry.1105252862", sprache: "entry.807495643",
     format: "entry.9727566", status: "entry.914730295", verlag: "entry.1674035100",  
-    cover: "entry.952453014"
+    cover: "entry.952453014", poc: "entry.1600060751"
   };
 
   const bookData = {
     start: "", title: "", author: "", gender: "", 
     umfang: "", seiten: "", minuten: "", genre: "", 
-    sprache: "", format: "", status: "", verlag: "", cover: ""
+    sprache: "", format: "", status: "", verlag: "", cover: "", poc: ""
   };
 
   let subDatenbank = [];
@@ -109,6 +109,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // --- Modals initialisieren ---
   renderOptions("genderModal", ["Weiblich", "Männlich", "Mix", "Divers"], "gender");
+  renderOptions("pocModal", ["Ja", "Nein"], "poc");
   renderOptions("umfangModal", ["bis 300", "301-500", "ab 501"], "umfang");
   renderOptions("genreModal", ["Roman", "Non Fiction", "Thriller/Krimi", "Erzählung", "Graphic Novel/Comic"], "genre");
   renderOptions("spracheModal", ["Deutsch", "Englisch", "Französisch", "Spanisch", "Italienisch", "Portugiesisch", "Koreanisch", "Japanisch", "Chinesisch", "Niederländisch", "Hebräisch", "Türkisch", "Russisch", "Schwedisch", "Norwegisch", "Dänisch", "Finnisch", "Polnisch", "Tschechisch", "Griechisch", "Arabisch", "Englisch Original", "Französisch Original", "Spanisch Original"], "sprache");
@@ -161,7 +162,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   };
 
-  setupRadioStep("genderModal", "gender", "Bitte Geschlecht auswählen.", "umfangModal");
+  // Geschlecht -> POC -> Umfang
+  setupRadioStep("genderModal", "gender", "Bitte Geschlecht auswählen.", "pocModal");
+  setupRadioStep("pocModal", "poc", "Bitte POC-Option auswählen.", "umfangModal");
   setupRadioStep("umfangModal", "umfang", "Bitte Umfang auswählen.", "seitenModal");
 
   document.querySelector("#seitenModal .modal-save").addEventListener("click", () => {
@@ -180,7 +183,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   setupRadioStep("formatModal", "format", "Bitte Format auswählen.", "statusModal");
   setupRadioStep("statusModal", "status", "Bitte Status auswählen.", "verlagModal");
 
-  // --- Senden ---
+  // --- Senden beim letzten Schritt (Verlag) ---
   document.querySelector("#verlagModal .modal-save").addEventListener("click", async () => {
     const val = document.querySelector("#verlagModal input:checked")?.value;
     const currentModal = document.getElementById("verlagModal");
@@ -194,7 +197,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       
       try {
         await fetch(FORM_URL, { method: "POST", mode: "no-cors", body: fd });
-       modalContent.innerHTML = `
+        modalContent.innerHTML = `
         <div style="text-align: center; padding: 20px;">
           <p style="font-size: 1.1em; margin: 20px 0;"><strong>${bookData.title}</strong> wurde hinzugefügt. 🚀</p>
           <button class="modal-save" id="btnSuccessAddOk">Super!</button>
