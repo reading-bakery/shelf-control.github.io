@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
             nav.querySelectorAll(".poc-dot").forEach((d, i) => d.classList.toggle("active", i === index));
         }
 
+        // Touch-Events für Swipe
         track.addEventListener("touchstart", e => {
             startX = e.touches[0].clientX;
             isDragging = true;
