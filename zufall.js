@@ -21,7 +21,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         format: "entry.9727566", 
         status: "entry.914730295", 
         verlag: "entry.1674035100", 
-        cover: "entry.952453014"
+        cover: "entry.952453014",
+        poc: "entry.1600060751" // <-- Hier hinzugefügt
     };
 
     // --- MODAL ELEMENTE ---
@@ -106,6 +107,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             formData.append(FORM_ENTRIES.format, buch.format || "");
             formData.append(FORM_ENTRIES.status, "Gelesen"); 
             formData.append(FORM_ENTRIES.verlag, buch.verlag || "");
+            formData.append(FORM_ENTRIES.poc, buch.poc || ""); // <-- Hier hinzugefügt
             formData.append(FORM_ENTRIES.cover, githubLink);
 
             try {
