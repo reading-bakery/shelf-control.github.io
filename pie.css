@@ -652,24 +652,28 @@ hr {
     padding-right: 10px;
 }
 
-.grid-thumb .abbruch-carousel {
+.grid-thumb .abbruch-carousel,
+.grid-thumb .stars-carousel {
     grid-column: 1 / -1; /* nimmt alle Grid-Spalten ein */
     width: 100%;
     height: auto;
     overflow: hidden;
 }
 
-.grid-thumb .abbruch-carousel-track {
+.grid-thumb .abbruch-carousel-track,
+.grid-thumb .stars-carousel-track {
     display: flex;
     width: 100%;
 }
 
-.grid-thumb .abbruch-carousel-slide {
+.grid-thumb .abbruch-carousel-slide,
+.grid-thumb .stars-carousel-slide {
     flex: 0 0 100%; /* jede Slide nimmt volle Breite ein */
     height: auto;
 }
 
-.abbruch-carousel img {
+.abbruch-carousel img,
+.stars-carousel img {
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -677,7 +681,8 @@ hr {
     cursor: pointer;
 }
 
-.grid-thumb .abbruch-card {
+.grid-thumb .abbruch-card,
+.grid-thumb .stars-card {
     width: 100%;
     height: 100%;
     display: flex;
@@ -686,7 +691,8 @@ hr {
     align-items: center;
 }
 
-.abbruch-card img {
+.abbruch-card img,
+.stars-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -713,13 +719,15 @@ hr {
 
 
 /* Hover Effekte */
-.abbruch-card:hover {
+.abbruch-card:hover,
+.stars-card:hover {
     transform: scale(1.01);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
 
-.abbruch-challenge {
+.abbruch-challenge,
+.stars-challenge {
     width: 100%;
     grid-column: 1/-1;
     display: flex;
@@ -728,7 +736,8 @@ hr {
     align-items: center; /* Zentriert das Grid als Ganzes auf der Seite */
 }
 
-.abbruch-grid {
+.abbruch-grid,
+.stars-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0.5rem;
@@ -738,14 +747,16 @@ hr {
 }
 
 /* Carousel Navigation */
-.abbruch-carousel-nav {
+.abbruch-carousel-nav,
+.stars-carousel-nav {
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 
-.abbruch-dot {
+.abbruch-dot,
+.stars-dot {
     display: inline-block;
     width: 12px;
     height: 12px;
@@ -759,7 +770,8 @@ hr {
     display: none; /* Startzustand ausgeblendet */
 }
 
-.abbruch-dot.active {
+.abbruch-dot.active,
+.stars-dot.active {
     background: #ff7256;
 }
 
@@ -770,7 +782,8 @@ hr {
   gap: 15px;              /* Abstand zwischen Kreis und Graph */
 }
 
-.abbruch-challenge {
+.abbruch-challenge,
+.stars-challenge {
     display: flex;
     flex-direction: column;
     justify-content: flex-start !important; /* Inhalt nach oben schieben */
