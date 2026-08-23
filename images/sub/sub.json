@@ -656,7 +656,7 @@
       "sprache": "Englisch",
       "format": "Softcover",
       "status": "SuB",
-      "verlag": "Diogenes Verlag AG",
+      "verlag": "Diogenes",
       "cover": "der-große-fehler.jpg"
     },
 
@@ -2089,6 +2089,22 @@
     },
 
     {
+      "isbn": "978-3-257-24788-6, 9783257247886",
+      "title": "Melody",
+      "author": "Martin Suter",
+      "poc": "Ja",
+      "gender": "Männlich",
+      "umfang": "301-500",
+      "seiten": "336",
+      "genre": "Roman",
+      "sprache": "Deutsch",
+      "format": "Softcover",
+      "status": "SuB",
+      "verlag": "Diogenes",
+      "cover": "melody.jpg"
+    },
+
+    {
       "isbn": "978-3-7530-0080-0, 9783753000800",
       "title": "Memphis",
       "author": "Tara M. Stringfellow",
@@ -2247,6 +2263,38 @@
       "status": "SuB",
       "verlag": "Sonstiges",
       "cover": "palace-of-glass.jpg"
+    },
+
+    {
+      "isbn": "978-3-257-24775-6, 9783257247756",
+      "title": "Paradies Garden",
+      "author": "Elena Fischer",
+      "poc": "Nein",
+      "gender": "Weiblich",
+      "umfang": "301-500",
+      "seiten": "352",
+      "genre": "Roman ",
+      "sprache": "Deutsch",
+      "format": "Softcover",
+      "status": "Neuzugang",
+      "verlag": "Diogenes",
+      "cover": "paradise-garden.jpg"
+    },
+
+    {
+      "isbn": "978-3-86391-466-0, 9783863914660",
+      "title": "Parasiti",
+      "author": "Alisha Gamisch",
+      "poc": "Nein",
+      "gender": "Weiblich",
+      "umfang": "bis 300",
+      "seiten": "200",
+      "genre": "Roman ",
+      "sprache": "Deutsch",
+      "format": "Hardcover",
+      "status": "Neuzugang",
+      "verlag": "Voland & Quist",
+      "cover": "parasiti.jpg"
     },
 
     {
