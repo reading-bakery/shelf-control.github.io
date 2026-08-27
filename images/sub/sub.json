@@ -3309,6 +3309,86 @@
   "status": "Neuzugang",
   "verlag": "Rowohlt/rororo",
   "cover": "honey.jpg"
+  },
+
+  {
+  "isbn": "978-3-522-20285-5, 9783522202855", 
+  "title": "Krabat",
+  "author": "Ottfried Preußler",
+  "poc": "Nein",
+  "gender": "Männlich",
+  "umfang": "301-500",
+  "seiten": "320",
+  "genre": "Roman",
+  "sprache": "Deutsch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "Thienemann",
+  "cover": "krabat.jpg"
+  },
+
+  {
+  "isbn": "978-3-446-28616-0, 9783446286160", 
+  "title": "Juli, August, September",
+  "author": "Olga Grjasnowa",
+  "poc": "Nein",
+  "gender": "Weiblich",
+  "umfang": "bis 300",
+  "seiten": "224",
+  "genre": "Roman",
+  "sprache": "Deutsch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "Hanser",
+  "cover": "juli-august-september.jpg"
+  },
+
+  {
+  "isbn": "978-3-7530-0121-0, 9783753001210", 
+  "title": "Jahre ohne Sprache",
+  "author": "Ann Esswein",
+  "poc": "Nein",
+  "gender": "Weiblich",
+  "umfang": "bis 300",
+  "seiten": "192",
+  "genre": "Roman",
+  "sprache": "Deutsch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "Ecco",
+  "cover": "jahre-ohne-sprache.jpg"
+  },
+
+  {
+  "isbn": "978-3-7530-0115-9, 9783753001159", 
+  "title": "Pizza Orlando",
+  "author": "Clara Umbach",
+  "poc": "Nein",
+  "gender": "Weiblich",
+  "umfang": "bis 300",
+  "seiten": "176",
+  "genre": "Roman",
+  "sprache": "Deutsch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "Ecco",
+  "cover": "pizza-orlando.jpg"
+  },
+
+  {
+  "isbn": "978-3-7530-0111-1, 9783753001111", 
+  "title": "Schwanentage",
+  "author": "Zhang Yueran",
+  "poc": "ja",
+  "gender": "Weiblich",
+  "umfang": "bis 300",
+  "seiten": "224",
+  "genre": "Roman",
+  "sprache": "Chinesisch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "Ecco",
+  "cover": "schwanentage.jpg"
   }
 
     ]
