@@ -3360,6 +3360,22 @@
   },
 
   {
+  "isbn": "978-3-95614-688-6, 9783956146886", 
+  "title": "Trainspotting",
+  "author": "Irvine Welsh",
+  "poc": "Nein",
+  "gender": "Männlich",
+  "umfang": "301-500",
+  "seiten": "384",
+  "genre": "Roman",
+  "sprache": "Englisch",
+  "format": "Softcover",
+  "status": "Neuzugang",
+  "verlag": "Kunstmann",
+  "cover": "trainspotting.jpg"
+  },
+
+  {
   "isbn": "978-3-7530-0115-9, 9783753001159", 
   "title": "Pizza Orlando",
   "author": "Clara Umbach",
