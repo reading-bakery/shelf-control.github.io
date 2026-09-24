@@ -49,22 +49,6 @@
     },
 
     {
-      "isbn": "978-3-455-65004-4, 9783455650044",
-      "title": "Alibi",
-      "author": "Agatha Christie",
-      "poc": "Nein",
-      "gender": "Weiblich",
-      "umfang": "bis 300",
-      "seiten": "288",
-      "genre": "Thriller/Krimi",
-      "sprache": "Englisch",
-      "format": "Softcover",
-      "status": "SuB",
-      "verlag": "Atlantik",
-      "cover": "alibi.jpg"
-    },
-
-    {
     "isbn": "978-3-7499-0236-1, 9783749902361",
     "title": "Alles über Liebe",
     "author": "bell hooks",
@@ -94,22 +78,6 @@
     "status": "SuB",
     "verlag": "btb",
     "cover": "alles-was-ich-dir-geben-will.jpg"
-    },
-
-    {
-    "isbn": "978-3-492-32061-0, 9783492320610",
-    "title": "Als die Welt zerbrach",
-    "author": "John Boyne",
-    "poc": "Nein",
-    "gender": "Männlich",
-    "umfang": "301-500",
-    "seiten": "416",
-    "genre": "Roman",
-    "sprache": "Englisch",
-    "format": "Softcover",
-    "status": "SuB",
-    "verlag": "Piper",
-    "cover": "als-die-welt-zerbrach.jpg"
     },
 
     {
@@ -224,22 +192,6 @@
     "status": "SuB",
     "verlag": "btb",
     "cover": "bitterer-zucker.jpg"
-    },
-
-    {
-    "isbn": "978-3-7558-0582-3, 9783755805823",
-    "title": "Botanik des Wahnsinns",
-    "author": "Leon Engler",
-    "poc": "Nein",
-    "gender": "Männlich",
-    "umfang": "bis 300",
-    "seiten": "208",
-    "genre": "Roman",
-    "sprache": "Deutsch",
-    "format": "Softcover",
-    "status": "Neuzugang",
-    "verlag": "Dumont",
-    "cover": "botanik-des-wahnsinns.jpg"
     },
 
     {
@@ -1463,22 +1415,6 @@
     },
 
     {
-      "isbn": "978-3-7466-3584-2, 9783746635842",
-      "title": "Grace und die Anmut der Liebe",
-      "author": "Sophie Benedict",
-      "poc": "Nein",
-      "gender": "Weiblich",
-      "umfang": "301-500",
-      "seiten": "400",
-      "genre": "Roman",
-      "sprache": "Deutsch",
-      "format": "Softcover",
-      "status": "SuB",
-      "verlag": "ATB/Aufbau/RL/Blumenbar",
-      "cover": "grace-und-die-anmut-der-liebe.jpg"
-    },
-
-    {
       "isbn": "978-3-423-14264-9, 9783423142649",
       "title": "Große Erwartungen",
       "author": "Charles Dickens",
@@ -1636,22 +1572,6 @@
       "status": "SuB",
       "verlag": "Suhrkamp",
       "cover": "im-menschen-muss-alles-herrlich-sein.jpg"
-    },
-
-    {
-      "isbn": "978-3-462-04632-8, 9783462046328",
-      "title": "Im Westen nichts Neues",
-      "author": "Erich Maria Remarque",
-      "poc": "Nein",
-      "gender": "Männlich",
-      "umfang": "301-500",
-      "seiten": "464",
-      "genre": "Roman",
-      "sprache": "Deutsch",
-      "format": "Softcover",
-      "status": "SuB",
-      "verlag": "KiWi",
-      "cover": "im-westen-nichts-neues.jpg"
     },
 
     {
@@ -2089,22 +2009,6 @@
     },
 
     {
-      "isbn": "978-3-257-24788-6, 9783257247886",
-      "title": "Melody",
-      "author": "Martin Suter",
-      "poc": "Ja",
-      "gender": "Männlich",
-      "umfang": "301-500",
-      "seiten": "336",
-      "genre": "Roman",
-      "sprache": "Deutsch",
-      "format": "Softcover",
-      "status": "SuB",
-      "verlag": "Diogenes",
-      "cover": "melody.jpg"
-    },
-
-    {
       "isbn": "978-3-7530-0080-0, 9783753000800",
       "title": "Memphis",
       "author": "Tara M. Stringfellow",
@@ -2118,22 +2022,6 @@
       "status": "SuB",
       "verlag": "Ecco",
       "cover": "memphis.jpg"
-    },
-
-    {
-      "isbn": "978-3-641-29260-7, 9783641292607",
-      "title": "Miss Bly und die Wette gegen Jules Verne",
-      "author": "Eva-Maria Bast",
-      "poc": "Nein",
-      "gender": "Weiblich",
-      "umfang": "301-500",
-      "seiten": "416",
-      "genre": "Roman",
-      "sprache": "Deutsch",
-      "format": "Softcover",
-      "status": "SuB",
-      "verlag": "Blanvalet",
-      "cover": "miss-bly-jules-vernes.jpg"
     },
 
     {
@@ -2279,22 +2167,6 @@
       "status": "Neuzugang",
       "verlag": "Diogenes",
       "cover": "paradise-garden.jpg"
-    },
-
-    {
-      "isbn": "978-3-86391-466-0, 9783863914660",
-      "title": "Parasiti",
-      "author": "Alisha Gamisch",
-      "poc": "Nein",
-      "gender": "Weiblich",
-      "umfang": "bis 300",
-      "seiten": "200",
-      "genre": "Roman ",
-      "sprache": "Deutsch",
-      "format": "Hardcover",
-      "status": "Neuzugang",
-      "verlag": "Voland & Quist",
-      "cover": "parasiti.jpg"
     },
 
     {
