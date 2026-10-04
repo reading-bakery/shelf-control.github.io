@@ -355,6 +355,71 @@
     },
 
     {
+    "isbn": "978-3-98585-295-6, 9783985852956",
+    "title": "Der gefrorene Fluss",
+    "author": "Ariel Lawhon",
+    "poc": "Nein",
+    "gender": "Weiblich",
+    "umfang": "301-500",
+    "seiten": "496",
+    "genre": "Roman",
+    "sprache": "Englisch",
+    "format": "eBook",
+    "status": "Neuzugang",
+    "verlag": "Adrian Verlag",
+    "cover": "der-gefrorene-fluss.jpg"
+    },
+
+    {
+    "isbn": "978-3-69045-022-5, 9783690450225",
+    "title": "Seltsame Sally Diamond",
+    "author": "Liz Nugent",
+    "poc": "Nein",
+    "gender": "Weiblich",
+    "umfang": "301-500",
+    "seiten": "400",
+    "genre": "Roman",
+    "sprache": "Englisch",
+    "format": "eBook",
+    "status": "Neuzugang",
+    "verlag": "Gutkind",
+    "cover": "seltsame-sally-diamond.jpg"
+    },
+
+    {
+    "isbn": "978-3-328-60461-7, 9783328604617",
+    "title": "Malacarne",
+    "author": "Beatrice Salvioni",
+    "poc": "Nein",
+    "gender": "Weiblich",
+    "umfang": "ab 501",
+    "seiten": "512",
+    "genre": "Roman",
+    "sprache": "Italienisch",
+    "format": "eBook",
+    "status": "Neuzugang",
+    "verlag": "Penguin",
+    "cover": "malacarne.jpg"
+    },
+
+    {
+    "isbn": "978-1-80494-607-7, 9781804946077",
+    "title": "Greta & Valdin",
+    "author": "Rebecca K. Reilly",
+    "poc": "Nein",
+    "gender": "Weiblich",
+    "umfang": "301-500",
+    "seiten": "336",
+    "genre": "Roman",
+    "sprache": "Englisch Original",
+    "format": "eBook",
+    "status": "Neuzugang",
+    "verlag": "Penguin",
+    "cover": "greta-and-valdin.jpg"
+    },
+
+
+    {
     "isbn": "978-3-426-65449-1, 9783426654491",
     "title": "Das Gold der Krähen",
     "author": "Leigh Bardugo",
