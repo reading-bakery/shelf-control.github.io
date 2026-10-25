@@ -257,6 +257,23 @@
     "verlag": "Sonstiges",
     "cover": "bye-bye-lolita.jpg"
     },
+
+    {
+    "isbn": "978-3-7632-7354-6, 9783763273546",
+    "title": "Das Archiv der Träume",
+    "author": "Carmen Maria Machado",
+    "poc": "Nein",
+    "gender": "Weiblich",
+    "umfang": "301-500",
+    "seiten": "336",
+    "genre": "Roman",
+    "sprache": "Englisch",
+    "format": "Softcover",
+    "status": "Neuzugang",
+    "verlag": "Büchergilde",
+    "cover": "das-archiv-der-traeume.jpg"
+    },
+    
     
     {
     "isbn": "978-3-442-77144-8, 9783442771448",
@@ -2538,6 +2555,22 @@
       "verlag": "Hanser",
       "cover": "suess.jpg"
     },
+
+    {
+      "isbn": "978-3-7632-7363-8, 9783763273638",
+      "title": "Tell",
+      "author": "Joachim B. Schmidt",
+      "poc": "Nein",
+      "gender": "Männlich",
+      "umfang": "bis 300",
+      "seiten": "288",
+      "genre": "Thriller/Krimi",
+      "sprache": "Deutsch",
+      "format": "Hardcover",
+      "status": "Neuzugang",
+      "verlag": "Büchergilde",
+      "cover": "tell.jpg"
+    },    
    
     {
       "isbn": "978-0-241-37694-2, 9780241376942",
@@ -3039,6 +3072,23 @@
   "verlag": "dtv",
   "cover": "die-bagage.jpg"
   },
+
+  {
+  "isbn": "978-3-7632-7117-7, 9783763271177", 
+  "title": "Licht",
+  "author": "T. C. Boyle",
+  "poc": "Nein",
+  "gender": "Männlich",
+  "umfang": "301-500",
+  "seiten": "384",
+  "genre": "Roman",
+  "sprache": "Englisch",
+  "format": "Hardcover",
+  "status": "Neuzugang",
+  "verlag": "Büchergilde",
+  "cover": "licht.jpg"
+  },
+
 
   {
   "isbn": "978-3-423-14879-5, 9783423148795", 
