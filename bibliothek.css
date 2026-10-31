@@ -56,14 +56,15 @@ h2 {
 
 .shelf-row {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center; /* Zentriert Bücher und Deko auf dem Regal für Symmetrie */
     align-items: flex-end;
-    gap: 15px; /* Etwas Platz zwischen den Büchern, damit nichts überlappt */
+    gap: 12px; /* Gleichmäßiger Abstand zwischen den Buchrücken */
     padding: 30px 20px 0 20px; /* Oben Platz lassen für das sanfte Herausgleiten */
     position: relative;
     margin-bottom: 50px;
     min-height: 230px;
     flex-wrap: wrap;
+    text-align: center;
 }
 
 /* 3D Regalboden-Effekt */
@@ -95,7 +96,7 @@ h2 {
 /* Buch-Card (steht fest im Regal, kein Overlay) */
 .book-card {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Normale Bücher bleiben unten */
     cursor: pointer;
     width: 42px;
     height: 190px;
@@ -138,7 +139,7 @@ h2 {
     text-align: center;
 }
 
-/* Cover-Ansicht: Gleitet mit einer SOFTEN Animation sanft nach oben (ohne Overlay auf Nachbarbücher) */
+/* Cover-Ansicht: Gleitet mit einer SOFTEN Animation sanft nach oben */
 .book-cover-container {
     position: absolute;
     bottom: 0;
@@ -153,14 +154,12 @@ h2 {
     
     opacity: 0;
     pointer-events: none;
-    /* Sehr softe, harmonische Übergänge */
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 100;
+    z-index: 100; /* Cover fährt auf z-index 100 hoch */
 }
 
 .book-card:hover .book-cover-container {
     opacity: 1;
-    /* Gleitet weich nach oben heraus und skaliert elegant */
     transform: translateX(-50%) translateY(-25px) scale(1);
     pointer-events: auto;
 }
@@ -193,6 +192,66 @@ h2 {
 
 .format-badge.print {
     background: rgba(244, 180, 186, 0.95);
+}
+
+/* Dekoration 1 (z. B. Pflanze) direkt auf dem Regalboden */
+.deko-card {
+    position: relative;
+    z-index: 150; /* Erhöht, damit es ÜBER dem hochfahrenden Buchcover (z-index 100) steht */
+    height: 190px;
+    display: flex;
+    align-items: flex-end;
+    margin: 0 6px;
+    pointer-events: none; /* Verhindert, dass die Deko Hover-Events von Büchern dahinter schluckt */
+}
+
+.deko-container {
+    width: 90px; 
+    height: 170px; 
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+}
+
+.deko-container img {
+    height: 140%; 
+    max-width: none;
+    object-fit: contain;
+    position: relative;
+    bottom: -5px; 
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
+}
+
+/* Dekoration 2 (z. B. Tute) mit negativem Bottom-Versatz */
+.deko2-card {
+    position: relative;
+    z-index: 150; /* Erhöht, damit es ÜBER dem hochfahrenden Buchcover (z-index 100) steht */
+    height: 190px;
+    display: flex;
+    align-items: flex-end;
+    margin: 0 6px;
+    pointer-events: none; /* Verhindert, dass die Deko Hover-Events von Büchern dahinter schluckt */
+}
+
+.deko2-container {
+    width: 90px; 
+    height: 190px; 
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+}
+
+.deko2-container img {
+    height: 140%; 
+    max-width: none;
+    object-fit: contain;
+    position: relative;
+    bottom: -144px; /* Unverändert */
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
 }
 
 /* Responsive Anpassungen */

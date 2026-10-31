@@ -16,6 +16,11 @@
 "cover": "agatha-christie.jpg"
 },
 {
+"title": "farn",
+"format": "Deko",
+"cover": "farn.png"
+},
+{
 "title": "Agatha",
 "format": "Physisch",
 "cover": "agatha.jpg"
@@ -156,6 +161,11 @@
 "cover": "bye-bye-lolita.jpg"
 },
 {
+"title": "Tute",
+"format": "Deko2",
+"cover": "tute.png"
+},
+{
 "title": "City of Girls",
 "format": "Physisch",
 "cover": "city-of-girls.jpg"
@@ -241,6 +251,11 @@
 "cover": "das-leben-nach-boo.jpg"
 },
 {
+"title": "Monstera",
+"format": "Deko",
+"cover": "monstera.png"
+},
+{
 "title": "Das Leben vor uns",
 "format": "Physisch",
 "cover": "das-leben-vor-uns.jpg"
@@ -306,6 +321,11 @@
 "cover": "das-weibliche-prinzip.jpg"
 },
 {
+"title": "Bogenhanf",
+"format": "Deko",
+"cover": "bogenhanf.png"
+},
+{
 "title": "Das Wohlbefinden",
 "format": "Physisch",
 "cover": "das-wohlbefinden.jpg"
@@ -349,6 +369,11 @@
 "title": "Der Gott des Waldes",
 "format": "Physisch",
 "cover": "der-gott-des-waldes.jpg"
+},
+{
+"title": "Perpetonia",
+"format": "Deko",
+"cover": "perpetonia.png"
 },
 {
 "title": "Der große Fehler",
@@ -416,6 +441,11 @@
 "cover": "die-bienenhueterin.jpg"
 },
 {
+"title": "Buquet",
+"format": "Deko",
+"cover": "buquet.png"
+},
+{
 "title": "Die Briefeschreiberin",
 "format": "Physisch",
 "cover": "die-briefeschreiberin.jpg"
@@ -454,6 +484,11 @@
 "title": "Die Forscherin",
 "format": "Physisch",
 "cover": "die-forscherin.jpg"
+},
+{
+"title": "Sonnenblume",
+"format": "Deko",
+"cover": "sonnenblume.png"
 },
 {
 "title": "Die Frau als Mensch",
