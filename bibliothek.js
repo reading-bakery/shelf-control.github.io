@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const bookshelfWrapper = document.getElementById('bookshelfWrapper');
     const tabButtons = document.querySelectorAll('.tab-btn');
+    const searchInput = document.getElementById('searchInput');
     let allItems = [];
 
-    // Ausgewogene Mischung aus hellen Basistönen und kräftigen, harmonischen Farbverläufen für perfekte Lesbarkeit
+    // 17 verschiedene Farben/Verläufe für die Buchrücken (Mischung aus hell und kräftig)
     const spineColors = [
         "linear-gradient(135deg, #d65d85 0%, #a23b5f 100%)", // 1. Sanftes Rosa-Pink
         "linear-gradient(135deg, #a1dbd8 0%, #587371 100%)", // 2. Helles Mint-Türkis
@@ -32,26 +33,55 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Fehler beim Laden der Bibliothek:', error));
 
+    // Tab-Filter-Logik
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
             tabButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-
-            const filter = button.getAttribute('data-filter');
-            if (filter === 'all') {
-                renderBookshelf(allItems);
-            } else {
-                const filtered = allItems.filter(item => {
-                    const format = item.format ? item.format.toLowerCase() : '';
-                    if (filter === 'Print') {
-                        return format !== 'ebook' && format !== 'deko' && format !== 'deko2';
-                    }
-                    return format === filter.toLowerCase();
-                });
-                renderBookshelf(filtered, true);
-            }
+            applyFilters();
         });
     });
+
+    // Suchleisten-Logik
+    if (searchInput) {
+        searchInput.addEventListener('input', applyFilters);
+    }
+
+    // Kombinierter Filter- und Suchprozess
+    function applyFilters() {
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        const activeTab = document.querySelector('.tab-btn.active');
+        const filter = activeTab ? activeTab.getAttribute('data-filter') : 'all';
+
+        const filtered = allItems.filter(item => {
+            const format = item.format ? item.format.toLowerCase() : '';
+            const title = item.title ? item.title.toLowerCase() : '';
+            const author = item.author ? item.author.toLowerCase() : '';
+            const isDeko = format === 'deko' || format === 'deko2';
+
+            // Filter nach Tab/Kategorie
+            let matchesTab = true;
+            if (filter === 'Print') {
+                matchesTab = format !== 'ebook' && !isDeko;
+            } else if (filter === 'eBook') {
+                matchesTab = format === 'ebook';
+            } else if (filter === 'sub') {
+                // SuB: Ungelesen (read === false oder nicht definiert)
+                matchesTab = !isDeko && (item.read === false || item.read === undefined);
+            }
+
+            // Filter nach Suchtext
+            const matchesSearch = title.includes(query) || author.includes(query);
+
+            if (query.length > 0 && isDeko) return false; // Deko bei gezielter Suche ausblenden
+
+            return matchesTab && matchesSearch;
+        });
+
+        // isFiltered = true deaktiviert bei aktiver Suche/Filterung die Deko-Einschübe
+        const isFiltered = filter !== 'all' || query.length > 0;
+        renderBookshelf(filtered, isFiltered);
+    }
 
     function renderBookshelf(items, isFiltered = false) {
         bookshelfWrapper.innerHTML = '';
@@ -176,8 +206,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="format-badge ${badgeClass}">${formatLabel}</span>
                 </div>
             `;
+
+            // Klick-Event für das Detail-Modal
+            itemCard.addEventListener('click', () => {
+                const modal = document.getElementById('bookModal');
+                const modalCover = document.getElementById('modalCover');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalFormat = document.getElementById('modalFormat');
+
+                if (modal) {
+                    modalCover.src = imagePath;
+                    modalTitle.textContent = item.title;
+                    modalFormat.textContent = formatLabel;
+                    modal.style.display = 'flex';
+                }
+            });
         }
 
         return itemCard;
     }
+
+    // Modal Schließen-Event
+    document.addEventListener('click', (e) => {
+        const modal = document.getElementById('bookModal');
+        if (modal && (e.target.classList.contains('close-modal') || e.target === modal)) {
+            modal.style.display = 'none';
+        }
+    });
 });

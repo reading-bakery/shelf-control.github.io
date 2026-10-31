@@ -10,19 +10,28 @@
 
 h2 {
     font-family: "Bebas Neue", sans-serif;
-    font-size: 3rem;
-    letter-spacing: 2px;
+    font-size: 3.5rem;
     text-align: center;
-    margin-bottom: 2rem;
+    letter-spacing: 2px;
+    margin-top: 0;
+    margin-bottom: 25px;
     color: khaki;
 }
 
-/* Filter Tabs passend zum Design */
+/* Filter Container & Suchleiste */
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
 .filter-tabs {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 40px;
+    flex-wrap: wrap;
 }
 
 .tab-btn {
@@ -46,6 +55,30 @@ h2 {
     font-weight: bold;
 }
 
+.search-box {
+    width: 100%;
+    max-width: 450px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 18px;
+    border-radius: 20px;
+    border: 2px solid whitesmoke;
+    background: rgba(255, 255, 255, 0.05);
+    color: whitesmoke;
+    font-family: "Dosis", sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.search-box input:focus {
+    border-color: rgb(224, 224, 87);
+    background: rgba(255, 255, 255, 0.1);
+}
+
 /* Regalsystem */
 .bookshelf-wrapper {
     width: 100%;
@@ -55,10 +88,10 @@ h2 {
 
 .shelf-row {
     display: flex;
-    justify-content: center; /* Zentriert Bücher und Deko auf dem Regal für Symmetrie */
+    justify-content: center;
     align-items: flex-end;
-    gap: 12px; /* Gleichmäßiger Abstand zwischen den Buchrücken */
-    padding: 50px 20px 0 20px; /* Platz nach oben für die sanfte Anhebung */
+    gap: 12px;
+    padding: 50px 20px 0 20px;
     position: relative;
     margin-bottom: 50px;
     min-height: 230px;
@@ -103,7 +136,6 @@ h2 {
     width: 42px;
     height: 190px;
     perspective: 1000px;
-    /* Weicher Übergang für das Zur-Seite-Schieben aller Elemente */
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -117,17 +149,6 @@ h2 {
     transform: translateX(45px);
 }
 
-/* Wenn eine Deko neben dem gehoverten Buch steht, wird auch sie weich geschoben */
-.shelf-row:has(.book-card:hover) .deko-card:has(+ .book-card:hover),
-.shelf-row:has(.book-card:hover) .deko2-card:has(+ .book-card:hover) {
-    transform: translateX(-45px);
-}
-.book-card:hover + .deko-card,
-.book-card:hover + .deko2-card {
-    transform: translateX(45px);
-}
-
-/* Buchrücken-Ansicht */
 /* Buchrücken-Ansicht */
 .book-spine {
     width: 100%;
@@ -143,7 +164,6 @@ h2 {
     transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
-/* Buchrücken blendet leicht aus, wenn das Cover hervorgleitet */
 .book-card:hover .book-spine {
     filter: brightness(1.1);
     opacity: 0.3;
@@ -191,8 +211,6 @@ h2 {
     transform: translateX(-50%) scale(1);
     pointer-events: auto;
 }
-
-
 
 .book-cover {
     width: 100%;
@@ -288,6 +306,81 @@ h2 {
     filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
 }
 
+/* =========================================================
+   DETAIL MODAL
+   ========================================================= */
+
+.book-modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #2a2a2a;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 90%;
+    display: flex;
+    gap: 25px;
+    position: relative;
+    color: whitesmoke;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.modal-content img {
+    width: 130px;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.modal-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-info h3 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 2rem;
+    color: khaki;
+    margin: 0;
+}
+
+.modal-notes textarea {
+    width: 100%;
+    height: 80px;
+    background: #1f1f1f;
+    border: 1px solid #444;
+    color: whitesmoke;
+    border-radius: 4px;
+    padding: 8px;
+    resize: none;
+    font-family: 'Dosis', sans-serif;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: whitesmoke;
+    transition: color 0.2s;
+}
+
+.close-modal:hover {
+    color: rgb(224, 224, 87);
+}
+
 /* Responsive Anpassungen */
 @media (max-width: 740px) {
     .library-container {
@@ -298,6 +391,12 @@ h2 {
     .shelf-row {
         justify-content: center;
         gap: 10px;
+    }
+
+    .modal-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 }
 
