@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const format = item.format ? item.format.toLowerCase() : '';
             const sprache = item.sprache ? item.sprache.toLowerCase() : '';
             const title = item.title ? item.title.toLowerCase() : '';
-            const author = item.author ? item.author.toLowerCase() : '';
+            const autor = item.autor ? item.autor.toLowerCase() : '';
             const isDeko = format === 'deko' || format === 'deko2';
 
             let matchesTab = true;
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 matchesTab = sprache === 'original' && !isDeko;
             }
 
-            const matchesSearch = title.includes(query) || author.includes(query);
+            const matchesSearch = title.includes(query) || autor.includes(query);
 
             if (query.length > 0 && isDeko) return false;
 
