@@ -1,4 +1,37 @@
-[
-  "adams-erbe.jpg",
-    "after-the-fire.jpg"
+{
+  "books": [
+    {
+      "title": "A Dark and Secret Magic",
+      "format": "eBook",
+      "cover": "a-dark-and-secret-magic.jpg"
+    },
+
+     {
+      "title": "Die Wand",
+      "format": "Physisch",
+      "cover": "die-wand.jpg"
+    },
+    {
+      "title": "Vatermal",
+      "format": "Physisch",
+      "cover": "vatermal.jpg"
+    },
+    {
+      "title": "Halb wach",
+      "format": "Physisch",
+      "cover": "halb-wach.jpg"
+    },
+    {
+      "title": "Lazar",
+      "format": "Physisch",
+      "cover": "lazar.jpg"
+    },
+    {
+      "title": "Tyll",
+      "format": "Physisch",
+      "cover": "tyll.jpg"
+    }
+
+
 ]
+}

@@ -1,0 +1,215 @@
+/* Hauptcontainer im Stil deiner Wishlist / Dark-Theme */
+.library-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background-color: #1f1f1f;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3.5rem;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: whitesmoke;
+}
+
+/* Filter Tabs passend zum Design */
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: 2px solid whitesmoke;
+    padding: 8px 22px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: whitesmoke;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active, 
+.tab-btn:hover {
+    background-color: rgb(224, 224, 87);
+    color: black;
+    border-color: rgb(224, 224, 87);
+    font-weight: bold;
+}
+
+/* Regalsystem */
+.bookshelf-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 20px;
+}
+
+.shelf-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 15px; /* Etwas Platz zwischen den Büchern, damit nichts überlappt */
+    padding: 30px 20px 0 20px; /* Oben Platz lassen für das sanfte Herausgleiten */
+    position: relative;
+    margin-bottom: 50px;
+    min-height: 230px;
+    flex-wrap: wrap;
+}
+
+/* 3D Regalboden-Effekt */
+.shelf-row::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    right: 0;
+    height: 16px;
+    background: linear-gradient(90deg, #2b1d18 0%, #3e2723 50%, #2b1d18 100%);
+    border-radius: 2px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.shelf-row::before {
+    content: '';
+    position: absolute;
+    bottom: -22px;
+    left: 5px;
+    right: 5px;
+    height: 8px;
+    background: #170e0b;
+    border-radius: 0 0 4px 4px;
+    z-index: 0;
+}
+
+/* Buch-Card (steht fest im Regal, kein Overlay) */
+.book-card {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    width: 42px;
+    height: 190px;
+    perspective: 1000px;
+}
+
+/* Buchrücken-Ansicht */
+.book-spine {
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 3px 6px 6px 3px;
+    box-shadow: -2px 2px 6px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 2px;
+    box-sizing: border-box;
+    transition: filter 0.3s ease;
+}
+
+.book-card:hover .book-spine {
+    filter: brightness(1.08);
+}
+
+/* Titel auf dem Buchrücken: Nach links gedreht */
+.spine-title {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: rotate(1800deg);
+    color: #2b2b2b;
+    font-family: "Dosis", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 170px;
+    text-align: center;
+}
+
+/* Cover-Ansicht: Gleitet mit einer SOFTEN Animation sanft nach oben (ohne Overlay auf Nachbarbücher) */
+.book-cover-container {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(0) scale(0.9);
+    width: 130px;
+    height: 190px;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #2a2a2a;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    
+    opacity: 0;
+    pointer-events: none;
+    /* Sehr softe, harmonische Übergänge */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+}
+
+.book-card:hover .book-cover-container {
+    opacity: 1;
+    /* Gleitet weich nach oben heraus und skaliert elegant */
+    transform: translateX(-50%) translateY(-25px) scale(1);
+    pointer-events: auto;
+}
+
+.book-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Format-Badges */
+.format-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    color: #333;
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-family: "Dosis", sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.format-badge.ebook {
+    background: rgba(163, 228, 215, 0.95);
+}
+
+.format-badge.print {
+    background: rgba(244, 180, 186, 0.95);
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 740px) {
+    .library-container {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .shelf-row {
+        justify-content: center;
+        gap: 10px;
+    }
+}
+
+@media (min-width: 1400px) {
+    h2 {
+        font-size: 5rem;
+    }
+}
