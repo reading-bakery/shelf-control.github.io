@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     let allItems = [];
 
-    // 17 verschiedene Farben/Verläufe für die Buchrücken (Mischung aus hell und kräftig)
+    // 17 verschiedene Farben/Verläufe für die Buchrücken
     const spineColors = [
         "linear-gradient(135deg, #d65d85 0%, #a23b5f 100%)", // 1. Sanftes Rosa-Pink
         "linear-gradient(135deg, #a1dbd8 0%, #587371 100%)", // 2. Helles Mint-Türkis
@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Fehler beim Laden der Bibliothek:', error));
 
-    // Tab-Filter-Logik
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
             tabButtons.forEach(btn => btn.classList.remove('active'));
@@ -42,12 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Suchleisten-Logik
     if (searchInput) {
         searchInput.addEventListener('input', applyFilters);
     }
 
-    // Kombinierter Filter- und Suchprozess
     function applyFilters() {
         const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
         const activeTab = document.querySelector('.tab-btn.active');
@@ -59,31 +56,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const author = item.author ? item.author.toLowerCase() : '';
             const isDeko = format === 'deko' || format === 'deko2';
 
-            // Filter nach Tab/Kategorie
             let matchesTab = true;
             if (filter === 'Print') {
                 matchesTab = format !== 'ebook' && !isDeko;
             } else if (filter === 'eBook') {
                 matchesTab = format === 'ebook';
-            } else if (filter === 'sub') {
-                // SuB: Ungelesen (read === false oder nicht definiert)
-                matchesTab = !isDeko && (item.read === false || item.read === undefined);
             }
 
-            // Filter nach Suchtext
             const matchesSearch = title.includes(query) || author.includes(query);
 
-            if (query.length > 0 && isDeko) return false; // Deko bei gezielter Suche ausblenden
+            if (query.length > 0 && isDeko) return false;
 
             return matchesTab && matchesSearch;
         });
 
-        // isFiltered = true deaktiviert bei aktiver Suche/Filterung die Deko-Einschübe
-        const isFiltered = filter !== 'all' || query.length > 0;
-        renderBookshelf(filtered, isFiltered);
+        const isSearchActive = query.length > 0;
+        renderBookshelf(filtered, isSearchActive, isSearchActive);
     }
 
-    function renderBookshelf(items, isFiltered = false) {
+    function renderBookshelf(items, isFiltered = false, isSearchMode = false) {
         bookshelfWrapper.innerHTML = '';
 
         if (items.length === 0) {
@@ -91,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Trenne echte Bücher von Dekorationen
         const booksOnly = items.filter(item => {
             const fmt = item.format ? item.format.toLowerCase() : '';
             return fmt !== 'deko' && fmt !== 'deko2';
@@ -107,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "Tute", format: "Deko2", cover: "tute.png" }
         ];
 
-        // Ersten Deko-Einschub nach 7 Büchern, danach alle 23 Bücher
         const finalDisplayList = [];
         let bookCounter = 0;
         let decoIndex = 0;
@@ -125,14 +114,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Aufteilen auf Regalböden
-        const itemsPerShelf = 15;
-        let currentShelf = createShelfElement();
+        const itemsPerShelf = isSearchMode ? 12 : 15;
+        let currentShelf = createShelfElement(isSearchMode);
 
         finalDisplayList.forEach((item, index) => {
             if (index > 0 && index % itemsPerShelf === 0) {
                 bookshelfWrapper.appendChild(currentShelf);
-                currentShelf = createShelfElement();
+                currentShelf = createShelfElement(isSearchMode);
             }
 
             const randomColor = spineColors[index % spineColors.length];
@@ -143,9 +131,12 @@ document.addEventListener('DOMContentLoaded', () => {
         bookshelfWrapper.appendChild(currentShelf);
     }
 
-    function createShelfElement() {
+    function createShelfElement(isSearchMode = false) {
         const shelf = document.createElement('div');
         shelf.classList.add('shelf-row');
+        if (isSearchMode) {
+            shelf.classList.add('search-mode');
+        }
         return shelf;
     }
 
@@ -207,7 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
 
-            // Klick-Event für das Detail-Modal
             itemCard.addEventListener('click', () => {
                 const modal = document.getElementById('bookModal');
                 const modalCover = document.getElementById('modalCover');
@@ -226,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return itemCard;
     }
 
-    // Modal Schließen-Event
     document.addEventListener('click', (e) => {
         const modal = document.getElementById('bookModal');
         if (modal && (e.target.classList.contains('close-modal') || e.target === modal)) {

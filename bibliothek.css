@@ -79,10 +79,11 @@ h2 {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* Regalsystem */
+/* Regalsystem - Scrollbar entfernen */
 .bookshelf-wrapper {
     width: 100%;
-    overflow-x: auto;
+    overflow-x: hidden; /* Verhindert das horizontale Scrollen und blendet die Scrollbar aus */
+    overflow-y: hidden; /* Verhindert das vertikale Scrollen und blendet die Scrollbar aus */
     padding-bottom: 20px;
 }
 
@@ -136,16 +137,15 @@ h2 {
     width: 42px;
     height: 190px;
     perspective: 1000px;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s ease;
 }
 
-/* 1. ALLE Elemente VOR dem gehoverten Element nach LINKS schieben */
-.shelf-row:has(.book-card:hover) > :has(~ .book-card:hover) {
+/* Standard-Animationen im Regalmodus */
+.shelf-row:not(.search-mode):has(.book-card:hover) > :has(~ .book-card:hover) {
     transform: translateX(-45px);
 }
 
-/* 2. ALLE Elemente NACH dem gehoverten Element nach RECHTS schieben */
-.shelf-row > .book-card:hover ~ * {
+.shelf-row:not(.search-mode) > .book-card:hover ~ * {
     transform: translateX(45px);
 }
 
@@ -186,7 +186,7 @@ h2 {
     text-align: center;
 }
 
-/* Cover-Ansicht: Fest auf dem Regal verankert und wächst nach oben */
+/* Cover-Ansicht (Standard-Hover) */
 .book-cover-container {
     position: absolute;
     bottom: 0;
@@ -210,6 +210,40 @@ h2 {
     opacity: 1;
     transform: translateX(-50%) scale(1);
     pointer-events: auto;
+}
+
+/* =========================================================
+   SUCH-MODUS: FRONTCOVER FEST AUF DEM REGAL STEHEN
+   ========================================================= */
+
+.shelf-row.search-mode {
+    gap: 15px;
+}
+
+.shelf-row.search-mode .book-card {
+    width: 130px;
+    margin: 10px 0;
+}
+
+.shelf-row.search-mode .book-spine {
+    display: none !important;
+}
+
+.shelf-row.search-mode .book-cover-container {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    transform-origin: bottom center !important;
+    transform: translateX(-50%) scale(1) !important;
+    width: 130px !important;
+    height: 190px !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 10 !important;
+}
+
+.shelf-row.search-mode .book-card:hover .book-cover-container {
+    transform: translateX(-50%) scale(1.05) !important;
 }
 
 .book-cover {
