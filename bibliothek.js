@@ -84,7 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const booksOnly = items.filter(item => {
             const fmt = item.format ? item.format.toLowerCase() : '';
-            return fmt !== 'deko' && fmt !== 'deko2';
+            const isBook = fmt !== 'deko' && fmt !== 'deko2';
+            const hasTitle = item.title && item.title.trim() !== '';
+            return isBook && hasTitle;
         });
 
         const decoOnly = items.filter(item => {
@@ -106,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
             bookCounter++;
 
             if (!isFiltered) {
-                if (bookCounter === 7 || (bookCounter > 7 && (bookCounter - 7) % 23 === 0)) {
+                if (bookCounter === 11 || (bookCounter > 11 && (bookCounter - 11) % 23 === 0)) {
                     const currentDeco = defaultDecos[decoIndex % defaultDecos.length];
                     finalDisplayList.push(currentDeco);
                     decoIndex++;
@@ -114,11 +116,35 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        const itemsPerShelf = isSearchMode ? 12 : 15;
+        // Bestimmung der Elemente pro Regal: Das erste Regal hat 10, alle weiteren 15 (bzw. im Suchmodus 8 und 12)
+        const firstShelfLimit = isSearchMode ? 8 : 10;
+        const subsequentShelfLimit = isSearchMode ? 12 : 15;
+
         let currentShelf = createShelfElement(isSearchMode);
 
+        // Retro Flip-Clock Zähler oben auf dem ersten Regalboden einfügen
+        const countBadge = document.createElement('div');
+        countBadge.classList.add('flip-counter-container');
+        
+        const countStr = String(booksOnly.length);
+        let digitsHtml = '';
+        for (let i = 0; i < countStr.length; i++) {
+            digitsHtml += `<div class="flip-card">${countStr[i]}</div>`;
+        }
+
+        countBadge.innerHTML = `
+            <div style="display: flex; gap: 4px;">${digitsHtml}</div>
+            <span class="flip-label">Bücher</span>
+        `;
+        currentShelf.appendChild(countBadge);
+
         finalDisplayList.forEach((item, index) => {
-            if (index > 0 && index % itemsPerShelf === 0) {
+            // Prüfen, wann ein neues Regal begonnen werden muss
+            // Das erste Regal bricht nach 'firstShelfLimit' ab, die danach nach 'subsequentShelfLimit'
+            const isFirstShelfFull = (index === firstShelfLimit);
+            const isSubsequentShelfFull = (index > firstShelfLimit) && ((index - firstShelfLimit) % subsequentShelfLimit === 0);
+
+            if (isFirstShelfFull || isSubsequentShelfFull) {
                 bookshelfWrapper.appendChild(currentShelf);
                 currentShelf = createShelfElement(isSearchMode);
             }
