@@ -3,16 +3,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabButtons = document.querySelectorAll('.tab-btn');
     let allItems = [];
 
-    // Neue Farbpalette aus deinen Bildern (abwechselnde Verläufe für die Buchrücken)
+    // Ausgewogene Mischung aus hellen Basistönen und kräftigen, harmonischen Farbverläufen für perfekte Lesbarkeit
     const spineColors = [
-        "linear-gradient(135deg, #F6BD60 0%, #F7EDE2 100%)", // Palette 1: Gelb zu Cremeweiß[cite: 17]
-        "linear-gradient(135deg, #F5CAC3 0%, #84A59D 100%)", // Palette 1: Altrosa zu Salbeigrün[cite: 17]
-        "linear-gradient(135deg, #F28482 0%, #F6BD60 100%)", // Palette 1: Koralle zu Gelb[cite: 17]
-        "linear-gradient(135deg, #0b4f6c 0%, #39739d 100%)", // Palette 2: Tiefes Ozeanblau zu Hellblau[cite: 18]
-        "linear-gradient(135deg, #e3c4b5 0%, #c18559 100%)", // Palette 2: Sandfarben zu Ocker[cite: 18]
-        "linear-gradient(135deg, #e5a954 0%, #fbd19a 100%)", // Palette 3: Herbst-Gold zu hellem Pfirsich[cite: 19]
-        "linear-gradient(135deg, #d26a63 0%, #854252 100%)", // Palette 3: Rostrot zu Dunkelkirsche[cite: 19]
-        "linear-gradient(135deg, #718798 0%, #e5a954 100%)"  // Palette 3: Schiefergrau zu Gold[cite: 19]
+        "linear-gradient(135deg, #d65d85 0%, #a23b5f 100%)", // 1. Sanftes Rosa-Pink
+        "linear-gradient(135deg, #a1dbd8 0%, #587371 100%)", // 2. Helles Mint-Türkis
+        "linear-gradient(135deg, #ffd166 0%, #f4a261 100%)", // 3. Kräftiges Sonnen-Gelb zu Orange
+        "linear-gradient(135deg, #70758f 0%, #424e9e 100%)", // 4. Helles Lavendelblau
+        "linear-gradient(135deg, #e76f51 0%, #bc4749 100%)", // 5. Kräftiges Terrakotta zu Rostrot
+        "linear-gradient(135deg, #aebd9c 0%, #5e8235 100%)", // 6. Frisches Hellgrün
+        "linear-gradient(135deg, #2a9d8f 0%, #264653 100%)", // 7. Kräftiges Petrol zu Dunkelblau
+        "linear-gradient(135deg, #98815c 0%, #ac8347 100%)", // 8. Helles Vanille-Beige
+        "linear-gradient(135deg, #c783d1 0%, #522d59 100%)", // 9. Zartes Flieder-Lila
+        "linear-gradient(135deg, #d78769 0%, #783a25 100%)", // 10. Warmes Taupe / Braun-Grau
+        "linear-gradient(135deg, #da6779 0%, #c41628 100%)", // 11. Sehr helles Pastell-Koralle
+        "linear-gradient(135deg, #73989c 0%, #266e77 100%)", // 12. Helles Eisblau
+        "linear-gradient(135deg, #d3cb75 0%, #55512a 100%)", // 13. Cremiges Pastellgelb
+        "linear-gradient(135deg, #7f7393 0%, #5123a1 100%)", // 14. Kräftiges Lavendel-Violett
+        "linear-gradient(135deg, #688069 0%, #1b7d20 100%)", // 15. Saftiges Frühlingsgrün
+        "linear-gradient(135deg, #beaa8b 0%, #c38426 100%)", // 16. Kräftiges Bernstein-Orange
+        "linear-gradient(135deg, #889ca7 0%, #2076a0 100%)"  // 17. Edles Schiefer-Blau-Grau
     ];
 
     fetch('bibliothek.json')
@@ -52,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 1. Trenne echte Bücher von Dekorationen
+        // Trenne echte Bücher von Dekorationen
         const booksOnly = items.filter(item => {
             const fmt = item.format ? item.format.toLowerCase() : '';
             return fmt !== 'deko' && fmt !== 'deko2';
@@ -68,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "Tute", format: "Deko2", cover: "tute.png" }
         ];
 
-        // 2. Ersten Deko-Einschub nach 7 Büchern, danach alle 23 Bücher
+        // Ersten Deko-Einschub nach 7 Büchern, danach alle 23 Bücher
         const finalDisplayList = [];
         let bookCounter = 0;
         let decoIndex = 0;
@@ -86,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 3. Aufteilen auf Regalböden
+        // Aufteilen auf Regalböden
         const itemsPerShelf = 15;
         let currentShelf = createShelfElement();
 
