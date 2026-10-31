@@ -10,12 +10,11 @@
 
 h2 {
     font-family: "Bebas Neue", sans-serif;
-    font-size: 3.5rem;
-    text-align: center;
+    font-size: 3rem;
     letter-spacing: 2px;
-    margin-top: 0;
-    margin-bottom: 25px;
-    color: whitesmoke;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: khaki;
 }
 
 /* Filter Tabs passend zum Design */
@@ -59,7 +58,7 @@ h2 {
     justify-content: center; /* Zentriert Bücher und Deko auf dem Regal für Symmetrie */
     align-items: flex-end;
     gap: 12px; /* Gleichmäßiger Abstand zwischen den Buchrücken */
-    padding: 30px 20px 0 20px; /* Oben Platz lassen für das sanfte Herausgleiten */
+    padding: 50px 20px 0 20px; /* Platz nach oben für die sanfte Anhebung */
     position: relative;
     margin-bottom: 50px;
     min-height: 230px;
@@ -93,14 +92,39 @@ h2 {
     z-index: 0;
 }
 
-/* Buch-Card (steht fest im Regal, kein Overlay) */
+/* =========================================================
+   BUCH-CARD & SMOOTH-ANIMATIONEN
+   ========================================================= */
+
 .book-card {
     position: relative;
-    z-index: 2; /* Normale Bücher bleiben unten */
+    z-index: 2;
     cursor: pointer;
     width: 42px;
     height: 190px;
     perspective: 1000px;
+    /* Weicher Übergang für das Verschieben der Nachbarn */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 1. Nach links verschieben: Das Buch direkt VOR dem gehoverten Buch */
+.shelf-row:has(.book-card:hover) .book-card:has(+ .book-card:hover) {
+    transform: translateX(-45px);
+}
+
+/* 2. Nach rechts verschieben: Das Buch direkt NACH dem gehoverten Buch */
+.book-card:hover + .book-card {
+    transform: translateX(45px);
+}
+
+/* Wenn eine Deko neben dem gehoverten Buch steht, wird auch sie weich geschoben */
+.shelf-row:has(.book-card:hover) .deko-card:has(+ .book-card:hover),
+.shelf-row:has(.book-card:hover) .deko2-card:has(+ .book-card:hover) {
+    transform: translateX(-45px);
+}
+.book-card:hover + .deko-card,
+.book-card:hover + .deko2-card {
+    transform: translateX(45px);
 }
 
 /* Buchrücken-Ansicht */
@@ -115,18 +139,20 @@ h2 {
     justify-content: center;
     padding: 10px 2px;
     box-sizing: border-box;
-    transition: filter 0.3s ease;
+    transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
+/* Buchrücken blendet leicht aus, wenn das Cover hervorgleitet */
 .book-card:hover .book-spine {
-    filter: brightness(1.08);
+    filter: brightness(1.1);
+    opacity: 0.3;
 }
 
-/* Titel auf dem Buchrücken: Nach links gedreht */
+/* Titel auf dem Buchrücken */
 .spine-title {
     writing-mode: vertical-lr;
     text-orientation: mixed;
-    transform: rotate(1800deg);
+    transform: rotate(180deg);
     color: #2b2b2b;
     font-family: "Dosis", sans-serif;
     font-size: 0.8rem;
@@ -139,30 +165,34 @@ h2 {
     text-align: center;
 }
 
-/* Cover-Ansicht: Gleitet mit einer SOFTEN Animation sanft nach oben */
+/* Cover-Ansicht: Gleitet weich nach oben und überlagert die geschaffene Lücke */
+/* Cover-Ansicht: Fest auf dem Regal verankert und wächst nach oben */
 .book-cover-container {
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%) translateY(0) scale(0.9);
+    transform-origin: bottom center; /* Verankert die Unterkante fest auf dem Regalboden */
+    transform: translateX(-50%) scale(0.9);
     width: 130px;
     height: 190px;
     border-radius: 6px;
     overflow: hidden;
     background-color: #2a2a2a;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.7);
     
     opacity: 0;
     pointer-events: none;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 100; /* Cover fährt auf z-index 100 hoch */
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+    z-index: 100;
 }
 
 .book-card:hover .book-cover-container {
     opacity: 1;
-    transform: translateX(-50%) translateY(-25px) scale(1);
+    transform: translateX(-50%) scale(1); /* Bleibt exakt auf der Regalkante stehen */
     pointer-events: auto;
 }
+
+
 
 .book-cover {
     width: 100%;
@@ -194,15 +224,19 @@ h2 {
     background: rgba(244, 180, 186, 0.95);
 }
 
-/* Dekoration 1 (z. B. Pflanze) direkt auf dem Regalboden */
+/* =========================================================
+   DEKORATIONEN
+   ========================================================= */
+
 .deko-card {
     position: relative;
-    z-index: 150; /* Erhöht, damit es ÜBER dem hochfahrenden Buchcover (z-index 100) steht */
+    z-index: 150;
     height: 190px;
     display: flex;
     align-items: flex-end;
     margin: 0 6px;
-    pointer-events: none; /* Verhindert, dass die Deko Hover-Events von Büchern dahinter schluckt */
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .deko-container {
@@ -224,15 +258,15 @@ h2 {
     filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
 }
 
-/* Dekoration 2 (z. B. Tute) mit negativem Bottom-Versatz */
 .deko2-card {
     position: relative;
-    z-index: 150; /* Erhöht, damit es ÜBER dem hochfahrenden Buchcover (z-index 100) steht */
+    z-index: 150;
     height: 190px;
     display: flex;
     align-items: flex-end;
     margin: 0 6px;
-    pointer-events: none; /* Verhindert, dass die Deko Hover-Events von Büchern dahinter schluckt */
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .deko2-container {
@@ -250,7 +284,7 @@ h2 {
     max-width: none;
     object-fit: contain;
     position: relative;
-    bottom: -144px; /* Unverändert */
+    bottom: -144px; 
     filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
 }
 
