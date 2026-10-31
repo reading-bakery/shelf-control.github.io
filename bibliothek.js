@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const filtered = allItems.filter(item => {
             const format = item.format ? item.format.toLowerCase() : '';
+            const sprache = item.sprache ? item.sprache.toLowerCase() : '';
             const title = item.title ? item.title.toLowerCase() : '';
             const author = item.author ? item.author.toLowerCase() : '';
             const isDeko = format === 'deko' || format === 'deko2';
@@ -61,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 matchesTab = format !== 'ebook' && !isDeko;
             } else if (filter === 'eBook') {
                 matchesTab = format === 'ebook';
+            } else if (filter === 'Original') {
+                matchesTab = sprache === 'original' && !isDeko;
             }
 
             const matchesSearch = title.includes(query) || author.includes(query);
@@ -116,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Bestimmung der Elemente pro Regal: Das erste Regal hat 10, alle weiteren 15 (bzw. im Suchmodus 8 und 12)
         const firstShelfLimit = isSearchMode ? 8 : 10;
         const subsequentShelfLimit = isSearchMode ? 12 : 15;
 
@@ -139,8 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
         currentShelf.appendChild(countBadge);
 
         finalDisplayList.forEach((item, index) => {
-            // Prüfen, wann ein neues Regal begonnen werden muss
-            // Das erste Regal bricht nach 'firstShelfLimit' ab, die danach nach 'subsequentShelfLimit'
             const isFirstShelfFull = (index === firstShelfLimit);
             const isSubsequentShelfFull = (index > firstShelfLimit) && ((index - firstShelfLimit) % subsequentShelfLimit === 0);
 
@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const itemCard = document.createElement('div');
         
         const format = item.format ? item.format.toLowerCase() : '';
+        const sprache = item.sprache ? item.sprache.toLowerCase() : '';
         const isDeko = format === 'deko';
         const isDeko2 = format === 'deko2';
 
@@ -203,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isEbook = format === 'ebook';
             const badgeClass = isEbook ? 'ebook' : 'print';
             const formatLabel = isEbook ? 'eBook' : 'Print';
+            const isOriginal = sprache === 'original';
 
             let imagePath = item.cover;
             if (imagePath) {
@@ -220,6 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="book-cover-container">
                     <img src="${imagePath}" alt="${item.title}" class="book-cover" onerror="this.src='https://via.placeholder.com/130x190?text=Kein+Cover'">
+                    ${isOriginal ? '<span class="format-badge original">Original</span>' : ''}
                     <span class="format-badge ${badgeClass}">${formatLabel}</span>
                 </div>
             `;
@@ -233,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (modal) {
                     modalCover.src = imagePath;
                     modalTitle.textContent = item.title;
-                    modalFormat.textContent = formatLabel;
+                    modalFormat.textContent = isOriginal ? `Original / ${formatLabel}` : formatLabel;
                     modal.style.display = 'flex';
                 }
             });

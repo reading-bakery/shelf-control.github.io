@@ -81,8 +81,8 @@ h2 {
 /* Regalsystem - Scrollbar entfernen */
 .bookshelf-wrapper {
     width: 100%;
-    overflow-x: hidden; /* Verhindert das horizontale Scrollen und blendet die Scrollbar aus */
-    overflow-y: hidden; /* Verhindert das vertikale Scrollen und blendet die Scrollbar aus */
+    overflow-x: hidden;
+    overflow-y: hidden;
     padding-bottom: 20px;
 }
 
@@ -135,7 +135,7 @@ h2 {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: rgb(78, 107, 91);
+    background: #6d3956;
     padding: 6px 10px;
     border-radius: 6px;
     border: 3px solid #2a2a2a;
@@ -147,10 +147,10 @@ h2 {
 
 .flip-card {
     position: relative;
-    background-color: #e6c3c3;
-    color: #060404;
+    background-color: #92a48e;
+    color: #140e0e;
     font-family: "Bebas Neue", sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.9rem;
     padding: 4px 8px;
     border-radius: 4px;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.8), 0 2px 4px rgba(255,255,255,0.05);
@@ -160,7 +160,6 @@ h2 {
     text-align: center;
 }
 
-/* Die typische horizontale Trennlinie in der Mitte des Fallblatts */
 .flip-card::after {
     content: '';
     position: absolute;
@@ -168,20 +167,19 @@ h2 {
     left: 0;
     right: 0;
     height: 1px;
-    background-color: #963636;
+    background-color: #8a7f7f;
     box-shadow: 0 1px 0 rgba(255,255,255,0.1);
 }
 
 .flip-label {
     font-family: "Dosis", sans-serif;
-    font-size: 1rem;
-    color: #0f0f0f;
+    font-size: 1.2rem;
+    color: #120101;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: bold;
 }
 
-/* Im Suchmodus ausblenden */
 .shelf-row.search-mode .flip-counter-container {
     display: none;
 }
@@ -200,7 +198,6 @@ h2 {
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s ease;
 }
 
-/* Standard-Animationen im Regalmodus */
 .shelf-row:not(.search-mode):has(.book-card:hover) > :has(~ .book-card:hover) {
     transform: translateX(-45px);
 }
@@ -229,14 +226,13 @@ h2 {
     opacity: 0.3;
 }
 
-/* Titel auf dem Buchrücken */
 .spine-title {
     writing-mode: vertical-lr;
     text-orientation: mixed;
     transform: rotate(180deg);
     color: #2b2b2b;
     font-family: "Dosis", sans-serif;
-    font-size: 0.8rem;
+    font-size: 1.15rem;
     font-weight: 700;
     letter-spacing: 0.5px;
     white-space: nowrap;
@@ -246,14 +242,14 @@ h2 {
     text-align: center;
 }
 
-/* Cover-Ansicht (Standard-Hover) */
+/* Cover-Ansicht */
 .book-cover-container {
     position: absolute;
     bottom: 0;
     left: 50%;
     transform-origin: bottom center;
     transform: translateX(-50%) scale(0.9);
-    width: 130px;
+    width: 115px;
     height: 190px;
     border-radius: 6px;
     overflow: hidden;
@@ -273,7 +269,7 @@ h2 {
 }
 
 /* =========================================================
-   SUCH-MODUS: FRONTCOVER FEST AUF DEM REGAL STEHEN
+   SUCH-MODUS
    ========================================================= */
 
 .shelf-row.search-mode {
@@ -313,8 +309,25 @@ h2 {
     display: block;
 }
 
-/* Format-Badges */
-.format-badge {
+/* Format- & Original-Badges auf dem Cover */
+.format-badge.original {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background: rgba(211, 211, 120, 0.95);
+    color: #333333;
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-family: "Dosis", sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    z-index: 10;
+}
+
+.format-badge.print, 
+.format-badge.ebook {
     position: absolute;
     top: 6px;
     right: 6px;
@@ -326,6 +339,7 @@ h2 {
     font-family: "Dosis", sans-serif;
     font-weight: bold;
     letter-spacing: 0.5px;
+    z-index: 10;
 }
 
 .format-badge.ebook {
@@ -334,10 +348,6 @@ h2 {
 
 .format-badge.print {
     background: rgba(244, 180, 186, 0.95);
-}
-
-.format-badge.original {
-    background: rgba(101, 156, 147, 0.95);
 }
 
 /* =========================================================
@@ -479,7 +489,6 @@ h2 {
     color: rgb(224, 224, 87);
 }
 
-/* Responsive Anpassungen */
 @media (max-width: 740px) {
     .library-container {
         padding: 15px;

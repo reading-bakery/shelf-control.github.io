@@ -170,6 +170,7 @@
 {
 "title": "Breasts and Eggs",
 "autor": "Mieko Kawakami",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "breasts-and-eggs.jpg"
 },
@@ -983,6 +984,7 @@
 {
 "title": "Girl in Pieces",
 "autor": "Kathleen Glasgow",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "girl-in-pieces.jpg"
 },
@@ -1001,6 +1003,7 @@
 {
 "title": "Greta and Valdin",
 "autor": "Rebecca K. Reilly",
+"sprache": "Original",
 "format": "eBook",
 "cover": "greta-and-valdin.jpg"
 },
@@ -1223,6 +1226,7 @@
 {
 "title": "Las Mujeres Wayward",
 "autor": "Emilia Hart",
+"sprache": "Original",
 "format": "eBook",
 "cover": "las-mujeres-wayward.jpg"
 },
@@ -1283,6 +1287,7 @@
 {
 "title": "Lucy by the Sea",
 "autor": "Elizabeth Strout",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "lucy-by-the-sea.jpg"
 },
@@ -1343,6 +1348,7 @@
 {
 "title": "Malibu Renace",
 "autor": "Taylor Jenkins Reid",
+"sprache": "Original",
 "format": "eBook",
 "cover": "malibu-renace.jpg"
 },
@@ -1475,6 +1481,7 @@
 {
 "title": "Nothing More to Tell",
 "autor": "Karen M. McManus",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "nothing-more-to-tell.jpg"
 },
@@ -1505,6 +1512,7 @@
 {
 "title": "One of Us is Back",
 "autor": "Karen M. McManus",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "one-of-us-is-back.jpg"
 },
@@ -1673,6 +1681,7 @@
 {
 "title": "Such a Fun Age",
 "autor": "Kiley Reid",
+"sprache": "Original",
 "format": "eBook",
 "cover": "such-a-fun-age.jpg"
 },
@@ -1697,18 +1706,21 @@
 {
 "title": "The Cousins",
 "autor": "Karen M. McManus",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "the-cousins.jpg"
 },
 {
 "title": "The House of My Mother",
 "autor": "Shari Franke",
+"sprache": "Original",
 "format": "eBook",
 "cover": "the-house-of-my-mother.jpg"
 },
 {
 "title": "The Safekeep",
 "autor": "Yael van der Wouden",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "the-safekeep.jpg"
 },
@@ -1757,6 +1769,7 @@
 {
 "title": "Two Can Keep a Secret",
 "autor": "Karen M. McManus",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "two-can-keep-a-secret.jpg"
 },
@@ -1966,6 +1979,7 @@
 {
 "title": "The Hate U Give",
 "autor": "Angie Thomas",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "thug.jpg"
 },
@@ -1990,12 +2004,14 @@
 {
 "title": "The Open Veins of Latin America",
 "autor": "Eduardo Galano",
+"sprache": "Original",
 "format": "eBook",
 "cover": "open-veins.jpg"
 },
 {
 "title": "Das Schicksal ist ein mieser Verräter",
 "autor": "John Green",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "schicksal.jpg"
 },
@@ -2036,7 +2052,7 @@
 "cover": "quidditch-im-wandel-der-zeit.jpg"
 },
 {
-"title": "Der Schmetterlin",
+"title": "Der Schmetterling",
 "autor": "Gabriella Ullberg Westin",
 "format": "eBook",
 "cover": "der-schmetterling.jpg"
@@ -2188,6 +2204,7 @@
 {
 "title": "Lost Boy",
 "autor": "Christina Henry",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "lost-boy.jpg"
 },
@@ -2248,6 +2265,7 @@
 {
 "title": "Five Feet Apart",
 "autor": "Rachael Lippincott, Mikki Daughtry",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "five-feet-apart.jpg"
 },
@@ -2326,12 +2344,14 @@
 {
 "title": "One Of Us Is Lying",
 "autor": "Karen M. McManus",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "one-of-us-is-lying.jpg"
 },
 {
 "title": "One Of Us Is Next",
 "autor": "Karen M. McManus",
+"sprache": "Original",
 "format": "Physisch",
 "cover": "one-of-us-is-next.jpg"
 },
