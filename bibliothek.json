@@ -1,37 +1,1574 @@
 {
-  "books": [
-    {
-      "title": "A Dark and Secret Magic",
-      "format": "eBook",
-      "cover": "a-dark-and-secret-magic.jpg"
-    },
-
-     {
-      "title": "Die Wand",
-      "format": "Physisch",
-      "cover": "die-wand.jpg"
-    },
-    {
-      "title": "Vatermal",
-      "format": "Physisch",
-      "cover": "vatermal.jpg"
-    },
-    {
-      "title": "Halb wach",
-      "format": "Physisch",
-      "cover": "halb-wach.jpg"
-    },
-    {
-      "title": "Lazar",
-      "format": "Physisch",
-      "cover": "lazar.jpg"
-    },
-    {
-      "title": "Tyll",
-      "format": "Physisch",
-      "cover": "tyll.jpg"
-    }
-
-
+"books": [
+{
+"title": "A Dark and Secret Magic",
+"format": "eBook",
+"cover": "a-dark-and-secret-magic.jpg"
+},
+{
+"title": "Abschiedsfarben",
+"format": "Physisch",
+"cover": "abschiedsfarben.jpg"
+},
+{
+"title": "Agatha Christie",
+"format": "Physisch",
+"cover": "agatha-christie.jpg"
+},
+{
+"title": "Agatha",
+"format": "Physisch",
+"cover": "agatha.jpg"
+},
+{
+"title": "Alef",
+"format": "Physisch",
+"cover": "alef.jpg"
+},
+{
+"title": "Alibi",
+"format": "Physisch",
+"cover": "alibi.jpg"
+},
+{
+"title": "Alles über Liebe",
+"format": "Physisch",
+"cover": "alles-ueber-liebe.jpg"
+},
+{
+"title": "Alles was ich dir geben will",
+"format": "eBook",
+"cover": "alles-was-ich-dir-geben-will.jpg"
+},
+{
+"title": "Als die Welt zerbrach",
+"format": "Physisch",
+"cover": "als-die-welt-zerbrach.jpg"
+},
+{
+"title": "Am Ende einer Welt",
+"format": "Physisch",
+"cover": "am-ende-einer-welt.jpg"
+},
+{
+"title": "Anne auf Green Gables",
+"format": "Physisch",
+"cover": "anne-auf-green-gables.jpg"
+},
+{
+"title": "Anne Frank Comic",
+"format": "Physisch",
+"cover": "anne-frank-comic.jpg"
+},
+{
+"title": "Anti Müller",
+"format": "eBook",
+"cover": "anti-mueller.jpg"
+},
+{
+"title": "Antichristie",
+"format": "eBook",
+"cover": "antichristie.jpg"
+},
+{
+"title": "Auf den zweiten Blick",
+"format": "Physisch",
+"cover": "auf-den-zweiten-blick.jpg"
+},
+{
+"title": "Aufzeichnungen eines Serienmörders",
+"format": "Physisch",
+"cover": "aufzeichnungen-eines-serienmoerders.jpg"
+},
+{
+"title": "Ausgestorben um zu bleiben",
+"format": "Physisch",
+"cover": "ausgestorben-um-zu-bleiben.jpg"
+},
+{
+"title": "Bad Feminist",
+"format": "eBook",
+"cover": "bad-feminist.jpg"
+},
+{
+"title": "Bambino",
+"format": "eBook",
+"cover": "bambino.jpg"
+},
+{
+"title": "Bei aller Liebe",
+"format": "Physisch",
+"cover": "bei-aller-liebe.jpg"
+},
+{
+"title": "Bei Anbruch der Nacht",
+"format": "Physisch",
+"cover": "bei-anbruch-der-nacht.jpg"
+},
+{
+"title": "Bestie",
+"format": "eBook",
+"cover": "bestie.jpg"
+},
+{
+"title": "Bitterer Zucker",
+"format": "Physisch",
+"cover": "bitterer-zucker.jpg"
+},
+{
+"title": "Blue Skies",
+"format": "Physisch",
+"cover": "blue-skies.jpg"
+},
+{
+"title": "Bonjour Tristesse",
+"format": "Physisch",
+"cover": "bonjour-tristesse.jpg"
+},
+{
+"title": "Botanik des Wahnsinns",
+"format": "Physisch",
+"cover": "botanik-des-wahnsinns.jpg"
+},
+{
+"title": "Breasts and Eggs",
+"format": "Physisch",
+"cover": "breasts-and-eggs.jpg"
+},
+{
+"title": "Bright Young Women",
+"format": "Physisch",
+"cover": "bright-young-women.jpg"
+},
+{
+"title": "Bruder",
+"format": "Physisch",
+"cover": "bruder.jpg"
+},
+{
+"title": "Butter",
+"format": "eBook",
+"cover": "butter.jpg"
+},
+{
+"title": "Bye Bye Lolita",
+"format": "Physisch",
+"cover": "bye-bye-lolita.jpg"
+},
+{
+"title": "City of Girls",
+"format": "Physisch",
+"cover": "city-of-girls.jpg"
+},
+{
+"title": "Daisy Jones and the Six",
+"format": "eBook",
+"cover": "daisy-jones-and-the-six.jpg"
+},
+{
+"title": "Das Archiv der Träume",
+"format": "Physisch",
+"cover": "das-archiv-der-traueme.jpg"
+},
+{
+"title": "Das Beste sind die Augen",
+"format": "Physisch",
+"cover": "das-beste-sind-die-augen.jpg"
+},
+{
+"title": "Das Buch Ana",
+"format": "eBook",
+"cover": "das-buch-ana.jpg"
+},
+{
+"title": "Das doppelte Lottchen",
+"format": "Physisch",
+"cover": "das-doppelte-lottchen.jpg"
+},
+{
+"title": "Das fahle Pferd",
+"format": "Physisch",
+"cover": "das-fahle-pferd.jpg"
+},
+{
+"title": "Das Flüstern der Bäume",
+"format": "Physisch",
+"cover": "das-fluestern-der-baeume.jpg"
+},
+{
+"title": "Das Gedächtnis der Tiere",
+"format": "Physisch",
+"cover": "das-gedaechtnis-der-tiere.jpg"
+},
+{
+"title": "Das Geflüster",
+"format": "eBook",
+"cover": "das-gefluester.jpg"
+},
+{
+"title": "Das Geheimnis von Zimmer 622",
+"format": "Physisch",
+"cover": "das-geheimnis-von-zimmer-622.jpg"
+},
+{
+"title": "Das Glashotel",
+"format": "Physisch",
+"cover": "das-glashotel.jpg"
+},
+{
+"title": "Das Gold der Krähen",
+"format": "eBook",
+"cover": "das-gold-der-kraehen.jpg"
+},
+{
+"title": "Das gute Benehmen",
+"format": "Physisch",
+"cover": "das-gute-benehmen.jpg"
+},
+{
+"title": "Das Haus zur besonderen Verwendung",
+"format": "Physisch",
+"cover": "das-haus-zur-besonderen-verwendung.jpg"
+},
+{
+"title": "Das krumme Haus",
+"format": "Physisch",
+"cover": "das-krumme-haus.jpg"
+},
+{
+"title": "Das Leben nach Boo",
+"format": "Physisch",
+"cover": "das-leben-nach-boo.jpg"
+},
+{
+"title": "Das Leben vor uns",
+"format": "Physisch",
+"cover": "das-leben-vor-uns.jpg"
+},
+{
+"title": "Das Licht ist hier viel heller",
+"format": "Physisch",
+"cover": "das-licht-ist-hier-viel-heller.jpg"
+},
+{
+"title": "Das Lied der Krähen",
+"format": "eBook",
+"cover": "das-lied-der-kraehen.jpg"
+},
+{
+"title": "Das Lied des Propheten",
+"format": "Physisch",
+"cover": "das-lied-des-propheten.jpg"
+},
+{
+"title": "Das Mädchen und der Winterkönig",
+"format": "eBook",
+"cover": "das-maedchen-und-der-winterkoenig.jpg"
+},
+{
+"title": "Das Mörderarchiv 2",
+"format": "eBook",
+"cover": "das-moerderarchiv-2.jpg"
+},
+{
+"title": "Das Mörderarchiv",
+"format": "eBook",
+"cover": "das-moerderarchiv.jpg"
+},
+{
+"title": "Das Reich der sieben Höfe",
+"format": "eBook",
+"cover": "das-reich-der-sieben-hoefe.jpg"
+},
+{
+"title": "Das Schwarz in den Händen meines Vaters",
+"format": "eBook",
+"cover": "das-schwarz-in-den-haenden-meines-vaters.jpg"
+},
+{
+"title": "Das unvollendete Bildnis",
+"format": "Physisch",
+"cover": "das-unvollendete-bildnis.jpg"
+},
+{
+"title": "Das verborgene Genie",
+"format": "Physisch",
+"cover": "das-verborgene-genie.jpg"
+},
+{
+"title": "Das Volk der Bäume",
+"format": "Physisch",
+"cover": "das-volk-der-baueme.jpg"
+},
+{
+"title": "Das weibliche Prinzip",
+"format": "Physisch",
+"cover": "das-weibliche-prinzip.jpg"
+},
+{
+"title": "Das Wohlbefinden",
+"format": "Physisch",
+"cover": "das-wohlbefinden.jpg"
+},
+{
+"title": "Deine kalten Hände",
+"format": "eBook",
+"cover": "deine-kalten-haende.jpg"
+},
+{
+"title": "Der andere Arthur",
+"format": "eBook",
+"cover": "der-andere-arthur.jpg"
+},
+{
+"title": "Der Augensammler",
+"format": "eBook",
+"cover": "der-augensammler.jpg"
+},
+{
+"title": "Der Bär und die Nachtigall",
+"format": "eBook",
+"cover": "der-baer-und-die-nachtigall.jpg"
+},
+{
+"title": "Der Donnerstags Mord Club 1",
+"format": "Physisch",
+"cover": "der-donnerstags-mord-club-1.jpg"
+},
+{
+"title": "Der gefrorene Fluss",
+"format": "eBook",
+"cover": "der-gefrorene-fluss.jpg"
+},
+{
+"title": "Der Gesang der Berge",
+"format": "Physisch",
+"cover": "der-gesang-der-berge.jpg"
+},
+{
+"title": "Der Gott des Waldes",
+"format": "Physisch",
+"cover": "der-gott-des-waldes.jpg"
+},
+{
+"title": "Der große Fehler",
+"format": "Physisch",
+"cover": "der-groįe-fehler.jpg"
+},
+{
+"title": "Der Halbbart",
+"format": "Physisch",
+"cover": "der-halbbart.jpg"
+},
+{
+"title": "Der Junge auf dem Berg",
+"format": "Physisch",
+"cover": "der-junge-auf-dem-berg.jpg"
+},
+{
+"title": "Der letzte Joker",
+"format": "Physisch",
+"cover": "der-letzte-joker.jpg"
+},
+{
+"title": "Der letzte Mensch",
+"format": "Physisch",
+"cover": "der-letzte-mensch.jpg"
+},
+{
+"title": "Der Sommer der schlafenden Hunde",
+"format": "eBook",
+"cover": "der-sommer-der-schlafenden-hunde.jpg"
+},
+{
+"title": "Der tödliche Ausgang von Sportverletzungen",
+"format": "Physisch",
+"cover": "der-toedliche-ausgang-von-sportverletzungen.jpg"
+},
+{
+"title": "Der Untertan",
+"format": "Physisch",
+"cover": "der-untertan.jpg"
+},
+{
+"title": "Der Wind kennt meinen Namen",
+"format": "Physisch",
+"cover": "der-wind-kennt-meinen-namen.jpg"
+},
+{
+"title": "Der Wintersoldat",
+"format": "Physisch",
+"cover": "der-wintersoldat.jpg"
+},
+{
+"title": "Die Bagage",
+"format": "Physisch",
+"cover": "die-bagage.jpg"
+},
+{
+"title": "Die bekannte Welt",
+"format": "eBook",
+"cover": "die-bekannte-welt.jpg"
+},
+{
+"title": "Die Bienenhüterin",
+"format": "eBook",
+"cover": "die-bienenhueterin.jpg"
+},
+{
+"title": "Die Briefeschreiberin",
+"format": "Physisch",
+"cover": "die-briefeschreiberin.jpg"
+},
+{
+"title": "Die Dinge die wir aus Liebe tun",
+"format": "eBook",
+"cover": "die-dinge-die-wir-aus-liebe-tun.jpg"
+},
+{
+"title": "Die Diva",
+"format": "Physisch",
+"cover": "die-diva.jpg"
+},
+{
+"title": "Die Einsamkeit der ersten ihrer Art",
+"format": "Physisch",
+"cover": "die-einsamkeit-der-ersten-ihrer-art.jpg"
+},
+{
+"title": "Die Entdeckerin des Lebens",
+"format": "Physisch",
+"cover": "die-entdeckerin-des-lebens.jpg"
+},
+{
+"title": "Die Entflammten",
+"format": "eBook",
+"cover": "die-entflammten.jpg"
+},
+{
+"title": "Die Erfindung der Flügel",
+"format": "Physisch",
+"cover": "die-erfindung-der-fluegel.jpg"
+},
+{
+"title": "Die Forscherin",
+"format": "Physisch",
+"cover": "die-forscherin.jpg"
+},
+{
+"title": "Die Frau als Mensch",
+"format": "Physisch",
+"cover": "die-frau-als-mensch.jpg"
+},
+{
+"title": "Die Frauen der Familie Flores",
+"format": "Physisch",
+"cover": "die-frauen-der-familie-flores.jpg"
+},
+{
+"title": "Die Gebärmutter",
+"format": "eBook",
+"cover": "die-gebaermutter.jpg"
+},
+{
+"title": "Die Geschichte der Baltimores",
+"format": "Physisch",
+"cover": "die-geschichte-der-baltimores.jpg"
+},
+{
+"title": "Die Geschichte der Einsamkeit",
+"format": "Physisch",
+"cover": "die-geschichte-der-einsamkeit.jpg"
+},
+{
+"title": "Die Geschichte der getrennten Wege",
+"format": "Physisch",
+"cover": "die-geschichte-der-getrennten-wege.jpg"
+},
+{
+"title": "Die Geschichte des verlorenen Kindes",
+"format": "Physisch",
+"cover": "die-geschichte-des-verlorenen-kindes.jpg"
+},
+{
+"title": "Die Hexe und der Winterzauber",
+"format": "eBook",
+"cover": "die-hexe-und-der-winterzauber.jpg"
+},
+{
+"title": "Die Inkommensurablen",
+"format": "eBook",
+"cover": "die-inkommensurablen.jpg"
+},
+{
+"title": "Die jüngste Tochter",
+"format": "Physisch",
+"cover": "die-juengste-tochter.jpg"
+},
+{
+"title": "Die Katze im Taubenschlag",
+"format": "Physisch",
+"cover": "die-katze-im-taubenschlag.jpg"
+},
+{
+"title": "Die Königin",
+"format": "Physisch",
+"cover": "die-koenigin.jpg"
+},
+{
+"title": "Die letzte Pharaonin",
+"format": "Physisch",
+"cover": "die-letzte-pharaonin.jpg"
+},
+{
+"title": "Die letzte Stadt",
+"format": "Physisch",
+"cover": "die-letzte-stadt.jpg"
+},
+{
+"title": "Die Lungenschwimmprobe",
+"format": "Physisch",
+"cover": "die-lungenschwimmprobe.jpg"
+},
+{
+"title": "Die Postkarte",
+"format": "eBook",
+"cover": "die-postkarte.jpg"
+},
+{
+"title": "Die Queen",
+"format": "Physisch",
+"cover": "die-queen.jpg"
+},
+{
+"title": "Die Schokoladenvilla 2",
+"format": "eBook",
+"cover": "die-schokoladenvilla-2.jpg"
+},
+{
+"title": "Die Schokoladenvilla 3",
+"format": "eBook",
+"cover": "die-schokoladenvilla-3.jpg"
+},
+{
+"title": "Die Schokoladenvilla",
+"format": "eBook",
+"cover": "die-schokoladenvilla.jpg"
+},
+{
+"title": "Die Schwarz Geherin",
+"format": "eBook",
+"cover": "die-schwarz-geherin.jpg"
+},
+{
+"title": "Die sieben Monde des Maadi Almeida",
+"format": "eBook",
+"cover": "die-sieben-monde-des-maadi-almeida.jpg"
+},
+{
+"title": "Die Spuren meiner Mutter",
+"format": "eBook",
+"cover": "die-spuren-meiner-mutter.jpg"
+},
+{
+"title": "Die Stimme meiner Mutter",
+"format": "Physisch",
+"cover": "die-stimme-meiner-mutter.jpg"
+},
+{
+"title": "Die Tote in der Bibliothek",
+"format": "Physisch",
+"cover": "die-tote-in-der-bibliothek.jpg"
+},
+{
+"title": "Die Unbezwingbare",
+"format": "Physisch",
+"cover": "die-unbezwingbare.jpg"
+},
+{
+"title": "Die unerzählte Geschichte",
+"format": "Physisch",
+"cover": "die-unerzaehlte-geschichte.jpg"
+},
+{
+"title": "Die verschwindende Hälfte",
+"format": "Physisch",
+"cover": "die-verschwindende-haelfte.jpg"
+},
+{
+"title": "Die Wand",
+"format": "Physisch",
+"cover": "die-wand.jpg"
+},
+{
+"title": "Die Welt vor den Fenstern",
+"format": "Physisch",
+"cover": "die-welt-vor-den-fenstern.jpg"
+},
+{
+"title": "Die wirkliche Wahrheit",
+"format": "Physisch",
+"cover": "die-wirkliche-wahrheit.jpg"
+},
+{
+"title": "Die Wut die bleibt",
+"format": "Physisch",
+"cover": "die-wut-die-bleibt.jpg"
+},
+{
+"title": "Dieses ganze Leben",
+"format": "Physisch",
+"cover": "dieses-ganze-leben.jpg"
+},
+{
+"title": "Drei",
+"format": "Physisch",
+"cover": "drei.jpg"
+},
+{
+"title": "Dreimeterdreißig",
+"format": "Physisch",
+"cover": "dreimeterdreiįig.jpg"
+},
+{
+"title": "Dry",
+"format": "eBook",
+"cover": "dry.jpg"
+},
+{
+"title": "Du sagst es",
+"format": "Physisch",
+"cover": "du-sagst-es.jpg"
+},
+{
+"title": "Ein erhabenes Königreich",
+"format": "Physisch",
+"cover": "ein-erhabenes-koenigreich.jpg"
+},
+{
+"title": "Ein Mord wird angekündigt",
+"format": "Physisch",
+"cover": "ein-mord-wird-angekuendigt.jpg"
+},
+{
+"title": "Ein Schritt ins Leere",
+"format": "Physisch",
+"cover": "ein-schritt-ins-leere.jpg"
+},
+{
+"title": "Eine einfache Wahrheit",
+"format": "Physisch",
+"cover": "eine-einfache-wahrheit.jpg"
+},
+{
+"title": "Eine Frage der Chemie",
+"format": "eBook",
+"cover": "eine-frage-der-chemie.jpg"
+},
+{
+"title": "Einstein in Kafkaland",
+"format": "Physisch",
+"cover": "einstein-in-kafkaland.jpg"
+},
+{
+"title": "Eisige Wellen",
+"format": "eBook",
+"cover": "eisige-wellen.jpg"
+},
+{
+"title": "Familiensache",
+"format": "eBook",
+"cover": "familensache.jpg"
+},
+{
+"title": "Farm der Tiere",
+"format": "Physisch",
+"cover": "farm-der-tiere.jpg"
+},
+{
+"title": "Femina",
+"format": "eBook",
+"cover": "femina.jpg"
+},
+{
+"title": "Flammen und Finsternis",
+"format": "eBook",
+"cover": "flammen-und-finsternis.jpg"
+},
+{
+"title": "Foster vergessen",
+"format": "Physisch",
+"cover": "foster-vergessen.jpg"
+},
+{
+"title": "Frankenstein",
+"format": "Physisch",
+"cover": "frankenstein.jpg"
+},
+{
+"title": "Frau im Mond",
+"format": "Physisch",
+"cover": "frau-im-mond.jpg"
+},
+{
+"title": "Fräulein Gold 1",
+"format": "Physisch",
+"cover": "frauelein-gold-1.jpg"
+},
+{
+"title": "Fräulein Gold 2",
+"format": "Physisch",
+"cover": "frauelein-gold-2.jpg"
+},
+{
+"title": "Fräulein Gold 3",
+"format": "Physisch",
+"cover": "frauelein-gold-3.jpg"
+},
+{
+"title": "Fräulein Gold 4",
+"format": "Physisch",
+"cover": "frauelein-gold-4.jpg"
+},
+{
+"title": "Fräulein Gold 5",
+"format": "Physisch",
+"cover": "frauelein-gold-5.jpg"
+},
+{
+"title": "Fräulein Gold 6",
+"format": "Physisch",
+"cover": "frauelein-gold-6.jpg"
+},
+{
+"title": "Fräulein Gold 7",
+"format": "Physisch",
+"cover": "frauelein-gold-7.jpg"
+},
+{
+"title": "Fräulein Gold 8",
+"format": "Physisch",
+"cover": "frauelein-gold-8.jpg"
+},
+{
+"title": "Fünf Leben",
+"format": "Physisch",
+"cover": "fuenf-leben.jpg"
+},
+{
+"title": "Funny Story",
+"format": "Physisch",
+"cover": "funny-story.jpg"
+},
+{
+"title": "Geständnisse einer Teilzeit Feministin",
+"format": "Physisch",
+"cover": "gestaaendnisse-einer-teilzeit-feministin.jpg"
+},
+{
+"title": "Gestalten der Tiefe",
+"format": "Physisch",
+"cover": "gestalten-der-tiefe.jpg"
+},
+{
+"title": "Gewöhnungsbedürftig",
+"format": "eBook",
+"cover": "gewoehnungsbeduerftig.jpg"
+},
+{
+"title": "Girl in Pieces",
+"format": "Physisch",
+"cover": "girl-in-pieces.jpg"
+},
+{
+"title": "Grace und die Anmut der Liebe",
+"format": "Physisch",
+"cover": "grace-und-die-anmut-der-liebe.jpg"
+},
+{
+"title": "Great Big Beautiful Life",
+"format": "Physisch",
+"cover": "great-big-beautiful-life.jpg"
+},
+{
+"title": "Greta and Valdin",
+"format": "eBook",
+"cover": "greta-and-valdin.jpg"
+},
+{
+"title": "Große Erwartungen",
+"format": "Physisch",
+"cover": "grosse-erwartungen.jpg"
+},
+{
+"title": "Gute Geister",
+"format": "eBook",
+"cover": "gute-geister.jpg"
+},
+{
+"title": "Habibitus",
+"format": "eBook",
+"cover": "habibitus.jpg"
+},
+{
+"title": "Halbwach",
+"format": "Physisch",
+"cover": "halbwach.jpg"
+},
+{
+"title": "Harlem Shuffle",
+"format": "Physisch",
+"cover": "harlem-shuffle.jpg"
+},
+{
+"title": "Heimkehren",
+"format": "Physisch",
+"cover": "heimkehren.jpg"
+},
+{
+"title": "Hexen",
+"format": "eBook",
+"cover": "hexen.jpg"
+},
+{
+"title": "Honey",
+"format": "Physisch",
+"cover": "honey.jpg"
+},
+{
+"title": "I Love You Fräulein Lena",
+"format": "Physisch",
+"cover": "i-love-you-fraeulein-lena.jpg"
+},
+{
+"title": "Ich bin Frida",
+"format": "Physisch",
+"cover": "ich-bin-frida.jpg"
+},
+{
+"title": "If He Had Been With Me",
+"format": "Physisch",
+"cover": "if-he-had-been-with-me.jpg"
+},
+{
+"title": "If Only I Had Told Her",
+"format": "Physisch",
+"cover": "if-only-i-had-told-her.jpg"
+},
+{
+"title": "Im Menschen muss alles herrlich sein",
+"format": "Physisch",
+"cover": "im-menschen-muss-alles-herrlich-sein.jpg"
+},
+{
+"title": "Im Westen nichts Neues",
+"format": "Physisch",
+"cover": "im-westen-nichts-neues.jpg"
+},
+{
+"title": "Institut für gute Mütter",
+"format": "eBook",
+"cover": "institut-fuer-gute-muetter.jpg"
+},
+{
+"title": "Inter Alia",
+"format": "Physisch",
+"cover": "inter-alia.jpg"
+},
+{
+"title": "Isidor",
+"format": "Physisch",
+"cover": "isidor.jpg"
+},
+{
+"title": "Iss das jetzt wenn du mich liebst",
+"format": "Physisch",
+"cover": "iss-das-jetzt-wenn-du-mich-liebst.jpg"
+},
+{
+"title": "Jägerin und Sammlerin",
+"format": "eBook",
+"cover": "jaegerin-und-sammlerin.jpg"
+},
+{
+"title": "Jahre ohne Sprache",
+"format": "Physisch",
+"cover": "jahre-ohne-sprache.jpg"
+},
+{
+"title": "Jane Eyre",
+"format": "Physisch",
+"cover": "jane-eyre.jpg"
+},
+{
+"title": "Jeanie und Julius",
+"format": "Physisch",
+"cover": "jeanie-und-julius.jpg"
+},
+{
+"title": "Jenseits von Eden",
+"format": "Physisch",
+"cover": "jenseits-von-eden.jpg"
+},
+{
+"title": "Juli August September",
+"format": "Physisch",
+"cover": "juli-august-september.jpg"
+},
+{
+"title": "Kala",
+"format": "eBook",
+"cover": "kala.jpg"
+},
+{
+"title": "Kallocain",
+"format": "eBook",
+"cover": "kallocain.jpg"
+},
+{
+"title": "Kálmán",
+"format": "Physisch",
+"cover": "kalman.jpg"
+},
+{
+"title": "Karibische Affäre",
+"format": "Physisch",
+"cover": "karibische-affaere.jpg"
+},
+{
+"title": "Kleine große Schritte",
+"format": "eBook",
+"cover": "kleine-grosse-schritte.jpg"
+},
+{
+"title": "Kleine Monster",
+"format": "Physisch",
+"cover": "kleine-monster.jpg"
+},
+{
+"title": "Kleine Schwächen",
+"format": "Physisch",
+"cover": "kleine-schwaechen.jpg"
+},
+{
+"title": "Kleopatra",
+"format": "eBook",
+"cover": "kleopatra.jpg"
+},
+{
+"title": "Kochen im falschen Jahrhundert",
+"format": "Physisch",
+"cover": "kochen-im-falschen-jahrhundert.jpg"
+},
+{
+"title": "Krabat",
+"format": "Physisch",
+"cover": "krabat.jpg"
+},
+{
+"title": "Krawall und Kekse",
+"format": "Physisch",
+"cover": "krawall-und-kekse.jpg"
+},
+{
+"title": "Krummes Holz",
+"format": "Physisch",
+"cover": "krummes-holz.jpg"
+},
+{
+"title": "Las Mujeres Wayward",
+"format": "eBook",
+"cover": "las-mujeres-wayward.jpg"
+},
+{
+"title": "Laute Nächte",
+"format": "eBook",
+"cover": "laute-naechte.jpg"
+},
+{
+"title": "Lazar",
+"format": "Physisch",
+"cover": "lazar.jpg"
+},
+{
+"title": "Leon und Louise",
+"format": "Physisch",
+"cover": "leon-und-louise.jpg"
+},
+{
+"title": "Letzte Nacht in Twisted River",
+"format": "Physisch",
+"cover": "letzte-nacht-in-twisted-river.jpg"
+},
+{
+"title": "Licht Boyle",
+"format": "Physisch",
+"cover": "licht-boyle.jpg"
+},
+{
+"title": "Liebe in Zeiten des Hasses",
+"format": "Physisch",
+"cover": "liebe-in-zeiten-des-hasses.jpg"
+},
+{
+"title": "Liebe und Verderben",
+"format": "eBook",
+"cover": "liebe-und-verderben.jpg"
+},
+{
+"title": "Lodernde Schwingen",
+"format": "eBook",
+"cover": "lodernde-schwingen.jpg"
+},
+{
+"title": "Löwenherz",
+"format": "Physisch",
+"cover": "loewenherz.jpg"
+},
+{
+"title": "Lucy by the Sea",
+"format": "Physisch",
+"cover": "lucy-by-the-sea.jpg"
+},
+{
+"title": "Lügen die wir uns erzählen",
+"format": "eBook",
+"cover": "luegen-die-wir-uns-erzaehlen.jpg"
+},
+{
+"title": "Lügen über meine Mutter",
+"format": "eBook",
+"cover": "luegen-ueber-meine-mutter.jpg"
+},
+{
+"title": "Mademoiselle Coco 1",
+"format": "Physisch",
+"cover": "mademoiselle-coco-1.jpg"
+},
+{
+"title": "Mademoiselle Coco 2",
+"format": "Physisch",
+"cover": "mademoiselle-coco-2.jpg"
+},
+{
+"title": "Mademoiselle Coco 3",
+"format": "Physisch",
+"cover": "mademoiselle-coco-3.jpg"
+},
+{
+"title": "Magnolia",
+"format": "Physisch",
+"cover": "magnolia.jpg"
+},
+{
+"title": "Maifliegenzeit",
+"format": "Physisch",
+"cover": "maifliegenzeit.jpg"
+},
+{
+"title": "Maikäferjahre",
+"format": "eBook",
+"cover": "maikaeferjahre.jpg"
+},
+{
+"title": "Malacarne",
+"format": "eBook",
+"cover": "malacarne.jpg"
+},
+{
+"title": "Malibu Renace",
+"format": "eBook",
+"cover": "malibu-renace.jpg"
+},
+{
+"title": "Malnata",
+"format": "eBook",
+"cover": "malnata.jpg"
+},
+{
+"title": "Mansfield Park",
+"format": "Physisch",
+"cover": "mansfield-park.jpg"
+},
+{
+"title": "Marschlande",
+"format": "eBook",
+"cover": "marschlande.jpg"
+},
+{
+"title": "Mein Bericht aus dem Spanischen Bürgerkrieg",
+"format": "Physisch",
+"cover": "mein-bericht-aus-dem-spanischen-buergerkrieg.jpg"
+},
+{
+"title": "Mein Mann",
+"format": "Physisch",
+"cover": "mein-mann.jpg"
+},
+{
+"title": "Mein Name ist Emilia del Valle",
+"format": "Physisch",
+"cover": "mein-name-ist-emilia-del-valle.jpg"
+},
+{
+"title": "Melody",
+"format": "Physisch",
+"cover": "melody.jpg"
+},
+{
+"title": "Memphis",
+"format": "Physisch",
+"cover": "memphis.jpg"
+},
+{
+"title": "Milchzähne",
+"format": "eBook",
+"cover": "milchzaehne.jpg"
+},
+{
+"title": "Miss Bly Jules Vernes",
+"format": "Physisch",
+"cover": "miss-bly-jules-vernes.jpg"
+},
+{
+"title": "Mit Männern leben",
+"format": "Physisch",
+"cover": "mit-maennern-leben.jpg"
+},
+{
+"title": "Mit offenen Karten",
+"format": "Physisch",
+"cover": "mit-offenen-karten.jpg"
+},
+{
+"title": "Molka",
+"format": "Physisch",
+"cover": "molka.jpg"
+},
+{
+"title": "Momo",
+"format": "Physisch",
+"cover": "momo.jpg"
+},
+{
+"title": "Mord in der Charing Cross Road",
+"format": "Physisch",
+"cover": "mord-in-der-charing-cross-road.jpg"
+},
+{
+"title": "Mord in Mesopotamien",
+"format": "Physisch",
+"cover": "mord-in-mesopotamien.jpg"
+},
+{
+"title": "Mr Parnassus Heim für magisch Begabte",
+"format": "eBook",
+"cover": "mr-parnassus-heim-fuer-magisch-begabte.jpg"
+},
+{
+"title": "Mrs Agatha Christie",
+"format": "Physisch",
+"cover": "mrs-agatha-christie.jpg"
+},
+{
+"title": "Nightbitch",
+"format": "Physisch",
+"cover": "nightbitch.jpg"
+},
+{
+"title": "Niklas Luhmann",
+"format": "Physisch",
+"cover": "niklas-luhmann.jpg"
+},
+{
+"title": "Normale Menschen",
+"format": "Physisch",
+"cover": "normale-menschen.jpg"
+},
+{
+"title": "Nothing More to Tell",
+"format": "Physisch",
+"cover": "nothing-more-to-tell.jpg"
+},
+{
+"title": "Notizen zu einer Hinrichtung",
+"format": "eBook",
+"cover": "notizen-zu-einer-hinrichtung.jpg"
+},
+{
+"title": "Nur eine weitere Geschichte",
+"format": "Physisch",
+"cover": "nur-eine-weitere-geschichte.jpg"
+},
+{
+"title": "Oh Simone",
+"format": "Physisch",
+"cover": "oh-simone.jpg"
+},
+{
+"title": "One of the Girls",
+"format": "Physisch",
+"cover": "one-of-the-girls.jpg"
+},
+{
+"title": "One of Us is Back",
+"format": "Physisch",
+"cover": "one-of-us-is-back.jpg"
+},
+{
+"title": "Palace of Glass",
+"format": "eBook",
+"cover": "palace-of-glass.jpg"
+},
+{
+"title": "Paradise Garden",
+"format": "Physisch",
+"cover": "paradise-garden.jpg"
+},
+{
+"title": "Parasiti",
+"format": "Physisch",
+"cover": "parasiti.jpg"
+},
+{
+"title": "Pizza Orlando",
+"format": "Physisch",
+"cover": "pizza-orlando.jpg"
+},
+{
+"title": "Prima Facie",
+"format": "Physisch",
+"cover": "prima-facie.jpg"
+},
+{
+"title": "Psychose",
+"format": "Physisch",
+"cover": "psychose.jpg"
+},
+{
+"title": "Radio Sarajevo",
+"format": "eBook",
+"cover": "radio-sarajevo.jpg"
+},
+{
+"title": "Rächende Geister",
+"format": "Physisch",
+"cover": "raechende-geister.jpg"
+},
+{
+"title": "Raue Wasser",
+"format": "Physisch",
+"cover": "raue-wasser.jpg"
+},
+{
+"title": "Reporterin für eine bessere Welt",
+"format": "Physisch",
+"cover": "reporterin-fuer-eine-bessere-welt.jpg"
+},
+{
+"title": "Restsommer",
+"format": "eBook",
+"cover": "restsommer.jpg"
+},
+{
+"title": "Ripley",
+"format": "Physisch",
+"cover": "ripley.jpg"
+},
+{
+"title": "Russische Spezialitäten",
+"format": "Physisch",
+"cover": "russische-spezialitaeten.jpg"
+},
+{
+"title": "Sapiens",
+"format": "Physisch",
+"cover": "sapiens.jpg"
+},
+{
+"title": "Saubere Zeiten",
+"format": "eBook",
+"cover": "saubere-zeiten.jpg"
+},
+{
+"title": "Schaut wie wir tanzen",
+"format": "Physisch",
+"cover": "schaut-wie-wir-tanzen.jpg"
+},
+{
+"title": "Schura",
+"format": "Physisch",
+"cover": "schura.jpg"
+},
+{
+"title": "Schwanentage",
+"format": "Physisch",
+"cover": "schwanentage.jpg"
+},
+{
+"title": "Schwindende Welt",
+"format": "eBook",
+"cover": "schwindende-welt.jpg"
+},
+{
+"title": "Seltsame Sally Diamond",
+"format": "eBook",
+"cover": "seltsame-sally-diamond.jpg"
+},
+{
+"title": "Sexuelle Revolution",
+"format": "Physisch",
+"cover": "sexuelle-revolution.jpg"
+},
+{
+"title": "Shuggie Bain",
+"format": "Physisch",
+"cover": "shuggie-bain.jpg"
+},
+{
+"title": "Sie kamen nach Bagdad",
+"format": "Physisch",
+"cover": "sie-kamen-nach-bagdad.jpg"
+},
+{
+"title": "So gehn wir denn hinab",
+"format": "Physisch",
+"cover": "so-gehn-wir-denn-hinab.jpg"
+},
+{
+"title": "Soziologie und Literatur",
+"format": "Physisch",
+"cover": "soziologie-und-literatur.jpg"
+},
+{
+"title": "Sprache und Sein",
+"format": "Physisch",
+"cover": "sprache-und-sein.jpg"
+},
+{
+"title": "Sterne und Schwerter",
+"format": "eBook",
+"cover": "sterne-und-schwerter.jpg"
+},
+{
+"title": "Such a Fun Age",
+"format": "eBook",
+"cover": "such-a-fun-age.jpg"
+},
+{
+"title": "Süß",
+"format": "eBook",
+"cover": "suess.jpg"
+},
+{
+"title": "Tage ohne Hunger",
+"format": "Physisch",
+"cover": "tage-ohne-hunger.jpg"
+},
+{
+"title": "Tell",
+"format": "Physisch",
+"cover": "tell.jpg"
+},
+{
+"title": "The Cousins",
+"format": "Physisch",
+"cover": "the-cousins.jpg"
+},
+{
+"title": "The House of My Mother",
+"format": "eBook",
+"cover": "the-house-of-my-mother.jpg"
+},
+{
+"title": "The Safekeep",
+"format": "Physisch",
+"cover": "the-safekeep.jpg"
+},
+{
+"title": "Toxische Weiblichkeit",
+"format": "Physisch",
+"cover": "toxische-weiblichkeit.jpg"
+},
+{
+"title": "Tragödie in drei Akten",
+"format": "Physisch",
+"cover": "tragoedie-in-drei-akten.jpg"
+},
+{
+"title": "Trainspotting",
+"format": "Physisch",
+"cover": "trainspotting.jpg"
+},
+{
+"title": "Traumsammler",
+"format": "Physisch",
+"cover": "traumsammler.jpg"
+},
+{
+"title": "Treppe aus Papier",
+"format": "eBook",
+"cover": "treppe-aus-papier.jpg"
+},
+{
+"title": "Trizeps Royal",
+"format": "eBook",
+"cover": "trizeps-royal.jpg"
+},
+{
+"title": "True Story",
+"format": "Physisch",
+"cover": "true-story.jpg"
+},
+{
+"title": "Two Can Keep a Secret",
+"format": "Physisch",
+"cover": "two-can-keep-a-secret.jpg"
+},
+{
+"title": "Tyll",
+"format": "Physisch",
+"cover": "tyll.jpg"
+},
+{
+"title": "Überredung",
+"format": "Physisch",
+"cover": "ueberredung.jpg"
+},
+{
+"title": "Und alle so still",
+"format": "Physisch",
+"cover": "und-alle-so-still.jpg"
+},
+{
+"title": "Unerhörte Stimmen",
+"format": "Physisch",
+"cover": "unerhoerte-stimmen.jpg"
+},
+{
+"title": "Unmöglicher Abschied",
+"format": "eBook",
+"cover": "unmoeglicher-abschied.jpg"
+},
+{
+"title": "Uns gehört die Nacht",
+"format": "Physisch",
+"cover": "uns-gehoert-die-nacht.jpg"
+},
+{
+"title": "Untenrum frei",
+"format": "Physisch",
+"cover": "untenrum-frei.jpg"
+},
+{
+"title": "Unter Dojczen",
+"format": "Physisch",
+"cover": "unter-dojczen.jpg"
+},
+{
+"title": "Unter Wasser",
+"format": "Physisch",
+"cover": "unter-wasser.jpg"
+},
+{
+"title": "Vatermal",
+"format": "Physisch",
+"cover": "vatermal.jpg"
+},
+{
+"title": "Vati",
+"format": "Physisch",
+"cover": "vati.jpg"
+},
+{
+"title": "Verlorene Schäfchen",
+"format": "eBook",
+"cover": "verlorene-schaefchen.jpg"
+},
+{
+"title": "Vertrauensübung",
+"format": "Physisch",
+"cover": "vertrauensuebung.jpg"
+},
+{
+"title": "Vier Frauen und ein Mord",
+"format": "Physisch",
+"cover": "vier-frauen-und-ein-mord.jpg"
+},
+{
+"title": "Vierundsiebzig",
+"format": "eBook",
+"cover": "vierundsiebzig.jpg"
+},
+{
+"title": "Viktor",
+"format": "Physisch",
+"cover": "viktor.jpg"
+},
+{
+"title": "Von Mäusen und Menschen",
+"format": "Physisch",
+"cover": "von-mauesen-und-menschen.jpg"
+},
+{
+"title": "Wassermusik",
+"format": "Physisch",
+"cover": "wassermusik.jpg"
+},
+{
+"title": "Weird Girls",
+"format": "Physisch",
+"cover": "weird-girls.jpg"
+},
+{
+"title": "Welches Königreich",
+"format": "Physisch",
+"cover": "welches-koenigreich.jpg"
+},
+{
+"title": "Wenn ich wiederkomme",
+"format": "Physisch",
+"cover": "wenn-ich-wiederkomme.jpg"
+},
+{
+"title": "Wenn sie wüsste",
+"format": "Physisch",
+"cover": "wenn-sie-wuesste.jpg"
+},
+{
+"title": "Wie viel von diesen Hügeln ist Gold",
+"format": "Physisch",
+"cover": "wie-viel-von-diesen-huegeln-ist-gold.jpg"
+},
+{
+"title": "Wo ist Anne Frank",
+"format": "Physisch",
+"cover": "wo-ist-anne-frank.jpg"
+},
+{
+"title": "Working Class Girl",
+"format": "Physisch",
+"cover": "working-class-girl.jpg"
+},
+{
+"title": "Working Class",
+"format": "Physisch",
+"cover": "working-class.jpg"
+},
+{
+"title": "Yellowface",
+"format": "Physisch",
+"cover": "yellowface.jpg"
+},
+{
+"title": "Zeit der Geister",
+"format": "eBook",
+"cover": "zeit-der-geister.jpg"
+},
+{
+"title": "Ziemlich tote Dinge",
+"format": "Physisch",
+"cover": "ziemlich-tote-dinge.jpg"
+}
 ]
 }
