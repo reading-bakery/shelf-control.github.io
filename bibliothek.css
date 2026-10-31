@@ -103,17 +103,17 @@ h2 {
     width: 42px;
     height: 190px;
     perspective: 1000px;
-    /* Weicher Übergang für das Verschieben der Nachbarn */
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), margin 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    /* Weicher Übergang für das Zur-Seite-Schieben aller Elemente */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* 1. Nach links verschieben: Das Buch direkt VOR dem gehoverten Buch */
-.shelf-row:has(.book-card:hover) .book-card:has(+ .book-card:hover) {
+/* 1. ALLE Elemente VOR dem gehoverten Element nach LINKS schieben */
+.shelf-row:has(.book-card:hover) > :has(~ .book-card:hover) {
     transform: translateX(-45px);
 }
 
-/* 2. Nach rechts verschieben: Das Buch direkt NACH dem gehoverten Buch */
-.book-card:hover + .book-card {
+/* 2. ALLE Elemente NACH dem gehoverten Element nach RECHTS schieben */
+.shelf-row > .book-card:hover ~ * {
     transform: translateX(45px);
 }
 
@@ -127,6 +127,7 @@ h2 {
     transform: translateX(45px);
 }
 
+/* Buchrücken-Ansicht */
 /* Buchrücken-Ansicht */
 .book-spine {
     width: 100%;
@@ -165,13 +166,12 @@ h2 {
     text-align: center;
 }
 
-/* Cover-Ansicht: Gleitet weich nach oben und überlagert die geschaffene Lücke */
 /* Cover-Ansicht: Fest auf dem Regal verankert und wächst nach oben */
 .book-cover-container {
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform-origin: bottom center; /* Verankert die Unterkante fest auf dem Regalboden */
+    transform-origin: bottom center;
     transform: translateX(-50%) scale(0.9);
     width: 130px;
     height: 190px;
@@ -188,7 +188,7 @@ h2 {
 
 .book-card:hover .book-cover-container {
     opacity: 1;
-    transform: translateX(-50%) scale(1); /* Bleibt exakt auf der Regalkante stehen */
+    transform: translateX(-50%) scale(1);
     pointer-events: auto;
 }
 

@@ -21,6 +21,11 @@
 "cover": "farn.png"
 },
 {
+"title": "kerze",
+"format": "Deko",
+"cover": "kerze.png"
+},
+{
 "title": "Agatha",
 "format": "Physisch",
 "cover": "agatha.jpg"
@@ -399,6 +404,11 @@
 "title": "Der letzte Mensch",
 "format": "Physisch",
 "cover": "der-letzte-mensch.jpg"
+},
+{
+"title": "lampe",
+"format": "Deko",
+"cover": "lampe.png"
 },
 {
 "title": "Der Sommer der schlafenden Hunde",
