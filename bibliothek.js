@@ -92,6 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return isBook && hasTitle;
         });
 
+        // ** Neu: Bücher alphabetisch nach Titel sortieren (mit localesCompare für Umlaute wie Ä, Ö, Ü) **
+        booksOnly.sort((a, b) => (a.title || '').localeCompare(b.title || '', 'de', { sensitivity: 'base' }));
+
         const decoOnly = items.filter(item => {
             const fmt = item.format ? item.format.toLowerCase() : '';
             return fmt === 'deko' || fmt === 'deko2';
