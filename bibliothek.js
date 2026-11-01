@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return isBook && hasTitle;
         });
 
-        // ** Neu: Bücher alphabetisch nach Titel sortieren (mit localesCompare für Umlaute wie Ä, Ö, Ü) **
+        // Bücher alphabetisch nach Titel sortieren (mit localesCompare für Umlaute)
         booksOnly.sort((a, b) => (a.title || '').localeCompare(b.title || '', 'de', { sensitivity: 'base' }));
 
         const decoOnly = items.filter(item => {
@@ -122,8 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        const firstShelfLimit = isSearchMode ? 8 : 10;
-        const subsequentShelfLimit = isSearchMode ? 12 : 15;
+        // Automatische Regalbegrenzung angepasst für Mobilgeräte (z. B. Google Pixel 10a)
+        const isMobile = window.innerWidth <= 480;
+        const firstShelfLimit = isSearchMode ? (isMobile ? 5 : 8) : (isMobile ? 6 : 10);
+        const subsequentShelfLimit = isSearchMode ? (isMobile ? 8 : 12) : (isMobile ? 8 : 15);
 
         let currentShelf = createShelfElement(isSearchMode);
 

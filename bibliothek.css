@@ -512,3 +512,154 @@ h2 {
         font-size: 5rem;
     }
 }
+
+/* =========================================================
+   MEDIA QUERIES FOR GOOGLE PIXEL 10a & MOBILE (max-width: 480px)
+   ========================================================= */
+
+@media (max-width: 480px) {
+    /* Main Layout */
+    .library-container {
+        padding: 12px 8px;
+        margin: 5px auto;
+        border-radius: 6px;
+    }
+
+    h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1.2rem;
+    }
+
+    /* Filter & Suchleiste */
+    .filter-container {
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+
+    .filter-tabs {
+        gap: 8px;
+    }
+
+    .tab-btn {
+        padding: 6px 14px;
+        font-size: 1rem;
+        border-radius: 6px;
+    }
+
+    .search-box input {
+        padding: 8px 14px;
+        font-size: 0.95rem;
+    }
+
+    /* Shelf Row Container */
+    .shelf-row {
+        gap: 6px;
+        padding: 45px 8px 0 8px;
+        margin-bottom: 35px;
+        min-height: 200px;
+    }
+
+    /* Flip-Clock Zähler anpassen */
+    .flip-counter-container {
+        padding: 4px 6px;
+        gap: 4px;
+        margin-right: 8px;
+    }
+
+    .flip-card {
+        font-size: 1.3rem;
+        min-width: 24px;
+        padding: 2px 4px;
+    }
+
+    .flip-label {
+        font-size: 0.9rem;
+    }
+
+    /* Buchrücken (Spine) Kompaktansicht */
+    .book-card {
+        width: 32px;
+        height: 160px;
+    }
+
+    .spine-title {
+        font-size: 0.95rem;
+        max-height: 140px;
+    }
+
+    /* Cover Hover im normalen Modus */
+    .book-cover-container {
+        width: 100px;
+        height: 160px;
+    }
+
+    /* Neighbor-Shift Effekte bei Hover reduzieren, da der Screen schmaler ist */
+    .shelf-row:not(.search-mode):has(.book-card:hover) > :has(~ .book-card:hover) {
+        transform: translateX(-30px);
+    }
+
+    .shelf-row:not(.search-mode) > .book-card:hover ~ * {
+        transform: translateX(30px);
+    }
+
+    /* Such-Modus Grid-Anpassung */
+    .shelf-row.search-mode {
+        gap: 10px;
+    }
+
+    .shelf-row.search-mode .book-card {
+        width: 100px;
+        height: 150px;
+    }
+
+    .shelf-row.search-mode .book-cover-container {
+        width: 100px !important;
+        height: 150px !important;
+    }
+
+    /* Deko-Elemente auf Mobile verkleinern */
+    .deko-card, .deko2-card {
+        height: 160px;
+        margin: 0 2px;
+    }
+
+    .deko-container, .deko2-container {
+        width: 60px;
+        height: 140px;
+    }
+
+    .deko-container img, .deko2-container img {
+        height: 110%;
+    }
+
+    .deko2-container img {
+        bottom: -110px;
+    }
+
+    /* Detail Modal Pop-up */
+    .modal-content {
+        padding: 20px 15px;
+        width: 92%;
+        max-height: 85vh;
+        overflow-y: auto;
+        gap: 15px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .modal-content img {
+        width: 110px;
+        height: 160px;
+    }
+
+    .modal-info h3 {
+        font-size: 1.6rem;
+    }
+
+    .close-modal {
+        top: 10px;
+        right: 15px;
+        font-size: 1.5rem;
+    }
+}
