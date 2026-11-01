@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     let allItems = [];
 
-    // 17 verschiedene Farben/Verläufe für die Buchrücken[cite: 3]
+    // 17 verschiedene Farben/Verläufe für die Buchrücken
     const spineColors = [
         "linear-gradient(135deg, #d65d85 0%, #a23b5f 100%)", // 1. Sanftes Rosa-Pink
         "linear-gradient(135deg, #a1dbd8 0%, #587371 100%)", // 2. Helles Mint-Türkis
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return isBook && hasTitle;
         });
 
-        // Bücher alphabetisch nach Titel sortieren (mit localesCompare für Umlaute)[cite: 3]
+        // Bücher alphabetisch nach Titel sortieren (mit localesCompare für Umlaute)
         booksOnly.sort((a, b) => (a.title || '').localeCompare(b.title || '', 'de', { sensitivity: 'base' }));
 
         const isMobile = window.innerWidth <= 480;
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let currentShelf = createShelfElement(isSearchMode);
 
-        // Retro Flip-Clock Zähler oben auf dem ersten Regalboden einfügen[cite: 3]
+        // Retro Flip-Clock Zähler oben auf dem ersten Regalboden einfügen
         const countBadge = document.createElement('div');
         countBadge.classList.add('flip-counter-container');
         
@@ -261,4 +261,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-```[cite: 3]
