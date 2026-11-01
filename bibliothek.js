@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Regalbegrenzung für Mobilgeräte: Erstes Brett = 3 Bücher, Folgebretter = 6 Bücher
         const firstShelfLimit = isSearchMode ? 5 : (isMobile ? 9 : 10);
-        const subsequentShelfLimit = isSearchMode ? 8 : (isMobile ? 8 : 15);
+        const subsequentShelfLimit = isSearchMode ? 8 : (isMobile ? 9 : 15);
 
         let currentShelf = createShelfElement(isSearchMode);
 
