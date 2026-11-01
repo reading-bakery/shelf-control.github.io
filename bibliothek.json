@@ -4,19 +4,22 @@
 "title": "A Dark and Secret Magic",
 "autor": "Wallis Kinney",
 "format": "eBook",
-"cover": "magic.jpeg"
+"cover": "magic.jpeg",
+"klappentext": "Als Hexe liebt Kate ihr ruhiges Leben zwischen Zaubertränken, Kräutern und ihrem Cottage im Wald. Doch als sie gezwungen ist, sich ihrer Vergangenheit zu stellen, stößt sie auf dunkle Familiengeheimnisse, verbotene Magie und Gefühle, die sie längst hinter sich glaubte. Zwischen alten Geheimnissen und unerwarteten Begegnungen muss sie herausfinden, wem sie vertrauen kann – und wie viel Dunkelheit in ihr selbst steckt. Denn manchmal verbirgt sich hinter der größten Magie das gefährlichste Geheimnis."
 },
 {
 "title": "Abschiedsfarben",
 "autor": "Bernhard Schlink",
 "format": "Physisch",
-"cover": "abschiedsfarben.jpg"
+"cover": "abschiedsfarben.jpg",
+"klappentext": "In neun eindringlichen Geschichten erzählt Bernhard Schlink von Menschen, die an Wendepunkten ihres Lebens mit ihrer Vergangenheit konfrontiert werden. Es geht um verpasste Chancen, zerbrochene Beziehungen, alte Schuld und die Sehnsucht nach Vergebung. Zwischen Liebe und Verrat, Erinnerungen und Neuanfängen stellt sich immer wieder die Frage: Können wir mit unseren Fehlern Frieden schließen – und ist es jemals zu spät, Dinge wiedergutzumachen?"
 },
 {
 "title": "Agatha Christie",
 "autor": "Susanne Lieder",
 "format": "Physisch",
-"cover": "agatha-christie.jpg"
+"cover": "agatha-christie.jpg",
+"klappentext": "Agatha Christie träumt zunächst von einer Karriere als Pianistin, doch das Schicksal führt sie auf einen ganz anderen Weg. Als sie beginnt, Geschichten zu schreiben, entdeckt sie ihre Leidenschaft für das Verbrechen und erschafft Figuren, die Literaturgeschichte schreiben werden. Doch während ihre Krimis immer erfolgreicher werden, sucht Agatha im eigenen Leben nach Liebe, Anerkennung und ihrem ganz persönlichen Glück. Die bewegende Geschichte einer Frau, die sich nicht von geplatzten Träumen aufhalten lässt und zur unvergessenen Queen of Crime wird."
 },
 {
 "title": "farn",
@@ -33,170 +36,198 @@
 "autor": "Anne Martinetti, Guillaume Lebeau",
 "sprache": "Original",
 "format": "Physisch",
-"cover": "agatha.jpg"
+"cover": "agatha.jpg",
+"klappentext": "Die Bücher von Agatha Christie gehören zu den meistgelesenen der Welt. Wer kennt nicht Miss Marple, den Mord im Orient-Express und Hercule Poirot? Der penible Detektiv mit dem gezwirbelten Bart diskutiert in dieser sachkundigen Biografie wortgewandt mit der Kriminalautorin und begleitet sie auf ihrem ungewöhnlichen Lebensweg, auf dem bei weitem nicht alles so präzise ablief wie in ihren Romanen. Scheidung, Reisen in den Nahen Osten, archäologische Ausgrabungen, zwei Weltkriege … Agatha Christie lebte ein selbstbewusstes und freies Leben."
 },
 {
 "title": "Alef",
 "autor": "Katharina Höftmann Ciobatoru",
 "format": "Physisch",
-"cover": "alef.jpg"
+"cover": "alef.jpg",
+"klappentext": "Maja und Eitan verlieben sich ineinander – doch ihre Herkunft könnte unterschiedlicher kaum sein. Sie ist in Ostdeutschland aufgewachsen, er ist Israeli und geprägt von einer jüdischen Familiengeschichte voller Flucht, Verlust und Erinnerung. Was als große Liebe beginnt, wird zu einer Reise zwischen Deutschland und Israel, zwischen unterschiedlichen Kulturen, Religionen und familiären Vergangenheiten. Ein bewegender Roman über die Frage, ob Liebe Grenzen überwinden kann – und wie sehr unsere Herkunft bestimmt, wer wir sind."
 },
 {
 "title": "Alibi",
 "autor": "Agatha Christie",
 "format": "Physisch",
-"cover": "alibi.jpg"
+"cover": "alibi.jpg",
+"klappentext": "Im beschaulichen englischen Dorf King's Abbot erschüttert ein rätselhafter Todesfall die Gemeinschaft. Kurz darauf wird der wohlhabende Roger Ackroyd ermordet – und plötzlich scheint jeder etwas zu verbergen. Als Hercule Poirot die Ermittlungen aufnimmt, stößt er auf widersprüchliche Aussagen, verborgene Motive und ein Netz aus Geheimnissen. Doch hinter den scheinbar eindeutigen Spuren verbirgt sich ein Rätsel, das selbst erfahrene Krimileser auf eine falsche Fährte lockt."
 },
 {
 "title": "Alles über Liebe",
 "autor": "bell hooks",
 "format": "Physisch",
-"cover": "alles-ueber-liebe.jpg"
+"cover": "alles-ueber-liebe.jpg",
+"klappentext": "Was bedeutet es wirklich, zu lieben? In ihrem inspirierenden und gesellschaftskritischen Werk hinterfragt bell hooks unsere Vorstellungen von Liebe und zeigt, dass sie weit mehr ist als Romantik, Leidenschaft oder Verliebtheit. Liebe bedeutet bewusste Entscheidung, Vertrauen, Respekt, Ehrlichkeit und gegenseitige Fürsorge. Mit persönlichen Erfahrungen und klugen Gedanken lädt sie dazu ein, die Liebe neu zu entdecken – zu anderen Menschen, aber auch zu sich selbst. Ein bewegendes Plädoyer dafür, dass Liebe nicht nur unser Leben, sondern auch unsere Gesellschaft verändern kann."
 },
 {
 "title": "Alles was ich dir geben will",
 "autor": "Dolores Redondo",
 "format": "eBook",
-"cover": "alles-was-ich-dir-geben-will.jpg"
+"cover": "alles-was-ich-dir-geben-will.jpg",
+"klappentext": "Als der Schriftsteller Manuel vom plötzlichen Tod seines Ehemannes Álvaro erfährt, reist er nach Galicien, um Abschied zu nehmen. Doch statt Antworten findet er Lügen, ein verborgenes Doppelleben und eine Familie, die ihre Geheimnisse um jeden Preis schützen will. Gemeinsam mit einem pensionierten Polizisten und einem Priester begibt er sich auf die Suche nach der Wahrheit. Inmitten der rauen Schönheit Galiciens entfaltet sich ein geheimnisvolles Geflecht aus Liebe, Verrat, alten Traditionen und dunklen Familiengeheimnissen."
 },
 {
 "title": "Als die Welt zerbrach",
 "autor": "John Boyne",
 "format": "Physisch",
-"cover": "als-die-welt-zerbrach.jpg"
+"cover": "als-die-welt-zerbrach.jpg",
+"klappentext": "Die 91-jährige Gretel Fernsby führt ein zurückgezogenes Leben in London und hütet seit Jahrzehnten ein dunkles Geheimnis: Ihr Vater war Kommandant eines Konzentrationslagers. Als eine junge Familie mit einem neunjährigen Sohn in ihr Haus zieht, wird sie mit schmerzhaften Erinnerungen an ihre Kindheit und ihrer eigenen Vergangenheit konfrontiert. Plötzlich steht sie vor einer Entscheidung, die alles verändern könnte. Ein bewegender Roman über Schuld, Verantwortung, Verdrängung und die Frage, ob ein Mensch jemals wirklich mit seiner Vergangenheit abschließen kann."
 },
 {
 "title": "Am Ende einer Welt",
 "autor": "Dennis Lehane",
 "format": "Physisch",
-"cover": "am-ende-einer-welt.jpg"
+"cover": "am-ende-einer-welt.jpg",
+"klappentext": "Amerika, 1943: Joe Coughlin hat es geschafft, seine kriminelle Vergangenheit hinter sich zu lassen und sich als angesehener Geschäftsmann in Tampa ein neues Leben aufzubauen. Doch als plötzlich ein Kopfgeld auf ihn ausgesetzt wird, gerät seine scheinbar sichere Welt ins Wanken. Während alte Feinde und dunkle Geheimnisse wieder auftauchen, kämpft Joe um das, was ihm am wichtigsten ist: seinen Sohn und sein eigenes Überleben. Ein packender Mafia-Roman über Loyalität, Verrat, Schuld und die Frage, ob man seiner Vergangenheit jemals wirklich entkommen kann."
 },
 {
 "title": "Anne auf Green Gables",
 "autor": "Lucy Maud Montgomery",
 "format": "Physisch",
-"cover": "anne-auf-green-gables.jpg"
+"cover": "anne-auf-green-gables.jpg",
+"klappentext": "Als das Waisenmädchen Anne Shirley versehentlich auf der Farm Green Gables landet, ahnt niemand, wie sehr die rothaarige, fantasievolle und temperamentvolle Elfjährige das Leben der Geschwister Cuthbert verändern wird. Mit ihrer unerschöpflichen Vorstellungskraft, ihrem großen Herzen und ihrer ganz eigenen Sicht auf die Welt stolpert Anne von einem Abenteuer ins nächste. Zwischen neuen Freundschaften, kleinen Katastrophen und großen Träumen entdeckt sie, was es bedeutet, ein Zuhause zu finden und seinen Platz im Leben zu erobern. Eine zauberhafte Geschichte über Freundschaft, Hoffnung und die Schönheit der kleinen Dinge."
 },
 {
 "title": "Anne Frank Comic",
 "autor": "Ari Folman, David Polonsky",
 "format": "Physisch",
-"cover": "anne-frank-comic.jpg"
+"cover": "anne-frank-comic.jpg",
+"klappentext": "Mit 13 Jahren muss Anne Frank gemeinsam mit ihrer Familie vor den Nationalsozialisten untertauchen. In einem versteckten Hinterhaus in Amsterdam versucht sie, trotz Angst, Enge und Ungewissheit ein Stück Normalität zu bewahren. In ihrem Tagebuch vertraut sie ihrer imaginären Freundin Kitty Gedanken, Träume, Sorgen und Hoffnungen an. Die Graphic Novel erzählt Anne Franks bewegende Geschichte anhand ihrer Originaltexte und eindrucksvoller Illustrationen neu – ein berührendes Zeugnis eines jungen Mädchens, dessen Lebensfreude und Menschlichkeit selbst in dunkelsten Zeiten spürbar bleiben."
 },
 {
 "title": "Anti Müller",
 "autor": "Yade Yasemine Önder",
 "format": "eBook",
-"cover": "anti-mueller.jpg"
+"cover": "anti-mueller.jpg",
+"klappentext": "Mit Mitte dreißig steht eine Frau vor den Trümmern ihrer Beziehung und kämpft mit einem immer stärker werdenden Wunsch nach Liebe, Geborgenheit und einem eigenen Kind. Auf der Suche nach einem Neuanfang stürzt sie sich in neue Beziehungen, Begegnungen und Enttäuschungen. Doch je mehr ihre Sehnsucht wächst, desto stärker gerät ihr Leben aus den Fugen. Schonungslos, provokant und mit schwarzem Humor erzählt Yade Yasemin Önder von weiblichen Erwartungen, modernen Beziehungen, Einsamkeit und patriarchalen Strukturen – und davon, wie weit ein Mensch gehen kann, um sich seinen größten Wunsch zu erfüllen."
 },
 {
 "title": "Antichristie",
 "autor": "Mithu Sanyal",
 "format": "eBook",
-"cover": "antichristie.jpg"
+"cover": "antichristie.jpg",
+"klappentext": "Die deutsch-indische Drehbuchautorin Durga soll in London an einer modernen Neuverfilmung der Agatha-Christie-Krimis mitarbeiten. Doch plötzlich findet sie sich im Jahr 1906 wieder – im Körper eines jungen indischen Mannes und mitten in der Unabhängigkeitsbewegung gegen die britische Kolonialherrschaft. Zwischen zwei Jahrhunderten, politischen Debatten und historischen Persönlichkeiten beginnt eine außergewöhnliche Reise durch Fragen von Identität, Rassismus, Kolonialismus und Widerstand. Ein ebenso humorvoller wie kluger Roman, der dazu anregt, Geschichte aus ganz neuen Perspektiven zu betrachten."
 },
 {
 "title": "Auf den zweiten Blick",
 "autor": "Jodi Picoult",
 "format": "Physisch",
-"cover": "auf-den-zweiten-blick.jpg"
+"cover": "auf-den-zweiten-blick.jpg",
+"klappentext": "Als eine junge Frau verletzt und ohne jede Erinnerung auf einem Friedhof in Los Angeles gefunden wird, versucht der Polizist Will herauszufinden, wer sie ist. Bald taucht ihr Ehemann auf: Alex Rivers, ein berühmter Schauspieler, der sie zurück in ihr scheinbar perfektes Leben holt. Doch während Cassie langsam ihre Erinnerungen wiederfindet, beginnt die glänzende Fassade ihrer Ehe zu bröckeln. Ein bewegender und spannungsgeladener Roman über Liebe, Abhängigkeit, häusliche Gewalt und den Mut, sich aus den Fesseln der Vergangenheit zu befreien."
 },
 {
 "title": "Aufzeichnungen eines Serienmörders",
 "autor": "Kim Young-ha",
 "format": "Physisch",
-"cover": "aufzeichnungen-eines-serienmoerders.jpg"
+"cover": "aufzeichnungen-eines-serienmoerders.jpg",
+"klappentext": "Der 70-jährige Byongsu Kim führt ein ruhiges Leben als pensionierter Tierarzt. Doch hinter seiner unscheinbaren Fassade verbirgt sich eine dunkle Vergangenheit: Er war jahrzehntelang ein Serienmörder. Als bei ihm Alzheimer diagnostiziert wird und er in seiner Nachbarschaft einem Mann begegnet, der ihm verdächtig ähnlich erscheint, beginnt ein gefährliches Spiel mit seiner schwindenden Erinnerung. Um seine Adoptivtochter zu schützen, fasst er einen letzten Entschluss. Ein außergewöhnlicher Psychothriller voller schwarzem Humor, verstörender Gedanken und der Frage, wie zuverlässig unsere eigene Erinnerung wirklich ist."
 },
 {
 "title": "Ausgestorben um zu bleiben",
 "autor": "Bernhard Kegel",
 "format": "Physisch",
-"cover": "ausgestorben-um-zu-bleiben.jpg"
+"cover": "ausgestorben-um-zu-bleiben.jpg",
+"klappentext": "Was wissen wir wirklich über die Dinosaurier, die einst die Erde beherrschten? Bernhard Kegel nimmt uns mit auf eine faszinierende Reise in die Welt der Urzeitriesen und zeigt, wie neue Fossilienfunde unser Bild dieser längst ausgestorbenen Lebewesen immer wieder verändern. Dabei geht es nicht nur um ihre Lebensweise und Entwicklung, sondern auch darum, wie Wissenschaft, Filme und unsere eigene Vorstellungskraft das Bild der Dinosaurier geprägt haben. Ein unterhaltsames Sachbuch über die Geheimnisse der Urzeit und eine überraschende Erkenntnis: Die Dinosaurier sind längst nicht alle verschwunden – ihre Nachfahren leben mitten unter uns."
 },
 {
 "title": "Bad Feminist",
 "autor": "Roxane Gay",
 "format": "eBook",
-"cover": "bad-feminist.jpg"
+"cover": "bad-feminist.jpg",
+"klappentext": "Was bedeutet es, eine gute Feministin zu sein – und wer legt eigentlich fest, wie sie sich verhalten muss? In einer Mischung aus persönlichen Geschichten, gesellschaftskritischen Gedanken und scharfem Humor hinterfragt Roxane Gay die Widersprüche unserer modernen Gesellschaft. Sie schreibt über Feminismus, Rassismus, Sexualität, Popkultur und weibliche Selbstbestimmung und zeigt, dass niemand perfekt sein muss, um für Gleichberechtigung einzustehen. Ein kluges, ehrliches und provokantes Plädoyer dafür, Feministin sein zu dürfen, ohne sich selbst dabei verleugnen zu müssen."
 },
 {
 "title": "Bambino",
 "autor": "Marco Balzano",
 "format": "eBook",
-"cover": "bambino.jpg"
+"cover": "bambino.jpg",
+"klappentext": "Triest, 1920: Der junge Mattia, genannt „Bambino“, schließt sich den faschistischen Schlägertrupps an und wird zu einem gefürchteten Mann. Doch hinter seiner brutalen Fassade verbirgt sich ein Mensch, der von innerer Leere und einer ungeklärten Herkunft geprägt ist. Auf der Suche nach seiner wahren Identität gerät er immer tiefer in die Gewalt und politischen Verwerfungen einer Zeit, die ganz Europa erschüttert. Ein eindringlicher historischer Roman über Fanatismus, Schuld, Identität und die dunklen Seiten der menschlichen Seele."
 },
 {
 "title": "Bei aller Liebe",
 "autor": "Jane Campbell",
 "format": "Physisch",
-"cover": "bei-aller-liebe.jpg"
+"cover": "bei-aller-liebe.jpg",
+"klappentext": "Eine Woche vor der Hochzeit ihrer Tochter wird Agnes von einem unguten Gefühl beschlichen. Denn unter den Hochzeitsgästen befinden sich Menschen, die mehr miteinander verbindet, als zunächst vermutet: ein Onkel, der seit Jahrzehnten ein Familiengeheimnis hütet, und ein ehemaliger Therapeut, der heimlich in Agnes verliebt ist. Während alte Wahrheiten ans Licht drängen und verborgene Gefühle für Unruhe sorgen, gerät nicht nur die Hochzeitsfeier aus dem Gleichgewicht. Mit feinem Humor und psychologischem Gespür erzählt Jane Campbell von Liebe, Sehnsucht, Selbsttäuschung und den Geheimnissen, die unser Leben prägen."
 },
 {
 "title": "Bei Anbruch der Nacht",
 "autor": "Kazuo Ishiguro",
 "format": "Physisch",
-"cover": "bei-anbruch-der-nacht.jpg"
+"cover": "bei-anbruch-der-nacht.jpg",
+"klappentext": "Von Venedig über London bis nach Hollywood begegnen wir Menschen, deren Leben auf unterschiedliche Weise mit der Musik verbunden ist. Ob alternde Musiker, unerfüllte Träume oder zerbrechende Beziehungen – sie alle suchen nach Anerkennung, Liebe und einem Neuanfang. In fünf miteinander verwobenen Geschichten erzählt Kazuo Ishiguro mit feinem Humor und leiser Melancholie von verpassten Chancen, menschlichen Schwächen und der verbindenden Kraft der Musik. Ein poetisches Buch über die Sehnsucht nach Glück und die kleinen Momente, die unser Leben verändern können."
 },
 {
 "title": "Bestie",
 "autor": "Joana June",
 "format": "eBook",
-"cover": "bestie.jpg"
+"cover": "bestie.jpg",
+"klappentext": "Als die unscheinbare Delia die Chance bekommt, Mitbewohnerin der erfolgreichen Influencerin Anouk zu werden, sieht sie darin die Möglichkeit, ihr Leben völlig neu zu erfinden. Kurzerhand schlüpft sie in die Rolle von Lilly – selbstbewusst, talentiert und erfolgreich. Doch auch Anouk verfolgt eigene Interessen und glaubt, in Lilly die perfekte Mitbewohnerin gefunden zu haben. Zwischen Inszenierung, gegenseitigen Erwartungen und verborgenen Unsicherheiten entsteht eine ungewöhnliche Verbindung. Ein moderner Roman über Freundschaft, Selbstfindung, Social Media und die Frage, ob wir wirklich jemand anderes werden können, wenn wir unser bisheriges Ich hinter uns lassen."
 },
 {
 "title": "Bitterer Zucker",
 "autor": "Avni Doshi",
 "format": "Physisch",
-"cover": "bitterer-zucker.jpg"
+"cover": "bitterer-zucker.jpg",
+"klappentext": "Antara hat ein schwieriges Verhältnis zu ihrer Mutter Tara, die einst aus ihrem wohlhabenden Leben ausbrach, sich einer spirituellen Gemeinschaft anschloss und ihre Tochter dabei weitgehend sich selbst überließ. Jahre später ist Tara alt und zunehmend dement – und plötzlich muss Antara sich um die Frau kümmern, von der sie sich nie wirklich geliebt fühlte. Während Erinnerungen, Vorwürfe und verdrängte Verletzungen wieder auftauchen, beginnt sie, ihre eigene Vergangenheit zu hinterfragen. Ein schonungslos ehrlicher Roman über eine komplizierte Mutter-Tochter-Beziehung, die Grenzen zwischen Liebe und Hass und die Frage, wie sehr uns unsere Kindheit ein Leben lang prägt."
 },
 {
 "title": "Blue Skies",
 "autor": "T.C. Boyle",
 "format": "Physisch",
-"cover": "blue-skies.jpg"
+"cover": "blue-skies.jpg",
+"klappentext": "Kalifornien versinkt in Waldbränden, Florida wird von Überschwemmungen bedroht und das Insektensterben nimmt dramatische Ausmaße an. Mitten in dieser sich verändernden Welt versucht eine amerikanische Familie, ihren ganz normalen Alltag aufrechtzuerhalten. Während Mutter Ottilie ihre Ernährung auf Insekten umstellt, kämpft ihr Sohn Cooper mit den Folgen einer Umweltkatastrophe und Tochter Cat verliert sich in ihrer Faszination für einen exotischen Haustier-Python. Zwischen absurden Situationen, familiären Konflikten und wachsender Bedrohung zeichnet T. C. Boyle ein ebenso schwarzhumoriges wie beunruhigendes Bild unserer Zukunft. Ein Roman über den Klimawandel, menschliche Verdrängung und die Frage, wie lange wir noch so tun können, als wäre alles in Ordnung."
 },
 {
 "title": "Bonjour Tristesse",
 "autor": "Françoise Sagan",
 "format": "Physisch",
-"cover": "bonjour-tristesse.jpg"
+"cover": "bonjour-tristesse.jpg",
+"klappentext": "Die 17-jährige Cécile verbringt mit ihrem Vater Raymond einen unbeschwerten Sommer an der französischen Riviera. Sonne, Strand und ein Leben voller Freiheit bestimmen ihren Alltag – bis Raymonds neue Bekanntschaft Anne auftaucht. Mit ihrer ernsten und kontrollierten Art droht sie, die vertraute Leichtigkeit und Céciles bisherige Welt zu verändern. Zwischen Eifersucht, jugendlicher Selbstüberschätzung und dem Wunsch nach Unabhängigkeit entspinnt sich ein gefährliches Spiel mit den Gefühlen anderer. Ein zeitloser Roman über das Erwachsenwerden, die erste Liebe und die bittersüße Erkenntnis, dass manche Entscheidungen unwiderruflich sind."
 },
 {
 "title": "Botanik des Wahnsinns",
 "autor": "Leon Engler",
 "format": "Physisch",
-"cover": "botanik-des-wahnsinns.jpg"
+"cover": "botanik-des-wahnsinns.jpg",
+"klappentext": "Als der Erzähler nach der Zwangsräumung der Wohnung seiner Mutter die Überreste seiner Familiengeschichte zusammensuchen muss, beginnt eine Reise in eine Vergangenheit voller psychischer Erkrankungen, Abhängigkeiten und schmerzhafter Erinnerungen. Geprägt von einer Großmutter mit bipolarer Störung, einem alkoholkranken Elternteil und einem depressiven Vater wächst er mit der Angst auf, selbst eines Tages dem Wahnsinn zu verfallen. Auf der Flucht vor seiner Familiengeschichte führt ihn sein Weg schließlich ausgerechnet in die Psychiatrie – diesmal als Psychologe. Ein zugleich humorvoller und berührender Roman über psychische Erkrankungen, familiäre Prägungen, Empathie und die Frage, was eigentlich als normal gilt."
 },
 {
 "title": "Breasts and Eggs",
 "autor": "Mieko Kawakami",
 "sprache": "Original",
 "format": "Physisch",
-"cover": "breasts-and-eggs.jpg"
+"cover": "breasts-and-eggs.jpg",
+"klappentext": "An einem heißen Sommertag treffen in Tokio drei Frauen aufeinander: Natsuko, ihre ältere Schwester Makiko und deren Tochter Midoriko. Während Makiko mit ihrem alternden Körper hadert und sich eine Schönheitsoperation wünscht, zieht sich die zwölfjährige Midoriko immer mehr in ihr Schweigen zurück. Jahre später steht Natsuko selbst vor grundlegenden Fragen über Weiblichkeit, Mutterschaft und ihren eigenen Lebensweg. Mieko Kawakami erzählt eindringlich und schonungslos von gesellschaftlichen Schönheitsidealen, weiblicher Selbstbestimmung und dem Wunsch, über den eigenen Körper und das eigene Leben entscheiden zu dürfen. Ein kluger, bewegender Roman über das Frausein im modernen Japan."
 },
 {
 "title": "Bright Young Women",
 "autor": "Jessica Knoll",
 "format": "Physisch",
-"cover": "bright-young-women.jpg"
+"cover": "bright-young-women.jpg",
+"klappentext": "Florida, 1978: Ein brutaler Überfall auf ein Studentinnenwohnheim verändert das Leben der Überlebenden für immer. Pamela, die Präsidentin der Studentinnenverbindung, und Tina, die ihre beste Freundin auf mysteriöse Weise verloren hat, vermuten, dass ein und derselbe Mann hinter den Verbrechen steckt. Entschlossen, die Wahrheit ans Licht zu bringen, verbünden sich die beiden Frauen und kämpfen gegen eine Gesellschaft, die dem Täter mehr Aufmerksamkeit schenkt als seinen Opfern. Ein packender Roman über weibliche Solidarität, Überlebenswillen, Gerechtigkeit und die Frage, warum Täter zu Legenden werden, während die Geschichten ihrer Opfer oft unerzählt bleiben."
 },
 {
 "title": "Bruder",
 "autor": "Zain Khalid",
 "format": "Physisch",
-"cover": "bruder.jpg"
+"cover": "bruder.jpg",
+"klappentext": "Auf Staten Island wachsen drei Adoptivbrüder auf, die unterschiedlicher kaum sein könnten und doch eng miteinander verbunden sind. Während Dayo und Iseul ihre familiären Wurzeln kennen, bleibt Youssef die eigene Herkunft verborgen. Ihr charismatischer Ziehvater Salim gibt ihnen Halt, birgt jedoch selbst zahlreiche Geheimnisse. Als er eines Tages nach Saudi-Arabien aufbricht, folgen ihm die Brüder und geraten in eine Welt, in der Religion, Macht und Kapitalismus auf ungewöhnliche Weise miteinander verschmelzen. Ein vielschichtiger Roman über Familie, Identität, Glauben und die Suche nach der eigenen Wahrheit – mit einer Geschichte, die zunehmend thrillerhafte Züge annimmt."
 },
 {
 "title": "Butter",
 "autor": "Asako Yuzuki",
 "format": "eBook",
-"cover": "butter.jpg"
+"cover": "butter.jpg",
+"klappentext": "Die junge Journalistin Rika Machida recherchiert über Manako Kajii, eine Frau, die im Gefängnis sitzt und beschuldigt wird, wohlhabende Männer mit ihren Kochkünsten verführt und anschließend ermordet zu haben. Als Rika beginnt, Manako regelmäßig zu besuchen, entwickelt sich zwischen den beiden Frauen eine ungewöhnliche Beziehung – zunächst dreht sich alles um Rezepte, gutes Essen und die besondere Leidenschaft für Butter. Doch je tiefer Rika in Manakos Welt eintaucht, desto mehr verändert sich auch ihr eigener Blick auf Genuss, Schönheit und gesellschaftliche Erwartungen. Ein faszinierender Roman über weibliche Selbstbestimmung, Obsession, Körperbilder und die Frage, warum Frauen sich ständig den Vorstellungen anderer anpassen sollen."
 },
 {
 "title": "Bye Bye Lolita",
 "autor": "Lea Ruckpaul",
 "format": "Physisch",
-"cover": "bye-bye-lolita.jpg"
+"cover": "bye-bye-lolita.jpg",
+"klappentext": "Dolores Haze – bekannt als „Lolita“ aus Vladimir Nabokovs berühmtem Roman – ist erwachsen geworden. Jahre nach den traumatischen Erlebnissen ihrer Kindheit blickt sie auf ihr Leben zurück und beschließt, ihre eigene Geschichte zu erzählen. Sie will sich von dem Bild des verführerischen Mädchens befreien, das andere ihr auferlegt haben, und ihrer Vergangenheit eine neue Stimme geben. Ein eindringlicher, feministischer Roman über sexuellen Missbrauch, Selbstermächtigung und die Macht von Erzählungen. Eine Geschichte über eine Frau, die sich weigert, länger nur die Figur in der Geschichte eines anderen zu sein."
 },
 {
 "title": "Tute",
@@ -207,103 +238,120 @@
 "title": "City of Girls",
 "autor": "Elizabeth Gilbert",
 "format": "Physisch",
-"cover": "city-of-girls.jpg"
+"cover": "city-of-girls.jpg",
+"klappentext": "New York, 1940: Die 19-jährige Vivian Morris wird von ihren Eltern nach einem misslungenen College-Jahr zu ihrer Tante Peg nach Manhattan geschickt. Dort taucht sie in die schillernde Welt eines kleinen Theaters ein und entdeckt zwischen glamourösen Revuetänzerinnen, rauschenden Partys und aufregenden Begegnungen ein völlig neues Leben. Doch eine folgenschwere Entscheidung bringt ihre Welt ins Wanken und zwingt sie, sich mit den Konsequenzen ihrer Freiheit auseinanderzusetzen. Jahrzehnte später blickt Vivian auf ein bewegtes Leben voller Leidenschaft, Freundschaft und Liebe zurück. Ein lebensfroher Roman über weibliche Selbstbestimmung, gesellschaftliche Konventionen und die Freiheit, seinen ganz eigenen Weg zu gehen."
 },
 {
 "title": "Daisy Jones and the Six",
 "autor": "Taylor Jenkins Reid",
 "format": "eBook",
-"cover": "daisy-jones-and-the-six.jpg"
+"cover": "daisy-jones-and-the-six.jpg",
+"klappentext": "Los Angeles, 1970er-Jahre: Daisy Jones träumt davon, als Sängerin groß herauszukommen. Gleichzeitig feiert die Rockband The Six erste Erfolge. Als Daisy und der charismatische Leadsänger Billy Dunne musikalisch zusammenfinden, entsteht eine explosive Mischung, die die Band an die Spitze der Charts katapultiert. Doch hinter dem Ruhm, den ausverkauften Konzerten und dem wilden Rockstarleben brodeln Eifersucht, persönliche Konflikte und unerfüllte Sehnsüchte. Jahrzehnte später versuchen die ehemaligen Bandmitglieder zu erklären, warum sie ausgerechnet auf dem Höhepunkt ihres Erfolgs auseinanderbrachen. Ein mitreißender Roman über Musik, Liebe, Ruhm, Abhängigkeit und die Schattenseiten des Erfolgs – erzählt wie die Geschichte einer echten Rocklegende."
 },
 {
 "title": "Das Archiv der Träume",
 "autor": "Carmen Maria Machado",
 "format": "Physisch",
-"cover": "das-archiv-der-traueme.jpg"
+"cover": "das-archiv-der-traueme.jpg",
+"klappentext": "Die junge Schriftstellerin Carmen verliebt sich in eine charismatische Frau und glaubt zunächst, die große Liebe gefunden zu haben. Doch aus der leidenschaftlichen Beziehung entwickelt sich zunehmend ein Albtraum aus Manipulation, psychischer und körperlicher Gewalt. Gefangen zwischen Liebe, Abhängigkeit und Selbstzweifeln verliert Carmen allmählich das Vertrauen in die eigene Wahrnehmung. In einer ungewöhnlichen Mischung aus autobiografischer Erzählung, Märchen, Horror und Essay versucht sie, das Erlebte zu verstehen und ihre eigene Geschichte zurückzugewinnen. Ein eindringliches und mutiges Buch über toxische Beziehungen, queere Liebe, Gewalt und den schwierigen Weg zurück zu sich selbst."
 },
 {
 "title": "Das Beste sind die Augen",
 "autor": "Monika Kim",
 "format": "Physisch",
-"cover": "das-beste-sind-die-augen.jpg"
+"cover": "das-beste-sind-die-augen.jpg",
+"klappentext": "Nach der Trennung ihrer Eltern gerät das Leben der jungen Jiwon zunehmend aus den Fugen. Als ihre Mutter einen neuen Freund kennenlernt, wird die Situation für Jiwon und ihre Schwester immer unerträglicher: Der selbstgefällige Mann fetischisiert asiatische Frauen und begegnet ihnen mit rassistischen Vorurteilen. In Jiwon wächst eine Wut, die sich bald in eine verstörende Obsession verwandelt. Was als familiärer Konflikt beginnt, entwickelt sich zu einem düsteren Spiel aus Rache, Gewalt und moralischen Grenzüberschreitungen. Ein provokanter feministischer Horrorroman über Rassismus, weibliche Wut, gesellschaftliche Schönheitsideale und die dunklen Seiten menschlicher Obsession."
 },
 {
 "title": "Das Buch Ana",
 "autor": "Sue Monk Kidd",
 "format": "eBook",
-"cover": "das-buch-ana.jpg"
+"cover": "das-buch-ana.jpg",
+"klappentext": "Ana wächst im Palästina des ersten Jahrhunderts in einer wohlhabenden Familie auf und soll den gesellschaftlichen Erwartungen ihrer Zeit entsprechend heiraten und ein angepasstes Leben führen. Doch Ana ist wissbegierig, selbstbewusst und sehnt sich nach einem Leben, in dem sie ihre eigene Stimme finden kann. Als sie Jesus von Nazareth begegnet und sich zunehmend für seine Botschaft interessiert, beginnt sie, ihren eigenen Weg zu suchen. Jahre später wird sie zur Chronistin einer außergewöhnlichen Zeit. Ein bewegender historischer Roman über weibliche Selbstbestimmung, Glauben, Liebe und den Mut einer Frau, sich über die Grenzen ihrer Epoche hinwegzusetzen."
 },
 {
 "title": "Das doppelte Lottchen",
 "autor": "Erich Kästner",
 "format": "Physisch",
-"cover": "das-doppelte-lottchen.jpg"
+"cover": "das-doppelte-lottchen.jpg",
+"klappentext": "Als sich Luise und Lotte in einem Ferienheim begegnen, trauen sie ihren Augen kaum: Die beiden Mädchen sehen sich zum Verwechseln ähnlich. Schnell entdecken sie, dass sie Zwillinge sind, die nach der Trennung ihrer Eltern getrennt aufgewachsen sind. Kurzerhand beschließen sie, ihre Rollen zu tauschen und so ihre bisher unbekannten Elternteile kennenzulernen. Doch das Versteckspiel bringt einige Überraschungen mit sich. Eine herzerwärmende Geschichte über Geschwisterliebe, Familie, Zusammenhalt und den Wunsch, wieder zusammenzuführen, was zusammengehört."
 },
 {
 "title": "Das fahle Pferd",
 "autor": "Agatha Christie",
 "format": "Physisch",
-"cover": "das-fahle-pferd.jpg"
+"cover": "das-fahle-pferd.jpg",
+"klappentext": "Als in einem Dorf mehrere Menschen unter mysteriösen Umständen sterben, wird der Schriftsteller Mark Easterbrook auf einen rätselhaften Zusammenhang aufmerksam. Eine Liste mit Namen, die bei einem ermordeten Pfarrer gefunden wird, führt ihn zu einem alten Gasthof namens „Das fahle Pferd“, in dem drei Frauen angeblich über übersinnliche Kräfte verfügen. Doch steckt tatsächlich schwarze Magie hinter den Todesfällen oder verbirgt sich dahinter ein perfider Plan? Ein atmosphärischer Kriminalroman voller mysteriöser Begegnungen, dunkler Geheimnisse und überraschender Wendungen."
 },
 {
 "title": "Das Flüstern der Bäume",
 "autor": "Michael Christie",
 "format": "Physisch",
-"cover": "das-fluestern-der-baeume.jpg"
+"cover": "das-fluestern-der-baeume.jpg",
+"klappentext": "Kanada, in einer nicht allzu fernen Zukunft: Jacinda Greenwood arbeitet als Naturführerin auf einer Insel, die einen der letzten ursprünglichen Wälder beherbergt. Als sie überraschend das Tagebuch ihrer Großmutter erhält, beginnt sie, die Geschichte ihrer bislang unbekannten väterlichen Familie zu entdecken. Über vier Generationen hinweg entfaltet sich ein Schicksal, das untrennbar mit den Wäldern Kanadas verbunden ist. Dabei werden Familiengeheimnisse, persönliche Entscheidungen und die dramatische Veränderung der Natur miteinander verwoben. Ein atmosphärischer Familienroman über Herkunft, Verlust, Generationen und die zerbrechliche Beziehung zwischen Mensch und Natur."
 },
 {
 "title": "Das Gedächtnis der Tiere",
 "autor": "Claire Fuller",
 "format": "Physisch",
-"cover": "das-gedaechtnis-der-tiere.jpg"
+"cover": "das-gedaechtnis-der-tiere.jpg",
+"klappentext": "Eine rätselhafte Pandemie breitet sich über die Welt aus: Die Menschen verlieren nach und nach ihre Erinnerungen. Die junge Meeresbiologin Neffy nimmt an einer experimentellen Studie teil, die Hoffnung auf ein Gegenmittel verspricht. Doch als sich herausstellt, dass ausgerechnet sie auf das Medikament anspricht, verändert sich die Stimmung unter den Versuchsteilnehmern dramatisch. Während die Welt um sie herum im Chaos versinkt, beginnt ein Kampf ums Überleben. Ein eindringlicher dystopischer Roman über Erinnerung, Identität, Schuld und die Frage, was von uns bleibt, wenn wir unsere Vergangenheit verlieren."
 },
 {
 "title": "Das Geflüster",
 "autor": "Ashley Audrain",
 "format": "eBook",
-"cover": "das-gefluester.jpg"
+"cover": "das-gefluester.jpg",
+"klappentext": "In einer scheinbar perfekten Nachbarschaft erschüttert ein dramatischer Vorfall das Leben mehrerer Familien: Der zehnjährige Xavier stürzt aus dem Fenster seines Kinderzimmers und liegt fortan im Koma. Während seine Mutter Whitney verzweifelt an seinem Krankenbett wacht, beginnen sich hinter den gepflegten Fassaden der Nachbarschaft dunkle Geheimnisse, alte Verletzungen und verborgene Rivalitäten zu zeigen. Was wissen die Nachbarn wirklich über die Familie – und was haben sie in jener Nacht gehört? Ein psychologischer Spannungsroman über Mutterschaft, Neid, Schuld und die Abgründe hinter einer vermeintlich heilen Welt."
 },
 {
 "title": "Das Geheimnis von Zimmer 622",
 "autor": "Joel Dicker",
 "format": "Physisch",
-"cover": "das-geheimnis-von-zimmer-622.jpg"
+"cover": "das-geheimnis-von-zimmer-622.jpg",
+"klappentext": "In einem luxuriösen Hotel in den Schweizer Alpen geschieht eines Nachts ein Mord, der niemals aufgeklärt wird. Jahre später verbringt der Schriftsteller Joël Dicker dort seinen Urlaub und stößt auf eine merkwürdige Besonderheit: Ein Zimmer mit der Nummer 622 scheint offiziell gar nicht zu existieren. Gemeinsam mit der faszinierenden Scarlett beginnt er, die Ereignisse jener verhängnisvollen Nacht zu rekonstruieren. Dabei geraten sie in ein Geflecht aus Machtkämpfen, Eifersucht, Liebe und Verrat. Ein raffiniert konstruierter Kriminalroman voller überraschender Wendungen, falscher Fährten und doppelter Böden."
 },
 {
 "title": "Das Glashotel",
 "autor": "Emily St. John Mandel",
 "format": "Physisch",
-"cover": "das-glashotel.jpg"
+"cover": "das-glashotel.jpg",
+"klappentext": "Die junge Barkeeperin Vincent arbeitet in einem abgelegenen Luxushotel an der kanadischen Westküste, als sie dem wohlhabenden Investor Jonathan Alkaitis begegnet und mit ihm nach New York geht. Doch hinter seinem luxuriösen Lebensstil verbirgt sich ein gigantischer Finanzbetrug, der das Leben zahlreicher Menschen zerstört. Als das Kartenhaus zusammenbricht, geraten auch Vincents Lebensentwürfe ins Wanken. Ein atmosphärischer Roman über Betrug, Verlust, verpasste Chancen und die lebenslange Suche nach einem Ort, an dem man wirklich zu Hause ist."
 },
 {
 "title": "Das Gold der Krähen",
 "autor": "Leigh Bardugo",
 "format": "eBook",
-"cover": "das-gold-der-kraehen.jpg"
+"cover": "das-gold-der-kraehen.jpg",
+"klappentext": "Sechs außergewöhnliche Außenseiter haben einen nahezu unmöglichen Coup gewagt und hoffen nun auf die versprochene Belohnung. Doch statt des erhofften Erfolgs erwartet sie Verrat, und plötzlich müssen sie nicht nur gegen mächtige Feinde, sondern auch um ihr eigenes Überleben kämpfen. Während alte Rechnungen beglichen und neue Bündnisse geschmiedet werden, zeigt sich, wie viel Vertrauen, Mut und Zusammenhalt die Gruppe wirklich besitzt. Ein rasanter Fantasyroman voller Intrigen, Magie, gefährlicher Abenteuer und unberechenbarer Wendungen – das große Finale der Krähen-Dilogie."
 },
 {
 "title": "Das gute Benehmen",
 "autor": "Molly Keane",
 "format": "Physisch",
-"cover": "das-gute-benehmen.jpg"
+"cover": "das-gute-benehmen.jpg",
+"klappentext": "Irland in den 1920er-Jahren: Auf dem herrschaftlichen Anwesen Temple Alice versucht die Familie St. Charles verzweifelt, den Schein von Wohlstand und gesellschaftlichem Ansehen aufrechtzuerhalten. Tochter Aroon sehnt sich nach Liebe und Anerkennung, findet jedoch weder bei ihren emotional distanzierten Eltern noch in ihrer eigenen Familie den erhofften Halt. Als sie sich in den charismatischen Richard verliebt und eine schmerzhafte Wahrheit über ihn entdeckt, gerät ihre Welt endgültig aus den Fugen. Mit schwarzem Humor und scharfem Blick erzählt Molly Keane von gesellschaftlichen Zwängen, familiärer Verdrängung, unerfüllter Sehnsucht und einer Frau, die beginnt, sich gegen ihre eigene Familie aufzulehnen."
 },
 {
 "title": "Das Haus zur besonderen Verwendung",
 "autor": "John Boyne",
 "format": "Physisch",
-"cover": "das-haus-zur-besonderen-verwendung.jpg"
+"cover": "das-haus-zur-besonderen-verwendung.jpg",
+"klappentext": "Russland, 1915: Der junge Bauernsohn Georgi verhindert ein Attentat auf ein Mitglied der Zarenfamilie und wird daraufhin zum Leibwächter des Zarewitsch ernannt. Im prunkvollen Winterpalast begegnet er der Zarentochter Anastasia, in die er sich verliebt – eine Liebe, die unter den gesellschaftlichen Umständen unmöglich scheint. Doch während sich im Land die Revolution zusammenbraut und die Herrschaft der Romanows zu zerbrechen droht, geraten auch Georgi und Anastasia in einen Strudel dramatischer Ereignisse. Ein bewegender historischer Roman über Liebe, Loyalität, Revolution und die Geheimnisse einer der berühmtesten Herrscherfamilien Russlands."
 },
 {
 "title": "Das krumme Haus",
 "autor": "Agatha Christie",
 "format": "Physisch",
-"cover": "das-krumme-haus.jpg"
+"cover": "das-krumme-haus.jpg",
+"klappentext": "Auf dem Anwesen der wohlhabenden Familie Leonides wird der Familienpatriarch Aristide ermordet aufgefunden. Seine Enkelin Sophia bittet ihren Verlobten Charles Hayward, bei der Aufklärung des Verbrechens zu helfen. Doch je genauer Charles die Bewohner des Hauses unter die Lupe nimmt, desto deutlicher wird: Jeder scheint etwas zu verbergen und beinahe jeder hätte ein Motiv. In einem Haus voller Eifersucht, Familienkonflikte und dunkler Geheimnisse beginnt eine Suche nach dem Täter, bei der nichts so eindeutig ist, wie es zunächst scheint. Ein klassischer Christie-Krimi voller psychologischer Raffinesse und überraschender Wendungen."
 },
 {
 "title": "Das Leben nach Boo",
 "autor": "Neil Smith",
 "format": "Physisch",
-"cover": "das-leben-nach-boo.jpg"
+"cover": "das-leben-nach-boo.jpg",
+"klappentext": "Der 13-jährige Oliver, genannt Boo, ist hochbegabt, schüchtern und ein Außenseiter in seiner Schule. Als er plötzlich stirbt, findet er sich an einem höchst ungewöhnlichen Ort wieder: einem Himmel, in dem ausschließlich amerikanische Jugendliche leben, die mit 13 Jahren gestorben sind. Dort versucht Boo, sich in seiner neuen Welt zurechtzufinden. Als ein weiterer Junge auftaucht und behauptet, dass sie beide ermordet wurden, beginnt Boo, die Umstände seines Todes zu hinterfragen. Eine ebenso humorvolle wie berührende Geschichte über Freundschaft, Außenseitertum, Mut und die großen Fragen des Lebens und des Todes."
 },
 {
 "title": "Monstera",
@@ -314,67 +362,78 @@
 "title": "Das Leben vor uns",
 "autor": "Kristina Gorcheva-Newberry",
 "format": "Physisch",
-"cover": "das-leben-vor-uns.jpg"
+"cover": "das-leben-vor-uns.jpg",
+"klappentext": "Anja und ihre beste Freundin Milka wachsen in den Achtzigerjahren am Stadtrand von Moskau auf. Zwischen wilden Sommerabenteuern, ersten Lieben und der Sehnsucht nach einem freien Leben träumen die beiden Mädchen von einer Zukunft, die ganz anders sein soll als die ihrer Eltern. Doch während die Sowjetunion vor dem politischen Umbruch steht, nimmt Anjas Jugend durch eine tragische Wendung ein jähes Ende. Jahre später, längst in den USA angekommen, muss sie sich ihrer Vergangenheit und den Erinnerungen an ihre Heimat stellen. Ein bewegender Roman über eine unerschütterliche Freundschaft, verlorene Jugend, Freiheit und die Frage, ob man seiner Herkunft jemals wirklich entkommen kann."
 },
 {
 "title": "Das Licht ist hier viel heller",
 "autor": "Mareike Fallwickl",
 "format": "Physisch",
-"cover": "das-licht-ist-hier-viel-heller.jpg"
+"cover": "das-licht-ist-hier-viel-heller.jpg",
+"klappentext": "Der einst gefeierte Bestsellerautor Maximilian Wenger steckt in einer tiefen Lebens- und Schaffenskrise. Seine Ehe ist gescheitert, seine Karriere vorbei und der Kontakt zu seinen Kindern schwierig. Als er beginnt, geheimnisvolle Briefe zu lesen, die eigentlich an seinen Vormieter gerichtet sind, fühlt er sich von den darin geschilderten Gefühlen und Erfahrungen zunehmend angesprochen. Auch seine Tochter Zoey entdeckt die Briefe und findet darin Gedanken wieder, die ihr eigenes Leben widerspiegeln. Während Vater und Tochter auf unterschiedliche Weise nach Antworten suchen, geraten alte Gewissheiten ins Wanken. Ein vielschichtiger Roman über Familie, Liebe, Machtmissbrauch, weibliche Selbstbestimmung und die Möglichkeit eines Neuanfangs."
 },
 {
 "title": "Das Lied der Krähen",
 "autor": "Leigh Bardugo",   
 "format": "eBook",
-"cover": "das-lied-der-kraehen.jpg"
+"cover": "das-lied-der-kraehen.jpg",
+"klappentext": "In der düsteren Hafenstadt Ketterdam erhält der junge Gangster Kaz Brekker einen Auftrag, der ihn unermesslich reich machen könnte: Er soll einen gefährlichen Gefangenen aus dem bestgesicherten Gefängnis der Welt befreien. Für diese nahezu unmögliche Mission stellt er eine Gruppe aus fünf ebenso talentierten wie unberechenbaren Außenseitern zusammen. Jeder von ihnen hat eigene Beweggründe, Geheimnisse und Ziele – und keiner ist bereit, leicht aufzugeben. Doch um den Coup zu schaffen, müssen sie lernen, einander zu vertrauen. Ein temporeicher Fantasyroman voller Magie, Intrigen, außergewöhnlicher Charaktere und gefährlicher Abenteuer über Zusammenhalt, Vertrauen und die Kraft einer ungewöhnlichen Gemeinschaft."
 },
 {
 "title": "Das Lied des Propheten",
 "autor": "Paul Lynch",
 "format": "Physisch",
-"cover": "das-lied-des-propheten.jpg"
+"cover": "das-lied-des-propheten.jpg",
+"klappentext": "Irland, in einer nahen Zukunft: Die politische Lage im Land spitzt sich dramatisch zu, als eine autoritäre Regierung zunehmend die Kontrolle übernimmt. Als Eilish Stack eines Abends Besuch von der neu gegründeten Geheimpolizei bekommt und ihr Mann kurz darauf verschwindet, gerät ihr bisheriges Leben aus den Fugen. Während Freiheit und Sicherheit immer mehr schwinden, versucht sie verzweifelt, ihre vier Kinder zu schützen und die Familie zusammenzuhalten. Ein beklemmender dystopischer Roman über politische Unterdrückung, Angst, Menschlichkeit und die Frage, wie weit man gehen würde, um seine Familie zu retten."
 },
 {
 "title": "Das Mädchen und der Winterkönig",
 "autor": "Katherine Arden",
 "format": "eBook",
-"cover": "das-maedchen-und-der-winterkoenig.jpg"
+"cover": "das-maedchen-und-der-winterkoenig.jpg",
+"klappentext": "In einer magischen Welt, in der alte slawische Sagen und übernatürliche Wesen zum Leben erwachen, steht die junge Wasja vor einer gefährlichen Entscheidung. Nachdem sie sich den Mächten der Dunkelheit entgegengestellt hat, muss sie sich in einer Welt behaupten, in der Menschen und mythische Wesen um Macht und Einfluss ringen. Zwischen verschneiten Landschaften, alten Legenden und geheimnisvollen Kräften sucht Wasja ihren eigenen Weg und kämpft um ihre Freiheit. Ein atmosphärischer Fantasyroman voller russischer Folklore, Magie und Abenteuer – über Mut, Selbstbestimmung und den Preis, den es kostet, anders zu sein."
 },
 {
 "title": "Das Mörderarchiv 2",
 "autor": "Kristen Perrin",
 "format": "eBook",
-"cover": "das-moerderarchiv-2.jpg"
+"cover": "das-moerderarchiv-2.jpg",
+"klappentext": "Annie hat sich gerade erst an ihr neues Leben in Castle Knoll gewöhnt, als eine unheimliche Prophezeiung für Aufregung sorgt: Die Wahrsagerin Peony Lane kündigt den Tod einer Frau an. Kurz darauf wird ausgerechnet Peony selbst ermordet – und die Spuren führen direkt zu Annie. Plötzlich steht sie erneut im Mittelpunkt eines mysteriösen Kriminalfalls und muss herausfinden, wer hinter dem Verbrechen steckt, bevor weitere Geheimnisse ans Licht kommen. Ein gemütlicher, britischer Cosy Crime mit schrulligen Charakteren, geheimnisvollen Vorhersagen und jeder Menge Verdächtiger."
 },
 {
 "title": "Das Mörderarchiv",
 "autor": "Kristen Perrin",
 "format": "eBook",
-"cover": "das-moerderarchiv.jpg"
+"cover": "das-moerderarchiv.jpg",
+"klappentext": "Frances Adams war erst siebzehn, als ihr eine Wahrsagerin prophezeite, dass sie eines Tages ermordet werden würde. Jahrzehnte später hat sie tatsächlich ein ganzes Archiv angelegt, um den möglichen Täter zu entlarven. Als ihre Großnichte Annie nach Frances' Tod auf das Anwesen der Familie zurückkehrt, stößt sie auf die geheimnisvollen Aufzeichnungen und beginnt, einen Mordfall aufzuklären, der viele Jahre zurückreicht. Doch je tiefer Annie in die Familiengeschichte eintaucht, desto mehr Verdächtige und dunkle Geheimnisse kommen ans Licht. Ein unterhaltsamer britischer Wohlfühlkrimi voller Rätsel, skurriler Figuren und überraschender Wendungen."
 },
 {
 "title": "Das Reich der sieben Höfe",
 "autor": "Sarah J. Maas",
 "format": "eBook",
-"cover": "das-reich-der-sieben-hoefe.jpg"
+"cover": "das-reich-der-sieben-hoefe.jpg",
+"klappentext": ""
 },
 {
 "title": "Das Schwarz in den Händen meines Vaters",
 "autor": "Lena Schätte",
 "format": "eBook",
-"cover": "das-schwarz-in-den-haenden-meines-vaters.jpg"
+"cover": "das-schwarz-in-den-haenden-meines-vaters.jpg",
+"klappentext": ""
 },
 {
 "title": "Das unvollendete Bildnis",
 "autor": "Agatha Christie",
 "format": "Physisch",
-"cover": "das-unvollendete-bildnis.jpg"
+"cover": "das-unvollendete-bildnis.jpg",
+"klappentext": ""
 },
 {
 "title": "Das verborgene Genie",
 "autor": "Marie Benedict",
 "format": "Physisch",
-"cover": "das-verborgene-genie.jpg"
+"cover": "das-verborgene-genie.jpg",
+"klappentext": ""
 },
 {
 "title": "Das Volk der Bäume",

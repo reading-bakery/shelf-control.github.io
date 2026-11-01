@@ -236,12 +236,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const modal = document.getElementById('bookModal');
                 const modalCover = document.getElementById('modalCover');
                 const modalTitle = document.getElementById('modalTitle');
-                const modalFormat = document.getElementById('modalFormat');
+                const modalKlappentext = document.getElementById('modalKlappentext');
 
                 if (modal) {
                     modalCover.src = imagePath;
                     modalTitle.textContent = item.title;
-                    modalFormat.textContent = isOriginal ? `Original / ${formatLabel}` : formatLabel;
+                    // Klappentext aus JSON-Daten setzen, falls vorhanden
+                    modalKlappentext.textContent = item.klappentext && item.klappentext.trim() !== '' 
+                        ? item.klappentext 
+                        : 'Noch kein Klappentext hinterlegt.';
                     modal.style.display = 'flex';
                 }
             });

@@ -518,9 +518,9 @@ h2 {
    ========================================================= */
 
 @media (max-width: 480px) {
-    /* Main Layout */
+    /* Container & Layout */
     .library-container {
-        padding: 12px 8px;
+        padding: 10px 5px;
         margin: 5px auto;
         border-radius: 6px;
     }
@@ -537,12 +537,12 @@ h2 {
     }
 
     .filter-tabs {
-        gap: 8px;
+        gap: 6px;
     }
 
     .tab-btn {
-        padding: 6px 14px;
-        font-size: 1rem;
+        padding: 6px 12px;
+        font-size: 0.95rem;
         border-radius: 6px;
     }
 
@@ -551,115 +551,132 @@ h2 {
         font-size: 0.95rem;
     }
 
-    /* Shelf Row Container */
+    /* Regalboden & Zeilenumbruch */
     .shelf-row {
-        gap: 6px;
-        padding: 45px 8px 0 8px;
-        margin-bottom: 35px;
-        min-height: 200px;
+        display: flex;
+        flex-wrap: nowrap !important; /* Verhindert das Umbrechen der Bücher innerhalb eines Regals */
+        justify-content: center;
+        align-items: flex-end;
+        gap: 4px;
+        padding: 40px 4px 0 4px;
+        margin-bottom: 45px;
+        min-height: 170px;
     }
 
-    /* Flip-Clock Zähler anpassen */
+    /* 3D Regalboden-Effekt Anpassung für Mobil */
+    .shelf-row::after {
+        bottom: -12px;
+        height: 12px;
+    }
+    .shelf-row::before {
+        bottom: -17px;
+        height: 6px;
+    }
+
+    /* Flip-Clock Zähler oben auf dem Regal ausrichten */
     .flip-counter-container {
-        padding: 4px 6px;
+        position: absolute;
+        top: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-right: 0;
+        margin-bottom: 0;
+        padding: 3px 6px;
         gap: 4px;
-        margin-right: 8px;
+        z-index: 10;
     }
 
     .flip-card {
-        font-size: 1.3rem;
-        min-width: 24px;
+        font-size: 1.1rem;
+        min-width: 20px;
         padding: 2px 4px;
     }
 
     .flip-label {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
 
     /* Buchrücken (Spine) Kompaktansicht */
     .book-card {
-        width: 32px;
-        height: 160px;
+        width: 30px;
+        height: 150px;
+        flex-shrink: 0; /* Verhindert Quetschen der Buchrücken */
     }
 
     .spine-title {
-        font-size: 0.95rem;
-        max-height: 140px;
+        font-size: 0.7rem;
+        max-height: 130px;
     }
 
-    /* Cover Hover im normalen Modus */
+    /* Cover-Hover im normalen Modus */
     .book-cover-container {
-        width: 100px;
-        height: 160px;
+        width: 95px;
+        height: 150px;
     }
 
-    /* Neighbor-Shift Effekte bei Hover reduzieren, da der Screen schmaler ist */
+    /* Verschiebefekt der Nachbarbücher auf Mobilgeräten reduzieren */
     .shelf-row:not(.search-mode):has(.book-card:hover) > :has(~ .book-card:hover) {
-        transform: translateX(-30px);
+        transform: translateX(-25px);
     }
 
     .shelf-row:not(.search-mode) > .book-card:hover ~ * {
-        transform: translateX(30px);
+        transform: translateX(25px);
     }
 
     /* Such-Modus Grid-Anpassung */
     .shelf-row.search-mode {
-        gap: 10px;
+        flex-wrap: wrap !important; /* Im Suchmodus dürfen Covers umbrechen */
+        gap: 8px;
     }
 
     .shelf-row.search-mode .book-card {
-        width: 100px;
-        height: 150px;
-    }
-
-    .shelf-row.search-mode .book-cover-container {
-        width: 100px !important;
-        height: 150px !important;
-    }
-
-    /* Deko-Elemente auf Mobile verkleinern */
-    .deko-card, .deko2-card {
-        height: 160px;
-        margin: 0 2px;
-    }
-
-    .deko-container, .deko2-container {
-        width: 60px;
+        width: 90px;
         height: 140px;
     }
 
+    .shelf-row.search-mode .book-cover-container {
+        width: 90px !important;
+        height: 140px !important;
+    }
+
+    /* Deko-Elemente */
+    .deko-card, .deko2-card {
+        height: 150px;
+        margin: 0 1px;
+        flex-shrink: 0;
+    }
+
+    .deko-container, .deko2-container {
+        width: 50px;
+        height: 130px;
+    }
+
     .deko-container img, .deko2-container img {
-        height: 110%;
+        height: 100%;
     }
 
     .deko2-container img {
-        bottom: -110px;
+        bottom: -90px;
     }
 
-    /* Detail Modal Pop-up */
+    /* Modal Pop-up */
     .modal-content {
-        padding: 20px 15px;
-        width: 92%;
+        padding: 15px;
+        width: 90%;
         max-height: 85vh;
         overflow-y: auto;
-        gap: 15px;
+        gap: 12px;
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
 
     .modal-content img {
-        width: 110px;
-        height: 160px;
+        width: 100px;
+        height: 150px;
     }
 
     .modal-info h3 {
-        font-size: 1.6rem;
-    }
-
-    .close-modal {
-        top: 10px;
-        right: 15px;
         font-size: 1.5rem;
     }
 }
