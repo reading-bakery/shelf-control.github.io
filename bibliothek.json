@@ -2416,16 +2416,473 @@
 "cover": "shutter-island.jpg"
 },
 {
-"title": "",
-"autor": "",
+"title": "Die Schachnovelle",
+"autor": "Stefan Zweig",
 "format": "Physisch",
-"cover": ".jpg"
+"cover": "die-schachnovelle.jpg"
+},
+{
+"title": "Reality Show",
+"autor": "Amelie Nothomb",
+"format": "Physisch",
+"cover": "reality show.jpg"
+},
+{
+"title": "Verstand und Gefühl",
+"autor": "Jane Austen",
+"format": "Physisch",
+"cover": "verstand-und-gefuehl.jpg"
+},
+{
+"title": "Alles, nichts und ganz viel dazwischen",
+"autor": "Ava Reid",
+"format": "eBook",
+"cover": "alles-nichts-und-ganz-viel-dazwischen.jpg"
+},
+{
+"title": "Wasser für die Elefanten",
+"autor": "Sarah Gruen",
+"format": "eBook",
+"cover": "wasser-fuer-die-elefanten.jpg"
+},
+{
+"title": "Das Tagebuch der Anne Frank",
+"autor": "Anne Frank",
+"format": "Physisch",
+"cover": "anne-frank.jpg"
+},
+{
+"title": "Unsere glücklichen Tage",
+"autor": "Julia Holbe",
+"format": "eBook",
+"cover": "unsere-gluecklichen-tage.jpg"
+},
+{
+"title": "Das Lied der Störche",
+"autor": "Ulrike Rehn",
+"format": "eBook",
+"cover": "lied-stoerche.jpg"
+},
+{
+"title": "Die Jahre der Schwalben",
+"autor": "Ulrike Rehn",
+"format": "eBook",
+"cover": "jahre-schwalben.jpg"
+},
+{
+"title": "Die Dame in Gold",
+"autor": "Valerie Trierweiler",
+"format": "Physisch",
+"cover": "die-dame-in-gold.jpg"
+},
+{
+"title": "Der merkwürdige Fall von Dr. Jekyll und Mr. Hyde",
+"autor": "Robert Louis Stevenson",
+"format": "Physisch",
+"cover": "jekyll-hyde.jpg"
 },
 {
 "title": "",
 "autor": "",
 "format": "Physisch",
 "cover": ".jpg"
+},
+{
+"title": "Drei Tage und ein Leben",
+"autor": "Pierre Lemaitre",
+"format": "Physisch",
+"cover": "drei-tage-und-ein-leben.jpg"
+},
+{
+"title": "Wörter auf Papier",
+"autor": "Vince Vawter",
+"format": "Physisch",
+"cover": "woerter-auf-papier.jpg"
+},
+{
+"title": "Unorthodox",
+"autor": "Deborah Feldman",
+"format": "Physisch",
+"cover": "unorthodox.jpg"
+},
+{
+"title": "Dann schlaf auch du",
+"autor": "Leila Slimani",
+"format": "Physisch",
+"cover": "dann-schlaf-auch-du.jpg"
+},
+{
+"title": "Der Vorleser",
+"autor": "Bernhard Schlink",
+"format": "Physisch",
+"cover": "der-vorleser.jpg"
+},
+{
+"title": "Die Zeit der Kraniche",
+"autor": "Ulrike Rehn",
+"format": "eBook",
+"cover": "zeit-kraniche.jpg"
+},
+{
+"title": "Kindeswohl",
+"autor": "Ian McEwan",
+"format": "Physisch",
+"cover": "kindeswohl.jpg"
+},
+{
+"title": "DEr Schatten des Windes",
+"autor": "Carlos Ruiz Zafon",
+"format": "Physisch",
+"cover": "der-schatten-des-windes.jpg"
+},
+{
+"title": "Die Tribute von Panem – Die tödlichen Spiele",
+"autor": "Suzanne Collins",
+"format": "Physisch",
+"cover": "panem1.jpg"
+},
+{
+"title": "Meine dunkle Vanessa",
+"autor": "Kate Elizabeth Russel",
+"format": "eBook",
+"cover": "meine-dunkle-vanessa.jpg"
+},
+{
+"title": "NIckel Boys",
+"autor": "Colson Whitehead",
+"sprache": "Original",
+"format": "Physisch",
+"cover": "nickel-boys.jpg"
+},
+{
+"title": "Ruth Bader Ginsburg",
+"autor": "Ruth Bader Ginsburg",
+"format": "Physisch",
+"cover": "rbg.jpg"
+},
+{
+"title": "Deine Juliet",
+"autor": "Mary Ann Shaffer, Annie Barows",
+"format": "eBook",
+"cover": "deine-juliet.jpg"
+},
+{
+"title": "Phantastische Tierwesen und wo sie zu finden sind",
+"autor": "Joanne K. Rowling",
+"format": "Physisch",
+"cover": "tierwesen-2.jpg"
+},
+{
+"title": "Verity",
+"autor": "Colleen Hoover",
+"format": "eBook",
+"cover": "verity.jpg"
+},
+{
+"title": "Die Tribute von Panem – Gefährliche Liebe",
+"autor": "Suzanne Collins",
+"format": "Physisch",
+"cover": "gefaehrliche-liebe.jpg"
+},
+{
+"title": "Die Tribute von Panem – Flammender Zorn",
+"autor": "Suzanne Collins",
+"format": "Physisch",
+"cover": "flammender-zorn.jpg"
+},
+{
+"title": "Der Report der Magd",
+"autor": "Margaret Atwood",
+"format": "Physisch",
+"cover": "der-report-der-magd.jpg"
+},
+{
+"title": "Die Zeuginnen",
+"autor": "Margaret Atwood",
+"format": "Physisch",
+"cover": "die-zeuginnen.jpg"
+},
+{
+"title": "Nie, nie, nie",
+"autor": "Linn Strömborg",
+"format": "Physisch",
+"cover": "nie-nie-nie.jpg"
+},
+{
+"title": "Der Steppenwolf",
+"autor": "Hermann Hesse",
+"format": "Physisch",
+"cover": "der-steppenwolf.jpg"
+},
+{
+"title": "Vergissmeinnicht – Was man bei Licht nicht",
+"autor": "Kerstin Gier",
+"format": "Physisch",
+"cover": "vergissmeinnicht-1.jpg"
+},
+{
+"title": "Vergissmeinnicht – Was bisher verloren war",
+"autor": "Kerstin Gier",
+"format": "Physisch",
+"cover": "vergissmeinnicht-2.jpg"
+},
+{
+"title": "Vergissmeinnicht – Was die Welt zusammenhält",
+"autor": "Kerstin Gier",
+"format": "Physisch",
+"cover": "vergissmeinnicht-3.jpg"
+},
+{
+"title": "Identittti",
+"autor": "Mithu Sanyal",
+"format": "Physisch",
+"cover": "identitti.jpg"
+},
+{
+"title": "Den Vater töten",
+"autor": "Amelie Nothomb",
+"format": "Physisch",
+"cover": "den-vater-toeten.jpg"
+},
+{
+"title": "Andorra",
+"autor": "Max Frisch",
+"format": "Physisch",
+"cover": "andorra.jpg"
+},
+{
+"title": "Der Goldfisch der aus dem 27. Stock fiel",
+"autor": "Bradley Somer",
+"format": "eBook",
+"cover": "goldfisch.jpg"
+},
+{
+"title": "Der Teufel von Mailand",
+"autor": "Martin Suter",
+"format": "Physisch",
+"cover": "der-teufel-von-mailand.jpg"
+},
+{
+"title": "Was geschah mit Femke Star?",
+"autor": "Kerstin Ruhkiek",
+"format": "eBook",
+"cover": "femke-star.jpg"
+},
+{
+"title": "Wir alle spielen Theater",
+"autor": "Erving Goffman",
+"format": "Physisch",
+"cover": "spielen-theater.jpg"
+},
+{
+"title": "Hard Land",
+"autor": "Benedict Wells",
+"format": "Physisch",
+"cover": "hardland.jpg"
+},
+{
+"title": "Acht Berge",
+"autor": "Paolo Cognetti",
+"format": "eBook",
+"cover": "acht-berge.jpg"
+},
+{
+"title": "Kleiner Wahn",
+"autor": "Dianne Touchell",
+"format": "Physisch",
+"cover": "kleiner-wahn.jpg"
+},
+{
+"title": "Perfect Day",
+"autor": "Romy Hausmann",
+"format": "Physisch",
+"cover": "perfect-day.jpg"
+},
+{
+"title": "Kleine Feuer überall",
+"autor": "Celeste Ng",
+"format": "eBook",
+"cover": "kleine-feuer.jpg"
+},
+{
+"title": "Die Passion",
+"autor": "Amelie Nothomb",
+"format": "Physisch",
+"cover": "die-passion.jpg"
+},
+{
+"title": "Der silberne Elefant",
+"autor": "Jemma Wayne",
+"format": "Physisch",
+"cover": "der-silberne-elefant.jpg"
+},
+{
+"title": "Alices Abenteuer im Wunderland",
+"autor": "Lewis Carroll",
+"format": "Physisch",
+"cover": "alice-abenteuer-im-wunderland.jpg"
+},
+{
+"title": "Das Spiel des Engels",
+"autor": "Carlos Ruiz Zafon",
+"format": "Physisch",
+"cover": "alice-abenteuer-im-wunderland.jpg"
+},
+{
+"title": "Der Wal und das Ende der Welt",
+"autor": "John Ironmonger",
+"format": "eBook",
+"cover": "der-wal.jpg"
+},
+{
+"title": "Turtles All The Way Down",
+"autor": "John Green",
+"format": "Physisch",
+"cover": "turtles-all-the-way-down.jpg"
+},
+{
+"title": "Die sieben Männer der Evelyn Hugo",
+"autor": "Taylor Jenkins Reid",
+"format": "eBook",
+"cover": "evelyn-hugo.jpg"
+},
+{
+"title": "Becks letzter Sommer",
+"autor": "Benedict Wells",
+"format": "Physisch",
+"cover": "becks-letzter-sommer.jpg"
+},
+{
+"title": "Café Morelli",
+"autor": "Giancarlo Gemin",
+"format": "Physisch",
+"cover": "cafe-morelli.jpg"
+},
+{
+"title": "Der Besuch der alten Dame",
+"autor": "Friedrich Dürrenmatt",
+"format": "Physisch",
+"cover": "der-besuch-der-alten-dame.jpg"
+},
+{
+"title": "Miracle Creek",
+"autor": "Angie Kim",
+"format": "eBook",
+"cover": "miracle-creek.jpg"
+},
+{
+"title": "Damals in Nagasaki",
+"autor": "Kazuo Ishiguro",
+"format": "Physisch",
+"cover": "damals-in-nagasaki.jpg"
+},
+{
+"title": "Marie Curie",
+"autor": "Frances Andreasen Osterfelt",
+"format": "Physisch",
+"cover": "marie-curie.jpg"
+},
+{
+"title": "Agnes Grey",
+"autor": "Anne Bronte",
+"format": "Physisch",
+"cover": "agnes-grey.jpg"
+},
+{
+"title": "Der Fürst des Nebels",
+"autor": "Carlos Ruiz Zafon",
+"format": "Physisch",
+"cover": "der-fuerst-des-nebels.jpg"
+},
+{
+"title": "Herkunft",
+"autor": "Sasa Stanisic",
+"format": "Physisch",
+"cover": "herkunft.jpg"
+},
+{
+"title": "Die Farbe Lila",
+"autor": "Alice Walker",
+"format": "Physisch",
+"cover": "die-farbe-lila.jpg"
+},
+{
+"title": "Was wir Frauen wollen",
+"autor": "Isabel Allende",
+"format": "Physisch",
+"cover": "was-wir-frauen-wollen.jpg"
+},
+{
+"title": "Liebes Kind",
+"autor": "Romy Hausmann",
+"format": "Physisch",
+"cover": "liebes-kind.jpg"
+},
+{
+"title": "So etwas wie ein Leben",
+"autor": "Amelie Nothomb",
+"format": "Physisch",
+"cover": "so-etwas-wie-ein-leben.jpg"
+},
+{
+"title": "1984",
+"autor": "George Orwell",
+"format": "Physisch",
+"cover": "1984.jpg"
+},
+{
+"title": "Die Physiker",
+"autor": "Friedrich Dürrenmatt",
+"format": "Physisch",
+"cover": "die-physiker.jpg"
+},
+{
+"title": "Radikale Zärtlichkeit",
+"autor": "Seyda Kurt",
+"format": "Physisch",
+"cover": "radikale-zaertlichkeit.jpg"
+},
+{
+"title": "You'll Be The Death Of Me",
+"autor": "Karen M. McManus",
+"format": "Physisch",
+"cover": "youll-be-the-death-of-me.jpg"
+},
+{
+"title": "Jack",
+"autor": "Anthony McCarten",
+"format": "Physisch",
+"cover": "jack.jpg"
+},
+{
+"title": "Gott wohnt im Wedding",
+"autor": "Regina Scheer",
+"format": "eBook",
+"cover": "gott-wohnt-im-wedding.jpg"
+},
+{
+"title": "Der Erlkönig",
+"autor": "Jerome Loubry",
+"format": "eBook",
+"cover": "der-erlkoenig.jpg"
+},
+{
+"title": "Kosmetik des Bösen",
+"autor": "Amelie Nothomb",
+"format": "Physisch",
+"cover": "kosmetik-des-boesen.jpg"
+},
+{
+"title": "Emma",
+"autor": "Jane Austen",
+"format": "Physisch",
+"cover": "emma.jpg"
+},
+{
+"title": "Mädchen, Frau etc.",
+"autor": "Bernardine Evaristo",
+"format": "Physisch",
+"cover": "maedchen-frau-etc.jpg"
 },
 {
 "title": "",
