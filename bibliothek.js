@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     let allItems = [];
 
-    // 17 verschiedene Farben/Verläufe für die Buchrücken
+    // 17 verschiedene Farben/Verläufe für die Buchrücken[cite: 3]
     const spineColors = [
         "linear-gradient(135deg, #d65d85 0%, #a23b5f 100%)", // 1. Sanftes Rosa-Pink
         "linear-gradient(135deg, #a1dbd8 0%, #587371 100%)", // 2. Helles Mint-Türkis
@@ -92,17 +92,20 @@ document.addEventListener('DOMContentLoaded', () => {
             return isBook && hasTitle;
         });
 
-        // Bücher alphabetisch nach Titel sortieren (mit localesCompare für Umlaute)
+        // Bücher alphabetisch nach Titel sortieren (mit localesCompare für Umlaute)[cite: 3]
         booksOnly.sort((a, b) => (a.title || '').localeCompare(b.title || '', 'de', { sensitivity: 'base' }));
+
+        const isMobile = window.innerWidth <= 480;
 
         const decoOnly = items.filter(item => {
             const fmt = item.format ? item.format.toLowerCase() : '';
+            // Deko2 auf Mobilgeräten (Google Pixel 10a) herausfiltern
+            if (isMobile && fmt === 'deko2') return false;
             return fmt === 'deko' || fmt === 'deko2';
         });
 
         const defaultDecos = decoOnly.length > 0 ? decoOnly : [
-            { title: "Farn", format: "Deko", cover: "farn.png" },
-            { title: "Tute", format: "Deko2", cover: "tute.png" }
+            { title: "Farn", format: "Deko", cover: "farn.png" }
         ];
 
         const finalDisplayList = [];
@@ -122,14 +125,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Automatische Regalbegrenzung angepasst für Mobilgeräte (z. B. Google Pixel 10a)
-        const isMobile = window.innerWidth <= 480;
-        const firstShelfLimit = isSearchMode ? (isMobile ? 5 : 8) : (isMobile ? 6 : 10);
-        const subsequentShelfLimit = isSearchMode ? (isMobile ? 8 : 12) : (isMobile ? 8 : 15);
+        // Regalbegrenzung für Mobilgeräte: Erstes Brett = 3 Bücher, Folgebretter = 6 Bücher
+        const firstShelfLimit = isSearchMode ? 5 : (isMobile ? 3 : 10);
+        const subsequentShelfLimit = isSearchMode ? 8 : (isMobile ? 6 : 15);
 
         let currentShelf = createShelfElement(isSearchMode);
 
-        // Retro Flip-Clock Zähler oben auf dem ersten Regalboden einfügen
+        // Retro Flip-Clock Zähler oben auf dem ersten Regalboden einfügen[cite: 3]
         const countBadge = document.createElement('div');
         countBadge.classList.add('flip-counter-container');
         
@@ -241,7 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (modal) {
                     modalCover.src = imagePath;
                     modalTitle.textContent = item.title;
-                    // Klappentext aus JSON-Daten setzen, falls vorhanden
                     modalKlappentext.textContent = item.klappentext && item.klappentext.trim() !== '' 
                         ? item.klappentext 
                         : 'Noch kein Klappentext hinterlegt.';
@@ -260,3 +261,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+```[cite: 3]

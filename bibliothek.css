@@ -679,4 +679,8 @@ h2 {
     .modal-info h3 {
         font-size: 1.5rem;
     }
+
+    .deko2-card {
+        display: none !important;
+    }
 }
