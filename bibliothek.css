@@ -380,7 +380,7 @@ h2 {
     max-width: none;
     object-fit: contain;
     position: relative;
-    bottom: -5px; 
+    bottom: 0px; 
     filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
 }
 

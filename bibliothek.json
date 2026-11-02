@@ -354,6 +354,11 @@
 "klappentext": "Der 13-jährige Oliver, genannt Boo, ist hochbegabt, schüchtern und ein Außenseiter in seiner Schule. Als er plötzlich stirbt, findet er sich an einem höchst ungewöhnlichen Ort wieder: einem Himmel, in dem ausschließlich amerikanische Jugendliche leben, die mit 13 Jahren gestorben sind. Dort versucht Boo, sich in seiner neuen Welt zurechtzufinden. Als ein weiterer Junge auftaucht und behauptet, dass sie beide ermordet wurden, beginnt Boo, die Umstände seines Todes zu hinterfragen. Eine ebenso humorvolle wie berührende Geschichte über Freundschaft, Außenseitertum, Mut und die großen Fragen des Lebens und des Todes."
 },
 {
+"title": "matrjoshka",
+"format": "Deko",
+"cover": "matrjoshka.png"
+},
+{
 "title": "Monstera",
 "format": "Deko",
 "cover": "monstera.png"
@@ -2455,6 +2460,11 @@
 "autor": "Lucy Maud Montgomery",
 "format": "Physisch",
 "cover": "das-schloss-in-den-wolken.jpg"
+},
+{
+"title": "kakao",
+"format": "Deko",
+"cover": "kakao.png"
 },
 {
 "title": "A Very Large Expanse Of Sea",
