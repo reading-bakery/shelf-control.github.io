@@ -22,14 +22,14 @@
 "klappentext": "Agatha Christie träumt zunächst von einer Karriere als Pianistin, doch das Schicksal führt sie auf einen ganz anderen Weg. Als sie beginnt, Geschichten zu schreiben, entdeckt sie ihre Leidenschaft für das Verbrechen und erschafft Figuren, die Literaturgeschichte schreiben werden. Doch während ihre Krimis immer erfolgreicher werden, sucht Agatha im eigenen Leben nach Liebe, Anerkennung und ihrem ganz persönlichen Glück. Die bewegende Geschichte einer Frau, die sich nicht von geplatzten Träumen aufhalten lässt und zur unvergessenen Queen of Crime wird."
 },
 {
-"title": "farn",
+"title": "kakao",
 "format": "Deko",
-"cover": "farn.png"
+"cover": "kakao.png"
 },
 {
 "title": "lucy",
 "format": "Deko",
-"cover": "lucy2.png"
+"cover": "lucy.png"
 },
 {
 "title": "kerze",
@@ -362,6 +362,11 @@
 "title": "matrjoshka",
 "format": "Deko",
 "cover": "matrjoshka.png"
+},
+{
+"title": "amur",
+"format": "Deko",
+"cover": "amur.png"
 },
 {
 "title": "Monstera",
@@ -2465,11 +2470,6 @@
 "autor": "Lucy Maud Montgomery",
 "format": "Physisch",
 "cover": "das-schloss-in-den-wolken.jpg"
-},
-{
-"title": "kakao",
-"format": "Deko",
-"cover": "kakao.png"
 },
 {
 "title": "A Very Large Expanse Of Sea",
