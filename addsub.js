@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. KONFIGURATION ---
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz9s1gQDb65Zqf2hJmgnDRC1IP2AGcYvOT1hWPF35TZ9zR2LpdCAFvjBtjX9ax2Q00X/exec";
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxH5qweCK_CZRlPaIThVGAfqGhEGsvb3Hdl0LX2xBwgHrJT7HudznfXQ3B2CuziF0-v4w/exec";
 
     const setupData = {
         gender: ["Weiblich", "Männlich", "Divers", "Mix"],
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 4. MODAL STEUERUNG ---
     const closeAll = () => {
         inputModal.style.display = 'none';
-        successModal.style.display = 'none';
+        if (successModal) successModal.style.display = 'none';
         if (addSubForm) addSubForm.reset();
         saveBtn.disabled = false;
         saveBtn.innerText = "Speichern";
@@ -89,62 +89,36 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
 
             const title = document.getElementById('title').value.trim();
-            const fileInput = document.getElementById('cover');
-
             if (!title) {
                 alert("Bitte gib einen Buchtitel ein!");
                 return;
             }
 
-            if (fileInput.files.length === 0) {
-                alert("Bitte wähle ein Cover-Bild aus!");
-                return;
-            }
-
-            // Button sperren für Feedback
             saveBtn.disabled = true;
-            saveBtn.innerText = "Wird hochgeladen...";
+            saveBtn.innerText = "Wird gespeichert...";
 
-            const file = fileInput.files[0];
-            const reader = new FileReader();
+            const fileInput = document.getElementById('cover');
+            const pages = parseInt(document.getElementById('pages').value) || 0;
+            const price = parseFloat(document.getElementById('price').value) || 0;
+            
+            let umfangText = "";
+            if (pages > 0 && pages <= 300) umfangText = "bis 300";
+            else if (pages >= 301 && pages <= 500) umfangText = "301-500";
+            else if (pages >= 501) umfangText = "ab 501";
 
-            reader.onload = async function() {
-                const base64String = reader.result.split(',')[1];
-                const pages = parseInt(document.getElementById('pages').value) || 0;
-                
-                let umfangText = "";
-                if (pages > 0 && pages <= 300) umfangText = "bis 300";
-                else if (pages >= 301 && pages <= 500) umfangText = "301-500";
-                else if (pages >= 501) umfangText = "ab 501";
-
-                const payload = {
-                    base64: base64String,
-                    type: file.type,
-                    name: file.name,
-                    title: title,
-                    author: document.getElementById('author').value,
-                    isbn: document.getElementById('isbnnumber').value,
-                    pages: pages,
-                    umfang: umfangText,
-                    gender: document.getElementById('gender').value,
-                    genre: document.getElementById('genre').value,
-                    language: document.getElementById('language').value,
-                    format: document.getElementById('format').value,
-                    publisher: document.getElementById('publisher').value
-                };
-
+            // Funktion zum Senden an das Apps Script
+            const sendData = async (payload) => {
                 try {
                     const response = await fetch(APPS_SCRIPT_URL, {
                         method: 'POST',
                         body: JSON.stringify(payload)
                     });
 
-                    // WICHTIG: Wir lesen die Antwort als TEXT, nicht als JSON
                     const resultText = await response.text();
 
                     if (resultText.includes("SUCCESS")) {
                         closeAll();
-                        successModal.style.display = 'flex'; // Hier startet deine Rakete 🚀
+                        if (successModal) successModal.style.display = 'flex';
                     } else {
                         throw new Error(resultText || "Fehler beim Speichern");
                     }
@@ -156,7 +130,55 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
 
-            reader.readAsDataURL(file);
+            // Prüfen, ob ein Cover ausgewählt wurde
+            if (fileInput && fileInput.files && fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+
+                reader.onload = async function() {
+                    const base64String = reader.result.split(',')[1];
+                    const payload = {
+                        base64: base64String,
+                        type: file.type,
+                        name: file.name,
+                        title: title,
+                        author: document.getElementById('author').value,
+                        isbn: document.getElementById('isbnnumber').value,
+                        pages: pages,
+                        umfang: umfangText,
+                        price: price,
+                        "entry.197444590": price,
+                        gender: document.getElementById('gender').value,
+                        genre: document.getElementById('genre').value,
+                        language: document.getElementById('language').value,
+                        format: document.getElementById('format').value,
+                        publisher: document.getElementById('publisher').value
+                    };
+                    await sendData(payload);
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                // Ohne Bild absenden
+                const payload = {
+                    base64: "",
+                    type: "",
+                    name: "placeholder.png",
+                    title: title,
+                    author: document.getElementById('author').value,
+                    isbn: document.getElementById('isbnnumber').value,
+                    pages: pages,
+                    umfang: umfangText,
+                    price: price,
+                    "entry.197444590": price,
+                    gender: document.getElementById('gender').value,
+                    genre: document.getElementById('genre').value,
+                    language: document.getElementById('language').value,
+                    format: document.getElementById('format').value,
+                    publisher: document.getElementById('publisher').value
+                };
+                await sendData(payload);
+            }
         };
     }
 });
