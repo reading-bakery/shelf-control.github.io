@@ -53,26 +53,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const filtered = allItems.filter(item => {
             const format = item.format ? item.format.toLowerCase() : '';
             const sprache = item.sprache ? item.sprache.toLowerCase() : '';
+            const rezi = item.rezi ? item.rezi.toLowerCase() : '';
             const title = item.title ? item.title.toLowerCase() : '';
             const autor = item.autor ? item.autor.toLowerCase() : '';
             const isDeko = format === 'deko' || format === 'deko2';
 
-            // Wenn eine Suchanfrage läuft, blenden wir Deko über die Suche aus, 
-            // aber bei aktiven Kategorie-Tabs (Print, eBook, Original) lassen wir Deko-Elemente zu, 
-            // damit sie gleich wieder mit eingestreut werden können.
             if (query.length > 0 && isDeko) return false;
 
             let matchesTab = true;
             if (filter === 'Print') {
-                matchesTab = format !== 'ebook'; // Erlaubt Print-Bücher UND Deko-Elemente für den Generator
+                matchesTab = format !== 'ebook';
             } else if (filter === 'eBook') {
-                matchesTab = format === 'ebook'; // Erlaubt eBooks (und wir erlauben Deko dazu)
+                matchesTab = format === 'ebook';
+            } else if (filter === 'rezi') {
+                matchesTab = rezi === 'ja';
             } else if (filter === 'Original') {
-                matchesTab = sprache === 'original'; // Erlaubt Original-Spruch (und wir erlauben Deko dazu)
+                matchesTab = sprache === 'original';
             }
 
-            // Wenn es sich um ein Deko-Element handelt, soll es den Tab-Filter immer passieren,
-            // es sei denn, im Tab "eBook" wollen wir reinzoomen (optional: Deko soll überall rein)
             if (isDeko) {
                 if (query.length > 0) return false;
                 return true; 
@@ -84,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const isSearchActive = query.length > 0;
-        // Wir übergeben dem Renderer ein Flag, ob aktiv gefiltert/gesucht wird
         renderBookshelf(filtered, true, isSearchActive);
     }
 
@@ -108,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const isMobile = window.innerWidth <= 480;
 
-        // Alle Original-Deko-Elemente aus dem globalen allItems extrahieren, falls in 'items' gerade keine dabei sind
         const allDecoSources = allItems.filter(item => {
             const fmt = item.format ? item.format.toLowerCase() : '';
             return fmt === 'deko' || fmt === 'deko2';
@@ -120,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return fmt === 'deko' || fmt === 'deko2';
         });
 
-        // Falls durch den Filter gerade keine Dekos im Array sind, nehmen wir den globalen Deko-Pool
         const availableDecos = decoOnly.length > 0 ? decoOnly : (allDecoSources.length > 0 ? allDecoSources : [
             { title: "Farn", format: "Deko", cover: "farn.png" }
         ]);
@@ -133,25 +128,20 @@ document.addEventListener('DOMContentLoaded', () => {
             finalDisplayList.push(book);
             bookCounter++;
 
-            // Deko-Elemente werden jetzt unabhängig vom Tab (auch bei Print, eBook, Original) 
-            // nach jedem 11. Buch und dann alle 23 Bücher eingestreut.
             if (!isSearchMode) {
                 if (bookCounter === 11 || (bookCounter > 11 && (bookCounter - 11) % 23 === 0)) {
                     const currentDeco = availableDecos[decoIndex % availableDecos.length];
-                    // Vermeide doppelte Deko-Objekte in direkter Folge falls nötig, oder einfach einfügen:
                     finalDisplayList.push(currentDeco);
                     decoIndex++;
                 }
             }
         });
 
-        // Regalbegrenzung für Mobilgeräte: Erstes Brett = 3/9 Bücher, Folgebretter...
         const firstShelfLimit = isSearchMode ? 5 : (isMobile ? 9 : 10);
         const subsequentShelfLimit = isSearchMode ? 8 : (isMobile ? 9 : 15);
 
         let currentShelf = createShelfElement(isSearchMode);
 
-        // Retro Flip-Clock Zähler oben auf dem ersten Regalboden einfügen
         const countBadge = document.createElement('div');
         countBadge.classList.add('flip-counter-container');
         
@@ -198,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const format = item.format ? item.format.toLowerCase() : '';
         const sprache = item.sprache ? item.sprache.toLowerCase() : '';
+        const rezi = item.rezi ? item.rezi.toLowerCase() : '';
         const isDeko = format === 'deko';
         const isDeko2 = format === 'deko2';
 
@@ -232,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const badgeClass = isEbook ? 'ebook' : 'print';
             const formatLabel = isEbook ? 'eBook' : 'Print';
             const isOriginal = sprache === 'original';
+            const isRezi = rezi === 'ja';
 
             let imagePath = item.cover;
             if (imagePath) {
@@ -243,13 +235,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Falls es sich um ein Rezensionsexemplar handelt, wird die Klasse .format-badge.original verwendet,
+            // damit Position (oben links) und Farbe exakt wie beim Original-Badge sind.
+            let leftBadgeHtml = '';
+            if (isRezi) {
+                leftBadgeHtml = '<span class="format-badge original">Rezi</span>';
+            } else if (isOriginal) {
+                leftBadgeHtml = '<span class="format-badge original">Original</span>';
+            }
+
             itemCard.innerHTML = `
                 <div class="book-spine" style="background: ${spineColor};">
                     <span class="spine-title">${item.title}</span>
                 </div>
                 <div class="book-cover-container">
                     <img src="${imagePath}" alt="${item.title}" class="book-cover" onerror="this.src='https://via.placeholder.com/130x190?text=Kein+Cover'">
-                    ${isOriginal ? '<span class="format-badge original">Original</span>' : ''}
+                    ${leftBadgeHtml}
                     <span class="format-badge ${badgeClass}">${formatLabel}</span>
                 </div>
             `;
