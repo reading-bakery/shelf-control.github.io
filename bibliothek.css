@@ -489,6 +489,34 @@ h2 {
     color: rgb(224, 224, 87);
 }
 
+/* =========================================================
+   SILBENTRENNUNG & TEXTAUSRICHTUNG (DESKTOP, TABLET & MOBILE)
+   ========================================================= */
+
+/* Globale Anwendung für Textbereiche & Modals */
+.spine-title,
+.modal-info,
+.modal-info h3,
+.modal-klappentext,
+.modal-klappentext p,
+.modal-notes textarea,
+.search-box input {
+    text-align: left; /* Linksbündig */
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto; /* Automatische Silbentrennung nach hinterlegtem Sprachstandard */
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
+/* Anpassung der Spine-Titel (vertikaler Text) */
+.spine-title {
+    text-align: left;
+    /* Ergänzung für saubere Trennung bei vertikalem Text */
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
 @media (max-width: 740px) {
     .library-container {
         padding: 15px;

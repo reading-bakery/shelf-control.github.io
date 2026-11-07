@@ -57,24 +57,35 @@ document.addEventListener('DOMContentLoaded', () => {
             const autor = item.autor ? item.autor.toLowerCase() : '';
             const isDeko = format === 'deko' || format === 'deko2';
 
+            // Wenn eine Suchanfrage läuft, blenden wir Deko über die Suche aus, 
+            // aber bei aktiven Kategorie-Tabs (Print, eBook, Original) lassen wir Deko-Elemente zu, 
+            // damit sie gleich wieder mit eingestreut werden können.
+            if (query.length > 0 && isDeko) return false;
+
             let matchesTab = true;
             if (filter === 'Print') {
-                matchesTab = format !== 'ebook' && !isDeko;
+                matchesTab = format !== 'ebook'; // Erlaubt Print-Bücher UND Deko-Elemente für den Generator
             } else if (filter === 'eBook') {
-                matchesTab = format === 'ebook';
+                matchesTab = format === 'ebook'; // Erlaubt eBooks (und wir erlauben Deko dazu)
             } else if (filter === 'Original') {
-                matchesTab = sprache === 'original' && !isDeko;
+                matchesTab = sprache === 'original'; // Erlaubt Original-Spruch (und wir erlauben Deko dazu)
+            }
+
+            // Wenn es sich um ein Deko-Element handelt, soll es den Tab-Filter immer passieren,
+            // es sei denn, im Tab "eBook" wollen wir reinzoomen (optional: Deko soll überall rein)
+            if (isDeko) {
+                if (query.length > 0) return false;
+                return true; 
             }
 
             const matchesSearch = title.includes(query) || autor.includes(query);
-
-            if (query.length > 0 && isDeko) return false;
 
             return matchesTab && matchesSearch;
         });
 
         const isSearchActive = query.length > 0;
-        renderBookshelf(filtered, isSearchActive, isSearchActive);
+        // Wir übergeben dem Renderer ein Flag, ob aktiv gefiltert/gesucht wird
+        renderBookshelf(filtered, true, isSearchActive);
     }
 
     function renderBookshelf(items, isFiltered = false, isSearchMode = false) {
@@ -92,21 +103,27 @@ document.addEventListener('DOMContentLoaded', () => {
             return isBook && hasTitle;
         });
 
-        // Bücher alphabetisch nach Titel sortieren (mit localesCompare für Umlaute)
+        // Bücher alphabetisch nach Titel sortieren (mit localeCompare für Umlaute)
         booksOnly.sort((a, b) => (a.title || '').localeCompare(b.title || '', 'de', { sensitivity: 'base' }));
 
         const isMobile = window.innerWidth <= 480;
 
+        // Alle Original-Deko-Elemente aus dem globalen allItems extrahieren, falls in 'items' gerade keine dabei sind
+        const allDecoSources = allItems.filter(item => {
+            const fmt = item.format ? item.format.toLowerCase() : '';
+            return fmt === 'deko' || fmt === 'deko2';
+        });
+
         const decoOnly = items.filter(item => {
             const fmt = item.format ? item.format.toLowerCase() : '';
-            // Deko2 auf Mobilgeräten (Google Pixel 10a) herausfiltern
             if (isMobile && fmt === 'deko2') return false;
             return fmt === 'deko' || fmt === 'deko2';
         });
 
-        const defaultDecos = decoOnly.length > 0 ? decoOnly : [
+        // Falls durch den Filter gerade keine Dekos im Array sind, nehmen wir den globalen Deko-Pool
+        const availableDecos = decoOnly.length > 0 ? decoOnly : (allDecoSources.length > 0 ? allDecoSources : [
             { title: "Farn", format: "Deko", cover: "farn.png" }
-        ];
+        ]);
 
         const finalDisplayList = [];
         let bookCounter = 0;
@@ -116,16 +133,19 @@ document.addEventListener('DOMContentLoaded', () => {
             finalDisplayList.push(book);
             bookCounter++;
 
-            if (!isFiltered) {
+            // Deko-Elemente werden jetzt unabhängig vom Tab (auch bei Print, eBook, Original) 
+            // nach jedem 11. Buch und dann alle 23 Bücher eingestreut.
+            if (!isSearchMode) {
                 if (bookCounter === 11 || (bookCounter > 11 && (bookCounter - 11) % 23 === 0)) {
-                    const currentDeco = defaultDecos[decoIndex % defaultDecos.length];
+                    const currentDeco = availableDecos[decoIndex % availableDecos.length];
+                    // Vermeide doppelte Deko-Objekte in direkter Folge falls nötig, oder einfach einfügen:
                     finalDisplayList.push(currentDeco);
                     decoIndex++;
                 }
             }
         });
 
-        // Regalbegrenzung für Mobilgeräte: Erstes Brett = 3 Bücher, Folgebretter = 6 Bücher
+        // Regalbegrenzung für Mobilgeräte: Erstes Brett = 3/9 Bücher, Folgebretter...
         const firstShelfLimit = isSearchMode ? 5 : (isMobile ? 9 : 10);
         const subsequentShelfLimit = isSearchMode ? 8 : (isMobile ? 9 : 15);
 
@@ -241,6 +261,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const modalKlappentext = document.getElementById('modalKlappentext');
 
                 if (modal) {
+                    const isEnglish = item.sprache && (item.sprache.toLowerCase() === 'en' || item.sprache.toLowerCase() === 'englisch' || item.sprache.toLowerCase() === 'original');
+                    const langCode = isEnglish ? 'en' : 'de';
+
+                    modalTitle.setAttribute('lang', langCode);
+                    modalKlappentext.setAttribute('lang', langCode);
+
                     modalCover.src = imagePath;
                     modalTitle.textContent = item.title;
                     modalKlappentext.textContent = item.klappentext && item.klappentext.trim() !== '' 
