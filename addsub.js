@@ -1,139 +1,173 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  console.log("ADDMODAL LÄUFT");
+document.addEventListener("DOMContentLoaded", () => {
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxH5qweCK_CZRlPaIThVGAfqGhEGsvb3Hdl0LX2xBwgHrJT7HudznfXQ3B2CuziF0-v4w/exec";
 
-  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse";
-  const JSON_URL = "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/sub.json";
-  
-  const FORM_ENTRIES = {
-    isbn: "entry.493642308",
-    title: "entry.1995249053", 
-    author: "entry.1794428850", 
-    gender: "entry.1917256559", 
-    umfang: "entry.989549743", 
-    seiten: "entry.2099091970",
-    genre: "entry.1441130368", 
-    sprache: "entry.610782042", // Originalsprache
-    status: "entry.680648898", 
-    verlag: "entry.307032270",  
-    cover: "entry.1309739909",
-    format: "entry.63372831",
-    preis: "entry.1974445901"
+  // Option-Daten inklusive PoC
+  const optionsData = {
+    poc: ["Ja", "Nein"],
+    gender: ["Weiblich", "Männlich", "Mix", "Divers"],
+    genre: ["Roman", "Non Fiction", "Thriller/Krimi", "Erzählung", "Graphic Novel/Comic"],
+    language: ["Deutsch", "Englisch", "Französisch", "Spanisch", "Italienisch", "Portugiesisch", "Koreanisch", "Japanisch", "Chinesisch", "Niederländisch", "Hebräisch", "Türkisch", "Russisch", "Schwedisch", "Norwegisch", "Dänisch", "Finnisch", "Polnisch", "Tschechisch", "Griechisch", "Arabisch", "Englisch Original", "Französisch Original", "Spanisch Original"],
+    format: ["Softcover", "Hardcover", "eBook", "Hörbuch"],
+    status: ["Neuzugang", "SuB", "Ausgeliehen", "Rezensionsexemplar"],
+    publisher: ["Sonstiges", "ATB/Aufbau/RL/Blumenbar", "Atlantik", "Atrium", "Blanvalet", "btb", "Büchergilde", "Carlsen", "C.Bertelsmann", "CBJ", "C.H.Beck", "Diogenes", "dtv", "Dumont", "Ecco", "Eichborn", "Eisele", "Fischer", "Frankfurter Verlagsanstalt", "Goldmann", "Gutkind", "Hanser", "Harper Collins", "Heyne", "Insel", "Kampa", "Kein&Aber", "Knaur/Droemer", "Kjona", "KiWi", "Klett-Cotta", "Knesebeck", "Königskinder", "Limes", "Luchterhand", "Lübbe", "LYX", "Penguin", "Piper", "Pola", "Reclam", "Rowohlt/rororo", "Suhrkamp", "transcript", "Ullstein/List", "Verbrecher", "Zsolnay"]
   };
 
-  let subDatenbank = [];
-
-  try {
-    const response = await fetch(JSON_URL);
-    const daten = await response.json();
-    subDatenbank = daten.books || [];
-  } catch (error) {
-    console.warn("Konnte sub.json nicht für Cover-Match laden:", error);
-  }
-
-  const populateSelect = (elementId, options) => {
+  function populateSelect(elementId, options) {
     const select = document.getElementById(elementId);
     if (!select) return;
-    options.forEach(opt => {
-      const option = document.createElement("option");
-      option.value = opt;
-      option.textContent = opt;
-      select.appendChild(option);
+
+    const firstOption = select.querySelector("option[disabled]");
+    select.innerHTML = "";
+    if (firstOption) select.appendChild(firstOption);
+
+    options.forEach(optText => {
+      const opt = document.createElement("option");
+      opt.value = optText;
+      opt.textContent = optText;
+      select.appendChild(opt);
     });
-  };
+  }
 
-  populateSelect("gender", ["Weiblich", "Männlich", "Mix", "Divers"]);
-  populateSelect("genre", ["Roman", "Non Fiction", "Thriller/Krimi", "Erzählung", "Graphic Novel/Comic"]);
-  populateSelect("publisher", ["Sonstiges", "ATB/Aufbau/RL/Blumenbar", "Atlantik", "Atrium", "Blanvalet", "btb", "Büchergilde", "Carlsen", "C.Bertelsmann", "CBJ", "C.H.Beck", "Diogenes", "dtv", "Dumont", "Ecco", "Eichborn", "Eisele", "Fischer", "Frankfurter Verlagsanstalt", "Goldmann", "Gutkind", "Hanser", "Harper Collins", "Heyne", "Insel", "Kampa", "Kein&Aber", "Knaur/Droemer", "Kjona", "KiWi", "Klett-Cotta", "Knesebeck", "Königskinder", "Limes", "Luchterhand", "Lübbe", "LYX", "Penguin", "Piper", "Pola", "Reclam", "Rowohlt/rororo", "Suhrkamp", "transcript", "Ullstein/List", "Verbrecher", "Zsolnay"]);
-  populateSelect("language", ["Deutsch", "Englisch", "Französisch", "Spanisch", "Italienisch", "Portugiesisch", "Koreanisch", "Japanisch", "Chinesisch", "Niederländisch", "Hebräisch", "Türkisch", "Russisch", "Schwedisch", "Norwegisch", "Dänisch", "Finnisch", "Polnisch", "Tschechisch", "Griechisch", "Arabisch", "Englisch Original", "Französisch Original", "Spanisch Original"]);
-  populateSelect("format", ["Softcover", "Hardcover", "eBook", "Hörbuch"]);
+  // Dropdowns befüllen
+  populateSelect("poc", optionsData.poc);
+  populateSelect("gender", optionsData.gender);
+  populateSelect("genre", optionsData.genre);
+  populateSelect("language", optionsData.language);
+  populateSelect("format", optionsData.format);
+  populateSelect("publisher", optionsData.publisher);
+  populateSelect("status", optionsData.status);
 
+  const form = document.getElementById("addSubForm");
+  const addBtn = document.getElementById("addSub");
+  const saveBtn = document.querySelector("#addSubForm .modal-save");
+  const cancelBtn = document.querySelector("#addSubForm .modal-cancel");
   const subModal = document.getElementById("subModal");
-  const addSubBtn = document.getElementById("addSub");
 
-  addSubBtn?.addEventListener("click", () => {
-    if (subModal) subModal.classList.add("active");
-  });
-
-  document.querySelectorAll(".modal-cancel").forEach(btn => {
-    btn.addEventListener("click", () => {
-      if (subModal) subModal.classList.remove("active");
+  if (addBtn && subModal) {
+    addBtn.addEventListener("click", () => {
+      subModal.classList.add("active");
     });
-  });
+  }
 
-  const titleInput = document.getElementById("title");
-  titleInput?.addEventListener("blur", () => {
-    const val = titleInput.value.trim();
-    if (!val) return;
-    const treffer = subDatenbank.find(b => b.title.toLowerCase().trim() === val.toLowerCase().trim());
-    if (treffer && treffer.cover) {
-      window.matchedCoverUrl = `https://github.com/reading-bakery/shelf-control.github.io/blob/main/images/sub/${treffer.cover}?raw=true`;
-    } else {
-      window.matchedCoverUrl = "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/default-cover.jpg";
-    }
-  });
+  if (cancelBtn && subModal) {
+    cancelBtn.addEventListener("click", () => {
+      subModal.classList.remove("active");
+    });
+  }
 
-  const saveBtn = document.querySelector("#subModal .modal-save");
-  saveBtn?.addEventListener("click", async () => {
-    const titleVal = document.getElementById("title")?.value.trim();
-    if (!titleVal) {
-      alert("Bitte gib einen Buchtitel ein.");
+  if (!saveBtn) return;
+
+  saveBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const title = document.getElementById("title")?.value.trim();
+    if (!title) {
+      alert("Bitte gib mindestens einen Buchtitel ein!");
       return;
     }
 
-    const isbnVal = document.getElementById("isbnnumber")?.value || "";
-    const authorVal = document.getElementById("author")?.value || "";
-    const pagesVal = document.getElementById("pages")?.value || "0";
-    const priceVal = document.getElementById("price")?.value || "0";
-    const genderVal = document.getElementById("gender")?.value || "";
-    const genreVal = document.getElementById("genre")?.value || "";
-    const publisherVal = document.getElementById("publisher")?.value || "";
-    const languageVal = document.getElementById("language")?.value || "";
-    const formatVal = document.getElementById("format")?.value || "";
-    
-    let umfangVal = "";
-    const pNum = parseInt(pagesVal, 10);
-    if (pNum > 0) {
-      if (pNum <= 300) umfangVal = "bis 300";
-      else if (pNum <= 500) umfangVal = "301-500";
-      else umfangVal = "ab 501";
-    }
+    const isbn = document.getElementById("isbnnumber")?.value.trim() || "";
+    const author = document.getElementById("author")?.value.trim() || "";
+    const pages = document.getElementById("pages")?.value || 0;
+    const price = document.getElementById("price")?.value || 0;
 
-    const coverVal = window.matchedCoverUrl || "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/default-cover.jpg";
+    const poc = document.getElementById("poc")?.value || "";
+    const gender = document.getElementById("gender")?.value || "";
+    const genre = document.getElementById("genre")?.value || "";
+    const publisher = document.getElementById("publisher")?.value || "";
+    const language = document.getElementById("language")?.value || "";
+    const format = document.getElementById("format")?.value || "";
+    const status = document.getElementById("status")?.value || "SuB";
 
-    const fd = new FormData();
-    fd.append(FORM_ENTRIES.isbn, isbnVal);
-    fd.append(FORM_ENTRIES.title, titleVal);
-    fd.append(FORM_ENTRIES.author, authorVal);
-    fd.append(FORM_ENTRIES.gender, genderVal);
-    fd.append(FORM_ENTRIES.umfang, umfangVal);
-    fd.append(FORM_ENTRIES.seiten, pagesVal);
-    fd.append(FORM_ENTRIES.genre, genreVal);
-    fd.append(FORM_ENTRIES.sprache, languageVal);
-    fd.append(FORM_ENTRIES.status, "SuB");
-    fd.append(FORM_ENTRIES.verlag, publisherVal);
-    fd.append(FORM_ENTRIES.cover, coverVal);
-    fd.append(FORM_ENTRIES.format, formatVal);
-    fd.append(FORM_ENTRIES.preis, priceVal);
+    const coverInput = document.getElementById("cover");
+    let base64Image = null;
+    let imageName = null;
+    let imageType = null;
+
+    const readCoverImage = (file) => {
+      return new Promise((resolve, reject) => {
+        if (!file) return resolve(null);
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64String = reader.result.split(",")[1];
+          resolve({
+            base64: base64String,
+            name: file.name,
+            type: file.type
+          });
+        };
+        reader.onerror = (error) => reject(error);
+        reader.readAsDataURL(file);
+      });
+    };
 
     try {
-      await fetch(FORM_URL, { method: "POST", mode: "no-cors", body: fd });
-      
-      if (subModal) subModal.classList.remove("active");
-      
-      const successModal = document.getElementById("successAddModal");
-      if (successModal) {
-        successModal.classList.add("active");
-        const okBtn = document.getElementById("btnSuccessAddOk");
-        if (okBtn) {
-          okBtn.onclick = () => location.reload();
+      saveBtn.disabled = true;
+      saveBtn.textContent = "Speichere...";
+
+      if (coverInput && coverInput.files.length > 0) {
+        const imgData = await readCoverImage(coverInput.files[0]);
+        if (imgData) {
+          base64Image = imgData.base64;
+          imageName = imgData.name;
+          imageType = imgData.type;
         }
-      } else {
-        alert("Buch wurde erfolgreich hinzugefügt! 🚀");
-        location.reload();
       }
 
+      const payload = {
+        title: title,
+        isbn: isbn,
+        author: author,
+        poc: poc,
+        gender: gender,
+        format: format,
+        umfang: pages > 500 ? "ab 501" : pages > 300 ? "301-500" : "bis 300",
+        seiten: Number(pages),
+        genre: genre,
+        sprache: language,
+        status: status,
+        verlag: publisher,
+        preis: Number(price),
+        base64: base64Image,
+        name: imageName,
+        type: imageType
+      };
+
+      const response = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (result.status === "success") {
+        const modalContent = subModal.querySelector(".modal-content-2");
+        if (modalContent) {
+          modalContent.innerHTML = `
+            <div style="text-align: center; padding: 20px;">
+              <p style="font-size: 1.1em; margin: 20px 0;"><strong>${title}</strong> wurde hinzugefügt. 🚀</p>
+              <button class="modal-save" id="btnSuccessAddOk">Super!</button>
+            </div>
+          `;
+          modalContent.querySelector("button").onclick = () => location.reload();
+        } else {
+          alert("Buch erfolgreich eingetragen!");
+          location.reload();
+        }
+      } else {
+        alert("Fehler beim Speichern: " + result.message);
+        saveBtn.disabled = false;
+        saveBtn.textContent = "Speichern";
+      }
     } catch (err) {
-      alert("Fehler beim Speichern: " + err);
+      console.error("Fehler beim Übertragen:", err);
+      alert("Fehler beim Senden der Daten: " + err.message);
+      saveBtn.disabled = false;
+      saveBtn.textContent = "Speichern";
     }
   });
 });
