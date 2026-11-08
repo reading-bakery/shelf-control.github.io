@@ -1,184 +1,139 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. KONFIGURATION ---
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxH5qweCK_CZRlPaIThVGAfqGhEGsvb3Hdl0LX2xBwgHrJT7HudznfXQ3B2CuziF0-v4w/exec";
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("ADDMODAL LÄUFT");
 
-    const setupData = {
-        gender: ["Weiblich", "Männlich", "Divers", "Mix"],
-        genre: ["Roman", "Non Fiction", "Thriller/Krimi", "Erzählung", "Graphic Novel/Comic"],
-        languages: [
-            "Deutsch", "Englisch", "Französisch", "Spanisch", "Italienisch", 
-            "Portugiesisch", "Koreanisch", "Japanisch", "Chinesisch", 
-            "Niederländisch", "Hebräisch", "Türkisch", "Russisch", 
-            "Schwedisch", "Norwegisch", "Dänisch", "Finnisch", 
-            "Polnisch", "Tschechisch", "Griechisch", "Arabisch", 
-            "Englisch Original", "Französisch Original", "Spanisch Original"
-        ],
-        formats: ["Hardcover", "Softcover", "E-Book", "Hörbuch"],
-        publishers: [
-            "ATB/Aufbau/RL/Blumenbar", "Atlantik", "Atrium", "Blanvalet", "btb", 
-            "Carlsen", "C.Bertelsmann", "CBJ", "C.H.Beck", "Diogenes", "dtv", 
-            "Dumont", "Ecco", "Eichborn", "Eisele", "Fischer", 
-            "Frankfurter Verlagsanstalt", "Goldmann", "Hanser", "Harper Collins", 
-            "Heyne", "Insel", "Kampa", "Kein&Aber", "Knaur/Droemer", "Kjona", 
-            "KiWi", "Klett-Cotta", "Knesebeck", "Königskinder", "Limes", 
-            "Luchterhand", "Lübbe", "LYX", "Penguin", "Piper", "Pola", 
-            "Reclam", "Rowohlt/rororo", "transcript", "Ullstein/List", 
-            "Verbrecher", "Sonstiges"
-        ]
-    };
+  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse";
+  const JSON_URL = "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/sub.json";
+  
+  const FORM_ENTRIES = {
+    isbn: "entry.493642308",
+    title: "entry.1995249053", 
+    author: "entry.1794428850", 
+    gender: "entry.1917256559", 
+    umfang: "entry.989549743", 
+    seiten: "entry.2099091970",
+    genre: "entry.1441130368", 
+    sprache: "entry.610782042", // Originalsprache
+    status: "entry.680648898", 
+    verlag: "entry.307032270",  
+    cover: "entry.1309739909",
+    format: "entry.63372831",
+    preis: "entry.1974445901"
+  };
 
-    // --- 2. ELEMENTE SELEKTIEREN ---
-    const addSubBtn = document.getElementById('addSub');
-    const inputModal = document.getElementById('subModal');
-    const successModal = document.getElementById('successSubModal');
-    const addSubForm = document.getElementById('addSubForm');
+  let subDatenbank = [];
 
-    const saveBtn = inputModal.querySelector('.modal-save');
-    const cancelBtn = inputModal.querySelector('.modal-cancel');
-    const successOkBtn = document.getElementById('btnSuccessSubOk');
+  try {
+    const response = await fetch(JSON_URL);
+    const daten = await response.json();
+    subDatenbank = daten.books || [];
+  } catch (error) {
+    console.warn("Konnte sub.json nicht für Cover-Match laden:", error);
+  }
 
-    // --- 3. DYNAMISCHE LISTEN BEFÜLLEN ---
-    const populateSelect = (id, options) => {
-        const selectEl = document.getElementById(id);
-        if (!selectEl) return;
-        
-        while (selectEl.options.length > 1) {
-            selectEl.remove(1);
+  const populateSelect = (elementId, options) => {
+    const select = document.getElementById(elementId);
+    if (!select) return;
+    options.forEach(opt => {
+      const option = document.createElement("option");
+      option.value = opt;
+      option.textContent = opt;
+      select.appendChild(option);
+    });
+  };
+
+  populateSelect("gender", ["Weiblich", "Männlich", "Mix", "Divers"]);
+  populateSelect("genre", ["Roman", "Non Fiction", "Thriller/Krimi", "Erzählung", "Graphic Novel/Comic"]);
+  populateSelect("publisher", ["Sonstiges", "ATB/Aufbau/RL/Blumenbar", "Atlantik", "Atrium", "Blanvalet", "btb", "Büchergilde", "Carlsen", "C.Bertelsmann", "CBJ", "C.H.Beck", "Diogenes", "dtv", "Dumont", "Ecco", "Eichborn", "Eisele", "Fischer", "Frankfurter Verlagsanstalt", "Goldmann", "Gutkind", "Hanser", "Harper Collins", "Heyne", "Insel", "Kampa", "Kein&Aber", "Knaur/Droemer", "Kjona", "KiWi", "Klett-Cotta", "Knesebeck", "Königskinder", "Limes", "Luchterhand", "Lübbe", "LYX", "Penguin", "Piper", "Pola", "Reclam", "Rowohlt/rororo", "Suhrkamp", "transcript", "Ullstein/List", "Verbrecher", "Zsolnay"]);
+  populateSelect("language", ["Deutsch", "Englisch", "Französisch", "Spanisch", "Italienisch", "Portugiesisch", "Koreanisch", "Japanisch", "Chinesisch", "Niederländisch", "Hebräisch", "Türkisch", "Russisch", "Schwedisch", "Norwegisch", "Dänisch", "Finnisch", "Polnisch", "Tschechisch", "Griechisch", "Arabisch", "Englisch Original", "Französisch Original", "Spanisch Original"]);
+  populateSelect("format", ["Softcover", "Hardcover", "eBook", "Hörbuch"]);
+
+  const subModal = document.getElementById("subModal");
+  const addSubBtn = document.getElementById("addSub");
+
+  addSubBtn?.addEventListener("click", () => {
+    if (subModal) subModal.classList.add("active");
+  });
+
+  document.querySelectorAll(".modal-cancel").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (subModal) subModal.classList.remove("active");
+    });
+  });
+
+  const titleInput = document.getElementById("title");
+  titleInput?.addEventListener("blur", () => {
+    const val = titleInput.value.trim();
+    if (!val) return;
+    const treffer = subDatenbank.find(b => b.title.toLowerCase().trim() === val.toLowerCase().trim());
+    if (treffer && treffer.cover) {
+      window.matchedCoverUrl = `https://github.com/reading-bakery/shelf-control.github.io/blob/main/images/sub/${treffer.cover}?raw=true`;
+    } else {
+      window.matchedCoverUrl = "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/default-cover.jpg";
+    }
+  });
+
+  const saveBtn = document.querySelector("#subModal .modal-save");
+  saveBtn?.addEventListener("click", async () => {
+    const titleVal = document.getElementById("title")?.value.trim();
+    if (!titleVal) {
+      alert("Bitte gib einen Buchtitel ein.");
+      return;
+    }
+
+    const isbnVal = document.getElementById("isbnnumber")?.value || "";
+    const authorVal = document.getElementById("author")?.value || "";
+    const pagesVal = document.getElementById("pages")?.value || "0";
+    const priceVal = document.getElementById("price")?.value || "0";
+    const genderVal = document.getElementById("gender")?.value || "";
+    const genreVal = document.getElementById("genre")?.value || "";
+    const publisherVal = document.getElementById("publisher")?.value || "";
+    const languageVal = document.getElementById("language")?.value || "";
+    const formatVal = document.getElementById("format")?.value || "";
+    
+    let umfangVal = "";
+    const pNum = parseInt(pagesVal, 10);
+    if (pNum > 0) {
+      if (pNum <= 300) umfangVal = "bis 300";
+      else if (pNum <= 500) umfangVal = "301-500";
+      else umfangVal = "ab 501";
+    }
+
+    const coverVal = window.matchedCoverUrl || "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/default-cover.jpg";
+
+    const fd = new FormData();
+    fd.append(FORM_ENTRIES.isbn, isbnVal);
+    fd.append(FORM_ENTRIES.title, titleVal);
+    fd.append(FORM_ENTRIES.author, authorVal);
+    fd.append(FORM_ENTRIES.gender, genderVal);
+    fd.append(FORM_ENTRIES.umfang, umfangVal);
+    fd.append(FORM_ENTRIES.seiten, pagesVal);
+    fd.append(FORM_ENTRIES.genre, genreVal);
+    fd.append(FORM_ENTRIES.sprache, languageVal);
+    fd.append(FORM_ENTRIES.status, "SuB");
+    fd.append(FORM_ENTRIES.verlag, publisherVal);
+    fd.append(FORM_ENTRIES.cover, coverVal);
+    fd.append(FORM_ENTRIES.format, formatVal);
+    fd.append(FORM_ENTRIES.preis, priceVal);
+
+    try {
+      await fetch(FORM_URL, { method: "POST", mode: "no-cors", body: fd });
+      
+      if (subModal) subModal.classList.remove("active");
+      
+      const successModal = document.getElementById("successAddModal");
+      if (successModal) {
+        successModal.classList.add("active");
+        const okBtn = document.getElementById("btnSuccessAddOk");
+        if (okBtn) {
+          okBtn.onclick = () => location.reload();
         }
+      } else {
+        alert("Buch wurde erfolgreich hinzugefügt! 🚀");
+        location.reload();
+      }
 
-        options.forEach(opt => {
-            const el = document.createElement("option");
-            el.value = opt;
-            el.textContent = opt;
-            selectEl.appendChild(el);
-        });
-    };
-
-    populateSelect('gender', setupData.gender);
-    populateSelect('genre', setupData.genre);
-    populateSelect('language', setupData.languages);
-    populateSelect('format', setupData.formats);
-    populateSelect('publisher', setupData.publishers);
-
-    // --- 4. MODAL STEUERUNG ---
-    const closeAll = () => {
-        inputModal.style.display = 'none';
-        if (successModal) successModal.style.display = 'none';
-        if (addSubForm) addSubForm.reset();
-        saveBtn.disabled = false;
-        saveBtn.innerText = "Speichern";
-    };
-
-    if (addSubBtn) {
-        addSubBtn.onclick = (e) => {
-            e.preventDefault();
-            inputModal.style.display = 'flex';
-        };
+    } catch (err) {
+      alert("Fehler beim Speichern: " + err);
     }
-
-    if (cancelBtn) cancelBtn.onclick = closeAll;
-    if (successOkBtn) successOkBtn.onclick = closeAll;
-
-    window.onclick = (event) => {
-        if (event.target === inputModal || event.target === successModal) closeAll();
-    };
-
-    // --- 5. ABSENDEN AN GOOGLE APPS SCRIPT ---
-    if (saveBtn) {
-        saveBtn.onclick = async (e) => {
-            e.preventDefault();
-
-            const title = document.getElementById('title').value.trim();
-            if (!title) {
-                alert("Bitte gib einen Buchtitel ein!");
-                return;
-            }
-
-            saveBtn.disabled = true;
-            saveBtn.innerText = "Wird gespeichert...";
-
-            const fileInput = document.getElementById('cover');
-            const pages = parseInt(document.getElementById('pages').value) || 0;
-            const price = parseFloat(document.getElementById('price').value) || 0;
-            
-            let umfangText = "";
-            if (pages > 0 && pages <= 300) umfangText = "bis 300";
-            else if (pages >= 301 && pages <= 500) umfangText = "301-500";
-            else if (pages >= 501) umfangText = "ab 501";
-
-            // Funktion zum Senden an das Apps Script
-            const sendData = async (payload) => {
-                try {
-                    const response = await fetch(APPS_SCRIPT_URL, {
-                        method: 'POST',
-                        body: JSON.stringify(payload)
-                    });
-
-                    const resultText = await response.text();
-
-                    if (resultText.includes("SUCCESS")) {
-                        closeAll();
-                        if (successModal) successModal.style.display = 'flex';
-                    } else {
-                        throw new Error(resultText || "Fehler beim Speichern");
-                    }
-                } catch (error) {
-                    console.error("Fehler beim Upload:", error);
-                    alert("Es gab ein Problem: " + error.message);
-                    saveBtn.disabled = false;
-                    saveBtn.innerText = "Speichern";
-                }
-            };
-
-            // Prüfen, ob ein Cover ausgewählt wurde
-            if (fileInput && fileInput.files && fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                const reader = new FileReader();
-
-                reader.onload = async function() {
-                    const base64String = reader.result.split(',')[1];
-                    const payload = {
-                        base64: base64String,
-                        type: file.type,
-                        name: file.name,
-                        title: title,
-                        author: document.getElementById('author').value,
-                        isbn: document.getElementById('isbnnumber').value,
-                        pages: pages,
-                        umfang: umfangText,
-                        price: price,
-                        "entry.197444590": price,
-                        gender: document.getElementById('gender').value,
-                        genre: document.getElementById('genre').value,
-                        language: document.getElementById('language').value,
-                        format: document.getElementById('format').value,
-                        publisher: document.getElementById('publisher').value
-                    };
-                    await sendData(payload);
-                };
-
-                reader.readAsDataURL(file);
-            } else {
-                // Ohne Bild absenden
-                const payload = {
-                    base64: "",
-                    type: "",
-                    name: "placeholder.png",
-                    title: title,
-                    author: document.getElementById('author').value,
-                    isbn: document.getElementById('isbnnumber').value,
-                    pages: pages,
-                    umfang: umfangText,
-                    price: price,
-                    "entry.197444590": price,
-                    gender: document.getElementById('gender').value,
-                    genre: document.getElementById('genre').value,
-                    language: document.getElementById('language').value,
-                    format: document.getElementById('format').value,
-                    publisher: document.getElementById('publisher').value
-                };
-                await sendData(payload);
-            }
-        };
-    }
+  });
 });

@@ -314,7 +314,9 @@ h3 {
 
 }
 
-
+.modal.active, .modal-overlay.active {
+    display: flex !important;
+}
 
 @media (min-width: 740px) {
     .sub {
