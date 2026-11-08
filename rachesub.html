@@ -20,7 +20,6 @@
     <script src="addsub.js" defer></script>
     <script src="zufall.js" defer></script>
 
-
 </head>
 <body>
 
@@ -31,7 +30,6 @@
         </div>
 
         <ul class="nav-links" id="nav-links">
-            
             <li><a href="currently.html">Currently</a></li> 
             <li><a href="wishlist.html">Wunschliste</a></li>
             <li><a href="rachesub.html">SuB</a></li>
@@ -41,7 +39,6 @@
             <li><a href="lieblinge.html">Favoriten</a></li>
             <li><a href="https://docs.google.com/spreadsheets/d/1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE/edit?gid=1702643479#gid=1702643479">Lager</a></li>
             <li><a href="addnewbook.html">Add Book</a></li>
-
         </ul>
 
         <div class="toggle-button" id="toggle-button">
@@ -57,20 +54,20 @@
 
     </nav>
 
-
     <h2>Rache des SuB</h2>
   
-    <div class="search-container">
-        <input type="text" id="sub-search" placeholder="Suche nach Titel oder Autor:in oder ISBN...">
-    </div>
-   
-    
+    <main class="sub-container">
+        <!-- Identischer Filter- und Suchcontainer wie in bibliothek.html -->
+        <div class="filter-container">
+            <div class="search-box" style="width: 100%;">
+                <input type="text" id="sub-search" placeholder="Nach Buchtitel oder Autor:in oder ISBN suchen..." autocomplete="off">
+            </div>
+        </div>
 
-    <div class="sub" id="subContainer">Lade Bücher...
-    </div>
+        <div class="sub" id="subContainer">Lade Bücher...</div>
+    </main>
 
     <div class="fixed-buttons">
-        
         <div class="top-button">
             <button id="backToTop" aria-label="Nach oben">
                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
@@ -122,67 +119,58 @@
         </div>
     </div>
 
-<div id="subModal" class="modal">
-    <div class="modal-content-2">
-        <h3>Neues Buch auf den SuB legen</h3>
-        <form id="addSubForm">
-            <input type="number" id="isbnnumber" placeholder="ISBN eingeben">
-            <input type="text" id="title" placeholder="Buchtitel eingeben" required>
-            <input type="text" id="author" placeholder="Autor:in eingeben">
-            <input type="number" id="pages" placeholder="Seiten insgesamt eingeben">
-            <input type="number" id="price" placeholder="Preis in € eingeben">
-            
+    <div id="subModal" class="modal">
+        <div class="modal-content-2">
+            <h3>Neues Buch auf den SuB legen</h3>
+            <form id="addSubForm">
+                <input type="number" id="isbnnumber" placeholder="ISBN eingeben">
+                <input type="text" id="title" placeholder="Buchtitel eingeben" required>
+                <input type="text" id="author" placeholder="Autor:in eingeben">
+                <input type="number" id="pages" placeholder="Seiten insgesamt eingeben">
+                <input type="number" id="price" placeholder="Preis in € eingeben">
+                
+                <select id="poc" aria-label="poc">
+                    <option value="" disabled selected>PoC Autor:in?</option>
+                    <option value="Ja">Ja</option>
+                    <option value="Nein">Nein</option>
+                </select>
+                
+                <select id="gender" aria-label="Geschlecht auswählen">
+                    <option value="" disabled selected>Geschlecht wählen</option>
+                </select>
 
-                       
-            <select id="poc" aria-label="poc">
-                <option value="" disabled selected>PoC Autor:in?</option>
-                <option value="Ja">Ja</option>
-                <option value="Nein">Nein</option>
-            </select>
-            
-            <select id="gender" aria-label="Geschlecht auswählen">
-                <option value="" disabled selected>Geschlecht wählen</option>
-            </select>
+                <select id="genre" aria-label="Genre auswählen">
+                    <option value="" disabled selected>Genre wählen</option>
+                </select>
 
-            <select id="genre" aria-label="Genre auswählen">
-                <option value="" disabled selected>Genre wählen</option>
-            </select>
+                <select id="publisher" aria-label="Verlag auswählen">
+                    <option value="" disabled selected>Verlag wählen</option>
+                </select>
 
-            <select id="publisher" aria-label="Verlag auswählen">
-                <option value="" disabled selected>Verlag wählen</option>
-            </select>
+                <select id="language" aria-label="Sprache auswählen">
+                    <option value="" disabled selected>Originalsprache wählen</option>
+                </select>
 
-            <select id="language" aria-label="Sprache auswählen">
-                <option value="" disabled selected>Originalsprache wählen</option>
-            </select>
+                <select id="format" aria-label="Format auswählen">
+                    <option value="" disabled selected>Format wählen</option>
+                </select>
 
-            <select id="format" aria-label="Format auswählen">
-                <option value="" disabled selected>Format wählen</option>
-            </select>
+                <div class="file-upload">
+                    <label for="cover">Cover hochladen:</label>
+                    <input type="file" id="cover" accept="image/*">
+                </div>
 
-            <div class="file-upload">
-                <label for="cover">Cover hochladen:</label>
-                <input type="file" id="cover" accept="image/*">
-            </div>
-
-            
-
-            <div class="modal-buttons">
-                <button type="button" class="modal-save">Speichern</button>
-                <button type="button" class="modal-cancel">Abbrechen</button>
-            </div>
-        </form>
+                <div class="modal-buttons">
+                    <button type="button" class="modal-save">Speichern</button>
+                    <button type="button" class="modal-cancel">Abbrechen</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-   
 
     <footer>
         <p>&copy; 2026 Katharina | Impressum</p>
     </footer>
-
-
-
 
 </body>
 </html>
