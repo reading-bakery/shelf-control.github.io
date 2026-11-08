@@ -3637,41 +3637,48 @@
 "cover": "auroras-anlass.jpg"
 },
 {
-"title": "",
-"autor": "",
-"format": "Physisch",
-"cover": ".jpg"
+"title": "Das Gegenteil von Hasen",
+"autor": "Anne Freytag",
+"format": "eBook",
+"cover": "das-gegenteil-von-hasen.jpg"
 },
 {
-"title": "",
-"autor": "",
-"format": "Physisch",
-"cover": ".jpg"
+"title": "Die Kriegerin",
+"autor": "Helene Bukowski",
+"format": "eBook",
+"cover": "die-kriegerin.jpg"
 },
 {
-"title": "",
-"autor": "",
+"title": "Weltalltage",
+"autor": "Paula Fürstenberg",
 "format": "Physisch",
-"cover": ".jpg"
+"cover": "weltalltage.jpg"
 },
 {
-"title": "",
-"autor": "",
+"title": "Ein völlig anderes Leben",
+"autor": "Lisa Quentin",
 "format": "Physisch",
-"cover": ".jpg"
+"cover": "ein-voellig-anderes-leben.jpg"
 },
 {
-"title": "",
-"autor": "",
+"title": "Sehr blaue Augen",
+"autor": "Toni Morrison",
 "format": "Physisch",
-"cover": ".jpg"
+"cover": "sehr-blaue-augen.jpg"
 },
 {
-"title": "",
-"autor": "",
+"title": "Die Kinder von Bilbao",
+"autor": "Marria Larrea",
 "format": "Physisch",
-"cover": ".jpg"
+"cover": "die-kinder-von-bilbao.jpg"
+},
+{
+"title": "Tokyo Girls Club",
+"autor": "Asako Yuzuki",
+"format": "Physisch",
+"cover": "tokyo-girls-club.jpg"
 }
+
 
 
 ]
