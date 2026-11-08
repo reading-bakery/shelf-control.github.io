@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         status: "entry.914730295", 
         verlag: "entry.1674035100", 
         cover: "entry.952453014",
-        poc: "entry.1600060751" // <-- Hier auf die neue Entry-ID aktualisiert
+        poc: "entry.1600060751"
     };
 
     let alleBuecher = [];
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             formData.append(FORM_ENTRIES.format, buch.format || "");
             formData.append(FORM_ENTRIES.status, buch.status || "");
             formData.append(FORM_ENTRIES.verlag, buch.verlag || "");
-            formData.append(FORM_ENTRIES.poc, buch.poc || ""); // Wird mit "Nein" / "Ja" aus der JSON befüllt
+            formData.append(FORM_ENTRIES.poc, buch.poc || "");
             formData.append(FORM_ENTRIES.cover, githubLink);
 
             try {
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
     };
 
-    // 3. Bilder rendern
+    // 3. Bilder rendern (aus JSON)
     const renderBooks = (buecherListe) => {
         container.innerHTML = "";
 
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     };
 
-    // Initialisierung
+    // Initialisierung (Lädt Bücher aus sub.json)
     const init = async () => {
         await ladeGeleseneStatus();
         
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             alleBuecher = daten.books;
             renderBooks(alleBuecher);
         } catch (error) {
-            console.error("Fehler beim Laden:", error);
+            console.error("Fehler beim Laden der JSON:", error);
             container.textContent = "Bilder konnten nicht geladen werden.";
         }
     };
