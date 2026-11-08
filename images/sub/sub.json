@@ -1,20 +1,5 @@
 {
   "books": [
-    {
-      "isbn": "9798892423298",
-      "title": "A Dark and Secret Magic",
-      "author": "Wallis Kinney",
-      "poc": "Nein",
-      "gender": "Weiblich",
-      "umfang": "301-500",
-      "seiten": "416",
-      "genre": "Roman",
-      "sprache": "Deutsch",
-      "format": "eBook",
-      "status": "SuB",
-      "verlag": "KiWi",
-      "cover": "a-dark-and-secret-magic.jpeg"
-    },
 
     {
       "isbn": "978-3-7466-4094-5, 9783746640945",
