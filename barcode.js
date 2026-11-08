@@ -17,8 +17,40 @@ document.addEventListener("DOMContentLoaded", () => {
         cover: "entry.952453014"
     };
 
+    const SUB_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=314687961&single=true&output=csv";
+    const baseURL = "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/";
+    const jsonURL = `https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/sub.json?t=${new Date().getTime()}`;
+
     let bookData = {}; 
     const codeReader = new ZXing.BrowserMultiFormatReader();
+
+    // Hilfsfunktion: CSV-Zeile sauber parsen
+    const parseCSVLine = (text) => {
+        const result = [];
+        let cur = '';
+        let inQuotes = false;
+        for (let i = 0; i < text.length; i++) {
+            const c = text[i];
+            if (c === '"') {
+                if (inQuotes && text[i + 1] === '"') {
+                    cur += '"';
+                    i++;
+                } else {
+                    inQuotes = !inQuotes;
+                }
+            } else if (c === ',' && !inQuotes) {
+                result.push(cur.trim());
+                cur = '';
+            } else {
+                cur += c;
+            }
+        }
+        result.push(cur.trim());
+        return result;
+    };
+
+    const cleanIsbn = (str) => (str || '').replace(/[^0-9Xx]/g, '');
+    const normalizeTitle = (str) => (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 
     // --- 1. SCANNER START ---
     document.getElementById("openScanner")?.addEventListener("click", () => {
@@ -45,55 +77,118 @@ document.addEventListener("DOMContentLoaded", () => {
             const manualIsbn = isbnInputField.value.trim();
             if (manualIsbn) {
                 await fetchBookData(manualIsbn);
-                isbnInputField.value = ""; // Feld leeren nach Suche
+                isbnInputField.value = ""; 
             }
         }
     });
 
-    // --- 3. DATEN AUS JSON LADEN ---
+    // --- 3. DATEN AUS GOOGLE TABELLE & JSON LADEN ---
     async function fetchBookData(rawInput) {
-        // Bereinigt Input von Bindestrichen & Leerzeichen
-        const cleanScanIsbn = String(rawInput).replace(/[^0-9Xx]/g, "").trim();
-        const JSON_URL = `https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/sub.json?t=${new Date().getTime()}`;
-        
+        const cleanScanIsbn = cleanIsbn(rawInput);
         const notFoundModal = document.getElementById("notFoundModal");
         const previewBox = document.getElementById("previewBox");
 
         try {
-            const res = await fetch(JSON_URL);
-            const data = await res.json();
+            // A) JSON für Cover-Zuordnung laden
+            const jsonRes = await fetch(jsonURL);
+            const jsonDaten = jsonRes.ok ? await jsonRes.json() : { books: [] };
             
-            // Abgleich: Wir bereinigen auch die ISBNs in der JSON für den Vergleich
-            const treffer = (data.books || []).find(b => 
-                String(b.isbn || "").replace(/[^0-9Xx]/g, "").includes(cleanScanIsbn)
-            );
+            const isbnToCoverMap = {};
+            (jsonDaten.books || []).forEach(b => {
+                if (b.cover && b.isbn) {
+                    b.isbn.split(',').forEach(raw => {
+                        const cleaned = cleanIsbn(raw);
+                        if (cleaned) isbnToCoverMap[cleaned] = b.cover;
+                    });
+                }
+            });
+
+            // B) CSV aus Google Tabelle laden
+            const csvRes = await fetch(SUB_CSV_URL);
+            if (!csvRes.ok) throw new Error("Google Tabelle konnte nicht geladen werden.");
+            const csvText = await csvRes.text();
+
+            const lines = csvText.split(/\r?\n/).filter(line => line.trim() !== '');
+            if (lines.length === 0) return;
+
+            const headers = parseCSVLine(lines[0]).map(h => h.toLowerCase());
+            const getIndex = (names) => headers.findIndex(h => names.some(n => h.includes(n)));
+
+            const idxIsbn = getIndex(['isbn']);
+            const idxTitle = getIndex(['titel', 'title']);
+            const idxAuthor = getIndex(['autor', 'author']);
+            const idxGender = getIndex(['geschlecht', 'gender']);
+            const idxUmfang = getIndex(['umfang']);
+            const idxSeiten = getIndex(['seiten', 'pages']);
+            const idxGenre = getIndex(['genre']);
+            const idxSprache = getIndex(['sprache', 'language']);
+            const idxFormat = getIndex(['format']);
+            const idxStatus = getIndex(['status']);
+            const idxVerlag = getIndex(['verlag', 'publisher']);
+            const idxPoc = getIndex(['poc']);
+
+            let treffer = null;
+
+            for (let i = 1; i < lines.length; i++) {
+                const row = parseCSVLine(lines[i]);
+                const rowIsbn = idxIsbn !== -1 ? row[idxIsbn] : '';
+                const cleanedRowIsbn = cleanIsbn(rowIsbn);
+
+                if (cleanedRowIsbn && cleanedRowIsbn.includes(cleanScanIsbn)) {
+                    const title = idxTitle !== -1 ? row[idxTitle] : '';
+                    let cover = isbnToCoverMap[cleanedRowIsbn] || '';
+
+                    // Fallback Cover über Titel falls ISBN in JSON abweicht
+                    if (!cover && title) {
+                        const foundInJson = jsonDaten.books.find(b => normalizeTitle(b.cover.replace(/\.[^/.]+$/, '')) === normalizeTitle(title));
+                        if (foundInJson) cover = foundInJson.cover;
+                    }
+
+                    const coverURL = cover ? `${baseURL}${cover}` : "";
+
+                    treffer = {
+                        title: title,
+                        author: idxAuthor !== -1 ? row[idxAuthor] : '',
+                        poc: idxPoc !== -1 ? row[idxPoc] : '',
+                        gender: idxGender !== -1 ? row[idxGender] : '',
+                        umfang: idxUmfang !== -1 ? row[idxUmfang] : '',
+                        seiten: idxSeiten !== -1 ? row[idxSeiten] : '',
+                        genre: idxGenre !== -1 ? row[idxGenre] : '',
+                        sprache: idxSprache !== -1 ? row[idxSprache] : '',
+                        format: idxFormat !== -1 ? row[idxFormat] : '',
+                        status: idxStatus !== -1 ? row[idxStatus] : '', 
+                        verlag: idxVerlag !== -1 ? row[idxVerlag] : '',
+                        cover: coverURL,
+                        githubCoverLink: cover ? `${baseURL}${cover}?raw=true` : ""
+                    };
+                    break;
+                }
+            }
 
             if (treffer) {
-                const coverURL = treffer.cover ? `https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/${treffer.cover}` : "";
-
                 bookData = {
                     start: new Date().toISOString().split('T')[0],
-                    title: treffer.title || "",
-                    author: treffer.author || "",
-                    poc: treffer.poc || "",
-                    gender: treffer.gender || "",
-                    umfang: treffer.umfang || "",
-                    seiten: treffer.seiten || "",
+                    title: treffer.title,
+                    author: treffer.author,
+                    poc: treffer.poc,
+                    gender: treffer.gender,
+                    umfang: treffer.umfang,
+                    seiten: treffer.seiten,
                     minuten: " ",
-                    genre: treffer.genre || "",
-                    sprache: treffer.sprache || "",
-                    format: treffer.format || "",
-                    status: treffer.status || "", 
-                    verlag: treffer.verlag || "",
-                    cover: coverURL
+                    genre: treffer.genre,
+                    sprache: treffer.sprache,
+                    format: treffer.format,
+                    status: treffer.status, 
+                    verlag: treffer.verlag,
+                    cover: treffer.githubCoverLink
                 };
 
                 document.getElementById("pTitle").textContent = bookData.title;
                 document.getElementById("pAuthor").textContent = bookData.author;
                 const coverImg = document.getElementById("pCover");
-                if(coverImg) {
-                    coverImg.src = coverURL;
-                    coverImg.style.display = coverURL ? "block" : "none";
+                if (coverImg) {
+                    coverImg.src = treffer.cover;
+                    coverImg.style.display = treffer.cover ? "block" : "none";
                 }
 
                 previewBox?.classList.remove("hidden");
