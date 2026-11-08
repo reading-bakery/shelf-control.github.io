@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     // --- KONFIGURATION ---
     const baseURL = "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/";
     const jsonURL = baseURL + "sub.json";
+    
+    // SuB-Bücher Tabelle als CSV
+    const SUB_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=314687961&single=true&output=csv";
+    
+    // Status-Abgleich
     const SHEET_TSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1702643479&single=true&output=tsv"; 
     const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeIzO8sX1GrQIBuBK8tclYRrrRcgqlukN4haElwdSXMOrIZ2Q/formResponse";
 
@@ -33,46 +38,66 @@ document.addEventListener("DOMContentLoaded", async () => {
     const closeBtn = document.getElementById("modal-cancel");
     const confirmBtn = document.getElementById("modal-confirm");
 
-    // 1. Abgleich: Vorhandene Einträge aus Google Sheets laden
+    // CSV-Zeile sauber parsen
+    const parseCSVLine = (text) => {
+        const result = [];
+        let cur = '';
+        let inQuotes = false;
+        for (let i = 0; i < text.length; i++) {
+            const c = text[i];
+            if (c === '"') {
+                if (inQuotes && text[i + 1] === '"') {
+                    cur += '"';
+                    i++;
+                } else {
+                    inQuotes = !inQuotes;
+                }
+            } else if (c === ',' && !inQuotes) {
+                result.push(cur.trim());
+                cur = '';
+            } else {
+                cur += c;
+            }
+        }
+        result.push(cur.trim());
+        return result;
+    };
+
+    const cleanIsbn = (str) => (str || '').replace(/[^0-9Xx]/g, '');
+
+    // Titel für Fallback-Abgleich normalisieren
+    const normalizeTitle = (str) => (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+
     const ladeGeleseneStatus = async () => {
         try {
             const response = await fetch(SHEET_TSV_URL);
             if (!response.ok) throw new Error();
             bereitsGeleseneCover = await response.text();
-            console.log("Abgleich mit Google Sheets erfolgreich.");
         } catch (e) {
-            console.warn("Google Sheets Abgleich fehlgeschlagen. Zeige alle Cover.");
             bereitsGeleseneCover = "";
         }
     };
 
-    // Hilfsfunktion: Erfolgs-Modal anzeigen
     function openSuccessAddModal() {
         return new Promise(resolve => {
             const successModal = document.getElementById("successAddModal");
             const btnOk = document.getElementById("btnSuccessAddOk");
-
             successModal.style.display = "flex";
-
             const onOk = () => {
                 successModal.style.display = "none";
                 btnOk.removeEventListener("click", onOk);
                 resolve();
             };
-
             btnOk.addEventListener("click", onOk);
         });
     }
 
-    // Hauptfunktion: Buch zu Google Sheets hinzufügen
     const addToGoogleSheets = (buch, element) => {
-        // Buch-Modal befüllen
         document.getElementById("modal-cover").src = baseURL + buch.cover;
         document.getElementById("modal-title").textContent = buch.title;
         document.getElementById("modal-author").textContent = buch.author;
 
         modal.style.display = "flex";
-
         closeBtn.onclick = () => { modal.style.display = "none"; };
 
         confirmBtn.onclick = async () => {
@@ -99,16 +124,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             formData.append(FORM_ENTRIES.cover, githubLink);
 
             try {
-                // 1. Daten an Google senden
                 await fetch(FORM_URL, { method: "POST", mode: "no-cors", body: formData });
-
-                // 2. Buch-Auswahl-Modal schließen
                 modal.style.display = "none";
-
-                // 3. Erfolgs-Bestätigung anzeigen und auf Klick warten
                 await openSuccessAddModal();
 
-                // 4. UI-Animation: Buch aus der Liste entfernen
                 element.style.transition = "all 0.5s ease";
                 element.style.opacity = "0";
                 element.style.transform = "translateY(-20px) scale(0.8)";
@@ -129,9 +148,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
     };
 
-    // 3. Bilder rendern (aus JSON)
     const renderBooks = (buecherListe) => {
         container.innerHTML = "";
+
+        if (buecherListe.length === 0) {
+            container.textContent = "Keine Bücher gefunden.";
+            return;
+        }
 
         buecherListe.forEach(buch => {
             if (buch.cover && !bereitsGeleseneCover.includes(buch.cover)) {
@@ -140,7 +163,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 const img = document.createElement("img");
                 img.src = baseURL + buch.cover;
-                img.alt = buch.title;
+                img.alt = buch.title || "Buchcover";
                 img.loading = "lazy";
                 img.classList.add("sub-bild");
 
@@ -157,23 +180,105 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     };
 
-    // Initialisierung (Lädt Bücher aus sub.json)
     const init = async () => {
         await ladeGeleseneStatus();
         
         try {
-            const response = await fetch(jsonURL);
-            if (!response.ok) throw new Error("JSON konnte nicht geladen werden.");
-            const daten = await response.json();
-            alleBuecher = daten.books;
+            // 1. JSON laden (für Cover-Mappings)
+            const jsonRes = await fetch(jsonURL);
+            const jsonDaten = jsonRes.ok ? await jsonRes.json() : { books: [] };
+
+            // Mapping-Tabellen aufbauen (ISBN & Titel -> Cover)
+            const isbnToCoverMap = {};
+            const titleToCoverMap = {};
+            
+            (jsonDaten.books || []).forEach(b => {
+                if (b.cover) {
+                    if (b.isbn) {
+                        b.isbn.split(',').forEach(raw => {
+                            const cleaned = cleanIsbn(raw);
+                            if (cleaned) isbnToCoverMap[cleaned] = b.cover;
+                        });
+                    }
+                }
+            });
+
+            // 2. CSV aus Google Sheets laden
+            const csvRes = await fetch(SUB_CSV_URL);
+            if (!csvRes.ok) throw new Error("Google Tabelle CSV konnte nicht geladen werden.");
+            const csvText = await csvRes.text();
+
+            const lines = csvText.split(/\r?\n/).filter(line => line.trim() !== '');
+            if (lines.length === 0) return;
+
+            const headers = parseCSVLine(lines[0]).map(h => h.toLowerCase());
+
+            const getIndex = (names) => headers.findIndex(h => names.some(n => h.includes(n)));
+
+            const idxIsbn = getIndex(['isbn']);
+            const idxTitle = getIndex(['titel', 'title']);
+            const idxAuthor = getIndex(['autor', 'author']);
+            const idxGender = getIndex(['geschlecht', 'gender']);
+            const idxUmfang = getIndex(['umfang']);
+            const idxSeiten = getIndex(['seiten', 'pages']);
+            const idxGenre = getIndex(['genre']);
+            const idxSprache = getIndex(['sprache', 'language']);
+            const idxFormat = getIndex(['format']);
+            const idxStatus = getIndex(['status']);
+            const idxVerlag = getIndex(['verlag', 'publisher']);
+            const idxPoc = getIndex(['poc']);
+            const idxCoverCol = getIndex(['cover']); // Falls die CSV direkt eine Cover-Spalte hat
+
+            alleBuecher = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const row = parseCSVLine(lines[i]);
+                const rawIsbn = idxIsbn !== -1 ? row[idxIsbn] : '';
+                const title = idxTitle !== -1 ? row[idxTitle] : '';
+                const cleanedIsbn = cleanIsbn(rawIsbn);
+
+                // Cover-Ermittlung (Priorität: 1. Direkt in CSV, 2. Per ISBN aus JSON, 3. Per Titel aus JSON)
+                let cover = '';
+                if (idxCoverCol !== -1 && row[idxCoverCol]) {
+                    cover = row[idxCoverCol];
+                } else {
+                    cover = isbnToCoverMap[cleanedIsbn] || '';
+                    if (!cover && title) {
+                        // Fallback: Versuche über JSON-Einträge nach Titel zu matchen falls ISBN abweicht
+                        const foundInJson = jsonDaten.books.find(b => normalizeTitle(b.cover.replace(/\.[^/.]+$/, '')) === normalizeTitle(title));
+                        if (foundInJson) cover = foundInJson.cover;
+                    }
+                }
+
+                const buch = {
+                    isbn: rawIsbn,
+                    title: title,
+                    author: idxAuthor !== -1 ? row[idxAuthor] : '',
+                    gender: idxGender !== -1 ? row[idxGender] : '',
+                    umfang: idxUmfang !== -1 ? row[idxUmfang] : '',
+                    seiten: idxSeiten !== -1 ? row[idxSeiten] : '',
+                    genre: idxGenre !== -1 ? row[idxGenre] : '',
+                    sprache: idxSprache !== -1 ? row[idxSprache] : '',
+                    format: idxFormat !== -1 ? row[idxFormat] : '',
+                    status: idxStatus !== -1 ? row[idxStatus] : '',
+                    verlag: idxVerlag !== -1 ? row[idxVerlag] : '',
+                    poc: idxPoc !== -1 ? row[idxPoc] : '',
+                    cover: cover
+                };
+
+                if (buch.title) {
+                    alleBuecher.push(buch);
+                }
+            }
+
             renderBooks(alleBuecher);
+
         } catch (error) {
-            console.error("Fehler beim Laden der JSON:", error);
-            container.textContent = "Bilder konnten nicht geladen werden.";
+            console.error("Fehler beim Laden:", error);
+            container.textContent = "Bücher konnten nicht geladen werden.";
         }
     };
 
-    // Suche
     searchInput.addEventListener("input", (e) => {
         const term = e.target.value.toLowerCase();
         const gefiltert = alleBuecher.filter(b => 
@@ -185,7 +290,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         renderBooks(gefiltert);
     });
 
-    // Schließen bei Klick außerhalb
     window.addEventListener("click", (event) => {
         if (event.target === modal) {
             modal.style.display = "none";
