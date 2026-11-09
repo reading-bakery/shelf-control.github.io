@@ -207,7 +207,7 @@ h3 {
     border-radius: 10px;
     max-width: 400px;
     width: 90%;
-    max-height: 80%;
+    max-height: 100%;
     color: black;
     text-align: center;
 }
@@ -361,6 +361,7 @@ h3 {
 }
 
 @media (max-width: 480px) {
+    @media (max-width: 480px) {
     .sub-container {
         padding: 10px 5px;
         margin: 5px auto;
@@ -370,10 +371,15 @@ h3 {
         gap: 12px;
         margin-bottom: 25px;
     }
+    .search-box {
+        margin: 15px 12px 0 12px; /* Oben, Rechts, Unten, Links mehr Abstand zum Container */
+        box-sizing: border-box;
+    }
     .search-box input {
         padding: 8px 14px;
         font-size: 0.95rem;
     }
+}
 }
 
 @media (min-width: 1400px) {
