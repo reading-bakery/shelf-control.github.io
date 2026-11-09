@@ -1,13 +1,18 @@
+/* Hauptcontainer im exakten Stil von rachesub (.sub-container) */
+.wishlist-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background-color: #1f1f1f;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
 .wishlist {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 700px;
-    margin: auto;
-    background-color: #1f1f1f;
-    padding: 20px;
-    border-radius: 8px;
-    gap: 20px;
+    gap: 15px;
 }
 
 .wishlist-bild {
@@ -16,6 +21,7 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     transition: transform 0.3s;
     cursor: pointer;
+    padding: 1px;
 }
 
 .wishlist-bild:hover {
@@ -24,19 +30,18 @@
 
 .wishlist-bild-large {
     width: 200px !important;
-    height: 300px !important; /* Hier legst du die "Gleichheit" fest */
-    object-fit: cover;        /* Schneidet Ränder leicht ab, statt zu quetschen */
+    height: 300px !important; 
+    object-fit: cover;        
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0,0,0,0.5);
     display: block;
     margin: 0 auto;
 }
 
-
 #luckyZufall {
-    position: fixed;       /* bleibt beim Scrollen an der Stelle */
-    bottom: 20px;           /* Abstand vom unteren Bildschirmrand */
-    right: 20px;            /* Abstand vom rechten Rand */
+    position: fixed;       
+    bottom: 20px;           
+    right: 20px;            
     background-color: rgb(141, 14, 56);
     cursor: pointer;
     border-radius: 8px;
@@ -44,13 +49,13 @@
     height: auto;
     padding: 10px;
     color: white;
-    z-index: 1000;          /* über allen anderen Elementen */
+    z-index: 1000;          
 }
 
 #backToTop {
-    position: fixed;       /* bleibt beim Scrollen an der Stelle */
-    bottom: 100px;           /* Abstand vom unteren Bildschirmrand */
-    right: 20px;            /* Abstand vom rechten Rand */
+    position: fixed;       
+    bottom: 100px;           
+    right: 20px;            
     background-color: rgb(224, 224, 87);
     cursor: pointer;
     border-radius: 8px;
@@ -58,16 +63,16 @@
     height: auto;
     padding: 10px;
     color: black;
-    z-index: 1000;          /* über allen anderen Elementen */
+    z-index: 1000;          
 }
 
-   #backToTop:hover {
-      background-color: #4b0606;
-      color: white;
-    }
+#backToTop:hover {
+    background-color: #4b0606;
+    color: white;
+}
 
 #close-icon {
-    display: none; /* Startzustand ausgeblendet */
+    display: none; 
 }
 
 #luckyZufall:hover {
@@ -80,22 +85,18 @@
     color: whitesmoke;
 }
 
-@media (max-width: 740px) {
-    .wishlist-bild {
-        flex: 1 1 calc(33.333% - 20px); /* 3 pro Zeile, Platz für gap lassen */
-        max-width: calc(33.333% - 10px);
-    }
-
-    /* Optional: Container so anpassen, dass es gut aussieht */
+@media (min-width: 740px) {
     .wishlist {
-        gap: 10px; /* Weniger Abstand bei kleinen Displays */
+        gap: 4px;
+        padding: 3px;
     }
+}
 
-    .wishlist-bild-large {
-        width: 15px;
-        max-width: none;       /* Wichtig, um das Limit von .sub-bild aufzuheben */
-        height: auto;          /* proportional */
-        box-shadow: 0 0 8px rgba(0,0,0,0.6);
+@media (max-width: 480px) {
+    .wishlist-container {
+        padding: 10px 5px;
+        margin: 5px auto;
+        border-radius: 6px;
     }
 }
 

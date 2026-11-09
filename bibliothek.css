@@ -443,7 +443,7 @@ h2 {
 }
 
 .modal-content img {
-    width: 130px;
+    width: 115px;
     height: 190px;
     object-fit: cover;
     border-radius: 6px;
@@ -700,7 +700,7 @@ h2 {
     }
 
     .modal-content img {
-        width: 100px;
+        width: 90px;
         height: 150px;
     }
 
