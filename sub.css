@@ -349,6 +349,130 @@ h3 {
     background: rgba(255, 255, 255, 0.1);
 }
 
+/* =========================================================
+   SUB STATS & COUNTER (ANIMIERT)
+   ========================================================= */
+
+.sub-stats-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin: 20px 0 30px 0;
+    flex-wrap: wrap;
+}
+
+/* Basis Stat Card */
+.stat-card {
+    background: #2a2a2a;
+    border: 2px solid #444;
+    border-radius: 12px;
+    padding: 12px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.stat-label {
+    font-family: "Dosis", sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #bbb;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 2.2rem;
+    letter-spacing: 1.5px;
+    color: khaki;
+    line-height: 1;
+}
+
+/* 1. Bücher Counter (Bounce / Pop Animation) */
+.book-stat {
+    border-color: rgb(224, 224, 87);
+}
+
+.book-stat .stat-value.bump {
+    animation: countBump 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes countBump {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); color: #fff; }
+    100% { transform: scale(1); }
+}
+
+/* 2. Price-Tag Counter Grafische Gestaltung & Animation */
+.price-tag-stat {
+    position: relative;
+    background: linear-gradient(135deg, #a2bba3 0%, #7d9e7f 100%);
+    border: none;
+    color: #1f1f1f;
+    padding: 12px 24px 12px 32px;
+    border-radius: 6px 14px 14px 6px;
+    box-shadow: 3px 6px 15px rgba(0, 0, 0, 0.5);
+    transform-origin: top left;
+    animation: tagSway 4s ease-in-out infinite alternate;
+}
+
+.price-tag-stat .stat-label {
+    color: #2b3a2c;
+    font-weight: bold;
+}
+
+.price-tag-stat .stat-value {
+    color: #121e13;
+}
+
+/* Anhänger-Loch */
+.price-tag-hole {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-color: #1f1f1f;
+    border-radius: 50%;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.6);
+}
+
+
+
+/* Leichtes Schaukeln des Price Tags */
+@keyframes tagSway {
+    0% { transform: rotate(0deg); }
+    30% { transform: rotate(2deg); }
+    70% { transform: rotate(-2deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Responsive Anpassung für Handys */
+@media (max-width: 480px) {
+    .sub-stats-container {
+        gap: 12px;
+        margin: 15px 0 20px 0;
+    }
+    .stat-card {
+        padding: 8px 16px;
+    }
+    .price-tag-stat {
+        padding: 8px 16px 8px 24px;
+    }
+    .stat-value {
+        font-size: 1.7rem;
+    }
+}
+
 /* Responsive Anpassungen */
 @media (min-width: 740px) {
     .sub {

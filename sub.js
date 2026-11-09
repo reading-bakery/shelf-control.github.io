@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const container = document.querySelector(".sub");
     const searchInput = document.getElementById("sub-search");
+    const bookCountEl = document.getElementById("sub-book-count");
+    const totalPriceEl = document.getElementById("sub-total-price");
 
     // --- KONFIGURATION ---
     const baseURL = "https://raw.githubusercontent.com/reading-bakery/shelf-control.github.io/main/images/sub/";
@@ -64,9 +66,45 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     const cleanIsbn = (str) => (str || '').replace(/[^0-9Xx]/g, '');
-
-    // Titel für Fallback-Abgleich normalisieren
     const normalizeTitle = (str) => (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    // Hilfsfunktion: Preis in Float umwandeln (z.B. "12,99 €" -> 12.99)
+    const parsePrice = (priceStr) => {
+        if (!priceStr) return 0;
+        const cleaned = priceStr.replace(',', '.').replace(/[^0-9.]/g, '');
+        const num = parseFloat(cleaned);
+        return isNaN(num) ? 0 : num;
+    };
+
+    // ANIMATION: Zahlen sanft hochzählen lassen
+    const animateValue = (element, start, end, duration, isCurrency = false) => {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const current = start + progress * (end - start);
+            
+            if (isCurrency) {
+                element.textContent = current.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+            } else {
+                element.textContent = Math.floor(current);
+            }
+            
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            } else {
+                // Bei Abschluss exakten Endwert setzen & Bumb-Effekt ausführen
+                if (isCurrency) {
+                    element.textContent = end.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+                } else {
+                    element.textContent = end;
+                }
+                element.classList.add("bump");
+                setTimeout(() => element.classList.remove("bump"), 300);
+            }
+        };
+        window.requestAnimationFrame(step);
+    };
 
     const ladeGeleseneStatus = async () => {
         try {
@@ -91,6 +129,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             btnOk.addEventListener("click", onOk);
         });
     }
+
+    const updateStats = (buecherListe) => {
+        const sichtbareBuecher = buecherListe.filter(b => b.cover && !bereitsGeleseneCover.includes(b.cover));
+        const count = sichtbareBuecher.length;
+        const total = sichtbareBuecher.reduce((sum, b) => sum + parsePrice(b.price), 0);
+
+        const currentCount = parseInt(bookCountEl.textContent) || 0;
+        const currentPrice = parsePrice(totalPriceEl.textContent);
+
+        animateValue(bookCountEl, currentCount, count, 800, false);
+        animateValue(totalPriceEl, currentPrice, total, 800, true);
+    };
 
     const addToGoogleSheets = (buch, element) => {
         document.getElementById("modal-cover").src = baseURL + buch.cover;
@@ -135,6 +185,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 setTimeout(() => {
                     element.remove();
                     alleBuecher = alleBuecher.filter(b => b.cover !== buch.cover);
+                    updateStats(alleBuecher); // Stats neu berechnen & animieren
                     confirmBtn.disabled = false;
                     confirmBtn.textContent = "Hinzufügen";
                 }, 500);
@@ -153,6 +204,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (buecherListe.length === 0) {
             container.textContent = "Keine Bücher gefunden.";
+            updateStats([]);
             return;
         }
 
@@ -178,32 +230,27 @@ document.addEventListener("DOMContentLoaded", async () => {
                 container.appendChild(wrapper);
             }
         });
+
+        updateStats(buecherListe);
     };
 
     const init = async () => {
         await ladeGeleseneStatus();
         
         try {
-            // 1. JSON laden (für Cover-Mappings)
             const jsonRes = await fetch(jsonURL);
             const jsonDaten = jsonRes.ok ? await jsonRes.json() : { books: [] };
 
-            // Mapping-Tabellen aufbauen (ISBN & Titel -> Cover)
             const isbnToCoverMap = {};
-            const titleToCoverMap = {};
-            
             (jsonDaten.books || []).forEach(b => {
-                if (b.cover) {
-                    if (b.isbn) {
-                        b.isbn.split(',').forEach(raw => {
-                            const cleaned = cleanIsbn(raw);
-                            if (cleaned) isbnToCoverMap[cleaned] = b.cover;
-                        });
-                    }
+                if (b.cover && b.isbn) {
+                    b.isbn.split(',').forEach(raw => {
+                        const cleaned = cleanIsbn(raw);
+                        if (cleaned) isbnToCoverMap[cleaned] = b.cover;
+                    });
                 }
             });
 
-            // 2. CSV aus Google Sheets laden
             const csvRes = await fetch(SUB_CSV_URL);
             if (!csvRes.ok) throw new Error("Google Tabelle CSV konnte nicht geladen werden.");
             const csvText = await csvRes.text();
@@ -212,7 +259,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (lines.length === 0) return;
 
             const headers = parseCSVLine(lines[0]).map(h => h.toLowerCase());
-
             const getIndex = (names) => headers.findIndex(h => names.some(n => h.includes(n)));
 
             const idxIsbn = getIndex(['isbn']);
@@ -221,13 +267,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             const idxGender = getIndex(['geschlecht', 'gender']);
             const idxUmfang = getIndex(['umfang']);
             const idxSeiten = getIndex(['seiten', 'pages']);
+            const idxPrice = getIndex(['preis', 'price', 'wert']); // Preis Spalte identifizieren
             const idxGenre = getIndex(['genre']);
             const idxSprache = getIndex(['sprache', 'language']);
             const idxFormat = getIndex(['format']);
             const idxStatus = getIndex(['status']);
             const idxVerlag = getIndex(['verlag', 'publisher']);
             const idxPoc = getIndex(['poc']);
-            const idxCoverCol = getIndex(['cover']); // Falls die CSV direkt eine Cover-Spalte hat
+            const idxCoverCol = getIndex(['cover']);
 
             alleBuecher = [];
 
@@ -237,14 +284,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const title = idxTitle !== -1 ? row[idxTitle] : '';
                 const cleanedIsbn = cleanIsbn(rawIsbn);
 
-                // Cover-Ermittlung (Priorität: 1. Direkt in CSV, 2. Per ISBN aus JSON, 3. Per Titel aus JSON)
                 let cover = '';
                 if (idxCoverCol !== -1 && row[idxCoverCol]) {
                     cover = row[idxCoverCol];
                 } else {
                     cover = isbnToCoverMap[cleanedIsbn] || '';
                     if (!cover && title) {
-                        // Fallback: Versuche über JSON-Einträge nach Titel zu matchen falls ISBN abweicht
                         const foundInJson = jsonDaten.books.find(b => normalizeTitle(b.cover.replace(/\.[^/.]+$/, '')) === normalizeTitle(title));
                         if (foundInJson) cover = foundInJson.cover;
                     }
@@ -257,6 +302,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     gender: idxGender !== -1 ? row[idxGender] : '',
                     umfang: idxUmfang !== -1 ? row[idxUmfang] : '',
                     seiten: idxSeiten !== -1 ? row[idxSeiten] : '',
+                    price: idxPrice !== -1 ? row[idxPrice] : '0',
                     genre: idxGenre !== -1 ? row[idxGenre] : '',
                     sprache: idxSprache !== -1 ? row[idxSprache] : '',
                     format: idxFormat !== -1 ? row[idxFormat] : '',
