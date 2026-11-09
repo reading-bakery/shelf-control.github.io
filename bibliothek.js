@@ -104,6 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
         booksOnly.sort((a, b) => (a.title || '').localeCompare(b.title || '', 'de', { sensitivity: 'base' }));
 
         const isMobile = window.innerWidth <= 480;
+        // Erkennung für Tablets im Hochformat (z.B. iPad Air 4 mit ~820px Breite)
+        const isIPadPortrait = window.innerWidth >= 768 && window.innerWidth <= 850 && window.innerHeight > window.innerWidth;
 
         const allDecoSources = allItems.filter(item => {
             const fmt = item.format ? item.format.toLowerCase() : '';
@@ -137,8 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        const firstShelfLimit = isSearchMode ? 5 : (isMobile ? 9 : 10);
-        const subsequentShelfLimit = isSearchMode ? 8 : (isMobile ? 9 : 15);
+        // Limit-Definitionen: Auf iPad Air 4 Hochkant = 7 Bücher + 1 Counter = 8 Elemente oben, danach 11 Bücher pro Brett
+        const firstShelfLimit = isSearchMode ? 5 : (isIPadPortrait ? 7 : (isMobile ? 9 : 10));
+        const subsequentShelfLimit = isSearchMode ? 8 : (isIPadPortrait ? 11 : (isMobile ? 9 : 15));
 
         let currentShelf = createShelfElement(isSearchMode);
 
@@ -235,8 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Falls es sich um ein Rezensionsexemplar handelt, wird die Klasse .format-badge.original verwendet,
-            // damit Position (oben links) und Farbe exakt wie beim Original-Badge sind.
             let leftBadgeHtml = '';
             if (isRezi) {
                 leftBadgeHtml = '<span class="format-badge original">Rezi</span>';
