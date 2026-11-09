@@ -1,29 +1,32 @@
+// charts-poc.js
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('pocChart');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  // Farbverläufe für PoC (z. B. Ja / Nein)
-  const gradient1 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Ja
+  // Farbverläufe für PoC (Index 0 = Grün/Ja, Index 1 = Orange/Nein)
+  const gradient1 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Ja (Grün)
   gradient1.addColorStop(0, '#3CB371');
   gradient1.addColorStop(1, '#294e29ff');
 
-  const gradient2 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Nein
+  const gradient2 = ctx.createLinearGradient(0, 0, canvas.width, 0); // Nein (Orange)
   gradient2.addColorStop(0, '#ff7256');
   gradient2.addColorStop(1, '#ff4500');
 
   const originalColors = [gradient1, gradient2];
   const inactiveColor = '#333333'; 
 
-  // URL zu deiner Google Sheets CSV für PoC (Gid entsprechend anpassen falls nötig)
+  // URL zu deiner Google Sheets CSV
   fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1234038788&single=true&output=csv')
     .then(response => response.text())
     .then(csvText => {
       const parsedData = Papa.parse(csvText, { header: true }).data;
-      const filtered = parsedData.filter(row => parseFloat(row['Anzahl']) > 0);
+      
+      // Filtere die Auswertungstabelle heraus
+      const validRows = parsedData.filter(row => row['PoC'] && row['Anzahl'] !== undefined && row['Anzahl'] !== '');
 
-      const labels = filtered.map(row => row['PoC'] || row['Geschlecht']); // Fallback je nach Tabellenstruktur
-      const data = filtered.map(row => parseFloat(row['Anzahl']));
+      const labels = validRows.map(row => row['PoC'].trim()); // ["Ja", "Nein"]
+      const data = validRows.map(row => parseFloat(row['Anzahl'])); // [12, 89]
 
       if (data.length === 0) {
         canvas.style.display = 'none';
@@ -73,33 +76,40 @@ document.addEventListener('DOMContentLoaded', () => {
             const ctx = chart.ctx;
             const active = chart.getActiveElements();
 
-            if (active && active.length) {
-              const idx = active[0].index;
-              const value = chart.data.datasets[0].data[idx];
-              const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-              const percentage = ((value / total) * 100).toFixed(1) + '%';
-              const label = chart.data.labels[idx];
-              const centerX = chart.width / 2;
-              const centerY = chart.height / 2;
-
-              ctx.save();
-              ctx.textAlign = 'center';
-              ctx.textBaseline = 'middle';
-
-              ctx.font = '18px "Dosis", sans-serif';
-              ctx.fillStyle = '#a2bba3';
-              ctx.fillText(label, centerX, centerY - 25);
-
-              ctx.font = 'bold 38px "Bebas Neue", sans-serif';
-              ctx.fillStyle = 'white';
-              ctx.fillText(percentage, centerX, centerY + 5);
-
-              ctx.font = '16px "Dosis", sans-serif';
-              ctx.fillStyle = 'white';
-              ctx.fillText('Total: ' + value, centerX, centerY + 32);
-
-              ctx.restore();
+            // Aktiven Index ermitteln (Standard ist 0 = das grüne "Ja"-Segment)
+            let idx = 0;
+            if (active && active.length > 0) {
+              idx = active[0].index;
             }
+
+            const value = chart.data.datasets[0].data[idx];
+            const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+            const percentage = ((value / total) * 100).toFixed(1) + '%';
+            
+            // Feste Zuweisung basierend auf der Position/Farbe:
+            // Index 0 = Grün = "Ja", Index 1 = Orange = "Nein"
+            const label = idx === 0 ? 'Ja' : 'Nein';
+
+            const centerX = chart.width / 2;
+            const centerY = chart.height / 2;
+
+            ctx.save();
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            ctx.font = '18px "Dosis", sans-serif';
+            ctx.fillStyle = '#a2bba3';
+            ctx.fillText(label, centerX, centerY - 25);
+
+            ctx.font = 'bold 38px "Bebas Neue", sans-serif';
+            ctx.fillStyle = 'white';
+            ctx.fillText(percentage, centerX, centerY + 5);
+
+            ctx.font = '16px "Dosis", sans-serif';
+            ctx.fillStyle = 'white';
+            ctx.fillText('Total: ' + value, centerX, centerY + 32);
+
+            ctx.restore();
           }
         }]
       };
