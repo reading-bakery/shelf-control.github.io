@@ -100,12 +100,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return isBook && hasTitle;
         });
 
-        // Bücher alphabetisch nach Titel sortieren (mit localeCompare für Umlaute)
+        // Bücher alphabetisch nach Titel sortieren
         booksOnly.sort((a, b) => (a.title || '').localeCompare(b.title || '', 'de', { sensitivity: 'base' }));
 
-        const isMobile = window.innerWidth <= 480;
-        // Erkennung für Tablets im Hochformat (z.B. iPad Air 4 mit ~820px Breite)
-        const isIPadPortrait = window.innerWidth >= 768 && window.innerWidth <= 850 && window.innerHeight > window.innerWidth;
+        // Exakte Geräte-Unterscheidung per JavaScript
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        const isMobile = width <= 480;
+        const isTabletPortrait = width > 480 && width <= 900 && height > width;
+        const isTabletLandscape = width > 480 && width <= 1200 && height <= width;
 
         const allDecoSources = allItems.filter(item => {
             const fmt = item.format ? item.format.toLowerCase() : '';
@@ -139,9 +143,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Limit-Definitionen: Auf iPad Air 4 Hochkant = 7 Bücher + 1 Counter = 8 Elemente oben, danach 11 Bücher pro Brett
-        const firstShelfLimit = isSearchMode ? 5 : (isIPadPortrait ? 7 : (isMobile ? 9 : 10));
-        const subsequentShelfLimit = isSearchMode ? 8 : (isIPadPortrait ? 11 : (isMobile ? 9 : 15));
+        // Limits je nach Gerätetyp festlegen
+        let firstShelfLimit, subsequentShelfLimit;
+
+        if (isSearchMode) {
+            firstShelfLimit = 5;
+            subsequentShelfLimit = 8;
+        } else if (isMobile) {
+            firstShelfLimit = 9;
+            subsequentShelfLimit = 9;
+        } else if (isTabletPortrait) {
+            firstShelfLimit = 7;     // Oben: 7 Bücher + 1 Counter = 8 Elemente
+            subsequentShelfLimit = 11; // Folgebretter: 11 Bücher
+        } else if (isTabletLandscape) {
+            firstShelfLimit = 9;     // Oben im Querformat etwas mehr Platz
+            subsequentShelfLimit = 14; // Folgebretter
+        } else {
+            // Desktop Standard
+            firstShelfLimit = 10;
+            subsequentShelfLimit = 15;
+        }
 
         let currentShelf = createShelfElement(isSearchMode);
 

@@ -490,10 +490,9 @@ h2 {
 }
 
 /* =========================================================
-   SILBENTRENNUNG & TEXTAUSRICHTUNG (DESKTOP, TABLET & MOBILE)
+   SILBENTRENNUNG & TEXTAUSRICHTUNG
    ========================================================= */
 
-/* Globale Anwendung für Textbereiche & Modals */
 .spine-title,
 .modal-info,
 .modal-info h3,
@@ -501,18 +500,16 @@ h2 {
 .modal-klappentext p,
 .modal-notes textarea,
 .search-box input {
-    text-align: left; /* Linksbündig */
+    text-align: left;
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
-    hyphens: auto; /* Automatische Silbentrennung nach hinterlegtem Sprachstandard */
+    hyphens: auto;
     word-break: normal;
     overflow-wrap: break-word;
 }
 
-/* Anpassung der Spine-Titel (vertikaler Text) */
 .spine-title {
     text-align: left;
-    /* Ergänzung für saubere Trennung bei vertikalem Text */
     -webkit-hyphens: auto;
     hyphens: auto;
 }
@@ -542,11 +539,10 @@ h2 {
 }
 
 /* =========================================================
-   MEDIA QUERIES FOR GOOGLE PIXEL 10a & MOBILE (max-width: 480px)
+   MEDIA QUERIES: HANDY (max-width: 480px)
    ========================================================= */
 
 @media (max-width: 480px) {
-    /* Container & Layout */
     .library-container {
         padding: 10px 5px;
         margin: 5px auto;
@@ -558,7 +554,6 @@ h2 {
         margin-bottom: 1.2rem;
     }
 
-    /* Filter & Suchleiste */
     .filter-container {
         gap: 12px;
         margin-bottom: 25px;
@@ -579,10 +574,9 @@ h2 {
         font-size: 0.95rem;
     }
 
-    /* Regalboden & Zeilenumbruch */
     .shelf-row {
         display: flex;
-        flex-wrap: nowrap !important; /* Verhindert das Umbrechen der Bücher innerhalb eines Regals */
+        flex-wrap: nowrap !important;
         justify-content: center;
         align-items: flex-end;
         gap: 4px;
@@ -591,7 +585,6 @@ h2 {
         min-height: 170px;
     }
 
-    /* 3D Regalboden-Effekt Anpassung für Mobil */
     .shelf-row::after {
         bottom: -12px;
         height: 12px;
@@ -601,7 +594,6 @@ h2 {
         height: 6px;
     }
 
-    /* Flip-Clock Zähler oben auf dem Regal ausrichten */
     .flip-counter-container {
         position: absolute;
         top: 2px;
@@ -624,11 +616,10 @@ h2 {
         font-size: 0.8rem;
     }
 
-    /* Buchrücken (Spine) Kompaktansicht */
     .book-card {
         width: 30px;
         height: 150px;
-        flex-shrink: 0; /* Verhindert Quetschen der Buchrücken */
+        flex-shrink: 0;
     }
 
     .spine-title {
@@ -636,13 +627,11 @@ h2 {
         max-height: 130px;
     }
 
-    /* Cover-Hover im normalen Modus */
     .book-cover-container {
         width: 95px;
         height: 150px;
     }
 
-    /* Verschiebefekt der Nachbarbücher auf Mobilgeräten reduzieren */
     .shelf-row:not(.search-mode):has(.book-card:hover) > :has(~ .book-card:hover) {
         transform: translateX(-25px);
     }
@@ -651,9 +640,8 @@ h2 {
         transform: translateX(25px);
     }
 
-    /* Such-Modus Grid-Anpassung */
     .shelf-row.search-mode {
-        flex-wrap: wrap !important; /* Im Suchmodus dürfen Covers umbrechen */
+        flex-wrap: wrap !important;
         gap: 8px;
     }
 
@@ -667,7 +655,6 @@ h2 {
         height: 140px !important;
     }
 
-    /* Deko-Elemente */
     .deko-card, .deko2-card {
         height: 150px;
         margin: 0 1px;
@@ -687,7 +674,6 @@ h2 {
         bottom: -90px;
     }
 
-    /* Modal Pop-up */
     .modal-content {
         padding: 15px;
         width: 90%;
@@ -710,5 +696,25 @@ h2 {
 
     .deko2-card {
         display: none !important;
+    }
+}
+
+/* =========================================================
+   MEDIA QUERIES: TABLET HOCHKANT (PORTRAIT)
+   ========================================================= */
+@media (min-width: 481px) and (max-width: 900px) and (orientation: portrait) {
+    .library-container {
+        max-width: 92%;
+        padding: 20px;
+    }
+}
+
+/* =========================================================
+   MEDIA QUERIES: TABLET QUERFORMAT (LANDSCAPE)
+   ========================================================= */
+@media (min-width: 481px) and (max-width: 1200px) and (orientation: landscape) {
+    .library-container {
+        max-width: 95%;
+        padding: 25px;
     }
 }
