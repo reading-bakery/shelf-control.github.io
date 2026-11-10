@@ -1,18 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
   const bingoGrid = document.getElementById("bingo");
+
+  // Aktuelle CSV-Schnittstelle deiner Formular-Antworten (Form_Responses5)
   const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1595827324&single=true&output=csv";
 
-  // WICHTIG: Ersetze diesen Platzhalter mit der URL deines Bingo-Google-Formulars (endet auf /formResponse)
-  const BINGO_FORM_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1595827324&single=true&output=csv/formResponse";
+  // DEINE GOOGLE FORMULAR SCHNITTSTELLE (Hier deinen Form-Link eintragen)
+  const BINGO_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfGsPPRkT3OBYIsLD0DAGAIx6WH4RQP2mXtcnOXvmGdRYb7lQ/formResponse";
   const ENTRY_AUFGABE = "entry.711389681";
   const ENTRY_BUCH = "entry.1570798113";
 
-  // Modal dynamisch im passenden Design erstellen
+  // Modal dynamisch im Design deiner challenge.css erstellen
   let modalEl = document.getElementById("bingo-modal");
   if (!modalEl) {
     modalEl = document.createElement("div");
     modalEl.id = "bingo-modal";
-    modalEl.className = "weltreise-modal"; // Nutzt das bestehende CSS aus challenge.css
+    modalEl.className = "weltreise-modal";
     modalEl.innerHTML = `
       <div class="weltreise-modal-content">
         <div class="weltreise-modal-header">
@@ -91,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
       setTimeout(() => {
         closeModal();
-        location.reload(); // Lädt die Seite neu, damit die aktualisierte CSV geladen wird
+        location.reload();
       }, 1000);
 
     } catch (err) {
@@ -105,9 +107,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function parseCSV(text) {
     const lines = text.trim().split("\n");
-    const headers = lines[0].split(",").map(h => h.trim());
+    if (lines.length === 0) return [];
+
+    const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ''));
     return lines.slice(1).map(line => {
-      const values = line.split(",").map(v => v.trim());
+      const values = line.split(",").map(v => v.trim().replace(/^"|"$/g, ''));
       let obj = {};
       headers.forEach((h, i) => {
         obj[h] = values[i] || "";
@@ -126,6 +130,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const maxCells = 20;
       bingoGrid.innerHTML = "";
 
+      // Erstelle ein Nachschlage-Objekt aus den Antworten
+      const buchMap = {};
+      data.forEach(row => {
+        const aufgabeName = row["Aufgabe"];
+        const buchName = row["Buch"];
+        if (aufgabeName) {
+          buchMap[aufgabeName.trim()] = buchName ? buchName.trim() : "";
+        }
+      });
+
       for (let i = 0; i < maxCells; i++) {
         const item = data[i];
         if (!item) {
@@ -137,14 +151,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const aufgabe = item["Aufgabe"] || "";
-        const buch = item["Buch"] || "";
+        const buch = buchMap[aufgabe] || item["Buch"] || "";
 
         if (!aufgabe) continue;
 
         const container = document.createElement("div");
         container.className = "flip-container";
         if (buch.trim()) {
-          container.classList.add("flipped"); // Automatisch geflippt, wenn ein Buch eingetragen ist
+          container.classList.add("flipped");
         }
 
         const inner = document.createElement("div");
@@ -162,9 +176,6 @@ document.addEventListener("DOMContentLoaded", () => {
         inner.appendChild(back);
         container.appendChild(inner);
 
-        // Klick-Logik:
-        // - Wenn kein Buch eingetragen ist: Modal öffnet sich zur Eingabe
-        // - Wenn bereits ein Buch eingetragen ist: Karte lässt sich wie gewohnt wenden
         container.addEventListener("click", () => {
           if (!buch.trim()) {
             openModal(aufgabe);
