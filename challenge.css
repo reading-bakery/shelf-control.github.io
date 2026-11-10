@@ -581,7 +581,7 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: flex-start !important;
-    align-items: center;
+    align-items: center !important;
 }
 
 .buechergilde-grid,
@@ -598,8 +598,11 @@ p {
     grid-template-columns: repeat(4, 1fr);
     gap: 0.5rem;
     width: 100%;
+    /* Wichtig: Verhindert, dass das Grid den Platz in der Höhe klammert und Elemente nach unten drückt */
+    align-content: start; 
     align-items: start;
     justify-items: start;
+    justify-content: start;
 }
 
 /* Carousel Navigation */

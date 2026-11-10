@@ -20,6 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (data.length <= maxItems) {
             const grid = document.createElement("div");
             grid.classList.add("buechergilde-grid");
+            // WICHTIG: Erzwingt, dass das Grid links beginnt
+            grid.style.cssText = "display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; width: 100%; justify-content: start;";
+            
             data.forEach(item => {
                 const card = createCard(item);
                 grid.appendChild(card);
@@ -36,14 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const hasCover = Boolean(item.Cover && item.Cover.trim() !== "");
 
-        // Cover oder Placeholder setzen
         if (hasCover) {
             div.innerHTML = `<img src="${item.Cover}" alt="${item.Buch || ''}">`;
         } else {
             div.innerHTML = `<div class="buechergilde-placeholder"></div>`;
         }
 
-        // Buchstaben NUR hinzufügen, wenn ein Cover existiert
         if (hasCover) {
             const letterContainer = document.createElement("div");
             letterContainer.classList.add("buechergilde-letter-container");
@@ -69,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const carousel = document.createElement("div");
         carousel.classList.add("buechergilde-carousel");
 
-        // Carousel Navigation
+        // Carousel Navigation (Bleibt oben zentriert)
         const nav = document.createElement("div");
         nav.classList.add("buechergilde-carousel-nav");
         for (let i = 0; i < totalSlides; i++) {
@@ -94,6 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const grid = document.createElement("div");
             grid.classList.add("buechergilde-grid");
+            // WICHTIG: Erzwingt auch im Karussell, dass das Grid links beginnt
+            grid.style.cssText = "display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; width: 100%; justify-content: start;";
 
             slice.forEach(item => {
                 const card = createCard(item);
@@ -118,7 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
             nav.querySelectorAll(".buechergilde-dot").forEach((d, i) => d.classList.toggle("active", i === index));
         }
 
-        // Touch-Events für Swipe
         track.addEventListener("touchstart", e => {
             startX = e.touches[0].clientX;
             isDragging = true;
