@@ -108,10 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .filter(item => item.country);
             
-            // NEU: Alphabetische Sortierung (A-Z) unter Berücksichtigung deutscher Umlaute
             data.sort((a, b) => a.country.localeCompare(b.country, 'de', { sensitivity: 'base' }));
-
-            // Vorhandene Länder für den Abgleich speichern
             existingCountries = data.map(item => item.country);
 
             renderWeltreise(data);
@@ -143,7 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target === modal) closeModal();
     });
 
-    // Absenden & Abgleich
     if (saveModalBtn) {
         saveModalBtn.addEventListener("click", async () => {
             const newCountry = countryInput.value.trim();
@@ -154,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Abgleich: Case-Insensitive Prüfung (Groß-/Kleinschreibung ignorieren)
             const exists = existingCountries.some(
                 c => c.toLowerCase() === newCountry.toLowerCase()
             );
@@ -165,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Formular absenden
             saveModalBtn.disabled = true;
             saveModalBtn.textContent = "Wird gesendet...";
             modalMessage.textContent = "";
@@ -202,7 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
         container.innerHTML = "";
 
         const maxPerRow = 4;
-        const maxRows = 3;
+        // Dynamische Reihen-Anzahl je nach Bildschirmbreite (Mobile < 740px = 3 Reihen, sonst 4 Reihen)
+        const maxRows = window.innerWidth <= 740 ? 3 : 4;
         const maxItems = maxPerRow * maxRows;
 
         if (data.length <= maxItems) {
@@ -258,7 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const grid = document.createElement("div");
             grid.classList.add("weltreise-grid");
-            slice.forEach(item => grid.appendChild(createCard(item)));
+            slice.forEach(item => grid.gridappendChild ? grid.appendChild(createCard(item)) : grid.appendChild(createCard(item)));
 
             slide.appendChild(grid);
             track.appendChild(slide);

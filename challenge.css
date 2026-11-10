@@ -83,7 +83,7 @@ h3 {
     border-radius: 12px;
     width: 90%;
     max-width: 420px;
-    padding: 20px;
+    padding: 25px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
     color: whitesmoke;
     font-family: 'Dosis', sans-serif;
@@ -173,33 +173,32 @@ h3 {
     padding-top: 15px;
 }
 
+/* Angepasstes Button-Styling exakt nach sub.css Vorbild */
 .modal-btn {
-    padding: 8px 16px;
-    border-radius: 6px;
+    margin-top: 10px;
+    padding: 7px 15px;
+    border-radius: 15px;
     border: none;
-    font-family: 'Dosis', sans-serif;
-    font-size: 1rem;
-    font-weight: bold;
     cursor: pointer;
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: #a2bba3;
+    color: #222;
     transition: background-color 0.2s ease;
 }
 
+.modal-btn:hover {
+    background-color: #8da98f;
+}
+
 .modal-btn.cancel {
-    background-color: #4a4a4a;
-    color: white;
+    background-color: #e0d0d0;
+    color: #222;
 }
 
 .modal-btn.cancel:hover {
-    background-color: #666;
-}
-
-.modal-btn.save {
-    background-color: #ff7256;
-    color: white;
-}
-
-.modal-btn.save:hover {
-    background-color: #63b8ff;
+    background-color: #ccb8b8;
 }
 
 .modal-btn:disabled {
