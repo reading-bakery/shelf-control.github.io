@@ -153,11 +153,11 @@ document.addEventListener('DOMContentLoaded', () => {
             firstShelfLimit = 9;
             subsequentShelfLimit = 9;
         } else if (isTabletPortrait) {
-            firstShelfLimit = 7;     // Oben: 7 Bücher + 1 Counter = 8 Elemente
-            subsequentShelfLimit = 11; // Folgebretter: 11 Bücher
+            firstShelfLimit = 5;     // Oben: 5 Bücher + 1 Counter = 6 Elemente (perfekt für ~768px iPad Portrait)
+            subsequentShelfLimit = 9;  // Folgebretter: 9 Bücher
         } else if (isTabletLandscape) {
-            firstShelfLimit = 9;     // Oben im Querformat etwas mehr Platz
-            subsequentShelfLimit = 14; // Folgebretter
+            firstShelfLimit = 8;     // Oben im Querformat
+            subsequentShelfLimit = 12; // Folgebretter
         } else {
             // Desktop Standard
             firstShelfLimit = 10;

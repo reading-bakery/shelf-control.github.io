@@ -95,7 +95,7 @@ h2 {
     position: relative;
     margin-bottom: 50px;
     min-height: 230px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     text-align: center;
 }
 
@@ -143,6 +143,7 @@ h2 {
     margin-right: 15px;
     margin-bottom: 4px;
     user-select: none;
+    flex-shrink: 0;
 }
 
 .flip-card {
@@ -194,6 +195,7 @@ h2 {
     cursor: pointer;
     width: 42px;
     height: 190px;
+    flex-shrink: 0;
     perspective: 1000px;
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s ease;
 }
@@ -274,6 +276,7 @@ h2 {
 
 .shelf-row.search-mode {
     gap: 15px;
+    flex-wrap: wrap;
 }
 
 .shelf-row.search-mode .book-card {
@@ -363,6 +366,7 @@ h2 {
     margin: 0 6px;
     pointer-events: none;
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    flex-shrink: 0;
 }
 
 .deko-container {
@@ -393,6 +397,7 @@ h2 {
     margin: 0 6px;
     pointer-events: none;
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    flex-shrink: 0;
 }
 
 .deko2-container {
@@ -518,11 +523,6 @@ h2 {
     .library-container {
         padding: 15px;
         margin: 10px;
-    }
-
-    .shelf-row {
-        justify-content: center;
-        gap: 10px;
     }
 
     .modal-content {
@@ -700,12 +700,22 @@ h2 {
 }
 
 /* =========================================================
-   MEDIA QUERIES: TABLET HOCHKANT (PORTRAIT)
+   MEDIA QUERIES: TABLET HOCHKANT (PORTRAIT - iPad etc.)
    ========================================================= */
-@media (min-width: 481px) and (max-width: 900px) and (orientation: portrait) {
+@media (min-width: 481px) and (max-width: 960px) and (orientation: portrait) {
     .library-container {
-        max-width: 92%;
-        padding: 20px;
+        max-width: 95%;
+        padding: 15px 10px;
+    }
+
+    .shelf-row {
+        gap: 8px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .book-card {
+        width: 38px;
     }
 }
 
