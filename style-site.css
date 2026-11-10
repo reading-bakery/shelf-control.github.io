@@ -60,7 +60,7 @@ form {
     justify-content: center;
     background-color: beige;
     border-radius: 12px;
-    overflow: hidden; /* Damit das Bild/Canvas nicht übersteht */
+    overflow: hidden; 
 }
 
 .controls-section {
@@ -72,18 +72,17 @@ form {
 }
 
 #btnSuccessAddOk.modal-save {
-    display: block;        /* Erlaubt die Zentrierung mit margin: auto */
-    width: fit-content;    /* Button wird nur so breit wie der Text */
-    min-width: 100px;       /* Mindestbreite, damit er nicht zu mickrig wirkt */
-    max-width: 150px;      /* Deine gewünschte maximale Breite */
-    margin: 20px auto 10px;/* Zentriert den Button (20px oben, auto links/rechts) */
-    padding: 8px 15px;     /* Macht den Button schmaler */
+    display: block;        
+    width: fit-content;    
+    min-width: 100px;       
+    max-width: 150px;      
+    margin: 20px auto 10px;
+    padding: 8px 15px;     
     
-    /* Falls du das Design aus dem Screenshot (grün/rund) willst: */
     background-color: #a2bba3; 
     color: black;
     border: none;
-    border-radius: 25px;   /* Rundes Design wie im Screenshot */
+    border-radius: 25px;   
     cursor: pointer;
     font-family: 'Dosis', sans-serif;
     font-weight: bold;
@@ -154,7 +153,6 @@ button[type="submit"]:hover {
         gap: 15px !important;
     }
 
-    /* Diese drei Container/Elemente werden nun auf die absolut gleiche Breite gezwungen */
     .scanner-section,
     #isbn, 
     .manual-btn {
@@ -162,14 +160,11 @@ button[type="submit"]:hover {
         max-width: 350px !important;
         margin: 0 auto !important;
         display: block !important;
-        
-        /* WICHTIG: Padding anpassen, damit langer Text (ISBN) nicht abgeschnitten wird */
         padding: 12px 5px !important; 
         min-height: 50px !important;
         box-sizing: border-box !important;
     }
 
-    /* Verhindert, dass der Text im ISBN Feld zu groß ist oder abgeschnitten wird */
     #isbn {
         font-size: 1rem !important; 
         line-height: normal !important;
@@ -181,8 +176,6 @@ button[type="submit"]:hover {
         height: auto !important;
         display: block;
     }
-
-    
 }
 
 /* --- 6. SONSTIGES & HELPER --- */
@@ -200,15 +193,15 @@ button[type="submit"]:hover {
     z-index: 1000;
 }
 
-   #backToTop:hover {
-      background-color: #4b0606;
-      color: white;
-    }
+#backToTop:hover {
+    background-color: #4b0606;
+    color: white;
+}
 
 footer {
-      padding: 1rem;
-      text-align: center;
-      cursor: text;
+    padding: 1rem;
+    text-align: center;
+    cursor: text;
 }
 
 .hidden-iframe { display: none; }

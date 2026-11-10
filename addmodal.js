@@ -134,7 +134,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (validateStep("titleModal", val, true, "Bitte Titel eintragen.", "authorModal")) {
         bookData.title = val;
 
-        // --- MATCHING LOGIK HIER ---
         const treffer = subDatenbank.find(b => b.title.toLowerCase().trim() === val.toLowerCase().trim());
         if (treffer && treffer.cover) {
           bookData.cover = `https://github.com/reading-bakery/shelf-control.github.io/blob/main/images/sub/${treffer.cover}?raw=true`;
@@ -162,7 +161,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   };
 
-  // Geschlecht -> POC -> Umfang
   setupRadioStep("genderModal", "gender", "Bitte Geschlecht auswählen.", "pocModal");
   setupRadioStep("pocModal", "poc", "Bitte POC-Option auswählen.", "umfangModal");
   setupRadioStep("umfangModal", "umfang", "Bitte Umfang auswählen.", "seitenModal");
@@ -183,7 +181,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   setupRadioStep("formatModal", "format", "Bitte Format auswählen.", "statusModal");
   setupRadioStep("statusModal", "status", "Bitte Status auswählen.", "verlagModal");
 
-  // --- Senden beim letzten Schritt (Verlag) ---
   document.querySelector("#verlagModal .modal-save").addEventListener("click", async () => {
     const val = document.querySelector("#verlagModal input:checked")?.value;
     const currentModal = document.getElementById("verlagModal");
