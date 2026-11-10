@@ -108,7 +108,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .filter(item => item.country);
             
+            // Alphabetische Sortierung (A-Z) mit Umlauten
             data.sort((a, b) => a.country.localeCompare(b.country, 'de', { sensitivity: 'base' }));
+
+            // Vorhandene Länder für den Abgleich speichern
             existingCountries = data.map(item => item.country);
 
             renderWeltreise(data);
@@ -140,6 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target === modal) closeModal();
     });
 
+    // Absenden & Abgleich
     if (saveModalBtn) {
         saveModalBtn.addEventListener("click", async () => {
             const newCountry = countryInput.value.trim();
@@ -196,8 +200,8 @@ document.addEventListener("DOMContentLoaded", () => {
         container.innerHTML = "";
 
         const maxPerRow = 4;
-        // Dynamische Reihen-Anzahl je nach Bildschirmbreite (Mobile < 740px = 3 Reihen, sonst 4 Reihen)
-        const maxRows = window.innerWidth <= 740 ? 3 : 4;
+        // Desktop/Tablet = 5 Reihen, Mobile (<= 740px) = 3 Reihen
+        const maxRows = window.innerWidth <= 740 ? 3 : 5;
         const maxItems = maxPerRow * maxRows;
 
         if (data.length <= maxItems) {
@@ -229,19 +233,24 @@ document.addEventListener("DOMContentLoaded", () => {
         const itemsPerSlide = maxPerRow * maxRows;
         const totalSlides = Math.ceil(data.length / itemsPerSlide);
 
-        const carousel = document.createElement("div");
-        carousel.classList.add("weltreise-carousel");
-
+        // Dots ganz oben im Container platzieren (analog zur Monatschallenge)
         const nav = document.createElement("div");
         nav.classList.add("weltreise-carousel-nav");
+        container.insertBefore(nav, container.firstChild);
+
+        const dots = [];
         for (let i = 0; i < totalSlides; i++) {
             const dot = document.createElement("span");
             dot.classList.add("weltreise-dot");
             if (i === 0) dot.classList.add("active");
             dot.addEventListener("click", () => goToSlide(i));
             nav.appendChild(dot);
+            dots.push(dot);
         }
-        container.appendChild(nav);
+
+        const carousel = document.createElement("div");
+        carousel.classList.add("weltreise-carousel");
+        container.appendChild(carousel);
 
         const track = document.createElement("div");
         track.classList.add("weltreise-carousel-track");
@@ -253,21 +262,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const grid = document.createElement("div");
             grid.classList.add("weltreise-grid");
-            slice.forEach(item => grid.gridappendChild ? grid.appendChild(createCard(item)) : grid.appendChild(createCard(item)));
+            slice.forEach(item => grid.appendChild(createCard(item)));
 
             slide.appendChild(grid);
             track.appendChild(slide);
         }
 
         carousel.appendChild(track);
-        container.appendChild(carousel);
 
         let currentSlide = 0, startX = 0, isDragging = false;
 
         function goToSlide(index) {
             currentSlide = index;
             track.style.transform = `translateX(${-100 * index}%)`;
-            nav.querySelectorAll(".weltreise-dot").forEach((d,i)=>d.classList.toggle("active",i===index));
+            dots.forEach((d, i) => d.classList.toggle("active", i === index));
         }
 
         track.addEventListener("touchstart", e => { startX = e.touches[0].clientX; isDragging = true; });
@@ -280,8 +288,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!isDragging) return;
             isDragging = false;
             const diff = e.changedTouches[0].clientX - startX;
-            if (diff < -50 && currentSlide < totalSlides-1) goToSlide(currentSlide+1);
-            else if (diff > 50 && currentSlide>0) goToSlide(currentSlide-1);
+            if (diff < -50 && currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
+            else if (diff > 50 && currentSlide > 0) goToSlide(currentSlide - 1);
             else goToSlide(currentSlide);
         });
     }
