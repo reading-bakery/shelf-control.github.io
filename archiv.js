@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return grouped;
   }
 
-  // ⭐ Sterne erstellen (SVG, halbe Sterne unterstützt)
   function createStarsDOM(sterne, coverWidthPx) {
     const container = document.createElement("div");
     container.style.display = "flex";
@@ -49,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const maxStars = 5;
     const starSizePx = Math.min((coverWidthPx - (maxStars - 1) * 2) / maxStars * 1.25, 20);
 
-    // volle Sterne
     for (let i = 0; i < fullStars; i++) {
       const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       svg.setAttribute("width", starSizePx);
@@ -59,7 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
       container.appendChild(svg);
     }
 
-    // halber Stern
     if (halfStar) {
       const gradId = `half-grad-${Math.random().toString(36).substr(2, 9)}`;
       const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -89,11 +86,42 @@ document.addEventListener("DOMContentLoaded", () => {
       const yearDiv = document.createElement("div");
       yearDiv.classList.add("lesejahr");
 
-      const yearHeader = document.createElement("h2");
-      yearHeader.textContent = year;
+      // Header-Container mit Jahreszahl und Statistiken
+      const yearHeader = document.createElement("div");
+      yearHeader.classList.add("jahr-header-container");
+
+      const titleSpan = document.createElement("h2");
+      titleSpan.textContent = year;
+      yearHeader.appendChild(titleSpan);
+
+      // Statistiken berechnen (Bücheranzahl & Durchschnittssterne)
+      let totalBooks = 0;
+      let totalStars = 0;
+      let starCount = 0;
+      const months = groupedData[year];
+
+      for (const month in months) {
+        months[month].forEach(book => {
+          totalBooks++;
+          const sterne = parseFloat(book.Sterne?.replace(",", ".")) || 0;
+          if (sterne > 0) {
+            totalStars += sterne;
+            starCount++;
+          }
+        });
+      }
+
+      const avgStars = starCount > 0 ? (totalStars / starCount).toFixed(2).replace(".", ",") : "–";
+
+      const statsDiv = document.createElement("div");
+      statsDiv.classList.add("jahr-stats");
+      statsDiv.innerHTML = `
+        <span class="stat-badge">📚 ${totalBooks} ${totalBooks === 1 ? 'Buch' : 'Bücher'}</span>
+        <span class="stat-badge">⭐ ${avgStars}</span>
+      `;
+      yearHeader.appendChild(statsDiv);
       yearDiv.appendChild(yearHeader);
 
-      const months = groupedData[year];
       const monthCollapses = [];
 
       for (const month in months) {
@@ -125,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
           img.style.borderRadius = "6px";
           coverDiv.appendChild(img);
 
-          const sterne = parseFloat(book.Sterne.replace(",", ".")) || 0;
+          const sterne = parseFloat(book.Sterne?.replace(",", ".")) || 0;
           const starsContainer = createStarsDOM(sterne, 70);
           coverDiv.appendChild(starsContainer);
 

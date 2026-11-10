@@ -190,7 +190,64 @@ h3 {
     font-weight: bold;
 }
 
+/* --- Jahres-Statistik Badges & Animationen --- */
+.jahr-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+}
 
+.jahr-header-container h2,
+.jahr-header-container h3 {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.jahr-stats {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    animation: fadeInSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.stat-badge {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    color: #deded6;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "Dosis", sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.stat-badge:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: rgba(255, 114, 86, 0.15);
+    border-color: #ff7256;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(255, 114, 86, 0.2);
+}
+
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(15px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
 
 /* Handy-Ansicht */
 @media (max-width: 740px) {

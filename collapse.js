@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const csvUrl =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1702643479&single=true&output=csv';
 
-  // Objekt für alle Monate plus Abgebrochen
   let monate = {
     Januar: [],
     Februar: [],
@@ -45,6 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const results = Papa.parse(csvText, { header: false });
       const data = results.data;
 
+      let totalBooks2026 = 0;
+      let totalStars2026 = 0;
+      let starCount2026 = 0;
+
       for (let i = 1; i < data.length; i++) {
         const row = data[i];
         if (!row || row.length < 20) continue;
@@ -52,27 +55,52 @@ document.addEventListener('DOMContentLoaded', () => {
         const fazitRaw = row[19]?.trim();
         const fazit = fazitRaw ? fazitRaw.toLowerCase() : '';
         const monatRaw = row[16]?.trim();
+        const coverUrl = row[1]?.trim();
+        if (!coverUrl) continue;
 
         let monatName = null;
+        let isValid = false;
 
         if (fazit === 'abgebrochen') {
           monatName = 'Abgebrochen';
+          isValid = true;
         } else {
           const monatNum = parseInt(monatRaw, 10);
           if (!isNaN(monatNum) && monatNum >= 1 && monatNum <= 12) {
             monatName = monthNames[monatNum.toString()];
-          } else {
-            continue;
+            isValid = true;
           }
         }
 
-        const coverUrl = row[1]?.trim();
-        if (!coverUrl) continue;
+        if (isValid) {
+          monate[monatName].push(coverUrl);
+          totalBooks2026++;
 
-        monate[monatName].push(coverUrl);
+          const sterneRaw = row[18]?.trim();
+          if (sterneRaw) {
+            const sterne = parseFloat(sterneRaw.replace(',', '.'));
+            if (!isNaN(sterne) && sterne > 0) {
+              totalStars2026 += sterne;
+              starCount2026++;
+            }
+          }
+        }
       }
 
-      // Bilder vorladen für schnellere Anzeige
+      // Statistiken für 2026 in den HTML-Header einfügen
+      const avgStars2026 = starCount2026 > 0 ? (totalStars2026 / starCount2026).toFixed(2).replace('.', ',') : '–';
+      const container2026 = document.getElementById('jahr-2026-container');
+      if (container2026) {
+        const statsDiv = document.createElement('div');
+        statsDiv.classList.add('jahr-stats');
+        statsDiv.innerHTML = `
+          <span class="stat-badge">📚 ${totalBooks2026} ${totalBooks2026 === 1 ? 'Buch' : 'Bücher'}</span>
+          <span class="stat-badge">⭐ ${avgStars2026}</span>
+        `;
+        container2026.appendChild(statsDiv);
+      }
+
+      // Bilder vorladen
       Object.values(monate)
         .flat()
         .forEach(url => {
@@ -80,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
           img.src = url;
         });
 
-      // --- Event-Listener nur einmal ---
       buttons.forEach(button => {
         button.addEventListener('click', () => {
           const monat = button.textContent.trim();
@@ -91,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
             collapseDiv.style.maxHeight &&
             collapseDiv.style.maxHeight !== '0px';
 
-          // Alle Collapses schließen und Buttons deaktivieren
           buttons.forEach(btn => {
             const id = btn.textContent.trim();
             const div = document.getElementById(id);
@@ -104,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
           });
 
           if (!isOpen) {
-            // Collapse öffnen und Button aktivieren
             const coverUrls = monate[monat] || [];
 
             coverUrls.forEach(url => {
@@ -114,29 +139,23 @@ document.addEventListener('DOMContentLoaded', () => {
               img.alt = 'Buchcover';
               img.loading = 'lazy';
 
-              // Finde die passende Zeile im CSV für das Cover
               const row = data.find(r => r[1]?.trim() === url);
               let sterne = 0;
               if (row && row[18]) {
-                // Spalte S = Index 18
                 sterne = parseFloat(row[18].replace(',', '.'));
               }
 
-              // Rundung auf halbe Schritte
               const rounded = Math.round(sterne * 2) / 2;
 
-              // SVG-Sterne generieren (nur volle + evtl. halber)
               const sterneDiv = document.createElement('div');
               sterneDiv.className = 'sterne-bewertung';
               let sterneHtml = '';
 
-              // Volle Sterne
               const volle = Math.floor(rounded);
               for (let s = 0; s < volle; s++) {
                 sterneHtml += `<svg width="14" height="14" viewBox="0 0 24 24" fill="gold" style="vertical-align:middle;"><polygon points="12,2 15,8.5 22,9.3 17,14.1 18.5,21 12,17.8 5.5,21 7,14.1 2,9.3 9,8.5"/></svg>`;
               }
 
-              // Halber Stern
               if (rounded % 1 !== 0) {
                 sterneHtml += `<svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:middle;">
                   <defs>
@@ -150,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </svg>`;
               }
 
-              // Bewertung als Text daneben
               const display = Number.isFinite(rounded)
                 ? rounded.toString().replace('.', ',')
                 : '–';
@@ -158,22 +176,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
               sterneDiv.innerHTML = sterneHtml;
 
-            // --- NEU: Lesezeit in Tagen ---
-            const tageDiv = document.createElement('div');
-            tageDiv.className = 'lesedauer';
-            tageDiv.style.fontSize = '0.8rem';
-            if (row && row[15]) {
-              const tage = parseInt(row[15], 10);
-              if (!isNaN(tage)) {
-                tageDiv.textContent = tage === 1 ? '1 Tag' : `${tage} Tage`;
+              const tageDiv = document.createElement('div');
+              tageDiv.className = 'lesedauer';
+              tageDiv.style.fontSize = '0.8rem';
+              if (row && row[15]) {
+                const tage = parseInt(row[15], 10);
+                if (!isNaN(tage)) {
+                  tageDiv.textContent = tage === 1 ? '1 Tag' : `${tage} Tage`;
+                } else {
+                  tageDiv.textContent = '–';
+                }
               } else {
                 tageDiv.textContent = '–';
               }
-            } else {
-              tageDiv.textContent = '–';
-            }
 
-              // Container für Bild und Bewertung
               const coverContainer = document.createElement('div');
               coverContainer.className = 'cover-container';
               coverContainer.appendChild(img);
@@ -184,12 +200,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             collapseDiv.style.padding = '10px';
-            collapseDiv.style.maxHeight = collapseDiv.scrollHeight + 'px'; // passt sich dynamisch an
+            collapseDiv.style.maxHeight = collapseDiv.scrollHeight + 'px';
             button.classList.add('active');
           }
         });
       });
-      // --- Ende ---
     })
     .catch(error => {
       console.error('Fehler beim Laden der CSV:', error);

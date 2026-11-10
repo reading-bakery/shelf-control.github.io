@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lesemonate</title>
@@ -19,124 +18,113 @@
     <script src="toggle.js" defer></script>
     <script src="collapse.js" defer></script>
     <script src="archiv.js" defer></script>
-
-
 </head>
 <body>
 
     <nav class="navbar"> 
-                    
-                    <div class="box1">
-                        <a href="index.html" class="logohome">Shelf Control</a>
-                    </div>
+        <div class="box1">
+            <a href="index.html" class="logohome">Shelf Control</a>
+        </div>
 
-                    <ul class="nav-links" id="nav-links">
-                        
-                        <li><a href="currently.html">Currently</a></li> 
-                        <li><a href="wishlist.html">Wunschliste</a></li>
-                        <li><a href="rachesub.html">SuB</a></li>
-                        <li><a href="lesemonate.html">Lesemonate</a></li>
-                        <li><a href="challenges.html">Challenges</a></li>
-                        <li><a href="recap.html">Statistik</a></li>
-                        <li><a href="lieblinge.html">Favoriten</a></li>
-                        <li><a href="bibliothek.html">Bibliothek</a></li>
-                        <li><a href="https://docs.google.com/spreadsheets/d/1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE/edit?gid=1702643479#gid=1702643479">Lager</a></li>
-                        <li><a href="addnewbook.html">Add Book</a></li>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="currently.html">Currently</a></li> 
+            <li><a href="wishlist.html">Wunschliste</a></li>
+            <li><a href="rachesub.html">SuB</a></li>
+            <li><a href="lesemonate.html">Lesemonate</a></li>
+            <li><a href="challenges.html">Challenges</a></li>
+            <li><a href="recap.html">Statistik</a></li>
+            <li><a href="lieblinge.html">Favoriten</a></li>
+            <li><a href="bibliothek.html">Bibliothek</a></li>
+            <li><a href="https://docs.google.com/spreadsheets/d/1Y6q--ao9QaY13fZSiIqNjPiOkYQiaQHdggKl0b_VaHE/edit?gid=1702643479#gid=1702643479">Lager</a></li>
+            <li><a href="addnewbook.html">Add Book</a></li>
+        </ul>
 
-                    </ul>
-
-<div class="toggle-button" id="toggle-button">
-    <span id="menu-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-        </svg>
-    </span>
-    <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-    </svg>
-</div>
-
-
+        <div class="toggle-button" id="toggle-button">
+            <span id="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </span>
+            <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+        </div>
     </nav>
-
 
     <h2>Lesemonate</h2>
 
-<div class="lesejahr-2025">
-    <h3>2026</h3>
-    <div class="lesemonat">
-      <div class="monat-block">
-        <button class="monat-btn" type="button">Januar</button>
-        <div class="collapse" id="Januar"></div>
-      </div>
-      <div class="monat-block">
-        <button class="monat-btn" type="button">Februar</button>
-        <div class="collapse" id="Februar"></div>
-      </div>
-      <div class="monat-block">
-        <button class="monat-btn" type="button">März</button>
-        <div class="collapse" id="März"></div>
-      </div>
-      <div class="monat-block">
-        <button class="monat-btn" type="button">April</button>
-        <div class="collapse" id="April"></div>
-      </div>
-      <div class="monat-block">
-        <button class="monat-btn" type="button">Mai</button>
-        <div class="collapse" id="Mai"></div>
-      </div>
-      <div class="monat-block">
-        <button class="monat-btn" type="button">Juni</button>
-        <div class="collapse" id="Juni"></div>
-      </div>
-      <div class="monat-block">
-        <button class="monat-btn" type="button">Juli</button>
-        <div class="collapse" id="Juli"></div>
-      </div>
-      <div class="monat-block">
-        <button class="monat-btn" type="button">August</button>
-        <div class="collapse" id="August"></div>
-      </div>
-      <div class="monat-block">
-        <button class="monat-btn" type="button">September</button>
-        <div class="collapse" id="September"></div>
-      </div>
-      <div class="monat-block">
-        <button class="monat-btn" type="button">Oktober</button>
-        <div class="collapse" id="Oktober"></div>
-      </div>
-      <div class="monat-block">
-        <button class="monat-btn" type="button">November</button>
-        <div class="collapse" id="November"></div>
-      </div>
-      <div class="monat-block">
-        <button class="monat-btn" type="button">Dezember</button>
-        <div class="collapse" id="Dezember"></div>
-      </div>
-            <div class="monat-block">
-        <button class="monat-btn" type="button">Abgebrochen</button>
-        <div class="collapse" id="Abgebrochen"></div>
-      </div>
+    <div class="lesejahr-2025">
+        <!-- Aktualisierter Header-Container für 2026 inklusive Statistik-Anbindung -->
+        <div class="jahr-header-container" id="jahr-2026-container">
+            <h3>2026</h3>
+        </div>
+        <div class="lesemonat">
+          <div class="monat-block">
+            <button class="monat-btn" type="button">Januar</button>
+            <div class="collapse" id="Januar"></div>
+          </div>
+          <div class="monat-block">
+            <button class="monat-btn" type="button">Februar</button>
+            <div class="collapse" id="Februar"></div>
+          </div>
+          <div class="monat-block">
+            <button class="monat-btn" type="button">März</button>
+            <div class="collapse" id="März"></div>
+          </div>
+          <div class="monat-block">
+            <button class="monat-btn" type="button">April</button>
+            <div class="collapse" id="April"></div>
+          </div>
+          <div class="monat-block">
+            <button class="monat-btn" type="button">Mai</button>
+            <div class="collapse" id="Mai"></div>
+          </div>
+          <div class="monat-block">
+            <button class="monat-btn" type="button">Juni</button>
+            <div class="collapse" id="Juni"></div>
+          </div>
+          <div class="monat-block">
+            <button class="monat-btn" type="button">Juli</button>
+            <div class="collapse" id="Juli"></div>
+          </div>
+          <div class="monat-block">
+            <button class="monat-btn" type="button">August</button>
+            <div class="collapse" id="August"></div>
+          </div>
+          <div class="monat-block">
+            <button class="monat-btn" type="button">September</button>
+            <div class="collapse" id="September"></div>
+          </div>
+          <div class="monat-block">
+            <button class="monat-btn" type="button">Oktober</button>
+            <div class="collapse" id="Oktober"></div>
+          </div>
+          <div class="monat-block">
+            <button class="monat-btn" type="button">November</button>
+            <div class="collapse" id="November"></div>
+          </div>
+          <div class="monat-block">
+            <button class="monat-btn" type="button">Dezember</button>
+            <div class="collapse" id="Dezember"></div>
+          </div>
+          <div class="monat-block">
+            <button class="monat-btn" type="button">Abgebrochen</button>
+            <div class="collapse" id="Abgebrochen"></div>
+          </div>
+        </div>
     </div>
-  </div>
 
-  <br>
+    <br>
 
-  <div class="lesejahr-archiv">Lade Bücher...
-    
-  </div>
+    <div class="lesejahr-archiv">Lade Bücher...</div>
 
-
-  
-
-<div class="top-button">
-    <button id="backToTop" aria-label="Nach oben">
-        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
-        </svg>
-    </button>
-</div>
-
+    <div class="top-button">
+        <button id="backToTop" aria-label="Nach oben">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
+            </svg>
+        </button>
+    </div>
 
     <footer>
         <p>&copy; 2026 Katharina | Impressum</p>
@@ -144,3 +132,4 @@
 
 </body>
 </html>
+```[cite: 5]
