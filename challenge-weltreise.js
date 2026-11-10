@@ -1,6 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=2117169712&single=true&output=csv";
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=1664133022&single=true&output=csv";
+    
+    // Google Forms URL und Entry-ID für das Land
+    const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScyxXjbJx5AQ0vXzo2hzl_RFzG1Etv8SF90Sh7wuYRSEHmlTA/formResponse";
+    const ENTRY_LAND = "entry.386951989";
+
     const container = document.querySelector(".weltreise-challenge");
+
+    // Modal Elemente
+    const modal = document.getElementById("weltreise-modal");
+    const openModalBtn = document.getElementById("open-weltreise-modal");
+    const closeModalBtn = document.getElementById("close-weltreise-modal");
+    const cancelModalBtn = document.getElementById("cancel-weltreise-modal");
+    const saveModalBtn = document.getElementById("save-weltreise-modal");
+    const countryInput = document.getElementById("weltreise-country-input");
+    const modalMessage = document.getElementById("weltreise-modal-message");
+
+    // Liste bereits vorhandener Länder aus der Tabelle für den Abgleich
+    let existingCountries = [];
 
     // Flaggen für verschiedene Länder
     const flagMap = {
@@ -71,7 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Tschechien": "<img src='flags/cz.svg' class='weltreise-flagge-img' alt='Tschechien'>",
         "Thailand": "<img src='flags/th.svg' class='weltreise-flagge-img' alt='Thailand'>",
         "Türkei": "<img src='flags/tr.svg' class='weltreise-flagge-img' alt='Türkei'>",
-        "Ukraine": "<img src='flags/ua.svg' class='weltreise-flagge-img' alt='Ukraine'>",  "Ungarn": "<img src='flags/hu.svg' class='weltreise-flagge-img' alt='Ungarn'>",
+        "Ukraine": "<img src='flags/ua.svg' class='weltreise-flagge-img' alt='Ukraine'>",
+        "Ungarn": "<img src='flags/hu.svg' class='weltreise-flagge-img' alt='Ungarn'>",
         "USA": "<img src='flags/us.svg' class='weltreise-flagge-img' alt='USA'>",
         "Venezuela": "<img src='flags/ve.svg' class='weltreise-flagge-img' alt='Venezuela'>",
         "Vietnam": "<img src='flags/vn.svg' class='weltreise-flagge-img' alt='Vietnam'>",
@@ -83,12 +101,106 @@ document.addEventListener("DOMContentLoaded", () => {
         download: true,
         header: true,
         complete: function(results) {
-            const data = results.data.filter(row => row['Land (Setting)']);
+            let data = results.data
+                .map(row => {
+                    const countryName = row['Land'] || row['Land (Setting)'] || Object.values(row)[1];
+                    return { country: countryName ? countryName.trim() : "" };
+                })
+                .filter(item => item.country);
+            
+            // NEU: Alphabetische Sortierung (A-Z) unter Berücksichtigung deutscher Umlaute
+            data.sort((a, b) => a.country.localeCompare(b.country, 'de', { sensitivity: 'base' }));
+
+            // Vorhandene Länder für den Abgleich speichern
+            existingCountries = data.map(item => item.country);
+
             renderWeltreise(data);
         }
     });
 
+    // --- MODAL LOGIK ---
+    const openModal = () => {
+        if (!modal) return;
+        countryInput.value = "";
+        modalMessage.textContent = "";
+        modalMessage.className = "modal-message";
+        saveModalBtn.disabled = false;
+        saveModalBtn.textContent = "Hinzufügen";
+        modal.classList.add("active");
+        countryInput.focus();
+    };
+
+    const closeModal = () => {
+        if (!modal) return;
+        modal.classList.remove("active");
+    };
+
+    if (openModalBtn) openModalBtn.addEventListener("click", openModal);
+    if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+    if (cancelModalBtn) cancelModalBtn.addEventListener("click", closeModal);
+
+    window.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // Absenden & Abgleich
+    if (saveModalBtn) {
+        saveModalBtn.addEventListener("click", async () => {
+            const newCountry = countryInput.value.trim();
+
+            if (!newCountry) {
+                modalMessage.textContent = "Bitte gib einen Ländernamen ein!";
+                modalMessage.className = "modal-message error";
+                return;
+            }
+
+            // Abgleich: Case-Insensitive Prüfung (Groß-/Kleinschreibung ignorieren)
+            const exists = existingCountries.some(
+                c => c.toLowerCase() === newCountry.toLowerCase()
+            );
+
+            if (exists) {
+                modalMessage.textContent = `Das Land "${newCountry}" ist bereits in der Liste vorhanden!`;
+                modalMessage.className = "modal-message error";
+                return;
+            }
+
+            // Formular absenden
+            saveModalBtn.disabled = true;
+            saveModalBtn.textContent = "Wird gesendet...";
+            modalMessage.textContent = "";
+
+            const formData = new FormData();
+            formData.append(ENTRY_LAND, newCountry);
+
+            try {
+                await fetch(FORM_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    body: formData
+                });
+
+                modalMessage.textContent = `"${newCountry}" wurde erfolgreich hinzugefügt! 🎉`;
+                modalMessage.className = "modal-message success";
+
+                setTimeout(() => {
+                    location.reload();
+                }, 1200);
+
+            } catch (err) {
+                console.error("Fehler beim Hinzufügen des Landes:", err);
+                modalMessage.textContent = "Fehler beim Hinzufügen. Bitte erneut versuchen.";
+                modalMessage.className = "modal-message error";
+                saveModalBtn.disabled = false;
+                saveModalBtn.textContent = "Hinzufügen";
+            }
+        });
+    }
+
     function renderWeltreise(data) {
+        if (!container) return;
+        container.innerHTML = "";
+
         const maxPerRow = 4;
         const maxRows = 3;
         const maxItems = maxPerRow * maxRows;
@@ -107,8 +219,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const div = document.createElement("div");
         div.classList.add("weltreise-card");
 
-        const country = item['Land (Setting)']?.trim();
-        let flagHtml = flagMap[country] || `<div class="weltreise-placeholder"></div>`;
+        const country = item.country;
+        let flagHtml = flagMap[country] || `<div class="weltreise-placeholder">${country}</div>`;
 
         div.innerHTML = `
             <div class="weltreise-flagge">${flagHtml}</div>

@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="challenge.css">
     <link rel="stylesheet" href="monatschallenge.css">
 
-
-   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
     <script src="backtop.js" defer></script>
     <script src="toggle.js" defer></script>
@@ -38,10 +37,6 @@
     <script src="challenge-weltreise.js" defer></script>
     <script src="challenge-sachbuch.js" defer></script>
     <script src="challenge-klassiker.js" defer></script>
-
-  
-
-
 </head>
 <body>
 
@@ -63,183 +58,173 @@
             <li><a href="addnewbook.html">Add Book</a></li>
         </ul>
 
-<div class="toggle-button" id="toggle-button">
-    <span id="menu-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-        </svg>
-    </span>
-    <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-    </svg>
-</div>
-
+        <div class="toggle-button" id="toggle-button">
+            <span id="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </span>
+            <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+        </div>
     </nav>
 
     <h2>Challenges</h2>
 
     <div class="ziele-container">
         <h3>Leseziele</h3>
-            <div class="grid-ziel">
-                <div class="challenge-container">
-                    <div id="books-circle"></div> 
-                </div>
+        <div class="grid-ziel">
+            <div class="challenge-container">
+                <div id="books-circle"></div> 
+            </div>
             <hr>
-                <div class="challenge-container">
-                    <div id="pages-circle"></div>
-                </div>
+            <div class="challenge-container">
+                <div id="pages-circle"></div>
+            </div>
             <hr>
-                <div class="challenge-container">
-                    <div id="minutes-circle"></div>
-                </div>
+            <div class="challenge-container">
+                <div id="minutes-circle"></div>
             </div>
         </div>
+    </div>
 
-        <br>
+    <br>
 
     <div class="ziele-container">
         <h3>Prognose</h3>
-            <div class="grid-ziel">
-                <div class="challenge-container">
-                    <div class="prognose-container">
-                        <div id="books-graph">Bücher</div> 
-                    </div>
+        <div class="grid-ziel">
+            <div class="challenge-container">
+                <div class="prognose-container">
+                    <div id="books-graph">Bücher</div> 
                 </div>
+            </div>
             <hr>
-                <div class="challenge-container">
-                    <div class="prognose-container">
-                        <div id="pages-graph">Seiten</div> 
-                    </div>
+            <div class="challenge-container">
+                <div class="prognose-container">
+                    <div id="pages-graph">Seiten</div> 
                 </div>
+            </div>
             <hr>
-                <div class="challenge-container">
-                    <div class="prognose-container">
-                        <div id="minutes-graph">Minuten</div> 
+            <div class="challenge-container">
+                <div class="prognose-container">
+                    <div id="minutes-graph">Minuten</div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="grid">
+        <div class="card">
+            <div id="books-challenge" class="card-book">
+                <h3>12 Books for 2026</h3>
+                <div class="legend"></div>
+                <div class="grid-thumb">
+                    <div class="covers" data-title="Das Schwarz an den Händen meines Vaters">
+                        <img src="images/2026/das-schwarz-in-den-haenden-meines-vaters.jpg" alt="Das Schwarz an den Händen meines Vaters">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                        <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+
+                    <div class="covers" data-title="Deine kalten Hände">
+                        <img src="images/2026/deine-kalten-haende.jpg" alt="Deine kalten Hände">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                        <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+
+                    <div class="covers" data-title="Die Geschichte der Baltimores">
+                        <img src="images/2026/die-geschichte-der-baltimores.jpg" alt="Die Geschichte der Baltimores">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                        <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+
+                    <div class="covers" data-title="Die Spuren meiner Mutter">
+                        <img src="images/2026/die-spuren-meiner-mutter.jpg" alt="Die Spuren meiner Mutter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                        <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+
+                    <div class="covers" data-title="Die Wut die bleibt">
+                        <img src="images/2026/die-wut-die-bleibt.jpg" alt="Die Wut die bleibt">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                        <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+
+                    <div class="covers" data-title="If he had been with me">
+                        <img src="images/2026/if-he-had-been-with-me.jpg" alt="If he had been with me">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                        <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+
+                    <div class="covers" data-title="Licht">
+                        <img src="images/2026/licht.jpg" alt="Licht">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                        <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+                    <div class="covers" data-title="Milchzähne">
+                        <img src="images/2026/milchzaehne.jpg" alt="Milchzähne">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                        <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+
+                    <div class="covers" data-title="One of us is back">
+                        <img src="images/2026/one-of-us-is-back.jpg" alt="One of us is back">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                        <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+
+                    <div class="covers" data-title="Russische Spezialitäten">
+                        <img src="images/2026/russische-spezialitaeten.jpg" alt="Russische Spezialitäten">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                        <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+
+                    <div class="covers" data-title="The House of my Mother">
+                        <img src="images/2026/the-house-of-my-mother.jpg" alt="The House of my Mother">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                        <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
+                    </div>
+
+                    <div class="covers" data-title="Uns gehört die Nacht">
+                        <img src="images/2026/uns-gehoert-die-nacht.jpg" alt="Uns gehört die Nacht">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+                        <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                        </svg>
                     </div>
                 </div>
             </div>
         </div>
 
-        <br>
-        
-
-        <div class="grid">
-            <div class="card">
-                <div id="books-challenge" class="card-book">
-                <h3>12 Books for 2026</h3>
-                <div class="legend">
-                </div>
-                <div class="grid-thumb">
-                <div class="covers" data-title="Das Schwarz an den Händen meines Vaters">
-                    <img src="images/2026/das-schwarz-in-den-haenden-meines-vaters.jpg" alt="Das Schwarz an den Händen meines Vaters">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers" data-title="Deine kalten Hände">
-                    <img src="images/2026/deine-kalten-haende.jpg" alt="Deine kalten Hände">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers" data-title="Die Geschichte der Baltimores">
-                    <img src="images/2026/die-geschichte-der-baltimores.jpg" alt="Die Geschichte der Baltimores">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers" data-title="Die Spuren meiner Mutter">
-                    <img src="images/2026/die-spuren-meiner-mutter.jpg" alt="Die Spuren meiner Mutter">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers" data-title="Die Wut die bleibt">
-                    <img src="images/2026/die-wut-die-bleibt.jpg" alt="Die Wut die bleibt">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers" data-title="If he had been with me">
-                    <img src="images/2026/if-he-had-been-with-me.jpg" alt="If he had been with me">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers" data-title="Licht">
-                    <img src="images/2026/licht.jpg" alt="Licht">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-                <div class="covers" data-title="Milchzähne">
-                    <img src="images/2026/milchzaehne.jpg" alt="Milchzähne">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers" data-title="One of us is back">
-                    <img src="images/2026/one-of-us-is-back.jpg" alt="One of us is back">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers" data-title="Russische Spezialitäten">
-                    <img src="images/2026/russische-spezialitaeten.jpg" alt="Russische Spezialitäten">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers" data-title="The House of my Mother">
-                    <img src="images/2026/the-house-of-my-mother.jpg" alt="The House of my Mother">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                <div class="covers" data-title="Uns gehört die Nacht">
-                    <img src="images/2026/uns-gehoert-die-nacht.jpg" alt="Uns gehört die Nacht">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-                    </svg>
-                </div>
-
-                </div>
-            </div>
-            </div>
-
-
-
-
-            <div class="card">
-                <div id="agatha-challenge" class="card-agatha">
-                
+        <div class="card">
+            <div id="agatha-challenge" class="card-agatha">
                 <h3>Agatha Christie Challenge</h3>
-                <div class="legend">
-                </div>
+                <div class="legend"></div>
                 <div class="grid-thumb">
-
                     <div class="covers" data-title="Die Tote in der Bibliothek">
                         <img src="images/agatha/die-tote-in-der-bibliothek.jpg" alt="Die Tote in der Bibliothek">
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
@@ -247,7 +232,6 @@
                         <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
                         </svg>
                     </div>
-
 
                     <div class="covers" data-title="Vier Frauen und ein Mord">
                         <img src="images/agatha/vier-frauen-und-ein-mord.jpg" alt="Vier Frauen und ein Mord">
@@ -280,7 +264,6 @@
                         <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
                         </svg>
                     </div>
-
 
                     <div class="covers" data-title="Alibi">
                         <img src="images/agatha/alibi.jpg" alt="Alibi">
@@ -337,124 +320,126 @@
                         <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
                         </svg>
                     </div>
-
                 </div>
-
             </div>
-            </div>
+        </div>
 
-            <div class="card">
+        <div class="card">
             <h3>Bingo</h3>
             <div id="bingo" class="bingo-grid"></div>
-            </div>
-
-
-
-            <div class="card">
-                <h3>ABC Challenge</h3>
-                <div class="grid-thumb">
-                    <div class="abc-challenge">
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>Monatschallenge</h3>
-                <div class="monatschallenge">
-                <div class="legend">
-                </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>Weltreise</h3>
-                <div class="grid-thumb">
-                <div class="weltreise-challenge"></div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>Originalsprache ≠ DE/EN</h3>
-                <div class="grid-thumb">
-                <div class="originalsprache-challenge"></div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>Queere Bücher</h3>
-                <div class="grid-thumb">
-                <div class="queer-challenge"></div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>Büchergilde</h3>
-                <div class="grid-thumb">
-                <div class="buechergilde-challenge"></div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>Dicke Schinken</h3>
-                <div class="grid-thumb">
-                <div class="schinken-challenge"></div>
-                </div>
-            </div>
-
-
-
-            <div class="card">
-                <h3>Indie Verlage</h3>
-                <div class="grid-thumb">
-                <div class="indie-challenge"></div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>Persons of Colour</h3>
-                <div class="grid-thumb">
-                <div class="poc-challenge"></div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>Non Fiction</h3>
-                <div class="grid-thumb">
-                <div class="sachbuch-challenge"></div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>Klassiker</h3>
-                <div class="grid-thumb">
-                <div class="klassiker-challenge"></div>
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-           
-
         </div>
-<div class="top-button">
-    <button id="backToTop" aria-label="Zurück nach oben">
-        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
-        </svg>
-    </button>
-</div>
 
+        <div class="card">
+            <h3>ABC Challenge</h3>
+            <div class="grid-thumb">
+                <div class="abc-challenge"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Monatschallenge</h3>
+            <div class="monatschallenge">
+                <div class="legend"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="weltreise-card-header">
+                <h3>Weltreise</h3>
+                <button id="open-weltreise-modal" class="add-country-btn" aria-label="Land hinzufügen">+</button>
+            </div>
+            <div class="grid-thumb">
+                <div class="weltreise-challenge"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Originalsprache ≠ DE/EN</h3>
+            <div class="grid-thumb">
+                <div class="originalsprache-challenge"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Queere Bücher</h3>
+            <div class="grid-thumb">
+                <div class="queer-challenge"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Büchergilde</h3>
+            <div class="grid-thumb">
+                <div class="buechergilde-challenge"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Dicke Schinken</h3>
+            <div class="grid-thumb">
+                <div class="schinken-challenge"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Indie Verlage</h3>
+            <div class="grid-thumb">
+                <div class="indie-challenge"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Persons of Colour</h3>
+            <div class="grid-thumb">
+                <div class="poc-challenge"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Non Fiction</h3>
+            <div class="grid-thumb">
+                <div class="sachbuch-challenge"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Klassiker</h3>
+            <div class="grid-thumb">
+                <div class="klassiker-challenge"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal für Weltreise-Land hinzufügen -->
+    <div id="weltreise-modal" class="weltreise-modal">
+        <div class="weltreise-modal-content">
+            <div class="weltreise-modal-header">
+                <h4>Neues Land hinzufügen</h4>
+                <button id="close-weltreise-modal" class="modal-close-icon">&times;</button>
+            </div>
+            <div class="weltreise-modal-body">
+                <label for="weltreise-country-input">Ländername:</label>
+                <input type="text" id="weltreise-country-input" placeholder="z. B. Italien" autocomplete="off">
+                <div id="weltreise-modal-message" class="modal-message"></div>
+            </div>
+            <div class="weltreise-modal-footer">
+                <button id="cancel-weltreise-modal" class="modal-btn cancel">Abbrechen</button>
+                <button id="save-weltreise-modal" class="modal-btn save">Hinzufügen</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="top-button">
+        <button id="backToTop" aria-label="Zurück nach oben">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
+            </svg>
+        </button>
+    </div>
 
     <footer>
         <p>&copy; 2026 Katharina | Impressum</p>
     </footer>
-
-
 
 </body>
 </html>

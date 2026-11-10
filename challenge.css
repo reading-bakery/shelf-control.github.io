@@ -20,7 +20,192 @@ h3 {
     font-family: "Bebas Neue", sans-serif;
 }
 
+/* Weltreise Card Header & Plus Button */
+.weltreise-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
 
+.weltreise-card-header h3 {
+    margin: 10px 0;
+}
+
+.add-country-btn {
+    position: absolute;
+    right: 15px;
+    background-color: #ff7256;
+    color: #fff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.add-country-btn:hover {
+    background-color: #63b8ff;
+    transform: scale(1.1);
+}
+
+/* Modal Styling */
+.weltreise-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.weltreise-modal.active {
+    display: flex;
+}
+
+.weltreise-modal-content {
+    background-color: #1f1f1f;
+    border: 1px solid #353434;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 420px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    color: whitesmoke;
+    font-family: 'Dosis', sans-serif;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.weltreise-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #353434;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.weltreise-modal-header h4 {
+    margin: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: khaki;
+    letter-spacing: 1px;
+}
+
+.modal-close-icon {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-close-icon:hover {
+    color: #ff7256;
+}
+
+.weltreise-modal-body label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.weltreise-modal-body input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background-color: #2b2b2b;
+    color: #fff;
+    font-size: 1rem;
+    font-family: 'Dosis', sans-serif;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.weltreise-modal-body input:focus {
+    border-color: #ff7256;
+    box-shadow: 0 0 5px rgba(255, 114, 86, 0.5);
+}
+
+.modal-message {
+    margin-top: 10px;
+    font-size: 0.95rem;
+    min-height: 22px;
+    text-align: left;
+}
+
+.modal-message.error {
+    color: #ff6b6b;
+}
+
+.modal-message.success {
+    color: #51cf66;
+}
+
+.weltreise-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    border-top: 1px solid #353434;
+    padding-top: 15px;
+}
+
+.modal-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    font-family: 'Dosis', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.modal-btn.cancel {
+    background-color: #4a4a4a;
+    color: white;
+}
+
+.modal-btn.cancel:hover {
+    background-color: #666;
+}
+
+.modal-btn.save {
+    background-color: #ff7256;
+    color: white;
+}
+
+.modal-btn.save:hover {
+    background-color: #63b8ff;
+}
+
+.modal-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 
 /* Textabsätze */
 p {
@@ -75,13 +260,13 @@ p {
 /* Grundzustand: Name ist unsichtbar */
 .weltreise-country-name {
     opacity: 0;
-    transform: translateY(5px); /* Optional: Kleiner Versatz für Effekt */
+    transform: translateY(5px);
     transition: opacity 0.3s ease, transform 0.3s ease;
     text-align: center;
     margin-top: 8px;
     font-size: 9pt;
-    font-family: 'Dosis', sans-serif; /* Passend zu deinen anderen Skripten */
-    pointer-events: none; /* Verhindert Flackern, wenn man direkt auf den Text hovert */
+    font-family: 'Dosis', sans-serif;
+    pointer-events: none;
 }
 
 /* Hover-Zustand: Wenn die Karte gehovert wird, zeige den Namen */
@@ -90,39 +275,10 @@ p {
     transform: translateY(0);
 }
 
-/* Optional: Flagge beim Hover leicht hervorheben oder abdunkeln */
 .weltreise-card:hover .weltreise-flagge {
     filter: brightness(1.1);
     transition: filter 0.3s ease;
 }
-
-
-
-
-/* .buechergilde-placeholder,
-.originalsprache-placeholder, 
-.queer-placeholder, 
-.sachbuch-placeholder,
-.klassiker-placeholder,
-.poc-placeholder, 
-.schinken-placeholder, 
-.abc-placeholder,
-.indie-placeholder {
-    display: inline-block;
-    font-size: 1.8rem;
-    color: #ff7256;
-    font-weight: bold;
-    text-align: center;
-    width: 100%;
-    height: 100px;
-    border: 1px dotted #ff7256;
-    border-radius: 10px;
-    background-color: rgba(255, 114, 86, 0.1);
-    box-shadow: 0 4px 10px rgba(255, 114, 86, 0.3);
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-*/
 
 .abc-placeholder {
     display: inline-block;
@@ -140,7 +296,6 @@ p {
     cursor: pointer;
 }
 
-
 .grid-thumb .buechergilde-carousel,
 .grid-thumb .originalsprache-carousel,
 .grid-thumb .queer-carousel,
@@ -151,7 +306,7 @@ p {
 .grid-thumb .schinken-carousel,
 .grid-thumb .indie-carousel,
 .grid-thumb .abc-carousel {
-    grid-column: 1 / -1; /* nimmt alle Grid-Spalten ein */
+    grid-column: 1 / -1;
     width: 100%;
     height: auto;
     overflow: hidden;
@@ -171,7 +326,6 @@ p {
     width: 100%;
 }
 
-
 .grid-thumb .buechergilde-carousel-slide,   
 .grid-thumb .originalsprache-carousel-slide, 
 .grid-thumb .queer-carousel-slide,
@@ -182,7 +336,7 @@ p {
 .grid-thumb .schinken-carousel-slide,
 .grid-thumb .indie-carousel-slide,
 .grid-thumb .abc-carousel-slide {
-    flex: 0 0 100%; /* jede Slide nimmt volle Breite ein */
+    flex: 0 0 100%;
     height: auto;
 }
 
@@ -238,10 +392,8 @@ p {
     display: block;
 }
 
-
-
 .grid-thumb .covers {
-    position: relative; /* Referenz für SVG */
+    position: relative;
 }
 
 .grid-thumb .covers svg {
@@ -282,8 +434,6 @@ p {
     transform: scale(1.01);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
-
-
 
 /* Bingo Grid */
 .bingo-grid {
@@ -362,7 +512,7 @@ p {
 .originalsprache-card-inner {
     position: relative;
     width: 100%;
-    padding-bottom: 163%; /* ← entspricht ca. Buchformat */
+    padding-bottom: 163%;
     transition: transform 0.6s;
     transform-style: preserve-3d;
 }
@@ -376,13 +526,11 @@ p {
     display: block;
 }
 
-
 .schinken-card.is-flipped .schinken-card-inner, 
 .indie-card.is-flipped .indie-card-inner, 
 .originalsprache-card.is-flipped .originalsprache-card-inner {
     transform: rotateY(180deg);
 }
-
 
 .schinken-card-front,
 .schinken-card-back,
@@ -405,21 +553,15 @@ p {
     align-items: center;
     justify-content: center;
     text-align: center;
-
     font-weight: 600;
     font-size: 1.1rem;
     line-height: 1.2;
-
     background-color: #353434;
     box-sizing: border-box;
-
-    hyphens: auto;          /* automatische Silbentrennung */
-    word-wrap: break-word;  /* ältere Browserunterstützung */
-    overflow-wrap: break-word; /* moderne Syntax */
+    hyphens: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
-
-
-
 
 /* ABC Challenge & Grid */
 .buechergilde-challenge,
@@ -438,8 +580,8 @@ p {
     grid-column: 1/-1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start !important; /* Startet immer ganz oben */
-    align-items: center; /* Zentriert das Grid als Ganzes auf der Seite */
+    justify-content: flex-start !important;
+    align-items: center;
 }
 
 .buechergilde-grid,
@@ -456,8 +598,8 @@ p {
     grid-template-columns: repeat(4, 1fr);
     gap: 0.5rem;
     width: 100%;
-    align-items: start; /* Richtet Karten innerhalb einer Zeile am oberen Rand aus */
-    justify-items: start; /* Richtet Karten innerhalb der Spalte links aus */
+    align-items: start;
+    justify-items: start;
 }
 
 /* Carousel Navigation */
@@ -475,13 +617,11 @@ p {
     margin-bottom: 10px;
 }
 
-/* Carousel Navigation – größerer Abstand zu den Flaggen */
 .weltreise-carousel-nav {
     text-align: center;
-    margin-top: 10px;   /* Abstand vergrößert von 10px auf 30px */
+    margin-top: 10px;
     margin-bottom: 20px;
 }
-
 
 .buechergilde-dot,  
 .queer-dot,
@@ -503,7 +643,7 @@ p {
 }
 
 #close-icon {
-    display: none; /* Startzustand ausgeblendet */
+    display: none;
 }
 
 .buechergilde-dot.active,   
@@ -521,9 +661,9 @@ p {
 
 .challenge-container {
   display: flex;
-  flex-direction: column; /* übereinander statt nebeneinander */
-  align-items: center;    /* zentriert horizontal */
-  gap: 15px;              /* Abstand zwischen Kreis und Graph */
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 }
 
 .queer-challenge,
@@ -531,23 +671,20 @@ p {
 .klassiker-challenge {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start !important; /* Inhalt nach oben schieben */
+    justify-content: flex-start !important;
     align-items: center;
     vertical-align: top;
 }
-
 
 #books-graph,
 #pages-graph,
 #minutes-graph {
   display: flex;
-  justify-content: center; /* Schiebt das SVG in die Mitte */
-  align-items: flex-end;    /* Setzt die Graphen auf die Grundlinie */
-  min-height: 220px;       /* WICHTIG: Genug Platz für das 220px SVG + etwas Puffer */
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 220px;
   margin-bottom: 5px;
-
 }
-
 
 #books-graph {
     margin-left: 50px;
@@ -557,13 +694,10 @@ p {
     margin-right: 50px;
 }
 
-
-
 #books-graph svg,
 #pages-graph svg,
 #minutes-graph svg {
   display: block;
-  /* Verhindert, dass das SVG kleiner skaliert als es im JS definiert ist */
   min-width: 350px; 
   min-height: 220px;
 }
@@ -575,12 +709,11 @@ p {
         margin-bottom: 15px;
     }
     
-    
     #books-graph,
     #pages-graph,
     #minutes-graph {
         width: 100%;
-        max-width: 100%;       /* Nutzt die volle verfügbare Breite */
+        max-width: 100%;
         margin-left: 0 !important;
         margin-right: 0 !important;
         height: auto;
@@ -588,31 +721,31 @@ p {
         justify-content: center;
     }
 
-
-
     #books-graph svg,
     #pages-graph svg,
     #minutes-graph svg {
-        width: 100%;           /* Füllt die Breite des Handys aus */
-        height: auto;          /* Behält das Seitenverhältnis bei */
+        width: 100%;
+        height: auto;
         min-width: 0 !important; 
         overflow: visible;
     }
 
-    
     .bingo-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 
-/* .buechergilde-placeholder,
-    .queer-placeholder,
-    .poc-placeholder,
-    .schinken-placeholder,
-    .indie-placeholder,
-    .originalsprache-placeholder,
-    .abc-placeholder,
-    .sachbuch-placeholder,
-    .klassiker-placeholder {
+    .weltreise-country-name {
+        opacity: 0;
+        transform: translateY(5px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        text-align: center;
+        margin-top: 8px;
+        font-size: 9pt;
+        font-family: 'Dosis', sans-serif;
+        pointer-events: none;
+    }
+
+    .abc-placeholder {
         display: inline-block;
         font-size: 1.8rem;
         color: #ff7256;
@@ -627,51 +760,23 @@ p {
         transition: all 0.3s ease;
         cursor: pointer;
     }
-*/
 
-.weltreise-country-name {
-    opacity: 0;
-    transform: translateY(5px); /* Optional: Kleiner Versatz für Effekt */
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    text-align: center;
-    margin-top: 8px;
-    font-size: 9pt;
-    font-family: 'Dosis', sans-serif; /* Passend zu deinen anderen Skripten */
-    pointer-events: none; /* Verhindert Flackern, wenn man direkt auf den Text hovert */
-}
-
-.abc-placeholder {
-        display: inline-block;
-        font-size: 1.8rem;
-        color: #ff7256;
-        font-weight: bold;
-        text-align: center;
-        width: 100%;
-        height: 75px;
-        border: 2px dotted #ff7256;
-        border-radius: 10px;
-        background-color: rgba(255, 114, 86, 0.1);
-        box-shadow: 0 4px 10px rgba(255, 114, 86, 0.3);
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
     .schinken-card-back,
     .indie-card-back,
     .originalsprache-card-back {
-    font-size: 0.85rem;
-    line-height: 1.2;
-}
+        font-size: 0.85rem;
+        line-height: 1.2;
+    }
 
-.prognose-container {
+    .prognose-container {
         display: flex;
         flex-direction: column; 
         align-items: center;    
-        width: 100%;           /* 150% wäre breiter als das Handy-Display */
+        width: 100%;
         margin: 0 auto;
-        height: auto;          /* 'auto' statt 170px, damit alle Graphen Platz haben */
-        gap: 50px;             /* Abstand zwischen den einzelnen Graphen */
+        height: auto;
+        gap: 50px;
     }
-
 }
 
 /* Ergänzung für große Bildschirme */
@@ -691,9 +796,9 @@ p {
     #books-graph,
     #pages-graph,
     #minutes-graph {
-        width: 100%;       /* kleiner als vorher 85% */
-        max-width: 600px; /* maximale Breite */
-        margin: 0 auto;   /* zentriert */
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
         height: 100px;
     }
 
@@ -701,8 +806,8 @@ p {
     #pages-graph svg,
     #minutes-graph svg {
         display: block;
-        width: 400px; /* maximale Breite */   
-        overflow: visible; /* Damit der Tooltip am Rand nicht abgeschnitten wird */
+        width: 400px;
+        overflow: visible;
     }
 
     #books-graph {
@@ -712,31 +817,26 @@ p {
     #minutes-graph {
         margin-left: -40px;
     }
-
 }
   
 @media screen and (max-width: 900px) and (orientation: portrait) {
-    
-    /* Container auf vertikal umstellen */
     .prognose-container {
         display: flex;
         flex-direction: column; 
         align-items: center;    
-        gap: 5px; /* Großzügiger Abstand, damit Pokale/Zahlen nicht in den nächsten Graph ragen */
+        gap: 5px;
         width: 109%;
         margin: 0 auto;
-        
         height: 170px;
     }
 
-    /* Margins aus dem Desktop-Layout zurücksetzen */
     #books-graph,
     #pages-graph,
     #minutes-graph {
         width: 100%;
-        max-width: 480px; /* Begrenzt die Breite, damit es auf schmalen Porträts nicht klebt */
-        margin-left: -25px !important;  /* Überschreibt die 50px von oben */
-        margin-right: 0 !important; /* Überschreibt die 50px von oben */
+        max-width: 480px;
+        margin-left: -25px !important;
+        margin-right: 0 !important;
         margin-bottom: 10px;
         height: auto;
         display: flex;
@@ -749,6 +849,6 @@ p {
         width: 100%;
         height: auto;
         min-width: 0 !important; 
-        overflow: visible; /* WICHTIG: Erlaubt, dass Pokale über den SVG-Rand ragen ohne Clipping */
+        overflow: visible;
     }
 }
