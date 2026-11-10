@@ -224,6 +224,8 @@ p {
     gap: 10px;
     padding-left: 10px;
     padding-right: 10px;
+    align-content: start !important; /* Verhindert das vertikale Dehnen/Zentrieren der Reihen */
+    align-items: start !important;
 }
 
 .weltreise-card {
@@ -563,6 +565,15 @@ p {
     overflow-wrap: break-word;
 }
 
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important; /* Richtet Überschrift und Inhalt immer ganz oben aus */
+    align-items: stretch;
+    height: 100%; /* Nutzt die volle Kartenhöhe, richtet den Inhalt aber oben an */
+}
+
 /* ABC Challenge & Grid */
 .buechergilde-challenge,
 .books-challenge,
@@ -580,8 +591,9 @@ p {
     grid-column: 1/-1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start !important;
-    align-items: center !important;
+    justify-content: flex-start !important; /* Verankert den Inhalt ganz oben */
+    align-items: center;
+    margin-top: 0;
 }
 
 .buechergilde-grid,
@@ -598,9 +610,8 @@ p {
     grid-template-columns: repeat(4, 1fr);
     gap: 0.5rem;
     width: 100%;
-    /* Wichtig: Verhindert, dass das Grid den Platz in der Höhe klammert und Elemente nach unten drückt */
-    align-content: start; 
-    align-items: start;
+    align-content: start !important; /* Die Bücherreihen beginnen direkt unter der Überschrift */
+    align-items: start !important;   /* Bücher beginnen am oberen Rand der Reihe */
     justify-items: start;
     justify-content: start;
 }
