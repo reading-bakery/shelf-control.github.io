@@ -18,7 +18,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <script src="lieblinge.js" defer></script>
-
 </head>
 <body>
 
@@ -52,41 +51,30 @@
         </div>
     </nav>
 
-<h2>All Time Favourites</h2>
-
-<h3>Klick aufs Cover, um mehr zu erfahren!</h3>
+    <h2>All Time Favourites</h2>
+    <h3>Klick aufs Cover, um mehr zu erfahren!</h3>
 
     <div class="lieblinge">
         <div class="grid-thumb" id="lieblingeGrid"></div>
-        </div>
-
-        <div class="popup-overlay" id="popup">
-        <div class="popup-content">
-            <button class="popup-close" id="popupClose">&times;</button>
-            <h3 id="popupTitle"></h3>
-            <div id="popupText"></div>
-        </div>
     </div>
 
+    <!-- Modal für Detailansicht -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup-content">
+            <button class="popup-close" id="popupClose">&times;</button>
+            <div id="popupDetails"></div>
+        </div>
+    </div>
 
     <div class="fixed-buttons">
         <div class="top-button">
-            
-<div class="top-button">
-    <button id="backToTop" aria-label="Nach oben">
-        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
-        </svg>
-    </button>
-</div>
- 
-
-            
+            <button id="backToTop" aria-label="Nach oben">
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
+                </svg>
+            </button>
         </div>
-
-    
     </div>
-
 
     <footer>
         <p>&copy; 2026 Katharina | Impressum</p>

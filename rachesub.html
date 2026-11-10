@@ -172,9 +172,14 @@
                     <option value="" disabled selected>Format wählen</option>
                 </select>
 
-                <div class="file-upload">
-                    <label for="cover">Cover hochladen:</label>
-                    <input type="file" id="cover" accept="image/*">
+                <!-- Status-Dropdown für addsub.js ergänzt -->
+                <select id="status" aria-label="Status auswählen">
+                    <option value="" disabled selected>Status wählen</option>
+                </select>
+
+                <div class="file-upload" style="text-align: left; margin: 10px 0; font-family: 'Dosis', sans-serif;">
+                    <label for="cover" style="display: block; margin-bottom: 5px; color: #bbb;">Cover hochladen:</label>
+                    <input type="file" id="cover" accept="image/*" style="background: none; border: none; padding: 0; color: #fff;">
                 </div>
 
                 <div class="modal-buttons">

@@ -7,12 +7,12 @@ h3 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 100%; /* Passt sich nun exakt dem .sub-container (1000px) an */
+    max-width: 100%;
     margin: auto;
     background-color: #1f1f1f;
     padding: 20px;
     border-radius: 8px;
-    gap: 15px; /* Falls noch nicht vorhanden, für einheitliche Abstände */
+    gap: 15px;
 }
 
 .sub-bild {
@@ -52,25 +52,32 @@ h3 {
 }
 
 #addSubForm {
-    background-color: whitesmoke;
-    padding-bottom: 20px;
+    background-color: #1f1f1f;
+    padding-bottom: 10px;
 }
 
 #addSubForm input, 
 #addSubForm select {
     width: 100%;
-    padding: 2px;       
-    margin: 3px 0;      
-    background: #c5bdbd; 
-    border: none;
-    border-radius: 8px;
+    padding: 10px 12px;       
+    margin: 6px 0;      
+    background: #2b2b2b; 
+    border: 1px solid #444;
+    border-radius: 6px;
     font-family: 'Dosis', sans-serif;
     box-sizing: border-box; 
-    color: black;
+    color: #fff;
+    outline: none;
+}
+
+#addSubForm input:focus,
+#addSubForm select:focus {
+    border-color: #ff7256;
+    box-shadow: 0 0 5px rgba(255, 114, 86, 0.5);
 }
 
 #addSubForm input {
-    padding-left: 5px;
+    padding-left: 12px;
 }
 
 #addSub {
@@ -176,6 +183,10 @@ h3 {
     transform: scale(1.0);
 }
 
+/* =========================================================
+   MODALFENSTER (Einheitliches Dark-Theme Styling)
+   ========================================================= */
+
 .modal, .modal-overlay {
     display: none; 
     position: fixed;
@@ -183,121 +194,114 @@ h3 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.7); 
-    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.7); 
+    z-index: 10000;
     justify-content: center;
     align-items: center;
+    backdrop-filter: blur(4px);
 }
 
-.modal-content {
-    background: whitesmoke;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 400px;
+.modal-content, .modal-content-2 {
+    background-color: #1f1f1f;
+    border: 1px solid #353434;
+    border-radius: 12px;
+    max-width: 420px;
     width: 90%;
-    max-height: 80%;
+    max-height: 85vh;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    color: whitesmoke;
+    text-align: center;
+    font-family: 'Dosis', sans-serif;
     overflow-y: auto;
-    color: black;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    animation: modalFadeIn 0.3s ease;
 }
 
-.modal-content-2 {
-    background-color: whitesmoke;
-    padding: 0;
-    border-radius: 10px;
-    max-width: 400px;
-    width: 90%;
-    max-height: 100%;
-    color: black;
-    text-align: center;
+.modal-content-2 h3,
+.modal-content h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: khaki;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #353434;
+    padding-bottom: 8px;
+    margin-top: 0;
+    text-align: left;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 #modal-cover {
-    width: 150px;
+    width: 140px;
     height: auto;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
     margin-bottom: 15px;
+    object-fit: cover;
 }
 
 #modal-title { 
-    font-size: 1.2rem; 
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem; 
     margin: 5px 0 2px; 
-    font-weight: bold; 
-    color: #222; 
+    color: khaki; 
+    letter-spacing: 1px;
     line-height: 1.2;
 }
 
 #modal-author { 
-    font-size: 1rem; 
-    color: #666; 
+    font-size: 1.05rem; 
+    color: #bbb; 
     margin-top: 0;      
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
-.modal-footer { 
+.modal-footer,
+.modal-buttons { 
     display: flex; 
-    gap: 5px; 
-    justify-content: center; 
+    gap: 10px; 
+    justify-content: flex-end; 
+    margin-top: 20px;
+    border-top: 1px solid #353434;
+    padding-top: 15px;
 }
 
-.btn-confirm, .btn-cancel {
-    padding: 7px 2px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: bold;
-    flex: 1;
-}
-
-.btn-confirm { 
-    background-color: #a2bba3; 
-    color: #222; 
-    font-family: "Dosis", sans-serif;
-    font-size: 12pt;
-}
-
-.btn-cancel { 
-    background-color: #e2d1d1; 
-    color: #222; 
-    font-family: "Dosis", sans-serif;
-    font-size: 12pt;
-}
-
-.modal-cancel,
-.modal-save {
-    margin-top: 10px;
-    padding: 5px 10px;
-    margin-right: 5px;
-    border-radius: 15px;
-    border: none;
-    cursor: pointer;
-    font-family: 'Dosis', sans-serif;
-    font-weight: bold;
-    width: 150px;
-}
-
-.modal-save {
-    background-color: #a2bba3;
-}
-
-.modal-cancel {
-    background-color: #e0d0d0;
-}
-
+.btn-confirm, .btn-cancel,
+.modal-save, .modal-cancel,
 #btnSuccessSubOk,
 #btnSuccessAddOk {
-    margin-top: 10px;
-    padding: 5px 10px;
-    margin-right: 5px;
-    border-radius: 15px;
+    margin-top: 0;
+    padding: 7px 15px;
     border: none;
-    background-color: #a2bba3;
+    border-radius: 15px;
     cursor: pointer;
-    font-family: 'Dosis', sans-serif;
+    font-family: "Dosis", sans-serif;
     font-weight: bold;
-    width: 100px;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+    flex: unset;
+    width: auto;
+}
+
+.btn-confirm, .modal-save, #btnSuccessSubOk, #btnSuccessAddOk { 
+    background-color: #a2bba3; 
+    color: #222; 
+}
+
+.btn-confirm:hover, .modal-save:hover, #btnSuccessSubOk:hover, #btnSuccessAddOk:hover {
+    background-color: #8da98f;
+}
+
+.btn-cancel, .modal-cancel { 
+    background-color: #e0d0d0; 
+    color: #222; 
+}
+
+.btn-cancel:hover, .modal-cancel:hover {
+    background-color: #ccb8b8;
 }
 
 .modal.active, .modal-overlay.active {
@@ -447,8 +451,6 @@ h3 {
     box-shadow: inset 1px 1px 2px rgba(0,0,0,0.6);
 }
 
-
-
 /* Leichtes Schaukeln des Price Tags */
 @keyframes tagSway {
     0% { transform: rotate(0deg); }
@@ -486,7 +488,6 @@ h3 {
 }
 
 @media (max-width: 480px) {
-    @media (max-width: 480px) {
     .sub-container {
         padding: 10px 5px;
         margin: 5px auto;
@@ -497,14 +498,13 @@ h3 {
         margin-bottom: 25px;
     }
     .search-box {
-        margin: 15px 12px 0 12px; /* Oben, Rechts, Unten, Links mehr Abstand zum Container */
+        margin: 15px 12px 0 12px;
         box-sizing: border-box;
     }
     .search-box input {
         padding: 8px 14px;
         font-size: 0.95rem;
     }
-}
 }
 
 @media (min-width: 1400px) {

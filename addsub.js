@@ -147,10 +147,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (result.status === "success") {
         const modalContent = subModal.querySelector(".modal-content-2");
         if (modalContent) {
+          // Angepasstes Design für das Erfolgsfenster im Dark Theme
           modalContent.innerHTML = `
-            <div style="text-align: center; padding: 20px;">
-              <p style="font-size: 1.1em; margin: 20px 0;"><strong>${title}</strong> wurde hinzugefügt. 🚀</p>
-              <button class="modal-save" id="btnSuccessAddOk">Super!</button>
+            <div style="text-align: center; padding: 10px; font-family: 'Dosis', sans-serif; color: whitesmoke;">
+              <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: khaki; letter-spacing: 1px; border-bottom: 1px solid #353434; padding-bottom: 8px; margin-top: 0;">Erfolg!</h3>
+              <p style="font-size: 1.1rem; margin: 20px 0;"><strong>${title}</strong> wurde erfolgreich hinzugefügt. 🚀</p>
+              <div style="border-top: 1px solid #353434; padding-top: 15px; margin-top: 20px; display: flex; justify-content: center;">
+                <button class="modal-save" id="btnSuccessAddOk" style="width: auto; min-width: 100px;">Super!</button>
+              </div>
             </div>
           `;
           modalContent.querySelector("button").onclick = () => location.reload();

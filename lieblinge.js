@@ -2,8 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const grid = document.getElementById("lieblingeGrid");
   const popup = document.getElementById("popup");
-  const popupTitle = document.getElementById("popupTitle");
-  const popupText = document.getElementById("popupText");
+  const popupDetails = document.getElementById("popupDetails");
   const popupClose = document.getElementById("popupClose");
 
   // 🔹 JSON laden
@@ -25,44 +24,47 @@ document.addEventListener("DOMContentLoaded", async () => {
     img.alt = book.title;
 
     div.appendChild(img);
-
     div.addEventListener("click", () => openPopup(book));
 
     return div;
   }
 
-  // 🔹 Popup öffnen
+  // 🔹 Popup öffnen (Mit runder Schriftart und sauberem Trennstrich)
   function openPopup(book) {
-    popupTitle.textContent = book.title;
+    popupDetails.innerHTML = `
+      <div class="modal-body-content">
+        <img src="${book.cover}" alt="${book.title}">
+        <div class="modal-text-info">
+          <h2 class="modal-title">${book.title}</h2>
+          <hr class="book-divider">
+          <div>
+            <span class="label">${book.labels?.autor || "Autor"}:</span>
+            <span class="value">${book.autor}</span><br>
 
-    popupText.innerHTML = `
-      <span class="label">${book.labels.autor}:</span>
-      <span class="value">${book.autor}</span><br>
+            <span class="label">Genre:</span>
+            <span class="value">${book.genre}</span><br>
 
-      <span class="label">Genre:</span>
-      <span class="value">${book.genre}</span><br>
+            <span class="label">Keywords:</span>
+            <span class="value">${book.keywords}</span><br>
 
-      <span class="label">Keywords:</span>
-      <span class="value">${book.keywords}</span><br>
+            <span class="label">Zum Buch:</span>
+            <span class="value">${book.beschreibung}</span><br>
 
-      <span class="label">Zum Buch:</span>
-      <span class="value">${book.beschreibung}</span><br>
+            <span class="label">Meine Meinung:</span>
+            <span class="value">${book.meinung}</span><br>
 
-      <span class="label">Meine Meinung:</span>
-      <span class="value">${book.meinung}</span><br>
+            <span class="label">Für Fans von:</span>
+            <span class="value">${book.fans}</span><br>
 
-      <span class="label">Für Fans von:</span>
-      <span class="value">${book.fans}</span><br>
+            <span class="label">Seiten:</span>
+            <span class="value">${book.seiten}</span><br>
 
-      <span class="label">Seiten:</span>
-      <span class="value">${book.seiten}</span><br>
-
-      <span class="label">Im Regal?</span>
-      <span class="value">${book.regal}</span>
+            <span class="label">Im Regal?</span>
+            <span class="value">${book.regal}</span>
+          </div>
+        </div>
+      </div>
     `;
-
-    popupText.style.maxHeight = window.innerHeight * 0.6 + "px";
-    popupText.style.overflowY = "auto";
 
     popup.style.display = "flex";
   }

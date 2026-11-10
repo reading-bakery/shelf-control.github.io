@@ -1,7 +1,7 @@
 /* --- GRID FÜR DIE COVER --- */
 .grid-thumb {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);   /* Immer 6 Cover pro Reihe */
+    grid-template-columns: repeat(5, 1fr);   
     gap: 25px;
     justify-items: center;
     padding: 20px 10px;
@@ -12,7 +12,6 @@
 /* --- GRAUER CONTAINER --- */
 .lieblinge {    
     display: flex;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* max. 4 pro Reihe */
     gap: 20px;
     max-width: 700px;
     margin: auto;
@@ -30,7 +29,7 @@
     overflow: hidden;
     border-radius: 10px;
     position: relative;
-    transition: transform 0.3s;  /* Animation für Hover */
+    transition: transform 0.3s;  
     cursor: pointer;
 }
 
@@ -43,20 +42,18 @@
     cursor: pointer;
 }
 
-
 .lieblinge-cover:hover {
-    transform: scale(1.05);  /* der Container wird leicht größer */
+    transform: scale(1.05);  
 }
 
-
-/* --- POPUP OVERLAY --- */
+/* --- POPUP OVERLAY (MODAL) --- */
 .popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.75);
+    background-color: rgba(0,0,0,0.8);
     display: none;
     justify-content: center;
     align-items: center;
@@ -65,59 +62,135 @@
 
 /* --- POPUP INHALT --- */
 .popup-content {
-    background: #ffffff;
-    color: #000;
+    background-color: #1e1e1e;
+    margin: 5% auto;
     padding: 25px;
     border-radius: 10px;
-    max-width: 400px;
     width: 90%;
-    text-align: left;
+    max-width: 650px;
+    color: #fff;
     position: relative;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.8);
     font-family: "Dosis", sans-serif;
 }
 
 /* --- CLOSE BUTTON --- */
 .popup-close {
+    color: #aaa;
     position: absolute;
-    top: 10px;
-    right: 12px;
+    right: 20px;
+    top: 15px;
     background: none;
     border: none;
     font-size: 28px;
+    font-weight: bold;
     cursor: pointer;
-    color: #000;
+    z-index: 10;
 }
+
+.popup-close:hover {
+    color: #fff;
+}
+
+/* --- MODAL LAYOUT (Cover links, Text rechts) --- */
+.modal-body-content {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.modal-body-content img {
+    width: 115px;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.modal-text-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* --- TRENNSTRICH (Exakt gleiche Abstände oben und unten) --- */
+.book-divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: 12px;   
+    margin-bottom: 12px; 
+}
+
+
 
 /* --- LABELS UND WERTE --- */
 .popup-content .label {
     font-weight: bold;                  
     font-family: "Dosis", sans-serif; 
-    color: #1b6433;                        
+    color: #4a90e2; 
     display: inline-block;                       
-    font-size: 17px;
-    text-transform: none;                  
-    margin-top: 12px;       /* Abstand zwischen den Zeilen */
+    font-size: 16px;
+    margin-top: 4px;     
 }
 
 .popup-content .value {
     font-weight: normal;
-    font-variant: normal;
     font-family: "Dosis", sans-serif;
-    color: #000;
+    color: #d0d0d0;
+    font-size: 15px;
 }
 
-.popup-content br {
-    line-height: 1.4;
+/* Das allererste Label direkt nach dem Strich anpassen */
+.modal-text-info > div > .label:first-of-type {
+    margin-top: 2px;
 }
 
+/* --- ÜBERSCHRIFTEN --- */
 h3 {
     text-align: center;
     color: rgb(116, 114, 114);
     font-family: "Dosis", sans-serif;
     font-size: 20pt;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
+
+/* Buchtitel im Modal */
+.modal-title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: khaki;
+    letter-spacing: 1px;
+    text-align: left;
+    border-bottom: 1px solid #353434;
+    padding-bottom: 8px;
+}
+
+/* Trennstrich unter dem Buchtitel im Modal */ 
+.modal-info h3 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 2rem;
+    color: khaki;
+    margin: 0 0 15px 0;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.modal-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.15); /* Dezenter Trennstrich im Dark-Theme */
+    border-radius: 2px;
+}
+
 
 /* --- RESPONSIVE: HANDY --- */
 @media (max-width: 740px) {
@@ -135,15 +208,25 @@ h3 {
         max-width: 140px;
         aspect-ratio: 14 / 22;
     }
+
+    .modal-body-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .modal-text-info {
+        text-align: left;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
     .lieblinge {
-        grid-template-columns: repeat(6, 1fr); /* maximal 6 Cover */
+        grid-template-columns: repeat(6, 1fr); 
         gap: 20px;
     }
 
     .lieblinge-cover {
-        max-width: 120px;  /* optional: passt besser in 6 Spalten */
+        max-width: 120px;  
     }
 }
