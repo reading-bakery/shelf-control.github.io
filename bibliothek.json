@@ -1605,226 +1605,263 @@
 "autor": "Taylor Jenkins Reid",
 "sprache": "Original",
 "format": "eBook",
-"cover": "malibu-renace.jpg"
+"cover": "malibu-renace.jpg",
+"klappentext": "Malibu, 1983: Die jährliche Sommerparty der berühmten Riva-Geschwister steht bevor. Nina, Jay, Hud und Kit sind in Malibu bekannt und bewundert – nicht zuletzt wegen ihres Vaters, eines legendären Musikstars. Doch hinter dem glamourösen Familienbild verbergen sich alte Verletzungen, unausgesprochene Konflikte und Geheimnisse. Während die Gäste feiern und die Nacht immer ausgelassener wird, kommen Wahrheiten ans Licht, die das Leben der Geschwister für immer verändern könnten. Ein mitreißender Roman über Familie, Ruhm, Liebe und die Frage, welche Vergangenheit man hinter sich lassen kann."
 },
 {
 "title": "Malnata",
 "autor": "Beatrice Salvioni",
 "format": "eBook",
-"cover": "malnata.jpg"
+"cover": "malnata.jpg",
+"klappentext": "Lombardei, 1935: Die junge Francesca wächst in einer Welt auf, in der Mädchen Gehorsam und Anstand lernen sollen. Als sie der unangepassten Maddalena begegnet, die im Dorf nur „Malnata“ – die Unheilbringende – genannt wird, ist sie sofort fasziniert. Trotz aller Warnungen freundet sie sich mit dem wilden, selbstbewussten Mädchen an. Durch Maddalena beginnt Francesca, die Regeln ihrer Umgebung und die scheinbar unumstößlichen Wahrheiten der Erwachsenen infrage zu stellen. Doch in einer Gesellschaft, die weibliche Freiheit bestraft, kann diese Freundschaft gefährlich werden. Ein eindringlicher Roman über Mut, Freundschaft und weibliche Selbstbestimmung."
 },
 {
 "title": "Mansfield Park",
 "autor": "Jane Austen",
 "format": "Physisch",
-"cover": "mansfield-park.jpg"
+"cover": "mansfield-park.jpg",
+"klappentext": "Als die zehnjährige Fanny Price aus ärmlichen Verhältnissen zu ihren wohlhabenden Verwandten nach Mansfield Park kommt, fühlt sie sich zunächst fremd und zurückgesetzt. Nur ihr Cousin Edmund begegnet ihr mit echter Freundlichkeit. Jahre später gerät das ruhige Leben auf dem Landsitz durch die Ankunft der Geschwister Mary und Henry Crawford durcheinander. Während sich neue Liebschaften und gesellschaftliche Verwicklungen entwickeln, muss Fanny ihren eigenen Überzeugungen treu bleiben – auch wenn ihre Umgebung andere Entscheidungen von ihr erwartet. Ein feinsinniger Gesellschaftsroman über Liebe, Moral, Standesunterschiede und die stille Stärke einer jungen Frau."
 },
 {
 "title": "Marschlande",
 "autor": "Jarka Kubsova",
 "format": "eBook",
-"cover": "marschlande.jpg"
+"cover": "marschlande.jpg",
+"klappentext": "Im Hamburger Marschland lebt um 1580 Abelke Bleken, die allein einen Hof bewirtschaftet und sich gegen die Vorurteile und Anfeindungen ihrer Nachbarn behaupten muss. Fast 500 Jahre später zieht Britta Stoever mit ihrer Familie in dieselbe Landschaft. Auf ihren Spaziergängen entdeckt sie Spuren der Vergangenheit und stößt auf die Geschichte Abelkes. Je mehr sie über das Schicksal der Frau erfährt, desto stärker erkennt sie Parallelen zu ihrem eigenen Leben und den Erwartungen, denen sie sich unterordnet. Zwei Frauen aus unterschiedlichen Jahrhunderten verbindet der Wunsch, selbst über ihr Leben zu bestimmen. Ein atmosphärischer Roman über weibliche Freiheit, Ausgrenzung und die unsichtbaren Spuren der Geschichte."
 },
 {
 "title": "Mein Bericht aus dem Spanischen Bürgerkrieg",
 "autor": "George Orwell",
 "format": "Physisch",
-"cover": "mein-bericht-aus-dem-spanischen-buergerkrieg.jpg"
+"cover": "mein-bericht-aus-dem-spanischen-buergerkrieg.jpg",
+"klappentext": "Ende 1936 reist George Orwell als Journalist nach Spanien, um über den Bürgerkrieg gegen die faschistischen Truppen Francos zu berichten. Doch schon bald schließt er sich selbst den republikanischen Milizen an und erlebt den Krieg an der Front: Hunger, Kälte, Angst und die Kameradschaft der Kämpfenden. Neben den Gefechten beschreibt Orwell auch die politischen Machtkämpfe und Konflikte innerhalb des republikanischen Lagers. Sein persönlicher Erfahrungsbericht ist zugleich eine schonungslose Auseinandersetzung mit Ideologien, Propaganda und den Widersprüchen des Krieges. Ein eindringliches Zeitzeugnis, das Orwells späteres politisches Denken entscheidend prägte."
 },
 {
 "title": "Mein Mann",
 "autor": "Maud Ventura",
 "format": "Physisch",
-"cover": "mein-mann.jpg"
+"cover": "mein-mann.jpg",
+"klappentext": "Sie hat alles, was man sich wünschen kann: eine erfolgreiche Karriere, ein schönes Zuhause, zwei Kinder und einen Mann, den sie nach fünfzehn Ehejahren noch immer leidenschaftlich liebt. Doch eine Frage lässt sie nicht los: Liebt er sie genauso sehr wie sie ihn? Um Gewissheit zu bekommen, beginnt sie, ihren Mann auf die Probe zu stellen. Was zunächst wie harmlose kleine Experimente wirkt, entwickelt sich zunehmend zu einem gefährlichen Spiel aus Kontrolle, Eifersucht und Besessenheit. Ein psychologisch raffiniertes und schwarzhumoriges Beziehungsdrama über Liebe, Macht und die Abgründe hinter einer scheinbar perfekten Ehe."
 },
 {
 "title": "Mein Name ist Emilia del Valle",
 "autor": "Isabel Allende",
 "format": "Physisch",
-"cover": "mein-name-ist-emilia-del-valle.jpg"
+"cover": "mein-name-ist-emilia-del-valle.jpg",
+"klappentext": "San Francisco, 1866: Emilia del Valle wächst als Tochter einer irischen Nonne und eines chilenischen Aristokraten in einfachen Verhältnissen auf. Schon früh entdeckt sie ihre Leidenschaft fürs Schreiben und veröffentlicht unter männlichem Pseudonym erfolgreiche Abenteuerromane. Doch sie möchte mehr als Geschichten erfinden und wird Reporterin. Gemeinsam mit ihrem Kollegen Eric reist sie nach Chile, um über den drohenden Bürgerkrieg zu berichten. Dort begegnet sie nicht nur den politischen Konflikten ihrer Zeit, sondern auch den Geheimnissen ihrer eigenen Herkunft. Ein mitreißender historischer Roman über eine mutige Frau, die ihren eigenen Weg sucht – zwischen Liebe, Krieg und der Frage, wo sie wirklich hingehört."
 },
 {
 "title": "Melody",
 "autor": "Martin Suter",
 "format": "Physisch",
-"cover": "melody.jpg"
+"cover": "melody.jpg",
+"klappentext": "Der wohlhabende und schwer kranke Alt-Nationalrat Peter Stotz bittet den jungen Tom Elmer, seinen Nachlass zu ordnen und seine Lebensgeschichte aufzuschreiben. Im Mittelpunkt steht Melody, eine junge Frau, die vor über vierzig Jahren kurz vor der Hochzeit mit Stotz spurlos verschwand. Während Tom die Erinnerungen des alten Mannes dokumentiert, stößt er auf widersprüchliche Erzählungen, rätselhafte Hinweise und Geheimnisse, die Stotz offenbar lieber verborgen halten möchte. Je tiefer Tom in die Vergangenheit eintaucht, desto mehr stellt sich die Frage, was damals wirklich geschah. Ein spannender Roman über Liebe, Erinnerung und die Macht der Geschichten, mit denen wir unser Leben erklären."
 },
 {
 "title": "Memphis",
 "autor": "Tara M. Stringfellow",
 "format": "Physisch",
-"cover": "memphis.jpg"
+"cover": "memphis.jpg",
+"klappentext": "1995: Die zehnjährige Joan flieht gemeinsam mit ihrer Mutter und ihrer kleinen Schwester vor dem gewalttätigen Vater nach Memphis, in das Haus ihrer Familie. Dort begegnet sie nicht nur einer neuen Umgebung, sondern auch einer Vergangenheit voller Schmerz und lange gehüteter Geheimnisse. Schon Joans Großvater, der als erster Schwarzer Polizist der Stadt ermordet wurde, und ihre Großmutter haben die Geschichte der Familie geprägt. Während Joan in der Malerei einen Weg findet, ihre Erlebnisse zu verarbeiten, entdeckt sie die Stärke und Widerstandskraft der Frauen vor ihr. Ein bewegender Familienroman über drei Generationen Schwarzer Frauen, Rassismus, Gewalt und die Kraft, das eigene Leben selbst zu gestalten."
 },
 {
 "title": "Milchzähne",
 "autor": "Helene Bukowski",
 "format": "eBook",
-"cover": "milchzaehne.jpg"
+"cover": "milchzaehne.jpg",
+"klappentext": "In einer abgelegenen, von der Außenwelt abgeschotteten Gegend lebt Skalde mit ihrer Mutter Edith in einer Gemeinschaft, deren Bewohner Fremden misstrauisch gegenüberstehen. Als eines Tages ein kleines Mädchen mit leuchtend roten Haaren auftaucht, nimmt Skalde es bei sich auf – obwohl sie weiß, dass sie damit die Regeln der Gemeinschaft verletzt. Auch Skalde und ihre Mutter gehören nicht wirklich dazu: Edith kam Jahre zuvor unter rätselhaften Umständen an den Ort. Während die Ablehnung der anderen wächst, geraten Mutter, Tochter und das fremde Kind zunehmend in Gefahr. Ein atmosphärischer, beklemmender Roman über Ausgrenzung, Zugehörigkeit und die Angst vor dem Fremden."
 },
 {
 "title": "Miss Bly Jules Vernes",
 "autor": "Eva-Maria Bast",
 "format": "Physisch",
-"cover": "miss-bly-jules-vernes.jpg"
+"cover": "miss-bly-jules-vernes.jpg",
+"klappentext": "New York, 1889: Die junge Journalistin Nellie Bly ist bekannt für ihre waghalsigen Reportagen und ihren Mut, gesellschaftliche Grenzen zu überschreiten. Als ihr Chefredakteur sie auf eine außergewöhnliche Idee bringt, beschließt sie, allein um die Welt zu reisen – und dabei sogar schneller zu sein als Phileas Fogg aus Jules Vernes berühmtem Roman „In 80 Tagen um die Welt“. Am 14. November beginnt sie ihre abenteuerliche Reise, die sie durch fremde Länder und unerwartete Begegnungen führt. Unterwegs warten nicht nur zahlreiche Herausforderungen, sondern auch eine Liebe, die ihr Leben komplizierter macht. Ein unterhaltsamer historischer Roman über eine außergewöhnliche Journalistin, weiblichen Pioniergeist und eine spektakuläre Weltreise."
 },
 {
 "title": "Mit Männern leben",
 "autor": "Manon Garcia",
 "format": "Physisch",
-"cover": "mit-maennern-leben.jpg"
+"cover": "mit-maennern-leben.jpg",
+"klappentext": "Die Philosophin Manon Garcia verfolgt den Prozess gegen Dominique Pelicot in Avignon, dessen Verbrechen an seiner Frau Gisèle Pelicot weltweit Entsetzen ausgelöst haben. Sie dokumentiert die Aussagen der Angeklagten, ihre Rechtfertigungen und die erschreckende Normalität, hinter der sich männliche Gewalt verbergen kann. Dabei verbindet sie ihre Beobachtungen aus dem Gerichtssaal mit feministischen und philosophischen Überlegungen zur Stellung der Frau in einer patriarchalen Gesellschaft. Ausgehend von diesem Prozess stellt sie eine grundlegende Frage: Wie können Frauen angesichts alltäglicher und struktureller Gewalt mit Männern leben? Ein eindringliches Sachbuch über Macht, Verantwortung und gesellschaftliche Strukturen."
 },
 {
 "title": "Mit offenen Karten",
 "autor": "Agatha Christie",
 "format": "Physisch",
-"cover": "mit-offenen-karten.jpg"
+"cover": "mit-offenen-karten.jpg",
+"klappentext": "Der exzentrische Sammler Mr. Shaitana lädt Hercule Poirot und drei weitere Ermittler zu einem ungewöhnlichen Abendessen ein. Anschließend sollen die Gäste eine Partie Bridge spielen – gemeinsam mit vier Menschen, die Shaitana für Mörder hält, denen ihre Taten jedoch nie nachgewiesen werden konnten. Während des Spiels bleibt der Gastgeber zunächst unbeobachtet im Nebenzimmer zurück. Als man ihn wenig später tot auffindet, ist klar: Einer der vier mutmaßlichen Mörder muss erneut zugeschlagen haben. Poirot beginnt, die Persönlichkeiten und Erinnerungen der Verdächtigen genau unter die Lupe zu nehmen. Ein raffinierter Kriminalroman, in dem psychologisches Gespür wichtiger ist als handfeste Beweise."
 },
 {
 "title": "Molka",
 "autor": "Monika Kim",
 "format": "Physisch",
-"cover": "molka.jpg"
+"cover": "molka.jpg",
+"klappentext": "Margot ist eine junge Koreanerin, die in Los Angeles lebt und sich zunehmend von ihrem eigenen Körper und den Erwartungen ihrer Umgebung entfremdet fühlt. Als sie entdeckt, dass sie heimlich gefilmt wurde, gerät ihr Leben aus dem Gleichgewicht. Die Erfahrung weckt in ihr eine verstörende Faszination für Voyeurismus, Kontrolle und die Grenzen zwischen Opfer und Täter. Während sie versucht, mit dem Geschehenen umzugehen, entwickelt sich eine obsessive Suche nach Macht und Vergeltung. Ein verstörender psychologischer Thriller über digitale Überwachung, sexualisierte Gewalt, Scham und den Wunsch, die Kontrolle zurückzugewinnen."
 },
 {
 "title": "Momo",
 "autor": "Michael Ende",
 "format": "Physisch",
-"cover": "momo.jpg"
+"cover": "momo.jpg",
+"klappentext": "Am Rande einer großen Stadt lebt das geheimnisvolle Mädchen Momo in den Ruinen eines alten Amphitheaters. Sie besitzt kaum etwas, aber eine außergewöhnliche Gabe: Sie kann Menschen so aufmerksam zuhören, dass diese ihre Sorgen vergessen und selbst neue Lösungen finden. Doch eines Tages tauchen die grauen Herren auf, die den Menschen ihre Zeit stehlen und sie dazu bringen, immer schneller und effizienter zu leben. Gemeinsam mit ihren Freunden Beppo Straßenkehrer und Gigi Fremdenführer stellt sich Momo den Zeitdieben entgegen. Ein poetisches und zeitloses Märchen über Freundschaft, Menschlichkeit und den unschätzbaren Wert der Zeit."
 },
 {
 "title": "Mord in der Charing Cross Road",
 "autor": "Henrietta Hamilton",
 "format": "Physisch",
-"cover": "mord-in-der-charing-cross-road.jpg"
+"cover": "mord-in-der-charing-cross-road.jpg",
+"klappentext": "In einer antiquarischen Buchhandlung in der Londoner Charing Cross Road scheint zunächst alles seinen gewohnten Gang zu gehen. Doch plötzlich verschwinden wertvolle Bücher, und kurz darauf wird der unbeliebte Mitarbeiter Mr. Butcher tot an seinem Schreibtisch aufgefunden. Die Buchhändlerin Sally Merton und der Juniorchef Johnny Heldar beginnen auf eigene Faust zu ermitteln. Als auch Johnnys Cousin unter Verdacht gerät, müssen die beiden herausfinden, was hinter den Diebstählen und dem Mord steckt. Ein klassischer Wohlfühlkrimi mit charmantem Ermittlerduo, Londoner Buchhandlungsatmosphäre und einer Prise Romantik."
 },
 {
 "title": "Mord in Mesopotamien",
 "autor": "Agatha Christie",
 "format": "Physisch",
-"cover": "mord-in-mesopotamien.jpg"
+"cover": "mord-in-mesopotamien.jpg",
+"klappentext": "Die Krankenschwester Amy Leatheran übernimmt eine Stelle bei einer archäologischen Expedition im Irak. Dort soll sie die Frau des berühmten Archäologen Dr. Leidner betreuen, die unter starken Ängsten leidet und überzeugt ist, von ihrem totgeglaubten ersten Ehemann bedroht zu werden. Die angespannte Stimmung unter den Expeditionsteilnehmern wird immer bedrohlicher, bis Mrs. Leidner eines Tages ermordet aufgefunden wird. Hercule Poirot, der sich gerade in der Nähe aufhält, übernimmt die Ermittlungen und muss herausfinden, welches Geheimnis hinter den rätselhaften Drohungen steckt. Ein atmosphärischer Kriminalroman vor der Kulisse einer archäologischen Ausgrabungsstätte."
 },
 {
 "title": "Mr Parnassus Heim für magisch Begabte",
 "autor": "T.J. Klune",
 "format": "eBook",
-"cover": "mr-parnassus-heim-fuer-magisch-begabte.jpg"
+"cover": "mr-parnassus-heim-fuer-magisch-begabte.jpg",
+"klappentext": "Linus Baker ist ein pflichtbewusster Beamter, der sein Leben nach Vorschriften und Regeln ausrichtet. Als er vom obersten Management auf eine geheime Mission geschickt wird, soll er ein abgelegenes Waisenhaus auf der Insel Marsyas überprüfen. Dort leben sechs außergewöhnliche Kinder mit magischen Fähigkeiten, darunter ein Junge, der möglicherweise der Sohn des Teufels ist. Geleitet wird das Heim von dem geheimnisvollen Arthur Parnassus, der seine Schützlinge mit viel Liebe beschützt. Je länger Linus auf der Insel bleibt, desto mehr gerät sein bisheriges Weltbild ins Wanken. Eine warmherzige Fantasygeschichte über Anderssein, Vorurteile, Zusammenhalt und die Bedeutung von Familie."
 },
 {
 "title": "Mrs Agatha Christie",
 "autor": "Marie Benedict",
 "format": "Physisch",
-"cover": "mrs-agatha-christie.jpg"
+"cover": "mrs-agatha-christie.jpg",
+"klappentext": "Dezember 1926: Die berühmte Krimiautorin Agatha Christie verschwindet spurlos. Ihr verlassenes Auto wird an einem Teich gefunden, ihr Pelzmantel liegt darin, doch von ihr selbst fehlt jede Spur. Während ganz England nach der Schriftstellerin sucht, steht ihr Ehemann Archie im Mittelpunkt der Aufmerksamkeit. Was ist geschehen? Marie Benedict erzählt die rätselhaften elf Tage aus Agatha Christies Leben und entwirft eine Geschichte über eine Frau, deren privates Leben ebenso geheimnisvoll erscheint wie ihre Kriminalromane. Ein spannender historischer Roman über Identität, Ehe, Selbstbestimmung und eines der bekanntesten ungelösten Rätsel der Literaturgeschichte."
 },
 {
 "title": "Nightbitch",
 "autor": "Rachel Yoder",
 "format": "Physisch",
-"cover": "nightbitch.jpg"
+"cover": "nightbitch.jpg",
+"klappentext": "Eine ehemalige Künstlerin hat ihre Karriere aufgegeben, um sich ganz ihrem kleinen Sohn zu widmen. Doch der Alltag als Mutter ist weit entfernt von dem erfüllten Familienleben, das sie sich vorgestellt hat: Sie ist erschöpft, einsam und zunehmend wütend, während ihr Mann beruflich ständig unterwegs ist. Als sie eines Tages körperliche Veränderungen an sich entdeckt – ein Fellbüschel im Nacken, schärfere Eckzähne und einen immer stärkeren Appetit auf rohes Fleisch –, beginnt sie zu glauben, sich in einen Hund zu verwandeln. Was zunächst beängstigend erscheint, wird für sie zu einer überraschenden Möglichkeit, ihre unterdrückte Seite zu entdecken. Eine wilde, schwarzhumorige und feministische Geschichte über Mutterschaft, Identität und den Wunsch nach Selbstbestimmung."
 },
 {
 "title": "She's a Star!",
 "autor": "Meredith Hambrock",
 "rezi": "ja",
 "format": "eBook",
-"cover": "shes-a-star.jpg"
+"cover": "shes-a-star.jpg",
+"klappentext": "Jessamyn St. Germain träumt davon, auf der großen Bühne zu stehen. Doch statt im Rampenlicht arbeitet sie als Platzanweiserin in einem Theater. Als dort eine Inszenierung von „The Sound of Music“ angekündigt wird, ist sie überzeugt, dass die Hauptrolle für sie bestimmt ist – auch wenn niemand sie dafür vorgesehen hat. Während sie die jungen Darsteller betreut und auf ihren großen Moment wartet, verschwimmen zunehmend die Grenzen zwischen Wunsch und Wirklichkeit. Ihr Ehrgeiz entwickelt sich zu einer gefährlichen Obsession, und Jessamyn verliert sich immer mehr in ihrer eigenen Vorstellung von Ruhm. Eine bissige Satire über Selbsttäuschung, Größenwahn, Patriarchat und den Hunger nach Anerkennung."
 },
 {
 "title": "Niklas Luhmann",
 "autor": "Clemens Luhmann",
 "format": "Physisch",
-"cover": "niklas-luhmann.jpg"
+"cover": "niklas-luhmann.jpg",
+"klappentext": "Wer war Niklas Luhmann jenseits seiner berühmten soziologischen Theorie? In dieser Biografie erzählt sein Sohn Clemens Luhmann das Leben des bedeutenden Gesellschaftstheoretikers – von seiner Kindheit in Lüneburg über Krieg und Gefangenschaft bis zu seiner wissenschaftlichen Karriere. Persönliche Erinnerungen, Briefe und bislang unbekannte Quellen eröffnen einen neuen Blick auf den privaten Menschen hinter dem großen Denker. Dabei wird sichtbar, wie Erfahrungen, Begegnungen und die gesellschaftlichen Umbrüche seiner Zeit Luhmanns Denken geprägt haben. Ein persönliches Porträt und zugleich eine Einführung in das Leben und Werk eines der einflussreichsten Soziologen des 20. Jahrhunderts."
 },
 {
 "title": "Normale Menschen",
 "autor": "Sally Rooney",
 "format": "Physisch",
-"cover": "normale-menschen.jpg"
+"cover": "normale-menschen.jpg",
+"klappentext": "Connell und Marianne wachsen in derselben irischen Kleinstadt auf, könnten aber unterschiedlicher kaum sein: Er ist beliebt, sportlich und stammt aus einfachen Verhältnissen, sie gilt als Außenseiterin und kommt aus einer wohlhabenden Familie. Als die beiden einander näherkommen, entsteht eine intensive Verbindung, die sie auch später während ihres Studiums in Dublin nicht loslässt. Immer wieder finden sie zueinander und entfernen sich voneinander – geprägt von Unsicherheiten, unausgesprochenen Gefühlen und unterschiedlichen Vorstellungen von Nähe. Über mehrere Jahre hinweg erzählt der Roman von einer Beziehung, die sich ständig verändert und beide nachhaltig prägt. Eine feinfühlige Geschichte über Liebe, Freundschaft, soziale Unterschiede und die Schwierigkeiten, sich selbst und andere wirklich zu verstehen."
 },
 {
 "title": "Nothing More to Tell",
 "autor": "Karen M. McManus",
 "sprache": "Original",
 "format": "Physisch",
-"cover": "nothing-more-to-tell.jpg"
+"cover": "nothing-more-to-tell.jpg",
+"klappentext": "Vor vier Jahren wurde der beliebte Lehrer Mr. Larkin ermordet im Wald hinter seiner Schule gefunden. Drei Schüler entdeckten damals die Leiche, doch der Mord wurde nie aufgeklärt. Nun kehrt Brynn an ihre alte Schule zurück und beginnt ein Praktikum bei einem True-Crime-Podcast. Sie beschließt, den ungelösten Fall neu aufzurollen – und stößt dabei auf ihren ehemaligen besten Freund Tripp, der damals zu den drei Jugendlichen gehörte und der Polizei nicht die ganze Wahrheit erzählt hat. Je tiefer Brynn gräbt, desto mehr Geheimnisse kommen ans Licht. Ein spannender Jugendthriller über Freundschaft, Lügen und die Frage, wie gut man Menschen wirklich kennt."
 },
 {
 "title": "Notizen zu einer Hinrichtung",
 "autor": "Danya Kukafka",
 "format": "eBook",
-"cover": "notizen-zu-einer-hinrichtung.jpg"
+"cover": "notizen-zu-einer-hinrichtung.jpg",
+"klappentext": "In zwölf Stunden soll Ansel Packer hingerichtet werden. Er ist ein verurteilter Serienmörder, der mehrere Frauen getötet hat – und dennoch hofft er bis zuletzt auf Verständnis und Anerkennung. Doch dieser Roman erzählt nicht nur seine Geschichte, sondern vor allem die der Frauen, deren Leben er geprägt und zerstört hat: seiner Mutter, seiner Schwester und der Ermittlerin, die sich seit Jahren mit seinen Verbrechen beschäftigt. Aus unterschiedlichen Perspektiven entsteht ein vielschichtiges Bild von Gewalt, Verlust und den Folgen eines Verbrechens. Ein eindringlicher psychologischer Roman, der die Perspektive vom Täter auf die Frauen in seinem Umfeld verschiebt."
 },
 {
 "title": "Nur eine weitere Geschichte",
 "autor": "Jacqueline Maley",
 "format": "Physisch",
-"cover": "nur-eine-weitere-geschichte.jpg"
+"cover": "nur-eine-weitere-geschichte.jpg",
+"klappentext": "Gehört die Geschichte eines Menschen ihm selbst oder denen, die sie erzählen? Die Journalistin und alleinerziehende Mutter Suzy Hamilton gerät in eine schwere Krise, als die Wellness-Bloggerin Tracey Doran Suizid begeht. Suzy hatte zuvor eine Enthüllungsgeschichte über Tracey veröffentlicht und fühlt sich nun für deren Tod mitverantwortlich. Ein Jahr später holen sie die Folgen ihrer Recherche ein: Sie erhält anonyme Drohbriefe und wird von Traceys Mutter aufgefordert, die wahre Geschichte ihrer Tochter zu erzählen. Während Suzy versucht, sich ihrer Schuld zu stellen, muss sie auch ihr eigenes Leben und ihre Rolle als Mutter hinterfragen. Ein vielschichtiger Roman über Schuld, Scham, weibliche Wut, Mutterschaft und die Macht des Erzählens."
 },
 {
 "title": "Oh Simone",
 "autor": "Julia Korbik",
 "format": "Physisch",
-"cover": "oh-simone.jpg"
+"cover": "oh-simone.jpg",
+"klappentext": "Julia Korbik nähert sich der französischen Philosophin, Schriftstellerin und Feministin Simone de Beauvoir auf persönliche und lebendige Weise. Dabei geht es nicht nur um ihre großen philosophischen Ideen und ihr berühmtes Werk, sondern auch um ihren Alltag, ihre Freundschaften, ihre Liebe zu Jean-Paul Sartre und ihren Kampf um ein selbstbestimmtes Leben. Das Buch zeigt, wie aktuell Beauvoirs Gedanken über Freiheit, Geschlechterrollen und gesellschaftliche Erwartungen bis heute sind. Eine inspirierende Einladung, eine der wichtigsten Denkerinnen des 20. Jahrhunderts neu kennenzulernen."
 },
 {
 "title": "One of the Girls",
 "autor": "Lucy Clark",
 "format": "Physisch",
-"cover": "one-of-the-girls.jpg"
+"cover": "one-of-the-girls.jpg",
+"klappentext": "Sechs Frauen reisen auf eine griechische Insel, um den Junggesellinnenabschied ihrer Freundin Lexi zu feiern. Sonne, Meer und eine luxuriöse Villa versprechen ein perfektes Wochenende – doch hinter der ausgelassenen Stimmung verbergen sich Geheimnisse, Eifersucht und alte Konflikte. Mit jedem Tag bröckelt die Fassade der Freundschaft ein wenig mehr, bis schließlich eine Leiche unterhalb der Klippen gefunden wird. Ein atmosphärischer Psychothriller über weibliche Freundschaften, Verrat und die Frage, wie gut man seine engsten Freundinnen wirklich kennt."
 },
 {
 "title": "One of Us is Back",
 "autor": "Karen M. McManus",
 "sprache": "Original",
 "format": "Physisch",
-"cover": "one-of-us-is-back.jpg"
+"cover": "one-of-us-is-back.jpg",
+"klappentext": "Fast zwei Jahre sind vergangen, seit Simon starb und die Bayview Four in einen Mordfall verwickelt waren. Die Mitglieder der Bayview-Clique versuchen inzwischen, ihr Leben wieder in den Griff zu bekommen. Doch dann taucht eine geheimnisvolle Botschaft auf einer Werbetafel auf: Ein neues Spiel soll beginnen. Als kurz darauf jemand aus der Gruppe verschwindet, wird klar, dass die Vergangenheit noch längst nicht abgeschlossen ist. Alte Geheimnisse kommen ans Licht und plötzlich scheint jeder zur Zielscheibe zu werden. Der dritte Band der „One of Us Is Lying“-Reihe – ein rasanter Jugendthriller voller Rätsel, Verdächtigungen und überraschender Wendungen."
 },
 {
 "title": "Palace of Glass",
 "autor": "C.E. Bernard",
 "format": "eBook",
-"cover": "palace-of-glass.jpg"
+"cover": "palace-of-glass.jpg",
+"klappentext": "In einem London, in dem jede Berührung verboten ist, lebt die junge Rea mit einer gefährlichen Gabe: Sie kann durch Hautkontakt die Gedanken anderer Menschen beeinflussen. Deshalb trägt sie stets Handschuhe und hält ihre Fähigkeit geheim. Als sie vom britischen Geheimdienst entführt wird, erhält sie einen ungewöhnlichen Auftrag: Sie soll das Leben des englischen Kronprinzen schützen. Doch am Hof ahnt niemand, dass ausgerechnet sie selbst eine Gefahr für ihn darstellt. Ein spannender Fantasyroman über verbotene Magie, Intrigen und eine Liebe unter gefährlichen Bedingungen."
 },
 {
 "title": "Paradise Garden",
 "autor": "Elena Fischer",
 "format": "Physisch",
-"cover": "paradise-garden.jpg"
+"cover": "paradise-garden.jpg",
+"klappentext": "Die 14-jährige Billie lebt mit ihrer Mutter Marika in einer Hochhaussiedlung. Obwohl das Geld knapp ist, machen die beiden mit viel Fantasie und Lebensfreude das Beste aus ihrem Alltag. Als unerwartet Billies Großmutter aus Ungarn auftaucht und kurz darauf eine Tragödie das Leben der beiden völlig verändert, verliert Billie ihren wichtigsten Halt. Auf eigene Faust macht sie sich in einem alten Nissan auf die Suche nach ihrem unbekannten Vater – und nach Antworten auf Fragen, die ihre Mutter nie beantworten wollte. Ein berührender Coming-of-Age-Roman über Verlust, Mutter-Tochter-Liebe, Herkunft und den Mut, seinen eigenen Weg zu finden."
 },
 {
 "title": "Parasiti",
 "autor": "Alisha Gamisch",
 "format": "Physisch",
-"cover": "parasiti.jpg"
+"cover": "parasiti.jpg",
+"klappentext": "Als Rinas Großmutter Lydia eines Tages verstummt, beginnt die Enkelin, Fragen zu stellen. Gemeinsam mit ihrer Tante Valli versucht sie, die Geheimnisse der Familiengeschichte zu entschlüsseln. Dabei führen die Spuren zurück ins sibirische Nowosibirsk der 1960er-Jahre, in die Zeit von Deportation und Zwangsarbeit, und weiter bis ins Deutschland der Gegenwart. Nach und nach werden die Erfahrungen dreier Generationen russlanddeutscher Frauen sichtbar: ihre Verletzungen, Ängste und Überlebensstrategien. Ein eindringlicher Familienroman über Migration, weibliche Schicksale, familiäres Schweigen und die Weitergabe von Traumata."
 },
 {
 "title": "Pizza Orlando",
 "autor": "Clara Umbach",
 "format": "Physisch",
-"cover": "pizza-orlando.jpg"
+"cover": "pizza-orlando.jpg",
+"klappentext": "Clara und Nina kennen sich seit ihrer Jugend, doch erst als erwachsene Frauen finden sie auf unerwartete Weise zueinander. Zwischen Berlin und Hamburg entwickelt sich eine leidenschaftliche Liebesbeziehung, die von großer Nähe und Verletzlichkeit geprägt ist. Doch Nina ist an Huntington erkrankt, einer unheilbaren Krankheit, die ihre gemeinsame Zukunft überschattet. Während beide versuchen, ihrer Liebe Raum zu geben, muss Clara ihren Alltag als alleinerziehende Mutter mit Studium und Arbeit bewältigen. Erzählt unter anderem in Chatnachrichten entsteht eine ungewöhnliche, unmittelbare Liebesgeschichte über Begehren, Vergänglichkeit und den Wunsch nach einem gemeinsamen Leben."
 },
 {
 "title": "Prima Facie",
 "autor": "Suzie Miller",
 "format": "Physisch",
-"cover": "prima-facie.jpg"
+"cover": "prima-facie.jpg",
+"klappentext": "Tessa Ensler ist eine erfolgreiche Strafverteidigerin in London. Mit Ehrgeiz und außergewöhnlichem Können hat sie sich aus einfachen Verhältnissen nach oben gearbeitet und verteidigt inzwischen regelmäßig Männer, die sexueller Übergriffe beschuldigt werden. Sie vertraut auf das Rechtssystem und ist überzeugt, dass sich vor Gericht Wahrheit und Gerechtigkeit durchsetzen lassen. Doch als sie selbst von einem Kollegen vergewaltigt wird, mit dem sie zuvor eine Beziehung hatte, findet sie sich auf der anderen Seite des Gerichtssaals wieder. Plötzlich muss sie erfahren, wie schwer es für Betroffene ist, Gehör zu finden und Gerechtigkeit zu erlangen. Ein aufwühlender Roman über sexuelle Gewalt, Macht und die Grenzen eines Rechtssystems, das eigentlich alle schützen sollte."
 },
 {
 "title": "Psychose",
 "autor": "Blake Crouch",
 "format": "Physisch",
-"cover": "psychose.jpg"
+"cover": "psychose.jpg",
+"klappentext": "Secret-Service-Agent Ethan Burke soll in der abgelegenen Kleinstadt Wayward Pines im US-Bundesstaat Idaho zwei vermisste Kollegen finden. Doch nach einem schweren Autounfall wacht er in einem Krankenhaus auf und merkt schnell, dass etwas nicht stimmt: Seine persönlichen Gegenstände sind verschwunden, die Menschen verhalten sich seltsam und niemand beantwortet seine Fragen. Als er versucht, die Stadt zu verlassen, stößt er auf einen unüberwindbaren Zaun. Bald wird klar, dass Wayward Pines ein düsteres Geheimnis verbirgt und Ethan selbst in großer Gefahr schwebt. Ein rasanter Mystery-Thriller über Überwachung, Identität und eine Stadt, aus der es scheinbar kein Entkommen gibt."
 },
 {
 "title": "Radio Sarajevo",
 "autor": "Tijan Sila",
 "format": "eBook",
-"cover": "radio-sarajevo.jpg"
+"cover": "radio-sarajevo.jpg",
+"klappentext": "Als im April 1992 der Krieg in Bosnien beginnt, ist Tijan Sila erst zehn Jahre alt. Plötzlich wird seine Heimatstadt Sarajevo zum Schauplatz einer jahrelangen Belagerung, geprägt von Bombenangriffen, Hunger und ständiger Lebensgefahr. Aus der Perspektive des Kindes, das er damals war, erzählt Sila, wie er durch die zerstörte Stadt streift, Gegenstände aus verlassenen Häusern sammelt und auf dem Schwarzmarkt gegen Lebensmittel tauscht. Während er lernt, unter unmenschlichen Bedingungen zu überleben, muss er viel zu früh erwachsen werden. Ein autobiografischer Roman über Krieg, Kindheit, Verlust und die lebenslangen Spuren traumatischer Erfahrungen."
 },
 {
 "title": "Rächende Geister",
 "autor": "Agatha Christie",
 "format": "Physisch",
-"cover": "raechende-geister.jpg"
+"cover": "raechende-geister.jpg",
+"klappentext": "Theben im Alten Ägypten, rund 2000 vor Christus: Nach dem Tod ihres Mannes muss die junge Witwe Renisenb in das Haus ihrer Familie zurückkehren. Dort herrscht ohnehin eine angespannte Atmosphäre, doch als ihr Vater Imhotep eine neue, junge Geliebte mit nach Hause bringt, verschärfen sich die Konflikte dramatisch. Die neue Frau versteht es, Misstrauen und Feindschaft unter den Familienmitgliedern zu säen. Als sie schließlich tot aufgefunden wird, bleibt es nicht bei diesem einen Todesfall. Während Angst und Verdächtigungen um sich greifen, versucht Renisenb herauszufinden, wer hinter den Morden steckt. Ein ungewöhnlicher Christie-Krimi mit einer faszinierenden historischen Kulisse und einem mörderischen Familiendrama."
 },
 {
 "title": "Raue Wasser",
@@ -1837,265 +1874,308 @@
 "title": "Reporterin für eine bessere Welt",
 "autor": "Ulrike Fuchs",
 "format": "Physisch",
-"cover": "reporterin-fuer-eine-bessere-welt.jpg"
+"cover": "reporterin-fuer-eine-bessere-welt.jpg",
+"klappentext": "New York, 1887: Die junge Journalistin Nellie Bly träumt davon, für eine große Zeitung zu schreiben. Doch Frauen haben es in der männerdominierten Pressewelt schwer, ernst genommen zu werden. Schließlich erhält sie eine außergewöhnliche Chance: Unter falschem Namen soll sie sich in eine psychiatrische Anstalt für Frauen einweisen lassen, um über die dortigen Zustände zu berichten. Zehn Tage lang erlebt sie Misshandlungen, Willkür und erschreckende Lebensbedingungen hautnah. Mit ihrer mutigen Recherche gelingt ihr eine Reportage, die eine gesellschaftliche Debatte auslöst und das Leben vieler Frauen verändert. Eine spannende Romanbiografie über journalistischen Mut, weibliche Selbstbestimmung und den Kampf für Gerechtigkeit."
 },
 {
 "title": "Restsommer",
 "autor": "Kea Garnier",
 "format": "eBook",
-"cover": "restsommer.jpg"
+"cover": "restsommer.jpg",
+"klappentext": "Sommer 2003 in einer niedersächsischen Kleinstadt: Dominik ist der Sohn eines Bestatters und soll später den Familienbetrieb übernehmen. Mit dem Tod kennt er sich bestens aus, doch vom Leben weiß er noch nicht besonders viel. Das ändert sich, als der unangepasste und lebenshungrige Biff neu in seine Klasse kommt. Zwischen Freibad, Bandproben und langen Sommerabenden entwickelt sich zwischen den beiden Jungen eine erste große Liebe. Doch Dominik muss sich entscheiden, ob er den Erwartungen seiner Familie folgt oder den Mut aufbringt, seinen eigenen Wünschen nachzugehen. Ein zärtlicher Coming-of-Age-Roman über queere Liebe, Erwachsenwerden und die Suche nach dem eigenen Lebensweg."
 },
 {
 "title": "Ripley",
 "autor": "Patricia Highsmith",
 "format": "Physisch",
-"cover": "ripley.jpg"
+"cover": "ripley.jpg",
+"klappentext": "Tom Ripley ist ein junger Mann, der sich mit kleinen Betrügereien über Wasser hält und von einem Leben in Luxus und Unbeschwertheit träumt. Als ihn der wohlhabende Vater seines Schulfreundes Dickie Greenleaf nach Italien schickt, um den Sohn zur Rückkehr in die USA zu bewegen, eröffnet sich Tom eine Welt, die ihn sofort fasziniert. Dickie führt genau das Leben, nach dem Tom sich sehnt. Aus Bewunderung wird Besessenheit – und Tom ist bereit, immer weiter zu gehen, um sich einen Platz in dieser Welt zu sichern. Ein psychologisch raffinierter Thriller über Identität, Neid, Täuschung und einen ebenso charmanten wie skrupellosen Hochstapler."
 },
 {
 "title": "Russische Spezialitäten",
 "autor": "Dmitrij Kapitelman",
 "format": "Physisch",
-"cover": "russische-spezialitaeten.jpg"
+"cover": "russische-spezialitaeten.jpg",
+"klappentext": "Eine ukrainische Familie betreibt in Leipzig einen Laden für russische Spezialitäten. Wodka, Pelmeni und Kaviar gehören zum Sortiment – ebenso wie ein Gefühl osteuropäischer Zusammengehörigkeit. Doch seit dem russischen Angriff auf die Ukraine ist dieses vertraute Miteinander zerbrochen: Die Mutter steht politisch auf Putins Seite, während ihr Sohn den Krieg und die russische Propaganda entschieden ablehnt. Er liebt seine Mutter, die russische Sprache und seine ukrainische Heimat Kyjiw – und kann kaum begreifen, wie tief die politischen Gegensätze in die eigene Familie vorgedrungen sind. Schließlich reist er in die Ukraine, um seine Mutter mit der Realität des Krieges zu konfrontieren. Ein zugleich humorvoller und schmerzhafter Roman über Familie, Heimat, politische Überzeugungen und die Schwierigkeit, einander trotz allem nicht zu verlieren."
 },
 {
 "title": "Sapiens",
 "autor": "Yuval Noah Harari",
 "format": "Physisch",
-"cover": "sapiens.jpg"
+"cover": "sapiens.jpg",
+"klappentext": "Wie wurde der Mensch zu der dominierenden Spezies auf unserem Planeten? In diesem faszinierenden Sachbuch erzählt der Historiker Yuval Noah Harari die Geschichte der Menschheit – von den ersten Homo-sapiens-Gruppen vor rund 70.000 Jahren bis in die moderne Welt. Er zeigt, wie kognitive Revolution, Landwirtschaft, Religion, Geld und Wissenschaft unsere Gesellschaften geprägt haben. Dabei stellt er scheinbar selbstverständliche Vorstellungen über Fortschritt, Glück und menschliche Zivilisation infrage. Eine ebenso unterhaltsame wie provokante Reise durch die Geschichte unserer Spezies, die dazu anregt, die Gegenwart mit anderen Augen zu betrachten."
 },
 {
 "title": "Saubere Zeiten",
 "autor": "Andreas Wunn",
 "format": "eBook",
-"cover": "saubere-zeiten.jpg"
+"cover": "saubere-zeiten.jpg",
+"klappentext": "Als Jakob erfährt, dass sein Vater im Sterben liegt, kehrt er in sein Elternhaus an der Mosel zurück. Dort beginnt er, die Geschichte seiner Familie zu erforschen. Besonders die Vergangenheit seines Großvaters Theodor beschäftigt ihn: Dieser hatte im Wirtschaftswunder-Deutschland mit einer Waschmittel-Erfindung ein erfolgreiches Unternehmen aufgebaut, bevor er unter rätselhaften Umständen alles verlor. Jakobs Spurensuche führt ihn bis nach Rio de Janeiro, wo er auf eine Frau trifft, die entscheidende Teile der Familiengeschichte kennt. Nach und nach kommen verdrängte Wahrheiten über Schuld, Erfolg und das Schweigen zwischen den Generationen ans Licht. Ein bewegender Familienroman über Väter und Söhne und die Last der Vergangenheit."
 },
 {
 "title": "Schaut wie wir tanzen",
 "autor": "Leila Slimani",
 "format": "Physisch",
-"cover": "schaut-wie-wir-tanzen.jpg"
+"cover": "schaut-wie-wir-tanzen.jpg",
+"klappentext": "Marokko, 1968: In einem Land, das sich nach der Unabhängigkeit im gesellschaftlichen und politischen Umbruch befindet, versucht eine Familie, ihren Platz in einer neuen Zeit zu finden. Mia und Aïcha, die Töchter von Mathilde und Amine, wachsen zwischen unterschiedlichen kulturellen Erwartungen, familiären Traditionen und dem Wunsch nach Freiheit auf. Während Mia ihren eigenen Weg sucht und sich zunehmend zu Frauen hingezogen fühlt, träumt Aïcha von einem selbstbestimmten Leben als Ärztin. Die politischen Veränderungen und gesellschaftlichen Spannungen prägen ihre Entscheidungen ebenso wie die Geschichte ihrer Eltern. Der zweite Band von Slimanis Familiensaga erzählt von Identität, Emanzipation und den Konflikten zwischen Tradition und Moderne."
 },
 {
 "title": "Schura",
 "autor": "Maria Jansen",
 "format": "Physisch",
-"cover": "schura.jpg"
+"cover": "schura.jpg",
+"klappentext": "Für Schura sind die Sommer auf der Datscha ihrer Großeltern die schönste Zeit des Jahres. Dort findet sie Zuflucht vor ihren strengen, emotional distanzierten Eltern. Ihre vier älteren Brüder werden zu ihren wichtigsten Bezugspersonen: Sie zeigen ihr die Welt, beschützen sie und bringen ihr zugleich Dinge bei, die sie eigentlich noch nicht kennen sollte. Doch eines Tages verschwindet einer der Brüder spurlos. Der Verlust verändert Schura und entfremdet sie zunehmend von ihrer Familie. Erst Jahre später eröffnet eine unerwartete Begegnung die Möglichkeit, sich der Vergangenheit und der eigenen Trauer zu stellen. Ein berührender Familienroman über Geschwisterliebe, Verlust und das schwierige Loslassen."
 },
 {
 "title": "Schwanentage",
 "autor": "Zhang Yueran",
 "format": "Physisch",
-"cover": "schwanentage.jpg"
+"cover": "schwanentage.jpg",
+"klappentext": "Yu Ling arbeitet als Kindermädchen für eine wohlhabende chinesische Familie und kümmert sich hingebungsvoll um deren siebenjährigen Sohn. Sie kennt die Geheimnisse ihrer Arbeitgeber genau, während diese kaum etwas über ihr eigenes Leben wissen. In der Hoffnung auf Lösegeld und eine bessere Zukunft plant Yu Ling, den Jungen zu entführen. Doch bevor sie ihren Plan umsetzen kann, gerät die Familie selbst in eine Krise: Der Großvater und der Vater werden wegen Korruption verhaftet, die Mutter verschwindet spurlos. Plötzlich muss Yu Ling Entscheidungen treffen, die nicht nur ihr eigenes Leben, sondern auch das des Kindes für immer verändern könnten. Ein vielschichtiger Roman über soziale Ungleichheit, Macht, Abhängigkeit und unerwartete Menschlichkeit."
 },
 {
 "title": "Schwindende Welt",
 "autor": "Sayaka Murata",
 "format": "eBook",
-"cover": "schwindende-welt.jpg"
+"cover": "schwindende-welt.jpg",
+"klappentext": "Amane wächst in einer Gesellschaft auf, in der Sex und romantische Liebe nahezu verschwunden sind und künstliche Befruchtung als selbstverständlich gilt. Als sie mit ihrem Mann Saku in eine experimentelle Stadt zieht, in der auch Männer Kinder austragen können und die Gemeinschaft gemeinsam für den Nachwuchs sorgt, scheint sie eine neue Form des Zusammenlebens gefunden zu haben. Doch hinter der vermeintlich fortschrittlichen Ordnung tun sich Widersprüche auf. Ein ungewöhnliches Gedankenexperiment über Sexualität, Familie und gesellschaftliche Normen."
 },
 {
 "title": "Seltsame Sally Diamond",
-"autor": "Liz Nunget",
+"autor": "Liz Nugent",
 "format": "eBook",
-"cover": "seltsame-sally-diamond.jpg"
+"cover": "seltsame-sally-diamond.jpg",
+"klappentext": "Sally Diamond lebt zurückgezogen und hat wenig Verständnis für die Erwartungen anderer Menschen. Als sie den letzten Wunsch ihres verstorbenen Vaters wörtlich nimmt, gerät sie plötzlich ins Zentrum öffentlicher Aufmerksamkeit. Während Polizei und Medien Fragen stellen, meldet sich auch eine unheimliche Stimme aus einer Vergangenheit, an die Sally keine Erinnerung hat. Nach und nach muss sie sich den Geheimnissen ihrer Kindheit stellen und lernen, wem sie vertrauen kann."
 },
 {
 "title": "Sexuelle Revolution",
 "autor": "Laurie Penny",
 "format": "Physisch",
-"cover": "sexuelle-revolution.jpg"
+"cover": "sexuelle-revolution.jpg",
+"klappentext": "Laurie Penny untersucht, wie eng Sexualität, Macht und gesellschaftliche Strukturen miteinander verwoben sind. Sie schreibt über Geschlechterrollen, sexuelle Gewalt, Trauma und den politischen Backlash gegen feministische Errungenschaften. Dabei plädiert sie für eine Kultur des Einvernehmens, die nicht beim Sex endet, sondern auch Arbeit, Politik und das gesellschaftliche Zusammenleben prägen sollte. Ein pointiertes feministisches Sachbuch über Widerstand und gesellschaftliche Veränderung."
 },
 {
 "title": "Shuggie Bain",
 "autor": "Douglas Stuart",
 "format": "Physisch",
-"cover": "shuggie-bain.jpg"
+"cover": "shuggie-bain.jpg",
+"klappentext": "Glasgow in den 1980er-Jahren: Der junge Shuggie wächst in einer von Armut und Arbeitslosigkeit geprägten Arbeiterfamilie auf. Sein ganzes Herz gehört seiner Mutter Agnes, die mit Stolz und Eleganz gegen die Tristesse ihres Alltags ankämpft, zugleich aber immer tiefer in ihre Alkoholabhängigkeit gerät. Shuggie setzt alles daran, sie zu retten, und versucht nebenbei, seinen eigenen Platz in einer Welt zu finden, die ihn wegen seiner Andersartigkeit ausgrenzt. Ein bewegender Roman über bedingungslose Liebe, Verlust und das Erwachsenwerden."
 },
 {
 "title": "Sie kamen nach Bagdad",
 "autor": "Agatha Christie",
 "format": "Physisch",
-"cover": "sie-kamen-nach-bagdad.jpg"
+"cover": "sie-kamen-nach-bagdad.jpg",
+"klappentext": "Die abenteuerlustige Victoria Jones reist nach Bagdad, um einen Mann wiederzufinden, in den sie sich verliebt hat. Dort steht ein geheimes Gipfeltreffen der Weltmächte bevor, das eine gefährliche Untergrundorganisation sabotieren will. Als ein schwer verletzter britischer Agent in ihrem Hotelzimmer stirbt, gerät Victoria unvermittelt in ein Netz aus Spionage, Verschwörungen und Mord. Mit Mut und Einfallsreichtum versucht sie, das Geheimnis hinter den letzten Worten des Agenten zu entschlüsseln."
 },
 {
 "title": "So gehn wir denn hinab",
 "autor": "Jesmyn Ward",
 "format": "Physisch",
-"cover": "so-gehn-wir-denn-hinab.jpg"
+"cover": "so-gehn-wir-denn-hinab.jpg",
+"klappentext": "Annis wird im Süden der USA zur Zeit der Sklaverei geboren. Als Kind wird sie von ihrer Mutter getrennt und muss gemeinsam mit anderen Versklavten einen brutalen Weg von South Carolina nach New Orleans zurücklegen. Auf einer Zuckerrohrplantage erlebt sie Gewalt und Unterdrückung. Kraft schöpft sie aus den Erinnerungen an ihre Mutter und den Geschichten über ihre afrikanische Großmutter. Als sie auf eine Gruppe entflohener Versklavter trifft, beginnt sie, an ein Leben in Freiheit zu glauben. Ein eindringlicher Roman über Gewalt, Widerstand und die Kraft der Hoffnung."
 },
 {
 "title": "Soziologie und Literatur",
 "autor": "Marc Ortmann",
 "format": "Physisch",
-"cover": "soziologie-und-literatur.jpg"
+"cover": "soziologie-und-literatur.jpg",
+"klappentext": "Was können literarische Texte über die Gesellschaft erzählen, was wissenschaftliche Analysen allein vielleicht nicht erfassen? Marc Ortmann untersucht das Verhältnis von Soziologie und Literatur und zeigt, wie beide Disziplinen einander bereichern können. Literatur erscheint dabei nicht nur als Spiegel gesellschaftlicher Verhältnisse, sondern als eigenständige Quelle sozialen Wissens: Sie macht Strukturen, Gefühle und alltägliche Praktiken sichtbar. Eine wissenschaftliche Studie über das Potenzial literarischer Texte für das Verständnis unserer Gesellschaft."
 },
 {
 "title": "Sprache und Sein",
 "autor": "Kübra Gümüsay",
 "format": "Physisch",
-"cover": "sprache-und-sein.jpg"
+"cover": "sprache-und-sein.jpg",
+"klappentext": "Wie beeinflusst Sprache, wen wir sehen, wie wir denken und wer in gesellschaftlichen Debatten gehört wird? Kübra Gümüşay zeigt, wie Menschen durch sprachliche Kategorien auf ihre Gruppenzugehörigkeit reduziert werden und dadurch als Individuen unsichtbar bleiben. Sie plädiert für eine Sprache, die die Vielschichtigkeit jedes Menschen anerkennt und einen respektvollen Austausch ermöglicht. Ein persönliches und politisches Plädoyer für mehr Vielfalt, Gleichberechtigung und eine andere Gesprächskultur."
 },
 {
 "title": "Sterne und Schwerter",
 "autor": "Sarah J. Maas",
 "format": "eBook",
-"cover": "sterne-und-schwerter.jpg"
+"cover": "sterne-und-schwerter.jpg",
+"klappentext": "Feyre kehrt an den Frühlingshof zurück, um Tamlins Bündnis mit dem König von Hybern auszuspionieren. Denn der König plant einen Krieg, der ganz Prythian ins Verderben stürzen könnte. Während Feyre versucht, ihre wahre Loyalität zu verbergen, muss sie ein gefährliches Doppelspiel führen – und verhindern, dass ihre Gegner ihre Gedanken und Absichten durchschauen. Der dritte Band der Reihe „Das Reich der sieben Höfe“ verbindet Magie, Intrigen, Liebe und einen drohenden Krieg."
 },
 {
 "title": "Such a Fun Age",
 "autor": "Kiley Reid",
 "sprache": "Original",
 "format": "eBook",
-"cover": "such-a-fun-age.jpg"
+"cover": "such-a-fun-age.jpg",
+"klappentext": "Als die junge schwarze Babysitterin Emira in einem Supermarkt mit dem kleinen weißen Mädchen konfrontiert wird, auf das sie aufpasst, beschuldigt ein Sicherheitsmann sie der Kindesentführung. Der Vorfall wird gefilmt und sorgt für Aufsehen. Emiras Arbeitgeberin Alix, eine erfolgreiche weiße Frau, möchte den Vorfall wiedergutmachen und beginnt, sich zunehmend in Emiras Leben einzumischen. Doch Emira ist misstrauisch gegenüber ihren Hilfsangeboten – und als das Video eine Verbindung zu Alix' Vergangenheit offenbart, geraten beide Frauen in einen Konflikt, der ihre Vorstellungen voneinander erschüttert. Ein scharfsinniger Roman über Rassismus, Privilegien und komplizierte Beziehungen"
 },
 {
 "title": "Süß",
 "autor": "Ann-Kristin Tlusty",
 "format": "eBook",
-"cover": "suess.jpg"
+"cover": "suess.jpg",
+"klappentext": "Plötzlich bekennen sich viele Menschen zum Feminismus – doch von echter Gleichberechtigung ist die Gesellschaft noch weit entfernt. Ann-Kristin Tlusty untersucht die Erwartungen und Zwänge, die Frauen bis heute prägen: Sie sollen fürsorglich und verständnisvoll sein, zugleich attraktiv und sexuell verfügbar, aber niemals zu selbstbestimmt oder unbequem. Mit analytischem Blick und pointierter Sprache hinterfragt sie diese widersprüchlichen Rollenbilder. Ein feministisches Plädoyer dafür, sich von überholten Vorstellungen zu befreien."
 },
 {
 "title": "Tage ohne Hunger",
 "autor": "Delphine de Vigan",
 "format": "Physisch",
-"cover": "tage-ohne-hunger.jpg"
+"cover": "tage-ohne-hunger.jpg",
+"klappentext": "Die neunzehnjährige Laure leidet an Magersucht und wird in eine Klinik eingewiesen, als ihre Krankheit lebensbedrohlich wird. Dort begegnet sie anderen Menschen, die auf ganz unterschiedliche Weise mit ihren eigenen Verletzungen kämpfen. Während Laure zunächst gegen die Behandlung und ihren Arzt rebelliert, beginnt sie langsam, sich mit den Ursachen ihrer Krankheit auseinanderzusetzen. In Gesprächen und Erinnerungen öffnet sich nach und nach der Blick auf ihre schwierige familiäre Vergangenheit. Ein eindringlicher Roman über Krankheit, Selbstzerstörung und den mühsamen Weg zurück ins Leben."
 },
 {
 "title": "Tell",
 "autor": "Joachim B. Schmidt",
 "format": "Physisch",
-"cover": "tell.jpg"
+"cover": "tell.jpg",
+"klappentext": "In den rauen Schweizer Alpen lebt Wilhelm Tell zurückgezogen mit seiner Familie. Als eine einzige Entscheidung sein Leben aus der Bahn wirft, gerät er in einen Konflikt mit den herrschenden Mächten. Aus unterschiedlichen Perspektiven und in rasanten Episoden erzählt Joachim B. Schmidt die berühmte Tell-Sage neu: nicht als Heldengeschichte, sondern als psychologisches Drama über Schuld, Angst, Machtmissbrauch und Widerstand. Ein spannender Roman, der den Schweizer Nationalmythos überraschend menschlich und gegenwärtig erscheinen lässt"
 },
 {
 "title": "The Cousins",
 "autor": "Karen M. McManus",
 "sprache": "Original",
 "format": "Physisch",
-"cover": "the-cousins.jpg"
+"cover": "the-cousins.jpg",
+"klappentext": "Milly, Aubrey und Jonah haben kaum Kontakt zueinander und kennen ihre reiche Großmutter, die ihre Eltern einst enterbt hat, nicht einmal persönlich. Als sie überraschend eine Einladung erhalten, den Sommer auf dem Inselresort der Großmutter zu verbringen, hoffen sie auf eine Gelegenheit, das Verhältnis zur Familie wieder zu verbessern. Doch vor Ort merken sie schnell, dass hinter der Einladung andere Absichten stecken. Je länger die drei Cousins bleiben, desto mehr dunkle Geheimnisse aus der Familiengeschichte kommen ans Licht. Ein spannender Jugendthriller voller Intrigen und überraschender Wendungen."
 },
 {
 "title": "The House of My Mother",
 "autor": "Shari Franke",
 "sprache": "Original",
 "format": "eBook",
-"cover": "the-house-of-my-mother.jpg"
+"cover": "the-house-of-my-mother.jpg",
+"klappentext": "In diesem autobiografischen Bericht erzählt Shari Franke von ihrem Aufwachsen in einer Familie, die durch den erfolgreichen YouTube-Kanal „8 Passengers“ öffentlich bekannt wurde. Hinter der scheinbar perfekten Familienfassade erlebten Shari und ihre Geschwister Kontrolle, Misshandlung und zunehmende Isolation. Sie schildert den Einfluss ihrer Mutter Ruby und der Life-Coachin Jodi Hildebrandt sowie ihren eigenen Weg, die Wahrheit über das Erlebte auszusprechen und sich daraus zu befreien. Ein erschütternder Bericht über familiären Missbrauch, öffentliche Inszenierung und den langen Weg in die Selbstbestimmung."
 },
 {
 "title": "The Safekeep",
 "autor": "Yael van der Wouden",
 "sprache": "Original",
 "format": "Physisch",
-"cover": "the-safekeep.jpg"
+"cover": "the-safekeep.jpg",
+"klappentext": "Fünfzehn Jahre nach dem Ende des Zweiten Weltkriegs lebt Isabel zurückgezogen im ehemaligen Landhaus ihrer Mutter in den Niederlanden. Ihr streng geordnetes Leben gerät aus dem Gleichgewicht, als ihr Bruder seine neue Freundin Eva für den Sommer bei ihr einquartiert. Isabel reagiert zunächst mit Misstrauen und Ablehnung, doch die Anwesenheit der jungen Frau bringt nicht nur verborgene Sehnsüchte, sondern auch verdrängte Wahrheiten über das Haus und seine Vergangenheit ans Licht. Ein atmosphärischer Roman über Begehren, Erinnerung, Schuld und die Nachwirkungen des Krieges."
 },
 {
 "title": "Toxische Weiblichkeit",
 "autor": "Sophia Fritz",
 "format": "Physisch",
-"cover": "toxische-weiblichkeit.jpg"
+"cover": "toxische-weiblichkeit.jpg",
+"klappentext": "Warum verhalten sich Frauen manchmal gegeneinander, obwohl sie sich eigentlich gegenseitig unterstützen möchten? Sophia Fritz untersucht Verhaltensmuster, die durch weibliche Sozialisation und patriarchale Erwartungen entstehen: Konfliktvermeidung, Konkurrenz, Anpassung und mangelnde Solidarität. Sie fragt, wie Frauen unbewusst zur Aufrechterhaltung jener Strukturen beitragen, unter denen sie selbst leiden. Ein feministischer Essay, der zur Selbstreflexion anregt und neue Formen des Miteinanders sucht."
 },
 {
 "title": "Tragödie in drei Akten",
 "autor": "Agatha Christie",
 "format": "Physisch",
-"cover": "tragoedie-in-drei-akten.jpg"
+"cover": "tragoedie-in-drei-akten.jpg",
+"klappentext": "Als der beliebte Pfarrer Babbington bei einer Gesellschaft plötzlich tot zusammenbricht, scheint zunächst alles auf einen tragischen Zufall hinzudeuten. Doch wenig später stirbt auch der Arzt Sir Bartholomew Strange unter ähnlichen Umständen. Hercule Poirot erkennt einen Zusammenhang zwischen den beiden Todesfällen: Bei beiden Gelegenheiten waren dieselben Gäste anwesend. Während er nach einem Motiv sucht, wird aus einem vermeintlichen Unglück eine raffiniert inszenierte Mordserie."
 },
 {
 "title": "Trainspotting",
 "autor": "Irvine Welsh",
 "format": "Physisch",
-"cover": "trainspotting.jpg"
+"cover": "trainspotting.jpg",
+"klappentext": "Im heruntergekommenen Edinburgher Stadtteil Leith dreht sich das Leben einer Clique junger Außenseiter vor allem um Drogen, Alkohol und den nächsten Rausch. Mark Renton, Spud, Begbie und Sick Boy schlagen sich durch eine Welt aus Arbeitslosigkeit, Gewalt und Perspektivlosigkeit. Zwischen Abstürzen, Freundschaft und schwarzem Humor versucht Renton immer wieder, aus dem Kreislauf der Abhängigkeit auszubrechen. Ein schonungsloser, sprachgewaltiger Roman über eine Generation am Rand der Gesellschaft."
 },
 {
 "title": "Traumsammler",
 "autor": "Khaled Hosseini",
 "format": "Physisch",
-"cover": "traumsammler.jpg"
+"cover": "traumsammler.jpg",
+"klappentext": "In einem kleinen afghanischen Dorf sind die Geschwister Pari und Abdullah unzertrennlich. Doch als ihr Vater die dreijährige Pari auf eine lange Reise nach Kabul mitnimmt, werden die beiden voneinander getrennt – eine Entscheidung, die ihr ganzes Leben prägen wird. Über Jahrzehnte und verschiedene Länder hinweg erzählt Khaled Hosseini von Menschen, deren Schicksale miteinander verwoben sind. Ein bewegender Familienroman über Verlust, Liebe und die weitreichenden Folgen einer einzigen Entscheidung."
 },
 {
 "title": "Treppe aus Papier",
 "autor": "Henrik Szanto",
 "format": "eBook",
-"cover": "treppe-aus-papier.jpg"
+"cover": "treppe-aus-papier.jpg",
+"klappentext": "Ein altes Mietshaus wird zum Schauplatz einer Geschichte, die sich über mehr als ein Jahrhundert erstreckt. Die 90-jährige Irma Thon erinnert sich an ihre Kindheit im Nationalsozialismus und an die jüdische Familie Sternheim, deren Schicksal mit ihrer eigenen Vergangenheit verbunden ist. Als sie mit der jungen Nachbarin Nele ins Gespräch kommt, beginnen sich die Geschichten der Hausbewohner und die verdrängten Erinnerungen miteinander zu verweben. Ein vielschichtiger Roman über Schuld, Verantwortung und die Frage, wie Vergangenheit in die Gegenwart hineinwirkt."
 },
 {
 "title": "Trizeps Royal",
 "autor": "Cecil Ludwig Röski",
 "rezi": "ja",
 "format": "eBook",
-"cover": "trizeps-royal.jpg"
+"cover": "trizeps-royal.jpg",
+"klappentext": "Dedo II. ist König von Sachsen – und hat ein Imageproblem: Er gilt als zu queer, zu schlaksig und zu introvertiert für die Rolle, die er ausfüllt. Als sein Partner ihn verlässt und konservative Medien über ihn herziehen, beschließt Dedo, seinen Körper zu verändern und sich als starker Monarch zu präsentieren. Doch weder Muskeln noch königliche Macht können Liebeskummer, familiäre Intrigen und gesellschaftliche Erwartungen einfach verschwinden lassen. Eine queere, humorvolle Tragikomödie über Männlichkeit, Identität und die Sehnsucht nach Anerkennung."
 },
 {
 "title": "True Story",
 "autor": "Kate Reed Petty",
 "format": "Physisch",
-"cover": "true-story.jpg"
+"cover": "true-story.jpg",
+"klappentext": "Nach einer Highschool-Party verbreitet sich in einer amerikanischen Kleinstadt ein Gerücht über eine Nacht, an die sich Alice selbst nicht erinnern kann. Zwei beliebte Sportler erzählen unterschiedliche Versionen des Geschehens, während die Wahrheit zunehmend hinter widersprüchlichen Geschichten verschwindet. Auch Nick, der damals dabei war, wird von den Ereignissen verfolgt. Über Jahre hinweg zeigt sich, wie Erzählungen und Gerüchte das Leben der Beteiligten prägen und verändern. Ein raffiniert aufgebauter Roman über Wahrheit, Erinnerung, Macht und die Frage, wem geglaubt wird."
 },
 {
 "title": "Two Can Keep a Secret",
 "autor": "Karen M. McManus",
 "sprache": "Original",
 "format": "Physisch",
-"cover": "two-can-keep-a-secret.jpg"
+"cover": "two-can-keep-a-secret.jpg",
+"klappentext": "Ellery zieht mit ihrem Zwillingsbruder Ezra nach Echo Ridge, einer Kleinstadt, in der ihre Tante vor Jahren spurlos verschwand und eine Homecoming-Königin ermordet wurde. Kaum angekommen, erhält die Schule anonyme Drohungen, die an den damaligen Mord erinnern. Als erneut ein Mädchen verschwindet, beginnen Ellery und Ezra, Nachforschungen anzustellen. Doch in Echo Ridge scheint jeder etwas zu verbergen – und manche Geheimnisse sind tödlich."
 },
 {
 "title": "Tyll",
 "autor": "Daniel Kehlmann",
 "format": "Physisch",
-"cover": "tyll.jpg"
+"cover": "tyll.jpg",
+"klappentext": "Während des Dreißigjährigen Krieges zieht der Gaukler und Narr Tyll Ulenspiegel durch ein verwüstetes Land. Mit seinem Talent für Spott, Akrobatik und Provokation begegnet er Königen, Gelehrten, Soldaten und einfachen Menschen. Immer wieder entlarvt er die Absurdität einer Welt, in der Gewalt und Aberglaube den Alltag bestimmen. Daniel Kehlmann verbindet historische Ereignisse und Legenden zu einem ebenso humorvollen wie düsteren Roman über Krieg, Macht und die Kunst des Überlebens."
 },
 {
 "title": "Überredung",
 "autor": "Jane Austen",
 "format": "Physisch",
-"cover": "ueberredung.jpg"
+"cover": "ueberredung.jpg",
+"klappentext": "Anne Elliot hat vor Jahren aus Pflichtgefühl auf die Liebe zu Frederick Wentworth verzichtet – auf Drängen ihrer Familie. Als er unerwartet in ihr Leben zurückkehrt, ist er inzwischen ein erfolgreicher Marineoffizier und scheint ihr gegenüber kühl und unnahbar. Während sich ihre Wege erneut kreuzen, muss Anne erkennen, dass alte Gefühle keineswegs verschwunden sind. Ein fein beobachteter Roman über zweite Chancen, gesellschaftliche Erwartungen und die Beständigkeit der Liebe."
 },
 {
 "title": "Und alle so still",
 "autor": "Mareike Fallwickl",
 "format": "Physisch",
-"cover": "und-alle-so-still.jpg"
+"cover": "und-alle-so-still.jpg",
+"klappentext": "An einem Sonntag im Juni legen sich plötzlich Frauen zu Hunderten reglos auf die Straßen. Sie verweigern sich dem Funktionieren und den Erwartungen einer Gesellschaft, die ihre Arbeit und Fürsorge als selbstverständlich betrachtet. Inmitten dieser stillen Revolte kreuzen sich die Wege von Elin, einer Influencerin, Nuri, einem jungen Mann mit mehreren Jobs, und Ruth, einer erschöpften Pflegefachkraft. Gemeinsam erleben sie, wie die Protestbewegung das gesellschaftliche Gefüge ins Wanken bringt. Ein feministischer Gesellschaftsroman über Solidarität und den Mut zur Veränderung."
 },
 {
 "title": "Unerhörte Stimmen",
 "autor": "Elif Shafak",
 "format": "Physisch",
-"cover": "unerhoerte-stimmen.jpg"
+"cover": "unerhoerte-stimmen.jpg",
+"klappentext": "Tequila Leila liegt tot in einer Gasse von Istanbul. Doch ihr Bewusstsein bleibt noch einige Minuten lang wach, und mit jedem Augenblick tauchen Erinnerungen an ihr bewegtes Leben auf. Sie denkt an ihre Kindheit, an Gewalt und Ausgrenzung, aber auch an die Menschen, die ihr trotz allem Freundschaft und Geborgenheit geschenkt haben. Während ihre Lebensgeschichte sichtbar wird, machen sich ihre engsten Freunde auf den Weg, um ihr einen würdigen Abschied zu ermöglichen. Ein berührender Roman über Freundschaft, gesellschaftliche Außenseiter und die Stimmen, die oft überhört werden."
 },
 {
 "title": "Unmöglicher Abschied",
 "autor": "Han Kang",
 "format": "eBook",
-"cover": "unmoeglicher-abschied.jpg"
+"cover": "unmoeglicher-abschied.jpg",
+"klappentext": "Als ihre Freundin Inseon nach einem Unfall im Krankenhaus liegt, reist Gyeongha auf die Insel Jeju, um sich um deren kleinen Vogel zu kümmern. Ein Schneesturm schneidet sie von der Außenwelt ab, und in der Einsamkeit des Hauses begegnet sie den Erinnerungen an Inseons Familie. Dabei stößt sie auf ein lange verschwiegenes Kapitel koreanischer Geschichte: das Massaker auf Jeju Ende der 1940er-Jahre. Ein eindringlicher Roman über Freundschaft, Erinnerung und die Frage, wie die Vergangenheit in die Gegenwart hineinwirkt."
 },
 {
 "title": "Uns gehört die Nacht",
 "autor": "Jardine Libaire",
 "format": "Physisch",
-"cover": "uns-gehoert-die-nacht.jpg"
+"cover": "uns-gehoert-die-nacht.jpg",
+"klappentext": "In New York begegnen sich Elise und Jamey, zwei junge Menschen aus völlig unterschiedlichen Lebenswelten. Zwischen ihnen entsteht eine leidenschaftliche Beziehung, die von Anziehung, Sehnsucht und gesellschaftlichen Gegensätzen geprägt ist. Während sie sich immer stärker aufeinander einlassen, geraten sie in einen Strudel aus Begehren, Exzess und Selbstzerstörung. Ein intensiver Roman über Liebe, soziale Ungleichheit und die Suche nach einem Platz im Leben."
 },
 {
 "title": "Untenrum frei",
 "autor": "Margarete Stuchowski",
 "format": "Physisch",
-"cover": "untenrum-frei.jpg"
+"cover": "untenrum-frei.jpg",
+"klappentext": "Was bedeutet es, wirklich frei zu sein – körperlich, sexuell und gesellschaftlich? Margarete Stokowski verbindet persönliche Erfahrungen mit politischen und gesellschaftlichen Analysen. Sie schreibt über Sexualität, Schönheitsideale, Gewalt, Liebe und Feminismus und zeigt, wie tief gesellschaftliche Machtverhältnisse in den Alltag und den eigenen Körper hineinreichen. Ein kluges, provokantes Plädoyer für Selbstbestimmung und Gleichberechtigung."
 },
 {
 "title": "Unter Dojczen",
 "autor": "Mia Raben",
 "format": "Physisch",
-"cover": "unter-dojczen.jpg"
+"cover": "unter-dojczen.jpg",
+"klappentext": "Jola kommt aus Polen nach Deutschland, um als Pflegekraft die ältere Ursula „Uschi“ von Klewen zu betreuen. Erschöpft von den Arbeitsbedingungen und daran gewöhnt, sich den Erwartungen anderer anzupassen, begegnet sie zunächst mit Vorsicht ihrer neuen Arbeitgeberin. Doch Uschi behandelt sie mit Respekt, und zwischen den beiden Frauen entsteht allmählich eine ungewöhnliche Freundschaft. Als Jola schließlich ein lange gehütetes Geheimnis offenbart, verändert sich ihr Verhältnis zueinander. Ein Roman über Pflegearbeit, Ausbeutung, Würde und gegenseitige Wertschätzung."
 },
 {
 "title": "Unter Wasser",
 "autor": "Tara Menon",
 "format": "Physisch",
-"cover": "unter-wasser.jpg"
+"cover": "unter-wasser.jpg",
+"klappentext": "Als die fünfjährige Marissa ihre Mutter verliert, zieht sie mit ihrem Vater, einem Meeresbiologen, auf eine thailändische Insel. Dort freundet sie sich mit Arielle an, und die beiden Mädchen entdecken gemeinsam die faszinierende Unterwasserwelt. Doch der Tsunami am zweiten Weihnachtstag 2004 reißt sie auseinander. Jahre später lebt Marissa in New York und wird erneut mit den Naturgewalten konfrontiert – während sie versucht, mit ihrer Vergangenheit und dem Verlust ihrer Freundin Frieden zu schließen. Ein bewegender Roman über Freundschaft, Trauer und die Kraft der Natur."
 },
 {
 "title": "Vatermal",
 "autor": "Necati Öziri",
 "format": "Physisch",
-"cover": "vatermal.jpg"
+"cover": "vatermal.jpg",
+"klappentext": "Arda liegt mit Organversagen im Krankenhaus und weiß nicht, wie viel Zeit ihm noch bleibt. An seinem Bett sitzen seine Mutter Ümran und seine Schwester Aylin, die seit Jahren nicht mehr miteinander sprechen. In einem Brief an seinen Vater, den er nie kennengelernt hat, erzählt Arda von seiner Kindheit, seinen Freunden und einer Familie, die von Verlust, Migration und schwierigen Lebensumständen geprägt ist. Er möchte dem abwesenden Vater wenigstens nachträglich die Möglichkeit nehmen, nichts über seinen Sohn zu wissen. Ein eindringlicher Roman über Herkunft, Familie und die Suche nach dem eigenen Platz im Leben."
 },
 {
 "title": "Vati",
