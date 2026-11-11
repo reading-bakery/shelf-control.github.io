@@ -76,11 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const ctx = chart.ctx;
             const active = chart.getActiveElements();
 
-            // Aktiven Index ermitteln (Standard ist 0 = das grüne "Ja"-Segment)
-            let idx = 0;
-            if (active && active.length > 0) {
-              idx = active[0].index;
+            // Wenn keine Maus über dem Chart ist, abbrechen (Inschrift bleibt unsichtbar)
+            if (!active || active.length === 0) {
+              return;
             }
+
+            const idx = active[0].index;
 
             const value = chart.data.datasets[0].data[idx];
             const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
