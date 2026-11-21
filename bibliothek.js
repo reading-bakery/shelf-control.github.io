@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const LOANS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXx02YVtknMhVpTr2xZL6jVSdCZs4WN4xN98xmeG19i47mqGn3Qlt8vmqsJ_KG76_TNsO0yX0FBEck/pub?gid=33699038&single=true&output=csv';
 
     // Google Form Konfiguration
-    const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/DEIN_FORMULAR_ID/formResponse';
+    const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfUKJWm4cnlSTNT1QeV9HkN_TVIHE67OwMd86-AmhYeZwhRpQ/formResponse';
     const ENTRY_BUCH = 'entry.346005667';
     const ENTRY_WER = 'entry.1529153488';
     const ENTRY_DATUM_LEIHE = 'entry.1913292543';
