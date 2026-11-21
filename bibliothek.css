@@ -420,7 +420,7 @@ h2 {
 }
 
 /* =========================================================
-   DETAIL MODAL
+   DETAIL MODAL & AUSLEIHE-OVERLAY
    ========================================================= */
 
 .book-modal {
@@ -438,20 +438,217 @@ h2 {
     background-color: #2a2a2a;
     padding: 30px;
     border-radius: 10px;
-    max-width: 600px;
+    max-width: 650px;
     width: 90%;
     display: flex;
     gap: 25px;
     position: relative;
     color: whitesmoke;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    max-height: 88vh;
+    overflow-y: auto;
 }
 
-.modal-content img {
+.modal-cover-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.modal-content img,
+.modal-cover-clickable {
     width: 115px;
     height: 190px;
     object-fit: cover;
     border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.modal-cover-clickable:hover {
+    transform: scale(1.04);
+    box-shadow: 0 6px 18px rgba(224, 224, 87, 0.35);
+}
+
+.modal-loan-info {
+    max-width: 155px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background-color: rgba(224, 224, 87, 0.12);
+    border: 1px solid rgba(224, 224, 87, 0.45);
+    color: khaki;
+    font-family: "Dosis", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    text-align: center;
+}
+
+/* Eigenes Ausleihe-Modal über dem Klappentext-Modal */
+.loan-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1200;
+    backdrop-filter: blur(4px);
+}
+
+.loan-modal-box {
+    position: relative;
+    background-color: #1f1f1f;
+    border: 1px solid #353434;
+    border-radius: 12px;
+    padding: 25px;
+    width: 90%;
+    max-width: 440px;
+    box-sizing: border-box;
+    color: whitesmoke;
+    font-family: 'Dosis', sans-serif;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.loan-modal-box h4 {
+    margin: 0 0 6px 0;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    color: khaki;
+    border-bottom: 1px solid #353434;
+    padding-bottom: 8px;
+}
+
+.loan-book-subtitle {
+    margin: 10px 0 14px 0;
+    font-family: "Dosis", sans-serif;
+    font-size: 1.05rem;
+    color: whitesmoke;
+}
+
+.close-loan-modal {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 1.6rem;
+    color: whitesmoke;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-loan-modal:hover {
+    color: rgb(224, 224, 87);
+}
+
+.loan-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.loan-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: left;
+}
+
+.loan-field label {
+    font-family: "Dosis", sans-serif;
+    font-size: 1rem;
+    color: whitesmoke;
+}
+
+.loan-field input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background-color: #2b2b2b;
+    color: #fff;
+    font-size: 1rem;
+    font-family: 'Dosis', sans-serif;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.loan-field input:focus {
+    border-color: rgb(224, 224, 87);
+}
+
+/* Buttons im Leihe-Modal exakt gleich groß & nebeneinander wie in currently.css */
+.loan-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-top: 14px !important;
+    border-top: 1px solid #353434 !important;
+    padding-top: 15px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.loan-modal-box .loan-submit-btn,
+.loan-modal-box .loan-return-btn,
+.loan-modal-box .loan-cancel-btn {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 8px 14px !important;
+    border-radius: 15px !important;
+    border: none !important;
+    cursor: pointer !important;
+    font-family: 'Dosis', sans-serif !important;
+    font-weight: bold !important;
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    transition: background-color 0.2s ease !important;
+}
+
+.loan-modal-box .loan-submit-btn {
+    background-color: #a2bba3 !important;
+    color: #222 !important;
+}
+
+.loan-modal-box .loan-submit-btn:hover {
+    background-color: #8da98f !important;
+}
+
+.loan-modal-box .loan-return-btn {
+    background-color: #8ecae6 !important;
+    color: #16222a !important;
+}
+
+.loan-modal-box .loan-return-btn:hover {
+    background-color: #74b9d9 !important;
+}
+
+.loan-modal-box .loan-cancel-btn {
+    background-color: #e0d0d0 !important;
+    color: #222 !important;
+}
+
+.loan-modal-box .loan-cancel-btn:hover {
+    background-color: #ccb8b8 !important;
+}
+
+.loan-status-msg {
+    margin: 4px 0 0 0;
+    font-family: "Dosis", sans-serif;
+    font-size: 0.95rem;
+    color: #a3e4d7;
+    text-align: left;
 }
 
 .modal-info {
@@ -524,6 +721,11 @@ h2 {
         flex-direction: column;
         align-items: center;
         text-align: center;
+    }
+
+    .loan-actions {
+        justify-content: center;
+        flex-wrap: wrap;
     }
 }
 
@@ -680,7 +882,8 @@ h2 {
         text-align: center;
     }
 
-    .modal-content img {
+    .modal-content img,
+    .modal-cover-clickable {
         width: 90px;
         height: 150px;
     }
@@ -723,4 +926,3 @@ h2 {
         padding: 25px;
     }
 }
-

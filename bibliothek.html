@@ -58,6 +58,7 @@
                 <button class="tab-btn" data-filter="eBook">E-Books</button>
                 <button class="tab-btn" data-filter="rezi">Rezension</button>
                 <button class="tab-btn" data-filter="Original">Original</button>
+                <button class="tab-btn" data-filter="leihe">Leihe</button>
             </div>
             
             <div class="search-box">
@@ -75,14 +76,44 @@
     <div id="bookModal" class="book-modal" style="display: none;">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <img id="modalCover" src="" alt="Cover">
+
+            <div class="modal-cover-column">
+                <img id="modalCover" src="" alt="Cover" title="Klicken, um Ausleihe einzutragen / zu verwalten" class="modal-cover-clickable">
+                <div id="modalLoanInfo" class="modal-loan-info" style="display: none;"></div>
+            </div>
+
             <div class="modal-info">
                 <h3 id="modalTitle">Buchtitel</h3>
-                <!-- Klappentext ersetzt Format und Notizen -->
                 <div class="modal-klappentext">
                     <p id="modalKlappentext">Noch kein Klappentext hinterlegt.</p>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Eigenes Ausleihe-Overlay-Modal über dem Klappentext-Modal -->
+    <div id="loanModal" class="loan-modal-overlay" style="display: none;">
+        <div class="loan-modal-box">
+            <span class="close-loan-modal" id="closeLoanModal">&times;</span>
+            <h4>Buch ausleihen</h4>
+            <p id="loanBookTitle" class="loan-book-subtitle"></p>
+
+            <form id="loanForm" class="loan-form">
+                <div class="loan-field">
+                    <label for="loanPersonInput">An wen?</label>
+                    <input type="text" id="loanPersonInput" placeholder="Name der Person" required>
+                </div>
+                <div class="loan-field">
+                    <label for="loanDateInput">Datum der Leihe</label>
+                    <input type="date" id="loanDateInput" required>
+                </div>
+                <div class="loan-actions">
+                    <button type="submit" class="loan-submit-btn">Buch ausleihen</button>
+                    <button type="button" id="returnLoanBtn" class="loan-return-btn" style="display: none;">Zurückgeben</button>
+                    <button type="button" id="cancelLoanBtn" class="loan-cancel-btn">Abbrechen</button>
+                </div>
+                <p id="loanStatusMsg" class="loan-status-msg"></p>
+            </form>
         </div>
     </div>
 
